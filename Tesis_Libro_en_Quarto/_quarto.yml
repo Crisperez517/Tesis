@@ -1,25 +1,61 @@
 project:
   type: book
 
+execute: 
+  freeze: auto
+
 book:
-  title: "Tesis_Libro_en_Quarto"
-  author: "Norah Jones"
-  date: "29/5/2026"
+  title: "Modelación Estocástica de la Red de Frío para Vacunas en Chiapas"
+  author: "Tu Nombre Completo"
+  language: es
+  date: "today"
+  downloads: [pdf] # ¡Esta es la magia! Agrega un botón para descargar el PDF en tu web
+  search: true
+  repo-url: https://github.com/Crisperez517/Tesis
+  page-navigation: true 
   chapters:
     - index.qmd
     - intro.qmd
-    - summary.qmd
+    
+    - part: "Marco Teórico y Normativa"
+      chapters: 
+        - red_de_frio_oms.qmd
+        - mermas_imss.qmd
+
+    - part: "Modelo Matemático"
+      chapters: 
+        - sde_cambio_regimen.qmd
+        - procesos_poisson.qmd
+
+    - part: "Simulación de Equipos (Haier HBC-150)"
+      chapters: 
+        - calibracion_parametros.qmd
+        - montecarlo.qmd
+        
+    - conclusiones.qmd
     - references.qmd
 
-bibliography: references.bib
+bibliography: referencias.bib # Tu archivo donde guardaste las citas de Bressan, Yin, etc.
 
 format:
   html:
     theme:
-      - cosmo
-      - brand
+      light: flatly
+      dark: darkly
+    lang: es
+    html-math-method: mathjax
+    code-fold: true
+    code-copy: true
+    toc: true
+    toc-location: right
+
   pdf:
+    lang: es
     documentclass: scrreprt
-
-
-
+    papersize: letter
+    institution: Universidad Autónoma de Chiapas
+    keep-tex: true
+    pdf-engine: lualatex
+    link-citations: true
+    number-sections: true
+    colorlinks: true
