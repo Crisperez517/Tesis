@@ -6,10 +6,10 @@ execute:
 
 book:
   title: "Modelación Estocástica de la Red de Frío para Vacunas en Chiapas"
-  author: "Tu Nombre Completo"
+  author: "Cristóbal Pérez González"
   language: es
   date: "today"
-  downloads: [pdf] # ¡Esta es la magia! Agrega un botón para descargar el PDF en tu web
+  downloads: [pdf]
   search: true
   repo-url: https://github.com/Crisperez517/Tesis
   page-navigation: true 
@@ -35,7 +35,10 @@ book:
     - conclusiones.qmd
     - references.qmd
 
-bibliography: referencias.bib # Tu archivo donde guardaste las citas de Bressan, Yin, etc.
+comments:
+  hypothesis: true
+
+bibliography: referencias.bib
 
 format:
   html:
@@ -53,7 +56,7 @@ format:
     lang: es
     documentclass: scrreprt
     papersize: letter
-    institution: Universidad Autónoma de Chiapas
+    institution: Benemerita Universidad Autónoma de Chiapas
     keep-tex: true
     pdf-engine: lualatex
     link-citations: true
