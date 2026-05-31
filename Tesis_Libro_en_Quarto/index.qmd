@@ -1,5 +1,3 @@
 # Prefacio {.unnumbered}
 
 Este es un libro de Quarto.
-
-Para aprender más sobre libros de Quarto visita <https://quarto.org/docs/books>.
