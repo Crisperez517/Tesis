@@ -1,3 +1,0 @@
-# Prefacio {.unnumbered}
-
-Este es un libro de Quarto.

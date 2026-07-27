@@ -1,0 +1,2947 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  spanish,
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Tabla de contenidos}
+\else
+  \newcommand\contentsname{Tabla de contenidos}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Listado de Figuras}
+\else
+  \newcommand\listfigurename{Listado de Figuras}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Listado de Tablas}
+\else
+  \newcommand\listtablename{Listado de Tablas}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figura}
+\else
+  \newcommand\figurename{Figura}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Tabla}
+\else
+  \newcommand\tablename{Tabla}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listado}
+\newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
+\theoremstyle{remark}
+\AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
+\newtheorem*{remark}{Observación}
+\newtheorem*{solution}{Solución}
+\newtheorem{refremark}{Observación}[chapter]
+\newtheorem{refsolution}{Solución}[chapter]
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Reporte de Investigación - Verano Delfín},
+  pdfauthor={Cristóbal Pérez González; Dr.~Yofre Hernán García Gómez},
+  pdflang={es},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Reporte de Investigación - Verano Delfín}
+\author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
+\date{2026-07-27}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Tabla de contenidos}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+
+\bookmarksetup{startatroot}
+
+\chapter{Introducción}\label{introducciuxf3n}
+
+La conservación de vacunas en condiciones óptimas es uno de los mayores
+desafíos para los sistemas de salud pública. Los biológicos son
+productos sensibles que requieren mantenerse estrictamente dentro del
+rango normativo de \(2^\circ\text{C}\) a \(8^\circ\text{C}\) desde su
+producción hasta su aplicación. Romper esta cadena de frío altera la
+estructura de los antígenos, reduciendo o anulando su efectividad
+inmunológica de manera irreversible.
+
+Este problema aumenta en regiones con climas cálidos extremos, como la
+ciudad de Tuxtla Gutiérrez, Chiapas. Las altas temperaturas ambientales
+aceleran la transferencia de calor hacia el interior de los equipos de
+refrigeración, reduciendo su tiempo de autonomía pasiva. A este factor
+climático se suman dos perturbaciones operativas críticas: las
+interrupciones en el suministro de la red eléctrica local por parte de
+la Comisión Federal de Electricidad (CFE) y el intercambio de aire con
+el exterior cada vez que el personal clínico abre la puerta del equipo
+para extraer o resguardar dosis.
+
+Dado que tanto los apagones como las aperturas de puerta ocurren en
+momentos aleatorios y con duraciones variables, los modelos matemáticos
+deterministas tradicionales resultan insuficientes para evaluar el
+comportamiento real del sistema. Para resolver esta complejidad, este
+trabajo presenta el desarrollo de un modelo estocástico continuo
+acoplado a una simulación de eventos discretos. El enfoque principal
+consiste en simular el comportamiento termodinámico de un refrigerador
+precalificado por la Organización Mundial de la Salud (OMS),
+específicamente el modelo Haier HBC-150, bajo las condiciones de estrés
+ambiental y eléctrico de la capital chiapaneca.
+
+El documento se estructura de la siguiente manera para guiar al lector
+en la resolución del problema:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Fundamentos Teóricos:} Se definen los principios matemáticos
+  de los procesos estocásticos, detallando el proceso de
+  Ornstein-Uhlenbeck y su modificación mediante cambios de régimen
+  (\emph{regime-switching}) para alternar entre el estado de
+  enfriamiento activo y el calentamiento pasivo.
+\item
+  \textbf{Estudio de Caso y Calibración:} Se recopilan los parámetros
+  técnicos del refrigerador Haier HBC-150 y los datos históricos de
+  fallas de la CFE y del clima de Tuxtla Gutiérrez, asignando valores
+  numéricos a las tasas de atracción térmica, volatilidades y
+  frecuencias de eventos.
+\item
+  \textbf{Metodología de Simulación Computacional:} Se describe el
+  diseño del algoritmo implementado en Python, explicando la partición
+  temporal en pasos de 5 minutos, la vectorización del ruido browniano y
+  el acoplamiento de la ecuación de Arrhenius con un modelo de
+  inventario clínico en dientes de sierra.
+\item
+  \textbf{Análisis de Montecarlo y Riesgo Operativo:} Se discuten los
+  resultados estadísticos extraídos de 1,000 trayectorias anuales
+  independientes. Se analizan las mermas esperadas, el comportamiento
+  estacional de las pérdidas en relación con las campañas de vacunación
+  y se establece el intervalo de predicción final para la toma de
+  decisiones en salud pública.
+\end{enumerate}
+
+\part{Marco Teórico y Normativa}
+
+\chapter{Fundamentos Teóricos}\label{fundamentos-teuxf3ricos}
+
+En este capítulo se presentarán las bases conceptuales y el marco formal
+del cálculo estocástico que fundamentan el desarrollo de nuestro modelo
+matemático para la red de frío. Se definirán en primer lugar los
+procesos estocásticos elementales para, posteriormente, construir la
+ecuación diferencial estocástica (EDE) híbrida que rige el sistema.
+
+\section{Procesos Estocásticos}\label{procesos-estocuxe1sticos}
+
+El modelado térmico de un refrigerador de vacunas expuesto a
+incertidumbres continuas y perturbaciones discretas requiere
+herramientas más allá del cálculo determinista. Desde una perspectiva
+analítica, un proceso estocástico representa la generalización de una
+variable aleatoria indexada en un conjunto ordenado, parametrizando la
+evolución de un sistema bajo incertidumbre.
+
+\begin{definition}[Proceso
+Estocástico]\protect\hypertarget{def-proceso-estocastico}{}\label{def-proceso-estocastico}
+
+Sea \((\Omega, \mathcal{F}, \mathbb{P})\) un espacio de probabilidad y
+sea \(\mathcal{S} \subseteq \mathbb{R}^d\) un espacio muestral dotado de
+su respectiva \(\sigma\)-álgebra de Borel. Un proceso estocástico es una
+familia de variables aleatorias \(\{X_t\}_{t \in \mathcal{T}}\)
+parametrizadas por \(t \in \mathcal{T}\), donde
+\(\mathcal{T} \subseteq \mathbb{R}\).
+
+\end{definition}
+
+Dependiendo de como es el conjunto de índices \(\mathcal{T}\), los
+procesos estocásticos se clasifican en dos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Procesos estocásticos a tiempo discreto:} Si \(\mathcal{T}\)
+  es numerable, por lo general
+  \(\mathcal{T} = \mathbb{N}_0 = \{0, 1, 2, \dots\}\) o
+  \(\mathcal{T} = \mathbb{Z}\), decimos que el proceso estocástico es a
+  tiempo discreto. En este escenario, el sistema evoluciona mediante
+  transiciones discretas en pasos fijos discretizados.
+\item
+  \textbf{Procesos estocásticos a tiempo continuo:} Si \(\mathcal{T}\)
+  es un intervalo de \(\mathbb{R}\), por lo general
+  \(\mathcal{T} = [0, \infty)\) o un intervalo acotado
+  \(\mathcal{T} = [0, T]\), \(T > 0\), se dice que el proceso
+  estocástico es a tiempo continuo. Esta estructura es la adecuada para
+  modelar fenómenos físicos continuos, como la transferencia térmica.
+\end{enumerate}
+
+Para enlazar la teoría probabilística con la observación empírica de un
+fenómeno estocástico, es indispensable establecer la distinción entre el
+espacio funcional del proceso y sus realizaciones particulares.
+
+\begin{definition}[Trayectorias del Proceso
+Estocástico]\protect\hypertarget{def-trayectoria}{}\label{def-trayectoria}
+
+Si \(\{X_t\}_{t \geq 0}\) es un proceso estocástico a tiempo continuo,
+para cada \(\omega \in \Omega\) fijo y \(\mathcal{S} = \mathbb{R}\), se
+definen las trayectorias del proceso como: \[
+    \mathcal{T} = [0, \infty) \rightarrow \mathcal{S} = \mathbb{R}
+\] \[
+    t \rightarrow X_t(\omega).
+\]
+
+\end{definition}
+
+Las propiedades analíticas de un proceso estocástico, tales como la
+continuidad, la diferenciabilidad y la presencia de discontinuidades
+finitas, se definen estrictamente a partir del comportamiento de varias
+componentes, para más detalles consultar
+(\citeproc{ref-karlin1998introduction}{Karlin y Taylor 1998}). Los
+componentes aleatorios de nuestro sistema se sustentan en tres procesos
+estocásticos específicos a tiempo continuo.
+
+\subsection{Movimiento Browniano (Proceso de
+Wiener)}\label{movimiento-browniano-proceso-de-wiener}
+
+Para representar las fluctuaciones térmicas continuas de baja intensidad
+asociadas al ruido intrínseco del termostato y microtransferencias de
+calor se utiliza el movimiento Browniano.
+
+\begin{definition}[Proceso de
+Wiener]\protect\hypertarget{def-movimiento-browniano}{}\label{def-movimiento-browniano}
+
+Un proceso estocástico a tiempo continuo \(\{W(t)\}_{t \ge 0}\) definido
+sobre un espacio de probabilidad filtrado
+\((\Omega, \mathcal{F}, \{\mathcal{F}_t\}, \mathbb{P})\) es un
+movimiento Browniano estándar o proceso de Wiener si cumple con las
+siguientes propiedades:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(W(0) = 0\) con probabilidad 1.
+\item
+  Posee incrementos independientes; es decir, para cualesquiera tiempos
+  \(0 \le t_1 < t_2 < \dots < t_n\), las variables aleatorias
+  \(W(t_2)-W(t_1), \dots, W(t_n)-W(t_{n-1})\) son mutuamente
+  independientes.
+\item
+  Posee incrementos estacionarios gaussianos, es decir, para todo
+  \(t > s \ge 0\), \(W(t) - W(s) \sim \mathcal{N}(0, t-s)\).
+\end{enumerate}
+
+\end{definition}
+
+El término \(dW(t) = W(t+dt) - W(t)\) representa el diferencial del
+proceso de Wiener. Este denota una perturbación gaussiana elemental en
+un intervalo infinitesimal \(dt\), caracterizada por una media
+\(\mathbb{E}[dW(t)] = 0\) y una varianza \(\mathbb{E}[(dW(t))^2] = dt\).
+Para una revisión detallada sobre las propiedades de medida y
+construcciones analíticas de este proceso, se sugiere consultar a
+(\citeproc{ref-karatzas1998brownian}{Karatzas y Shreve 1998}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.8\linewidth,height=\textheight,keepaspectratio]{proceso_wiener.png}
+
+}
+
+\caption{\label{fig-wiener}Trayectoria simulada del proceso de Wiener.
+El eje horizontal representa el avance del tiempo continuo en un
+horizonte parametrizado de \(T = 1.0\) con incrementos de
+\(dt = 0.001\). El eje vertical denota la posición de las fluctuaciones
+aleatorias \(W(t)\), iniciando en el origen \(W(0) = 0\).}
+
+\end{figure}%
+
+\subsection{Procesos de Poisson}\label{procesos-de-poisson}
+
+Las aperturas de las puertas del refrigerador por el personal médico
+constituyen eventos discretos y repentinos que alteran instantáneamente
+la temperatura interna. Este tipo de fenómenos se modela mediante un
+proceso estocástico a tiempo continuo de saltos puros.
+
+\begin{definition}[Proceso de Poisson
+Homogéneo]\protect\hypertarget{def-proceso-poisson}{}\label{def-proceso-poisson}
+
+Un proceso estocástico a tiempo continuo \(\{N(t)\}_{t \ge 0}\) que toma
+valores enteros en el espacio de estados \(\mathcal{S} = \mathbb{N}_0\)
+es un proceso de Poisson homogéneo con parámetro de intensidad constante
+\(\lambda > 0\) si satisface las siguientes condiciones:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(N(0) = 0\) con probabilidad 1.
+\item
+  Posee incrementos independientes; es decir, para cualesquiera tiempos
+  \(0 \le t_1 < t_2 < \dots < t_n\), las variables aleatorias discretas
+  \(N(t_2)-N(t_1), \dots, N(t_n)-N(t_{n-1})\) son mutuamente
+  independientes.
+\item
+  Posee incrementos estacionarios; lo que implica que la ley de
+  probabilidad de cualquier incremento \(N(t+s) - N(s)\) depende
+  únicamente de la amplitud temporal \(t\) y resulta invariante ante
+  traslaciones sobre el origen cronológico \(s\). De forma explícita, la
+  variable aleatoria \(N(t)\) sigue una distribución de Poisson con
+  parámetro o tasa media dada por el producto \(\lambda t\), es decir:
+\end{enumerate}
+
+\[
+\mathbb{P}(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}, \quad n = 0, 1, 2, \dots
+\]
+
+\end{definition}
+
+Para formalizar analíticamente el comportamiento probabilístico de los
+saltos sin recurrir a nociones intuitivas, las probabilidades de
+transición asociadas al incremento del proceso en un intervalo acotado
+de longitud \(h > 0\) se especifican rigurosamente mediante el límite
+asintótico cuando \(h \to 0\):
+
+\[
+\mathbb{P}(N(t+h) - N(t) = 1) = \lambda h + o(h)
+\] \[
+\mathbb{P}(N(t+h) - N(t) \ge 2) = o(h)
+\]
+
+donde la notación algebraico-asintótica de Landau \(o(h)\) denota una
+función de orden superior tal que \(\lim_{h \to 0} \frac{o(h)}{h} = 0\).
+Esto garantiza formalmente que la probabilidad de ocurrencia de
+múltiples eventos simultáneos en una fracción temporal infinitesimal es
+prácticamente nula.
+
+Sin embargo, en la dinámica real de un centro de salud, la tasa de
+aperturas del refrigerador no es constante; exhibe una estacionalidad
+diaria (por ejemplo, mayor actividad en horas pico). Para capturar esta
+variabilidad, generalizamos el modelo relajando la propiedad de
+incrementos estacionarios.
+
+\begin{definition}[Proceso de Poisson No
+Homogéneo]\protect\hypertarget{def-poisson-no-homogeneo}{}\label{def-poisson-no-homogeneo}
+
+Un proceso estocástico a tiempo continuo \(\{N(t)\}_{t \ge 0}\) es un
+proceso de Poisson no homogéneo con función de intensidad
+\(\lambda(t) \ge 0\) (para \(t \ge 0\)) si satisface las siguientes
+condiciones:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(N(0) = 0\) con probabilidad 1.
+\item
+  Posee incrementos independientes.
+\item
+  Para todo \(t \ge 0\) y \(h > 0\), la probabilidad de que ocurra
+  exactamente un evento en el intervalo \((t, t+h]\) está dada por la
+  tasa instantánea en el tiempo \(t\): \[
+  \mathbb{P}(N(t+h) - N(t) = 1) = \lambda(t) h + o(h)
+  \]
+\item
+  La probabilidad de observar dos o más eventos en dicho intervalo es de
+  orden superior a \(h\): \[
+  \mathbb{P}(N(t+h) - N(t) \ge 2) = o(h)
+  \]
+\end{enumerate}
+
+\end{definition}
+
+Una exposición rigurosa sobre los procesos de conteo, sus
+generalizaciones no homogéneas y sus aplicaciones en sistemas con
+discontinuidades puede encontrarse en
+(\citeproc{ref-ross1996stochastic}{Ross 1996}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.85\linewidth,height=\textheight,keepaspectratio]{proceso_poisson.png}
+
+}
+
+\caption{\label{fig-poisson}Trayectorias simuladas de dos procesos de
+Poisson. El eje horizontal representa el tiempo de observación en un
+horizonte de \(T = 10.0\) con incrementos discretos de \(dt = 0.01\). El
+eje vertical contabiliza el número acumulado de eventos discretos
+\(N(t)\), iniciando en \(N(0) = 0\). La línea continua (azul) ilustra un
+Proceso de Poisson Homogéneo con una tasa de intensidad constante
+\(\lambda = 1\), evidenciando incrementos estacionarios, por otro lado
+la línea punteada (roja) representa un Proceso de Poisson No Homogéneo
+con una intensidad de
+\(\lambda(t) = \frac{1}{2} + \frac{5}{2} \sin\left(\frac{\pi t}{10}\right)\),
+es decir es dependiente del tiempo, concentrando una mayor densidad de
+saltos en el periodo central del intervalo (simulando, por ejemplo, las
+horas pico de aperturas del refrigerador durante una jornada clínica).
+Ambas gráficas exhiben la naturaleza escalonada continua por la derecha
+con límites por la izquierda, por sus siglas en francés (càdlàg), propia
+de los procesos de saltos puros.}
+
+\end{figure}%
+
+\subsection{Cadenas de Markov a Tiempo
+Continuo}\label{cadenas-de-markov-a-tiempo-continuo}
+
+Los fallos prolongados en el suministro eléctrico de la red pública
+alteran estructuralmente la dinámica del sistema. Para modelar estas
+transiciones entre estados macroscópicos del entorno, introducimos una
+cadena de Markov en tiempo continuo.
+
+\begin{definition}[Cadena de Markov a Tiempo
+Continuo]\protect\hypertarget{def-cadena-markov}{}\label{def-cadena-markov}
+
+Sea \(\{\alpha(t)\}_{t \ge 0}\) un proceso estocástico que toma valores
+en un espacio de estados finito y discreto
+\(\mathcal{M} = \{1, 2, \dots, m\}\). Se dice que \(\alpha(t)\) es una
+cadena de Markov en tiempo continuo si para todo \(s, t \ge 0\) y
+estados \(i, j \in \mathcal{M}\), cumple la propiedad de Markov:
+
+\[
+\mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i, \alpha(u) = \alpha_u, 0 \le u < s) = \mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i)
+\]
+
+\end{definition}
+
+Las leyes de transición y la evolución temporal de las probabilidades de
+estado de la cadena \(\{\alpha(t)\}_{t \ge 0}\) se encuentran
+completamente caracterizadas por la matriz de intensidades de transición
+\(Q = (q_{ij}) \in \mathbb{R}^{m \times m}\). Si definimos las funciones
+de probabilidad de transición condicional mediante
+\(p_{ij}(h) = \mathbb{P}(\alpha(t+h) = j \mid \alpha(t) = i)\) para un
+incremento temporal positivo \(h > 0\), las componentes de la matriz
+\(Q\) se determinan evaluando el límite analítico en el origen:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Para transiciones entre estados distintos (\(i \neq j\)), la
+  componente \(q_{ij}\) representa la tasa instantánea o intensidad de
+  conmutación desde el régimen \(i\) hacia el régimen \(j\), definida
+  como:
+\end{enumerate}
+
+\[
+q_{ij} = \lim_{h \to 0^+} \frac{p_{ij}(h)}{h} \ge 0
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Para los elementos situados sobre la diagonal principal (\(i = j\)),
+  la componente \(q_{ii}\) representa la tasa neta de salida del estado
+  \(i\), cumpliendo por conservación de la probabilidad que la suma por
+  filas de la matriz \(Q\) sea idénticamente nula:
+\end{enumerate}
+
+\[
+q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i} q_{ij}
+\]
+
+A través de esta formulación basada en límites, las probabilidades de
+transición de primer orden quedan descritas mediante las expresiones
+\(p_{ij}(h) = q_{ij}h + o(h)\) para \(i \neq j\), y
+\(p_{ii}(h) = 1 + q_{ii}h + o(h)\). Esto permite modelar las
+conmutaciones macroscópicas de la dinámica del refrigerador sin
+necesidad de introducir variables temporales discretas ni heurísticas.
+Los lectores interesados en profundizar en las propiedades asintóticas y
+de estabilidad de estos procesos híbridos pueden remitirse al texto
+especializado de (\citeproc{ref-asmussen2003markov}{Asmussen 2003}).
+
+\section{Ecuaciones Diferenciales Estocásticas y la Integral de
+Itô}\label{ecuaciones-diferenciales-estocuxe1sticas-y-la-integral-de-ituxf4}
+
+Una vez establecidos los procesos estocásticos de soporte, es necesario
+definir las reglas operacionales que permiten construir y resolver
+ecuaciones sujetas a perturbaciones aleatorias continuas. Dado que las
+trayectorias del movimiento Browniano no son de variación acotada y
+tampoco son diferenciables en ningún punto, entonces la expresión
+clásica \(dW(t)/dt\) no tiene sentido dentro del cálculo ordinario. Por
+lo tanto, la integración respecto a procesos estocásticos requiere la
+construcción de una nueva herramienta analítica conocida como la
+integral de Itô.
+
+\begin{definition}[Integral de
+Itô]\protect\hypertarget{def-integral-ito}{}\label{def-integral-ito}
+
+Sea \(\{X(t)\}_{t \ge 0}\) un proceso estocástico adaptado a la
+filtración Browniana \(\{\mathcal{F}_t\}_{t \ge 0}\) que satisface la
+condición de integrabilidad,
+i.e.~\(\mathbb{E}\left[\int_0^T X^2(t) dt\right] < \infty\). La integral
+de Itô de \(X(t)\) respecto al proceso de Wiener \(W(t)\) se define como
+el límite en media cuadrática de sumas de Riemann aproximadas por la
+izquierda:
+
+\[
+\int_0^T X(t) dW(t) = \lim_{n \to \infty} \sum_{i=0}^{n-1} X(t_i) [W(t_{i+1}) - W(t_i)] \quad \text{en } L^2
+\]
+
+donde \(0 = t_0 < t_1 < \dots < t_n = T\) es una partición del intervalo
+\([0, T]\) cuyo diámetro tiende a cero cuando \(n \to \infty\).
+
+\end{definition}
+
+A diferencia del cálculo clásico, evaluar el integrando estrictamente en
+el extremo izquierdo de cada subintervalo (\(t_i\)) garantiza que la
+integral resultante conserve la propiedad de martingala, lo que implica
+que su esperanza matemática es nula,
+i.e.~\(\mathbb{E}\left[\int_0^T X(t) dW(t)\right] = 0\). A partir de
+este concepto fundamental, se establece la formulación de una Ecuación
+Diferencial Estocástica (EDE).
+
+\begin{definition}[Ecuación Diferencial
+Estocástica]\protect\hypertarget{def-ede-general}{}\label{def-ede-general}
+
+Una ecuación diferencial estocástica para un proceso
+\(\{X(t)\}_{t \ge 0}\) es una relación simbólica expresada en su forma
+diferencial mediante:
+
+\begin{equation}\phantomsection\label{eq-ede-general-diff}{
+dX(t) = b(t, X(t)) dt + \sigma(t, X(t)) dW(t)
+}\end{equation}
+
+donde \(b(t, X(t))\) denota el coeficiente de deriva y
+\(\sigma(t, X(t))\) representa el coeficiente de difusión.
+
+\end{definition}
+
+El término \(dX(t)\) en la Ecuación~\ref{eq-ede-general-diff} no debe
+interpretarse como una derivada ordinaria, sino como una representación
+abreviada de su ecuación integral equivalente:
+
+\begin{equation}\phantomsection\label{eq-ede-general-int}{
+X(t) = X(0) + \int_0^t b(s, X(s)) ds + \int_0^t \sigma(s, X(s)) dW(s)
+}\end{equation}
+
+En la Ecuación~\ref{eq-ede-general-int}, la primera integral respecto al
+tiempo es una integral ordinaria de Lebesgue-Stieltjes que captura la
+tendencia determinista del sistema, mientras que la segunda es una
+integral de Itô que modela el ruido estocástico continuo. Para una
+revisión rigurosa del cálculo estocástico elemental, se sugiere
+consultar a (\citeproc{ref-karatzas1998brownian}{Karatzas y Shreve
+1998}).
+
+Para asegurar que una EDE posea una solución única ante cualquier
+condición inicial, los coeficientes de deriva y difusión deben cumplir
+ciertas condiciones, expuestas en el siguiente teorema de existencia y
+unicidad.
+
+\begin{theorem}[Teorema de Existencia y
+Unicidad]\protect\hypertarget{thm-existencia-unicidad}{}\label{thm-existencia-unicidad}
+
+Sea la EDE definida en la Ecuación~\ref{eq-ede-general-diff} con una
+condición inicial \(X(0) = X_0\) independiente del proceso de Wiener.
+Supóngase que para todo \(t \in [0, T]\) y variables
+\(x, y \in \mathbb{R}\), los coeficientes satisfacen las siguientes dos
+restricciones:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Condición de Lipschitz global:} Existe una constante \(K > 0\)
+  tal que: \[
+  |b(t, x) - b(t, y)| + |\sigma(t, x) - \sigma(t, y)| \le K |x - y|
+  \]
+\item
+  \textbf{Condición de crecimiento lineal:} Existe una constante
+  \(C > 0\) tal que: \[
+  |b(t, x)| + |\sigma(t, x)| \le C (1 + |x|)
+  \]
+\end{enumerate}
+
+Bajo el cumplimiento de ambas condiciones, la ecuación tiene una
+solución fuerte única \(\{X(t)\}_{t \in [0, T]}\) con trayectorias
+continuas con probabilidad 1, una demostración a detalle de este
+teorema, basada en el método de aproximaciones sucesivas de Picard, se
+encuentra en (\citeproc{ref-arnold1974stochastic}{Arnold 1974})
+
+\end{theorem}
+
+La condición de Lipschitz previene que las trayectorias colapsen de
+manera indeterminada, garantizando la unicidad, mientras que la
+restricción de crecimiento lineal evita que las soluciones diverjan a
+infinito en un tiempo finito.
+
+\section{El Proceso de Ornstein-Uhlenbeck
+Clásico}\label{el-proceso-de-ornstein-uhlenbeck-cluxe1sico}
+
+Como paso previo al desarrollo de nuestro modelo termodinámico final, es
+indispensable introducir un tipo particular de EDE que modela la inercia
+física y la atracción hacia un estado de equilibrio: el proceso de
+Ornstein-Uhlenbeck.
+
+\begin{definition}[Proceso de
+Ornstein-Uhlenbeck]\protect\hypertarget{def-ou-clasico}{}\label{def-ou-clasico}
+
+Un proceso estocástico \(\{X(t)\}_{t \ge 0}\) es un proceso de
+Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial
+estocástica lineal homogénea:
+
+\begin{equation}\phantomsection\label{eq-ou-clasica}{
+dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t)
+}\end{equation}
+
+donde \(\kappa > 0\) representa la velocidad de reversión a la media,
+\(\theta \in \mathbb{R}\) denota el nivel de equilibrio de largo plazo y
+\(\sigma > 0\) es la volatilidad del sistema.
+
+\end{definition}
+
+La característica principal de la Ecuación~\ref{eq-ou-clasica} radica en
+su deriva lineal \(b(x) = \kappa(\theta - x)\). Cuando el estado del
+proceso supera el valor de equilibrio (\(X(t) > \theta\)), la deriva se
+vuelve negativa, empujando la trayectoria hacia abajo; inversamente, si
+el proceso se encuentra por debajo del nivel de consigna
+(\(X(t) < \theta\)), la deriva se vuelve positiva, con lo cual hay un
+crecimiento hacia el promedio. Esta propiedad de atracción convierte a
+este proceso en la base ideal para simular la oscilación térmica de
+sistemas cerrados regidos por la ley de enfriamiento de Newton, cuyas
+propiedades analíticas detalladas se discuten en
+(\citeproc{ref-karlin1998introduction}{Karlin y Taylor 1998}).
+
+\section{Formulación de la Ecuación Diferencial Estocástica
+General}\label{formulaciuxf3n-de-la-ecuaciuxf3n-diferencial-estocuxe1stica-general}
+
+Una vez definidos los elementos estocásticos elementales, es posible
+formular el marco matemático que une la evolución analítica continua con
+las perturbaciones aleatorias y los saltos discretos. De acuerdo con el
+marco general desarrollado por (\citeproc{ref-yin2010hybrid}{Yin y Zhu
+2010}) y (\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati
+2010}), una Difusión Híbrida con Conmutación de Régimen y Saltos se
+define mediante el siguiente sistema de ecuaciones diferenciales
+estocásticas:
+
+\begin{equation}\phantomsection\label{eq-sde-hibrida-general}{
+dT(t) = \mu(T(t), \alpha(t)) dt + \sigma(T(t), \alpha(t)) dW(t) + \gamma(T(t^-), \alpha(t^-)) dN(t)
+}\end{equation}
+
+En la Ecuación~\ref{eq-sde-hibrida-general}, el término
+\(T(t^-) = \lim_{s \to t^-} T(s)\) preserva la propiedad de continuidad
+por la izquierda con límites por la derecha (càdlàg) del proceso ante la
+ocurrencia de un salto. Las funciones de coeficientes se definen como:
+\[\mu: \mathbb{R} \times \mathcal{M} \to \mathbb{R} \quad \text{(Coeficiente de deriva o tendencia)}\]
+\[\sigma: \mathbb{R} \times \mathcal{M} \to \mathbb{R} \quad \text{(Coeficiente de difusión o volatilidad)}\]
+\[\gamma: \mathbb{R} \times \mathcal{M} \to \mathbb{R} \quad \text{(Magnitud o intensidad del impacto del salto)}\]
+
+La incorporación con la cadena de Markov \(\alpha(t)\) indica que los
+parámetros estructurales del sistema cambian de forma aleatoria e
+instantánea cuando el entorno conmuta de estado.
+
+Para ilustrar el impacto de nuestra formulación matemática sobre el
+modelado físico de la red de frío, es fundamental contrastar el
+comportamiento de las trayectorias resultantes. La simulación numérica
+del modelo revela cómo la incorporación de discontinuidades captura
+fenómenos que los modelos clásicos omiten.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{trayectorias_sde.png}
+
+}
+
+\caption{\label{fig-sde-comparacion}Trayectorias simuladas de la
+Ecuación Diferencial Estocástica de Ornstein-Uhlenbeck para la
+temperatura interna de un refrigerador de vacunas. El eje horizontal
+representa el tiempo de observación en un horizonte de \(T = 10.0\)
+horas con incrementos de \(dt = 0.01\). La línea base negra indica la
+temperatura óptima \(\theta = 4^\circ\text{C}\). La trayectoria continua
+(azul) ilustra una difusión clásica perturbada únicamente por el
+movimiento Browniano \(dW(t)\), simulando las microfluctuaciones
+gaussianas del ciclo del compresor. Por otro lado, la trayectoria
+híbrida (roja) añade perturbaciones mediante un proceso de Poisson
+\(dN(t)\), modelando impactos macroscópicos. Se observa claramente cómo
+los saltos térmicos positivos (simulando aperturas de la puerta por el
+personal) elevan bruscamente la temperatura, la cual posteriormente
+experimenta una reversión a la media controlada por el parámetro
+\(\kappa\). Las trayectorias fueron aproximadas computacionalmente
+mediante el método de Euler-Maruyama, que presentaremos más adelante.}
+
+\end{figure}%
+
+Como muestra la Figura~\ref{fig-sde-comparacion}, al modelar el sistema
+exclusivamente con componentes difusivos continuos se subestima el
+riesgo de trayectorias térmicas fuera del rango normativo de la OMS (2
+°C a 8 °C). La inclusión del proceso de saltos justifica nuestra
+necesidad de utilizar el Lema de Itô generalizado, ya que la temperatura
+experimenta cambios finitos instantáneos que rompen la diferenciabilidad
+clásica del modelo.
+
+\section{El Modelo Estocástico de Red de Frío (Ornstein-Uhlenbeck
+Modificado)}\label{el-modelo-estocuxe1stico-de-red-de-fruxedo-ornstein-uhlenbeck-modificado}
+
+Pasando a la física de nuestro problema particular, adaptamos la
+Ecuación~\ref{eq-sde-hibrida-general} bajo una estructura termodinámica
+de reversión a la media. Trabajaremos bajo la hipótesis de que el
+comportamiento de la temperatura interna \(T(t)\) de un refrigerador
+institucional de vacunas se rige por la siguiente ecuación diferencial
+estocástica de Ornstein-Uhlenbeck híbrida con saltos de Poisson:
+
+\begin{equation}\phantomsection\label{eq-ou-temperatura}{
+dT(t) = \kappa(\alpha(t)) [\theta(\alpha(t)) - T(t)] dt + \sigma(\alpha(t)) dW(t) + \gamma dN(t)
+}\end{equation}
+
+Bajo esta parametrización particular, el espacio de estados de la cadena
+de Markov se restringe a dos regímenes operativos fundamentales,
+\(\mathcal{M} = \{1, 2\}\), cuyas implicaciones físicas y estocásticas
+se detallan en los siguientes conceptos:
+
+\begin{definition}[Inercia Térmica y Parámetros
+Estructurales]\protect\hypertarget{def-inercia-termica}{}\label{def-inercia-termica}
+
+La inercia térmica es la capacidad de la masa interna del refrigerador
+(biológicos, paquetes refrigerantes y botellas de agua) para amortiguar
+la transferencia de calor del exterior. En la
+Ecuación~\ref{eq-ou-temperatura}, se modela mediante el coeficiente de
+velocidad de reversión \(\kappa(\alpha(t)) > 0\). A mayor inercia
+térmica, menor será el valor de \(\kappa\) en ausencia de energía
+eléctrica, retrasando el calentamiento del refrigerador. El parámetro de
+volatilidad \(\sigma(\alpha(t)) > 0\) mide el ruido continuo gaussiano
+inducido por el ciclo del compresor.
+
+\end{definition}
+
+\begin{definition}[Corte de Energía (Conmutación de
+Régimen)]\protect\hypertarget{def-cortes-energia}{}\label{def-cortes-energia}
+
+Se define como la transición de la cadena de Markov debido a fallos en
+el suministro eléctrico. El sistema conmuta del régimen con suministro
+normal (\(\alpha(t) = 1\)) al régimen de falla (\(\alpha(t) = 2\)). Esta
+conmutación altera los límites asintóticos de la deriva en la
+Ecuación~\ref{eq-ou-temperatura}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Régimen \(\alpha(t) = 1\):} El sistema converge a la
+  temperatura ideal del termostato, es decir,
+  \(\theta(1) = 4^\circ\text{C}\).
+\item
+  \textbf{Régimen \(\alpha(t) = 2\):} Al apagarse el motor, el sistema
+  interrumpe el enfriamiento y la temperatura interna comienza a subir
+  hacia la temperatura ambiente exterior del centro de salud,
+  parametrizada por \(\theta(2) = T_{\text{amb}}\).
+\end{enumerate}
+
+\end{definition}
+
+\begin{definition}[Apertura de Puertas (Perturbaciones por
+Saltos)]\protect\hypertarget{def-apertura-puerta}{}\label{def-apertura-puerta}
+
+Corresponde a la entrada brusca de aire cálido exterior provocada por la
+manipulación operativa del personal de enfermería. Este fenómeno ocurre
+de forma intermitente y se modela en la Ecuación~\ref{eq-ou-temperatura}
+mediante el término de saltos \(\gamma dN(t)\), donde \(\gamma > 0\)
+representa el incremento térmico discreto e instantáneo en grados
+Celsius cada vez que el diferencial del proceso de Poisson registra un
+evento (\(dN(t) = 1\)).
+
+\end{definition}
+
+\section{El Lema de Itô Clásico y
+Generalizado}\label{el-lema-de-ituxf4-cluxe1sico-y-generalizado}
+
+Para realizar transformaciones algebraicas sobre funciones que dependen
+de procesos estocásticos o para desarrollar algoritmos de aproximación
+computacional válidos, el teorema fundamental del cálculo determinista
+debe sustituirse por el Lema de Itô. Introducimos inicialmente la
+versión elemental para difusiones continuas.
+
+\begin{theorem}[Lema de Itô para Difusiones
+Continuas]\protect\hypertarget{thm-ito-clasico}{}\label{thm-ito-clasico}
+
+Sea \(\{X(t)\}_{t \ge 0}\), considere la EDE dada por la
+Ecuación~\ref{eq-ede-general-diff}, con condición inicial
+\(X(0) = x_0\),, y sea \(V(t, x)\) una función escalar continuamente
+diferenciable en su componente temporal \(t\) y dos veces continuamente
+diferenciable en su componente espacial \(x\). El diferencial
+estocástico de la función compuesta viene dado por:
+
+\[
+dV(t, X(t)) = \left[ \frac{\partial V}{\partial t} + b(t, X(t))\frac{\partial V}{\partial x} + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 V}{\partial x^2} \right] dt + \sigma(t, X(t))\frac{\partial V}{\partial x} dW(t)
+\]
+
+\end{theorem}
+
+El término de segundo orden respecto a la derivada espacial surge de la
+propiedad cuadrática del movimiento Browniano, donde
+\((dW(t))^2 \to dt\) en un sentido probabilístico. Este desarrollo
+elemental se detalla conceptualmente en
+(\citeproc{ref-karatzas1998brownian}{Karatzas y Shreve 1998}).
+
+No obstante, dado que nuestro modelo usa conmutaciones estructurales
+discretas y discontinuidades puntuales, la versión continua resulta
+insuficiente. Apoyados en los desarrollos de
+(\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}) y
+(\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}),
+establecemos el siguiente teorema analítico que rige el cálculo sobre
+trayectorias discontinuas con conmutación:
+
+\begin{theorem}[Fórmula de Itô para Difusiones Híbridas con
+Saltos]\protect\hypertarget{thm-ito-generalizado}{}\label{thm-ito-generalizado}
+
+Sea \(V(t, T, i)\) una función continuamente diferenciable en su
+componente temporal \(t\), y dos veces continuamente diferenciable en su
+componente espacial \(T\) para cada régimen operativo
+\(i \in \mathcal{M}\). Si \(T(t)\) es un proceso que satisface la
+Ecuación~\ref{eq-sde-hibrida-general}, entonces el diferencial
+estocástico de la función compuesta \(V(t, T(t), \alpha(t))\) viene dado
+por:
+
+\begin{equation}\phantomsection\label{eq-ito-generalizado}{
+\begin{aligned}
+dV(t, T(t), \alpha(t)) = & \left[ \frac{\partial V}{\partial t} + \frac{\partial V}{\partial T}\mu(T, \alpha) + \frac{1}{2}\frac{\partial^2 V}{\partial T^2}\sigma^2(T, \alpha) + \sum_{j \in \mathcal{M}} q_{\alpha(t)j}V(t, T, j) \right] dt \\
+& + \frac{\partial V}{\partial T}\sigma(T, \alpha) dW(t) + \left[ V(t, T(t^-) + \gamma, \alpha(t^-)) - V(t, T(t^-), \alpha(t^-)) \right] dN(t)
+\end{aligned}
+}\end{equation}
+
+\end{theorem}
+
+Como se puede apreciar en el Teorema~\ref{thm-ito-generalizado}, el
+operador diferencial de Itô se logra expandir. El primer término entre
+corchetes añade a la derivada temporal y al generador de difusión
+clásico una sumatoria ponderada por las tasas de transición \(q_{ij}\)
+de la matriz \(Q\), lo cual captura el efecto del cambio en la deriva.
+Por su parte, la componente final sustituye la derivada espacial
+tradicional por un operador de diferencias finitas encargado de absorber
+la discontinuidad en los tiempos de salto del proceso de Poisson.
+
+\section{Soluciones Numéricas de Ecuaciones Diferenciales
+Estocásticas}\label{soluciones-numuxe9ricas-de-ecuaciones-diferenciales-estocuxe1sticas}
+
+En la práctica, la gran mayoría de las ecuaciones diferenciales
+estocásticas carecen de una solución analítica explícita debido a la no
+linealidad de sus coeficientes o al acoplamiento de sus perturbaciones.
+Por este motivo, resulta necesario recurrir a esquemas de aproximación
+numérica distribuidos en un mallado temporal discreto. A diferencia del
+cálculo determinista, donde la convergencia se evalúa de forma puntual,
+en el ámbito estocástico la cercanía entre la solución real \(X(t)\) y
+la aproximación discreta \(Y_n\) requiere criterios fundamentados en la
+teoría de la medida.
+
+Para definir los criterios de convergencia, consideremos una partición
+regular del intervalo de tiempo \([0, T]\) con un tamaño de paso
+constante \(\Delta t = \frac{T}{N}\), fijando los nodos temporales como
+\(t_n = n \Delta t\) para cada paso \(n = 0, 1, \dots, N\). Denotaremos
+a la solución aproximada en el nodo \(t_n\) como \(Y_n = Y(t_n)\).
+
+\begin{definition}[Convergencia
+Fuerte]\protect\hypertarget{def-convergencia-fuerte}{}\label{def-convergencia-fuerte}
+
+Se dice que una aproximación discreta \(Y\) converge fuertemente de
+orden \(\gamma > 0\) hacia la solución real \(X(T)\) en el tiempo
+terminal \(T\) si existe una constante positiva \(C\), independiente de
+\(\Delta t\), tal que se cumple la desigualdad:
+
+\[
+\mathbb{E}\left[|X(T) - Y_N|\right] \le C (\Delta t)^\gamma
+\]
+
+\end{definition}
+
+La convergencia fuerte evalúa el error promedio directo sobre cada
+trayectoria individual del proceso. Es el criterio adecuado cuando
+interesa simular caminos muestrales específicos del sistema.
+
+\begin{definition}[Convergencia
+Débil]\protect\hypertarget{def-convergencia-debil}{}\label{def-convergencia-debil}
+
+Se dice que una aproximación discreta \(Y\) converge débilmente de orden
+\(\beta > 0\) hacia la solución real \(X(T)\) en el tiempo terminal
+\(T\) si, para toda función de prueba \(g: \mathbb{R} \to \mathbb{R}\)
+continuamente diferenciable de crecimiento polinomial, existe una
+constante positiva \(C\) tal que:
+
+\[
+|\mathbb{E}[g(X(T))] - \mathbb{E}[g(Y_N)]| \le C (\Delta t)^\beta
+\]
+
+\end{definition}
+
+La convergencia débil no compara trayectoria por trayectoria, sino que
+evalúa la aproximación de la distribución de probabilidad global y sus
+momentos estadísticos (como la media y la varianza), para más detalles
+consultar a (\citeproc{ref-kloeden1992numerical}{Kloeden y Platen
+1992}).
+
+\subsection{Esquema Numérico de
+Euler-Maruyama}\label{sec-euler-maruyama}
+
+El método de Euler-Maruyama constituye la extensión estocástica más
+elemental del método de Euler para ecuaciones diferenciales ordinarias.
+Este esquema aproxima el cambio continuo truncando las integrales de la
+ecuación mediante aproximaciones de orden inferior.
+
+\begin{theorem}[Teorema de Convergencia de
+Euler-Maruyama]\protect\hypertarget{thm-euler-maruyama}{}\label{thm-euler-maruyama}
+
+Sea \(\{X(t)\}_{t \ge 0}\), considere la EDE dada por la
+Ecuación~\ref{eq-ede-general-diff}, con condición inicial
+\(X(0) = x_0\), si se cumplen las hipotesis del teorema de existencia y
+unicidad Teorema~\ref{thm-existencia-unicidad} y los coeficientes \(b\)
+y de difusión \(\sigma\) son continuamente diferenciables, entonces el
+esquema de Euler-Maruyama converge fuertemente con orden:
+
+\[
+\gamma = 0.5
+\]
+
+y converge débilmente con un orden de acotación de \(\beta = 1.0\).
+
+\end{theorem}
+
+Este orden de convergencia se fundamenta en que el incremento del
+movimiento Browniano domina algebraicamente sobre el incremento del
+tiempo determinista, dado que su escala de variación es proporcional a
+\(\sqrt{\Delta t}\), la demostración de este teorema se encuentra en
+(\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}).
+
+\textbf{Algoritmo General de Euler-Maruyama}
+
+Para aproximar numéricamente las trayectorias de la ecuación en el
+intervalo \([0, T]\) con condición inicial \(X(0) = x_0\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Inicialización:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Fijar el número de pasos \(N\) y calcular el incremento
+    \(\Delta t = T/N\).
+  \item
+    Construir la malla temporal \(t_n = n \Delta t\) para
+    \(n = 0, 1, \dots, N\).
+  \item
+    Asignar el valor inicial a la primera posición del vector:
+    \(Y_0 = x_0\).
+  \end{itemize}
+\item
+  \textbf{Bucle de Simulación:} Para cada paso temporal
+  \(n = 0, 1, \dots, N-1\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Generar una variable aleatoria normal estándar independiente:
+    \(Z_n \sim \mathcal{N}(0, 1)\).
+  \item
+    Calcular el incremento del proceso de Wiener mediante el
+    escalamiento:
+    \[\Delta W_n = W(t_{n+1}) - W(t_n) = Z_n \sqrt{\Delta t}\]
+  \item
+    Actualizar el estado del proceso en el siguiente nodo evaluando la
+    relación recursiva:
+    \[Y_{n+1} = Y_n + b(t_n, Y_n) \Delta t + \sigma(t_n, Y_n) \Delta W_n\]
+  \end{itemize}
+\item
+  \textbf{Resultado:} El vector de estados discreto
+  \(\{Y_0, Y_1, \dots, Y_N\}\) representa la trayectoria simulada
+  aproximada del proceso.
+\end{enumerate}
+
+\subsection{Esquema Numérico de
+Milstein}\label{esquema-numuxe9rico-de-milstein}
+
+El método de Milstein es un esquema numérico avanzado de orden superior
+que corrige la aproximación de la componente difusiva. Surge de aplicar
+de manera explícita el Lema de Itô al integrando de la componente
+estocástica en la expansión de Taylor-Itô, rescatando los términos de
+segundo orden que el método de Euler-Maruyama ignora.
+
+\begin{theorem}[Teorema de Convergencia de
+Milstein]\protect\hypertarget{thm-milstein}{}\label{thm-milstein}
+
+Sea \(\{X(t)\}_{t \ge 0}\), considere la EDE dada por la
+Ecuación~\ref{eq-ede-general-diff} sujeta a las condiciones estándar de
+regularidad, es decir si los coeficientes \(b(t, x)\) y \(\sigma(t, x)\)
+son dos veces continuamente diferenciables respecto a sus componentes y
+cumplen los criterios de crecimiento acotado, entonces el esquema
+numérico de Milstein converge fuertemente con un orden superior dado
+por:
+
+\[
+\gamma = 1.0
+\]
+
+\end{theorem}
+
+El incremento en la velocidad de convergencia fuerte se logra al
+incorporar de forma analítica el término correspondiente a la integral
+estocástica iterada
+
+\[
+\int_{t_n}^{t_{n+1}} \int_{t_n}^s dW(u) dW(s) = \frac{1}{2} \left[ (\Delta W_n)^2 - \Delta t \right],
+\]
+
+la cual modela la curvatura interna del ruido estocástico dentro del
+intervalo de simulación, lo que permite una aproximación más precisa de
+la trayectoria. La demostración de este resultado se encuentra en
+(\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}).
+
+\textbf{Algoritmo General de Milstein}
+
+Para aproximar numéricamente las trayectorias bajo el refinamiento de
+segundo orden estocástico en el intervalo \([0, T]\) con condición
+inicial \(X(0) = x_0\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Inicialización:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Establecer el número de intervalos \(N\) y calcular el paso
+    \(\Delta t = T/N\).
+  \item
+    Definir los puntos de la malla \(t_n = n \Delta t\) para
+    \(n = 0, 1, \dots, N\).
+  \item
+    Asignar la condición de inicio del proceso: \(Y_0 = x_0\).
+  \end{itemize}
+\item
+  \textbf{Bucle de Simulación:} Para cada paso temporal
+  \(n = 0, 1, \dots, N-1\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Obtener una realización independiente de una variable normal
+    estándar: \(Z_n \sim \mathcal{N}(0, 1)\).
+  \item
+    Establecer el incremento browniano escalar correspondientemente:
+    \(\Delta W_n = Z_n \sqrt{\Delta t}\).
+  \item
+    Calcular analíticamente el valor de la primera derivada parcial del
+    coeficiente de difusión respecto a la variable espacial evaluado en
+    el punto actual:
+    \[\sigma'(t_n, Y_n) = \frac{\partial \sigma(t, x)}{\partial x} \bigg|_{(t_n, Y_n)}\]
+  \item
+    Realizar la actualización recursiva del estado integrando la
+    corrección de segundo orden:
+    \[Y_{n+1} = Y_n + b(t_n, Y_n)\Delta t + \sigma(t_n, Y_n)\Delta W_n + \frac{1}{2}\sigma(t_n, Y_n)\sigma'(t_n, Y_n)\left[(\Delta W_n)^2 - \Delta t\right]\]
+  \end{itemize}
+\item
+  \textbf{Resultado:} El conjunto ordenado de aproximaciones numéricas
+  \(\{Y_0, Y_1, \dots, Y_N\}\) conforma la trayectoria analizada bajo
+  estabilidad de orden superior.
+\end{enumerate}
+
+\section{Análisis Comparativo de Convergencia
+Fuerte}\label{anuxe1lisis-comparativo-de-convergencia-fuerte}
+
+Para mostrar la diferencia analítica que hay entre los esquemas de
+Euler-Maruyama y Milstein, y justificar la necesidad de utilizar este
+último cuando se requiere precisión en trayectorias individuales,
+planteamos un problema de control numérico. Consideremos el Movimiento
+Browniano Geométrico (GBM), una EDE lineal homogénea caracterizada por
+un coeficiente de difusión multiplicativo, dada por la ecuación:
+
+\begin{equation}\phantomsection\label{eq-ede-gbm}{
+dX(t) = \mu X(t) dt + \sigma X(t) dW(t)
+}\end{equation}
+
+con condición inicial \(X(0) = X_0\), tendencia determinista \(\mu > 0\)
+y volatilidad \(\sigma > 0\). Este proceso posee una solución analítica
+única dada por:
+
+\[
+X(t) = X_0 \exp\left[\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W(t)\right]
+\]
+
+Esta forma cerrada nos permite contrastar directamente las
+aproximaciones numéricas contra la realidad del proceso. La principal
+limitación del método de Euler-Maruyama radica en su coeficiente de
+difusión constante en cada paso temporal. Al truncar la integral
+estocástica con un orden de convergencia fuerte de 0.5, el esquema no
+absorbe correctamente la curvatura del ruido multiplicativo
+(\(\sigma X_t\)), acumulando errores significativos sobre las
+trayectorias individuales, incluso ante mallados temporales
+relativamente pequeños. Por el contrario, el método de Milstein integra
+el término de segundo orden estocástico, logrando que el vector de
+estados discreto coincida con mayor precisión con la dinámica real del
+proceso (\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}).
+
+En la Figura~\ref{fig-sde-metodos}, simulamos una trayectoria de GBM en
+un horizonte temporal acotado (\(T=2.0\) años) con una volatilidad alta
+(\(\sigma = 1\)) y un tamaño de paso discreto relativamente grueso
+(\(\Delta t = 0.05\), correspondiente a \(N=40\) pasos). Esta
+configuración es deliberada para resaltar las fallas de los
+aproximadores.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{comparacion_metodos.png}
+
+}
+
+\caption{\label{fig-sde-metodos}Análisis de convergencia fuerte de
+esquemas numéricos estocásticos para una trayectoria de Movimiento
+Browniano Geométrico (GBM) definida por \(dX = 0.05 X dt + X dW\) con
+\(X_0 = 1\). El eje horizontal representa el tiempo discreto y el eje
+vertical el estado del proceso \(X(t)\). La línea negra continua muestra
+la solución analítica exacta. La línea roja discontinua ilustra la
+aproximación de Euler-Maruyama (Orden fuerte 0.5), evidenciando
+desviaciones significativas respecto a la trayectoria real. La línea
+azul discontinua-punto representa el esquema de Milstein (Orden fuerte
+1.0), el cual sigue con alta precisión la dinámica exacta, demostrando
+su estabilidad superior ante ruidos multiplicativos y mallados
+temporales gruesos. La fuente de los datos corresponde a una simulación
+de elaboración propia generada en Python.}
+
+\end{figure}%
+
+Como se puede apreciar en la Figura~\ref{fig-sde-metodos}, la
+trayectoria roja que correspondiente al método de Euler-Maruyama falla
+en aproximar la dinámica exacta (línea negra), presentando oscilaciones
+exageradas y alejándose del valor real a medida que el tiempo avanza.
+Por otro lado, la trayectoria azul del método de Milstein sigue
+prácticamente de forma idéntica la trayectoria real. Esta diferencia
+justifica nuestra decisión de utilizar el esquema numérico de Milstein
+para simular el comportamiento térmico del refrigerador HBC-150, ya que
+el modelo híbrido presenta un coeficiente de ruido continuo
+\(\sigma(\alpha(t))\), lo cual genera perturbaciones multiplicativas que
+requieren un orden de convergencia estricto para no subestimar el riesgo
+de trayectorias erráticas.
+
+\part{Modelo Matemático}
+
+\chapter{Estudio de Caso: Calibración Termodinámica, Eléctrica y
+Cinética de
+Degradación}\label{estudio-de-caso-calibraciuxf3n-termodinuxe1mica-eluxe9ctrica-y-cinuxe9tica-de-degradaciuxf3n}
+
+\section{Motivación y Contexto del
+Estudio}\label{motivaciuxf3n-y-contexto-del-estudio}
+
+El presente estudio de caso consolida el marco teórico y metodológico de
+nuestra investigación aplicándolo a un escenario real y altamente
+crítico: la red de frío para la preservación de vacunas en Tuxtla
+Gutiérrez, Chiapas. Debido a las altas temperaturas de la región y a la
+vulnerabilidad de la infraestructura eléctrica ante eventos climáticos,
+los refrigeradores institucionales de vacunas se enfrentan a una
+dificultad operativa constante.
+
+Para que nuestra simulación sea valida, no podemos usar la Ecuación
+Diferencial Estocástica (EDE) con números aleatorios sin fundamento. En
+esta sección, calibraremos todos los parámetros de nuestro modelo en
+tres fases fundamentales. Primero, determinaremos la frecuencia y
+duración de los cortes de energía basándonos en datos oficiales de la
+Comisión Federal de Electricidad (CFE), modelándolos a través de
+procesos estocásticos de Poisson. Segundo, utilizaremos la física del
+enfriamiento para deducir los parámetros de la EDE a partir de las
+especificaciones termodinámicas reales de los refrigeradores.
+Finalmente, acoplaremos estos resultados a las leyes de la cinética
+química para cuantificar la degradación térmica exacta que sufren los
+biológicos durante un apagón.
+
+\section{Datos Base (CFE) e Indicadores de
+Confiabilidad}\label{datos-base-cfe-e-indicadores-de-confiabilidad}
+
+El objetivo fundamental es modelar la tasa de ocurrencia de
+interrupciones del suministro eléctrico en el punto específico de Tuxtla
+Gutiérrez donde se ubicaría el refrigerador de vacunas. Los datos de
+partida provienen de la Comisión Federal de Electricidad (CFE)
+(\citeproc{ref-cfe2024informe}{Comisión Federal de Electricidad 2024}),
+la cual evalúa la continuidad del suministro a través de dos indicadores
+internacionales de confiabilidad:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{SAIFI (Índice de la Frecuencia de Interrupción, en número):}
+  El indicador SAIFI mide la frecuencia con que se interrumpe el
+  servicio a los usuarios por causas propias del transportista y se
+  calcula evalúa como: \[
+  SAIFI = \frac{\sum \text{Número total de interrupciones por usuario}}{\text{Número total de usuarios}}
+  \]
+\item
+  \textbf{SAIDI (Índice de Duración Promedio de Interrupción, en
+  minutos):} El inicador SAIDI mide en minutos el tiempo que los
+  usuarios del servicio de energía eléctrica no cuentan con servicio por
+  causas atribuibles al transportista y se evalúa como: \[
+  SAIDI = \frac{\sum \text{Duración total de las interrupciones sufridas por usuario}}{\text{Número total de usuarios}}
+  \]
+\end{enumerate}
+
+Mediante una solicitud de información pública de transparencia dirigida
+a la CFE, se obtuvo el registro histórico del promedio mensual de
+interrupciones y su duración para el municipio de Tuxtla Gutiérrez.
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\caption{Interrupciones eléctricas en Tuxtla Gutiérrez, Chiapas (Fuente:
+Solicitud de Transparencia a la
+CFE).}\label{tbl-interrupciones-cfe}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Año
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Número de interrupciones promedio por mes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Duración Promedio de las interrupciones (Horas)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Año
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Número de interrupciones promedio por mes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Duración Promedio de las interrupciones (Horas)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+2019 & 25 & 2.02 \\
+2020 & 42 & 1.73 \\
+2021 & 47 & 2.03 \\
+2022 & 40 & 2.59 \\
+2023 & 49 & 2.23 \\
+2024 & 43 & 2.39 \\
+2025 & 38 & 2.02 \\
+\end{longtable}
+
+Para este modelo, se toma como línea base el comportamiento del año
+\textbf{2024}, el cual indica un promedio de \textbf{43 cortes por mes}.
+Esto resulta en un promedio anual a nivel municipal de:
+
+\[43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/año}\]
+
+\section{\texorpdfstring{Corrección de Escala Espacial (Factor
+\(\kappa_{espacial}\))}{Corrección de Escala Espacial (Factor \textbackslash kappa\_\{espacial\})}}\label{correcciuxf3n-de-escala-espacial-factor-kappa_espacial}
+
+\subsection{Justificación de la Reducción de
+Escala}\label{justificaciuxf3n-de-la-reducciuxf3n-de-escala}
+
+El valor de 516 cortes al año es un dato agregado de todo el municipio.
+En la modelación aplicada, utilizar directamente este valor para un solo
+refrigerador implicaría asumir que el edificio clínico sufre más de un
+apagón diario, lo cual no es físicamente real. Este error ocurre al
+ignorar que un edificio está conectado a un solo nodo de la red, no a
+todos simultáneamente.
+
+Para solucionar esto, introducimos un factor de escala espacial. De
+acuerdo con el Programa para el Desarrollo del Sistema Eléctrico
+Nacional (PRODESEN) y los diagramas de infraestructura del Centro
+Nacional de Control de Energía (CENACE)
+(\citeproc{ref-sener2024prodesen}{Secretaría de Energía 2024}), la
+mancha urbana de Tuxtla Gutiérrez está alimentada de manera sectorizada
+por exactamente \textbf{8 subestaciones principales} de distribución
+(Tuxtla Céntrica, Oriente, Poniente, Terán, Tuxtla Norte, Tuxtla Dos,
+Mactumatzá y Real del Bosque).
+
+\subsection{La Esperanza Matemática
+Local}\label{la-esperanza-matemuxe1tica-local}
+
+Asumiendo que las fallas de transmisión se distribuyen de manera
+uniforme sobre estas infraestructuras, el riesgo que absorbe el edificio
+de interés (la subestación Tuxtla Norte, encargada de alimentar la zona
+de hospitales y laboratorios de la Colonia Maya) corresponde a un octavo
+del total municipal.
+
+\[\mathbb{E}[N_{local}] = \frac{516 \text{ cortes}}{8 \text{ subestaciones}} = 64.5 \approx 64 \text{ cortes al año}\]
+
+Al ajustar al entero más cercano, establecemos una base realista de
+\textbf{64 interrupciones esperadas al año} para nuestra simulación.
+
+\section{Distribución Temporal de las
+Fallas}\label{distribuciuxf3n-temporal-de-las-fallas}
+
+Las interrupciones no ocurren de manera homogénea a lo largo del año (es
+decir, no se presentan exactamente 5.33 cortes idénticos cada mes). La
+variabilidad mensual depende directamente de los factores climáticos
+estacionales de la región. Para no asignar los apagones de manera
+aleatoria, utilizamos el comportamiento documentado en el \emph{Informe
+Anual de la CFE 2024} (\citeproc{ref-cfe2024informe}{Comisión Federal de
+Electricidad 2024}), específicamente en su página 82, donde se registra
+la evolución de los indicadores de continuidad del servicio a lo largo
+de los meses.
+
+\begin{longtable}[]{@{}lcc@{}}
+\caption{Evolución mensual acumulada de los indicadores SAIDI y SAIFI
+(Fuente: Informe Anual CFE 2024,
+p.~82).}\label{tbl-saidi-saifi}\tabularnewline
+\toprule\noalign{}
+Mes & SAIDI Acumulado (Horas) & SAIFI Acumulado \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Mes & SAIDI Acumulado (Horas) & SAIFI Acumulado \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Enero & 0.998 & 0.013 \\
+Febrero & 1.110 & 0.017 \\
+Marzo & 1.285 & 0.022 \\
+Abril & 2.793 & 0.027 \\
+Mayo & 4.120 & 0.037 \\
+Junio & 5.774 & 0.053 \\
+Julio & 6.557 & 0.065 \\
+Agosto & 7.905 & 0.080 \\
+Septiembre & 8.592 & 0.096 \\
+Octubre & 9.063 & 0.103 \\
+Noviembre & 9.314 & 0.106 \\
+Diciembre & 10.812 & 0.113 \\
+\end{longtable}
+
+Dado que el informe de la CFE publica el indicador SAIFI de forma
+acumulada, es necesario calcular la diferencia marginal (\(\Delta\))
+respecto al mes anterior para aislar el peso estadístico de cada mes de
+forma individual:
+
+\[
+\Delta \text{SAIFI}_i = \text{SAIFI}_i - \text{SAIFI}_{i-1}
+\]
+
+Para distribuir los 64 cortes anuales calculados para la subestación
+local respetando esta estacionalidad, aplicamos una \textbf{regla de
+tres simple}. Suponiendo que el valor total del SAIFI al final del año
+(\(0.113\)) representa el 100\% de las fallas (equivalente a los 64
+cortes), entonces el incremento mensual generado en cada periodo
+(\(\Delta \text{SAIFI}_i\)) representara una fracción directamente
+proporcional de cortes. Expresado de forma general para cualquier mes
+\(i\), la asignación viene dada por:
+
+\[
+\text{Cortes}_i = \left( \frac{\Delta \text{SAIFI}_i}{\text{SAIFI}_{total}} \right) \times \mathbb{E}[N_{local}]
+\]
+
+Sustituyendo los valores de nuestro escenario
+(\(\text{SAIFI}_{total} = 0.113\) y \(\mathbb{E}[N_{local}] = 64\)), la
+ecuación del modelo es:
+
+\[
+\text{Cortes}_i = \left( \frac{\Delta \text{SAIFI}_i}{0.113} \right) \times 64
+\]
+
+Al hacer este cálculo y redondeando al entero más cercano (realizando un
+ajuste para mantener la conservación de la suma total en 64), obtenemos
+la distribución estacional empírica de fallas:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2105}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}@{}}
+\caption{Distribución estacional de los 64 cortes locales calculada
+mediante proporcionalidad sobre el SAIFI
+2024.}\label{tbl-cortes-mensuales}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Mes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\Delta\) SAIFI (Mensual)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Cortes Exactos Calculados
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Cortes Asignados (Redondeo)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Mes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\Delta\) SAIFI (Mensual)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Cortes Exactos Calculados
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Cortes Asignados (Redondeo)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Enero & 0.013 & 7.36 & 7 \\
+Febrero & 0.004 & 2.26 & 2 \\
+Marzo & 0.005 & 2.83 & 3 \\
+Abril & 0.005 & 2.83 & 3 \\
+Mayo & 0.010 & 5.66 & 6 \\
+Junio & 0.016 & 9.06 & 9 \\
+Julio & 0.012 & 6.79 & 7 \\
+Agosto & 0.015 & 8.49 & 8 \\
+Septiembre & 0.016 & 9.06 & 9 \\
+Octubre & 0.007 & 3.96 & 4 \\
+Noviembre & 0.003 & 1.70 & 2 \\
+Diciembre & 0.007 & 3.96 & 4 \\
+\end{longtable}
+
+El análisis de la Tabla 3 revela con claridad los dos momentos
+estacionales de mayor vulnerabilidad y frecuencia de cortes en el
+suministro eléctrico de la región. El pico más severo se registra en
+\textbf{Junio (9 cortes)}, un fenómeno ocasionado por las altas
+temperaturas extremas registradas en Tuxtla Gutiérrez durante la
+primavera-verano, las cuales provocaron una saturación en la red de
+distribución eléctrica debido al uso masivo y simultáneo de sistemas de
+aire acondicionado. El segundo periodo crítico ocurre durante
+\textbf{Agosto y Septiembre (8 y 9 cortes respectivamente)},
+coincidiendo directamente con el máximo histórico de la temporada de
+lluvias, tormentas tropicales y huracanes en el Sureste mexicano,
+eventos climáticos que suelen derribar líneas de alta tensión y afectar
+transformadores locales. En contraste, la época invernal se consolida
+como el periodo de máxima estabilidad en el servicio.
+
+\section{Modelado del Proceso de Poisson No Homogéneo
+(PPNH)}\label{sec-ppnh}
+
+Para integrar estas interrupciones eléctricas dentro de la Ecuación
+Diferencial Estocástica (EDE) en tiempo continuo \(t\), donde
+\(t \in [0, 365]\) representa los días del año, utilizamos un
+\textbf{Proceso de Poisson No Homogéneo}, cuya intensidad instantánea de
+eventos \(\lambda(t)\) varía en función del tiempo para absorber la
+estacionalidad climática.
+
+El modelo se construye mediante la suma de una tasa base constante y dos
+funciones de perturbación gaussianas no normalizadas. La elección de
+núcleos gaussianos obedece a dos razones analíticas fundamentales:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Transición Teórica Suave:} Los fenómenos climáticos (como una
+  ola de calor o la época de huracanes) no inician ni terminan de forma
+  abrupta. Una gaussiana permite modelar la transición gradual de las
+  estaciones sin introducir discontinuidades de salto que volverían
+  inestable la resolución numérica de la EDE.
+\item
+  \textbf{Correlación Física Estacional:} Permite alinear y concentrar
+  el mayor riesgo de que la EDE salte al estado de falla eléctrica
+  (apagón) exactamente en los días donde el clima ambiental exterior es
+  más adverso.
+\end{enumerate}
+
+La función analítica propuesta para la intensidad diaria de fallas es:
+
+\[\lambda(t) = \lambda_{base} + A_1 \exp\left(-\frac{(t - \mu_1)^2}{2\sigma_1^2}\right) + A_2 \exp\left(-\frac{(t - \mu_2)^2}{2\sigma_2^2}\right)\]
+
+Para calibrar estos coeficientes con los datos empíricos de Tuxtla
+Gutiérrez (2024), se realiza el siguiente desglose analítico:
+
+\begin{itemize}
+\item
+  \textbf{Tasa Base (\(\lambda_{base} = 0.0667\)):} Representa el riesgo
+  mínimo de fondo debido a fallas fortuitas o mantenimiento de la red,
+  independiente del clima. Se calcula desde los meses más estables
+  (febrero y noviembre, con 2 cortes al mes). Al dividir este valor,
+  obtenemos la tasa diaria:
+  \[\lambda_{base} = \frac{2 \text{ cortes}}{30 \text{ días}} \approx 0.0667 \text{ cortes/día}\]
+\item
+  \textbf{Medias Temporales (\(\mu_1 = 152\) y \(\mu_2 = 244\)):} Ubican
+  el centro máximo de los picos de riesgo. El primer pico se centra a
+  \textbf{principios de junio} (el 1 de junio equivale al día 152 del
+  año), alineándose con el inicio del verano más caluroso. El segundo se
+  centra a \textbf{inicios de septiembre} (día 244), el momento
+  históricamente más activo de la temporada de huracanes.
+\item
+  \textbf{Amplitudes (\(A_1 = 0.2333\) y \(A_2 = 0.2333\)):} Capturan la
+  altura máxima de la campana en los días críticos. Como junio y
+  septiembre registraron 9 cortes mensuales, la tasa en su pico es de
+  \(9/30 = 0.30\) cortes/día. Dado que la tasa base ya aporta
+  \(0.0667\), la magnitud neta que debe sumar la gaussiana es la
+  diferencia: \(0.30 - 0.0667 = 0.2333\).
+\item
+  \textbf{Varianzas Estacionales (\(\sigma_1 = 40\) y
+  \(\sigma_2 = 30\)):} Controlan el ancho temporal de las afectaciones.
+  Para la ola de calor, se asigna una desviación estándar de \(40\) días
+  (varianza \(2\sigma_1^2 = 3200\)) para garantizar que la campana sea
+  lo suficientemente ancha como para cubrir desde finales de abril
+  (cuando inician las altas temperaturas) hasta mediados de julio. Para
+  las lluvias, una desviación estándar de \(30\) días (varianza
+  \(2\sigma_2^2 = 1800\)) modela una perturbación que cubre por completo
+  agosto y septiembre, extendiéndose hacia octubre.
+\end{itemize}
+
+Sustituyendo cada coeficiente calibrado, la función de intensidad
+operativa queda definida formalmente como:
+
+\[\lambda(t) = 0.0667 + 0.2333 \exp\left(-\frac{(t - 152)^2}{3200}\right) + 0.2333 \exp\left(-\frac{(t - 244)^2}{1800}\right)\]
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.85\linewidth,height=\textheight,keepaspectratio]{intensidad_lambda.png}
+
+}
+
+\caption{\label{fig-lambda-t}Función de intensidad diaria de fallas
+eléctricas \(\lambda(t)\). El modelo superpone al ruido constante de
+fondo dos núcleos gaussianos anchos que abarcan los momentos más
+críticos del año: la temporada de estiaje y calor extremo
+(\(\mu_1=152\), \(\sigma_1=40\)) y la temporada de tormentas tropicales
+(\(\mu_2=244\), \(\sigma_2=30\)).}
+
+\end{figure}%
+
+\section{Validación del Modelo (Cálculo
+Integral)}\label{validaciuxf3n-del-modelo-cuxe1lculo-integral}
+
+Por los fundamentos de los Procesos de Poisson No Homogéneos, el número
+esperado de eventos en cualquier intervalo \((t_1, t_2]\) está
+determinado por la integral definida de su función de intensidad:
+
+\[\mathbb{E}[N(t_1, t_2)] = \int_{t_1}^{t_2} \lambda(t) dt\]
+
+Para validar la consistencia analítica de nuestra función
+\(\lambda(t)\), particionamos el año de 365 días en 12 subintervalos
+(correspondientes a los días acumulados de cada mes) y resolvemos
+numéricamente sus respectivas integrales, contrastando el área teórica
+bajo la curva contra los objetivos empíricos de la CFE:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2105}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}@{}}
+\caption{Validación de Valores Esperados por Integral vs.~Datos
+Empíricos de la CFE 2024.}\label{tbl-validacion-integral}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Mes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Intervalo de Integración \([t_{i-1}, t_i]\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Objetivo Empírico (CFE)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Esperanza Integral \(\mathbb{E}[N]\)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Mes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Intervalo de Integración \([t_{i-1}, t_i]\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Objetivo Empírico (CFE)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Esperanza Integral \(\mathbb{E}[N]\)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Enero & \([0, 31]\) & 7 & 2.10 \\
+Febrero & \([31, 59]\) & 2 & 2.06 \\
+Marzo & \([59, 90]\) & 3 & 3.26 \\
+Abril & \([90, 120]\) & 3 & 5.56 \\
+Mayo & \([120, 151]\) & 6 & 8.56 \\
+Junio & \([151, 181]\) & 9 & 8.75 \\
+Julio & \([181, 212]\) & 7 & 8.16 \\
+Agosto & \([212, 243]\) & 8 & 9.40 \\
+Septiembre & \([243, 273]\) & 9 & 8.29 \\
+Octubre & \([273, 304]\) & 4 & 4.63 \\
+Noviembre & \([304, 334]\) & 2 & 2.38 \\
+Diciembre & \([334, 365]\) & 4 & 2.10 \\
+\end{longtable}
+
+La suma acumulada de las 12 integrales definidas a lo largo de todo el
+dominio anual arrojó un valor total de \textbf{65.25 eventos esperados}.
+Al comparar este resultado con la meta de 64 cortes empíricos, se
+observa que el modelo añade, en promedio, una falla anual extra.
+
+Esta desviación hacia arriba es una decisión metodológica deliberada
+para blindar la simulación de Montecarlo: al ensanchar las campanas de
+riesgo para cubrir desde abril hasta octubre de manera ininterrumpida,
+el modelo genera un escenario ligeramente más \textbf{conservador y
+severo} que la simple estadística aislada. Esto garantiza que las
+proyecciones de estrés térmico sobre la red de frío no subestimen el
+peligro real al que estarán sometidos los biológicos de la OMS durante
+las estaciones críticas en Tuxtla Gutiérrez.
+
+\section{Distribución Log-Normal de las Duraciones de las
+Fallas}\label{distribuciuxf3n-log-normal-de-las-duraciones-de-las-fallas}
+
+Una vez modelada la frecuencia con la que ocurren las interrupciones
+eléctricas, el siguiente componente crítico para el simulador
+termodinámico consiste en determinar cuánto tiempo dura cada apagón
+(\(D\)). La duración de una falla es una variable aleatoria continua
+estrictamente positiva con una marcada asimetría hacia la derecha (la
+mayoría de los cortes se resuelven en pocas horas, pero existen eventos
+atípicos muy prolongados). Por este motivo, la teoría analítica
+establece que el comportamiento de las duraciones se modela mediante una
+distribución Log-normal:
+
+\[
+D \sim \text{LogNormal}(\mu, \sigma^2)
+\]
+
+Para calibrar los parámetros de escala \(\mu\) (media de los logaritmos)
+y de forma \(\sigma\) (desviación estándar de los logaritmos) para cada
+régimen estacional, es necesario procesar los indicadores empíricos de
+la CFE bajo un esquema de desagregación temporal.
+
+\subsection{Desglose Mensual de Horas de
+Interrupción}\label{desglose-mensual-de-horas-de-interrupciuxf3n}
+
+De acuerdo con el registro histórico municipal consolidado para el año
+2024, la duración promedio general de una interrupción en Tuxtla
+Gutiérrez fue de \textbf{\(2.39\) horas por corte}
+Tabla~\ref{tbl-interrupciones-cfe}. Sabiendo que el factor de escala
+espacial redujo el riesgo del edificio a una esperanza de \textbf{\(64\)
+cortes locales al año}, podemos deducir la cantidad total de tiempo que
+el refrigerador experimentará desabasto eléctrico a lo largo de todo el
+año:
+
+\[
+\text{Horas Totales del Año} = 64 \text{ cortes/año} \times 2.39 \text{ horas/corte} = 152.96 \text{ horas/año}
+\]
+
+Para distribuir estas \(152.96\) horas anuales entre los 12 meses
+respetando la estacionalidad de la red, utilizamos el indicador SAIDI
+acumulado del \emph{Informe Anual de la CFE 2024}
+Tabla~\ref{tbl-saidi-saifi}. Primero, calculamos la diferencia marginal
+(\(\Delta \text{SAIDI}_i\)) para aislar el impacto de cada mes.
+Posteriormente, mediante una regla de tres simple, equiparamos el SAIDI
+total acumulado al final del año (\(10.812\) horas) con nuestras
+\(152.96\) horas de afectación local. La asignación de horas de falla
+para cada mes viene dada por:
+
+\[
+\text{Horas del Mes}_i = \left( \frac{\Delta \text{SAIDI}_i}{10.812} \right) \times 152.96
+\]
+
+Finalmente, para conocer la duración promedio esperada de un corte
+individual en un mes específico (\(E_i\)), se divide la cantidad de
+horas asignadas de ese mes entre el número de cortes calculados
+previamente Tabla~\ref{tbl-cortes-mensuales}
+(\(E_i = \text{Horas del Mes}_i / \text{Cortes}_i\)):
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1379}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}@{}}
+\caption{Estimación de la duración promedio mensual por corte a partir
+de los indicadores SAIDI
+2024.}\label{tbl-duracion-cortes}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Mes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+SAIDI Acumulado
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\Delta\) SAIDI
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Horas del Mes Calculadas
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Cortes del Mes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Duración Media \(E_i\) (Horas)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Mes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+SAIDI Acumulado
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\Delta\) SAIDI
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Horas del Mes Calculadas
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Cortes del Mes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Duración Media \(E_i\) (Horas)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Enero & 0.998 & 0.998 & 14.12 & 7 & 2.017 \\
+Febrero & 1.110 & 0.112 & 1.58 & 2 & 0.790 \\
+Marzo & 1.285 & 0.175 & 2.48 & 3 & 0.827 \\
+Abril & 2.793 & 1.508 & 21.33 & 3 & 7.110 \\
+Mayo & 4.120 & 1.327 & 18.77 & 6 & 3.128 \\
+Junio & 5.774 & 1.654 & 23.40 & 9 & 2.600 \\
+Julio & 6.557 & 0.783 & 11.08 & 7 & 1.583 \\
+Agosto & 7.905 & 1.348 & 19.07 & 8 & 2.384 \\
+Septiembre & 8.592 & 0.687 & 9.72 & 9 & 1.080 \\
+Octubre & 9.063 & 0.471 & 6.66 & 4 & 1.665 \\
+Noviembre & 9.314 & 0.251 & 3.55 & 2 & 1.775 \\
+Diciembre & 10.812 & 1.498 & 21.19 & 4 & 5.298 \\
+\end{longtable}
+
+\subsection{Cálculo de Medias y Varianzas por
+Régimen}\label{cuxe1lculo-de-medias-y-varianzas-por-ruxe9gimen}
+
+Para alimentar la conmutación de regímenes de la EDE, agrupamos los
+meses en las tres temporadas climáticas analizadas. Sin embargo,
+realizar un promedio aritmético simple entre las duraciones mensuales
+introduciría un sesgo metodológico, ya que trataría por igual a un mes
+con 9 cortes que a uno con solo 2 cortes.
+
+Para resolver esto, calculamos la media empírica
+(\(\mathbb{E}[D_{reg}]\)) y la varianza empírica
+(\(\mathbb{V}[D_{reg}]\)) de cada régimen utilizando estadística
+descriptiva ponderada, donde el peso de cada mes está determinado
+estrictamente por su número de cortes (\(\omega_i = \text{Cortes}_i\)).
+Analíticamente, es decir:
+
+\[
+\mathbb{E}[D_{reg}] = \frac{\sum \omega_i E_i}{\sum \omega_i} = \frac{\text{Total de Horas del Régimen}}{\text{Total de Cortes del Régimen}}
+\]
+
+\[
+\mathbb{V}[D_{reg}] = \frac{\sum \omega_i (E_i - \mathbb{E}[D_{reg}])^2}{\sum \omega_i}
+\]
+
+Agrupando los datos bajo este criterio de ponderación, se obtienen las
+siguientes métricas muestrales por temporada:
+
+\begin{itemize}
+\item
+  \textbf{Temporada de Calor (Mayo, Junio y Julio):} Acumula \(22\)
+  cortes y \(53.25\) horas de interrupción, resultando en una duración
+  media de \(\mathbb{E}[D] = 2.420\) horas y una varianza de
+  \(\mathbb{V}[D] = 0.373\).
+\item
+  \textbf{Temporada de Lluvias (Agosto, Septiembre y Octubre):} Suma
+  \(21\) cortes y \(35.45\) horas de interrupción, generando una
+  duración media de \(\mathbb{E}[D] = 1.688\) horas y una varianza de
+  \(\mathbb{V}[D] = 0.343\).
+\item
+  \textbf{Temporada Base e Invierno (Resto de meses):} Concentra \(23\)
+  cortes y \(64.25\) horas, arrojando una duración media de
+  \(\mathbb{E}[D] = 2.793\) horas con una varianza más dispersa de
+  \(\mathbb{V}[D] = 4.650\) debido a la anomalía de abril.
+\end{itemize}
+
+\subsection{Transformación Analítica a Parámetros
+Log-Normales}\label{transformaciuxf3n-analuxedtica-a-paruxe1metros-log-normales}
+
+Una vez que conocemos la media (\(\mathbb{E}[D]\)) y la varianza
+(\(\mathbb{V}[D]\)) del sistema, debemos mapearlas hacia los parámetros
+analíticos internos \(\mu\) y \(\sigma\) que requiere la función de
+distribución de probabilidad Log-normal.
+
+La esperanza y la varianza de una variable aleatoria con distribución
+Log-normal están dadas por las siguientes dos identidades:
+
+\[
+\mathbb{E}[D] = \exp\left(\mu + \frac{\sigma^2}{2}\right)
+\]
+
+\[
+\mathbb{V}[D] = \left[\exp(\sigma^2) - 1\right] \exp(2\mu + \sigma^2) = (\mathbb{E}[D])^2 \left[\exp(\sigma^2) - 1\right]
+\]
+
+Al resolver este sistema de ecuaciones no lineales de forma algebraica
+para despejar los parámetros objetivos en función de los momentos
+estadísticos conocidos, se deducen las fórmulas generales de
+calibración:
+
+\[
+\sigma = \sqrt{\ln\left(1 + \frac{\mathbb{V}[D]}{(\mathbb{E}[D])^2}\right)}
+\]
+
+\[
+\mu = \ln(\mathbb{E}[D]) - \frac{\sigma^2}{2} = \ln\left( \frac{(\mathbb{E}[D])^2}{\sqrt{\mathbb{V}[D] + (\mathbb{E}[D])^2}} \right)
+\]
+
+Al sustituir las medias y varianzas de cada temporada en estas
+relaciones, obtenemos los parámetros exactos de la distribución
+Log-normal que modelará la duración de las fallas eléctricas en cada
+temporada:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1379}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}@{}}
+\caption{Parámetros de la distribución Log-normal
+finales.}\label{tbl-parametros-lognormal}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Temporada
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Meses que lo integran
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Media Empírica \(\mathbb{E}[D]\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Varianza Empírica \(\mathbb{V}[D]\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Parámetro \(\mu\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Parámetro \(\sigma\)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Temporada
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Meses que lo integran
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Media Empírica \(\mathbb{E}[D]\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Varianza Empírica \(\mathbb{V}[D]\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Parámetro \(\mu\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Parámetro \(\sigma\)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Base (Invierno)} & Ene, Feb, Mar, Abr, Nov, Dic & 2.793 & 4.650
+& 0.7933 & 0.6838 \\
+\textbf{Calor (Ola de Verano)} & May, Jun, Jul & 2.420 & 0.373 & 0.8529
+& 0.2485 \\
+\textbf{Lluvias (Ciclones)} & Ago, Sep, Oct & 1.688 & 0.343 & 0.4667 &
+0.3371 \\
+\end{longtable}
+
+\section{Calibración de la Ecuación Diferencial Estocástica
+(EDE)}\label{calibraciuxf3n-de-la-ecuaciuxf3n-diferencial-estocuxe1stica-ede}
+
+Enlazando la dinámica de la red eléctrica con la termodinámica,
+recordamos que la temperatura interna \(T(t)\) del refrigerador está
+gobernada por un proceso de Ornstein-Uhlenbeck con saltos y conmutación
+de régimen. Para que la transición hacia el modelo computacional sea
+transparente, desglosamos la ecuación abstracta en su forma operativa
+mediante un sistema de ecuaciones acopladas, el cual depende
+estrictamente del estado del suministro eléctrico \(\alpha(t)\):
+
+\begin{equation}\phantomsection\label{eq-ede-operativa}{
+dT(t) = 
+\begin{cases} 
+\kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + \gamma dN_{puerta}(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
+\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) + \gamma dN_{puerta}(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
+\end{cases}
+}\end{equation}
+
+Para la modelación estocástica, los parámetros de inercia térmica y
+tiempo de autonomía (\emph{holdover time}) se calibraron utilizando los
+datos técnicos del refrigerador institucional Haier HBC-150, el cual
+cuenta con certificación de protección Grado A contra congelamiento en
+el catálogo oficial PQS de la OMS
+(\citeproc{ref-oms_pqs_e003}{Organización Mundial de la Salud 2024}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{haier_hbc150.jpg}
+
+}
+
+\caption{\label{fig-haier-hbc150}Refrigerador institucional para vacunas
+Haier HBC-150 (Icelined Refrigerator). Este equipo tipo cofre cuenta con
+certificación PQS de la OMS y masa térmica incorporada para garantizar
+la red de frío durante cortes prolongados de energía eléctrica.}
+
+\end{figure}%
+
+Para reflejar el comportamiento de este equipo bajo los rigurosos
+estándares normativos, calibramos cada coeficiente de la
+Ecuación~\ref{eq-ede-operativa} con base en la física del enfriamiento:
+
+\subsection{\texorpdfstring{Régimen 1: Operación Normal
+(\(\alpha(t) = 1\))}{Régimen 1: Operación Normal (\textbackslash alpha(t) = 1)}}\label{sec-regimen-1}
+
+Ocurre cuando hay energía eléctrica y el compresor funciona empujando la
+temperatura hacia su objetivo.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Temperatura de Consigna (\(\theta_{set}\))}: Se establece en
+  \textbf{\(4^\circ \text{C}\)}, el centro ideal del rango normativo de
+  seguridad (2°C a 8°C).
+\item
+  \textbf{Velocidad de Enfriamiento (\(\kappa_{on}\))}: Representa la
+  capacidad de potencia del motor para recuperar la temperatura. Se
+  calibra en \(\kappa_{on} = 0.1188\), una velocidad rápida propia de la
+  compresión activa de acuerdo con
+  (\citeproc{ref-oms_pqs_e003}{Organización Mundial de la Salud 2024}).
+\item
+  \textbf{Ruido del Compresor (\(\sigma_{on}\))}: El motor se prende y
+  se apaga constantemente para mantener los 4°C. Acorde con un intervalo
+  de confianza del 99.7\% (aplicando la regla de las 3 sigmas de la
+  distribución normal), queremos que las fluctuaciones máximas no
+  excedan los \(\pm 2^\circ \text{C}\) para evitar llegar a los 2°C
+  (riesgo de congelación) o a los 6°C. Sabiendo que
+  \(3 \times SD = 2^\circ \text{C}\), la desviación estándar
+  estacionaria debe ser \(SD \approx 0.667^\circ \text{C}\). Despejando
+  la volatilidad de la varianza a largo plazo del proceso
+  Ornstein-Uhlenbeck
+  \(\left(SD = \frac{\sigma_{on}}{\sqrt{2\kappa_{on}}}\right)\):
+  \[0.667 = \frac{\sigma_{on}}{\sqrt{2(0.1188)}} \implies \sigma_{on} \approx 0.325\]
+\end{itemize}
+
+\subsection{\texorpdfstring{Régimen 2: Falla Eléctrica
+(\(\alpha(t) = 2\))}{Régimen 2: Falla Eléctrica (\textbackslash alpha(t) = 2)}}\label{sec-regimen-2}
+
+Se activa cuando el Proceso de Poisson dice que hay un apagón y el
+enfriamiento activo se detiene.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Temperatura Exterior (\(T_{amb}(t)\))}: La temperatura
+  ambiente actúa como el atractor del sistema. Dado que en Tuxtla
+  Gutiérrez el calor oscila drásticamente a lo largo del día, esta
+  variable se modela computacionalmente como una función senoidal que
+  alcanza su pico máximo a las 15:00 hrs. Para nuestra calibración
+  analítica del peor escenario (estiaje), evaluamos este atractor en un
+  máximo absoluto de \textbf{\(43^\circ \text{C}\)}. En este escenario,
+  el término \((T_{amb} - T(t))\) se vuelve enorme y genera un
+  calentamiento fuertemente acelerado.
+\item
+  \textbf{Velocidad de Pérdida Térmica (\(\kappa_{off}\))}: De acuerdo
+  con las especificaciones del fabricante validadas por la OMS
+  (\citeproc{ref-oms_pqs_e003}{Organización Mundial de la Salud 2024}),
+  el equipo Haier HBC-150 garantiza un \emph{Holdover Time} (tiempo de
+  autonomía) de 60 horas con 50 minutos (60.83 horas) a una temperatura
+  ambiente extrema de 43°C antes de rebasar los 8°C. Usando la solución
+  analítica determinista de la Ley de Enfriamiento de Newton desde los
+  4°C de consigna hasta el límite de 8°C:
+  \[8 = 43 + (4 - 43) e^{-\kappa_{off} (60.83)}\] Al resolver la
+  ecuación
+  \(\left(\ln\left(\frac{35}{39}\right) = -60.83 \kappa_{off}\right)\),
+  obtenemos un valor sumamente bajo de
+  \(\kappa_{off} \approx 0.00178 \text{ hr}^{-1}\). Esta dramática
+  diferencia entre un parámetro rápido (\(\kappa_{on}\)) y uno muy lento
+  (\(\kappa_{off}\)) demuestra la efectividad de los revestimientos de
+  hielo y justifica el uso de EDEs con conmutación de régimen.
+\item
+  \textbf{Volatilidad Externa (\(\sigma_{off}\))}: Sin el compresor
+  encendido, las variaciones aleatorias obedecen únicamente a
+  micro-filtraciones de aire por las gomas de la puerta. Por ello,
+  establecemos un ruido significativamente menor:
+  \(\sigma_{off} = 0.05\).
+\end{itemize}
+
+\subsection{\texorpdfstring{Perturbaciones Discretas: Apertura de
+Puertas
+(\(N_{puerta}(t)\))}{Perturbaciones Discretas: Apertura de Puertas (N\_\{puerta\}(t))}}\label{perturbaciones-discretas-apertura-de-puertas-n_puertat}
+
+De acuerdo con las normativas internacionales de manejo de red de frío,
+el refrigerador debe abrirse idealmente un máximo de dos veces al día:
+una apertura rutinaria matutina para extraer los frascos necesarios para
+la jornada y una vespertina para resguardar los sobrantes.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Tasa de Aperturas (\(\lambda_{puerta}\))}: Dado que la
+  apertura matutina es un evento operativo fijo, la verdadera
+  estocasticidad recae en la tarde, ya que el ingreso de biológicos
+  depende de si hubo sobrantes en los termos clínicos. Por ello, la
+  perturbación aleatoria se restringe a este momento y se modela
+  computacionalmente con un Proceso de Poisson Homogéneo con una tasa de
+  \(\lambda = 1\) evento/día.
+\item
+  \textbf{Impacto de la Apertura (\(\gamma\))}: Al tratarse de un equipo
+  tipo cofre (\emph{Icelined Refrigerator}), la pérdida térmica es mucho
+  menor que en equipos verticales, ya que el aire frío, siendo más
+  denso, tiende a permanecer en el fondo del gabinete. Sin embargo,
+  basándonos en estudios de convección para una apertura prolongada
+  típica de 5 minutos (tiempo estimado para organizar y contabilizar
+  viales), se introduce una carga térmica inesperada. Asignamos un
+  incremento de \textbf{\(\gamma = +1^\circ \text{C}\)} por evento. Esta
+  es una perturbación instantánea que rompe la continuidad de la
+  trayectoria y reduce críticamente el ``colchón térmico'' disponible en
+  caso de ocurrir un apagón durante la noche.
+\end{itemize}
+
+\section{Cinética de Degradación Térmica (Ecuación de
+Arrhenius)}\label{sec-Arrhenius}
+
+La Ecuación Diferencial Estocástica calibrada anteriormente nos permite
+simular con alta precisión la temperatura interna del refrigerador
+\(T(t)\). Sin embargo, para evaluar el impacto en la salud pública, es
+necesario traducir estas variaciones térmicas en pérdida de viabilidad
+del biológico.
+
+La degradación de las vacunas (particularmente las vivas atenuadas, como
+el biológico contra el Sarampión o la Poliomielitis) es un proceso de
+desnaturalización proteica que se acelera exponencialmente con el calor.
+Esta velocidad de degradación \(k(T)\) se modela mediante la
+\textbf{Ecuación de Arrhenius} (\citeproc{ref-chen2009thermostable}{Chen
+y Kristensen 2009}):
+
+\begin{equation}\phantomsection\label{eq-Arrhenius}{
+k(T(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right)
+}\end{equation}
+
+Donde la temperatura \(T_K(t) = T(t) + 273.15\) se expresa en grados
+Kelvin y los parámetros cinéticos para un biológico termosensible
+genérico se establecen como:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Constante Universal de los Gases (\(R\))}:
+  \(8.314 \, \text{J/(mol} \cdot \text{K)}\).
+\item
+  \textbf{Energía de Activación (\(E_a\))}: Se calibra en
+  \textbf{\(85,000 \, \text{J/mol}\)} (\(85 \text{ kJ/mol}\)). Este
+  valor representa la barrera energética que debe superarse para que las
+  proteínas del antígeno comiencen a romperse irreversiblemente.
+\item
+  \textbf{Factor Pre-exponencial (\(A\))}: Se ajusta a un valor de
+  \textbf{\(1.2 \times 10^{14}\)}. Este factor de frecuencia asegura que
+  la tasa de degradación sea prácticamente nula cuando el equipo opera
+  correctamente en el rango normativo de 2°C a 8°C, pero escale
+  logarítmicamente durante una excursión térmica severa.
+\end{itemize}
+
+\subsection{\texorpdfstring{El Modelo de Daño Térmico Acumulado
+(\(DA\))}{El Modelo de Daño Térmico Acumulado (DA)}}\label{el-modelo-de-dauxf1o-tuxe9rmico-acumulado-da}
+
+En la práctica clínica normativa, las variaciones térmicas dentro del
+rango seguro (2°C a 8°C) se consideran tolerables y su impacto en la
+caducidad a corto plazo es ignorado. El daño crítico ocurre
+exclusivamente cuando la red de frío se rompe.
+
+Para modelar este protocolo operativo dentro de nuestra simulación, el
+\textbf{Daño Acumulado (\(DA\))} se calcula como la integral de la tasa
+de Arrhenius, condicionada por una función indicadora
+\(\mathbb{I}_{\{T(t) > 8^\circ\text{C}\}}\) que ``enciende'' el reloj de
+degradación únicamente cuando la temperatura cruza el límite superior de
+seguridad:
+
+\[
+DA(t) = \int_{0}^{t} \mathbb{I}_{\{T(s) > 8\}} \cdot k(T(s)) \, ds
+\]
+
+Esta formulación integral permite que el simulador de Montecarlo
+contabilice el estrés térmico exacto de cada trayectoria. Si durante un
+apagón prolongado la EDE empuja a \(T(t)\) muy por encima de los 8°C, el
+integrando crecerá rápidamente. Si al final de un año simulado el
+\(DA(t)\) rebasa un umbral de descarte crítico predefinido, el lote de
+vacunas se considerará como pérdida total.
+
+\part{Simulación de Equipos (Haier HBC-150)}
+
+\chapter{Metodología de Simulación Computacional y Análisis Estadístico
+de
+Riesgo}\label{metodologuxeda-de-simulaciuxf3n-computacional-y-anuxe1lisis-estaduxedstico-de-riesgo}
+
+Para evaluar la confiabilidad de la red de frío frente a la volatilidad
+del suministro eléctrico y las condiciones climáticas de Tuxtla
+Gutiérrez, Chiapas, desarrollamos un simulador estocástico en Python
+enfocado en el refrigerador institucional Haier HBC-150 presentado en la
+sección anterior. Debido a la interacción de múltiples procesos
+aleatorios inesperados (cortes de energía de CFE, aperturas de puerta y
+variaciones extremas de temperatura), el sistema no posee una solución
+matemática analítica cerrada. En consecuencia, recurrimos a la
+integración numérica de trayectorias acoplada al método de Montecarlo.
+
+\begin{quote}
+\textbf{Nota sobre Reproducibilidad:} Con el fin de mantener este
+reporte de investigación con un formato académico limpio y legible,
+hemos omitido el código fuente de programación. El script completo se
+encuentra documentado detalladamente en el repositorio público de GitHub
+de este proyecto (\citeproc{ref-CPG2026Delfin}{Repositorio de GitHub}).
+\end{quote}
+
+A continuación, exponemos detalladamente el diseño metodológico de la
+simulación estructurado según el orden lógico de las celdas del
+algoritmo computacional, seguido de la discusión profunda de los
+resultados obtenidos.
+
+\section{1. Procesamiento Temporal y Entorno
+Climático}\label{procesamiento-temporal-y-entorno-climuxe1tico}
+
+El primer módulo de la simulación constituye el eje central del sistema.
+Definimos una malla de tiempo continua para cubrir un año completo
+(\(366\) días, contemplando el año bisiesto 2024). Para capturar las
+microfluctuaciones de la temperatura interna del refrigerador,
+seleccionamos un paso de integración discreto de exactamente 5 minutos
+(\(\Delta t = 5/60\) horas), lo que genera un total de \(105408\)
+iteraciones por cada trayectoria anual simulada.
+
+Para acoplar con la logística institucional, programamos un calendario
+interno que identifica los días hábiles (lunes a viernes) y los fines de
+semana (sábados y domingos), debido a que la extracción de vacunas
+ocurren exclusivamente en jornadas laborales.
+
+Primero cargamos la base de datos meteorológicos reales de Tuxtla
+Gutiérrez. No obstante, las bases de datos públicas solo proveen la
+temperatura promedio diaria (\(T_{media}\)), ocultando el estrés térmico
+entre días. Para solucionar, expandimos el vector diario a la escala de
+5 minutos mediante una función armónica (onda senoidal) con una amplitud
+térmica calibrada de \(7^\circ\text{C}\) (equivalente a una oscilación
+típica de 14°C entre la madrugada y la tarde chiapaneca). Desfasamos el
+argumento del coseno por 15 horas para forzar que el pico de calor sea a
+las 15:00 horas de cada día simulado:
+
+\[
+T_{amb}(t) = T_{media}(t) + 7.0 \cdot \cos\left(2\pi \frac{t - 15}{24}\right).
+\]
+
+Donde \(t\) representa el tiempo en horas, es decir, \(t \in [0, 8784)\)
+para un año de 366 días. La oscilación de la temperatura ambiente se
+presenta en la Figura~\ref{fig-clima-anual}, que muestra el
+comportamiento anual, y en la Figura~\ref{fig-clima-zoom}, que demuestra
+la consistencia del ciclo diurno continuo.
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{temp_anual_tuxtla.png}}
+
+}
+
+\caption{\label{fig-clima-anual}Temperatura ambiente continua simulada
+para Tuxtla Gutiérrez a lo largo de un año completo, comparada con los
+promedios diarios de la base de datos meteorológica original.}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{temp_zoom_tuxtla.png}}
+
+}
+
+\caption{\label{fig-clima-zoom}Acercamiento a un periodo de 5 días de
+simulación climática (Mayo), donde se observa el comportamiento de la
+oscilación senoidal entre días y la ubicación exacta de los picos
+térmicos a las 15:00 horas.}
+
+\end{figure}%
+
+\section{2. Parametrización Física, Cinética y Estocástica de la
+Red}\label{parametrizaciuxf3n-fuxedsica-cinuxe9tica-y-estocuxe1stica-de-la-red}
+
+Una vez construido el entorno temporal y climático, procedemos a
+inicializar las constantes que controlan las fuerzas físicas del
+refrigerador Haier HBC-150 y las propiedades biológicas de las vacunas.
+
+\subsection{Parámetros Termodinámicos y Cinéticos del
+Equipo}\label{paruxe1metros-termodinuxe1micos-y-cinuxe9ticos-del-equipo}
+
+Asignamos los coeficientes térmicos constantes previamente estimados
+para el modelo de Ornstein-Uhlenbeck (EDE). Cuando el equipo cuenta con
+electricidad, la tasa de abatimiento térmico se fija en
+\(\kappa_{on} = 0.1188\,\text{hr}^{-1}\) con una volatilidad interna de
+los ventiladores de \(\sigma_{on} = 0.325\), obtenidos con los calculos
+de la sección anterior Sección~\ref{sec-regimen-1}. Ante un escenario de
+falla eléctrica, el compresor se apaga y el aislamiento de alta densidad
+del equipo (reforzado por sus paquetes de hielo internos) frena la
+transferencia de calor, lo que se modela con una inercia pasiva
+sumamente lenta de \(\kappa_{off} = 0.00178\,\text{hr}^{-1}\) y un ruido
+por microfiltraciones de aire de \(\sigma_{off} = 0.05\), estimado en la
+Sección~\ref{sec-regimen-2}. La temperatura objetivo del termostato se
+establece en \(\theta = 4.0^\circ\text{C}\) y el equipo arranca en esta
+misma condición inicial (\(T_0 = 4.0^\circ\text{C}\)).
+
+Para modelar la degradación biológica, configuramos las constantes de la
+ecuación de Arrhenius Ecuación~\ref{eq-Arrhenius} para un biológico
+termosensible genérico (perfil biológico representativo de vacunas vivas
+atenuadas como Sarampión o Poliomielitis). La energía de activación
+crítica se establece en \(E_a = 85,000\,\text{J/mol}\)
+(\(85\,\text{kJ/mol}\)), la constante universal de los gases en
+\(R = 8.314\,\text{J/(mol}\cdot\text{K)}\) y el factor de frecuencia
+preexponencial en \(A = 1.2 \times 10^{14}\), estos parámtros se
+obtuvieron de la Sección~\ref{sec-Arrhenius}.
+
+Finalmente, programamos la lógica operativa para las aperturas de puerta
+durante las jornadas de consulta (lunes a viernes). Para aproximarnos a
+la realidad clínica, dividimos este comportamiento operativo en dos
+reglas independientes:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  \textbf{Regla Matutina (Determinista):} Se programa una apertura fija
+  y obligatoria exactamente a las 8:00 AM, momento en el que el personal
+  de enfermería extrae los lotes de vacunas que se utilizarán en la
+  jornada matutina.
+\item
+  \textbf{Regla Vespertina (Estocástica):} Entre las 15:00 y las 17:00
+  horas (horario de cierre y resguardo), se activa una tasa de
+  probabilidad basada en un proceso de Poisson con una intensidad de
+  \(\lambda_{tarde} = 0.5\) aperturas por hora, en proporción a la
+  longitud del horario vespertino, modelando asi las aperturas
+  aleatorias para almacenar los frascos sobrantes. Cada evento de
+  apertura incrementa instantáneamente un salto térmico constante de
+  \(\gamma = +1.0^\circ\text{C}\) al interior del equipo. Ambas reglas
+  dejan de funcionar por completo si el indicador de fin de semana es
+  verdadero.
+\end{enumerate}
+
+\subsection{Parámetros Estocásticos de Fallas de la
+CFE}\label{paruxe1metros-estocuxe1sticos-de-fallas-de-la-cfe}
+
+El riesgo externo del suministro eléctrico se parametriza mediante el
+comportamiento histórico de fallas de la Comisión Federal de
+Electricidad (CFE) en la región Sureste. Retomando los calculos de la
+Sección~\ref{sec-ppnh}, programamos la tasa de fallas diarias
+\(\lambda_{cfe}(t), t > 0\) como un Proceso de Poisson No Homogéneo,
+donde combinamos un riesgo base de fallas locales (\(0.0667\)
+cortes/día) con dos campanas gaussianas estacionales que modelan los
+picos de cortes debidos al sobrecalentamiento de transformadores en
+verano (centrada en el día 152) y la temporada de tormentas tropicales
+(centrada en el día 244):
+
+\[
+\lambda_{cfe}(t) = 0.0667 + 0.2333 \cdot \exp\left(-\frac{(t - 152)^2}{3200}\right) + 0.2333 \cdot \exp\left(-\frac{(t - 244)^2}{1800}\right).
+\]
+
+Para la duración de dichos cortes, incorporamos los parámetros de escala
+y forma (\(\mu\) y \(\sigma\)) de una distribución Log-Normal calibrada
+por el método de los momentos para tres estaciones del año, usando para
+su estimación los datos históricos: temporada base
+(\(\mu = 0.7933, \sigma = 0.6838\)), temporada de estrés por calor
+(\(\mu = 0.8529, \sigma = 0.2485\)) y temporada de lluvias de alta
+intensidad (\(\mu = 0.4667, \sigma = 0.3371\)).
+
+\section{3. Precalibración Vectorizada de Eventos
+Externos}\label{precalibraciuxf3n-vectorizada-de-eventos-externos}
+
+Antes de ponernos a resolver la ecuación diferencial estocástica de la
+temperatura, el algoritmo ejecuta un módulo de precalculabilidad
+vectorizada para optimizar los tiempos de cómputo. En esta fase, el
+programa simula de manera independiente las variables externas que
+afectarán al refrigerador a lo largo del año de prueba.
+
+Para el suministro eléctrico, el algoritmo recorre secuencialmente los
+366 días del año. Para cada día, consultamos la intensidad estacional de
+la CFE y realizamos un muestreo aleatorio de Poisson para determinar
+cuántas fallas eléctricas ocurrirán en esa jornada. Si el resultado es
+mayor a cero, el algoritmo selecciona una hora de inicio distribuida de
+manera uniforme entre las 0 y las 24 horas de ese día, y realiza un
+muestreo Log-Normal condicionado a la fecha para determinar la duración
+del corte en horas. Con estos datos, el algoritmo calcula los índices
+temporales correspondientes y modifica el vector de estado eléctrico
+\(S(t)\), cambiando su valor de 1 (hay energía electrica) a 0 (no hay
+energía electrica) durante el intervalo afectado.
+
+Para las aperturas de la puerta del refrigerador, el algoritmo genera un
+vector binario de eventos evaluado en el dominio de tiempo discreto
+\(t \in \{0, \Delta t, 2\Delta t, \dots, 8784\}\) horas. Dado que el
+paso de integración se fijó en \(\Delta t = 5/60\) horas (es decir 5
+minutos), este conjunto se particiona exactamente en \(105408\)
+iteraciones para cubrir la totalidad del año. Este vector se construye
+combinando la apertura de las 8:00 AM con un muestreo de Poisson
+ejecutado sobre la tasa de intensidad de la tarde
+(\(\lambda_{tarde} \cdot \Delta t\)).
+
+Posteriormente, el algoritmo aplica una regla estricta de control
+sanitario: multiplica el vector de aperturas por la función de estado
+eléctrico \(S(t)\), donde la variable de entrada \(t\) en \(S(t)\) se
+mueve exactamente en el mismo intervalo discreto de \([0, 8784]\) horas.
+Esto garantiza que si la central de almacenamiento de vacunas se
+encuentra bajo un apagón en un instante específico (\(S(t)=0\)), la
+probabilidad de apertura en ese mismo \(t\) se reduce a cero de forma
+absoluta, reflejando el protocolo médico real que prohíbe abrir el
+refrigerador si no hay energía para evitar la pérdida acelerada de frío.
+
+Finalmente, los eventos válidos se multiplican por la magnitud del
+impacto térmico (\(\gamma = 1.0^\circ\text{C}\)) para terminar el vector
+discreto temporal de saltos térmicos (\(Saltos\_Termicos(t)\)).
+
+En el año de prueba inicial con semilla controlada, la simulación arrojó
+que hay \textbf{68 apagones} y un total de \textbf{508 aperturas de
+puerta} hechas por el personal clínico.
+
+\section{4. Resolución de la SDE}\label{resoluciuxf3n-de-la-sde}
+
+Con todos los vectores de perturbaciones externas precalculados, se
+procede a ejecutar el núcleo analítico del modelo, resolviendo la
+evolución de la temperatura interna y su impacto directo sobre el lote
+de vacunas.
+
+\subsection{Integración de la Temperatura por Cambios de
+Régimen}\label{integraciuxf3n-de-la-temperatura-por-cambios-de-ruxe9gimen}
+
+Para avanzar en el tiempo, el algoritmo recorre la iteración \(i\) en el
+intervalo \(i \in [1, 105407]\). El índice arranca en 1 y no en 0 porque
+el primer valor de la matriz corresponde a la condición inicial ya
+conocida de la temperatura interna del refrigerador
+(\(T_0 = 4^\circ\text{C}\)). En cada iteración \(i\), evalúa el estado
+del suministro eléctrico en el paso previo (\(S_{t}[i-1]\)), activando
+un cambio de régimen dinámico (\emph{regime-switching}). Si el
+suministro está activo, aplica los parámetros de convección forzada
+(\(\kappa_{on}, \sigma_{on}\)) llevando a la temperatura hacia la
+temperatura ideal (\(\theta = 4.0^\circ\text{C}\)) y le suma el salto
+térmico si la puerta fué manipulada. Si el suministro está apagado, el
+algoritmo desactiva los ventiladores y acopla la inercia térmica pasiva
+(\(\kappa_{off}, \sigma_{off}\)), provocando que la temperatura del
+refrigerador sea atraída hacia la temperatura ambiente exterior de
+Tuxtla Gutiérrez (\(T_{amb}[i-1]\)).
+
+La solución numérica se ejecuta mediante el esquema de Euler-Maruyama
+desarrollado en la Sección~\ref{sec-euler-maruyama}. Es fundamental
+destacar que, dado que las volatilidades térmicas (\(\sigma_{on}\) y
+\(\sigma_{off}\)) actúan como ruidos aditivos constantes independientes
+del estado de la temperatura \(X(t)\), sus derivadas parciales respecto
+al estado son nulas (\(\frac{\partial \sigma}{\partial x} = 0\)). Debido
+a esta propiedad del cálculo estocástico, el término de corrección de
+segundo orden del método de Milstein se multiplica por cero y desaparece
+por completo, demostrando que el esquema de Milstein se reduce de forma
+exacta al método de Euler-Maruyama aquí empleado.
+
+Simultáneamente, el ciclo evalúa el daño térmico acumulado mediante la
+ecuación de Arrhenius. Si la temperatura interna del refrigerador supera
+el límite normativo de seguridad (\(X_{t}[i] > 8.0^\circ\text{C}\)), el
+algoritmo convierte la temperatura a grados Kelvin, calcula la constante
+cinética instantánea \(k(t)\) y actualiza la viabilidad de la vacuna
+(\(V_t\)) aplicando un decaimiento exponencial dependiente de
+\(\Delta t\). Si la temperatura se mantiene a salvo dentro del rango
+seguro, la viabilidad farmacológica permanece congelada en su valor
+previo. La dinámica resultante para el año completo se expone en la
+Figura~\ref{fig-sde-anual}, mientras que la Figura~\ref{fig-sde-zoom}
+presenta un acercamiento exclusivo al mes crítico de junio.
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{sde_anual.png}}
+
+}
+
+\caption{\label{fig-sde-anual}Dinámica térmica anual simulada para el
+refrigerador Haier HBC-150. Las zonas sombreadas en rojo indican la
+ocurrencia de los 68 apagones a lo largo del año, la trayectoria de
+color azul indica la tempertura interna del refrigerador (la solución
+numerica de la EDE), y la trayectoria de color amarillo inidica la
+temperatura ambiente en Tuxtla Gutiérrez, Chiapas.}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{sde_zoom.png}}
+
+}
+
+\caption{\label{fig-sde-zoom}Acercamiento del comportamiento de la EDE
+durante el mes de junio. Se omitió el clima exterior para observar la
+estabilidad del termostato (4°C), los impactos de las aperturas
+(triángulos verdes inferiores) y la pérdida de frío en los apagones.}
+
+\end{figure}%
+
+\subsection{Integración de la Dinámica Logística de Inventario y
+Mermas}\label{integraciuxf3n-de-la-dinuxe1mica-loguxedstica-de-inventario-y-mermas}
+
+Para pasar de una pérdida de viabilidad teórica a pérdidas de vacunas,
+acomodamos la simulación al inventario físico real del equipo (\(I_t\)),
+donde \(t\) representa el tiempo cada 5 minutos. El algoritmo avanza
+iteración por iteración, utilizando tres características logísticas
+clave:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Consumo Mensual Estacional:} Si el reloj de la simulación
+  marca exactamente las 8:00 AM en un día hábil, el algoritmo resta la
+  demanda diaria asignada a ese mes (ej. 65 dosis en meses regulares,
+  aumentando a 163 dosis en octubre por Influenza).
+\item
+  \textbf{Penalización por Merma Instantánea:} En ese mismo paso de
+  tiempo, si la temperatura supera los 8°C, el algoritmo extrae la
+  fracción de pérdida calculada por la ecuación de Arrhenius
+  (\(1 - \exp(-k_t \cdot \Delta t)\)) y se multiplica por el número
+  exacto de vacunas almacenadas en el refrigerador en ese instante. El
+  resultado representa las dosis perdidas, las cuales son restadas del
+  inventario activo y acumuladas en un vector de mermas acumuladas.
+\item
+  \textbf{Reabastecimiento Automático:} Si el inventario cae por debajo
+  del stock de seguridad o punto de reorden (\(1,000\) dosis), se simula
+  la llegada instantánea del camión de distribución, el cual recarga el
+  equipo hasta su capacidad máxima de \(5,000\) dosis. El algoritmo
+  registra la cantidad exacta de dosis entregadas en la variable
+  \texttt{total\_dosis\_ingresadas} para calcular con precisión la tasa
+  de pérdida global al final de la simulación. La interacción de esta
+  logística con las mermas físicas se visualiza en la
+  Figura~\ref{fig-inventario-mermas}.
+\end{enumerate}
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{inventario_vs_mermas.png}}
+
+}
+
+\caption{\label{fig-inventario-mermas}Simulación del inventario de
+vacunas a lo largo del año (dientes de sierra) de la central de
+almacenamiento de vacunas (eje izquierdo) y el crecimiento acumulado de
+las dosis destruidas por fallas térmicas (eje derecho).}
+
+\end{figure}%
+
+\section{5. Estructura de la Simulación
+Montecarlo}\label{estructura-de-la-simulaciuxf3n-montecarlo}
+
+Con el fin de obtener validez científica y no depender del escenario de
+una sola simulación, empaquetamos el algoritmo completo dentro de la
+función \texttt{simular\_un\_ano(semilla)}. Para optimizar drásticamente
+la velocidad de ejecución en Google Colab y permitir análisis masivos,
+vectorizamos la generación del ruido browniano creando el arreglo global
+de variables normales \texttt{dW\_vec} al inicio de la función.
+
+Invocamos esta función dentro de un bucle de \textbf{Montecarlo con
+1,000 simulaciones independientes}, asignando en cada iteración una
+semilla de aleatoriedad indexada (\texttt{semilla\ =\ sim\ +\ 42}). Al
+correr 1,000 años simulados, el algoritmo elimina las fluctuaciones
+extremas de los escenarios individuales y permite que actúe la
+\textbf{Ley de los Grandes Números} (\citeproc{ref-ross2018first}{Ross
+2018}). Esto provoca que las métricas de control se estabilicen
+firmemente en promedios realistas: el simulador reportó un promedio
+global de \textbf{64.0 apagones por año} (alineado con los datos
+meteorológicos de la zona de Tuxtla Gutiérrez, Chiapas de la CFE) y un
+promedio de \textbf{515 aperturas de puerta anuales}, validando el
+comportamiento del personal clínico y la infraestructura eléctrica de
+entrada.
+
+\section{6. Resultados Estadísticos y Riesgo
+Operativo}\label{resultados-estaduxedsticos-y-riesgo-operativo}
+
+Después de simular las 1,000 trayectorias de Montecarlo, procedemos a
+realizar el análisis de inferencia estadística para determinar el
+verdadero nivel de riesgo al que están expuestas las vacunas en Tuxtla
+Gutiérrez.
+
+El comportamiento de los daños acumulados se aprecia con claridad en las
+trayectorias aleatorias presentadas en la Figura~\ref{fig-abanico}. El
+comportamiento de las curvas demuestra que el riesgo no es lineal; la
+tendencia de la merma anual depende estrictamente de la coincidencia
+temporal entre la duración de un apagón de la CFE y el nivel de
+saturación del almacenamiento de vacunas en ese día específico del año.
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{abanico_riesgo.png}}
+
+}
+
+\caption{\label{fig-abanico}30 trayectorias anuales aleatorias. Muestra
+la tendencia en la acumulación de dosis destruidas a lo largo de los 366
+días del año.}
+
+\end{figure}%
+
+Al desglosar las pérdidas de dosis de forma mensual, los datos revelan
+el verdadero comportamiento del riesgo operativo a lo largo del año,
+expuesto en la Figura~\ref{fig-barras-promedio} (Promedio mensual) y en
+la Figura~\ref{fig-barras-mediana} (Mediana mensual).
+
+Inicialmente, desde un punto de vista puramente logístico, se podría
+pensar que los meses de otoño (octubre y noviembre) presentarían la
+mayor cantidad de vacunas perdidas, debido a que en esa temporada el
+refrigerador opera a su máxima capacidad por el arranque de la campaña
+nacional invernal contra la Influenza. Sin embargo, la simulación
+muestra que \textbf{el factor termodinámico y eléctrico domina por
+completo al volumen de inventario.} Tanto el promedio como la mediana
+revelan que \textbf{el verdadero pico de pérdidas materiales se
+concentra severamente en la temporada de calor extremo: marzo, abril y
+mayo.}
+
+Durante este trimestre, Tuxtla Gutiérrez experimenta sus temperaturas
+ambientales máximas. Este calor extremo genera un doble impacto en el
+sistema: por un lado, dispara el estrés sobre la infraestructura de la
+CFE (debido al uso masivo de aires acondicionados en la ciudad),
+provocando la mayor tasa de apagones por sobrecalentamiento de
+transformadores; por otro lado, reduce drásticamente el tiempo de
+autonomía pasiva del refrigerador apagado, acelerando la cinética de
+degradación de Arrhenius de las vacunas.
+
+En el gráfico de promedios, estos tres meses resultan casi idénticos en
+su alto nivel de pérdidas, confirmando que la primavera es la temporada
+crítica. Al observar la métrica de la mediana (estadísticamente más
+robusta porque aísla los años atípicamente catastróficos), el mes de
+\textbf{abril} sobresale como el periodo donde la pérdida de vacunas es
+superior a la de los otros meses. Queda comprobado que la red de frío
+chiapaneca es altamente vulnerable al choque térmico primaveral,
+superando cualquier riesgo derivado de la saturación logística de otras
+temporadas.
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{barras_estacionales_promedio.png}}
+
+}
+
+\caption{\label{fig-barras-promedio}Pérdida promedio de dosis de vacunas
+por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando
+el impacto crítico durante los meses de calor.}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{barras_estacionales_mediana.png}}
+
+}
+
+\caption{\label{fig-barras-mediana}Pérdida mediana de dosis de vacunas
+por mes, confirmando que el mes de abril representa el escenario de
+mayor riesgo operativo para la red de frío.}
+
+\end{figure}%
+
+\end{minipage}%
+
+\end{figure}%
+
+Finalmente, para estandarizar el riesgo sin importar la escala de la
+unidad médica, transformamos las dosis destruidas en porcentajes
+relativos respecto al volumen total de vacunas manejadas por el equipo
+en el año. Al hacer las 1,000 simulaciones, el algoritmo arrojó el
+histograma presentado en la Figura~\ref{fig-histograma-final}. La
+distribución presenta una asimetría positiva (cola estirada hacia la
+derecha), comportamiento típico de los sistemas de riesgo operativo
+expuestos a fallas intermitentes severas.
+
+\textbf{Los estadísticos descriptivos e inferenciales del modelo revelan
+que:}
+
+\begin{itemize}
+\tightlist
+\item
+  La \textbf{mediana de mermas} anuales se ubica en \textbf{751 dosis},
+  lo que representa una tasa de pérdida del \textbf{2.57\%} de los lotes
+  administrados.
+\item
+  El \textbf{promedio de mermas} anuales se eleva a \textbf{827 dosis}
+  (tasa del \textbf{2.87\%}), el cual es mas alto por la presencia de
+  años atípicamente catastróficos en la cola de la distribución.
+\item
+  El \textbf{Value at Risk (VaR) al 95\% de confianza} (riesgo severo)
+  advierte que los centros de almacenamiento de vacunas se enfrentan a
+  escenarios extremos donde se perderán hasta \textbf{1,736 dosis} en un
+  solo refrigerador institucional.
+\end{itemize}
+
+A partir de los percentiles del histograma, podemos concluir con un
+\textbf{95\% de nivel de confianza (Intervalo de Predicción)} que un
+centro de almacenamiento de vacunas en Tuxtla Gutiérrez, operando con un
+equipo normado por la OMS de última generación (Haier HBC-150),
+\textbf{sufrirá una pérdida inevitable de entre el 0.72\% y el 6.57\% de
+su inventario anual} debido a las condiciones climáticas locales y las
+condiciones eléctricas.
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{histograma_porcentajes.png}}
+
+}
+
+\caption{\label{fig-histograma-final}Histograma para el porcentaje de
+vacunas perdidas anualmente. Se detallan las casillas de centralidad
+(media y mediana) y las líneas de acotación del intervalo de predicción
+del 95\%.}
+
+\end{figure}%
+
+\bookmarksetup{startatroot}
+
+\chapter{Conclusiones y Trabajo
+Futuro}\label{conclusiones-y-trabajo-futuro}
+
+El análisis estocástico implementado anteriormente mediante 1,000
+simulaciones independientes de Montecarlo permitió medir de forma
+objetiva el riesgo térmico y operativo al que está expuesta la
+conservación de vacunas en Tuxtla Gutiérrez, Chiapas, utilizando el
+refrigerador institucional Haier HBC-150. Los resultados integran las
+fuerzas termodinámicas locales, las interrupciones del suministro
+eléctrico y las restricciones de la cinética química de la degradación.
+
+\section{1. Conclusiones del Análisis de Riesgo
+Operativo}\label{conclusiones-del-anuxe1lisis-de-riesgo-operativo}
+
+A partir simulación anterior, se extraen las siguientes conclusiones
+principales:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cuantificación de Mermas Anuales:} Bajo un escenario normado
+  que registró un promedio global de 64.0 apagones de la CFE y 515
+  aperturas de puerta anuales, la mediana de pérdidas se estableció en
+  751 dosis por refrigerador (equivalente a una tasa de perdida del
+  2.57\% del total de vacunas almacenadas), mientras que el promedio se
+  ubicó en 827 dosis (2.87\%).
+\item
+  \textbf{Intervalo de Predicción:} El análisis de los percentiles del
+  histograma permite concluir, con un 95\% de nivel de confianza, que un
+  centro de almacenamiento de vacunas operando bajo estas condiciones
+  experimentará mermas inevitables de entre el 0.72\% y el 6.57\% de su
+  inventario anual. Asimismo, el indicador \emph{Value at Risk} (VaR) al
+  95\% advierte que en escenarios de alta vulnerabilidad las pérdidas
+  pueden ascender hasta las 1736 dosis por equipo.
+\item
+  \textbf{Dominancia Termodinámica sobre la Logística:} Al evaluar la
+  estacionalidad del daño, se rechazó la hipótesis de que el volumen de
+  saturación logística por la campaña de Influenza en octubre y
+  noviembre provocaría la mayor pérdida de vacunas. Los datos demuestran
+  que el factor climático y eléctrico ejerce una dominancia absoluta
+  sobre el inventario. Las mermas se concentran de manera sostenida en
+  el trimestre de marzo, abril y mayo debido a que las elevadas
+  temperaturas ambientales reducen el tiempo de retención del frío del
+  equipo y aceleran la tasa cinética de la ecuación de Arrhenius. La
+  métrica de la mediana identificó a \textbf{abril} como el mes con el
+  mayor índice de riesgo y pérdida de vacunas del año.
+\end{itemize}
+
+\section{2. Limitaciones del Modelo y Trabajo
+Futuro}\label{limitaciones-del-modelo-y-trabajo-futuro}
+
+El modelo desarrollado durante la estancia del Verano Delfín proporciona
+una metodología matemática reproducible para la evaluación de políticas
+de salud pública y equipamiento térmico. No obstante, con el fin de
+simplificar el cómputo y mantener el alcance de una investigación de
+licenciatura, se omitieron ciertas dinámicas que se proponen como
+trabajo a futuro:
+
+\subsection{Estimación de
+Parámetros}\label{estimaciuxf3n-de-paruxe1metros}
+
+En este estudio se consideraron constantes los coeficientes de
+transferencia de calor por conducción y convección del refrigerador,
+representados por la tasa de abatimiento activo (\(\kappa_{on}\)) y la
+tasa de inercia pasiva (\(\kappa_{off}\)). Como trabajo futuro, se
+plantea desarrollar un modelo de estimación paramétrica donde estos
+coeficientes varíen continuamente en el tiempo. Esta variación se
+programará en función directa de la fracción de llenado diario del
+refrigerador, permitiendo que la fluctuación real de la masa térmica
+interna afecte dinámicamente la velocidad de amortiguación térmica ante
+las fallas eléctricas.
+
+\subsection{Proceso de Saltos por
+Aperturas}\label{proceso-de-saltos-por-aperturas}
+
+La regla de las aperturas del refrigerador se limitó a un escenario
+promedio de uso diario (una apertura fija matutina y un proceso
+estocástico vespertino). Para aproximar el simulador a la realidad de
+las unidades médicas, el trabajo a futuro requiere incorporar escenarios
+extremos en el proceso de saltos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Escenario de Aperturas Nulas:} Modelar los días en que el
+  refrigerador no es operado por el personal (como fines de semana
+  prolongados o periodos de inactividad). En estos casos, las
+  variaciones de temperatura interna deberán ser absorbidas y capturadas
+  exclusivamente por el ruido aditivo del movimiento browniano de la
+  EDE, manteniendo el proceso de saltos discretos en cero.
+\item
+  \textbf{Escenario de Alta Demanda:} Incorporar una tasa de intensidad
+  variable que simule jornadas de vacunación masivas o contingencias
+  sanitarias, donde el volumen de aperturas sea excesivo e incremente la
+  inyección de calor acumulado por encima de los parámetros estándar
+  evaluados en este reporte.
+\end{enumerate}
+
+\bookmarksetup{startatroot}
+
+\chapter*{Referencias}\label{referencias}
+\addcontentsline{toc}{chapter}{Referencias}
+
+\markboth{Referencias}{Referencias}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-arnold1974stochastic}
+Arnold, Ludwig. 1974. \emph{Stochastic Differential Equations: Theory
+and Applications}. New York, NY: John Wiley \& Sons.
+
+\bibitem[\citeproctext]{ref-asmussen2003markov}
+Asmussen, Søren. 2003. {«Applied Probability and Queues»}. En, 2nd ed.,
+51:39-59. Stochastic Modelling y Applied Probability. New York, NY:
+Springer-Verlag. \url{https://doi.org/10.1007/0-387-21525-5_2}.
+
+\bibitem[\citeproctext]{ref-chen2009thermostable}
+Chen, Dexiang, y Debra Kristensen. 2009. {«Opportunities and challenges
+of developing thermostable vaccines»}. \emph{Expert review of vaccines}
+8 (5): 547-57. \url{https://doi.org/10.1586/erv.09.20}.
+
+\bibitem[\citeproctext]{ref-cfe2024informe}
+Comisión Federal de Electricidad. 2024. {«Informe Anual 2024»}. Ciudad
+de México: Gobierno de México.
+
+\bibitem[\citeproctext]{ref-karatzas1998brownian}
+Karatzas, Ioannis, y Steven E. Shreve. 1998. \emph{Brownian Motion and
+Stochastic Calculus}. 2nd ed. Vol. 113. Graduate Texts en Mathematics.
+New York, NY: Springer-Verlag.
+\url{https://doi.org/10.1007/978-1-4612-0949-2}.
+
+\bibitem[\citeproctext]{ref-karlin1998introduction}
+Karlin, Samuel, y Howard M. Taylor. 1998. \emph{An Introduction to
+Stochastic Modeling}. 3rd ed. San Diego, CA: Academic Press.
+
+\bibitem[\citeproctext]{ref-kloeden1992numerical}
+Kloeden, Peter E., y Eckhard Platen. 1992. \emph{Numerical Solution of
+Stochastic Differential Equations}. Vol. 23. Stochastic Modelling y
+Applied Probability. Berlin, Heidelberg: Springer-Verlag.
+
+\bibitem[\citeproctext]{ref-oms_pqs_e003}
+Organización Mundial de la Salud. 2024. \emph{WHO Immunisation Devices -
+Performance, Quality \& Safety. E003: Refrigerators and freezers}. World
+Health Organization.
+\url{https://apps.who.int/immunization_standards/vaccine_quality/pqs_catalogue/index.aspx}.
+
+\bibitem[\citeproctext]{ref-platen2010numerical}
+Platen, Eckhard, y Nicola Bruti-Liberati. 2010. \emph{Numerical Solution
+of Stochastic Differential Equations with Jumps in Finance}. Vol. 64.
+Stochastic Modelling y Applied Probability. Berlin, Heidelberg:
+Springer-Verlag. \url{https://doi.org/10.1007/978-3-642-13694-8}.
+
+\bibitem[\citeproctext]{ref-CPG2026Delfin}
+Repositorio de GitHub. {«Simulador Estocástico y Análisis de Riesgo en
+la Red de Frío para Vacunas: Código Fuente en Python»}.
+\url{https://github.com/Crisperez517/VERANO-DELFIN/blob/3a3f49b27bca9671e71b40c738dec826c8eb30cc/VERANO_DELFIN_SIMULACION_CODIGO_DE_PYTHON.ipynb}.
+
+\bibitem[\citeproctext]{ref-ross1996stochastic}
+Ross, Sheldon M. 1996. \emph{Stochastic Processes}. 2nd ed. New York,
+NY: Wiley.
+
+\bibitem[\citeproctext]{ref-ross2018first}
+---------. 2018. \emph{A First Course in Probability}. 10th ed. Pearson.
+
+\bibitem[\citeproctext]{ref-sener2024prodesen}
+Secretaría de Energía. 2024. {«Programa para el Desarrollo del Sistema
+Eléctrico Nacional (PRODESEN) 2024-2038»}. Ciudad de México: Gobierno de
+México.
+
+\bibitem[\citeproctext]{ref-yin2010hybrid}
+Yin, G. George, y Chao Zhu. 2010. \emph{Hybrid Switching Diffusions:
+Properties and Applications}. Vol. 63. Stochastic Modelling y Applied
+Probability. New York, NY: Springer.
+\url{https://doi.org/10.1007/978-1-4419-1105-6}.
+
+\end{CSLReferences}
+
+
+
+
+\end{document}

@@ -1,0 +1,406 @@
+# Fundamentos Teóricos
+
+En este capítulo se presentarán las bases conceptuales y el marco formal del cálculo estocástico que fundamentan el desarrollo de nuestro modelo matemático para la red de frío. Se definirán en primer lugar los procesos estocásticos elementales para, posteriormente, construir la ecuación diferencial estocástica (EDE) híbrida que rige el sistema.
+
+## Procesos Estocásticos
+
+El modelado térmico de un refrigerador de vacunas expuesto a incertidumbres continuas y perturbaciones discretas requiere herramientas más allá del cálculo determinista. Desde una perspectiva analítica, un proceso estocástico representa la generalización de una variable aleatoria indexada en un conjunto ordenado, parametrizando la evolución de un sistema bajo incertidumbre.
+
+::: {#def-proceso-estocastico}
+### Proceso Estocástico
+Sea $(\Omega, \mathcal{F}, \mathbb{P})$ un espacio de probabilidad y sea $\mathcal{S} \subseteq \mathbb{R}^d$ un espacio muestral dotado de su respectiva $\sigma$-álgebra de Borel. Un proceso estocástico es una familia de variables aleatorias $\{X_t\}_{t \in \mathcal{T}}$ parametrizadas por $t \in \mathcal{T}$, donde $\mathcal{T} \subseteq \mathbb{R}$.
+:::
+
+Dependiendo de como es el conjunto de índices $\mathcal{T}$, los procesos estocásticos se clasifican en dos:
+
+1. **Procesos estocásticos a tiempo discreto:** Si $\mathcal{T}$ es numerable,  por lo general $\mathcal{T} = \mathbb{N}_0 = \{0, 1, 2, \dots\}$ o $\mathcal{T} = \mathbb{Z}$, decimos que el proceso estocástico es a tiempo discreto. En este escenario, el sistema evoluciona mediante transiciones discretas en pasos fijos discretizados.
+2. **Procesos estocásticos a tiempo continuo:** Si $\mathcal{T}$ es un intervalo de $\mathbb{R}$, por lo general $\mathcal{T} = [0, \infty)$ o un intervalo acotado $\mathcal{T} = [0, T]$, $T > 0$, se dice que el proceso estocástico es a tiempo continuo. Esta estructura es la adecuada para modelar fenómenos físicos continuos, como la transferencia térmica.
+
+Para enlazar la teoría probabilística con la observación empírica de un fenómeno estocástico, es indispensable establecer la distinción entre el espacio funcional del proceso y sus realizaciones particulares.
+
+::: {#def-trayectoria}
+### Trayectorias del Proceso Estocástico
+Si $\{X_t\}_{t \geq 0}$ es un proceso estocástico a tiempo continuo, para cada $\omega \in \Omega$ fijo y $\mathcal{S} = \mathbb{R}$, se definen las trayectorias del proceso como:
+$$
+    \mathcal{T} = [0, \infty) \rightarrow \mathcal{S} = \mathbb{R}
+$$
+$$
+    t \rightarrow X_t(\omega).
+$$
+:::
+
+Las propiedades analíticas de un proceso estocástico, tales como la continuidad, la diferenciabilidad y la presencia de discontinuidades finitas, se definen estrictamente a partir del comportamiento de varias componentes, para más detalles consultar  [@karlin1998introduction]. Los componentes aleatorios de nuestro sistema se sustentan en tres procesos estocásticos específicos a tiempo continuo.
+
+### Movimiento Browniano (Proceso de Wiener)
+
+Para representar las fluctuaciones térmicas continuas de baja intensidad asociadas al ruido intrínseco del termostato y microtransferencias de calor se utiliza el movimiento Browniano.
+
+::: {#def-movimiento-browniano}
+### Proceso de Wiener
+Un proceso estocástico a tiempo continuo $\{W(t)\}_{t \ge 0}$ definido sobre un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}, \mathbb{P})$ es un movimiento Browniano estándar o proceso de Wiener si cumple con las siguientes propiedades:
+
+1. $W(0) = 0$ con probabilidad 1.
+2. Posee incrementos independientes; es decir, para cualesquiera tiempos $0 \le t_1 < t_2 < \dots < t_n$, las variables aleatorias $W(t_2)-W(t_1), \dots, W(t_n)-W(t_{n-1})$ son mutuamente independientes.
+3. Posee incrementos estacionarios gaussianos, es decir, para todo $t > s \ge 0$, $W(t) - W(s) \sim \mathcal{N}(0, t-s)$.
+:::
+
+El término $dW(t) = W(t+dt) - W(t)$ representa el diferencial del proceso de Wiener. Este denota una perturbación gaussiana elemental en un intervalo infinitesimal $dt$, caracterizada por una media $\mathbb{E}[dW(t)] = 0$ y una varianza $\mathbb{E}[(dW(t))^2] = dt$. Para una revisión detallada sobre las propiedades de medida y construcciones analíticas de este proceso, se sugiere consultar a [@karatzas1998brownian].
+
+![Trayectoria simulada del proceso de Wiener. El eje horizontal representa el avance del tiempo continuo en un horizonte parametrizado de $T = 1.0$ con incrementos de $dt = 0.001$. El eje vertical denota la posición de las fluctuaciones aleatorias $W(t)$, iniciando en el origen $W(0) = 0$.](proceso_wiener.png){#fig-wiener width="80%" fig-align="center"}
+
+### Procesos de Poisson
+
+Las aperturas de las puertas del refrigerador por el personal médico constituyen eventos discretos y repentinos que alteran instantáneamente la temperatura interna. Este tipo de fenómenos se modela mediante un proceso estocástico a tiempo continuo de saltos puros.
+
+::: {#def-proceso-poisson}
+### Proceso de Poisson Homogéneo
+Un proceso estocástico a tiempo continuo $\{N(t)\}_{t \ge 0}$ que toma valores enteros en el espacio de estados $\mathcal{S} = \mathbb{N}_0$ es un proceso de Poisson homogéneo con parámetro de intensidad constante $\lambda > 0$ si satisface las siguientes condiciones:
+
+1. $N(0) = 0$ con probabilidad 1.
+2. Posee incrementos independientes; es decir, para cualesquiera tiempos $0 \le t_1 < t_2 < \dots < t_n$, las variables aleatorias discretas $N(t_2)-N(t_1), \dots, N(t_n)-N(t_{n-1})$ son mutuamente independientes.
+3. Posee incrementos estacionarios; lo que implica que la ley de probabilidad de cualquier incremento $N(t+s) - N(s)$ depende únicamente de la amplitud temporal $t$ y resulta invariante ante traslaciones sobre el origen cronológico $s$. De forma explícita, la variable aleatoria $N(t)$ sigue una distribución de Poisson con parámetro o tasa media dada por el producto $\lambda t$, es decir:
+
+$$
+\mathbb{P}(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}, \quad n = 0, 1, 2, \dots
+$$
+:::
+
+Para formalizar analíticamente el comportamiento probabilístico de los saltos sin recurrir a nociones intuitivas, las probabilidades de transición asociadas al incremento del proceso en un intervalo acotado de longitud $h > 0$ se especifican rigurosamente mediante el límite asintótico cuando $h \to 0$:
+
+$$
+\mathbb{P}(N(t+h) - N(t) = 1) = \lambda h + o(h)
+$$
+$$
+\mathbb{P}(N(t+h) - N(t) \ge 2) = o(h)
+$$
+
+donde la notación algebraico-asintótica de Landau $o(h)$ denota una función de orden superior tal que $\lim_{h \to 0} \frac{o(h)}{h} = 0$. Esto garantiza formalmente que la probabilidad de ocurrencia de múltiples eventos simultáneos en una fracción temporal infinitesimal es prácticamente nula. 
+
+Sin embargo, en la dinámica real de un centro de salud, la tasa de aperturas del refrigerador no es constante; exhibe una estacionalidad diaria (por ejemplo, mayor actividad en horas pico). Para capturar esta variabilidad, generalizamos el modelo relajando la propiedad de incrementos estacionarios.
+
+::: {#def-poisson-no-homogeneo}
+### Proceso de Poisson No Homogéneo
+Un proceso estocástico a tiempo continuo $\{N(t)\}_{t \ge 0}$ es un proceso de Poisson no homogéneo con función de intensidad $\lambda(t) \ge 0$ (para $t \ge 0$) si satisface las siguientes condiciones:
+
+1. $N(0) = 0$ con probabilidad 1.
+2. Posee incrementos independientes.
+3. Para todo $t \ge 0$ y $h > 0$, la probabilidad de que ocurra exactamente un evento en el intervalo $(t, t+h]$ está dada por la tasa instantánea en el tiempo $t$:
+$$
+\mathbb{P}(N(t+h) - N(t) = 1) = \lambda(t) h + o(h)
+$$
+4. La probabilidad de observar dos o más eventos en dicho intervalo es de orden superior a $h$:
+$$
+\mathbb{P}(N(t+h) - N(t) \ge 2) = o(h)
+$$
+:::
+
+Una exposición rigurosa sobre los procesos de conteo, sus generalizaciones no homogéneas y sus aplicaciones en sistemas con discontinuidades puede encontrarse en [@ross1996stochastic].
+
+![Trayectorias simuladas de dos procesos de Poisson. El eje horizontal representa el tiempo de observación en un horizonte de $T = 10.0$ con incrementos discretos de $dt = 0.01$. El eje vertical contabiliza el número acumulado de eventos discretos $N(t)$, iniciando en $N(0) = 0$. La línea continua (azul) ilustra un Proceso de Poisson Homogéneo con una tasa de intensidad constante $\lambda = 1$, evidenciando incrementos estacionarios, por otro lado la línea punteada (roja) representa un Proceso de Poisson No Homogéneo con una intensidad de $\lambda(t) = \frac{1}{2} + \frac{5}{2} \sin\left(\frac{\pi t}{10}\right)$, es decir es dependiente del tiempo, concentrando una mayor densidad de saltos en el periodo central del intervalo (simulando, por ejemplo, las horas pico de aperturas del refrigerador durante una jornada clínica). Ambas gráficas exhiben la naturaleza escalonada continua por la derecha con límites por la izquierda, por sus siglas en francés (càdlàg), propia de los procesos de saltos puros.](proceso_poisson.png){#fig-poisson width="85%" fig-align="center"}
+
+### Cadenas de Markov a Tiempo Continuo
+
+Los fallos prolongados en el suministro eléctrico de la red pública alteran estructuralmente la dinámica del sistema. Para modelar estas transiciones entre estados macroscópicos del entorno, introducimos una cadena de Markov en tiempo continuo.
+
+::: {#def-cadena-markov}
+### Cadena de Markov a Tiempo Continuo
+Sea $\{\alpha(t)\}_{t \ge 0}$ un proceso estocástico que toma valores en un espacio de estados finito y discreto $\mathcal{M} = \{1, 2, \dots, m\}$. Se dice que $\alpha(t)$ es una cadena de Markov en tiempo continuo si para todo $s, t \ge 0$ y estados $i, j \in \mathcal{M}$, cumple la propiedad de Markov:
+
+$$
+\mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i, \alpha(u) = \alpha_u, 0 \le u < s) = \mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i)
+$$
+:::
+
+Las leyes de transición y la evolución temporal de las probabilidades de estado de la cadena $\{\alpha(t)\}_{t \ge 0}$ se encuentran completamente caracterizadas por la matriz de intensidades de transición $Q = (q_{ij}) \in \mathbb{R}^{m \times m}$. Si definimos las funciones de probabilidad de transición condicional mediante $p_{ij}(h) = \mathbb{P}(\alpha(t+h) = j \mid \alpha(t) = i)$ para un incremento temporal positivo $h > 0$, las componentes de la matriz $Q$ se determinan evaluando el límite analítico en el origen:
+
+1. Para transiciones entre estados distintos ($i \neq j$), la componente $q_{ij}$ representa la tasa instantánea o intensidad de conmutación desde el régimen $i$ hacia el régimen $j$, definida como:
+
+$$
+q_{ij} = \lim_{h \to 0^+} \frac{p_{ij}(h)}{h} \ge 0
+$$
+
+2. Para los elementos situados sobre la diagonal principal ($i = j$), la componente $q_{ii}$ representa la tasa neta de salida del estado $i$, cumpliendo por conservación de la probabilidad que la suma por filas de la matriz $Q$ sea idénticamente nula:
+
+$$
+q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i} q_{ij}
+$$
+
+A través de esta formulación basada en límites, las probabilidades de transición de primer orden quedan descritas mediante las expresiones $p_{ij}(h) = q_{ij}h + o(h)$ para $i \neq j$, y $p_{ii}(h) = 1 + q_{ii}h + o(h)$. Esto permite modelar las conmutaciones macroscópicas de la dinámica del refrigerador sin necesidad de introducir variables temporales discretas ni heurísticas. Los lectores interesados en profundizar en las propiedades asintóticas y de estabilidad de estos procesos híbridos pueden remitirse al texto especializado de [@asmussen2003markov].
+
+## Ecuaciones Diferenciales Estocásticas y la  Integral de Itô
+
+Una vez establecidos los procesos estocásticos de soporte, es necesario definir las reglas operacionales que permiten construir y resolver ecuaciones sujetas a perturbaciones aleatorias continuas. Dado que las trayectorias del movimiento Browniano no son de variación acotada y tampoco son diferenciables en ningún punto, entonces la expresión clásica $dW(t)/dt$ no tiene sentido dentro del cálculo ordinario. Por lo tanto, la integración respecto a procesos estocásticos requiere la construcción de una nueva herramienta analítica conocida como la integral de Itô.
+
+::: {#def-integral-ito}
+### Integral de Itô
+Sea $\{X(t)\}_{t \ge 0}$ un proceso estocástico adaptado a la filtración Browniana $\{\mathcal{F}_t\}_{t \ge 0}$ que satisface la condición de integrabilidad, i.e. $\mathbb{E}\left[\int_0^T X^2(t) dt\right] < \infty$. La integral de Itô de $X(t)$ respecto al proceso de Wiener $W(t)$ se define como el límite en media cuadrática de sumas de Riemann aproximadas por la izquierda:
+
+$$
+\int_0^T X(t) dW(t) = \lim_{n \to \infty} \sum_{i=0}^{n-1} X(t_i) [W(t_{i+1}) - W(t_i)] \quad \text{en } L^2
+$$
+
+donde $0 = t_0 < t_1 < \dots < t_n = T$ es una partición del intervalo $[0, T]$ cuyo diámetro tiende a cero cuando $n \to \infty$.
+:::
+
+A diferencia del cálculo clásico, evaluar el integrando estrictamente en el extremo izquierdo de cada subintervalo ($t_i$) garantiza que la integral resultante conserve la propiedad de martingala, lo que implica que su esperanza matemática es nula, i.e. $\mathbb{E}\left[\int_0^T X(t) dW(t)\right] = 0$. A partir de este concepto fundamental, se establece la formulación de una Ecuación Diferencial Estocástica (EDE).
+
+::: {#def-ede-general}
+### Ecuación Diferencial Estocástica
+Una ecuación diferencial estocástica para un proceso $\{X(t)\}_{t \ge 0}$ es una relación simbólica expresada en su forma diferencial mediante:
+
+$$
+dX(t) = b(t, X(t)) dt + \sigma(t, X(t)) dW(t)
+$$ {#eq-ede-general-diff}
+
+donde $b(t, X(t))$ denota el coeficiente de deriva y $\sigma(t, X(t))$ representa el coeficiente de difusión.
+:::
+
+El término $dX(t)$ en la @eq-ede-general-diff no debe interpretarse como una derivada ordinaria, sino como una representación abreviada de su ecuación integral equivalente:
+
+$$
+X(t) = X(0) + \int_0^t b(s, X(s)) ds + \int_0^t \sigma(s, X(s)) dW(s)
+$$ {#eq-ede-general-int}
+
+En la @eq-ede-general-int, la primera integral respecto al tiempo es una integral ordinaria de Lebesgue-Stieltjes que captura la tendencia determinista del sistema, mientras que la segunda es una integral de Itô que modela el ruido estocástico continuo. Para una revisión rigurosa del cálculo estocástico elemental, se sugiere consultar a [@karatzas1998brownian].
+
+Para asegurar que una EDE posea una solución única ante cualquier condición inicial, los coeficientes de deriva y difusión deben cumplir ciertas condiciones, expuestas en el siguiente teorema de existencia y unicidad.
+
+::: {#thm-existencia-unicidad}
+### Teorema de Existencia y Unicidad
+Sea la EDE definida en la @eq-ede-general-diff con una condición inicial $X(0) = X_0$ independiente del proceso de Wiener. Supóngase que para todo $t \in [0, T]$ y variables $x, y \in \mathbb{R}$, los coeficientes satisfacen las siguientes dos restricciones:
+
+1. **Condición de Lipschitz global:** Existe una constante $K > 0$ tal que:
+$$
+|b(t, x) - b(t, y)| + |\sigma(t, x) - \sigma(t, y)| \le K |x - y|
+$$
+2. **Condición de crecimiento lineal:** Existe una constante $C > 0$ tal que:
+$$
+|b(t, x)| + |\sigma(t, x)| \le C (1 + |x|)
+$$
+
+Bajo el cumplimiento de ambas condiciones, la ecuación tiene una solución fuerte única $\{X(t)\}_{t \in [0, T]}$ con trayectorias continuas con probabilidad 1, una demostración a detalle de este teorema, basada en el método de aproximaciones sucesivas de Picard, se encuentra en [@arnold1974stochastic]
+:::
+
+La condición de Lipschitz previene que las trayectorias colapsen de manera indeterminada, garantizando la unicidad, mientras que la restricción de crecimiento lineal evita que las soluciones diverjan a infinito en un tiempo finito.
+
+## El Proceso de Ornstein-Uhlenbeck Clásico
+
+Como paso previo al desarrollo de nuestro modelo termodinámico final, es indispensable introducir un tipo particular de EDE que modela la inercia física y la atracción hacia un estado de equilibrio: el proceso de Ornstein-Uhlenbeck.
+
+::: {#def-ou-clasico}
+### Proceso de Ornstein-Uhlenbeck
+Un proceso estocástico $\{X(t)\}_{t \ge 0}$ es un proceso de Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial estocástica lineal homogénea:
+
+$$
+dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t)
+$$ {#eq-ou-clasica}
+
+donde $\kappa > 0$ representa la velocidad de reversión a la media, $\theta \in \mathbb{R}$ denota el nivel de equilibrio de largo plazo y $\sigma > 0$ es la volatilidad del sistema.
+:::
+
+La característica principal de la @eq-ou-clasica radica en su deriva lineal $b(x) = \kappa(\theta - x)$. Cuando el estado del proceso supera el valor de equilibrio ($X(t) > \theta$), la deriva se vuelve negativa, empujando la trayectoria hacia abajo; inversamente, si el proceso se encuentra por debajo del nivel de consigna ($X(t) < \theta$), la deriva se vuelve positiva, con lo cual hay un crecimiento hacia el promedio. Esta propiedad de atracción convierte a este proceso en la base ideal para simular la oscilación térmica de sistemas cerrados regidos por la ley de enfriamiento de Newton, cuyas propiedades analíticas detalladas se discuten en [@karlin1998introduction].
+
+## Formulación de la Ecuación Diferencial Estocástica General
+
+Una vez definidos los elementos estocásticos elementales, es posible formular el marco matemático que une la evolución analítica continua con las perturbaciones aleatorias y los saltos discretos. De acuerdo con el marco general desarrollado por [@yin2010hybrid] y [@platen2010numerical], una Difusión Híbrida con Conmutación de Régimen y Saltos se define mediante el siguiente sistema de ecuaciones diferenciales estocásticas:
+
+$$
+dT(t) = \mu(T(t), \alpha(t)) dt + \sigma(T(t), \alpha(t)) dW(t) + \gamma(T(t^-), \alpha(t^-)) dN(t)
+$$ {#eq-sde-hibrida-general}
+
+En la @eq-sde-hibrida-general, el término $T(t^-) = \lim_{s \to t^-} T(s)$ preserva la propiedad de continuidad por la izquierda con límites por la derecha (càdlàg) del proceso ante la ocurrencia de un salto. Las funciones de coeficientes se definen como:
+$$\mu: \mathbb{R} \times \mathcal{M} \to \mathbb{R} \quad \text{(Coeficiente de deriva o tendencia)}$$
+$$\sigma: \mathbb{R} \times \mathcal{M} \to \mathbb{R} \quad \text{(Coeficiente de difusión o volatilidad)}$$
+$$\gamma: \mathbb{R} \times \mathcal{M} \to \mathbb{R} \quad \text{(Magnitud o intensidad del impacto del salto)}$$
+
+La incorporación con la cadena de Markov $\alpha(t)$ indica que los parámetros estructurales del sistema cambian de forma aleatoria e instantánea cuando el entorno conmuta de estado.
+
+Para ilustrar el impacto de nuestra formulación matemática sobre el modelado físico de la red de frío, es fundamental contrastar el comportamiento de las trayectorias resultantes. La simulación numérica del modelo revela cómo la incorporación de discontinuidades captura fenómenos que los modelos clásicos omiten.
+
+![Trayectorias simuladas de la Ecuación Diferencial Estocástica de Ornstein-Uhlenbeck para la temperatura interna de un refrigerador de vacunas. El eje horizontal representa el tiempo de observación en un horizonte de $T = 10.0$ horas con incrementos de $dt = 0.01$. La línea base negra indica la temperatura óptima $\theta = 4^\circ\text{C}$. La trayectoria continua (azul) ilustra una difusión clásica perturbada únicamente por el movimiento Browniano $dW(t)$, simulando las microfluctuaciones gaussianas del ciclo del compresor. Por otro lado, la trayectoria híbrida (roja) añade perturbaciones mediante un proceso de Poisson $dN(t)$, modelando impactos macroscópicos. Se observa claramente cómo los saltos térmicos positivos (simulando aperturas de la puerta por el personal) elevan bruscamente la temperatura, la cual posteriormente experimenta una reversión a la media controlada por el parámetro $\kappa$. Las trayectorias fueron aproximadas computacionalmente mediante el método de Euler-Maruyama, que presentaremos más adelante.](trayectorias_sde.png){#fig-sde-comparacion width="90%" fig-align="center"}
+
+Como muestra la @fig-sde-comparacion, al modelar el sistema exclusivamente con componentes difusivos continuos se subestima el riesgo de trayectorias térmicas fuera del rango normativo de la OMS (2 °C a 8 °C). La inclusión del proceso de saltos justifica nuestra necesidad de utilizar el Lema de Itô generalizado, ya que la temperatura experimenta cambios finitos instantáneos que rompen la diferenciabilidad clásica del modelo.
+
+## El Modelo Estocástico de Red de Frío (Ornstein-Uhlenbeck Modificado)
+
+Pasando a la física de nuestro problema particular, adaptamos la @eq-sde-hibrida-general bajo una estructura termodinámica de reversión a la media. Trabajaremos bajo la hipótesis de que el comportamiento de la temperatura interna $T(t)$ de un refrigerador institucional de vacunas se rige por la siguiente ecuación diferencial estocástica de Ornstein-Uhlenbeck híbrida con saltos de Poisson:
+
+$$
+dT(t) = \kappa(\alpha(t)) [\theta(\alpha(t)) - T(t)] dt + \sigma(\alpha(t)) dW(t) + \gamma dN(t)
+$$ {#eq-ou-temperatura}
+
+Bajo esta parametrización particular, el espacio de estados de la cadena de Markov se restringe a dos regímenes operativos fundamentales, $\mathcal{M} = \{1, 2\}$, cuyas implicaciones físicas y estocásticas se detallan en los siguientes conceptos:
+
+::: {#def-inercia-termica}
+### Inercia Térmica y Parámetros Estructurales
+La inercia térmica es la capacidad de la masa interna del refrigerador (biológicos, paquetes refrigerantes y botellas de agua) para amortiguar la transferencia de calor del exterior. En la @eq-ou-temperatura, se modela mediante el coeficiente de velocidad de reversión $\kappa(\alpha(t)) > 0$. A mayor inercia térmica, menor será el valor de $\kappa$ en ausencia de energía eléctrica, retrasando el calentamiento del refrigerador. El parámetro de volatilidad $\sigma(\alpha(t)) > 0$ mide el ruido continuo gaussiano inducido por el ciclo del compresor.
+:::
+
+::: {#def-cortes-energia}
+### Corte de Energía (Conmutación de Régimen)
+Se define como la transición de la cadena de Markov debido a fallos en el suministro eléctrico. El sistema conmuta del régimen con suministro normal ($\alpha(t) = 1$) al régimen de falla ($\alpha(t) = 2$). Esta conmutación altera los límites asintóticos de la deriva en la @eq-ou-temperatura:
+
+1. **Régimen $\alpha(t) = 1$:** El sistema converge a la temperatura ideal del termostato, es decir, $\theta(1) = 4^\circ\text{C}$.
+2. **Régimen $\alpha(t) = 2$:** Al apagarse el motor, el sistema interrumpe el enfriamiento y la temperatura interna comienza a subir hacia la temperatura ambiente exterior del centro de salud, parametrizada por $\theta(2) = T_{\text{amb}}$.
+:::
+
+::: {#def-apertura-puerta}
+### Apertura de Puertas (Perturbaciones por Saltos)
+Corresponde a la entrada brusca de aire cálido exterior provocada por la manipulación operativa del personal de enfermería. Este fenómeno ocurre de forma intermitente y se modela en la @eq-ou-temperatura mediante el término de saltos $\gamma dN(t)$, donde $\gamma > 0$ representa el incremento térmico discreto e instantáneo en grados Celsius cada vez que el diferencial del proceso de Poisson registra un evento ($dN(t) = 1$).
+:::
+
+## El Lema de Itô Clásico y Generalizado
+
+Para realizar transformaciones algebraicas sobre funciones que dependen de procesos estocásticos o para desarrollar algoritmos de aproximación computacional válidos, el teorema fundamental del cálculo determinista debe sustituirse por el Lema de Itô. Introducimos inicialmente la versión elemental para difusiones continuas.
+
+::: {#thm-ito-clasico}
+### Lema de Itô para Difusiones Continuas
+Sea $\{X(t)\}_{t \ge 0}$, considere la EDE dada por la @eq-ede-general-diff, con condición inicial $X(0) = x_0$,, y sea $V(t, x)$ una función escalar continuamente diferenciable en su componente temporal $t$ y dos veces continuamente diferenciable en su componente espacial $x$. El diferencial estocástico de la función compuesta viene dado por:
+
+$$
+dV(t, X(t)) = \left[ \frac{\partial V}{\partial t} + b(t, X(t))\frac{\partial V}{\partial x} + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 V}{\partial x^2} \right] dt + \sigma(t, X(t))\frac{\partial V}{\partial x} dW(t)
+$$
+:::
+
+El término de segundo orden respecto a la derivada espacial surge de la propiedad cuadrática del movimiento Browniano, donde $(dW(t))^2 \to dt$ en un sentido probabilístico. Este desarrollo elemental se detalla conceptualmente en [@karatzas1998brownian]. 
+
+No obstante, dado que nuestro modelo usa conmutaciones estructurales discretas y discontinuidades puntuales, la versión continua resulta insuficiente. Apoyados en los desarrollos de [@yin2010hybrid] y [@platen2010numerical], establecemos el siguiente teorema analítico que rige el cálculo sobre trayectorias discontinuas con conmutación:
+
+::: {#thm-ito-generalizado}
+### Fórmula de Itô para Difusiones Híbridas con Saltos
+Sea $V(t, T, i)$ una función continuamente diferenciable en su componente temporal $t$, y dos veces continuamente diferenciable en su componente espacial $T$ para cada régimen operativo $i \in \mathcal{M}$. Si $T(t)$ es un proceso que satisface la @eq-sde-hibrida-general, entonces el diferencial estocástico de la función compuesta $V(t, T(t), \alpha(t))$ viene dado por:
+
+$$
+\begin{aligned}
+dV(t, T(t), \alpha(t)) = & \left[ \frac{\partial V}{\partial t} + \frac{\partial V}{\partial T}\mu(T, \alpha) + \frac{1}{2}\frac{\partial^2 V}{\partial T^2}\sigma^2(T, \alpha) + \sum_{j \in \mathcal{M}} q_{\alpha(t)j}V(t, T, j) \right] dt \\
+& + \frac{\partial V}{\partial T}\sigma(T, \alpha) dW(t) + \left[ V(t, T(t^-) + \gamma, \alpha(t^-)) - V(t, T(t^-), \alpha(t^-)) \right] dN(t)
+\end{aligned}
+$$ {#eq-ito-generalizado}
+:::
+
+Como se puede apreciar en el @thm-ito-generalizado, el operador diferencial de Itô se logra expandir. El primer término entre corchetes añade a la derivada temporal y al generador de difusión clásico una sumatoria ponderada por las tasas de transición $q_{ij}$ de la matriz $Q$, lo cual captura el efecto del cambio en la deriva. Por su parte, la componente final sustituye la derivada espacial tradicional por un operador de diferencias finitas encargado de absorber la discontinuidad en los tiempos de salto del proceso de Poisson.
+
+## Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas
+
+En la práctica, la gran mayoría de las ecuaciones diferenciales estocásticas carecen de una solución analítica explícita debido a la no linealidad de sus coeficientes o al acoplamiento de sus perturbaciones. Por este motivo, resulta necesario recurrir a esquemas de aproximación numérica distribuidos en un mallado temporal discreto. A diferencia del cálculo determinista, donde la convergencia se evalúa de forma puntual, en el ámbito estocástico la cercanía entre la solución real $X(t)$ y la aproximación discreta $Y_n$ requiere criterios fundamentados en la teoría de la medida.
+
+Para definir los criterios de convergencia, consideremos una partición regular del intervalo de tiempo $[0, T]$ con un tamaño de paso constante $\Delta t = \frac{T}{N}$, fijando los nodos temporales como $t_n = n \Delta t$ para cada paso $n = 0, 1, \dots, N$. Denotaremos a la solución aproximada en el nodo $t_n$ como $Y_n = Y(t_n)$.
+
+::: {#def-convergencia-fuerte}
+### Convergencia Fuerte
+Se dice que una aproximación discreta $Y$ converge fuertemente de orden $\gamma > 0$ hacia la solución real $X(T)$ en el tiempo terminal $T$ si existe una constante positiva $C$, independiente de $\Delta t$, tal que se cumple la desigualdad:
+
+$$
+\mathbb{E}\left[|X(T) - Y_N|\right] \le C (\Delta t)^\gamma
+$$
+:::
+
+La convergencia fuerte evalúa el error promedio directo sobre cada trayectoria individual del proceso. Es el criterio adecuado cuando interesa simular caminos muestrales específicos del sistema.
+
+::: {#def-convergencia-debil}
+### Convergencia Débil
+Se dice que una aproximación discreta $Y$ converge débilmente de orden $\beta > 0$ hacia la solución real $X(T)$ en el tiempo terminal $T$ si, para toda función de prueba $g: \mathbb{R} \to \mathbb{R}$ continuamente diferenciable de crecimiento polinomial, existe una constante positiva $C$ tal que:
+
+$$
+|\mathbb{E}[g(X(T))] - \mathbb{E}[g(Y_N)]| \le C (\Delta t)^\beta
+$$
+:::
+
+La convergencia débil no compara trayectoria por trayectoria, sino que evalúa la aproximación de la distribución de probabilidad global y sus momentos estadísticos (como la media y la varianza), para más detalles consultar a [@kloeden1992numerical].
+
+### Esquema Numérico de Euler-Maruyama {#sec-euler-maruyama}
+
+El método de Euler-Maruyama constituye la extensión estocástica más elemental del método de Euler para ecuaciones diferenciales ordinarias. Este esquema aproxima el cambio continuo truncando las integrales de la ecuación mediante aproximaciones de orden inferior.
+
+::: {#thm-euler-maruyama}
+### Teorema de Convergencia de Euler-Maruyama
+Sea $\{X(t)\}_{t \ge 0}$, considere la EDE dada por la @eq-ede-general-diff, con condición inicial $X(0) = x_0$, si se cumplen las hipotesis del teorema de existencia y unicidad @thm-existencia-unicidad y los coeficientes $b$ y de difusión $\sigma$ son continuamente diferenciables, entonces el esquema de Euler-Maruyama converge fuertemente con orden:
+
+$$
+\gamma = 0.5
+$$
+
+y converge débilmente con un orden de acotación de $\beta = 1.0$.
+:::
+
+Este orden de convergencia se fundamenta en que el incremento del movimiento Browniano domina algebraicamente sobre el incremento del tiempo determinista, dado que su escala de variación es proporcional a $\sqrt{\Delta t}$, la demostración de este teorema se encuentra en [@kloeden1992numerical].
+
+**Algoritmo General de Euler-Maruyama**
+
+Para aproximar numéricamente las trayectorias de la ecuación en el intervalo $[0, T]$ con condición inicial $X(0) = x_0$:
+
+1. **Inicialización:**
+   - Fijar el número de pasos $N$ y calcular el incremento $\Delta t = T/N$.
+   - Construir la malla temporal $t_n = n \Delta t$ para $n = 0, 1, \dots, N$.
+   - Asignar el valor inicial a la primera posición del vector: $Y_0 = x_0$.
+
+2. **Bucle de Simulación:** Para cada paso temporal $n = 0, 1, \dots, N-1$:
+   - Generar una variable aleatoria normal estándar independiente: $Z_n \sim \mathcal{N}(0, 1)$.
+   - Calcular el incremento del proceso de Wiener mediante el escalamiento: 
+     $$\Delta W_n = W(t_{n+1}) - W(t_n) = Z_n \sqrt{\Delta t}$$
+   - Actualizar el estado del proceso en el siguiente nodo evaluando la relación recursiva:
+     $$Y_{n+1} = Y_n + b(t_n, Y_n) \Delta t + \sigma(t_n, Y_n) \Delta W_n$$
+
+3. **Resultado:** El vector de estados discreto $\{Y_0, Y_1, \dots, Y_N\}$ representa la trayectoria simulada aproximada del proceso.
+
+### Esquema Numérico de Milstein
+
+El método de Milstein es un esquema numérico avanzado de orden superior que corrige la aproximación de la componente difusiva. Surge de aplicar de manera explícita el Lema de Itô al integrando de la componente estocástica en la expansión de Taylor-Itô, rescatando los términos de segundo orden que el método de Euler-Maruyama ignora.
+
+::: {#thm-milstein}
+### Teorema de Convergencia de Milstein
+Sea $\{X(t)\}_{t \ge 0}$, considere la EDE dada por la  @eq-ede-general-diff sujeta a las condiciones estándar de regularidad, es decir si los coeficientes $b(t, x)$ y $\sigma(t, x)$ son dos veces continuamente diferenciables respecto a sus componentes y cumplen los criterios de crecimiento acotado, entonces el esquema numérico de Milstein converge fuertemente con un orden superior dado por:
+
+$$
+\gamma = 1.0
+$$
+:::
+
+El incremento en la velocidad de convergencia fuerte se logra al incorporar de forma analítica el término correspondiente a la integral estocástica iterada 
+
+$$
+\int_{t_n}^{t_{n+1}} \int_{t_n}^s dW(u) dW(s) = \frac{1}{2} \left[ (\Delta W_n)^2 - \Delta t \right],
+$$ 
+
+la cual modela la curvatura interna del ruido estocástico dentro del intervalo de simulación, lo que permite una aproximación más precisa de la trayectoria. La demostración de este resultado se encuentra en [@kloeden1992numerical].
+
+**Algoritmo General de Milstein**
+
+Para aproximar numéricamente las trayectorias bajo el refinamiento de segundo orden estocástico en el intervalo $[0, T]$ con condición inicial $X(0) = x_0$:
+
+1. **Inicialización:**
+   - Establecer el número de intervalos $N$ y calcular el paso $\Delta t = T/N$.
+   - Definir los puntos de la malla $t_n = n \Delta t$ para $n = 0, 1, \dots, N$.
+   - Asignar la condición de inicio del proceso: $Y_0 = x_0$.
+
+2. **Bucle de Simulación:** Para cada paso temporal $n = 0, 1, \dots, N-1$:
+   - Obtener una realización independiente de una variable normal estándar: $Z_n \sim \mathcal{N}(0, 1)$.
+   - Establecer el incremento browniano escalar correspondientemente: $\Delta W_n = Z_n \sqrt{\Delta t}$.
+   - Calcular analíticamente el valor de la primera derivada parcial del coeficiente de difusión respecto a la variable espacial evaluado en el punto actual:
+     $$\sigma'(t_n, Y_n) = \frac{\partial \sigma(t, x)}{\partial x} \bigg|_{(t_n, Y_n)}$$
+   - Realizar la actualización recursiva del estado integrando la corrección de segundo orden:
+     $$Y_{n+1} = Y_n + b(t_n, Y_n)\Delta t + \sigma(t_n, Y_n)\Delta W_n + \frac{1}{2}\sigma(t_n, Y_n)\sigma'(t_n, Y_n)\left[(\Delta W_n)^2 - \Delta t\right]$$
+
+3. **Resultado:** El conjunto ordenado de aproximaciones numéricas $\{Y_0, Y_1, \dots, Y_N\}$ conforma la trayectoria analizada bajo estabilidad de orden superior.
+
+## Análisis Comparativo de Convergencia Fuerte
+
+Para mostrar la diferencia analítica que hay entre los esquemas de Euler-Maruyama y Milstein, y justificar la necesidad de utilizar este último cuando se requiere precisión en trayectorias individuales, planteamos un problema de control numérico. Consideremos el Movimiento Browniano Geométrico (GBM), una EDE lineal homogénea caracterizada por un coeficiente de difusión multiplicativo, dada por la ecuación:
+
+$$
+dX(t) = \mu X(t) dt + \sigma X(t) dW(t)
+$$ {#eq-ede-gbm}
+
+con condición inicial $X(0) = X_0$, tendencia determinista $\mu > 0$ y volatilidad $\sigma > 0$. Este proceso posee una solución analítica única dada por:
+
+$$
+X(t) = X_0 \exp\left[\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W(t)\right]
+$$
+
+Esta forma cerrada nos permite contrastar directamente las aproximaciones numéricas contra la realidad del proceso. La principal limitación del método de Euler-Maruyama radica en su coeficiente de difusión constante en cada paso temporal. Al truncar la integral estocástica con un orden de convergencia fuerte de 0.5, el esquema no absorbe correctamente la curvatura del ruido multiplicativo ($\sigma X_t$), acumulando errores significativos sobre las trayectorias individuales, incluso ante mallados temporales relativamente pequeños. Por el contrario, el método de Milstein integra el término de segundo orden estocástico, logrando que el vector de estados discreto coincida con mayor precisión con la dinámica real del proceso [@kloeden1992numerical].
+
+En la @fig-sde-metodos, simulamos una trayectoria de GBM en un horizonte temporal acotado ($T=2.0$ años) con una volatilidad alta ($\sigma = 1$) y un tamaño de paso discreto relativamente grueso ($\Delta t = 0.05$, correspondiente a $N=40$ pasos). Esta configuración es deliberada para resaltar las fallas de los aproximadores.
+
+![Análisis de convergencia fuerte de esquemas numéricos estocásticos para una trayectoria de Movimiento Browniano Geométrico (GBM) definida por $dX = 0.05 X dt + X dW$ con $X_0 = 1$. El eje horizontal representa el tiempo discreto y el eje vertical el estado del proceso $X(t)$. La línea negra continua muestra la solución analítica exacta. La línea roja discontinua ilustra la aproximación de Euler-Maruyama (Orden fuerte 0.5), evidenciando desviaciones significativas respecto a la trayectoria real. La línea azul discontinua-punto representa el esquema de Milstein (Orden fuerte 1.0), el cual sigue con alta precisión la dinámica exacta, demostrando su estabilidad superior ante ruidos multiplicativos y mallados temporales gruesos. La fuente de los datos corresponde a una simulación de elaboración propia generada en Python.](comparacion_metodos.png){#fig-sde-metodos width="90%" fig-align="center"}
+
+Como se puede apreciar en la @fig-sde-metodos, la trayectoria roja que correspondiente al método de Euler-Maruyama falla en aproximar la dinámica exacta (línea negra), presentando oscilaciones exageradas y alejándose del valor real a medida que el tiempo avanza. Por otro lado, la trayectoria azul del método de Milstein sigue prácticamente de forma idéntica la trayectoria real. Esta diferencia justifica nuestra decisión de utilizar el esquema numérico de Milstein para simular el comportamiento térmico del refrigerador HBC-150, ya que el modelo híbrido presenta un coeficiente de ruido continuo $\sigma(\alpha(t))$, lo cual genera perturbaciones multiplicativas que requieren un orden de convergencia estricto para no subestimar el riesgo de trayectorias erráticas.

@@ -1,0 +1,70 @@
+project:
+  type: book
+
+execute: 
+  freeze: auto
+
+book:
+  title: "Reporte de Investigación - Verano Delfín"
+  author: 
+      - name: "Cristóbal Pérez González"
+        email: "cristobal.perez70@unach.mx"
+      - name: "Dr. Yofre Hernán García Gómez"
+        email: "yofre.garcia@unach.mx"
+  language: es
+  date: "today"
+  downloads: [pdf]
+  search: true
+  repo-url: https://github.com/Crisperez517/VERANO-DELFIN.git
+  page-navigation: true 
+  image: LogoDelfin.jpeg
+  cover-image: LogoDelfin.jpeg
+  sidebar:
+    logo: LOGOunach.jpeg
+  chapters:
+    - index.qmd
+    
+    - part: "Marco Teórico y Normativa"
+      chapters: 
+        - fundamentos_teoricos.qmd
+
+    - part: "Modelo Matemático"
+      chapters: 
+        - Estudio_de_caso.qmd
+
+    - part: "Simulación de Equipos (Haier HBC-150)"
+      chapters: 
+        - montecarlo.qmd
+        
+    - conclusiones.qmd
+    - references.qmd
+
+comments:
+  hypothesis: true
+
+bibliography: referencias.bib
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: superhero
+    css: styles.css
+    lang: es
+    html-math-method: mathjax
+    code-fold: true
+    code-copy: true
+    toc: true
+    toc-location: right
+
+  pdf:
+    lang: es
+    documentclass: scrreprt
+    papersize: letter
+    institution: Benemerita Universidad Autónoma de Chiapas
+    keep-tex: true
+    pdf-engine: lualatex
+    link-citations: true
+    number-sections: true
+    colorlinks: true
+    titlegraphic: LOGOunach.jpeg
