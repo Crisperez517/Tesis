@@ -187,10 +187,10 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -1306,24 +1306,24 @@ Degradación}\label{estudio-de-caso-calibraciuxf3n-termodinuxe1mica-eluxe9ctrica
 \section{Motivación y Contexto del
 Estudio}\label{sec-motivacion-contexto}
 
-El presente capítulo consolida el marco teórico estocástico desarrollado
+El presente capítulo consolida el marco teórico desarrollado
 previamente, trasladándolo de una formulación matemática abstracta a un
-escenario de aplicación empírica y altamente crítico: la red de frío
-para la preservación de vacunas en Tuxtla Gutiérrez, Chiapas. La
-elección de esta región geográfica como caso de estudio obedece a la
-combinación de condiciones climatológicas de calor extremo y a la
-vulnerabilidad de la infraestructura eléctrica local ante fenómenos
-meteorológicos. Bajo este entorno, los refrigeradores institucionales
-que resguardan biológicos de alto valor inmunológico operan bajo
-condiciones de estrés continuo.
+escenario de aplicación altamente crítico: la red de frío para la
+preservación de vacunas en Tuxtla Gutiérrez, Chiapas. La elección de
+esta región geográfica como caso de estudio se debe a la combinación de
+condiciones climatológicas de calor extremo y a la vulnerabilidad de la
+infraestructura eléctrica local ante fenómenos meteorológicos. Bajo este
+entorno, los refrigeradores institucionales que resguardan los
+biológicos de alto valor inmunológico operan bajo condiciones de estrés
+continuo.
 
-Para garantizar la validez empírica y la utilidad prescriptiva del
-modelo computacional, resulta imperativo evitar la parametrización
-arbitraria de la Ecuación Diferencial Estocástica (EDE). Un modelo
-probabilístico alimentado con tasas de intensidad o volatilidades
-carentes de fundamento físico produciría trayectorias desconectadas de
-la realidad operativa. Por consiguiente, el objetivo central de este
-capítulo es la calibración rigurosa de las variables del sistema.
+Para garantizar la validez y la utilidad del modelo computacional, se
+evitara la parametrización arbitraria de la Ecuación Diferencial
+Estocástica (EDE). Un modelo probabilístico con tasas de intensidad o
+volatilidades carentes de fundamento físico produciría trayectorias
+desconectadas de la realidad operativa. Por consiguiente, el objetivo
+central de este capítulo es la calibración rigurosa de las variables del
+sistema.
 
 El proceso de estimación y asignación de parámetros se desarrollará en
 las siguientes tres fases analíticas:
@@ -1334,10 +1334,10 @@ las siguientes tres fases analíticas:
 \item
   \textbf{Caracterización Estocástica del Suministro Eléctrico:}
   Mediante el análisis de datos oficiales de la Comisión Federal de
-  Electricidad (CFE), se modelará la frecuencia temporal y la duración
-  de las interrupciones del servicio eléctrico. Estas estimaciones
-  permitirán estructurar la conmutación de la cadena de Markov y los
-  Procesos de Poisson No Homogéneos acoplados a la ecuación.
+  Electricidad (CFE), se modelará la frecuencia y la duración de las
+  interrupciones del servicio eléctrico. Estas estimaciones permitirán
+  estructurar la conmutación de la cadena de Markov y los Procesos de
+  Poisson No Homogéneos acoplados a la ecuación.
 \item
   \textbf{Calibración Termodinámica del Equipo Operativo:} A partir de
   las especificaciones técnicas y requerimientos normados por la
@@ -1346,11 +1346,11 @@ las siguientes tres fases analíticas:
   volatilidades térmicas (\(\sigma\)) que dictan el enfriamiento activo
   y la inercia pasiva del refrigerador de estudio.
 \item
-  \textbf{Cinética de Degradación Biológica:} Finalmente, se vincularán
-  las excursiones térmicas arrojadas por la EDE con la Ecuación de
+  \textbf{Cinética de Degradación Biológica:} Finalmente, se vinculara
+  el comportamiento térmico dada por la EDE con la Ecuación de
   Arrhenius, estableciendo el marco cuantitativo necesario para evaluar
   la pérdida de viabilidad farmacológica que sufren las vacunas durante
-  un fallo sistémico.
+  algun fallo.
 \end{enumerate}
 
 \section{Datos Base (CFE) e Indicadores de
