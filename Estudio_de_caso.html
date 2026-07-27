@@ -418,7 +418,7 @@ window.Quarto = {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#motivación-y-contexto-del-estudio" id="toc-motivación-y-contexto-del-estudio" class="nav-link active" data-scroll-target="#motivación-y-contexto-del-estudio"><span class="header-section-number">3.1</span> Motivación y Contexto del Estudio</a></li>
+  <li><a href="#sec-motivacion-contexto" id="toc-sec-motivacion-contexto" class="nav-link active" data-scroll-target="#sec-motivacion-contexto"><span class="header-section-number">3.1</span> Motivación y Contexto del Estudio</a></li>
   <li><a href="#datos-base-cfe-e-indicadores-de-confiabilidad" id="toc-datos-base-cfe-e-indicadores-de-confiabilidad" class="nav-link" data-scroll-target="#datos-base-cfe-e-indicadores-de-confiabilidad"><span class="header-section-number">3.2</span> Datos Base (CFE) e Indicadores de Confiabilidad</a></li>
   <li><a href="#corrección-de-escala-espacial-factor-kappa_espacial" id="toc-corrección-de-escala-espacial-factor-kappa_espacial" class="nav-link" data-scroll-target="#corrección-de-escala-espacial-factor-kappa_espacial"><span class="header-section-number">3.3</span> Corrección de Escala Espacial (Factor <span class="math inline">\(\kappa_{espacial}\)</span>)</a>
   <ul class="collapse">
@@ -470,10 +470,16 @@ window.Quarto = {
 </header>
 
 
-<section id="motivación-y-contexto-del-estudio" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="motivación-y-contexto-del-estudio"><span class="header-section-number">3.1</span> Motivación y Contexto del Estudio</h2>
-<p>El presente estudio de caso consolida el marco teórico y metodológico de nuestra investigación aplicándolo a un escenario real y altamente crítico: la red de frío para la preservación de vacunas en Tuxtla Gutiérrez, Chiapas. Debido a las altas temperaturas de la región y a la vulnerabilidad de la infraestructura eléctrica ante eventos climáticos, los refrigeradores institucionales de vacunas se enfrentan a una dificultad operativa constante.</p>
-<p>Para que nuestra simulación sea valida, no podemos usar la Ecuación Diferencial Estocástica (EDE) con números aleatorios sin fundamento. En esta sección, calibraremos todos los parámetros de nuestro modelo en tres fases fundamentales. Primero, determinaremos la frecuencia y duración de los cortes de energía basándonos en datos oficiales de la Comisión Federal de Electricidad (CFE), modelándolos a través de procesos estocásticos de Poisson. Segundo, utilizaremos la física del enfriamiento para deducir los parámetros de la EDE a partir de las especificaciones termodinámicas reales de los refrigeradores. Finalmente, acoplaremos estos resultados a las leyes de la cinética química para cuantificar la degradación térmica exacta que sufren los biológicos durante un apagón.</p>
+<section id="sec-motivacion-contexto" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-motivacion-contexto"><span class="header-section-number">3.1</span> Motivación y Contexto del Estudio</h2>
+<p>El presente capítulo consolida el marco teórico estocástico desarrollado previamente, trasladándolo de una formulación matemática abstracta a un escenario de aplicación empírica y altamente crítico: la red de frío para la preservación de vacunas en Tuxtla Gutiérrez, Chiapas. La elección de esta región geográfica como caso de estudio obedece a la combinación de condiciones climatológicas de calor extremo y a la vulnerabilidad de la infraestructura eléctrica local ante fenómenos meteorológicos. Bajo este entorno, los refrigeradores institucionales que resguardan biológicos de alto valor inmunológico operan bajo condiciones de estrés continuo.</p>
+<p>Para garantizar la validez empírica y la utilidad prescriptiva del modelo computacional, resulta imperativo evitar la parametrización arbitraria de la Ecuación Diferencial Estocástica (EDE). Un modelo probabilístico alimentado con tasas de intensidad o volatilidades carentes de fundamento físico produciría trayectorias desconectadas de la realidad operativa. Por consiguiente, el objetivo central de este capítulo es la calibración rigurosa de las variables del sistema.</p>
+<p>El proceso de estimación y asignación de parámetros se desarrollará en las siguientes tres fases analíticas:</p>
+<ol type="1">
+<li><strong>Caracterización Estocástica del Suministro Eléctrico:</strong> Mediante el análisis de datos oficiales de la Comisión Federal de Electricidad (CFE), se modelará la frecuencia temporal y la duración de las interrupciones del servicio eléctrico. Estas estimaciones permitirán estructurar la conmutación de la cadena de Markov y los Procesos de Poisson No Homogéneos acoplados a la ecuación.</li>
+<li><strong>Calibración Termodinámica del Equipo Operativo:</strong> A partir de las especificaciones técnicas y requerimientos normados por la Organización Mundial de la Salud (OMS), se deducirán analíticamente los coeficientes de reversión a la media (<span class="math inline">\(\kappa\)</span>) y las volatilidades térmicas (<span class="math inline">\(\sigma\)</span>) que dictan el enfriamiento activo y la inercia pasiva del refrigerador de estudio.</li>
+<li><strong>Cinética de Degradación Biológica:</strong> Finalmente, se vincularán las excursiones térmicas arrojadas por la EDE con la Ecuación de Arrhenius, estableciendo el marco cuantitativo necesario para evaluar la pérdida de viabilidad farmacológica que sufren las vacunas durante un fallo sistémico.</li>
+</ol>
 </section>
 <section id="datos-base-cfe-e-indicadores-de-confiabilidad" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="datos-base-cfe-e-indicadores-de-confiabilidad"><span class="header-section-number">3.2</span> Datos Base (CFE) e Indicadores de Confiabilidad</h2>
