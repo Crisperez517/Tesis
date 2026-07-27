@@ -12,23 +12,37 @@ El proceso de estimación y asignación de parámetros se desarrollará en las s
 2. **Calibración Termodinámica del Equipo Operativo:** A partir de las especificaciones técnicas y requerimientos normados por la Organización Mundial de la Salud (OMS), se deducirán analíticamente los coeficientes de reversión a la media ($\kappa$) y las volatilidades térmicas ($\sigma$) que dictan el enfriamiento activo y la inercia pasiva del refrigerador de estudio.
 3. **Cinética de Degradación Biológica:** Finalmente, se vinculara el comportamiento térmico dada por la EDE con la Ecuación de Arrhenius, estableciendo el marco cuantitativo necesario para evaluar la pérdida de viabilidad farmacológica que sufren las vacunas durante algun fallo.
 
-## Datos Base (CFE) e Indicadores de Confiabilidad
+## Datos Base (CFE) e Indicadores de Confiabilidad Eléctrica {#sec-datos-cfe}
 
-El objetivo fundamental es modelar la tasa de ocurrencia de interrupciones del suministro eléctrico en el punto específico de Tuxtla Gutiérrez donde se ubicaría el refrigerador de vacunas. Los datos de partida provienen de la Comisión Federal de Electricidad (CFE) [@cfe2024informe], la cual evalúa la continuidad del suministro a través de dos indicadores internacionales de confiabilidad:
+El objetivo de esta fase es caracterizar cuantitativamente la tasa de ocurrencia y la escala temporal de las interrupciones del suministro eléctrico en el área geográfica de Tuxtla Gutiérrez, Chiapas. Los datos primarios provienen de los registros oficiales de la Comisión Federal de Electricidad (CFE) [@cfe2024informe], obtenidos mediante solicitudes de información pública.
 
-1. **SAIFI (Índice de la Frecuencia de Interrupción, en número):** El indicador SAIFI mide la frecuencia con que se interrumpe el servicio a los usuarios por causas propias del transportista y se calcula evalúa como:
+De acuerdo con la normativa internacional estandarizada por el *Institute of Electrical and Electronics Engineers* en la norma IEEE Std 1366 [@sener2024prodesen], el desempeño y la continuidad de los sistemas de distribución eléctrica se evalúan cuantitativamente a través de dos índices fundamentales de confiabilidad:
+
+### 1. Índice de Frecuencia de Interrupción Promedio por Usuario (SAIFI)
+El indicador SAIFI (*System Average Interruption Frequency Index*) contabiliza el número promedio de interrupciones sostenidas que experimenta un usuario del sistema durante un periodo determinado (generalmente un año o un mes). Considerese una red eléctrica con un total de $N_T$ usuarios atendidos. Si en un intervalo de observación ocurren $M$ eventos aleatorios de interrupción, donde cada evento $i \in \{1, 2, \dots, M\}$ afecta a una cantidad de $N_i$ usuarios, el índice SAIFI se expresa formalmente como:
+
 $$
-SAIFI = \frac{\sum \text{Número total de interrupciones por usuario}}{\text{Número total de usuarios}}
-$$
+\text{SAIFI} = \frac{\sum_{i=1}^{M} N_i}{N_T}
+$$ {#eq-saifi}
 
-2. **SAIDI (Índice de Duración Promedio de Interrupción, en minutos):** El inicador SAIDI mide en minutos el tiempo que los usuarios del servicio de energía eléctrica no cuentan con servicio por causas atribuibles al transportista y se evalúa como:
-$$
-SAIDI = \frac{\sum \text{Duración total de las interrupciones sufridas por usuario}}{\text{Número total de usuarios}}
-$$
+### 2. Índice de Duración Promedio de Interrupción por Usuario (SAIDI)
+El indicador SAIDI (*System Average Interruption Duration Index*) mide la duración total acumulada de las interrupciones sostenidas sufridas por el usuario promedio dentro del periodo de evaluación. Si cada evento de falla $i$ tiene una duración temporal de $r_i$ horas, el índice SAIDI se define analíticamente mediante:
 
-Mediante una solicitud de información pública de transparencia dirigida a la CFE, se obtuvo el registro histórico del promedio mensual de interrupciones y su duración para el municipio de Tuxtla Gutiérrez.
+$$
+\text{SAIDI} = \frac{\sum_{i=1}^{M} N_i r_i}{N_T}
+$$ {#eq-saidi}
 
-| Año | Número de interrupciones promedio por mes | Duración Promedio de las interrupciones (Horas) |
+### 3. Relación Cinética: Duración Promedio por Evento (CAIDI)
+Para conectar la frecuencia de fallos con su duración individual dentro de la modelación estocástica, se define el índice CAIDI (*Customer Average Interruption Duration Index*), el cual representa el tiempo promedio de restablecimiento del servicio por cada evento de falla. A partir de las @eq-saifi y @eq-saidi, este indicador se deduce como el cociente directo entre el SAIDI y el SAIFI:
+
+$$
+\text{CAIDI} = \frac{\text{SAIDI}}{\text{SAIFI}} = \frac{\sum_{i=1}^{M} N_i r_i}{\sum_{i=1}^{M} N_i}
+$$ {#eq-caidi}
+
+### Análisis del Registro Histórico Municipal (2019-2025)
+A partir de la información proporcionada por la CFE, la @tbl-interrupciones-cfe condensa el comportamiento mensual promedio de las interrupciones y su duración unitaria ($\text{CAIDI}$) registradas en el municipio de Tuxtla Gutiérrez durante el periodo 2019–2025.
+
+| Año | Número de interrupciones promedio por mes ($\text{SAIFI}_{mensual}$) | Duración Promedio por evento $\text{CAIDI}$ (Horas) |
 |:---:|:---:|:---:|
 | 2019 | 25 | 2.02 |
 | 2020 | 42 | 1.73 |
@@ -38,11 +52,15 @@ Mediante una solicitud de información pública de transparencia dirigida a la C
 | 2024 | 43 | 2.39 |
 | 2025 | 38 | 2.02 |
 
-: Interrupciones eléctricas en Tuxtla Gutiérrez, Chiapas (Fuente: Solicitud de Transparencia a la CFE). {#tbl-interrupciones-cfe}
+: Interrupciones eléctricas mensuales y duración promedio en Tuxtla Gutiérrez, Chiapas (Fuente: Solicitud de Transparencia a la CFE). {#tbl-interrupciones-cfe}
 
-Para este modelo, se toma como línea base el comportamiento del año **2024**, el cual indica un promedio de **43 cortes por mes**. Esto resulta en un promedio anual a nivel municipal de:
+El análisis de la @tbl-interrupciones-cfe muestra un incremento estructural significativo en la frecuencia de fallas a partir del año 2020, estabilizándose en una franja superior a los 40 cortes mensuales. Este cambio obedece al crecimiento de la carga térmica residencial e industrial y a la saturación de los transformadores de distribución en la mancha urbana.
 
-$$43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/año}$$
+Para la calibración de la EDE en esta investigación, se selecciona el año **2024** como el escenario de línea base. Dicho año presenta una media mensual representativa de **43 cortes por mes** con una duración promedio por evento de **2.39 horas**. Al proyectar esta tasa mensual sobre un horizonte anual completo de 12 meses, la variable discreta de interrupciones totales esperadas a nivel municipal ($N_{total}$) queda expresada como:
+
+$$
+N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/año}
+$$ {#eq-cortes-totales}
 
 ## Corrección de Escala Espacial (Factor $\kappa_{espacial}$)
 
