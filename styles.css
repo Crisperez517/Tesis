@@ -1,0 +1,4 @@
+/* Justificar absolutamente todo el texto de lectura en HTML */
+p, li, figcaption, caption, blockquote, dd {
+  text-align: justify;
+}
