@@ -419,7 +419,13 @@ window.Quarto = {
    
   <ul>
   <li><a href="#sec-motivacion-contexto" id="toc-sec-motivacion-contexto" class="nav-link active" data-scroll-target="#sec-motivacion-contexto"><span class="header-section-number">3.1</span> Motivación y Contexto del Estudio</a></li>
-  <li><a href="#datos-base-cfe-e-indicadores-de-confiabilidad" id="toc-datos-base-cfe-e-indicadores-de-confiabilidad" class="nav-link" data-scroll-target="#datos-base-cfe-e-indicadores-de-confiabilidad"><span class="header-section-number">3.2</span> Datos Base (CFE) e Indicadores de Confiabilidad</a></li>
+  <li><a href="#sec-datos-cfe" id="toc-sec-datos-cfe" class="nav-link" data-scroll-target="#sec-datos-cfe"><span class="header-section-number">3.2</span> Datos Base (CFE) e Indicadores de Confiabilidad Eléctrica</a>
+  <ul class="collapse">
+  <li><a href="#índice-de-frecuencia-de-interrupción-promedio-por-usuario-saifi" id="toc-índice-de-frecuencia-de-interrupción-promedio-por-usuario-saifi" class="nav-link" data-scroll-target="#índice-de-frecuencia-de-interrupción-promedio-por-usuario-saifi"><span class="header-section-number">3.2.1</span> 1. Índice de Frecuencia de Interrupción Promedio por Usuario (SAIFI)</a></li>
+  <li><a href="#índice-de-duración-promedio-de-interrupción-por-usuario-saidi" id="toc-índice-de-duración-promedio-de-interrupción-por-usuario-saidi" class="nav-link" data-scroll-target="#índice-de-duración-promedio-de-interrupción-por-usuario-saidi"><span class="header-section-number">3.2.2</span> 2. Índice de Duración Promedio de Interrupción por Usuario (SAIDI)</a></li>
+  <li><a href="#relación-cinética-duración-promedio-por-evento-caidi" id="toc-relación-cinética-duración-promedio-por-evento-caidi" class="nav-link" data-scroll-target="#relación-cinética-duración-promedio-por-evento-caidi"><span class="header-section-number">3.2.3</span> 3. Relación Cinética: Duración Promedio por Evento (CAIDI)</a></li>
+  <li><a href="#análisis-del-registro-histórico-municipal-2019-2025" id="toc-análisis-del-registro-histórico-municipal-2019-2025" class="nav-link" data-scroll-target="#análisis-del-registro-histórico-municipal-2019-2025"><span class="header-section-number">3.2.4</span> Análisis del Registro Histórico Municipal (2019-2025)</a></li>
+  </ul></li>
   <li><a href="#corrección-de-escala-espacial-factor-kappa_espacial" id="toc-corrección-de-escala-espacial-factor-kappa_espacial" class="nav-link" data-scroll-target="#corrección-de-escala-espacial-factor-kappa_espacial"><span class="header-section-number">3.3</span> Corrección de Escala Espacial (Factor <span class="math inline">\(\kappa_{espacial}\)</span>)</a>
   <ul class="collapse">
   <li><a href="#justificación-de-la-reducción-de-escala" id="toc-justificación-de-la-reducción-de-escala" class="nav-link" data-scroll-target="#justificación-de-la-reducción-de-escala"><span class="header-section-number">3.3.1</span> Justificación de la Reducción de Escala</a></li>
@@ -481,22 +487,38 @@ window.Quarto = {
 <li><strong>Cinética de Degradación Biológica:</strong> Finalmente, se vinculara el comportamiento térmico dada por la EDE con la Ecuación de Arrhenius, estableciendo el marco cuantitativo necesario para evaluar la pérdida de viabilidad farmacológica que sufren las vacunas durante algun fallo.</li>
 </ol>
 </section>
-<section id="datos-base-cfe-e-indicadores-de-confiabilidad" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="datos-base-cfe-e-indicadores-de-confiabilidad"><span class="header-section-number">3.2</span> Datos Base (CFE) e Indicadores de Confiabilidad</h2>
-<p>El objetivo fundamental es modelar la tasa de ocurrencia de interrupciones del suministro eléctrico en el punto específico de Tuxtla Gutiérrez donde se ubicaría el refrigerador de vacunas. Los datos de partida provienen de la Comisión Federal de Electricidad (CFE) <span class="citation" data-cites="cfe2024informe">(<a href="references.html#ref-cfe2024informe" role="doc-biblioref">Comisión Federal de Electricidad 2024</a>)</span>, la cual evalúa la continuidad del suministro a través de dos indicadores internacionales de confiabilidad:</p>
-<ol type="1">
-<li><p><strong>SAIFI (Índice de la Frecuencia de Interrupción, en número):</strong> El indicador SAIFI mide la frecuencia con que se interrumpe el servicio a los usuarios por causas propias del transportista y se calcula evalúa como: <span class="math display">\[
-SAIFI = \frac{\sum \text{Número total de interrupciones por usuario}}{\text{Número total de usuarios}}
-\]</span></p></li>
-<li><p><strong>SAIDI (Índice de Duración Promedio de Interrupción, en minutos):</strong> El inicador SAIDI mide en minutos el tiempo que los usuarios del servicio de energía eléctrica no cuentan con servicio por causas atribuibles al transportista y se evalúa como: <span class="math display">\[
-SAIDI = \frac{\sum \text{Duración total de las interrupciones sufridas por usuario}}{\text{Número total de usuarios}}
-\]</span></p></li>
-</ol>
-<p>Mediante una solicitud de información pública de transparencia dirigida a la CFE, se obtuvo el registro histórico del promedio mensual de interrupciones y su duración para el municipio de Tuxtla Gutiérrez.</p>
+<section id="sec-datos-cfe" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-datos-cfe"><span class="header-section-number">3.2</span> Datos Base (CFE) e Indicadores de Confiabilidad Eléctrica</h2>
+<p>El objetivo de esta fase es caracterizar cuantitativamente la tasa de ocurrencia y la escala temporal de las interrupciones del suministro eléctrico en el área geográfica de Tuxtla Gutiérrez, Chiapas. Los datos primarios provienen de los registros oficiales de la Comisión Federal de Electricidad (CFE) <span class="citation" data-cites="cfe2024informe">(<a href="references.html#ref-cfe2024informe" role="doc-biblioref">Comisión Federal de Electricidad 2024</a>)</span>, obtenidos mediante solicitudes de información pública.</p>
+<p>De acuerdo con la normativa internacional estandarizada por el <em>Institute of Electrical and Electronics Engineers</em> en la norma IEEE Std 1366 <span class="citation" data-cites="sener2024prodesen">(<a href="references.html#ref-sener2024prodesen" role="doc-biblioref">Secretaría de Energía 2024</a>)</span>, el desempeño y la continuidad de los sistemas de distribución eléctrica se evalúan cuantitativamente a través de dos índices fundamentales de confiabilidad:</p>
+<section id="índice-de-frecuencia-de-interrupción-promedio-por-usuario-saifi" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="índice-de-frecuencia-de-interrupción-promedio-por-usuario-saifi"><span class="header-section-number">3.2.1</span> 1. Índice de Frecuencia de Interrupción Promedio por Usuario (SAIFI)</h3>
+<p>El indicador SAIFI (<em>System Average Interruption Frequency Index</em>) contabiliza el número promedio de interrupciones sostenidas que experimenta un usuario del sistema durante un periodo determinado (generalmente un año o un mes). Considerese una red eléctrica con un total de <span class="math inline">\(N_T\)</span> usuarios atendidos. Si en un intervalo de observación ocurren <span class="math inline">\(M\)</span> eventos aleatorios de interrupción, donde cada evento <span class="math inline">\(i \in \{1, 2, \dots, M\}\)</span> afecta a una cantidad de <span class="math inline">\(N_i\)</span> usuarios, el índice SAIFI se expresa formalmente como:</p>
+<p><span id="eq-saifi"><span class="math display">\[
+\text{SAIFI} = \frac{\sum_{i=1}^{M} N_i}{N_T}
+\tag{3.1}\]</span></span></p>
+</section>
+<section id="índice-de-duración-promedio-de-interrupción-por-usuario-saidi" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="índice-de-duración-promedio-de-interrupción-por-usuario-saidi"><span class="header-section-number">3.2.2</span> 2. Índice de Duración Promedio de Interrupción por Usuario (SAIDI)</h3>
+<p>El indicador SAIDI (<em>System Average Interruption Duration Index</em>) mide la duración total acumulada de las interrupciones sostenidas sufridas por el usuario promedio dentro del periodo de evaluación. Si cada evento de falla <span class="math inline">\(i\)</span> tiene una duración temporal de <span class="math inline">\(r_i\)</span> horas, el índice SAIDI se define analíticamente mediante:</p>
+<p><span id="eq-saidi"><span class="math display">\[
+\text{SAIDI} = \frac{\sum_{i=1}^{M} N_i r_i}{N_T}
+\tag{3.2}\]</span></span></p>
+</section>
+<section id="relación-cinética-duración-promedio-por-evento-caidi" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="relación-cinética-duración-promedio-por-evento-caidi"><span class="header-section-number">3.2.3</span> 3. Relación Cinética: Duración Promedio por Evento (CAIDI)</h3>
+<p>Para conectar la frecuencia de fallos con su duración individual dentro de la modelación estocástica, se define el índice CAIDI (<em>Customer Average Interruption Duration Index</em>), el cual representa el tiempo promedio de restablecimiento del servicio por cada evento de falla. A partir de las <a href="#eq-saifi" class="quarto-xref">Ecuación&nbsp;<span>3.1</span></a> y <a href="#eq-saidi" class="quarto-xref">Ecuación&nbsp;<span>3.2</span></a>, este indicador se deduce como el cociente directo entre el SAIDI y el SAIFI:</p>
+<p><span id="eq-caidi"><span class="math display">\[
+\text{CAIDI} = \frac{\text{SAIDI}}{\text{SAIFI}} = \frac{\sum_{i=1}^{M} N_i r_i}{\sum_{i=1}^{M} N_i}
+\tag{3.3}\]</span></span></p>
+</section>
+<section id="análisis-del-registro-histórico-municipal-2019-2025" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="análisis-del-registro-histórico-municipal-2019-2025"><span class="header-section-number">3.2.4</span> Análisis del Registro Histórico Municipal (2019-2025)</h3>
+<p>A partir de la información proporcionada por la CFE, la <a href="#tbl-interrupciones-cfe" class="quarto-xref">Tabla&nbsp;<span>3.1</span></a> condensa el comportamiento mensual promedio de las interrupciones y su duración unitaria (<span class="math inline">\(\text{CAIDI}\)</span>) registradas en el municipio de Tuxtla Gutiérrez durante el periodo 2019–2025.</p>
 <div id="tbl-interrupciones-cfe" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-interrupciones-cfe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabla&nbsp;3.1: Interrupciones eléctricas en Tuxtla Gutiérrez, Chiapas (Fuente: Solicitud de Transparencia a la CFE).
+Tabla&nbsp;3.1: Interrupciones eléctricas mensuales y duración promedio en Tuxtla Gutiérrez, Chiapas (Fuente: Solicitud de Transparencia a la CFE).
 </figcaption>
 <div aria-describedby="tbl-interrupciones-cfe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -508,8 +530,8 @@ Tabla&nbsp;3.1: Interrupciones eléctricas en Tuxtla Gutiérrez, Chiapas (Fuente
 <thead>
 <tr class="header">
 <th style="text-align: center;">Año</th>
-<th style="text-align: center;">Número de interrupciones promedio por mes</th>
-<th style="text-align: center;">Duración Promedio de las interrupciones (Horas)</th>
+<th style="text-align: center;">Número de interrupciones promedio por mes (<span class="math inline">\(\text{SAIFI}_{mensual}\)</span>)</th>
+<th style="text-align: center;">Duración Promedio por evento <span class="math inline">\(\text{CAIDI}\)</span> (Horas)</th>
 </tr>
 </thead>
 <tbody>
@@ -553,8 +575,12 @@ Tabla&nbsp;3.1: Interrupciones eléctricas en Tuxtla Gutiérrez, Chiapas (Fuente
 </div>
 </figure>
 </div>
-<p>Para este modelo, se toma como línea base el comportamiento del año <strong>2024</strong>, el cual indica un promedio de <strong>43 cortes por mes</strong>. Esto resulta en un promedio anual a nivel municipal de:</p>
-<p><span class="math display">\[43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/año}\]</span></p>
+<p>El análisis de la <a href="#tbl-interrupciones-cfe" class="quarto-xref">Tabla&nbsp;<span>3.1</span></a> muestra un incremento estructural significativo en la frecuencia de fallas a partir del año 2020, estabilizándose en una franja superior a los 40 cortes mensuales. Este cambio obedece al crecimiento de la carga térmica residencial e industrial y a la saturación de los transformadores de distribución en la mancha urbana.</p>
+<p>Para la calibración de la EDE en esta investigación, se selecciona el año <strong>2024</strong> como el escenario de línea base. Dicho año presenta una media mensual representativa de <strong>43 cortes por mes</strong> con una duración promedio por evento de <strong>2.39 horas</strong>. Al proyectar esta tasa mensual sobre un horizonte anual completo de 12 meses, la variable discreta de interrupciones totales esperadas a nivel municipal (<span class="math inline">\(N_{total}\)</span>) queda expresada como:</p>
+<p><span id="eq-cortes-totales"><span class="math display">\[
+N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/año}
+\tag{3.4}\]</span></span></p>
+</section>
 </section>
 <section id="corrección-de-escala-espacial-factor-kappa_espacial" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="corrección-de-escala-espacial-factor-kappa_espacial"><span class="header-section-number">3.3</span> Corrección de Escala Espacial (Factor <span class="math inline">\(\kappa_{espacial}\)</span>)</h2>
@@ -1151,7 +1177,7 @@ dT(t) =
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + \gamma dN_{puerta}(t) &amp; \text{si } \alpha(t) = 1 \text{ (Con energía)} \\
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) + \gamma dN_{puerta}(t) &amp; \text{si } \alpha(t) = 2 \text{ (Corte de luz)}
 \end{cases}
-\tag{3.1}\]</span></span></p>
+\tag{3.5}\]</span></span></p>
 <p>Para la modelación estocástica, los parámetros de inercia térmica y tiempo de autonomía (<em>holdover time</em>) se calibraron utilizando los datos técnicos del refrigerador institucional Haier HBC-150, el cual cuenta con certificación de protección Grado A contra congelamiento en el catálogo oficial PQS de la OMS <span class="citation" data-cites="oms_pqs_e003">(<a href="references.html#ref-oms_pqs_e003" role="doc-biblioref">Organización Mundial de la Salud 2024</a>)</span>.</p>
 <div id="fig-haier-hbc150" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1163,7 +1189,7 @@ Figura&nbsp;3.2: Refrigerador institucional para vacunas Haier HBC-150 (Icelined
 </figcaption>
 </figure>
 </div>
-<p>Para reflejar el comportamiento de este equipo bajo los rigurosos estándares normativos, calibramos cada coeficiente de la <a href="#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>3.1</span></a> con base en la física del enfriamiento:</p>
+<p>Para reflejar el comportamiento de este equipo bajo los rigurosos estándares normativos, calibramos cada coeficiente de la <a href="#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>3.5</span></a> con base en la física del enfriamiento:</p>
 <section id="sec-regimen-1" class="level3" data-number="3.8.1">
 <h3 data-number="3.8.1" class="anchored" data-anchor-id="sec-regimen-1"><span class="header-section-number">3.8.1</span> Régimen 1: Operación Normal (<span class="math inline">\(\alpha(t) = 1\)</span>)</h3>
 <p>Ocurre cuando hay energía eléctrica y el compresor funciona empujando la temperatura hacia su objetivo.</p>
@@ -1197,7 +1223,7 @@ Figura&nbsp;3.2: Refrigerador institucional para vacunas Haier HBC-150 (Icelined
 <p>La degradación de las vacunas (particularmente las vivas atenuadas, como el biológico contra el Sarampión o la Poliomielitis) es un proceso de desnaturalización proteica que se acelera exponencialmente con el calor. Esta velocidad de degradación <span class="math inline">\(k(T)\)</span> se modela mediante la <strong>Ecuación de Arrhenius</strong> <span class="citation" data-cites="chen2009thermostable">(<a href="references.html#ref-chen2009thermostable" role="doc-biblioref">Chen y Kristensen 2009</a>)</span>:</p>
 <p><span id="eq-Arrhenius"><span class="math display">\[
 k(T(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right)
-\tag{3.2}\]</span></span></p>
+\tag{3.6}\]</span></span></p>
 <p>Donde la temperatura <span class="math inline">\(T_K(t) = T(t) + 273.15\)</span> se expresa en grados Kelvin y los parámetros cinéticos para un biológico termosensible genérico se establecen como:</p>
 <ul>
 <li><strong>Constante Universal de los Gases (<span class="math inline">\(R\)</span>)</strong>: <span class="math inline">\(8.314 \, \text{J/(mol} \cdot \text{K)}\)</span>.</li>
