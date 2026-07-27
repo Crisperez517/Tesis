@@ -1304,28 +1304,54 @@ Cinética de
 Degradación}\label{estudio-de-caso-calibraciuxf3n-termodinuxe1mica-eluxe9ctrica-y-cinuxe9tica-de-degradaciuxf3n}
 
 \section{Motivación y Contexto del
-Estudio}\label{motivaciuxf3n-y-contexto-del-estudio}
+Estudio}\label{sec-motivacion-contexto}
 
-El presente estudio de caso consolida el marco teórico y metodológico de
-nuestra investigación aplicándolo a un escenario real y altamente
-crítico: la red de frío para la preservación de vacunas en Tuxtla
-Gutiérrez, Chiapas. Debido a las altas temperaturas de la región y a la
-vulnerabilidad de la infraestructura eléctrica ante eventos climáticos,
-los refrigeradores institucionales de vacunas se enfrentan a una
-dificultad operativa constante.
+El presente capítulo consolida el marco teórico estocástico desarrollado
+previamente, trasladándolo de una formulación matemática abstracta a un
+escenario de aplicación empírica y altamente crítico: la red de frío
+para la preservación de vacunas en Tuxtla Gutiérrez, Chiapas. La
+elección de esta región geográfica como caso de estudio obedece a la
+combinación de condiciones climatológicas de calor extremo y a la
+vulnerabilidad de la infraestructura eléctrica local ante fenómenos
+meteorológicos. Bajo este entorno, los refrigeradores institucionales
+que resguardan biológicos de alto valor inmunológico operan bajo
+condiciones de estrés continuo.
 
-Para que nuestra simulación sea valida, no podemos usar la Ecuación
-Diferencial Estocástica (EDE) con números aleatorios sin fundamento. En
-esta sección, calibraremos todos los parámetros de nuestro modelo en
-tres fases fundamentales. Primero, determinaremos la frecuencia y
-duración de los cortes de energía basándonos en datos oficiales de la
-Comisión Federal de Electricidad (CFE), modelándolos a través de
-procesos estocásticos de Poisson. Segundo, utilizaremos la física del
-enfriamiento para deducir los parámetros de la EDE a partir de las
-especificaciones termodinámicas reales de los refrigeradores.
-Finalmente, acoplaremos estos resultados a las leyes de la cinética
-química para cuantificar la degradación térmica exacta que sufren los
-biológicos durante un apagón.
+Para garantizar la validez empírica y la utilidad prescriptiva del
+modelo computacional, resulta imperativo evitar la parametrización
+arbitraria de la Ecuación Diferencial Estocástica (EDE). Un modelo
+probabilístico alimentado con tasas de intensidad o volatilidades
+carentes de fundamento físico produciría trayectorias desconectadas de
+la realidad operativa. Por consiguiente, el objetivo central de este
+capítulo es la calibración rigurosa de las variables del sistema.
+
+El proceso de estimación y asignación de parámetros se desarrollará en
+las siguientes tres fases analíticas:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Caracterización Estocástica del Suministro Eléctrico:}
+  Mediante el análisis de datos oficiales de la Comisión Federal de
+  Electricidad (CFE), se modelará la frecuencia temporal y la duración
+  de las interrupciones del servicio eléctrico. Estas estimaciones
+  permitirán estructurar la conmutación de la cadena de Markov y los
+  Procesos de Poisson No Homogéneos acoplados a la ecuación.
+\item
+  \textbf{Calibración Termodinámica del Equipo Operativo:} A partir de
+  las especificaciones técnicas y requerimientos normados por la
+  Organización Mundial de la Salud (OMS), se deducirán analíticamente
+  los coeficientes de reversión a la media (\(\kappa\)) y las
+  volatilidades térmicas (\(\sigma\)) que dictan el enfriamiento activo
+  y la inercia pasiva del refrigerador de estudio.
+\item
+  \textbf{Cinética de Degradación Biológica:} Finalmente, se vincularán
+  las excursiones térmicas arrojadas por la EDE con la Ecuación de
+  Arrhenius, estableciendo el marco cuantitativo necesario para evaluar
+  la pérdida de viabilidad farmacológica que sufren las vacunas durante
+  un fallo sistémico.
+\end{enumerate}
 
 \section{Datos Base (CFE) e Indicadores de
 Confiabilidad}\label{datos-base-cfe-e-indicadores-de-confiabilidad}
