@@ -5,7 +5,7 @@ execute:
   freeze: auto
 
 book:
-  title: "Reporte de Investigación - Verano Delfín"
+  title: "Tesis"
   author: 
       - name: "Cristóbal Pérez González"
         email: "cristobal.perez70@unach.mx"
@@ -17,8 +17,6 @@ book:
   search: true
   repo-url: https://github.com/Crisperez517/VERANO-DELFIN.git
   page-navigation: true 
-  image: LogoDelfin.jpeg
-  cover-image: LogoDelfin.jpeg
   sidebar:
     logo: LOGOunach.jpeg
   chapters:
