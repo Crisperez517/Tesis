@@ -221,7 +221,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-07-27}
+\date{2026-07-28}
 \begin{document}
 \maketitle
 
@@ -1356,39 +1356,33 @@ las siguientes tres fases analíticas:
 \section{Datos Base (CFE) e Indicadores de Confiabilidad
 Eléctrica}\label{sec-datos-cfe}
 
-El objetivo de esta fase es caracterizar cuantitativamente la tasa de
-ocurrencia y la escala temporal de las interrupciones del suministro
-eléctrico en el área geográfica de Tuxtla Gutiérrez, Chiapas. Los datos
-primarios provienen de los registros oficiales de la Comisión Federal de
-Electricidad (CFE) (\citeproc{ref-cfe2024informe}{Comisión Federal de
-Electricidad 2024}), obtenidos mediante solicitudes de información
-pública.
+El objetivo de esta fase es modelar la tasa de ocurrencia y la escala
+temporal de las interrupciones del suministro eléctrico en el área
+geográfica de Tuxtla Gutiérrez, Chiapas. Los datos de partida provienen
+de los registros oficiales de la Comisión Federal de Electricidad (CFE)
+(\citeproc{ref-cfe2024informe}{Comisión Federal de Electricidad 2024}),
+la cual evalúa la continuidad del suministro a través de dos indicadores
+internacionales de confiabilidad:
 
-De acuerdo con la normativa internacional estandarizada por el
-\emph{Institute of Electrical and Electronics Engineers} en la norma
-IEEE Std 1366 (\citeproc{ref-sener2024prodesen}{Secretaría de Energía
-2024}), el desempeño y la continuidad de los sistemas de distribución
-eléctrica se evalúan cuantitativamente a través de dos índices
-fundamentales de confiabilidad:
-
-\subsection{1. Índice de Frecuencia de Interrupción Promedio por Usuario
-(SAIFI)}\label{uxedndice-de-frecuencia-de-interrupciuxf3n-promedio-por-usuario-saifi}
+\subsection{1. Índice de la Frecuencia de Interrupción Promedio, en
+número
+(SAIFI)}\label{uxedndice-de-la-frecuencia-de-interrupciuxf3n-promedio-en-nuxfamero-saifi}
 
 El indicador SAIFI (\emph{System Average Interruption Frequency Index})
 contabiliza el número promedio de interrupciones sostenidas que
-experimenta un usuario del sistema durante un periodo determinado
-(generalmente un año o un mes). Considerese una red eléctrica con un
-total de \(N_T\) usuarios atendidos. Si en un intervalo de observación
-ocurren \(M\) eventos aleatorios de interrupción, donde cada evento
+experimenta un usuario durante un periodo determinado (generalmente un
+año o un mes), es decir si se tiene una red eléctrica con un total de
+\(N_T\) usuarios atendidos. Si en un intervalo de observación ocurren
+\(M\) eventos de interrupción, donde cada evento
 \(i \in \{1, 2, \dots, M\}\) afecta a una cantidad de \(N_i\) usuarios,
 el índice SAIFI se expresa formalmente como:
 
 \begin{equation}\phantomsection\label{eq-saifi}{
-\text{SAIFI} = \frac{\sum_{i=1}^{M} N_i}{N_T}
+\displaystyle \text{SAIFI} = \frac{\sum_{i=1}^{M} N_i}{N_T}
 }\end{equation}
 
-\subsection{2. Índice de Duración Promedio de Interrupción por Usuario
-(SAIDI)}\label{uxedndice-de-duraciuxf3n-promedio-de-interrupciuxf3n-por-usuario-saidi}
+\subsection{2. Índice de Duración Promedio de Interrupción, en minutos
+(SAIDI)}\label{uxedndice-de-duraciuxf3n-promedio-de-interrupciuxf3n-en-minutos-saidi}
 
 El indicador SAIDI (\emph{System Average Interruption Duration Index})
 mide la duración total acumulada de las interrupciones sostenidas
@@ -1397,7 +1391,7 @@ cada evento de falla \(i\) tiene una duración temporal de \(r_i\) horas,
 el índice SAIDI se define analíticamente mediante:
 
 \begin{equation}\phantomsection\label{eq-saidi}{
-\text{SAIDI} = \frac{\sum_{i=1}^{M} N_i r_i}{N_T}
+\displaystyle \text{SAIDI} = \frac{\sum_{i=1}^{M} N_i r_i}{N_T}
 }\end{equation}
 
 \subsection{3. Relación Cinética: Duración Promedio por Evento
