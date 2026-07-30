@@ -187,10 +187,10 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -221,7 +221,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-07-28}
+\date{2026-07-30}
 \begin{document}
 \maketitle
 
@@ -1394,43 +1394,28 @@ el índice SAIDI se define analíticamente mediante:
 \displaystyle \text{SAIDI} = \frac{\sum_{i=1}^{M} N_i r_i}{N_T}
 }\end{equation}
 
-\subsection{3. Relación Cinética: Duración Promedio por Evento
-(CAIDI)}\label{relaciuxf3n-cinuxe9tica-duraciuxf3n-promedio-por-evento-caidi}
-
-Para conectar la frecuencia de fallos con su duración individual dentro
-de la modelación estocástica, se define el índice CAIDI (\emph{Customer
-Average Interruption Duration Index}), el cual representa el tiempo
-promedio de restablecimiento del servicio por cada evento de falla. A
-partir de las Ecuación~\ref{eq-saifi} y Ecuación~\ref{eq-saidi}, este
-indicador se deduce como el cociente directo entre el SAIDI y el SAIFI:
-
-\begin{equation}\phantomsection\label{eq-caidi}{
-\text{CAIDI} = \frac{\text{SAIDI}}{\text{SAIFI}} = \frac{\sum_{i=1}^{M} N_i r_i}{\sum_{i=1}^{M} N_i}
-}\end{equation}
-
 \subsection{Análisis del Registro Histórico Municipal
 (2019-2025)}\label{anuxe1lisis-del-registro-histuxf3rico-municipal-2019-2025}
 
-A partir de la información proporcionada por la CFE, la
-Tabla~\ref{tbl-interrupciones-cfe} condensa el comportamiento mensual
-promedio de las interrupciones y su duración unitaria (\(\text{CAIDI}\))
-registradas en el municipio de Tuxtla Gutiérrez durante el periodo
-2019--2025.
+Mediante una solicitud de información pública de transparencia dirigida
+a la CFE, se obtuvo el registro histórico del promedio mensual de
+interrupciones y su duración para el municipio de Tuxtla Gutiérrez, el
+cual se condensa en la Tabla~\ref{tbl-interrupciones-cfe}.
 
 \begin{longtable}[]{@{}
   >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
-\caption{Interrupciones eléctricas mensuales y duración promedio en
-Tuxtla Gutiérrez, Chiapas (Fuente: Solicitud de Transparencia a la
+\caption{Interrupciones eléctricas en Tuxtla Gutiérrez, Chiapas (Fuente:
+Solicitud de Transparencia a la
 CFE).}\label{tbl-interrupciones-cfe}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Año
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Número de interrupciones promedio por mes (\(\text{SAIFI}_{mensual}\))
+Número de interrupciones promedio por mes
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Duración Promedio por evento \(\text{CAIDI}\) (Horas)
+Duración Promedio de las interrupciones (Horas)
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
@@ -1438,9 +1423,9 @@ Duración Promedio por evento \(\text{CAIDI}\) (Horas)
 \begin{minipage}[b]{\linewidth}\centering
 Año
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Número de interrupciones promedio por mes (\(\text{SAIFI}_{mensual}\))
+Número de interrupciones promedio por mes
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Duración Promedio por evento \(\text{CAIDI}\) (Horas)
+Duración Promedio de las interrupciones (Horas)
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
@@ -1475,17 +1460,18 @@ N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/a�
 }\end{equation}
 
 \section{\texorpdfstring{Corrección de Escala Espacial (Factor
-\(\kappa_{espacial}\))}{Corrección de Escala Espacial (Factor \textbackslash kappa\_\{espacial\})}}\label{correcciuxf3n-de-escala-espacial-factor-kappa_espacial}
+\(\kappa_{espacial}\))}{Corrección de Escala Espacial (Factor \textbackslash kappa\_\{espacial\})}}\label{sec-escala-espacial}
 
 \subsection{Justificación de la Reducción de
 Escala}\label{justificaciuxf3n-de-la-reducciuxf3n-de-escala}
 
-El valor de 516 cortes al año es un dato agregado de todo el municipio.
-En la modelación aplicada, utilizar directamente este valor para un solo
-refrigerador implicaría asumir que el edificio clínico sufre más de un
-apagón diario, lo cual no es físicamente real. Este error ocurre al
-ignorar que un edificio está conectado a un solo nodo de la red, no a
-todos simultáneamente.
+El valor de \(516\) cortes al año obtenido en la
+Ecuación~\ref{eq-cortes-totales} es un dato agregado de todo el
+municipio. En la modelación aplicada, utilizar directamente este valor
+para un solo refrigerador implicaría asumir que el edificio clínico
+sufre más de un apagón diario, lo cual no es físicamente real. Este
+error ocurre al ignorar que un edificio está conectado a un solo nodo de
+la red, no a todos simultáneamente.
 
 Para solucionar esto, introducimos un factor de escala espacial. De
 acuerdo con el Programa para el Desarrollo del Sistema Eléctrico
@@ -1501,18 +1487,26 @@ Mactumatzá y Real del Bosque).
 Local}\label{la-esperanza-matemuxe1tica-local}
 
 Asumiendo que las fallas de transmisión se distribuyen de manera
-uniforme sobre estas infraestructuras, el riesgo que absorbe el edificio
-de interés (la subestación Tuxtla Norte, encargada de alimentar la zona
-de hospitales y laboratorios de la Colonia Maya) corresponde a un octavo
-del total municipal.
+uniforme sobre estas infraestructuras mediante el principio de razón
+insuficiente de Laplace, la probabilidad \(p\) de que un evento afecte a
+la subestación de interés (Tuxtla Norte, encargada de alimentar la zona
+de hospitales y laboratorios de la Colonia Maya) es \(p = 1/8\).
 
-\[\mathbb{E}[N_{local}] = \frac{516 \text{ cortes}}{8 \text{ subestaciones}} = 64.5 \approx 64 \text{ cortes al año}\]
+Por consiguiente, el número de cortes que absorbe la clínica local se
+comporta como una variable aleatoria binomial
+\(N_{local} \sim \mathcal{B}(N_{total}, p)\), cuya esperanza matemática
+es:
 
-Al ajustar al entero más cercano, establecemos una base realista de
-\textbf{64 interrupciones esperadas al año} para nuestra simulación.
+\begin{equation}\phantomsection\label{eq-esperanza-local}{
+\mathbb{E}[N_{local}] = \frac{516 \text{ cortes}}{8 \text{ subestaciones}} = 64.5 \approx 64 \text{ cortes al año}
+}\end{equation}
+
+Al ajustar al entero más cercano para mantener la naturaleza discreta de
+los eventos, establecemos una base realista de \textbf{64 interrupciones
+esperadas al año} para nuestra simulación.
 
 \section{Distribución Temporal de las
-Fallas}\label{distribuciuxf3n-temporal-de-las-fallas}
+Fallas}\label{sec-distribucion-temporal}
 
 Las interrupciones no ocurren de manera homogénea a lo largo del año (es
 decir, no se presentan exactamente 5.33 cortes idénticos cada mes). La
@@ -1557,34 +1551,35 @@ acumulada, es necesario calcular la diferencia marginal (\(\Delta\))
 respecto al mes anterior para aislar el peso estadístico de cada mes de
 forma individual:
 
-\[
+\begin{equation}\phantomsection\label{eq-delta-saifi}{
 \Delta \text{SAIFI}_i = \text{SAIFI}_i - \text{SAIFI}_{i-1}
-\]
+}\end{equation}
 
 Para distribuir los 64 cortes anuales calculados para la subestación
-local respetando esta estacionalidad, aplicamos una \textbf{regla de
-tres simple}. Suponiendo que el valor total del SAIFI al final del año
-(\(0.113\)) representa el 100\% de las fallas (equivalente a los 64
-cortes), entonces el incremento mensual generado en cada periodo
-(\(\Delta \text{SAIFI}_i\)) representara una fracción directamente
-proporcional de cortes. Expresado de forma general para cualquier mes
-\(i\), la asignación viene dada por:
+local respetando esta estacionalidad, aplicamos una regla de tres simple
+basada en la proporcionalidad marginal. Suponiendo que el valor total
+del SAIFI al final del año (\(0.113\)) representa el 100\% de las fallas
+(equivalente a los 64 cortes), entonces el incremento mensual generado
+en cada periodo (\(\Delta \text{SAIFI}_i\)) representará una fracción
+directamente proporcional de cortes. Expresado de forma general para
+cualquier mes \(i\), la asignación viene dada por:
 
-\[
+\begin{equation}\phantomsection\label{eq-reparto-cortes}{
 \text{Cortes}_i = \left( \frac{\Delta \text{SAIFI}_i}{\text{SAIFI}_{total}} \right) \times \mathbb{E}[N_{local}]
-\]
+}\end{equation}
 
 Sustituyendo los valores de nuestro escenario
 (\(\text{SAIFI}_{total} = 0.113\) y \(\mathbb{E}[N_{local}] = 64\)), la
 ecuación del modelo es:
 
-\[
+\begin{equation}\phantomsection\label{eq-modelo-cortes}{
 \text{Cortes}_i = \left( \frac{\Delta \text{SAIFI}_i}{0.113} \right) \times 64
-\]
+}\end{equation}
 
 Al hacer este cálculo y redondeando al entero más cercano (realizando un
 ajuste para mantener la conservación de la suma total en 64), obtenemos
-la distribución estacional empírica de fallas:
+la distribución estacional empírica de fallas presentada en la
+Tabla~\ref{tbl-cortes-mensuales}.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2105}}
@@ -1634,11 +1629,11 @@ Noviembre & 0.003 & 1.70 & 2 \\
 Diciembre & 0.007 & 3.96 & 4 \\
 \end{longtable}
 
-El análisis de la Tabla 3 revela con claridad los dos momentos
-estacionales de mayor vulnerabilidad y frecuencia de cortes en el
-suministro eléctrico de la región. El pico más severo se registra en
-\textbf{Junio (9 cortes)}, un fenómeno ocasionado por las altas
-temperaturas extremas registradas en Tuxtla Gutiérrez durante la
+El análisis de la Tabla~\ref{tbl-cortes-mensuales} revela con claridad
+los dos momentos estacionales de mayor vulnerabilidad y frecuencia de
+cortes en el suministro eléctrico de la región. El pico más severo se
+registra en \textbf{Junio (9 cortes)}, un fenómeno ocasionado por las
+altas temperaturas extremas registradas en Tuxtla Gutiérrez durante la
 primavera-verano, las cuales provocaron una saturación en la red de
 distribución eléctrica debido al uso masivo y simultáneo de sistemas de
 aire acondicionado. El segundo periodo crítico ocurre durante
