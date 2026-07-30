@@ -419,18 +419,17 @@ window.Quarto = {
    
   <ul>
   <li><a href="#sec-motivacion-contexto" id="toc-sec-motivacion-contexto" class="nav-link active" data-scroll-target="#sec-motivacion-contexto"><span class="header-section-number">3.1</span> Motivación y Contexto del Estudio</a></li>
-  <li><a href="#sec-datos-cfe" id="toc-sec-datos-cfe" class="nav-link" data-scroll-target="#sec-datos-cfe"><span class="header-section-number">3.2</span> Datos Base (CFE) e Indicadores de Confiabilidad Eléctrica</a>
-  <ul class="collapse">
-  <li><a href="#índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi" id="toc-índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi" class="nav-link" data-scroll-target="#índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi"><span class="header-section-number">3.2.1</span> 1. Índice de la Frecuencia de Interrupción Promedio, en número (SAIFI)</a></li>
-  <li><a href="#índice-de-duración-promedio-de-interrupción-en-minutos-saidi" id="toc-índice-de-duración-promedio-de-interrupción-en-minutos-saidi" class="nav-link" data-scroll-target="#índice-de-duración-promedio-de-interrupción-en-minutos-saidi"><span class="header-section-number">3.2.2</span> 2. Índice de Duración Promedio de Interrupción, en minutos (SAIDI)</a></li>
-  <li><a href="#análisis-del-registro-histórico-municipal-2019-2025" id="toc-análisis-del-registro-histórico-municipal-2019-2025" class="nav-link" data-scroll-target="#análisis-del-registro-histórico-municipal-2019-2025"><span class="header-section-number">3.2.3</span> Análisis del Registro Histórico Municipal (2019-2025)</a></li>
-  </ul></li>
+  <li><a href="#sec-datos-cfe" id="toc-sec-datos-cfe" class="nav-link" data-scroll-target="#sec-datos-cfe"><span class="header-section-number">3.2</span> Datos Base e Histórico de Interrupciones Eléctricas</a></li>
   <li><a href="#sec-escala-espacial" id="toc-sec-escala-espacial" class="nav-link" data-scroll-target="#sec-escala-espacial"><span class="header-section-number">3.3</span> Corrección de Escala Espacial (Factor <span class="math inline">\(\kappa_{espacial}\)</span>)</a>
   <ul class="collapse">
   <li><a href="#justificación-de-la-reducción-de-escala" id="toc-justificación-de-la-reducción-de-escala" class="nav-link" data-scroll-target="#justificación-de-la-reducción-de-escala"><span class="header-section-number">3.3.1</span> Justificación de la Reducción de Escala</a></li>
   <li><a href="#la-esperanza-matemática-local" id="toc-la-esperanza-matemática-local" class="nav-link" data-scroll-target="#la-esperanza-matemática-local"><span class="header-section-number">3.3.2</span> La Esperanza Matemática Local</a></li>
   </ul></li>
-  <li><a href="#sec-distribucion-temporal" id="toc-sec-distribucion-temporal" class="nav-link" data-scroll-target="#sec-distribucion-temporal"><span class="header-section-number">3.4</span> Distribución Temporal de las Fallas</a></li>
+  <li><a href="#sec-distribucion-temporal" id="toc-sec-distribucion-temporal" class="nav-link" data-scroll-target="#sec-distribucion-temporal"><span class="header-section-number">3.4</span> Distribución Temporal de las Fallas</a>
+  <ul class="collapse">
+  <li><a href="#índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi" id="toc-índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi" class="nav-link" data-scroll-target="#índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi"><span class="header-section-number">3.4.1</span> 1. Índice de la Frecuencia de Interrupción Promedio, en número (SAIFI)</a></li>
+  <li><a href="#índice-de-duración-promedio-de-interrupción-en-minutos-saidi" id="toc-índice-de-duración-promedio-de-interrupción-en-minutos-saidi" class="nav-link" data-scroll-target="#índice-de-duración-promedio-de-interrupción-en-minutos-saidi"><span class="header-section-number">3.4.2</span> 2. Índice de Duración Promedio de Interrupción, en minutos (SAIDI)</a></li>
+  </ul></li>
   <li><a href="#sec-ppnh" id="toc-sec-ppnh" class="nav-link" data-scroll-target="#sec-ppnh"><span class="header-section-number">3.5</span> Modelado del Proceso de Poisson No Homogéneo (PPNH)</a></li>
   <li><a href="#validación-del-modelo-cálculo-integral" id="toc-validación-del-modelo-cálculo-integral" class="nav-link" data-scroll-target="#validación-del-modelo-cálculo-integral"><span class="header-section-number">3.6</span> Validación del Modelo (Cálculo Integral)</a></li>
   <li><a href="#distribución-log-normal-de-las-duraciones-de-las-fallas" id="toc-distribución-log-normal-de-las-duraciones-de-las-fallas" class="nav-link" data-scroll-target="#distribución-log-normal-de-las-duraciones-de-las-fallas"><span class="header-section-number">3.7</span> Distribución Log-Normal de las Duraciones de las Fallas</a>
@@ -487,25 +486,9 @@ window.Quarto = {
 </ol>
 </section>
 <section id="sec-datos-cfe" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="sec-datos-cfe"><span class="header-section-number">3.2</span> Datos Base (CFE) e Indicadores de Confiabilidad Eléctrica</h2>
-<p>El objetivo de esta fase es modelar la tasa de ocurrencia y la escala temporal de las interrupciones del suministro eléctrico en el área geográfica de Tuxtla Gutiérrez, Chiapas. Los datos de partida provienen de los registros oficiales de la Comisión Federal de Electricidad (CFE) <span class="citation" data-cites="cfe2024informe">(<a href="references.html#ref-cfe2024informe" role="doc-biblioref">Comisión Federal de Electricidad 2024</a>)</span>, la cual evalúa la continuidad del suministro a través de dos indicadores internacionales de confiabilidad:</p>
-<section id="índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi"><span class="header-section-number">3.2.1</span> 1. Índice de la Frecuencia de Interrupción Promedio, en número (SAIFI)</h3>
-<p>El indicador SAIFI (<em>System Average Interruption Frequency Index</em>) contabiliza el número promedio de interrupciones sostenidas que experimenta un usuario durante un periodo determinado (generalmente un año o un mes), es decir si se tiene una red eléctrica con un total de <span class="math inline">\(N_T\)</span> usuarios atendidos. Si en un intervalo de observación ocurren <span class="math inline">\(M\)</span> eventos de interrupción, donde cada evento <span class="math inline">\(i \in \{1, 2, \dots, M\}\)</span> afecta a una cantidad de <span class="math inline">\(N_i\)</span> usuarios, el índice SAIFI se expresa formalmente como:</p>
-<p><span id="eq-saifi"><span class="math display">\[
-\displaystyle \text{SAIFI} = \frac{\sum_{i=1}^{M} N_i}{N_T}
-\tag{3.1}\]</span></span></p>
-</section>
-<section id="índice-de-duración-promedio-de-interrupción-en-minutos-saidi" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="índice-de-duración-promedio-de-interrupción-en-minutos-saidi"><span class="header-section-number">3.2.2</span> 2. Índice de Duración Promedio de Interrupción, en minutos (SAIDI)</h3>
-<p>El indicador SAIDI (<em>System Average Interruption Duration Index</em>) mide la duración total acumulada de las interrupciones sostenidas que experimenta el usuario promedio dentro del periodo de evaluación. Si cada evento de falla <span class="math inline">\(i\)</span> tiene una duración temporal de <span class="math inline">\(r_i\)</span> horas, el índice SAIDI se define analíticamente mediante:</p>
-<p><span id="eq-saidi"><span class="math display">\[
-\displaystyle \text{SAIDI} = \frac{\sum_{i=1}^{M} N_i r_i}{N_T}
-\tag{3.2}\]</span></span></p>
-</section>
-<section id="análisis-del-registro-histórico-municipal-2019-2025" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="análisis-del-registro-histórico-municipal-2019-2025"><span class="header-section-number">3.2.3</span> Análisis del Registro Histórico Municipal (2019-2025)</h3>
-<p>Mediante una solicitud de información pública de transparencia dirigida a la CFE, se obtuvo el registro histórico del promedio mensual de interrupciones y su duración para el municipio de Tuxtla Gutiérrez, el cual se condensa en la <a href="#tbl-interrupciones-cfe" class="quarto-xref">Tabla&nbsp;<span>3.1</span></a>.</p>
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-datos-cfe"><span class="header-section-number">3.2</span> Datos Base e Histórico de Interrupciones Eléctricas</h2>
+<p>El objetivo de esta fase es caracterizar cuantitativamente la tasa de ocurrencia y la escala temporal de las interrupciones del suministro eléctrico en el área geográfica de Tuxtla Gutiérrez, Chiapas. Para evitar supuestos teóricos alejados de la realidad operativa de la red local, los datos primarios empíricos no se asignaron de manera arbitraria, sino que se obtuvieron a través de los registros oficiales de la Comisión Federal de Electricidad (CFE) <span class="citation" data-cites="cfe2024informe">(<a href="references.html#ref-cfe2024informe" role="doc-biblioref">Comisión Federal de Electricidad 2024</a>)</span>, solicitados explícitamente mediante mecanismos de transparencia pública.</p>
+<p>A partir de dicha solicitud, se recabó el comportamiento histórico del municipio para el periodo comprendido entre los años 2019 y 2025. La <a href="#tbl-interrupciones-cfe" class="quarto-xref">Tabla&nbsp;<span>3.1</span></a> condensa esta información, presentando el número promedio de eventos de falla mensual y la duración promedio en horas por cada corte de energía.</p>
 <div id="tbl-interrupciones-cfe" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-interrupciones-cfe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -570,14 +553,13 @@ Tabla&nbsp;3.1: Interrupciones eléctricas en Tuxtla Gutiérrez, Chiapas (Fuente
 <p>Para la calibración de la EDE en esta investigación, se selecciona el año <strong>2024</strong> como el escenario de línea base. Dicho año presenta una media mensual representativa de <strong>43 cortes por mes</strong> con una duración promedio por evento de <strong>2.39 horas</strong>. Al proyectar esta tasa mensual sobre un horizonte anual completo de 12 meses, la variable discreta de interrupciones totales esperadas a nivel municipal (<span class="math inline">\(N_{total}\)</span>) queda expresada como:</p>
 <p><span id="eq-cortes-totales"><span class="math display">\[
 N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/año}
-\tag{3.3}\]</span></span></p>
-</section>
+\tag{3.1}\]</span></span></p>
 </section>
 <section id="sec-escala-espacial" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-escala-espacial"><span class="header-section-number">3.3</span> Corrección de Escala Espacial (Factor <span class="math inline">\(\kappa_{espacial}\)</span>)</h2>
 <section id="justificación-de-la-reducción-de-escala" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="justificación-de-la-reducción-de-escala"><span class="header-section-number">3.3.1</span> Justificación de la Reducción de Escala</h3>
-<p>El valor de <span class="math inline">\(516\)</span> cortes al año obtenido en la <a href="#eq-cortes-totales" class="quarto-xref">Ecuación&nbsp;<span>3.3</span></a> es un dato agregado de todo el municipio. En la modelación aplicada, utilizar directamente este valor para un solo refrigerador implicaría asumir que el edificio clínico sufre más de un apagón diario, lo cual no es físicamente real. Este error ocurre al ignorar que un edificio está conectado a un solo nodo de la red, no a todos simultáneamente.</p>
+<p>El valor de <span class="math inline">\(516\)</span> cortes al año obtenido en la <a href="#eq-cortes-totales" class="quarto-xref">Ecuación&nbsp;<span>3.1</span></a> es un dato agregado de todo el municipio. En la modelación aplicada, utilizar directamente este valor para un solo refrigerador implicaría asumir que el edificio clínico sufre más de un apagón diario, lo cual no es físicamente real. Este error ocurre al ignorar que un edificio está conectado a un solo nodo de la red, no a todos simultáneamente.</p>
 <p>Para solucionar esto, introducimos un factor de escala espacial. De acuerdo con el Programa para el Desarrollo del Sistema Eléctrico Nacional (PRODESEN) y los diagramas de infraestructura del Centro Nacional de Control de Energía (CENACE) <span class="citation" data-cites="sener2024prodesen">(<a href="references.html#ref-sener2024prodesen" role="doc-biblioref">Secretaría de Energía 2024</a>)</span>, la mancha urbana de Tuxtla Gutiérrez está alimentada de manera sectorizada por exactamente <strong>8 subestaciones principales</strong> de distribución (Tuxtla Céntrica, Oriente, Poniente, Terán, Tuxtla Norte, Tuxtla Dos, Mactumatzá y Real del Bosque).</p>
 </section>
 <section id="la-esperanza-matemática-local" class="level3" data-number="3.3.2">
@@ -586,13 +568,28 @@ N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/a�
 <p>Por consiguiente, el número de cortes que absorbe la clínica local se comporta como una variable aleatoria binomial <span class="math inline">\(N_{local} \sim \mathcal{B}(N_{total}, p)\)</span>, cuya esperanza matemática es:</p>
 <p><span id="eq-esperanza-local"><span class="math display">\[
 \mathbb{E}[N_{local}] = \frac{516 \text{ cortes}}{8 \text{ subestaciones}} = 64.5 \approx 64 \text{ cortes al año}
-\tag{3.4}\]</span></span></p>
+\tag{3.2}\]</span></span></p>
 <p>Al ajustar al entero más cercano para mantener la naturaleza discreta de los eventos, establecemos una base realista de <strong>64 interrupciones esperadas al año</strong> para nuestra simulación.</p>
 </section>
 </section>
 <section id="sec-distribucion-temporal" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-distribucion-temporal"><span class="header-section-number">3.4</span> Distribución Temporal de las Fallas</h2>
 <p>Las interrupciones no ocurren de manera homogénea a lo largo del año (es decir, no se presentan exactamente 5.33 cortes idénticos cada mes). La variabilidad mensual depende directamente de los factores climáticos estacionales de la región. Para no asignar los apagones de manera aleatoria, utilizamos el comportamiento documentado en el <em>Informe Anual de la CFE 2024</em> <span class="citation" data-cites="cfe2024informe">(<a href="references.html#ref-cfe2024informe" role="doc-biblioref">Comisión Federal de Electricidad 2024</a>)</span>, específicamente en su página 82, donde se registra la evolución de los indicadores de continuidad del servicio a lo largo de los meses.</p>
+<p>Para comprender la estructura de estos datos oficiales, la CFE evalúa la continuidad del suministro a través de dos indicadores internacionales de confiabilidad:</p>
+<section id="índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi"><span class="header-section-number">3.4.1</span> 1. Índice de la Frecuencia de Interrupción Promedio, en número (SAIFI)</h3>
+<p>El indicador SAIFI (<em>System Average Interruption Frequency Index</em>) contabiliza el número promedio de interrupciones sostenidas que experimenta un usuario durante un periodo determinado (generalmente un año o un mes), es decir si se tiene una red eléctrica con un total de <span class="math inline">\(N_T\)</span> usuarios atendidos. Si en un intervalo de observación ocurren <span class="math inline">\(M\)</span> eventos de interrupción, donde cada evento <span class="math inline">\(i \in \{1, 2, \dots, M\}\)</span> afecta a una cantidad de <span class="math inline">\(N_i\)</span> usuarios, el índice SAIFI se expresa formalmente como:</p>
+<p><span id="eq-saifi"><span class="math display">\[
+\displaystyle \text{SAIFI} = \frac{\sum_{i=1}^{M} N_i}{N_T}
+\tag{3.3}\]</span></span></p>
+</section>
+<section id="índice-de-duración-promedio-de-interrupción-en-minutos-saidi" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="índice-de-duración-promedio-de-interrupción-en-minutos-saidi"><span class="header-section-number">3.4.2</span> 2. Índice de Duración Promedio de Interrupción, en minutos (SAIDI)</h3>
+<p>El indicador SAIDI (<em>System Average Interruption Duration Index</em>) mide la duración total acumulada de las interrupciones sostenidas que experimenta el usuario promedio dentro del periodo de evaluación. Si cada evento de falla <span class="math inline">\(i\)</span> tiene una duración temporal de <span class="math inline">\(r_i\)</span> horas, el índice SAIDI se define analíticamente mediante:</p>
+<p><span id="eq-saidi"><span class="math display">\[
+\displaystyle \text{SAIDI} = \frac{\sum_{i=1}^{M} N_i r_i}{N_T}
+\tag{3.4}\]</span></span></p>
+<p>A partir de estas definiciones, la <a href="#tbl-saidi-saifi" class="quarto-xref">Tabla&nbsp;<span>3.2</span></a> presenta la evolución mensual acumulada de los indicadores SAIDI y SAIFI reportada en la página 82 del informe de la CFE.</p>
 <div id="tbl-saidi-saifi" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-saidi-saifi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -786,6 +783,7 @@ Tabla&nbsp;3.3: Distribución estacional de los 64 cortes locales calculada medi
 </figure>
 </div>
 <p>El análisis de la <a href="#tbl-cortes-mensuales" class="quarto-xref">Tabla&nbsp;<span>3.3</span></a> revela con claridad los dos momentos estacionales de mayor vulnerabilidad y frecuencia de cortes en el suministro eléctrico de la región. El pico más severo se registra en <strong>Junio (9 cortes)</strong>, un fenómeno ocasionado por las altas temperaturas extremas registradas en Tuxtla Gutiérrez durante la primavera-verano, las cuales provocaron una saturación en la red de distribución eléctrica debido al uso masivo y simultáneo de sistemas de aire acondicionado. El segundo periodo crítico ocurre durante <strong>Agosto y Septiembre (8 y 9 cortes respectivamente)</strong>, coincidiendo directamente con el máximo histórico de la temporada de lluvias, tormentas tropicales y huracanes en el Sureste mexicano, eventos climáticos que suelen derribar líneas de alta tensión y afectar transformadores locales. En contraste, la época invernal se consolida como el periodo de máxima estabilidad en el servicio.</p>
+</section>
 </section>
 <section id="sec-ppnh" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-ppnh"><span class="header-section-number">3.5</span> Modelado del Proceso de Poisson No Homogéneo (PPNH)</h2>
