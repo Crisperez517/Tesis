@@ -187,10 +187,10 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -221,7 +221,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-07-30}
+\date{2026-07-31}
 \begin{document}
 \maketitle
 
@@ -1356,20 +1356,20 @@ las siguientes tres fases analíticas:
 \section{Datos Base e Histórico de Interrupciones
 Eléctricas}\label{sec-datos-cfe}
 
-El objetivo de esta fase es caracterizar cuantitativamente la tasa de
-ocurrencia y la escala temporal de las interrupciones del suministro
-eléctrico en el área geográfica de Tuxtla Gutiérrez, Chiapas. Para
-evitar supuestos teóricos alejados de la realidad operativa de la red
-local, los datos primarios empíricos no se asignaron de manera
-arbitraria, sino que se obtuvieron a través de los registros oficiales
-de la Comisión Federal de Electricidad (CFE)
-(\citeproc{ref-cfe2024informe}{Comisión Federal de Electricidad 2024}),
-solicitados explícitamente mediante mecanismos de transparencia pública.
+El objetivo de esta fase es modelar la tasa de ocurrencia y la escala
+temporal de las interrupciones del suministro eléctrico en el área
+geográfica de Tuxtla Gutiérrez, Chiapas. Para evitar supuestos teóricos
+alejados de la realidad operativa de la red local, los datos de partida
+no se asignaron de manera arbitraria, sino que se obtuvieron a través de
+los registros oficiales de la Comisión Federal de Electricidad (CFE).
+Mediante una solicitud de información pública de transparencia dirigida
+a la CFE, se obtuvo el registro histórico del promedio mensual de
+interrupciones y su duración para el municipio de Tuxtla Gutiérrez.
 
 A partir de dicha solicitud, se recabó el comportamiento histórico del
 municipio para el periodo comprendido entre los años 2019 y 2025. La
-Tabla~\ref{tbl-interrupciones-cfe} condensa esta información,
-presentando el número promedio de eventos de falla mensual y la duración
+Tabla~\ref{tbl-interrupciones-cfe} contien dicha información,
+presentando el número de interrupciones promedio por mes y la duración
 promedio en horas por cada corte de energía.
 
 \begin{longtable}[]{@{}
@@ -1411,19 +1411,18 @@ Duración Promedio de las interrupciones (Horas)
 \end{longtable}
 
 El análisis de la Tabla~\ref{tbl-interrupciones-cfe} muestra un
-incremento estructural significativo en la frecuencia de fallas a partir
-del año 2020, estabilizándose en una franja superior a los 40 cortes
-mensuales. Este cambio obedece al crecimiento de la carga térmica
-residencial e industrial y a la saturación de los transformadores de
-distribución en la mancha urbana.
+incremento significativo en la frecuencia de fallas a partir del año
+2020, estabilizándose en una franja superior a los 40 cortes mensuales.
+Este cambio se debe al crecimiento de la carga térmica residencial e
+industrial y a la saturación de los transformadores de distribución en
+la mancha urbana.
 
-Para la calibración de la EDE en esta investigación, se selecciona el
-año \textbf{2024} como el escenario de línea base. Dicho año presenta
-una media mensual representativa de \textbf{43 cortes por mes} con una
-duración promedio por evento de \textbf{2.39 horas}. Al proyectar esta
-tasa mensual sobre un horizonte anual completo de 12 meses, la variable
-discreta de interrupciones totales esperadas a nivel municipal
-(\(N_{total}\)) queda expresada como:
+Para la calibración de la EDE en este trabajo de investigación, se
+selecciono el año \textbf{2024} como el escenario de línea base. Dicho
+año presenta una media mensual de \textbf{43 interrupciones por mes} con
+una duración promedio por corte de \textbf{2.39 horas}. Al proyectar
+esta tasa mensual a una tasa anual, se tiene que el número total de
+interrupciones al año esperadas a nivel municipal (\(N_{total}\)) es:
 
 \begin{equation}\phantomsection\label{eq-cortes-totales}{
 N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/año}

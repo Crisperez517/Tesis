@@ -14,9 +14,9 @@ El proceso de estimación y asignación de parámetros se desarrollará en las s
 
 ## Datos Base e Histórico de Interrupciones Eléctricas {#sec-datos-cfe}
 
-El objetivo de esta fase es caracterizar cuantitativamente la tasa de ocurrencia y la escala temporal de las interrupciones del suministro eléctrico en el área geográfica de Tuxtla Gutiérrez, Chiapas. Para evitar supuestos teóricos alejados de la realidad operativa de la red local, los datos primarios empíricos no se asignaron de manera arbitraria, sino que se obtuvieron a través de los registros oficiales de la Comisión Federal de Electricidad (CFE) [@cfe2024informe], solicitados explícitamente mediante mecanismos de transparencia pública.
+El objetivo de esta fase es modelar la tasa de ocurrencia y la escala temporal de las interrupciones del suministro eléctrico en el área geográfica de Tuxtla Gutiérrez, Chiapas. Para evitar supuestos teóricos alejados de la realidad operativa de la red local, los datos de partida no se asignaron de manera arbitraria, sino que se obtuvieron a través de los registros oficiales de la Comisión Federal de Electricidad (CFE). Mediante una solicitud de información pública de transparencia dirigida a la CFE, se obtuvo el registro histórico del promedio mensual de interrupciones y su duración para el municipio de Tuxtla Gutiérrez.
 
-A partir de dicha solicitud, se recabó el comportamiento histórico del municipio para el periodo comprendido entre los años 2019 y 2025. La @tbl-interrupciones-cfe condensa esta información, presentando el número promedio de eventos de falla mensual y la duración promedio en horas por cada corte de energía.
+A partir de dicha solicitud, se recabó el comportamiento histórico del municipio para el periodo comprendido entre los años 2019 y 2025. La @tbl-interrupciones-cfe contien dicha información, presentando el número de interrupciones promedio por mes y la duración promedio en horas por cada corte de energía.
 
 | Año | Número de interrupciones promedio por mes | Duración Promedio de las interrupciones (Horas) |
 |:---:|:---:|:---:|
@@ -30,9 +30,9 @@ A partir de dicha solicitud, se recabó el comportamiento histórico del municip
 
 : Interrupciones eléctricas en Tuxtla Gutiérrez, Chiapas (Fuente: Solicitud de Transparencia a la CFE). {#tbl-interrupciones-cfe}
 
-El análisis de la @tbl-interrupciones-cfe muestra un incremento estructural significativo en la frecuencia de fallas a partir del año 2020, estabilizándose en una franja superior a los 40 cortes mensuales. Este cambio obedece al crecimiento de la carga térmica residencial e industrial y a la saturación de los transformadores de distribución en la mancha urbana.
+El análisis de la @tbl-interrupciones-cfe muestra un incremento significativo en la frecuencia de fallas a partir del año 2020, estabilizándose en una franja superior a los 40 cortes mensuales. Este cambio se debe al crecimiento de la carga térmica residencial e industrial y a la saturación de los transformadores de distribución en la mancha urbana.
 
-Para la calibración de la EDE en esta investigación, se selecciona el año **2024** como el escenario de línea base. Dicho año presenta una media mensual representativa de **43 cortes por mes** con una duración promedio por evento de **2.39 horas**. Al proyectar esta tasa mensual sobre un horizonte anual completo de 12 meses, la variable discreta de interrupciones totales esperadas a nivel municipal ($N_{total}$) queda expresada como:
+Para la calibración de la EDE en este trabajo de investigación, se selecciono el año **2024** como el escenario de línea base. Dicho año presenta una media mensual de **43 interrupciones por mes** con una duración promedio por corte de **2.39 horas**. Al proyectar esta tasa mensual a una tasa anual, se tiene que el número total de interrupciones al año esperadas a nivel municipal ($N_{total}$) es:
 
 $$
 N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/año}
