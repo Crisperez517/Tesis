@@ -188,7 +188,7 @@ Como se aprecia en la @fig-lambda-t, el área bajo la curva de la función de in
 * **La Canícula (Área Púrpura, Días $196 \le t < 227$):** Abarca aproximadamente 30 días, desde el 15 de julio hasta el 15 de agosto. Corresponde a la zona de transición e intersección entre ambas campanas gaussianas.
 * **Temporada de Tormentas y Ciclones (Área Azul, Días $227 \le t \le 304$):** Comprende del 15 de agosto al 31 de octubre, con su punto crítico centrado en $t = 244$ (1 de septiembre). Representa la máxima incidencia de precipitación y eventos meteorológicos extremos capaces de derribar líneas de alta tensión.
 
-## Validación Estocástica y Análisis de la Anomalía de Enero
+## Validación del Modelo y Análisis de la Anomalía de Enero
 
 Por los fundamentos de los Procesos de Poisson No Homogéneos, el número esperado de cortes en cualquier intervalo $(t_1, t_2]$ está determinado por la integral definida de su función de intensidad:
 
@@ -219,33 +219,47 @@ La suma acumulada de las 12 integrales arroja un total de **65.90 cortes esperad
 
 Finalmente, es importante destacar la inexactitud observada exclusivamente en el mes de **Enero** (7 cortes empíricos frente a los $2.15$ esperados por la integral). Dado que enero es un periodo climatológicamente estable (sin huracanes ni olas de calor), esta desviación es originada muy probablemente por mantenimientos extraordinarios o contingencias locales impredecibles ocurridas específicamente a inicios del año 2024.
 
-## Distribución Log-Normal de las Duraciones de las Fallas
+## Distribución Log-Normal de las Duraciones de las Fallas electrícas {#sec-lognormal-duracion}
 
-Una vez modelada la frecuencia con la que ocurren las interrupciones eléctricas, el siguiente componente crítico para el simulador termodinámico consiste en determinar cuánto tiempo dura cada apagón ($D$). La duración de una falla es una variable aleatoria continua estrictamente positiva con una marcada asimetría hacia la derecha (la mayoría de los cortes se resuelven en pocas horas, pero existen eventos atípicos muy prolongados). Por este motivo, la teoría analítica establece que el comportamiento de las duraciones se modela mediante una distribución Log-normal:
+Una vez modelada la frecuencia con la que ocurren las interrupciones eléctricas mediante el Proceso de Poisson, el siguiente componente crítico es determinar la duración exacta de cada apagón ($D$). En teoría de probabilidad aplicada a la ingeniería de confiabilidad, el tiempo de reparación o restablecimiento de un sistema no sigue a una distribución normal estándar. 
+
+La duración de una falla eléctrica es una variable aleatoria continua que presenta las siguientes dos características principales:
+1. **Dominio estrictamente positivo:** El tiempo de interrupción no puede tomar valores negativos ($D > 0$).
+2. **Asimetría positiva (Cola pesada hacia la derecha):** La inmensa mayoría de las fallas locales se resuelven en pocas horas (e.g., restablecimiento de fusibles o reconexiones de subestación), pero existe una probabilidad baja de eventos atípicos severos cuya reparación demora días enteros (e.g., explosión de transformadores o colapso de torres por huracanes). 
+
+Debido a que una distribución Normal clásica asignaría probabilidad a tiempos negativos y subestimaría el riesgo de cortes prolongados, la literatura establece que las duraciones de las interrupciones eléctricas se modelan mediante una **Distribución Log-normal**:
 
 $$
 D \sim \text{LogNormal}(\mu, \sigma^2)
-$$
+$$ {#eq-lognormal-def}
 
-Para calibrar los parámetros de escala $\mu$ (media de los logaritmos) y de forma $\sigma$ (desviación estándar de los logaritmos) para cada régimen estacional, es necesario procesar los indicadores empíricos de la CFE bajo un esquema de desagregación temporal.
+Para calibrar el parámetro $\mu$ (media de los logaritmos) y el parámetro $\sigma$ (desviación estándar de los logaritmos) para cada temporada, es necesario utilizar los indicadores de la CFE.
 
 ### Desglose Mensual de Horas de Interrupción
 
-De acuerdo con el registro histórico municipal consolidado para el año 2024, la duración promedio general de una interrupción en Tuxtla Gutiérrez fue de **$2.39$ horas por corte** @tbl-interrupciones-cfe. Sabiendo que el factor de escala espacial redujo el riesgo del edificio a una esperanza de **$64$ cortes locales al año**, podemos deducir la cantidad total de tiempo que el refrigerador experimentará desabasto eléctrico a lo largo de todo el año:
+De acuerdo con el registro histórico municipal consolidado para el año 2024, la duración promedio de un corte en Tuxtla Gutiérrez fue de **$2.39$ horas por corte** @tbl-interrupciones-cfe. Sabiendo que el factor de escala espacial redujo el riesgo de la unidad de salud a un promedio de **$64$ cortes al año**, podemos calcular la cantidad total de tiempo que el refrigerador clínico experimentará desabasto eléctrico a lo largo de todo el año:
 
 $$
-\text{Horas Totales del Año} = 64 \text{ cortes/año} \times 2.39 \text{ horas/corte} = 152.96 \text{ horas/año}
+\text{Horas Totales Anuales} = 64 \text{ cortes/año} \times 2.39 \text{ horas/corte} = 152.96 \text{ horas}
 $$
 
-Para distribuir estas $152.96$ horas anuales entre los 12 meses respetando la estacionalidad de la red, utilizamos el indicador SAIDI acumulado del *Informe Anual de la CFE 2024* @tbl-saidi-saifi. Primero, calculamos la diferencia marginal ($\Delta \text{SAIDI}_i$) para aislar el impacto de cada mes. Posteriormente, mediante una regla de tres simple, equiparamos el SAIDI total acumulado al final del año ($10.812$ horas) con nuestras $152.96$ horas de afectación local. La asignación de horas de falla para cada mes viene dada por:
+Para distribuir estas $152.96$ horas a lo largo de los 12 meses del año, respetando la intensidad de daño a la infraestructura propia de cada época del año, utilizamos el indicador de duración acumulada SAIDI del *Informe Anual de la CFE 2024* @tbl-saidi-saifi. 
+
+El primer paso consiste en calcular la diferencia marginal ($\Delta \text{SAIDI}_i = \text{SAIDI}_i - \text{SAIDI}_{i-1}$) para obtener el peso de cada mes individual. Posteriormente, aplicamos una **regla de 3 simple**: asumiendo que el valor total del SAIDI acumulado total ($10.812$ horas) representa el 100% de la afectación anual (equivalente a nuestras $152.96$ horas proyectadas), entonces el incremento de cualquier mes $i$ representará una fracción directamente proporcional de horas de corte para el centro de almacenamiento. Analíticamente, la ecuación de asignación es:
+
+$$
+\text{Horas del Mes}_i = \left( \frac{\Delta \text{SAIDI}_i}{\text{SAIDI}_{total}} \right) \times \text{Horas Totales Anuales}
+$$
+
+Sustituyendo los valores de nuestro escenario ($\text{SAIDI}_{total} = 10.812$ y $\text{Horas Totales} = 152.96$), el modelo de asignación mensual queda como:
 
 $$
 \text{Horas del Mes}_i = \left( \frac{\Delta \text{SAIDI}_i}{10.812} \right) \times 152.96
 $$
 
-Finalmente, para conocer la duración promedio esperada de un corte individual en un mes específico ($E_i$), se divide la cantidad de horas asignadas de ese mes entre el número de cortes calculados previamente @tbl-cortes-mensuales ($E_i = \text{Horas del Mes}_i / \text{Cortes}_i$):
+Finalmente, para conocer la duración media esperada de un corte individual en un mes específico ($E_i$), se divide el número de horas asignadas a dicho mes entre la cantidad de cortes de ese mes calculados previamente en la @tbl-cortes-mensuales. Es decir, $E_i = \text{Horas del Mes}_i / \text{Cortes}_i$. Al hacer estos cálculos se obtienen los siguientes resultados:
 
-| Mes | SAIDI Acumulado | $\Delta$ SAIDI | Horas del Mes Calculadas | Cortes del Mes | Duración Media $E_i$ (Horas) |
+| Mes | SAIDI Acumulado | $\Delta$ SAIDI | Duración Acumulada de las Interrupciones en el Mes | Cortes del Mes | Duración Promedio $E_i$ (Horas) |
 |:---|:---:|:---:|:---:|:---:|:---:|
 | Enero | 0.998 | 0.998 | 14.12 | 7 | 2.017 |
 | Febrero | 1.110 | 0.112 | 1.58 | 2 | 0.790 |
@@ -262,61 +276,86 @@ Finalmente, para conocer la duración promedio esperada de un corte individual e
 
 : Estimación de la duración promedio mensual por corte a partir de los indicadores SAIDI 2024. {#tbl-duracion-cortes}
 
-### Cálculo de Medias y Varianzas por Régimen
+### Cálculo de Medias y Varianzas por Temporada Climática
 
-Para alimentar la conmutación de regímenes de la EDE, agrupamos los meses en las tres temporadas climáticas analizadas. Sin embargo, realizar un promedio aritmético simple entre las duraciones mensuales introduciría un sesgo metodológico, ya que trataría por igual a un mes con 9 cortes que a uno con solo 2 cortes. 
+Para integrar con precisión la duración de los cortes dentro de los regímenes estacionales de la EDE, es necesario agrupar los datos mensuales de la @tbl-duracion-cortes en las tres temporadas climáticas previamente delimitadas en el análisis del Proceso de Poisson. La conformación dichos grupos se debe a las siguientes razones termodinámicas:
 
-Para resolver esto, calculamos la media empírica ($\mathbb{E}[D_{reg}]$) y la varianza empírica ($\mathbb{V}[D_{reg}]$) de cada régimen utilizando estadística descriptiva ponderada, donde el peso de cada mes está determinado estrictamente por su número de cortes ($\omega_i = \text{Cortes}_i$). Analíticamente, es decir:
+1. **Temporada de Calor (Abril a Julio):** Agrupa el periodo de máximo estiaje y temperaturas extremas, culminando en la canícula. Durante este cuatrimestre, la saturación térmica de los equipos de distribución eléctrica es máxima.
+2. **Temporada de Lluvias (Agosto a Octubre):** Concentra el periodo crítico de huracanes y tormentas, caracterizado por daños mecánicos sobre la red eléctrica.
+3. **Estabilidad Invernal (Enero a Marzo, Noviembre y Diciembre):** Meses de baja exigencia térmica ambiental, donde los apagones ocurren mayoritariamente a factores de mantenimiento.
+
+Realizar un promedio aritmético simple de las duraciones $E_i$ entre los meses de cada temporada introduciría un sesgo grave, ya que asignaría el mismo peso a un mes con 9 cortes que a uno con solo 2 cortes. Para garantizar la rigurosidad estadística, se calcula la media empírica ($\mathbb{E}[D]$) y la varianza empírica ($\mathbb{V}[D]$) mediante un modelo de **estadística descriptiva ponderada**, donde el peso de cada mes ($\omega_i$) está dado por su frecuencia de cortes ($\omega_i = \text{Cortes}_i$). 
+
+Asi, las formulaciones para la esperanza y la varianza ponderada están dadas por:
 
 $$
-\mathbb{E}[D_{reg}] = \frac{\sum \omega_i E_i}{\sum \omega_i} = \frac{\text{Total de Horas del Régimen}}{\text{Total de Cortes del Régimen}}
-$$
+\mathbb{E}[D] = \frac{\sum_{i=1}^{n} \omega_i E_i}{\sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
+$$ {#eq-media-ponderada}
 
 $$
-\mathbb{V}[D_{reg}] = \frac{\sum \omega_i (E_i - \mathbb{E}[D_{reg}])^2}{\sum \omega_i}
-$$
+\mathbb{V}[D] = \frac{\sum_{i=1}^{n} \omega_i (E_i - \mathbb{E}[D])^2}{\sum_{i=1}^{n} \omega_i}
+$$ {#eq-varianza-ponderada}
 
-Agrupando los datos bajo este criterio de ponderación, se obtienen las siguientes métricas muestrales por temporada:
+Al sustituir los valores de los meses correspondientes en las @eq-media-ponderada y @eq-varianza-ponderada, se obtienen los siguientes resultados para cada temporada:
 
-* **Temporada de Calor (Mayo, Junio y Julio):** Acumula $22$ cortes y $53.25$ horas de interrupción, resultando en una duración media de $\mathbb{E}[D] = 2.420$ horas y una varianza de $\mathbb{V}[D] = 0.373$.
+* **Temporada de Calor (Abr, May, Jun, Jul):** Acumula un total de $25$ cortes y $74.58$ horas de interrupción, arrojando una duración media alta de $\mathbb{E}[D] = 2.983$ horas y una varianza considerable de $\mathbb{V}[D] = 2.651$, esto se debe a las anomalías de colapso de red registradas durante las olas de calor primaverales.
+* **Temporada de Lluvias (Ago, Sep, Oct):** Acumula $21$ cortes pero únicamente $35.45$ horas de interrupción. Esto nos da una media notablemente más baja de $\mathbb{E}[D] = 1.688$ horas y una varianza muy estable de $\mathbb{V}[D] = 0.343$, indicando que las fallas por lluvia son frecuentes pero suelen ser restablecidas con rapidez.
+* **Estabilidad Invernal (Ene, Feb, Mar, Nov, Dic):** Acumula $18$ cortes y $42.92$ horas de interrupción. Su duración media es de $\mathbb{E}[D] = 2.384$ horas con una varianza alta de $\mathbb{V}[D] = 2.667$, provocada por mantenimientos atípicos observados en los bordes del año (especialmente en enero y diciembre).
 
-* **Temporada de Lluvias (Agosto, Septiembre y Octubre):** Suma $21$ cortes y $35.45$ horas de interrupción, generando una duración media de $\mathbb{E}[D] = 1.688$ horas y una varianza de $\mathbb{V}[D] = 0.343$.
+### Transformación Algebraica a Parámetros Log-Normales
 
-* **Temporada Base e Invierno (Resto de meses):** Concentra $23$ cortes y $64.25$ horas, arrojando una duración media de $\mathbb{E}[D] = 2.793$ horas con una varianza más dispersa de $\mathbb{V}[D] = 4.650$ debido a la anomalía de abril.
+Una vez conocidas las medias ($\mathbb{E}[D]$) y varianzas ($\mathbb{V}[D]$), estas deben transformarse hacia los parámetros $\mu$ y $\sigma$ que conforman la función de distribución Log-normal. 
 
-### Transformación Analítica a Parámetros Log-Normales
-
-Una vez que conocemos la media ($\mathbb{E}[D]$) y la varianza ($\mathbb{V}[D]$) del sistema, debemos mapearlas hacia los parámetros analíticos internos $\mu$ y $\sigma$ que requiere la función de distribución de probabilidad Log-normal. 
-
-La esperanza y la varianza de una variable aleatoria con distribución Log-normal están dadas por las siguientes dos identidades:
+La teoría de la probabilidad nos dice que la esperanza y la varianza de una variable con distribución Log-normal dependen de sus parámetros a través del siguiente sistema de ecuaciones no lineales:
 
 $$
 \mathbb{E}[D] = \exp\left(\mu + \frac{\sigma^2}{2}\right)
 $$
-
 $$
-\mathbb{V}[D] = \left[\exp(\sigma^2) - 1\right] \exp(2\mu + \sigma^2) = (\mathbb{E}[D])^2 \left[\exp(\sigma^2) - 1\right]
+\mathbb{V}[D] = \left[\exp(\sigma^2) - 1\right] \exp(2\mu + \sigma^2)
 $$
 
-Al resolver este sistema de ecuaciones no lineales de forma algebraica para despejar los parámetros objetivos en función de los momentos estadísticos conocidos, se deducen las fórmulas generales de calibración:
+Sustituyendo la primera ecuación en la segunda, la varianza puede reescribirse como $\mathbb{V}[D] = (\mathbb{E}[D])^2 \left[\exp(\sigma^2) - 1\right]$. A partir de esta simplificación, se despeja el sistema para obtener las fórmulas inversas de calibración:
 
 $$
 \sigma = \sqrt{\ln\left(1 + \frac{\mathbb{V}[D]}{(\mathbb{E}[D])^2}\right)}
-$$
+$$ {#eq-sigma-lognormal}
 
 $$
 \mu = \ln(\mathbb{E}[D]) - \frac{\sigma^2}{2} = \ln\left( \frac{(\mathbb{E}[D])^2}{\sqrt{\mathbb{V}[D] + (\mathbb{E}[D])^2}} \right)
-$$
+$$ {#eq-mu-lognormal}
 
-Al sustituir las medias y varianzas de cada temporada en estas relaciones, obtenemos los parámetros exactos de la distribución Log-normal que modelará la duración de las fallas eléctricas en cada temporada:
+Al sustituir las medias y varianzas empíricas de cada temporada en las ecuaciones anteriores, obtenemos los parámetros exactos de la distribución Log-normal que modelará la duración de las fallas eléctricas en cada temporada:
 
-| Temporada | Meses que lo integran | Media Empírica $\mathbb{E}[D]$ | Varianza Empírica $\mathbb{V}[D]$ | Parámetro $\mu$ | Parámetro $\sigma$ |
+| Temporada Climática | Meses que integran lo Integran | Media Ponderada $\mathbb{E}[D]$ | Varianza Ponderada $\mathbb{V}[D]$ | Parámetro $\mu$ | Parámetro $\sigma$ |
 |:---|:---:|:---:|:---:|:---:|:---:|
-| **Base (Invierno)** | Ene, Feb, Mar, Abr, Nov, Dic | 2.793 | 4.650 | 0.7933 | 0.6838 |
-| **Calor (Ola de Verano)** | May, Jun, Jul | 2.420 | 0.373 | 0.8529 | 0.2485 |
-| **Lluvias (Ciclones)** | Ago, Sep, Oct | 1.688 | 0.343 | 0.4667 | 0.3371 |
+| **Estabilidad (Invierno)** | Ene, Feb, Mar, Nov, Dic | 2.384 | 2.667 | 0.6766 | 0.6202 |
+| **Calor (Estiaje y Canícula)** | Abr, May, Jun, Jul | 2.983 | 2.651 | 0.9627 | 0.5106 |
+| **Lluvias (Tormentas)** | Ago, Sep, Oct | 1.688 | 0.343 | 0.4668 | 0.3372 |
 
-: Parámetros de la distribución Log-normal finales. {#tbl-parametros-lognormal}
+: Parámetros finales de la distribución Log-normal por temporada climática. {#tbl-parametros-lognormal}
+
+### Visualización de las Densidades de Probabilidad (PDF)
+
+Para comprender físicamente el comportamiento de los apagones en cada época del año, es fundamental analizar la Función de Densidad de Probabilidad (PDF, por sus siglas en inglés) de las tres distribuciones calibradas anteriormente. Matemáticamente, la función de densidad para una variable aleatoria $D$ con distribución Log-normal se define como:
+
+$$
+f(x; \mu, \sigma) = \frac{1}{x \sigma \sqrt{2\pi}} \exp\left( - \frac{(\ln x - \mu)^2}{2\sigma^2} \right), \quad \text{para } x > 0
+$$ {#eq-pdf-lognormal}
+
+Donde $x$ representa la duración del corte eléctrico en horas, y el área bajo la curva en un intervalo $[a, b]$ representa la probabilidad exacta de que un apagón dure entre $a$ y $b$ horas.
+
+A continuación, se grafican las densidades de probabilidad para cada temporada climática, utilizando los parámetros $\mu$ y $\sigma$ deducidos en la @tbl-parametros-lognormal. Para facilitar la comparación visual del riesgo, todas las gráficas se evalúan en una ventana de observación de 0 a 12 horas.
+
+![Función de densidad de probabilidad Log-normal para la Temporada de Estabilidad (Invierno). Su distribución muestra una dispersión considerable ($\sigma = 0.6202$), lo que refleja una mezcla de cortes breves y mantenimientos atípicos prolongados.](lognormal_invierno.png){#fig-lognormal-invierno width="85%" fig-align="center"}
+
+![Función de densidad de probabilidad Log-normal para la Temporada de Calor. Presenta el mayor desplazamiento hacia la derecha ($\mu = 0.9627$) y una "cola pesada", advirtiendo que los cortes por saturación térmica de transformadores tienen una alta probabilidad de prolongarse por varias horas, representando el mayor peligro para la red de frío.](lognormal_calor.png){#fig-lognormal-calor width="85%" fig-align="center"}
+
+![Función de densidad de probabilidad Log-normal para la Temporada de Tormentas (Lluvias). Exhibe un pico muy pronunciado al inicio y una cola corta ($\sigma = 0.3371$), lo que indica que, aunque los cortes por lluvia son frecuentes, la CFE logra restablecer el servicio rápidamente en la gran mayoría de los casos.](lognormal_lluvias.png){#fig-lognormal-lluvias width="85%" fig-align="center"}
+
+El análisis de estas tres distribuciones valida teóricamente la hipótesis de vulnerabilidad térmica de la investigación: el verdadero riesgo para la viabilidad de las vacunas no radica en la cantidad de cortes durante la época de huracanes, ya que estos suelen ser breves, sino en la pesada cola derecha de la distribución de la Temporada de Calor, donde los apagones prolongados coinciden con las temperaturas ambientales más agresivas del año.
+
+# HASTA AQUI
 
 ## Calibración de la Ecuación Diferencial Estocástica (EDE)
 

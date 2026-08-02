@@ -435,22 +435,26 @@ window.Quarto = {
   <li><a href="#calibración-mediante-la-regla-empírica-68-95-99.7" id="toc-calibración-mediante-la-regla-empírica-68-95-99.7" class="nav-link" data-scroll-target="#calibración-mediante-la-regla-empírica-68-95-99.7"><span class="header-section-number">3.5.1</span> Calibración mediante la Regla Empírica (68-95-99.7)</a></li>
   <li><a href="#sistema-de-amplitudes-cruzadas-a_1-y-a_2" id="toc-sistema-de-amplitudes-cruzadas-a_1-y-a_2" class="nav-link" data-scroll-target="#sistema-de-amplitudes-cruzadas-a_1-y-a_2"><span class="header-section-number">3.5.2</span> Sistema de Amplitudes Cruzadas (<span class="math inline">\(A_1\)</span> y <span class="math inline">\(A_2\)</span>)</a></li>
   </ul></li>
-  <li><a href="#validación-estocástica-y-análisis-de-la-anomalía-de-enero" id="toc-validación-estocástica-y-análisis-de-la-anomalía-de-enero" class="nav-link" data-scroll-target="#validación-estocástica-y-análisis-de-la-anomalía-de-enero"><span class="header-section-number">3.6</span> Validación Estocástica y Análisis de la Anomalía de Enero</a></li>
-  <li><a href="#distribución-log-normal-de-las-duraciones-de-las-fallas" id="toc-distribución-log-normal-de-las-duraciones-de-las-fallas" class="nav-link" data-scroll-target="#distribución-log-normal-de-las-duraciones-de-las-fallas"><span class="header-section-number">3.7</span> Distribución Log-Normal de las Duraciones de las Fallas</a>
+  <li><a href="#validación-del-modelo-y-análisis-de-la-anomalía-de-enero" id="toc-validación-del-modelo-y-análisis-de-la-anomalía-de-enero" class="nav-link" data-scroll-target="#validación-del-modelo-y-análisis-de-la-anomalía-de-enero"><span class="header-section-number">3.6</span> Validación del Modelo y Análisis de la Anomalía de Enero</a></li>
+  <li><a href="#sec-lognormal-duracion" id="toc-sec-lognormal-duracion" class="nav-link" data-scroll-target="#sec-lognormal-duracion"><span class="header-section-number">3.7</span> Distribución Log-Normal de las Duraciones de las Fallas electrícas</a>
   <ul class="collapse">
   <li><a href="#desglose-mensual-de-horas-de-interrupción" id="toc-desglose-mensual-de-horas-de-interrupción" class="nav-link" data-scroll-target="#desglose-mensual-de-horas-de-interrupción"><span class="header-section-number">3.7.1</span> Desglose Mensual de Horas de Interrupción</a></li>
-  <li><a href="#cálculo-de-medias-y-varianzas-por-régimen" id="toc-cálculo-de-medias-y-varianzas-por-régimen" class="nav-link" data-scroll-target="#cálculo-de-medias-y-varianzas-por-régimen"><span class="header-section-number">3.7.2</span> Cálculo de Medias y Varianzas por Régimen</a></li>
-  <li><a href="#transformación-analítica-a-parámetros-log-normales" id="toc-transformación-analítica-a-parámetros-log-normales" class="nav-link" data-scroll-target="#transformación-analítica-a-parámetros-log-normales"><span class="header-section-number">3.7.3</span> Transformación Analítica a Parámetros Log-Normales</a></li>
+  <li><a href="#cálculo-de-medias-y-varianzas-por-temporada-climática" id="toc-cálculo-de-medias-y-varianzas-por-temporada-climática" class="nav-link" data-scroll-target="#cálculo-de-medias-y-varianzas-por-temporada-climática"><span class="header-section-number">3.7.2</span> Cálculo de Medias y Varianzas por Temporada Climática</a></li>
+  <li><a href="#transformación-algebraica-a-parámetros-log-normales" id="toc-transformación-algebraica-a-parámetros-log-normales" class="nav-link" data-scroll-target="#transformación-algebraica-a-parámetros-log-normales"><span class="header-section-number">3.7.3</span> Transformación Algebraica a Parámetros Log-Normales</a></li>
+  <li><a href="#visualización-de-las-densidades-de-probabilidad-pdf" id="toc-visualización-de-las-densidades-de-probabilidad-pdf" class="nav-link" data-scroll-target="#visualización-de-las-densidades-de-probabilidad-pdf"><span class="header-section-number">3.7.4</span> Visualización de las Densidades de Probabilidad (PDF)</a></li>
   </ul></li>
-  <li><a href="#calibración-de-la-ecuación-diferencial-estocástica-ede" id="toc-calibración-de-la-ecuación-diferencial-estocástica-ede" class="nav-link" data-scroll-target="#calibración-de-la-ecuación-diferencial-estocástica-ede"><span class="header-section-number">3.8</span> Calibración de la Ecuación Diferencial Estocástica (EDE)</a>
+  <li><a href="#hasta-aqui" id="toc-hasta-aqui" class="nav-link" data-scroll-target="#hasta-aqui"><span class="header-section-number">4</span> HASTA AQUI</a>
   <ul class="collapse">
-  <li><a href="#sec-regimen-1" id="toc-sec-regimen-1" class="nav-link" data-scroll-target="#sec-regimen-1"><span class="header-section-number">3.8.1</span> Régimen 1: Operación Normal (<span class="math inline">\(\alpha(t) = 1\)</span>)</a></li>
-  <li><a href="#sec-regimen-2" id="toc-sec-regimen-2" class="nav-link" data-scroll-target="#sec-regimen-2"><span class="header-section-number">3.8.2</span> Régimen 2: Falla Eléctrica (<span class="math inline">\(\alpha(t) = 2\)</span>)</a></li>
-  <li><a href="#perturbaciones-discretas-apertura-de-puertas-n_puertat" id="toc-perturbaciones-discretas-apertura-de-puertas-n_puertat" class="nav-link" data-scroll-target="#perturbaciones-discretas-apertura-de-puertas-n_puertat"><span class="header-section-number">3.8.3</span> Perturbaciones Discretas: Apertura de Puertas (<span class="math inline">\(N_{puerta}(t)\)</span>)</a></li>
+  <li><a href="#calibración-de-la-ecuación-diferencial-estocástica-ede" id="toc-calibración-de-la-ecuación-diferencial-estocástica-ede" class="nav-link" data-scroll-target="#calibración-de-la-ecuación-diferencial-estocástica-ede"><span class="header-section-number">4.1</span> Calibración de la Ecuación Diferencial Estocástica (EDE)</a>
+  <ul class="collapse">
+  <li><a href="#sec-regimen-1" id="toc-sec-regimen-1" class="nav-link" data-scroll-target="#sec-regimen-1"><span class="header-section-number">4.1.1</span> Régimen 1: Operación Normal (<span class="math inline">\(\alpha(t) = 1\)</span>)</a></li>
+  <li><a href="#sec-regimen-2" id="toc-sec-regimen-2" class="nav-link" data-scroll-target="#sec-regimen-2"><span class="header-section-number">4.1.2</span> Régimen 2: Falla Eléctrica (<span class="math inline">\(\alpha(t) = 2\)</span>)</a></li>
+  <li><a href="#perturbaciones-discretas-apertura-de-puertas-n_puertat" id="toc-perturbaciones-discretas-apertura-de-puertas-n_puertat" class="nav-link" data-scroll-target="#perturbaciones-discretas-apertura-de-puertas-n_puertat"><span class="header-section-number">4.1.3</span> Perturbaciones Discretas: Apertura de Puertas (<span class="math inline">\(N_{puerta}(t)\)</span>)</a></li>
   </ul></li>
-  <li><a href="#sec-Arrhenius" id="toc-sec-Arrhenius" class="nav-link" data-scroll-target="#sec-Arrhenius"><span class="header-section-number">3.9</span> Cinética de Degradación Térmica (Ecuación de Arrhenius)</a>
+  <li><a href="#sec-Arrhenius" id="toc-sec-Arrhenius" class="nav-link" data-scroll-target="#sec-Arrhenius"><span class="header-section-number">4.2</span> Cinética de Degradación Térmica (Ecuación de Arrhenius)</a>
   <ul class="collapse">
-  <li><a href="#el-modelo-de-daño-térmico-acumulado-da" id="toc-el-modelo-de-daño-térmico-acumulado-da" class="nav-link" data-scroll-target="#el-modelo-de-daño-térmico-acumulado-da"><span class="header-section-number">3.9.1</span> El Modelo de Daño Térmico Acumulado (<span class="math inline">\(DA\)</span>)</a></li>
+  <li><a href="#el-modelo-de-daño-térmico-acumulado-da" id="toc-el-modelo-de-daño-térmico-acumulado-da" class="nav-link" data-scroll-target="#el-modelo-de-daño-térmico-acumulado-da"><span class="header-section-number">4.2.1</span> El Modelo de Daño Térmico Acumulado (<span class="math inline">\(DA\)</span>)</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -845,8 +849,8 @@ Figura&nbsp;3.1: Función de intensidad diaria de fallas eléctricas <span class
 </ul>
 </section>
 </section>
-<section id="validación-estocástica-y-análisis-de-la-anomalía-de-enero" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="validación-estocástica-y-análisis-de-la-anomalía-de-enero"><span class="header-section-number">3.6</span> Validación Estocástica y Análisis de la Anomalía de Enero</h2>
+<section id="validación-del-modelo-y-análisis-de-la-anomalía-de-enero" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="validación-del-modelo-y-análisis-de-la-anomalía-de-enero"><span class="header-section-number">3.6</span> Validación del Modelo y Análisis de la Anomalía de Enero</h2>
 <p>Por los fundamentos de los Procesos de Poisson No Homogéneos, el número esperado de cortes en cualquier intervalo <span class="math inline">\((t_1, t_2]\)</span> está determinado por la integral definida de su función de intensidad:</p>
 <p><span id="eq-integral-poisson"><span class="math display">\[
 \mathbb{E}[N(t_1, t_2)] = \int_{t_1}^{t_2} \lambda(t) dt
@@ -954,24 +958,31 @@ Tabla&nbsp;3.4: Validación de los Valores Esperados Teóricos vs.&nbsp;Datos Em
 <p>La suma acumulada de las 12 integrales arroja un total de <strong>65.90 cortes esperados</strong> a lo largo del año. Este resultado demuestra una congruencia matemática robusta frente a los 64 cortes teóricos calculados inicialmente. La diferencia de <span class="math inline">\(+2\)</span> cortes anuales funciona como un margen de seguridad metodológico, garantizando que el modelo numérico no subestime el estrés real sobre la red de frío.</p>
 <p>Finalmente, es importante destacar la inexactitud observada exclusivamente en el mes de <strong>Enero</strong> (7 cortes empíricos frente a los <span class="math inline">\(2.15\)</span> esperados por la integral). Dado que enero es un periodo climatológicamente estable (sin huracanes ni olas de calor), esta desviación es originada muy probablemente por mantenimientos extraordinarios o contingencias locales impredecibles ocurridas específicamente a inicios del año 2024.</p>
 </section>
-<section id="distribución-log-normal-de-las-duraciones-de-las-fallas" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="distribución-log-normal-de-las-duraciones-de-las-fallas"><span class="header-section-number">3.7</span> Distribución Log-Normal de las Duraciones de las Fallas</h2>
-<p>Una vez modelada la frecuencia con la que ocurren las interrupciones eléctricas, el siguiente componente crítico para el simulador termodinámico consiste en determinar cuánto tiempo dura cada apagón (<span class="math inline">\(D\)</span>). La duración de una falla es una variable aleatoria continua estrictamente positiva con una marcada asimetría hacia la derecha (la mayoría de los cortes se resuelven en pocas horas, pero existen eventos atípicos muy prolongados). Por este motivo, la teoría analítica establece que el comportamiento de las duraciones se modela mediante una distribución Log-normal:</p>
-<p><span class="math display">\[
+<section id="sec-lognormal-duracion" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-lognormal-duracion"><span class="header-section-number">3.7</span> Distribución Log-Normal de las Duraciones de las Fallas electrícas</h2>
+<p>Una vez modelada la frecuencia con la que ocurren las interrupciones eléctricas mediante el Proceso de Poisson, el siguiente componente crítico es determinar la duración exacta de cada apagón (<span class="math inline">\(D\)</span>). En teoría de probabilidad aplicada a la ingeniería de confiabilidad, el tiempo de reparación o restablecimiento de un sistema no sigue a una distribución normal estándar.</p>
+<p>La duración de una falla eléctrica es una variable aleatoria continua que presenta las siguientes dos características principales: 1. <strong>Dominio estrictamente positivo:</strong> El tiempo de interrupción no puede tomar valores negativos (<span class="math inline">\(D &gt; 0\)</span>). 2. <strong>Asimetría positiva (Cola pesada hacia la derecha):</strong> La inmensa mayoría de las fallas locales se resuelven en pocas horas (e.g., restablecimiento de fusibles o reconexiones de subestación), pero existe una probabilidad baja de eventos atípicos severos cuya reparación demora días enteros (e.g., explosión de transformadores o colapso de torres por huracanes).</p>
+<p>Debido a que una distribución Normal clásica asignaría probabilidad a tiempos negativos y subestimaría el riesgo de cortes prolongados, la literatura establece que las duraciones de las interrupciones eléctricas se modelan mediante una <strong>Distribución Log-normal</strong>:</p>
+<p><span id="eq-lognormal-def"><span class="math display">\[
 D \sim \text{LogNormal}(\mu, \sigma^2)
-\]</span></p>
-<p>Para calibrar los parámetros de escala <span class="math inline">\(\mu\)</span> (media de los logaritmos) y de forma <span class="math inline">\(\sigma\)</span> (desviación estándar de los logaritmos) para cada régimen estacional, es necesario procesar los indicadores empíricos de la CFE bajo un esquema de desagregación temporal.</p>
+\tag{3.11}\]</span></span></p>
+<p>Para calibrar el parámetro <span class="math inline">\(\mu\)</span> (media de los logaritmos) y el parámetro <span class="math inline">\(\sigma\)</span> (desviación estándar de los logaritmos) para cada temporada, es necesario utilizar los indicadores de la CFE.</p>
 <section id="desglose-mensual-de-horas-de-interrupción" class="level3" data-number="3.7.1">
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="desglose-mensual-de-horas-de-interrupción"><span class="header-section-number">3.7.1</span> Desglose Mensual de Horas de Interrupción</h3>
-<p>De acuerdo con el registro histórico municipal consolidado para el año 2024, la duración promedio general de una interrupción en Tuxtla Gutiérrez fue de <strong><span class="math inline">\(2.39\)</span> horas por corte</strong> <a href="#tbl-interrupciones-cfe" class="quarto-xref">Tabla&nbsp;<span>3.1</span></a>. Sabiendo que el factor de escala espacial redujo el riesgo del edificio a una esperanza de <strong><span class="math inline">\(64\)</span> cortes locales al año</strong>, podemos deducir la cantidad total de tiempo que el refrigerador experimentará desabasto eléctrico a lo largo de todo el año:</p>
+<p>De acuerdo con el registro histórico municipal consolidado para el año 2024, la duración promedio de un corte en Tuxtla Gutiérrez fue de <strong><span class="math inline">\(2.39\)</span> horas por corte</strong> <a href="#tbl-interrupciones-cfe" class="quarto-xref">Tabla&nbsp;<span>3.1</span></a>. Sabiendo que el factor de escala espacial redujo el riesgo de la unidad de salud a un promedio de <strong><span class="math inline">\(64\)</span> cortes al año</strong>, podemos calcular la cantidad total de tiempo que el refrigerador clínico experimentará desabasto eléctrico a lo largo de todo el año:</p>
 <p><span class="math display">\[
-\text{Horas Totales del Año} = 64 \text{ cortes/año} \times 2.39 \text{ horas/corte} = 152.96 \text{ horas/año}
+\text{Horas Totales Anuales} = 64 \text{ cortes/año} \times 2.39 \text{ horas/corte} = 152.96 \text{ horas}
 \]</span></p>
-<p>Para distribuir estas <span class="math inline">\(152.96\)</span> horas anuales entre los 12 meses respetando la estacionalidad de la red, utilizamos el indicador SAIDI acumulado del <em>Informe Anual de la CFE 2024</em> <a href="#tbl-saidi-saifi" class="quarto-xref">Tabla&nbsp;<span>3.2</span></a>. Primero, calculamos la diferencia marginal (<span class="math inline">\(\Delta \text{SAIDI}_i\)</span>) para aislar el impacto de cada mes. Posteriormente, mediante una regla de tres simple, equiparamos el SAIDI total acumulado al final del año (<span class="math inline">\(10.812\)</span> horas) con nuestras <span class="math inline">\(152.96\)</span> horas de afectación local. La asignación de horas de falla para cada mes viene dada por:</p>
+<p>Para distribuir estas <span class="math inline">\(152.96\)</span> horas a lo largo de los 12 meses del año, respetando la intensidad de daño a la infraestructura propia de cada época del año, utilizamos el indicador de duración acumulada SAIDI del <em>Informe Anual de la CFE 2024</em> <a href="#tbl-saidi-saifi" class="quarto-xref">Tabla&nbsp;<span>3.2</span></a>.</p>
+<p>El primer paso consiste en calcular la diferencia marginal (<span class="math inline">\(\Delta \text{SAIDI}_i = \text{SAIDI}_i - \text{SAIDI}_{i-1}\)</span>) para obtener el peso de cada mes individual. Posteriormente, aplicamos una <strong>regla de 3 simple</strong>: asumiendo que el valor total del SAIDI acumulado total (<span class="math inline">\(10.812\)</span> horas) representa el 100% de la afectación anual (equivalente a nuestras <span class="math inline">\(152.96\)</span> horas proyectadas), entonces el incremento de cualquier mes <span class="math inline">\(i\)</span> representará una fracción directamente proporcional de horas de corte para el centro de almacenamiento. Analíticamente, la ecuación de asignación es:</p>
+<p><span class="math display">\[
+\text{Horas del Mes}_i = \left( \frac{\Delta \text{SAIDI}_i}{\text{SAIDI}_{total}} \right) \times \text{Horas Totales Anuales}
+\]</span></p>
+<p>Sustituyendo los valores de nuestro escenario (<span class="math inline">\(\text{SAIDI}_{total} = 10.812\)</span> y <span class="math inline">\(\text{Horas Totales} = 152.96\)</span>), el modelo de asignación mensual queda como:</p>
 <p><span class="math display">\[
 \text{Horas del Mes}_i = \left( \frac{\Delta \text{SAIDI}_i}{10.812} \right) \times 152.96
 \]</span></p>
-<p>Finalmente, para conocer la duración promedio esperada de un corte individual en un mes específico (<span class="math inline">\(E_i\)</span>), se divide la cantidad de horas asignadas de ese mes entre el número de cortes calculados previamente <a href="#tbl-cortes-mensuales" class="quarto-xref">Tabla&nbsp;<span>3.3</span></a> (<span class="math inline">\(E_i = \text{Horas del Mes}_i / \text{Cortes}_i\)</span>):</p>
+<p>Finalmente, para conocer la duración media esperada de un corte individual en un mes específico (<span class="math inline">\(E_i\)</span>), se divide el número de horas asignadas a dicho mes entre la cantidad de cortes de ese mes calculados previamente en la <a href="#tbl-cortes-mensuales" class="quarto-xref">Tabla&nbsp;<span>3.3</span></a>. Es decir, <span class="math inline">\(E_i = \text{Horas del Mes}_i / \text{Cortes}_i\)</span>. Al hacer estos cálculos se obtienen los siguientes resultados:</p>
 <div id="tbl-duracion-cortes" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-duracion-cortes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -992,9 +1003,9 @@ Tabla&nbsp;3.5: Estimación de la duración promedio mensual por corte a partir 
 <th style="text-align: left;">Mes</th>
 <th style="text-align: center;">SAIDI Acumulado</th>
 <th style="text-align: center;"><span class="math inline">\(\Delta\)</span> SAIDI</th>
-<th style="text-align: center;">Horas del Mes Calculadas</th>
+<th style="text-align: center;">Duración Acumulada de las Interrupciones en el Mes</th>
 <th style="text-align: center;">Cortes del Mes</th>
-<th style="text-align: center;">Duración Media <span class="math inline">\(E_i\)</span> (Horas)</th>
+<th style="text-align: center;">Duración Promedio <span class="math inline">\(E_i\)</span> (Horas)</th>
 </tr>
 </thead>
 <tbody>
@@ -1100,45 +1111,50 @@ Tabla&nbsp;3.5: Estimación de la duración promedio mensual por corte a partir 
 </figure>
 </div>
 </section>
-<section id="cálculo-de-medias-y-varianzas-por-régimen" class="level3" data-number="3.7.2">
-<h3 data-number="3.7.2" class="anchored" data-anchor-id="cálculo-de-medias-y-varianzas-por-régimen"><span class="header-section-number">3.7.2</span> Cálculo de Medias y Varianzas por Régimen</h3>
-<p>Para alimentar la conmutación de regímenes de la EDE, agrupamos los meses en las tres temporadas climáticas analizadas. Sin embargo, realizar un promedio aritmético simple entre las duraciones mensuales introduciría un sesgo metodológico, ya que trataría por igual a un mes con 9 cortes que a uno con solo 2 cortes.</p>
-<p>Para resolver esto, calculamos la media empírica (<span class="math inline">\(\mathbb{E}[D_{reg}]\)</span>) y la varianza empírica (<span class="math inline">\(\mathbb{V}[D_{reg}]\)</span>) de cada régimen utilizando estadística descriptiva ponderada, donde el peso de cada mes está determinado estrictamente por su número de cortes (<span class="math inline">\(\omega_i = \text{Cortes}_i\)</span>). Analíticamente, es decir:</p>
-<p><span class="math display">\[
-\mathbb{E}[D_{reg}] = \frac{\sum \omega_i E_i}{\sum \omega_i} = \frac{\text{Total de Horas del Régimen}}{\text{Total de Cortes del Régimen}}
-\]</span></p>
-<p><span class="math display">\[
-\mathbb{V}[D_{reg}] = \frac{\sum \omega_i (E_i - \mathbb{E}[D_{reg}])^2}{\sum \omega_i}
-\]</span></p>
-<p>Agrupando los datos bajo este criterio de ponderación, se obtienen las siguientes métricas muestrales por temporada:</p>
+<section id="cálculo-de-medias-y-varianzas-por-temporada-climática" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="cálculo-de-medias-y-varianzas-por-temporada-climática"><span class="header-section-number">3.7.2</span> Cálculo de Medias y Varianzas por Temporada Climática</h3>
+<p>Para integrar con precisión la duración de los cortes dentro de los regímenes estacionales de la EDE, es necesario agrupar los datos mensuales de la <a href="#tbl-duracion-cortes" class="quarto-xref">Tabla&nbsp;<span>3.5</span></a> en las tres temporadas climáticas previamente delimitadas en el análisis del Proceso de Poisson. La conformación dichos grupos se debe a las siguientes razones termodinámicas:</p>
+<ol type="1">
+<li><strong>Temporada de Calor (Abril a Julio):</strong> Agrupa el periodo de máximo estiaje y temperaturas extremas, culminando en la canícula. Durante este cuatrimestre, la saturación térmica de los equipos de distribución eléctrica es máxima.</li>
+<li><strong>Temporada de Lluvias (Agosto a Octubre):</strong> Concentra el periodo crítico de huracanes y tormentas, caracterizado por daños mecánicos sobre la red eléctrica.</li>
+<li><strong>Estabilidad Invernal (Enero a Marzo, Noviembre y Diciembre):</strong> Meses de baja exigencia térmica ambiental, donde los apagones ocurren mayoritariamente a factores de mantenimiento.</li>
+</ol>
+<p>Realizar un promedio aritmético simple de las duraciones <span class="math inline">\(E_i\)</span> entre los meses de cada temporada introduciría un sesgo grave, ya que asignaría el mismo peso a un mes con 9 cortes que a uno con solo 2 cortes. Para garantizar la rigurosidad estadística, se calcula la media empírica (<span class="math inline">\(\mathbb{E}[D]\)</span>) y la varianza empírica (<span class="math inline">\(\mathbb{V}[D]\)</span>) mediante un modelo de <strong>estadística descriptiva ponderada</strong>, donde el peso de cada mes (<span class="math inline">\(\omega_i\)</span>) está dado por su frecuencia de cortes (<span class="math inline">\(\omega_i = \text{Cortes}_i\)</span>).</p>
+<p>Asi, las formulaciones para la esperanza y la varianza ponderada están dadas por:</p>
+<p><span id="eq-media-ponderada"><span class="math display">\[
+\mathbb{E}[D] = \frac{\sum_{i=1}^{n} \omega_i E_i}{\sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
+\tag{3.12}\]</span></span></p>
+<p><span id="eq-varianza-ponderada"><span class="math display">\[
+\mathbb{V}[D] = \frac{\sum_{i=1}^{n} \omega_i (E_i - \mathbb{E}[D])^2}{\sum_{i=1}^{n} \omega_i}
+\tag{3.13}\]</span></span></p>
+<p>Al sustituir los valores de los meses correspondientes en las <a href="#eq-media-ponderada" class="quarto-xref">Ecuación&nbsp;<span>3.12</span></a> y <a href="#eq-varianza-ponderada" class="quarto-xref">Ecuación&nbsp;<span>3.13</span></a>, se obtienen los siguientes resultados para cada temporada:</p>
 <ul>
-<li><p><strong>Temporada de Calor (Mayo, Junio y Julio):</strong> Acumula <span class="math inline">\(22\)</span> cortes y <span class="math inline">\(53.25\)</span> horas de interrupción, resultando en una duración media de <span class="math inline">\(\mathbb{E}[D] = 2.420\)</span> horas y una varianza de <span class="math inline">\(\mathbb{V}[D] = 0.373\)</span>.</p></li>
-<li><p><strong>Temporada de Lluvias (Agosto, Septiembre y Octubre):</strong> Suma <span class="math inline">\(21\)</span> cortes y <span class="math inline">\(35.45\)</span> horas de interrupción, generando una duración media de <span class="math inline">\(\mathbb{E}[D] = 1.688\)</span> horas y una varianza de <span class="math inline">\(\mathbb{V}[D] = 0.343\)</span>.</p></li>
-<li><p><strong>Temporada Base e Invierno (Resto de meses):</strong> Concentra <span class="math inline">\(23\)</span> cortes y <span class="math inline">\(64.25\)</span> horas, arrojando una duración media de <span class="math inline">\(\mathbb{E}[D] = 2.793\)</span> horas con una varianza más dispersa de <span class="math inline">\(\mathbb{V}[D] = 4.650\)</span> debido a la anomalía de abril.</p></li>
+<li><strong>Temporada de Calor (Abr, May, Jun, Jul):</strong> Acumula un total de <span class="math inline">\(25\)</span> cortes y <span class="math inline">\(74.58\)</span> horas de interrupción, arrojando una duración media alta de <span class="math inline">\(\mathbb{E}[D] = 2.983\)</span> horas y una varianza considerable de <span class="math inline">\(\mathbb{V}[D] = 2.651\)</span>, esto se debe a las anomalías de colapso de red registradas durante las olas de calor primaverales.</li>
+<li><strong>Temporada de Lluvias (Ago, Sep, Oct):</strong> Acumula <span class="math inline">\(21\)</span> cortes pero únicamente <span class="math inline">\(35.45\)</span> horas de interrupción. Esto nos da una media notablemente más baja de <span class="math inline">\(\mathbb{E}[D] = 1.688\)</span> horas y una varianza muy estable de <span class="math inline">\(\mathbb{V}[D] = 0.343\)</span>, indicando que las fallas por lluvia son frecuentes pero suelen ser restablecidas con rapidez.</li>
+<li><strong>Estabilidad Invernal (Ene, Feb, Mar, Nov, Dic):</strong> Acumula <span class="math inline">\(18\)</span> cortes y <span class="math inline">\(42.92\)</span> horas de interrupción. Su duración media es de <span class="math inline">\(\mathbb{E}[D] = 2.384\)</span> horas con una varianza alta de <span class="math inline">\(\mathbb{V}[D] = 2.667\)</span>, provocada por mantenimientos atípicos observados en los bordes del año (especialmente en enero y diciembre).</li>
 </ul>
 </section>
-<section id="transformación-analítica-a-parámetros-log-normales" class="level3" data-number="3.7.3">
-<h3 data-number="3.7.3" class="anchored" data-anchor-id="transformación-analítica-a-parámetros-log-normales"><span class="header-section-number">3.7.3</span> Transformación Analítica a Parámetros Log-Normales</h3>
-<p>Una vez que conocemos la media (<span class="math inline">\(\mathbb{E}[D]\)</span>) y la varianza (<span class="math inline">\(\mathbb{V}[D]\)</span>) del sistema, debemos mapearlas hacia los parámetros analíticos internos <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\sigma\)</span> que requiere la función de distribución de probabilidad Log-normal.</p>
-<p>La esperanza y la varianza de una variable aleatoria con distribución Log-normal están dadas por las siguientes dos identidades:</p>
+<section id="transformación-algebraica-a-parámetros-log-normales" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="transformación-algebraica-a-parámetros-log-normales"><span class="header-section-number">3.7.3</span> Transformación Algebraica a Parámetros Log-Normales</h3>
+<p>Una vez conocidas las medias (<span class="math inline">\(\mathbb{E}[D]\)</span>) y varianzas (<span class="math inline">\(\mathbb{V}[D]\)</span>), estas deben transformarse hacia los parámetros <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\sigma\)</span> que conforman la función de distribución Log-normal.</p>
+<p>La teoría de la probabilidad nos dice que la esperanza y la varianza de una variable con distribución Log-normal dependen de sus parámetros a través del siguiente sistema de ecuaciones no lineales:</p>
 <p><span class="math display">\[
 \mathbb{E}[D] = \exp\left(\mu + \frac{\sigma^2}{2}\right)
+\]</span> <span class="math display">\[
+\mathbb{V}[D] = \left[\exp(\sigma^2) - 1\right] \exp(2\mu + \sigma^2)
 \]</span></p>
-<p><span class="math display">\[
-\mathbb{V}[D] = \left[\exp(\sigma^2) - 1\right] \exp(2\mu + \sigma^2) = (\mathbb{E}[D])^2 \left[\exp(\sigma^2) - 1\right]
-\]</span></p>
-<p>Al resolver este sistema de ecuaciones no lineales de forma algebraica para despejar los parámetros objetivos en función de los momentos estadísticos conocidos, se deducen las fórmulas generales de calibración:</p>
-<p><span class="math display">\[
+<p>Sustituyendo la primera ecuación en la segunda, la varianza puede reescribirse como <span class="math inline">\(\mathbb{V}[D] = (\mathbb{E}[D])^2 \left[\exp(\sigma^2) - 1\right]\)</span>. A partir de esta simplificación, se despeja el sistema para obtener las fórmulas inversas de calibración:</p>
+<p><span id="eq-sigma-lognormal"><span class="math display">\[
 \sigma = \sqrt{\ln\left(1 + \frac{\mathbb{V}[D]}{(\mathbb{E}[D])^2}\right)}
-\]</span></p>
-<p><span class="math display">\[
+\tag{3.14}\]</span></span></p>
+<p><span id="eq-mu-lognormal"><span class="math display">\[
 \mu = \ln(\mathbb{E}[D]) - \frac{\sigma^2}{2} = \ln\left( \frac{(\mathbb{E}[D])^2}{\sqrt{\mathbb{V}[D] + (\mathbb{E}[D])^2}} \right)
-\]</span></p>
-<p>Al sustituir las medias y varianzas de cada temporada en estas relaciones, obtenemos los parámetros exactos de la distribución Log-normal que modelará la duración de las fallas eléctricas en cada temporada:</p>
+\tag{3.15}\]</span></span></p>
+<p>Al sustituir las medias y varianzas empíricas de cada temporada en las ecuaciones anteriores, obtenemos los parámetros exactos de la distribución Log-normal que modelará la duración de las fallas eléctricas en cada temporada:</p>
 <div id="tbl-parametros-lognormal" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-parametros-lognormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabla&nbsp;3.6: Parámetros de la distribución Log-normal finales.
+Tabla&nbsp;3.6: Parámetros finales de la distribución Log-normal por temporada climática.
 </figcaption>
 <div aria-describedby="tbl-parametros-lognormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -1152,38 +1168,38 @@ Tabla&nbsp;3.6: Parámetros de la distribución Log-normal finales.
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Temporada</th>
-<th style="text-align: center;">Meses que lo integran</th>
-<th style="text-align: center;">Media Empírica <span class="math inline">\(\mathbb{E}[D]\)</span></th>
-<th style="text-align: center;">Varianza Empírica <span class="math inline">\(\mathbb{V}[D]\)</span></th>
+<th style="text-align: left;">Temporada Climática</th>
+<th style="text-align: center;">Meses que integran lo Integran</th>
+<th style="text-align: center;">Media Ponderada <span class="math inline">\(\mathbb{E}[D]\)</span></th>
+<th style="text-align: center;">Varianza Ponderada <span class="math inline">\(\mathbb{V}[D]\)</span></th>
 <th style="text-align: center;">Parámetro <span class="math inline">\(\mu\)</span></th>
 <th style="text-align: center;">Parámetro <span class="math inline">\(\sigma\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Base (Invierno)</strong></td>
-<td style="text-align: center;">Ene, Feb, Mar, Abr, Nov, Dic</td>
-<td style="text-align: center;">2.793</td>
-<td style="text-align: center;">4.650</td>
-<td style="text-align: center;">0.7933</td>
-<td style="text-align: center;">0.6838</td>
+<td style="text-align: left;"><strong>Estabilidad (Invierno)</strong></td>
+<td style="text-align: center;">Ene, Feb, Mar, Nov, Dic</td>
+<td style="text-align: center;">2.384</td>
+<td style="text-align: center;">2.667</td>
+<td style="text-align: center;">0.6766</td>
+<td style="text-align: center;">0.6202</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Calor (Ola de Verano)</strong></td>
-<td style="text-align: center;">May, Jun, Jul</td>
-<td style="text-align: center;">2.420</td>
-<td style="text-align: center;">0.373</td>
-<td style="text-align: center;">0.8529</td>
-<td style="text-align: center;">0.2485</td>
+<td style="text-align: left;"><strong>Calor (Estiaje y Canícula)</strong></td>
+<td style="text-align: center;">Abr, May, Jun, Jul</td>
+<td style="text-align: center;">2.983</td>
+<td style="text-align: center;">2.651</td>
+<td style="text-align: center;">0.9627</td>
+<td style="text-align: center;">0.5106</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Lluvias (Ciclones)</strong></td>
+<td style="text-align: left;"><strong>Lluvias (Tormentas)</strong></td>
 <td style="text-align: center;">Ago, Sep, Oct</td>
 <td style="text-align: center;">1.688</td>
 <td style="text-align: center;">0.343</td>
-<td style="text-align: center;">0.4667</td>
-<td style="text-align: center;">0.3371</td>
+<td style="text-align: center;">0.4668</td>
+<td style="text-align: center;">0.3372</td>
 </tr>
 </tbody>
 </table>
@@ -1191,9 +1207,51 @@ Tabla&nbsp;3.6: Parámetros de la distribución Log-normal finales.
 </figure>
 </div>
 </section>
+<section id="visualización-de-las-densidades-de-probabilidad-pdf" class="level3" data-number="3.7.4">
+<h3 data-number="3.7.4" class="anchored" data-anchor-id="visualización-de-las-densidades-de-probabilidad-pdf"><span class="header-section-number">3.7.4</span> Visualización de las Densidades de Probabilidad (PDF)</h3>
+<p>Para comprender físicamente el comportamiento de los apagones en cada época del año, es fundamental analizar la Función de Densidad de Probabilidad (PDF, por sus siglas en inglés) de las tres distribuciones calibradas anteriormente. Matemáticamente, la función de densidad para una variable aleatoria <span class="math inline">\(D\)</span> con distribución Log-normal se define como:</p>
+<p><span id="eq-pdf-lognormal"><span class="math display">\[
+f(x; \mu, \sigma) = \frac{1}{x \sigma \sqrt{2\pi}} \exp\left( - \frac{(\ln x - \mu)^2}{2\sigma^2} \right), \quad \text{para } x &gt; 0
+\tag{3.16}\]</span></span></p>
+<p>Donde <span class="math inline">\(x\)</span> representa la duración del corte eléctrico en horas, y el área bajo la curva en un intervalo <span class="math inline">\([a, b]\)</span> representa la probabilidad exacta de que un apagón dure entre <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> horas.</p>
+<p>A continuación, se grafican las densidades de probabilidad para cada temporada climática, utilizando los parámetros <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\sigma\)</span> deducidos en la <a href="#tbl-parametros-lognormal" class="quarto-xref">Tabla&nbsp;<span>3.6</span></a>. Para facilitar la comparación visual del riesgo, todas las gráficas se evalúan en una ventana de observación de 0 a 12 horas.</p>
+<div id="fig-lognormal-invierno" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lognormal-invierno-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="lognormal_invierno.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lognormal-invierno-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.2: Función de densidad de probabilidad Log-normal para la Temporada de Estabilidad (Invierno). Su distribución muestra una dispersión considerable (<span class="math inline">\(\sigma = 0.6202\)</span>), lo que refleja una mezcla de cortes breves y mantenimientos atípicos prolongados.
+</figcaption>
+</figure>
+</div>
+<div id="fig-lognormal-calor" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lognormal-calor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="lognormal_calor.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lognormal-calor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.3: Función de densidad de probabilidad Log-normal para la Temporada de Calor. Presenta el mayor desplazamiento hacia la derecha (<span class="math inline">\(\mu = 0.9627\)</span>) y una “cola pesada”, advirtiendo que los cortes por saturación térmica de transformadores tienen una alta probabilidad de prolongarse por varias horas, representando el mayor peligro para la red de frío.
+</figcaption>
+</figure>
+</div>
+<div id="fig-lognormal-lluvias" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lognormal-lluvias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="lognormal_lluvias.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lognormal-lluvias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.4: Función de densidad de probabilidad Log-normal para la Temporada de Tormentas (Lluvias). Exhibe un pico muy pronunciado al inicio y una cola corta (<span class="math inline">\(\sigma = 0.3371\)</span>), lo que indica que, aunque los cortes por lluvia son frecuentes, la CFE logra restablecer el servicio rápidamente en la gran mayoría de los casos.
+</figcaption>
+</figure>
+</div>
+<p>El análisis de estas tres distribuciones valida teóricamente la hipótesis de vulnerabilidad térmica de la investigación: el verdadero riesgo para la viabilidad de las vacunas no radica en la cantidad de cortes durante la época de huracanes, ya que estos suelen ser breves, sino en la pesada cola derecha de la distribución de la Temporada de Calor, donde los apagones prolongados coinciden con las temperaturas ambientales más agresivas del año.</p>
 </section>
-<section id="calibración-de-la-ecuación-diferencial-estocástica-ede" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="calibración-de-la-ecuación-diferencial-estocástica-ede"><span class="header-section-number">3.8</span> Calibración de la Ecuación Diferencial Estocástica (EDE)</h2>
+</section>
+<section id="hasta-aqui" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> HASTA AQUI</h1>
+<section id="calibración-de-la-ecuación-diferencial-estocástica-ede" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="calibración-de-la-ecuación-diferencial-estocástica-ede"><span class="header-section-number">4.1</span> Calibración de la Ecuación Diferencial Estocástica (EDE)</h2>
 <p>Enlazando la dinámica de la red eléctrica con la termodinámica, recordamos que la temperatura interna <span class="math inline">\(T(t)\)</span> del refrigerador está gobernada por un proceso de Ornstein-Uhlenbeck con saltos y conmutación de régimen. Para que la transición hacia el modelo computacional sea transparente, desglosamos la ecuación abstracta en su forma operativa mediante un sistema de ecuaciones acopladas, el cual depende estrictamente del estado del suministro eléctrico <span class="math inline">\(\alpha(t)\)</span>:</p>
 <p><span id="eq-ede-operativa"><span class="math display">\[
 dT(t) =
@@ -1201,7 +1259,7 @@ dT(t) =
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + \gamma dN_{puerta}(t) &amp; \text{si } \alpha(t) = 1 \text{ (Con energía)} \\
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) + \gamma dN_{puerta}(t) &amp; \text{si } \alpha(t) = 2 \text{ (Corte de luz)}
 \end{cases}
-\tag{3.11}\]</span></span></p>
+\tag{4.1}\]</span></span></p>
 <p>Para la modelación estocástica, los parámetros de inercia térmica y tiempo de autonomía (<em>holdover time</em>) se calibraron utilizando los datos técnicos del refrigerador institucional Haier HBC-150, el cual cuenta con certificación de protección Grado A contra congelamiento en el catálogo oficial PQS de la OMS <span class="citation" data-cites="oms_pqs_e003">(<a href="references.html#ref-oms_pqs_e003" role="doc-biblioref">Organización Mundial de la Salud 2024</a>)</span>.</p>
 <div id="fig-haier-hbc150" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1209,13 +1267,13 @@ dT(t) =
 <img src="haier_hbc150.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-haier-hbc150-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;3.2: Refrigerador institucional para vacunas Haier HBC-150 (Icelined Refrigerator). Este equipo tipo cofre cuenta con certificación PQS de la OMS y masa térmica incorporada para garantizar la red de frío durante cortes prolongados de energía eléctrica.
+Figura&nbsp;4.1: Refrigerador institucional para vacunas Haier HBC-150 (Icelined Refrigerator). Este equipo tipo cofre cuenta con certificación PQS de la OMS y masa térmica incorporada para garantizar la red de frío durante cortes prolongados de energía eléctrica.
 </figcaption>
 </figure>
 </div>
-<p>Para reflejar el comportamiento de este equipo bajo los rigurosos estándares normativos, calibramos cada coeficiente de la <a href="#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>3.11</span></a> con base en la física del enfriamiento:</p>
-<section id="sec-regimen-1" class="level3" data-number="3.8.1">
-<h3 data-number="3.8.1" class="anchored" data-anchor-id="sec-regimen-1"><span class="header-section-number">3.8.1</span> Régimen 1: Operación Normal (<span class="math inline">\(\alpha(t) = 1\)</span>)</h3>
+<p>Para reflejar el comportamiento de este equipo bajo los rigurosos estándares normativos, calibramos cada coeficiente de la <a href="#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>4.1</span></a> con base en la física del enfriamiento:</p>
+<section id="sec-regimen-1" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="sec-regimen-1"><span class="header-section-number">4.1.1</span> Régimen 1: Operación Normal (<span class="math inline">\(\alpha(t) = 1\)</span>)</h3>
 <p>Ocurre cuando hay energía eléctrica y el compresor funciona empujando la temperatura hacia su objetivo.</p>
 <ul>
 <li><strong>Temperatura de Consigna (<span class="math inline">\(\theta_{set}\)</span>)</strong>: Se establece en <strong><span class="math inline">\(4^\circ \text{C}\)</span></strong>, el centro ideal del rango normativo de seguridad (2°C a 8°C).</li>
@@ -1223,8 +1281,8 @@ Figura&nbsp;3.2: Refrigerador institucional para vacunas Haier HBC-150 (Icelined
 <li><strong>Ruido del Compresor (<span class="math inline">\(\sigma_{on}\)</span>)</strong>: El motor se prende y se apaga constantemente para mantener los 4°C. Acorde con un intervalo de confianza del 99.7% (aplicando la regla de las 3 sigmas de la distribución normal), queremos que las fluctuaciones máximas no excedan los <span class="math inline">\(\pm 2^\circ \text{C}\)</span> para evitar llegar a los 2°C (riesgo de congelación) o a los 6°C. Sabiendo que <span class="math inline">\(3 \times SD = 2^\circ \text{C}\)</span>, la desviación estándar estacionaria debe ser <span class="math inline">\(SD \approx 0.667^\circ \text{C}\)</span>. Despejando la volatilidad de la varianza a largo plazo del proceso Ornstein-Uhlenbeck <span class="math inline">\(\left(SD = \frac{\sigma_{on}}{\sqrt{2\kappa_{on}}}\right)\)</span>: <span class="math display">\[0.667 = \frac{\sigma_{on}}{\sqrt{2(0.1188)}} \implies \sigma_{on} \approx 0.325\]</span></li>
 </ul>
 </section>
-<section id="sec-regimen-2" class="level3" data-number="3.8.2">
-<h3 data-number="3.8.2" class="anchored" data-anchor-id="sec-regimen-2"><span class="header-section-number">3.8.2</span> Régimen 2: Falla Eléctrica (<span class="math inline">\(\alpha(t) = 2\)</span>)</h3>
+<section id="sec-regimen-2" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="sec-regimen-2"><span class="header-section-number">4.1.2</span> Régimen 2: Falla Eléctrica (<span class="math inline">\(\alpha(t) = 2\)</span>)</h3>
 <p>Se activa cuando el Proceso de Poisson dice que hay un apagón y el enfriamiento activo se detiene.</p>
 <ul>
 <li><strong>Temperatura Exterior (<span class="math inline">\(T_{amb}(t)\)</span>)</strong>: La temperatura ambiente actúa como el atractor del sistema. Dado que en Tuxtla Gutiérrez el calor oscila drásticamente a lo largo del día, esta variable se modela computacionalmente como una función senoidal que alcanza su pico máximo a las 15:00 hrs. Para nuestra calibración analítica del peor escenario (estiaje), evaluamos este atractor en un máximo absoluto de <strong><span class="math inline">\(43^\circ \text{C}\)</span></strong>. En este escenario, el término <span class="math inline">\((T_{amb} - T(t))\)</span> se vuelve enorme y genera un calentamiento fuertemente acelerado.</li>
@@ -1232,8 +1290,8 @@ Figura&nbsp;3.2: Refrigerador institucional para vacunas Haier HBC-150 (Icelined
 <li><strong>Volatilidad Externa (<span class="math inline">\(\sigma_{off}\)</span>)</strong>: Sin el compresor encendido, las variaciones aleatorias obedecen únicamente a micro-filtraciones de aire por las gomas de la puerta. Por ello, establecemos un ruido significativamente menor: <span class="math inline">\(\sigma_{off} = 0.05\)</span>.</li>
 </ul>
 </section>
-<section id="perturbaciones-discretas-apertura-de-puertas-n_puertat" class="level3" data-number="3.8.3">
-<h3 data-number="3.8.3" class="anchored" data-anchor-id="perturbaciones-discretas-apertura-de-puertas-n_puertat"><span class="header-section-number">3.8.3</span> Perturbaciones Discretas: Apertura de Puertas (<span class="math inline">\(N_{puerta}(t)\)</span>)</h3>
+<section id="perturbaciones-discretas-apertura-de-puertas-n_puertat" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="perturbaciones-discretas-apertura-de-puertas-n_puertat"><span class="header-section-number">4.1.3</span> Perturbaciones Discretas: Apertura de Puertas (<span class="math inline">\(N_{puerta}(t)\)</span>)</h3>
 <p>De acuerdo con las normativas internacionales de manejo de red de frío, el refrigerador debe abrirse idealmente un máximo de dos veces al día: una apertura rutinaria matutina para extraer los frascos necesarios para la jornada y una vespertina para resguardar los sobrantes.</p>
 <ul>
 <li><strong>Tasa de Aperturas (<span class="math inline">\(\lambda_{puerta}\)</span>)</strong>: Dado que la apertura matutina es un evento operativo fijo, la verdadera estocasticidad recae en la tarde, ya que el ingreso de biológicos depende de si hubo sobrantes en los termos clínicos. Por ello, la perturbación aleatoria se restringe a este momento y se modela computacionalmente con un Proceso de Poisson Homogéneo con una tasa de <span class="math inline">\(\lambda = 1\)</span> evento/día.</li>
@@ -1241,21 +1299,21 @@ Figura&nbsp;3.2: Refrigerador institucional para vacunas Haier HBC-150 (Icelined
 </ul>
 </section>
 </section>
-<section id="sec-Arrhenius" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="sec-Arrhenius"><span class="header-section-number">3.9</span> Cinética de Degradación Térmica (Ecuación de Arrhenius)</h2>
+<section id="sec-Arrhenius" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-Arrhenius"><span class="header-section-number">4.2</span> Cinética de Degradación Térmica (Ecuación de Arrhenius)</h2>
 <p>La Ecuación Diferencial Estocástica calibrada anteriormente nos permite simular con alta precisión la temperatura interna del refrigerador <span class="math inline">\(T(t)\)</span>. Sin embargo, para evaluar el impacto en la salud pública, es necesario traducir estas variaciones térmicas en pérdida de viabilidad del biológico.</p>
 <p>La degradación de las vacunas (particularmente las vivas atenuadas, como el biológico contra el Sarampión o la Poliomielitis) es un proceso de desnaturalización proteica que se acelera exponencialmente con el calor. Esta velocidad de degradación <span class="math inline">\(k(T)\)</span> se modela mediante la <strong>Ecuación de Arrhenius</strong> <span class="citation" data-cites="chen2009thermostable">(<a href="references.html#ref-chen2009thermostable" role="doc-biblioref">Chen y Kristensen 2009</a>)</span>:</p>
 <p><span id="eq-Arrhenius"><span class="math display">\[
 k(T(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right)
-\tag{3.12}\]</span></span></p>
+\tag{4.2}\]</span></span></p>
 <p>Donde la temperatura <span class="math inline">\(T_K(t) = T(t) + 273.15\)</span> se expresa en grados Kelvin y los parámetros cinéticos para un biológico termosensible genérico se establecen como:</p>
 <ul>
 <li><strong>Constante Universal de los Gases (<span class="math inline">\(R\)</span>)</strong>: <span class="math inline">\(8.314 \, \text{J/(mol} \cdot \text{K)}\)</span>.</li>
 <li><strong>Energía de Activación (<span class="math inline">\(E_a\)</span>)</strong>: Se calibra en <strong><span class="math inline">\(85,000 \, \text{J/mol}\)</span></strong> (<span class="math inline">\(85 \text{ kJ/mol}\)</span>). Este valor representa la barrera energética que debe superarse para que las proteínas del antígeno comiencen a romperse irreversiblemente.</li>
 <li><strong>Factor Pre-exponencial (<span class="math inline">\(A\)</span>)</strong>: Se ajusta a un valor de <strong><span class="math inline">\(1.2 \times 10^{14}\)</span></strong>. Este factor de frecuencia asegura que la tasa de degradación sea prácticamente nula cuando el equipo opera correctamente en el rango normativo de 2°C a 8°C, pero escale logarítmicamente durante una excursión térmica severa.</li>
 </ul>
-<section id="el-modelo-de-daño-térmico-acumulado-da" class="level3" data-number="3.9.1">
-<h3 data-number="3.9.1" class="anchored" data-anchor-id="el-modelo-de-daño-térmico-acumulado-da"><span class="header-section-number">3.9.1</span> El Modelo de Daño Térmico Acumulado (<span class="math inline">\(DA\)</span>)</h3>
+<section id="el-modelo-de-daño-térmico-acumulado-da" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="el-modelo-de-daño-térmico-acumulado-da"><span class="header-section-number">4.2.1</span> El Modelo de Daño Térmico Acumulado (<span class="math inline">\(DA\)</span>)</h3>
 <p>En la práctica clínica normativa, las variaciones térmicas dentro del rango seguro (2°C a 8°C) se consideran tolerables y su impacto en la caducidad a corto plazo es ignorado. El daño crítico ocurre exclusivamente cuando la red de frío se rompe.</p>
 <p>Para modelar este protocolo operativo dentro de nuestra simulación, el <strong>Daño Acumulado (<span class="math inline">\(DA\)</span>)</strong> se calcula como la integral de la tasa de Arrhenius, condicionada por una función indicadora <span class="math inline">\(\mathbb{I}_{\{T(t) &gt; 8^\circ\text{C}\}}\)</span> que “enciende” el reloj de degradación únicamente cuando la temperatura cruza el límite superior de seguridad:</p>
 <p><span class="math display">\[
@@ -1278,6 +1336,7 @@ Organización Mundial de la Salud. 2024. <em>WHO Immunisation Devices - Performa
 Secretaría de Energía. 2024. <span>«Programa para el Desarrollo del Sistema Eléctrico Nacional (PRODESEN) 2024-2038»</span>. Ciudad de México: Gobierno de México.
 </div>
 </div>
+</section>
 </section>
 </section>
 
