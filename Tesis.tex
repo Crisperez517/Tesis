@@ -221,7 +221,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-07-31}
+\date{2026-08-01}
 \begin{document}
 \maketitle
 
@@ -1368,7 +1368,7 @@ interrupciones y su duración para el municipio de Tuxtla Gutiérrez.
 
 A partir de dicha solicitud, se recabó el comportamiento histórico del
 municipio para el periodo comprendido entre los años 2019 y 2025. La
-Tabla~\ref{tbl-interrupciones-cfe} contien dicha información,
+Tabla~\ref{tbl-interrupciones-cfe} contiene dicha información,
 presentando el número de interrupciones promedio por mes y la duración
 promedio en horas por cada corte de energía.
 
@@ -1436,11 +1436,11 @@ Escala}\label{justificaciuxf3n-de-la-reducciuxf3n-de-escala}
 
 El valor de \(516\) cortes al año obtenido en la
 Ecuación~\ref{eq-cortes-totales} es un dato agregado de todo el
-municipio. En la modelación aplicada, utilizar directamente este valor
-para un solo refrigerador implicaría asumir que el edificio clínico
-sufre más de un apagón diario, lo cual no es físicamente real. Este
-error ocurre al ignorar que un edificio está conectado a un solo nodo de
-la red, no a todos simultáneamente.
+municipio, asi que utilizar directamente este valor para un solo
+refrigerador implicaría asumir que el centro de almacenamiento de
+vacunas sufre más de un apagón diario, lo cual no es físicamente real.
+Este error ocurre al ignorar que un edificio está conectado a un solo
+nodo de la red, no a todos simultáneamente.
 
 Para solucionar esto, introducimos un factor de escala espacial. De
 acuerdo con el Programa para el Desarrollo del Sistema Eléctrico
@@ -1455,34 +1455,33 @@ Mactumatzá y Real del Bosque).
 \subsection{La Esperanza Matemática
 Local}\label{la-esperanza-matemuxe1tica-local}
 
-Asumiendo que las fallas de transmisión se distribuyen de manera
-uniforme sobre estas infraestructuras mediante el principio de razón
-insuficiente de Laplace, la probabilidad \(p\) de que un evento afecte a
-la subestación de interés (Tuxtla Norte, encargada de alimentar la zona
-de hospitales y laboratorios de la Colonia Maya) es \(p = 1/8\).
+Asumiendo que los cortes de energía se distribuyen de manera uniforme
+sobre estas subestaciones, la probabilidad \(p\) de que un corte afecte
+a la subestación de interés (Tuxtla Norte, encargada de alimentar la
+zona de hospitales y laboratorios de la Colonia Maya) es \(p = 1/8\).
 
-Por consiguiente, el número de cortes que absorbe la clínica local se
-comporta como una variable aleatoria binomial
-\(N_{local} \sim \mathcal{B}(N_{total}, p)\), cuya esperanza matemática
-es:
+Por consiguiente, el número de cortes que tiene el centro de
+almacenamiento de vacunas se comporta como una variable aleatoria
+binomial \(N_{local} \sim \mathcal{B}(N_{total}, p)\), cuya esperanza
+matemática es:
 
 \begin{equation}\phantomsection\label{eq-esperanza-local}{
-\mathbb{E}[N_{local}] = \frac{516 \text{ cortes}}{8 \text{ subestaciones}} = 64.5 \approx 64 \text{ cortes al año}
+\mathbb{E}[N_{local}] = N_{total} \times p = \frac{516 \text{ cortes}}{8 \text{ subestaciones}} = 64.5 \approx 64 \text{ cortes al año}
 }\end{equation}
 
-Al ajustar al entero más cercano para mantener la naturaleza discreta de
-los eventos, establecemos una base realista de \textbf{64 interrupciones
-esperadas al año} para nuestra simulación.
+Al redondear la esperanza a un número entero, establecemos una base
+realista de \textbf{64 interrupciones esperadas al año} para nuestra
+simulación.
 
 \section{Distribución Temporal de las
 Fallas}\label{sec-distribucion-temporal}
 
 Las interrupciones no ocurren de manera homogénea a lo largo del año (es
-decir, no se presentan exactamente 5.33 cortes idénticos cada mes). La
-variabilidad mensual depende directamente de los factores climáticos
-estacionales de la región. Para no asignar los apagones de manera
-aleatoria, utilizamos el comportamiento documentado en el \emph{Informe
-Anual de la CFE 2024} (\citeproc{ref-cfe2024informe}{Comisión Federal de
+decir, no ocurren exactamente 5.33 cortes cada mes). La variabilidad
+mensual depende directamente de los factores climáticos estacionales de
+la región. Para no asignar los apagones de cada mes de manera aleatoria,
+utilizamos el comportamiento documentado en el \emph{Informe Anual de la
+CFE 2024} (\citeproc{ref-cfe2024informe}{Comisión Federal de
 Electricidad 2024}), específicamente en su página 82, donde se registra
 la evolución de los indicadores de continuidad del servicio a lo largo
 de los meses.
@@ -1523,7 +1522,7 @@ el índice SAIDI se define analíticamente mediante:
 
 A partir de estas definiciones, la Tabla~\ref{tbl-saidi-saifi} presenta
 la evolución mensual acumulada de los indicadores SAIDI y SAIFI
-reportada en la página 82 del informe de la CFE.
+reportada en la página 82 del informe anual de la CFE.
 
 \begin{longtable}[]{@{}lcc@{}}
 \caption{Evolución mensual acumulada de los indicadores SAIDI y SAIFI
@@ -1555,7 +1554,7 @@ Diciembre & 10.812 & 0.113 \\
 
 Dado que el informe de la CFE publica el indicador SAIFI de forma
 acumulada, es necesario calcular la diferencia marginal (\(\Delta\))
-respecto al mes anterior para aislar el peso estadístico de cada mes de
+respecto al mes anterior para obtener el peso estadístico de cada mes de
 forma individual:
 
 \begin{equation}\phantomsection\label{eq-delta-saifi}{
@@ -1584,8 +1583,8 @@ ecuación del modelo es:
 }\end{equation}
 
 Al hacer este cálculo y redondeando al entero más cercano (realizando un
-ajuste para mantener la conservación de la suma total en 64), obtenemos
-la distribución estacional empírica de fallas presentada en la
+ajuste para conservar la suma total en 64 cortes anuales), obtenemos la
+distribución estacional de las fallas eléctricas presentada en la
 Tabla~\ref{tbl-cortes-mensuales}.
 
 \begin{longtable}[]{@{}
@@ -1593,8 +1592,8 @@ Tabla~\ref{tbl-cortes-mensuales}.
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}@{}}
-\caption{Distribución estacional de los 64 cortes locales calculada
-mediante proporcionalidad sobre el SAIFI
+\caption{Distribución estacional de los 64 cortes calculada mediante
+proporcionalidad sobre el SAIFI
 2024.}\label{tbl-cortes-mensuales}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -1650,6 +1649,8 @@ lluvias, tormentas tropicales y huracanes en el Sureste mexicano,
 eventos climáticos que suelen derribar líneas de alta tensión y afectar
 transformadores locales. En contraste, la época invernal se consolida
 como el periodo de máxima estabilidad en el servicio.
+
+\chapter{HASTA AQUI}\label{hasta-aqui}
 
 \section{Modelado del Proceso de Poisson No Homogéneo
 (PPNH)}\label{sec-ppnh}
