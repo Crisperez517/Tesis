@@ -432,7 +432,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-ppnh" id="toc-sec-ppnh" class="nav-link" data-scroll-target="#sec-ppnh"><span class="header-section-number">3.5</span> Modelado del Proceso de Poisson No Homogéneo (PPNH)</a>
   <ul class="collapse">
-  <li><a href="#calibración-estacional-mediante-la-regla-empírica-68-95-99.7" id="toc-calibración-estacional-mediante-la-regla-empírica-68-95-99.7" class="nav-link" data-scroll-target="#calibración-estacional-mediante-la-regla-empírica-68-95-99.7"><span class="header-section-number">3.5.1</span> Calibración Estacional mediante la Regla Empírica (68-95-99.7)</a></li>
+  <li><a href="#calibración-mediante-la-regla-empírica-68-95-99.7" id="toc-calibración-mediante-la-regla-empírica-68-95-99.7" class="nav-link" data-scroll-target="#calibración-mediante-la-regla-empírica-68-95-99.7"><span class="header-section-number">3.5.1</span> Calibración mediante la Regla Empírica (68-95-99.7)</a></li>
   <li><a href="#sistema-de-amplitudes-cruzadas-a_1-y-a_2" id="toc-sistema-de-amplitudes-cruzadas-a_1-y-a_2" class="nav-link" data-scroll-target="#sistema-de-amplitudes-cruzadas-a_1-y-a_2"><span class="header-section-number">3.5.2</span> Sistema de Amplitudes Cruzadas (<span class="math inline">\(A_1\)</span> y <span class="math inline">\(A_2\)</span>)</a></li>
   </ul></li>
   <li><a href="#validación-estocástica-y-análisis-de-la-anomalía-de-enero" id="toc-validación-estocástica-y-análisis-de-la-anomalía-de-enero" class="nav-link" data-scroll-target="#validación-estocástica-y-análisis-de-la-anomalía-de-enero"><span class="header-section-number">3.6</span> Validación Estocástica y Análisis de la Anomalía de Enero</a></li>
@@ -791,25 +791,25 @@ Tabla&nbsp;3.3: Distribución estacional de los 64 cortes calculada mediante pro
 </section>
 <section id="sec-ppnh" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-ppnh"><span class="header-section-number">3.5</span> Modelado del Proceso de Poisson No Homogéneo (PPNH)</h2>
-<p>Para integrar las interrupciones eléctricas dentro de la Ecuación Diferencial Estocástica (EDE) en el dominio continuo <span class="math inline">\(t \in [0, 365]\)</span>, utilizamos un <strong>Proceso de Poisson No Homogéneo</strong>. En este proceso, la intensidad instantánea de eventos <span class="math inline">\(\lambda(t)\)</span> varía en función del tiempo para absorber la estacionalidad climática de la región.</p>
-<p>El modelo se construye mediante la suma de una tasa base de fondo y dos funciones de perturbación gaussianas. La elección de núcleos gaussianos permite modelar la transición gradual de las estaciones meteorológicas sin introducir discontinuidades de salto, concentrando el riesgo exactamente en los días donde el clima somete a la red a mayor estrés.</p>
-<p>La estructura analítica propuesta para la intensidad diaria de fallas está dada por:</p>
+<p>Para integrar las interrupciones eléctricas dentro de la Ecuación Diferencial Estocástica (EDE) en tiempo continuo <span class="math inline">\(t\)</span>, donde <span class="math inline">\(t \in [0, 365]\)</span> representa los días del año, utilizamos un <strong>Proceso de Poisson No Homogéneo</strong>, cuya intensidad <span class="math inline">\(\lambda(t)\)</span> varía en función del tiempo para tener en cuenta la estacionalidad climática de la región.</p>
+<p>El modelo se construye mediante la suma de una tasa base de fondo y dos funciones de perturbación gaussianas no normalizadas. La elección de núcleos gaussianos permite modelar la transición gradual de las estaciones meteorológicas sin introducir discontinuidades de salto, concentrando el riesgo exactamente en los días donde el clima somete a la red a mayor estrés.</p>
+<p>La función analítica propuesta para la intensidad diaria de fallas es:</p>
 <p><span id="eq-lambda-teorica"><span class="math display">\[
 \lambda(t) = \lambda_{base} + A_1 \exp\left(-\frac{(t - \mu_1)^2}{2\sigma_1^2}\right) + A_2 \exp\left(-\frac{(t - \mu_2)^2}{2\sigma_2^2}\right)
 \tag{3.8}\]</span></span></p>
-<section id="calibración-estacional-mediante-la-regla-empírica-68-95-99.7" class="level3" data-number="3.5.1">
-<h3 data-number="3.5.1" class="anchored" data-anchor-id="calibración-estacional-mediante-la-regla-empírica-68-95-99.7"><span class="header-section-number">3.5.1</span> Calibración Estacional mediante la Regla Empírica (68-95-99.7)</h3>
-<p>Para deducir la dispersión exacta de las campanas (<span class="math inline">\(\sigma_1\)</span> y <span class="math inline">\(\sigma_2\)</span>), recurrimos a la regla empírica de la distribución normal, la cual establece que el <strong>95.4% de la probabilidad</strong> se concentra a una distancia de <span class="math inline">\(\pm 2\sigma\)</span> respecto a la media. Igualando esta amplitud (un ancho total de <span class="math inline">\(4\sigma\)</span>) a la duración física en días de cada temporada climática en Chiapas, obtenemos una calibración analítica rigurosa:</p>
+<section id="calibración-mediante-la-regla-empírica-68-95-99.7" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="calibración-mediante-la-regla-empírica-68-95-99.7"><span class="header-section-number">3.5.1</span> Calibración mediante la Regla Empírica (68-95-99.7)</h3>
+<p>Para deducir la dispersión exacta de las campanas (<span class="math inline">\(\sigma_1\)</span> y <span class="math inline">\(\sigma_2\)</span>), recurrimos a la regla empírica de la distribución normal, la cual establece que el <strong>95.4% de los datos</strong> se concentra a una distancia de <span class="math inline">\(\pm 2\sigma\)</span> respecto a la media. Igualando esta amplitud (un ancho total de <span class="math inline">\(4\sigma\)</span>) a la duración física en días de cada temporada climática en Chiapas, obtenemos la siguiente calibración analítica:</p>
 <ul>
-<li><strong>Tasa Base (<span class="math inline">\(\lambda_{base} = 0.0667\)</span>):</strong> Representa el riesgo mínimo constante por fallas fortuitas. Se extrae de los meses más estables, resultando en <span class="math inline">\(2 \text{ cortes} / 30 \text{ días} \approx 0.0667\)</span> cortes/día.</li>
-<li><strong>Ola de Calor (<span class="math inline">\(\mu_1 = 152\)</span> y <span class="math inline">\(\sigma_1 = 45\)</span>):</strong> El primer pico térmico se centra a principios de junio (día 152). La temporada de calor abarca históricamente 6 meses (de marzo a agosto, <span class="math inline">\(\approx 180\)</span> días). Aplicando la regla empírica, <span class="math inline">\(4\sigma_1 = 180 \implies \sigma_1 = 45\)</span>. Elevando al cuadrado, la varianza estacional queda fijada en <span class="math inline">\(2\sigma_1^2 = 4050\)</span>.</li>
-<li><strong>Temporada de Lluvias (<span class="math inline">\(\mu_2 = 244\)</span> y <span class="math inline">\(\sigma_2 = 30\)</span>):</strong> El segundo pico se ancla a inicios de septiembre (día 244), el momento más severo de tormentas. Esta temporada abarca 4 meses (julio a octubre, <span class="math inline">\(\approx 120\)</span> días). Aplicando la regla empírica, <span class="math inline">\(4\sigma_2 = 120 \implies \sigma_2 = 30\)</span>. Su varianza estacional se establece en <span class="math inline">\(2\sigma_2^2 = 1800\)</span>.</li>
+<li><strong>Tasa Base (<span class="math inline">\(\lambda_{base} = 0.0667\)</span>):</strong> Representa el riesgo mínimo constante por fallas accidentales o mantenimientos de la red, independiente del clima. Se calcula a partir de los meses más estables (febrero y noviembre, con 2 cortes al mes), resultando en <span class="math inline">\(2 \text{ cortes} / 30 \text{ días} \approx 0.0667\)</span> cortes/día.</li>
+<li><strong>Ola de Calor (<span class="math inline">\(\mu_1 = 152\)</span> y <span class="math inline">\(\sigma_1 = 45\)</span>):</strong> El primer pico térmico se centra a principios de junio (día 152). La temporada de calor abarca históricamente 6 meses (de marzo a agosto, <span class="math inline">\(\approx 180\)</span> días). Aplicando la regla empírica, <span class="math inline">\(4\sigma_1 = 180 \implies \sigma_1 = 45\)</span>. Elevando al cuadrado, la varianza estacional queda en <span class="math inline">\(2\sigma_1^2 = 4050\)</span>.</li>
+<li><strong>Temporada de Lluvias (<span class="math inline">\(\mu_2 = 244\)</span> y <span class="math inline">\(\sigma_2 = 30\)</span>):</strong> El segundo pico se centra a inicios de septiembre (día 244), el momento más severo de tormentas. Esta temporada abarca 4 meses (julio a octubre, <span class="math inline">\(\approx 120\)</span> días). Aplicando la regla empírica, <span class="math inline">\(4\sigma_2 = 120 \implies \sigma_2 = 30\)</span>. Su varianza estacional queda en <span class="math inline">\(2\sigma_2^2 = 1800\)</span>.</li>
 </ul>
 </section>
 <section id="sistema-de-amplitudes-cruzadas-a_1-y-a_2" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="sistema-de-amplitudes-cruzadas-a_1-y-a_2"><span class="header-section-number">3.5.2</span> Sistema de Amplitudes Cruzadas (<span class="math inline">\(A_1\)</span> y <span class="math inline">\(A_2\)</span>)</h3>
-<p>Para que los picos máximos en <span class="math inline">\(t=152\)</span> y <span class="math inline">\(t=244\)</span> alcancen exactamente una intensidad de <span class="math inline">\(0.30\)</span> cortes/día (equivalente a los 9 cortes mensuales reportados empíricamente), no basta con restar la tasa base de <span class="math inline">\(0.0667\)</span>. Al estar las campanas cercanas en el tiempo, la “cola” derecha del pico de calor contribuye a la intensidad durante la temporada de lluvias, y viceversa.</p>
-<p>Para obtener las amplitudes reales (<span class="math inline">\(A_1\)</span> y <span class="math inline">\(A_2\)</span>), se resuelve el siguiente sistema de ecuaciones evaluado en los centros <span class="math inline">\(\mu_1\)</span> y <span class="math inline">\(\mu_2\)</span>:</p>
+<p>Para que los picos máximos en <span class="math inline">\(t=152\)</span> y <span class="math inline">\(t=244\)</span> alcancen exactamente una intensidad de <span class="math inline">\(0.30\)</span> cortes/día (equivalente a los 9 cortes mensuales reportados empíricamente en junio y septiembre), no basta con restar la tasa base de <span class="math inline">\(0.0667\)</span>. Al estar las campanas cercanas en el tiempo, la “cola” derecha del pico de calor contribuye a la intensidad durante la temporada de lluvias, y viceversa.</p>
+<p>Para obtener las amplitudes exactas (<span class="math inline">\(A_1\)</span> y <span class="math inline">\(A_2\)</span>), se resuelve el siguiente sistema de ecuaciones evaluado en los centros <span class="math inline">\(\mu_1\)</span> y <span class="math inline">\(\mu_2\)</span>:</p>
 <p><span class="math display">\[
 \begin{cases}
 \lambda(152) = 0.0667 + A_1 (1) + A_2 \exp\left(-\frac{(152 - 244)^2}{1800}\right) = 0.30 \\
@@ -822,7 +822,7 @@ A_1 + 0.009 A_2 = 0.2333 \\
 0.123 A_1 + A_2 = 0.2333
 \end{cases}
 \]</span></p>
-<p>Al resolver este sistema, obtenemos los valores ajustados: <strong><span class="math inline">\(A_1 = 0.2314\)</span></strong> y <strong><span class="math inline">\(A_2 = 0.2048\)</span></strong>. Sustituyendo todos los coeficientes, la función de intensidad queda rígidamente definida como:</p>
+<p>Al resolver este sistema, obtenemos los valores de las amplitudes: <strong><span class="math inline">\(A_1 = 0.2314\)</span></strong> y <strong><span class="math inline">\(A_2 = 0.2048\)</span></strong>. Sustituyendo todos los coeficientes, la función de intensidad es:</p>
 <p><span id="eq-lambda-final"><span class="math display">\[
 \lambda(t) = 0.0667 + 0.2314 \exp\left(-\frac{(t - 152)^2}{4050}\right) + 0.2048 \exp\left(-\frac{(t - 244)^2}{1800}\right)
 \tag{3.9}\]</span></span></p>
@@ -832,19 +832,30 @@ A_1 + 0.009 A_2 = 0.2333 \\
 <img src="intensidad_lambda.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lambda-t-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;3.1: Función de intensidad diaria de fallas eléctricas <span class="math inline">\(\lambda(t)\)</span>. El área sombreada bajo la curva delimita los escenarios de simulación basados en la Regla Empírica (95% de concentración a <span class="math inline">\(\pm 2\sigma\)</span>): la temporada de estiaje (<span class="math inline">\(\mu_1=152\)</span>) y la temporada de tormentas tropicales (<span class="math inline">\(\mu_2=244\)</span>).
+Figura&nbsp;3.1: Función de intensidad diaria de fallas eléctricas <span class="math inline">\(\lambda(t)\)</span>. El área sombreada bajo la curva representa las temporadas climáticas del año: temporada de calor en naranja (días 62 a 196), canícula en púrpura (días 196 a 227), temporada de tormentas en azul (días 227 a 304) y estabilidad invernal en gris.
 </figcaption>
 </figure>
 </div>
+<p>Como se aprecia en la <a href="#fig-lambda-t" class="quarto-xref">Figura&nbsp;<span>3.1</span></a>, el área bajo la curva de la función de intensidad <span class="math inline">\(\lambda(t)\)</span> se divide en cuatro regiones climáticas fundamentales para reflejar el comportamiento térmico de Tuxtla Gutiérrez:</p>
+<ul>
+<li><strong>Estabilidad Invernal (Área Gris, Días <span class="math inline">\(0 \le t &lt; 62\)</span> y <span class="math inline">\(304 &lt; t \le 366\)</span>):</strong> Abarca desde el 1 de enero hasta principios de marzo, y del 1 de noviembre al 31 de diciembre. Representa el periodo de menor demanda térmica y mayor estabilidad operacional de la red eléctrica, donde la intensidad responde únicamente a la tasa base de fallas accidentales o mantenimientos de la red (<span class="math inline">\(\lambda_{base} = 0.0667\)</span>).</li>
+<li><strong>Temporada de Calor y Estiaje (Área Naranja, Días <span class="math inline">\(62 \le t &lt; 196\)</span>):</strong> Comprende del 2 de marzo al 15 de julio, alcanzando su pico máximo en <span class="math inline">\(t = 152\)</span> (1 de junio). En este periodo, las temperaturas extremas provocan la saturación de los transformadores por el uso intensivo de aire acondicionado.</li>
+<li><strong>La Canícula (Área Púrpura, Días <span class="math inline">\(196 \le t &lt; 227\)</span>):</strong> Abarca aproximadamente 30 días, desde el 15 de julio hasta el 15 de agosto. Corresponde a la zona de transición e intersección entre ambas campanas gaussianas.</li>
+<li><strong>Temporada de Tormentas y Ciclones (Área Azul, Días <span class="math inline">\(227 \le t \le 304\)</span>):</strong> Comprende del 15 de agosto al 31 de octubre, con su punto crítico centrado en <span class="math inline">\(t = 244\)</span> (1 de septiembre). Representa la máxima incidencia de precipitación y eventos meteorológicos extremos capaces de derribar líneas de alta tensión.</li>
+</ul>
 </section>
 </section>
 <section id="validación-estocástica-y-análisis-de-la-anomalía-de-enero" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="validación-estocástica-y-análisis-de-la-anomalía-de-enero"><span class="header-section-number">3.6</span> Validación Estocástica y Análisis de la Anomalía de Enero</h2>
-<p>Para validar la consistencia del modelo propuesto en la <a href="#eq-lambda-final" class="quarto-xref">Ecuación&nbsp;<span>3.9</span></a>, se particionó el año de 365 días en 12 subintervalos mensuales. Las integrales definidas se resolvieron numéricamente mediante cuadratura gaussiana, arrojando el número de eventos esperados por mes:</p>
+<p>Por los fundamentos de los Procesos de Poisson No Homogéneos, el número esperado de cortes en cualquier intervalo <span class="math inline">\((t_1, t_2]\)</span> está determinado por la integral definida de su función de intensidad:</p>
+<p><span id="eq-integral-poisson"><span class="math display">\[
+\mathbb{E}[N(t_1, t_2)] = \int_{t_1}^{t_2} \lambda(t) dt
+\tag{3.10}\]</span></span></p>
+<p>Para validar la consistencia analítica de nuestra función <span class="math inline">\(\lambda(t)\)</span>, particionamos el año de 366 días (considerando que el <strong>año 2024 fue bisiesto</strong>, por lo que febrero aporta 29 días al dominio) en 12 subintervalos correspondientes a los días acumulados de cada mes. Al resolver numéricamente sus respectivas integrales mediante cuadratura gaussiana, contrastamos el área teórica bajo la curva contra los objetivos empíricos de la CFE:</p>
 <div id="tbl-validacion-integral" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-validacion-integral-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabla&nbsp;3.4: Validación de Valores Esperados Teóricos vs.&nbsp;Datos Empíricos de la CFE 2024.
+Tabla&nbsp;3.4: Validación de los Valores Esperados Teóricos vs.&nbsp;Datos Empíricos de la CFE 2024.
 </figcaption>
 <div aria-describedby="tbl-validacion-integral-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -859,7 +870,7 @@ Tabla&nbsp;3.4: Validación de Valores Esperados Teóricos vs.&nbsp;Datos Empír
 <th style="text-align: left;">Mes</th>
 <th style="text-align: center;">Intervalo de Integración <span class="math inline">\([t_{i-1}, t_i]\)</span></th>
 <th style="text-align: center;">Objetivo Empírico (CFE)</th>
-<th style="text-align: center;">Esperanza Integral calculada <span class="math inline">\(\mathbb{E}[N]\)</span></th>
+<th style="text-align: center;">Esperanza calculada <span class="math inline">\(\mathbb{E}[N]\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -867,81 +878,81 @@ Tabla&nbsp;3.4: Validación de Valores Esperados Teóricos vs.&nbsp;Datos Empír
 <td style="text-align: left;">Enero</td>
 <td style="text-align: center;"><span class="math inline">\([0, 31]\)</span></td>
 <td style="text-align: center;">7</td>
-<td style="text-align: center;">2.11</td>
+<td style="text-align: center;">2.15</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Febrero</td>
-<td style="text-align: center;"><span class="math inline">\([31, 59]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([31, 60]\)</span></td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">2.01</td>
+<td style="text-align: center;">2.37</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Marzo</td>
-<td style="text-align: center;"><span class="math inline">\([59, 90]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([60, 91]\)</span></td>
 <td style="text-align: center;">3</td>
-<td style="text-align: center;">2.87</td>
+<td style="text-align: center;">3.82</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Abril</td>
-<td style="text-align: center;"><span class="math inline">\([90, 120]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([91, 121]\)</span></td>
 <td style="text-align: center;">3</td>
-<td style="text-align: center;">4.88</td>
+<td style="text-align: center;">6.12</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Mayo</td>
-<td style="text-align: center;"><span class="math inline">\([120, 151]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([121, 152]\)</span></td>
 <td style="text-align: center;">6</td>
-<td style="text-align: center;">7.74</td>
+<td style="text-align: center;">8.73</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Junio</td>
-<td style="text-align: center;"><span class="math inline">\([151, 181]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([152, 182]\)</span></td>
 <td style="text-align: center;">9</td>
-<td style="text-align: center;">8.78</td>
+<td style="text-align: center;">8.74</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Julio</td>
-<td style="text-align: center;"><span class="math inline">\([181, 212]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([182, 213]\)</span></td>
 <td style="text-align: center;">7</td>
-<td style="text-align: center;">8.52</td>
+<td style="text-align: center;">8.39</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Agosto</td>
-<td style="text-align: center;"><span class="math inline">\([212, 243]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([213, 244]\)</span></td>
 <td style="text-align: center;">8</td>
-<td style="text-align: center;">9.38</td>
+<td style="text-align: center;">9.20</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Septiembre</td>
-<td style="text-align: center;"><span class="math inline">\([243, 273]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([244, 274]\)</span></td>
 <td style="text-align: center;">9</td>
-<td style="text-align: center;">8.16</td>
+<td style="text-align: center;">7.70</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Octubre</td>
-<td style="text-align: center;"><span class="math inline">\([273, 304]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([274, 305]\)</span></td>
 <td style="text-align: center;">4</td>
-<td style="text-align: center;">4.31</td>
+<td style="text-align: center;">4.27</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Noviembre</td>
-<td style="text-align: center;"><span class="math inline">\([304, 334]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([305, 335]\)</span></td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">2.17</td>
+<td style="text-align: center;">2.31</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Diciembre</td>
-<td style="text-align: center;"><span class="math inline">\([334, 365]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([335, 366]\)</span></td>
 <td style="text-align: center;">4</td>
-<td style="text-align: center;">2.08</td>
+<td style="text-align: center;">2.09</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<p>La suma acumulada arroja un total de <strong>63.01 eventos esperados</strong> a lo largo del año. Este resultado demuestra una precisión matemática sobresaliente frente a los 64 cortes teóricos calculados inicialmente, validando la formulación estocástica.</p>
-<p>Es importante destacar la fuerte discrepancia observada exclusivamente en el mes de <strong>Enero</strong> (7 cortes empíricos frente a <span class="math inline">\(2.11\)</span> esperados por la integral). Dado que enero es un periodo climatológicamente estable (sin huracanes ni olas de calor), esta desviación empírica no obedece a un patrón estacional recurrente. En términos de modelado, se clasifica como una <strong>anomalía atípica</strong> (ruido blanco no estacionario) originada muy probablemente por mantenimientos extraordinarios o contingencias locales impredecibles ocurridas específicamente a inicios del año 2024. El modelo <span class="math inline">\(\lambda(t)\)</span> absorbe y suaviza esta fluctuación atípica al centrarse en proyectar el riesgo climático a largo plazo.</p>
+<p>La suma acumulada de las 12 integrales arroja un total de <strong>65.90 cortes esperados</strong> a lo largo del año. Este resultado demuestra una congruencia matemática robusta frente a los 64 cortes teóricos calculados inicialmente. La diferencia de <span class="math inline">\(+2\)</span> cortes anuales funciona como un margen de seguridad metodológico, garantizando que el modelo numérico no subestime el estrés real sobre la red de frío.</p>
+<p>Finalmente, es importante destacar la inexactitud observada exclusivamente en el mes de <strong>Enero</strong> (7 cortes empíricos frente a los <span class="math inline">\(2.15\)</span> esperados por la integral). Dado que enero es un periodo climatológicamente estable (sin huracanes ni olas de calor), esta desviación es originada muy probablemente por mantenimientos extraordinarios o contingencias locales impredecibles ocurridas específicamente a inicios del año 2024.</p>
 </section>
 <section id="distribución-log-normal-de-las-duraciones-de-las-fallas" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="distribución-log-normal-de-las-duraciones-de-las-fallas"><span class="header-section-number">3.7</span> Distribución Log-Normal de las Duraciones de las Fallas</h2>
@@ -1190,7 +1201,7 @@ dT(t) =
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + \gamma dN_{puerta}(t) &amp; \text{si } \alpha(t) = 1 \text{ (Con energía)} \\
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) + \gamma dN_{puerta}(t) &amp; \text{si } \alpha(t) = 2 \text{ (Corte de luz)}
 \end{cases}
-\tag{3.10}\]</span></span></p>
+\tag{3.11}\]</span></span></p>
 <p>Para la modelación estocástica, los parámetros de inercia térmica y tiempo de autonomía (<em>holdover time</em>) se calibraron utilizando los datos técnicos del refrigerador institucional Haier HBC-150, el cual cuenta con certificación de protección Grado A contra congelamiento en el catálogo oficial PQS de la OMS <span class="citation" data-cites="oms_pqs_e003">(<a href="references.html#ref-oms_pqs_e003" role="doc-biblioref">Organización Mundial de la Salud 2024</a>)</span>.</p>
 <div id="fig-haier-hbc150" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1202,7 +1213,7 @@ Figura&nbsp;3.2: Refrigerador institucional para vacunas Haier HBC-150 (Icelined
 </figcaption>
 </figure>
 </div>
-<p>Para reflejar el comportamiento de este equipo bajo los rigurosos estándares normativos, calibramos cada coeficiente de la <a href="#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>3.10</span></a> con base en la física del enfriamiento:</p>
+<p>Para reflejar el comportamiento de este equipo bajo los rigurosos estándares normativos, calibramos cada coeficiente de la <a href="#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>3.11</span></a> con base en la física del enfriamiento:</p>
 <section id="sec-regimen-1" class="level3" data-number="3.8.1">
 <h3 data-number="3.8.1" class="anchored" data-anchor-id="sec-regimen-1"><span class="header-section-number">3.8.1</span> Régimen 1: Operación Normal (<span class="math inline">\(\alpha(t) = 1\)</span>)</h3>
 <p>Ocurre cuando hay energía eléctrica y el compresor funciona empujando la temperatura hacia su objetivo.</p>
@@ -1236,7 +1247,7 @@ Figura&nbsp;3.2: Refrigerador institucional para vacunas Haier HBC-150 (Icelined
 <p>La degradación de las vacunas (particularmente las vivas atenuadas, como el biológico contra el Sarampión o la Poliomielitis) es un proceso de desnaturalización proteica que se acelera exponencialmente con el calor. Esta velocidad de degradación <span class="math inline">\(k(T)\)</span> se modela mediante la <strong>Ecuación de Arrhenius</strong> <span class="citation" data-cites="chen2009thermostable">(<a href="references.html#ref-chen2009thermostable" role="doc-biblioref">Chen y Kristensen 2009</a>)</span>:</p>
 <p><span id="eq-Arrhenius"><span class="math display">\[
 k(T(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right)
-\tag{3.11}\]</span></span></p>
+\tag{3.12}\]</span></span></p>
 <p>Donde la temperatura <span class="math inline">\(T_K(t) = T(t) + 273.15\)</span> se expresa en grados Kelvin y los parámetros cinéticos para un biológico termosensible genérico se establecen como:</p>
 <ul>
 <li><strong>Constante Universal de los Gases (<span class="math inline">\(R\)</span>)</strong>: <span class="math inline">\(8.314 \, \text{J/(mol} \cdot \text{K)}\)</span>.</li>
