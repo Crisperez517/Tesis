@@ -224,6 +224,7 @@ Finalmente, es importante destacar la inexactitud observada exclusivamente en el
 Una vez modelada la frecuencia con la que ocurren las interrupciones eléctricas mediante el Proceso de Poisson, el siguiente componente crítico es determinar la duración exacta de cada apagón ($D$). En teoría de probabilidad aplicada a la ingeniería de confiabilidad, el tiempo de reparación o restablecimiento de un sistema no sigue a una distribución normal estándar. 
 
 La duración de una falla eléctrica es una variable aleatoria continua que presenta las siguientes dos características principales:
+
 1. **Dominio estrictamente positivo:** El tiempo de interrupción no puede tomar valores negativos ($D > 0$).
 2. **Asimetría positiva (Cola pesada hacia la derecha):** La inmensa mayoría de las fallas locales se resuelven en pocas horas (e.g., restablecimiento de fusibles o reconexiones de subestación), pero existe una probabilidad baja de eventos atípicos severos cuya reparación demora días enteros (e.g., explosión de transformadores o colapso de torres por huracanes). 
 

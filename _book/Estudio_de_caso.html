@@ -961,7 +961,11 @@ Tabla&nbsp;3.4: Validación de los Valores Esperados Teóricos vs.&nbsp;Datos Em
 <section id="sec-lognormal-duracion" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="sec-lognormal-duracion"><span class="header-section-number">3.7</span> Distribución Log-Normal de las Duraciones de las Fallas electrícas</h2>
 <p>Una vez modelada la frecuencia con la que ocurren las interrupciones eléctricas mediante el Proceso de Poisson, el siguiente componente crítico es determinar la duración exacta de cada apagón (<span class="math inline">\(D\)</span>). En teoría de probabilidad aplicada a la ingeniería de confiabilidad, el tiempo de reparación o restablecimiento de un sistema no sigue a una distribución normal estándar.</p>
-<p>La duración de una falla eléctrica es una variable aleatoria continua que presenta las siguientes dos características principales: 1. <strong>Dominio estrictamente positivo:</strong> El tiempo de interrupción no puede tomar valores negativos (<span class="math inline">\(D &gt; 0\)</span>). 2. <strong>Asimetría positiva (Cola pesada hacia la derecha):</strong> La inmensa mayoría de las fallas locales se resuelven en pocas horas (e.g., restablecimiento de fusibles o reconexiones de subestación), pero existe una probabilidad baja de eventos atípicos severos cuya reparación demora días enteros (e.g., explosión de transformadores o colapso de torres por huracanes).</p>
+<p>La duración de una falla eléctrica es una variable aleatoria continua que presenta las siguientes dos características principales:</p>
+<ol type="1">
+<li><strong>Dominio estrictamente positivo:</strong> El tiempo de interrupción no puede tomar valores negativos (<span class="math inline">\(D &gt; 0\)</span>).</li>
+<li><strong>Asimetría positiva (Cola pesada hacia la derecha):</strong> La inmensa mayoría de las fallas locales se resuelven en pocas horas (e.g., restablecimiento de fusibles o reconexiones de subestación), pero existe una probabilidad baja de eventos atípicos severos cuya reparación demora días enteros (e.g., explosión de transformadores o colapso de torres por huracanes).</li>
+</ol>
 <p>Debido a que una distribución Normal clásica asignaría probabilidad a tiempos negativos y subestimaría el riesgo de cortes prolongados, la literatura establece que las duraciones de las interrupciones eléctricas se modelan mediante una <strong>Distribución Log-normal</strong>:</p>
 <p><span id="eq-lognormal-def"><span class="math display">\[
 D \sim \text{LogNormal}(\mu, \sigma^2)
