@@ -2312,7 +2312,7 @@ estabilizarla nuevamente.
 Para conectar el comportamiento aleatorio de la red eléctrica con la
 termodinámica del sistema, recordamos que la temperatura interna
 \(T(t)\) del equipo de refrigeración se describe mediante un proceso de
-Ornstein-Uhlenbeck, que el modelo a usar incorpora perturbaciones por
+Ornstein-Uhlenbeck, y que el modelo a usar incorpora perturbaciones por
 saltos y conmutación de régimen. Para facilitar la transición hacia la
 simulación computacional, desglosamos la ecuación diferencial en su
 forma operativa. Esta se presenta como un sistema de ecuaciones
@@ -2327,7 +2327,7 @@ dT(t) =
 \end{cases}
 }\end{equation}
 
-Donde cada término de la EDE representa lo siguiente:
+Donde cada término de la ecuación representa lo siguiente:
 
 \begin{itemize}
 \tightlist
@@ -2341,11 +2341,32 @@ Donde cada término de la EDE representa lo siguiente:
   \textbf{\(T_{amb}(t)\):} La temperatura ambiente exterior de la ciudad
   de Tuxtla Gutiérrez.
 \item
-  \textbf{\(dW(t)\):} El incremento del movimiento browniano estándar,
-  el cual captura las fluctuaciones del ruido térmico.
+  \textbf{\(\kappa_{on}\):} La velocidad de enfriamiento del equipo, la
+  cual refleja la potencia del compresor cuando hay suministro
+  eléctrico.
 \item
-  \textbf{\(dN_{puerta}(t)\):} Los eventos discretos que modelan las
-  veces que el personal médico abre la puerta del equipo.
+  \textbf{\(\kappa_{off}\):} La velocidad de pérdida térmica hacia el
+  exterior durante un apagón, la cual depende de la calidad del
+  aislamiento del equipo.
+\item
+  \textbf{\(\sigma_{on}\):} La volatilidad térmica originada por la
+  turbulencia y mezcla del aire interno cuando los ventiladores están
+  encendidos.
+\item
+  \textbf{\(\sigma_{off}\):} La volatilidad térmica presente durante un
+  corte de luz, cuando el fluido interno transita a un estado de
+  convección natural estática.
+\item
+  \textbf{\(dW(t)\):} El incremento del movimiento browniano estándar,
+  el cual captura las fluctuaciones aleatorias continuas.
+\item
+  \textbf{\(\gamma\):} La magnitud del choque térmico instantáneo
+  provocado por la entrada de calor exterior cada vez que se abre el
+  equipo.
+\item
+  \textbf{\(dN_{puerta}(t)\):} Los eventos discretos que modelan el
+  número de veces que el personal médico abre la puerta del
+  refrigerador.
 \end{itemize}
 
 Para garantizar el rigor de la simulación, los parámetros de inercia
@@ -2376,6 +2397,8 @@ este equipo bajo los rigurosos estándares operativos de la OMS, cada
 coeficiente de la Ecuación~\ref{eq-ede-operativa} se calculó a partir de
 las leyes físicas de transferencia de calor y la mecánica de fluidos. El
 desarrollo analítico para cada parámetro se detalla a continuación:
+
+\chapter{HASTA AQUI}\label{hasta-aqui}
 
 \subsection{\texorpdfstring{Régimen 1: Operación Normal
 (\(\alpha(t) = 1\))}{Régimen 1: Operación Normal (\textbackslash alpha(t) = 1)}}\label{sec-regimen-1}

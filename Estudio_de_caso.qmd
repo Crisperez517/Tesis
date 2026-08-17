@@ -368,7 +368,7 @@ En segundo lugar, se incorpora un Proceso de Poisson compuesto ($dN_{puerta}(t)$
 
 ## Calibración de la Ecuación Diferencial Estocástica (EDE)
 
-Para conectar el comportamiento aleatorio de la red eléctrica con la termodinámica del sistema, recordamos que la temperatura interna $T(t)$ del equipo de refrigeración se describe mediante un proceso de Ornstein-Uhlenbeck, que el modelo a usar incorpora perturbaciones por saltos y conmutación de régimen. Para facilitar la transición hacia la simulación computacional, desglosamos la ecuación diferencial en su forma operativa. Esta se presenta como un sistema de ecuaciones acopladas, cuyos términos de deriva y difusión dependen estrictamente del estado del suministro eléctrico $\alpha(t)$:
+Para conectar el comportamiento aleatorio de la red eléctrica con la termodinámica del sistema, recordamos que la temperatura interna $T(t)$ del equipo de refrigeración se describe mediante un proceso de Ornstein-Uhlenbeck, y que el modelo a usar incorpora perturbaciones por saltos y conmutación de régimen. Para facilitar la transición hacia la simulación computacional, desglosamos la ecuación diferencial en su forma operativa. Esta se presenta como un sistema de ecuaciones acopladas, cuyos términos de deriva y difusión dependen estrictamente del estado del suministro eléctrico $\alpha(t)$:
 
 $$
 dT(t) = 
@@ -378,19 +378,26 @@ dT(t) =
 \end{cases}
 $$ {#eq-ede-operativa}
 
-Donde cada término de la EDE representa lo siguiente:
+Donde cada término de la ecuación representa lo siguiente:
 
 * **$T(t)$:** La temperatura interna del equipo en el tiempo $t$.
 * **$\theta_{set}$:** La temperatura ideal u objetivo configurada en el termostato.
 * **$T_{amb}(t)$:** La temperatura ambiente exterior de la ciudad de Tuxtla Gutiérrez.
-* **$dW(t)$:** El incremento del movimiento browniano estándar, el cual captura las fluctuaciones del ruido térmico.
-* **$dN_{puerta}(t)$:** Los eventos discretos que modelan las veces que el personal médico abre la puerta del equipo.
+* **$\kappa_{on}$:** La velocidad de enfriamiento del equipo, la cual refleja la potencia del compresor cuando hay suministro eléctrico.
+* **$\kappa_{off}$:** La velocidad de pérdida térmica hacia el exterior durante un apagón, la cual depende de la calidad del aislamiento del equipo.
+* **$\sigma_{on}$:** La volatilidad térmica originada por la turbulencia y mezcla del aire interno cuando los ventiladores están encendidos.
+* **$\sigma_{off}$:** La volatilidad térmica presente durante un corte de luz, cuando el fluido interno transita a un estado de convección natural estática.
+* **$dW(t)$:** El incremento del movimiento browniano estándar, el cual captura las fluctuaciones aleatorias continuas.
+* **$\gamma$:** La magnitud del choque térmico instantáneo provocado por la entrada de calor exterior cada vez que se abre el equipo.
+* **$dN_{puerta}(t)$:** Los eventos discretos que modelan el número de veces que el personal médico abre la puerta del refrigerador.
 
 Para garantizar el rigor de la simulación, los parámetros de inercia térmica y el tiempo de autonomía (*holdover time*) se calibraron utilizando las especificaciones técnicas del refrigerador institucional Haier HBC-150. Este modelo cuenta con certificación de protección Grado A contra congelamiento, avalado en el catálogo oficial PQS de la Organización Mundial de la Salud (OMS) [@oms_pqs_e003].
 
 ![Refrigerador institucional para vacunas Haier HBC-150. Este equipo tipo cofre cuenta con certificación PQS de la OMS y masa térmica incorporada para mantener la red de frío estable durante fallas prolongadas del suministro eléctrico.](haier_hbc150.jpg){#fig-haier-hbc150 width="70%" fig-align="center"}
 
 Con el propósito de aproximar de manera precisa el comportamiento de este equipo bajo los rigurosos estándares operativos de la OMS, cada coeficiente de la @eq-ede-operativa se calculó a partir de las leyes físicas de transferencia de calor y la mecánica de fluidos. El desarrollo analítico para cada parámetro se detalla a continuación:
+
+# HASTA AQUI
 
 ### Régimen 1: Operación Normal ($\alpha(t) = 1$) {#sec-regimen-1}
 Ocurre cuando hay energía eléctrica y el compresor funciona empujando la temperatura hacia su objetivo.
