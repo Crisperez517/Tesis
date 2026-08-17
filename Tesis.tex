@@ -2275,8 +2275,7 @@ la incertidumbre de las fluctuaciones no medidas, la ecuación
 diferencial resultante tiene la forma de un proceso de
 Ornstein-Uhlenbeck. Este enfoque ha sido validado exitosamente en la
 estimación predictiva de unidades de refrigeración en trabajos como el
-de Costanzo et al. (\citeproc{ref-costanzo2013grey}{Costanzo et~al.
-2013}).
+de (\citeproc{ref-costanzo2013grey}{Costanzo et~al. 2013}).
 
 Sin embargo, para el problema logístico de la red de frío en Tuxtla
 Gutiérrez, el modelo clásico resulta limitado. Si bien el proceso de
@@ -2328,15 +2327,26 @@ dT(t) =
 \end{cases}
 }\end{equation}
 
-Donde cada término de la EDE representa lo siguiente: *
-\textbf{\(T(t)\):} La temperatura interna del equipo en el tiempo \(t\).
-* \textbf{\(\theta_{set}\):} La temperatura ideal u objetivo configurada
-en el termostato. * \textbf{\(T_{amb}(t)\):} La temperatura ambiente
-exterior de la ciudad de Tuxtla Gutiérrez. * \textbf{\(dW(t)\):} El
-incremento del movimiento browniano estándar, el cual captura las
-fluctuaciones del ruido térmico. * \textbf{\(dN_{puerta}(t)\):} Los
-eventos discretos que modelan las veces que el personal médico abre la
-puerta del equipo.
+Donde cada término de la EDE representa lo siguiente:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\(T(t)\):} La temperatura interna del equipo en el tiempo
+  \(t\).
+\item
+  \textbf{\(\theta_{set}\):} La temperatura ideal u objetivo configurada
+  en el termostato.
+\item
+  \textbf{\(T_{amb}(t)\):} La temperatura ambiente exterior de la ciudad
+  de Tuxtla Gutiérrez.
+\item
+  \textbf{\(dW(t)\):} El incremento del movimiento browniano estándar,
+  el cual captura las fluctuaciones del ruido térmico.
+\item
+  \textbf{\(dN_{puerta}(t)\):} Los eventos discretos que modelan las
+  veces que el personal médico abre la puerta del equipo.
+\end{itemize}
 
 Para garantizar el rigor de la simulación, los parámetros de inercia
 térmica y el tiempo de autonomía (\emph{holdover time}) se calibraron

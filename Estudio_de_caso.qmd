@@ -356,7 +356,7 @@ A continuación, se grafican las densidades de probabilidad para cada temporada 
 
 ## Planteamiento del Modelo
 
-En la literatura de ingeniería térmica y control, el comportamiento de la temperatura de una cámara frigorífica suele modelarse utilizando el enfoque de Ecuaciones Diferenciales Estocásticas de "caja gris" (*Grey-box SDEs*). Al representar el circuito térmico equivalente del refrigerador y añadir un término de ruido estocástico para absorber la incertidumbre de las fluctuaciones no medidas, la ecuación diferencial resultante tiene la forma de un proceso de Ornstein-Uhlenbeck. Este enfoque ha sido validado exitosamente en la estimación predictiva de unidades de refrigeración en trabajos como el de Costanzo et al. [@costanzo2013grey].
+En la literatura de ingeniería térmica y control, el comportamiento de la temperatura de una cámara frigorífica suele modelarse utilizando el enfoque de Ecuaciones Diferenciales Estocásticas de "caja gris" (*Grey-box SDEs*). Al representar el circuito térmico equivalente del refrigerador y añadir un término de ruido estocástico para absorber la incertidumbre de las fluctuaciones no medidas, la ecuación diferencial resultante tiene la forma de un proceso de Ornstein-Uhlenbeck. Este enfoque ha sido validado exitosamente en la estimación predictiva de unidades de refrigeración en trabajos como el de [@costanzo2013grey].
 
 Sin embargo, para el problema logístico de la red de frío en Tuxtla Gutiérrez, el modelo clásico resulta limitado. Si bien el proceso de Ornstein-Uhlenbeck describe a la perfección la reversión a la media (la acción estabilizadora del termostato) y el ruido térmico interno de fondo, es insuficiente para modelar alteraciones drásticas en las condiciones de frontera.
 
@@ -379,6 +379,7 @@ dT(t) =
 $$ {#eq-ede-operativa}
 
 Donde cada término de la EDE representa lo siguiente:
+
 * **$T(t)$:** La temperatura interna del equipo en el tiempo $t$.
 * **$\theta_{set}$:** La temperatura ideal u objetivo configurada en el termostato.
 * **$T_{amb}(t)$:** La temperatura ambiente exterior de la ciudad de Tuxtla Gutiérrez.
