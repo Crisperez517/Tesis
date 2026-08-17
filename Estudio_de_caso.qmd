@@ -354,13 +354,21 @@ A continuación, se grafican las densidades de probabilidad para cada temporada 
 
 ![Función de densidad de probabilidad Log-normal para la Temporada de Tormentas (Lluvias). Exhibe un pico muy pronunciado al inicio y una cola corta ($\sigma = 0.3371$), lo que indica que, aunque los cortes por lluvia son frecuentes, la CFE logra restablecer el servicio rápidamente en la gran mayoría de los casos.](lognormal_lluvias.png){#fig-lognormal-lluvias width="85%" fig-align="center"}
 
-El análisis de estas tres distribuciones valida teóricamente la hipótesis de vulnerabilidad térmica de la investigación: el verdadero riesgo para la viabilidad de las vacunas no radica en la cantidad de cortes durante la época de huracanes, ya que estos suelen ser breves, sino en la pesada cola derecha de la distribución de la Temporada de Calor, donde los apagones prolongados coinciden con las temperaturas ambientales más agresivas del año.
+## Planteamiento del Modelo
 
-# HASTA AQUI
+En la literatura de ingeniería térmica y control, el comportamiento de la temperatura de una cámara frigorífica suele modelarse utilizando el enfoque de Ecuaciones Diferenciales Estocásticas de "caja gris" (*Grey-box SDEs*). Al representar el circuito térmico equivalente del refrigerador y añadir un término de ruido estocástico para absorber la incertidumbre de las fluctuaciones no medidas, la ecuación diferencial resultante tiene la forma de un proceso de Ornstein-Uhlenbeck. Este enfoque ha sido validado exitosamente en la estimación predictiva de unidades de refrigeración en trabajos como el de Costanzo et al. [@costanzo2013grey].
+
+Sin embargo, para el problema logístico de la red de frío en Tuxtla Gutiérrez, el modelo clásico resulta limitado. Si bien el proceso de Ornstein-Uhlenbeck describe a la perfección la reversión a la media (la acción estabilizadora del termostato) y el ruido térmico interno de fondo, es insuficiente para modelar alteraciones drásticas en las condiciones de frontera.
+
+Por este motivo, en la presente investigación se añadió a la ecuación diferencial estocástica clásica una arquitectura híbrida que incluye **conmutación de régimen (*regime-switching*) y procesos de salto discreto**:
+
+En primer lugar, el estado del suministro eléctrico actúa como un interruptor determinado por un Proceso de Poisson No Homogéneo. Esta conmutación permite vincular el clima exterior con el riesgo operativo de la red; cuando el proceso de Poisson registra un apagón, el modelo simula un cambio radical en la termodinámica del equipo, pasando de un régimen de convección forzada (enfriamiento activo) a un régimen de convección natural pasiva (calentamiento inercial).
+
+En segundo lugar, se incorpora un Proceso de Poisson compuesto ($dN_{puerta}(t)$) para simular las perturbaciones del sistema ocasionadas por la operación clínica diaria. Cada apertura de la puerta del refrigerador por parte del personal médico inyecta choques térmicos instantáneos al equipo. Modelar estos eventos como saltos discretos permite simular cómo el calor externo entra de golpe y desplaza momentáneamente la temperatura antes de que la inercia térmica logre estabilizarla nuevamente.
 
 ## Calibración de la Ecuación Diferencial Estocástica (EDE)
 
-Enlazando la dinámica de la red eléctrica con la termodinámica, recordamos que la temperatura interna $T(t)$ del refrigerador está gobernada por un proceso de Ornstein-Uhlenbeck con saltos y conmutación de régimen. Para que la transición hacia el modelo computacional sea transparente, desglosamos la ecuación abstracta en su forma operativa mediante un sistema de ecuaciones acopladas, el cual depende estrictamente del estado del suministro eléctrico $\alpha(t)$:
+Para conectar el comportamiento aleatorio de la red eléctrica con la termodinámica del sistema, recordamos que la temperatura interna $T(t)$ del equipo de refrigeración se describe mediante un proceso de Ornstein-Uhlenbeck, que el modelo a usar incorpora perturbaciones por saltos y conmutación de régimen. Para facilitar la transición hacia la simulación computacional, desglosamos la ecuación diferencial en su forma operativa. Esta se presenta como un sistema de ecuaciones acopladas, cuyos términos de deriva y difusión dependen estrictamente del estado del suministro eléctrico $\alpha(t)$:
 
 $$
 dT(t) = 
@@ -370,11 +378,18 @@ dT(t) =
 \end{cases}
 $$ {#eq-ede-operativa}
 
-Para la modelación estocástica, los parámetros de inercia térmica y tiempo de autonomía (*holdover time*) se calibraron utilizando los datos técnicos del refrigerador institucional Haier HBC-150, el cual cuenta con certificación de protección Grado A contra congelamiento en el catálogo oficial PQS de la OMS [@oms_pqs_e003].
+Donde cada término de la EDE representa lo siguiente:
+* **$T(t)$:** La temperatura interna del equipo en el tiempo $t$.
+* **$\theta_{set}$:** La temperatura ideal u objetivo configurada en el termostato.
+* **$T_{amb}(t)$:** La temperatura ambiente exterior de la ciudad de Tuxtla Gutiérrez.
+* **$dW(t)$:** El incremento del movimiento browniano estándar, el cual captura las fluctuaciones del ruido térmico.
+* **$dN_{puerta}(t)$:** Los eventos discretos que modelan las veces que el personal médico abre la puerta del equipo.
 
-![Refrigerador institucional para vacunas Haier HBC-150 (Icelined Refrigerator). Este equipo tipo cofre cuenta con certificación PQS de la OMS y masa térmica incorporada para garantizar la red de frío durante cortes prolongados de energía eléctrica.](haier_hbc150.jpg){#fig-haier-hbc150 width="70%" fig-align="center"}
+Para garantizar el rigor de la simulación, los parámetros de inercia térmica y el tiempo de autonomía (*holdover time*) se calibraron utilizando las especificaciones técnicas del refrigerador institucional Haier HBC-150. Este modelo cuenta con certificación de protección Grado A contra congelamiento, avalado en el catálogo oficial PQS de la Organización Mundial de la Salud (OMS) [@oms_pqs_e003].
 
-Para reflejar el comportamiento de este equipo bajo los rigurosos estándares normativos, calibramos cada coeficiente de la @eq-ede-operativa con base en la física del enfriamiento:
+![Refrigerador institucional para vacunas Haier HBC-150. Este equipo tipo cofre cuenta con certificación PQS de la OMS y masa térmica incorporada para mantener la red de frío estable durante fallas prolongadas del suministro eléctrico.](haier_hbc150.jpg){#fig-haier-hbc150 width="70%" fig-align="center"}
+
+Con el propósito de aproximar de manera precisa el comportamiento de este equipo bajo los rigurosos estándares operativos de la OMS, cada coeficiente de la @eq-ede-operativa se calculó a partir de las leyes físicas de transferencia de calor y la mecánica de fluidos. El desarrollo analítico para cada parámetro se detalla a continuación:
 
 ### Régimen 1: Operación Normal ($\alpha(t) = 1$) {#sec-regimen-1}
 Ocurre cuando hay energía eléctrica y el compresor funciona empujando la temperatura hacia su objetivo.
