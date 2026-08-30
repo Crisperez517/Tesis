@@ -1265,10 +1265,11 @@ Figura&nbsp;3.4: Función de densidad de probabilidad Log-normal para la Tempora
 dT(t) =
 \begin{cases}
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + \gamma dN_{puerta}(t) &amp; \text{si } \alpha(t) = 1 \text{ (Con energía)} \\
-\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) + \gamma dN_{puerta}(t) &amp; \text{si } \alpha(t) = 2 \text{ (Corte de luz)}
+\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) &amp; \text{si } \alpha(t) = 2 \text{ (Corte de luz)}
 \end{cases}
 \tag{3.17}\]</span></span></p>
-<p>Donde cada término de la ecuación representa lo siguiente:</p>
+<p>Como se observa en el segundo escenario de la <a href="#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>3.17</span></a>, el término de saltos discretos (<span class="math inline">\(+ \gamma dN_{puerta}(t)\)</span>) se elimina por completo durante un corte de luz. Esto debido a los protocolos operativos normativos: ante una falla eléctrica, el personal médico tiene estrictamente prohibido abrir el refrigerador. Al mantener la puerta sellada, se protege la inercia térmica provista por las botellas de agua y los paquetes refrigerantes, garantizando que la dinámica de la temperatura dependa exclusivamente de la pérdida pasiva hacia el ambiente exterior.</p>
+<p>Cada término de la ecuación representa lo siguiente:</p>
 <ul>
 <li><strong><span class="math inline">\(T(t)\)</span>:</strong> La temperatura interna del equipo en el tiempo <span class="math inline">\(t\)</span>.</li>
 <li><strong><span class="math inline">\(\theta_{set}\)</span>:</strong> La temperatura ideal u objetivo configurada en el termostato.</li>
@@ -1292,7 +1293,8 @@ Figura&nbsp;3.5: Refrigerador institucional para vacunas Haier HBC-150. Este equ
 </figcaption>
 </figure>
 </div>
-<p>Con el propósito de aproximar de manera precisa el comportamiento de este equipo bajo los rigurosos estándares operativos de la OMS, cada coeficiente de la <a href="#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>3.17</span></a> se calculó a partir de las leyes físicas de transferencia de calor y la mecánica de fluidos. El desarrollo analítico para cada parámetro se detalla a continuación:</p>
+<p>Con el propósito de aproximar de manera precisa el comportamiento de este equipo bajo los rigurosos estándares operativos de la OMS, cada coeficiente de la <a href="#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>3.17</span></a> se calculó a partir de las leyes físicas de transferencia de calor y la mecánica de fluidos.</p>
+<p>El desarrollo analítico para cada parámetro se detalla a continuación:</p>
 </section>
 <section id="hasta-aqui" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> HASTA AQUI</h1>
