@@ -378,7 +378,7 @@ dT(t) =
 \end{cases}
 $$ {#eq-ede-operativa}
 
-Como se observa en el segundo escenario de la @eq-ede-operativa, el término de saltos discretos ($+ \gamma dN_{puerta}(t)$) se elimina por completo durante un corte de luz. Esto debido a los protocolos operativos normativos: ante una falla eléctrica, el personal médico tiene estrictamente prohibido abrir el refrigerador. Al mantener la puerta sellada, se protege la inercia térmica provista por las botellas de agua y los paquetes refrigerantes, garantizando que la dinámica de la temperatura dependa exclusivamente de la pérdida pasiva hacia el ambiente exterior.
+Como se observa en el segundo escenario de la @eq-ede-operativa, el término de saltos discretos ($+ \gamma dN_{puerta}(t)$) se elimina por completo durante un corte de luz, esto debido a los protocolos operativos normativos: ante una falla eléctrica, el personal médico tiene estrictamente prohibido abrir el refrigerador. Al mantener la puerta sellada, se protege la inercia térmica provista por las botellas de agua y los paquetes refrigerantes, garantizando que la dinámica de la temperatura dependa exclusivamente de la pérdida pasiva hacia el ambiente exterior.
 
 Cada término de la ecuación representa lo siguiente:
 
@@ -393,32 +393,38 @@ Cada término de la ecuación representa lo siguiente:
 * **$\gamma$:** La magnitud del choque térmico instantáneo provocado por la entrada de calor exterior cada vez que se abre el equipo.
 * **$dN_{puerta}(t)$:** Los eventos discretos que modelan el número de veces que el personal médico abre la puerta del refrigerador.
 
-Para garantizar el rigor de la simulación, los parámetros de inercia térmica y el tiempo de autonomía (*holdover time*) se calibraron utilizando las especificaciones técnicas del refrigerador institucional Haier HBC-150. Este modelo cuenta con certificación de protección Grado A contra congelamiento, avalado en el catálogo oficial PQS de la Organización Mundial de la Salud (OMS) [@oms_pqs_e003].
+Para garantizar el rigor de la simulación, los coeficientes térmicos se dedujeron utilizando las especificaciones técnicas del refrigerador institucional Haier HBC-150. De acuerdo con el catálogo oficial PQS de la Organización Mundial de la Salud (OMS) [@oms_pqs_e003, pp. 89-90], este equipo cuenta con certificación de protección Grado A y está diseñado específicamente para mantener la red de frío en condiciones climáticas severas. 
 
 ![Refrigerador institucional para vacunas Haier HBC-150. Este equipo tipo cofre cuenta con certificación PQS de la OMS y masa térmica incorporada para mantener la red de frío estable durante fallas prolongadas del suministro eléctrico.](haier_hbc150.jpg){#fig-haier-hbc150 width="70%" fig-align="center"}
 
 Con el propósito de aproximar de manera precisa el comportamiento de este equipo bajo los rigurosos estándares operativos de la OMS, cada coeficiente de la @eq-ede-operativa se calculó a partir de las leyes físicas de transferencia de calor y la mecánica de fluidos. 
 
-El desarrollo analítico para cada parámetro se detalla a continuación:
-
-# HASTA AQUI
+A continuación, se detalla el cálculo de cada parámetro de la @eq-ede-operativa basándose en las pruebas estandarizadas de este equipo.
 
 ### Régimen 1: Operación Normal ($\alpha(t) = 1$) {#sec-regimen-1}
-Ocurre cuando hay energía eléctrica y el compresor funciona empujando la temperatura hacia su objetivo.
 
-* **Temperatura de Consigna ($\theta_{set}$)**: Se establece en **$4^\circ \text{C}$**, el centro ideal del rango normativo de seguridad (2°C a 8°C).
-* **Velocidad de Enfriamiento ($\kappa_{on}$)**: Representa la capacidad de potencia del motor para recuperar la temperatura. Se calibra en $\kappa_{on} = 0.1188$, una velocidad rápida propia de la compresión activa de acuerdo con [@oms_pqs_e003].
-* **Ruido del Compresor ($\sigma_{on}$)**: El motor se prende y se apaga constantemente para mantener los 4°C. Acorde con un intervalo de confianza del 99.7% (aplicando la regla de las 3 sigmas de la distribución normal), queremos que las fluctuaciones máximas no excedan los $\pm 2^\circ \text{C}$ para evitar llegar a los 2°C (riesgo de congelación) o a los 6°C. Sabiendo que $3 \times SD = 2^\circ \text{C}$, la desviación estándar estacionaria debe ser $SD \approx 0.667^\circ \text{C}$. Despejando la volatilidad de la varianza a largo plazo del proceso Ornstein-Uhlenbeck $\left(SD = \frac{\sigma_{on}}{\sqrt{2\kappa_{on}}}\right)$:
-  $$0.667 = \frac{\sigma_{on}}{\sqrt{2(0.1188)}} \implies \sigma_{on} \approx 0.325$$
+Este estado ocurre cuando hay suministro eléctrico continuo. El compresor y los ventiladores del equipo funcionan activamente para llevar y mantener la temperatura interna hacia su nivel ideal.
+
+* **Temperatura de Consigna ($\theta_{set}$)**: Se establece analíticamente en **$5^\circ \text{C}$**. Esta elección no es arbitraria; representa exactamente el punto medio del rango normativo de seguridad de la OMS (2°C a 8°C). Al centrar el termostato en 5°C, el modelo adquiere un margen simétrico de seguridad de $3^\circ \text{C}$ hacia arriba (evitando la degradación por calor) y $3^\circ \text{C}$ hacia abajo (evitando la destrucción de la vacuna por congelamiento).
+* **Velocidad de Enfriamiento ($\kappa_{on}$)**: Este parámetro mide la rapidez con la que el motor abate el calor. Sus unidades son $\text{hr}^{-1}$ (tasas de cambio por hora). Para calcularlo, recurrimos a la Ley de Enfriamiento de Newton [@vollmer2009newton], la cual establece que la temperatura en el tiempo $t$ sigue una trayectoria exponencial: $T(t) = \theta_{set} + (T_0 - \theta_{set}) e^{-\kappa t}$. 
+  El protocolo de la OMS dicta un *Pull-down time* (tiempo de abatimiento) de 22 horas para que el equipo logre bajar desde un calor ambiental extremo de $43^\circ \text{C}$ hasta entrar a la zona segura de $8^\circ \text{C}$. Sustituyendo estos valores y nuestro objetivo de $5^\circ \text{C}$, obtenemos:
+  $$8 = 5 + (43 - 5) e^{-\kappa_{on} (22)}$$
+  Al despejar la ecuación $\left(\ln\left(\frac{3}{38}\right) = -22 \kappa_{on}\right)$, el resultado es **$\kappa_{on} \approx 0.1154 \text{ hr}^{-1}$**.
+* **Volatilidad y Ruido del Compresor ($\sigma_{on}$)**: El motor del refrigerador no enfría de manera perfecta; se enciende y apaga constantemente, generando turbulencia. Dado que la solución matemática de un Proceso de Ornstein-Uhlenbeck sigue una distribución de probabilidad Normal (Gaussiana), podemos usar la "regla empírica" de la estadística para acotar este ruido.
+  Para asegurar con un 99.7% de confianza que estas fluctuaciones naturales no rompan nuestro margen de seguridad de $\pm 3^\circ \text{C}$, requerimos que tres desviaciones estándar abarquen exactamente esos tres grados ($3 \times SD = 3^\circ \text{C}$), lo que implica una desviación estándar de $SD = 1^\circ \text{C}$.
+  En rigor, la varianza de un proceso de Ornstein-Uhlenbeck depende del tiempo $t$. Sin embargo, dado que el refrigerador opera de manera continua durante meses, la inercia inicial se desvanece y el sistema alcanza un estado estacionario (el límite cuando $t \to \infty$). Sustituyendo en la fórmula asintótica de la desviación estándar $\left(SD = \frac{\sigma_{on}}{\sqrt{2\kappa_{on}}}\right)$:
+  $$1 = \frac{\sigma_{on}}{\sqrt{2(0.1154)}} \implies \sigma_{on} = \sqrt{0.2308} \approx 0.4804$$
 
 ### Régimen 2: Falla Eléctrica ($\alpha(t) = 2$) {#sec-regimen-2}
-Se activa cuando el Proceso de Poisson dice que hay un apagón y el enfriamiento activo se detiene.
 
-* **Temperatura Exterior ($T_{amb}(t)$)**: La temperatura ambiente actúa como el atractor del sistema. Dado que en Tuxtla Gutiérrez el calor oscila drásticamente a lo largo del día, esta variable se modela computacionalmente como una función senoidal que alcanza su pico máximo a las 15:00 hrs. Para nuestra calibración analítica del peor escenario (estiaje), evaluamos este atractor en un máximo absoluto de **$43^\circ \text{C}$**. En este escenario, el término $(T_{amb} - T(t))$ se vuelve enorme y genera un calentamiento fuertemente acelerado.
-* **Velocidad de Pérdida Térmica ($\kappa_{off}$)**: De acuerdo con las especificaciones del fabricante validadas por la OMS [@oms_pqs_e003], el equipo Haier HBC-150 garantiza un *Holdover Time* (tiempo de autonomía) de 60 horas con 50 minutos (60.83 horas) a una temperatura ambiente extrema de 43°C antes de rebasar los 8°C. Usando la solución analítica determinista de la Ley de Enfriamiento de Newton desde los 4°C de consigna hasta el límite de 8°C:
-  $$8 = 43 + (4 - 43) e^{-\kappa_{off} (60.83)}$$
-  Al resolver la ecuación $\left(\ln\left(\frac{35}{39}\right) = -60.83 \kappa_{off}\right)$, obtenemos un valor sumamente bajo de $\kappa_{off} \approx 0.00178 \text{ hr}^{-1}$. Esta dramática diferencia entre un parámetro rápido ($\kappa_{on}$) y uno muy lento ($\kappa_{off}$) demuestra la efectividad de los revestimientos de hielo y justifica el uso de EDEs con conmutación de régimen.
-* **Volatilidad Externa ($\sigma_{off}$)**: Sin el compresor encendido, las variaciones aleatorias obedecen únicamente a micro-filtraciones de aire por las gomas de la puerta. Por ello, establecemos un ruido significativamente menor: $\sigma_{off} = 0.05$.
+Este estado se activa cuando el Proceso de Poisson registra un apagón. El motor se detiene, y la dinámica del sistema pasa a depender exclusivamente del aislamiento térmico del refrigerador frente al clima exterior.
+
+* **Temperatura Exterior ($T_{amb}(t)$)**: Durante la simulación, esta variable sigue la curva climática real de Tuxtla Gutiérrez. Sin embargo, para calibrar el peor escenario normativo, evaluamos este atractor en una constante máxima de **$43^\circ \text{C}$**.
+* **Velocidad de Pérdida Térmica ($\kappa_{off}$)**: Representa la lentitud con la que el calor exterior logra penetrar el equipo. Se mide en $\text{hr}^{-1}$. En el manual de la OMS [@oms_pqs_e003, pp. 89-90], el equipo Haier HBC-150 reporta un *Hold-over time* (tiempo de autonomía) de 60 horas con 50 minutos ($60.833$ horas). Físicamente, esto significa que gracias a la enorme masa de hielo y agua en su interior, el equipo puede resistir rodeado de un calor de 43°C durante casi 61 horas antes de que su temperatura suba desde los $5^\circ \text{C}$ ideales hasta el umbral de fallo normativo ($10^\circ \text{C}$ en las pruebas de autonomía de la OMS).
+  Usando nuevamente la Ley de Enfriamiento de Newton [@vollmer2009newton] hacia el atractor externo:
+  $$10 = 43 + (5 - 43) e^{-\kappa_{off} (60.833)}$$
+  Al resolver el despeje $\left(\ln\left(\frac{33}{38}\right) = -60.833 \kappa_{off}\right)$, obtenemos **$\kappa_{off} \approx 0.00232 \text{ hr}^{-1}$**. La enorme diferencia de magnitud entre $\kappa_{on}$ (rápido) y $\kappa_{off}$ (muy lento) comprueba matemáticamente la alta efectividad térmica de los paquetes refrigerantes.
+* **Volatilidad Externa ($\sigma_{off}$)**: Al cortarse la electricidad y apagarse los ventiladores, el aire interior deja de mezclarse a la fuerza (convección forzada) y pasa a un estado de reposo (convección natural estática). Según la mecánica de fluidos, esta ausencia de turbulencia reduce las variaciones aleatorias en un orden de magnitud. Por ello, la volatilidad térmica sin energía se calcula como la décima parte de la volatilidad activa: $\sigma_{off} = \frac{0.4804}{10} \approx 0.048$.
 
 ### Perturbaciones Discretas: Apertura de Puertas ($N_{puerta}(t)$)
 De acuerdo con las normativas internacionales de manejo de red de frío, el refrigerador debe abrirse idealmente un máximo de dos veces al día: una apertura rutinaria matutina para extraer los frascos necesarios para la jornada y una vespertina para resguardar los sobrantes.
