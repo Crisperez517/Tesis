@@ -374,11 +374,13 @@ $$
 dT(t) = 
 \begin{cases} 
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + \gamma dN_{puerta}(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
-\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) + \gamma dN_{puerta}(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
+\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
 \end{cases}
 $$ {#eq-ede-operativa}
 
-Donde cada término de la ecuación representa lo siguiente:
+Como se observa en el segundo escenario de la @eq-ede-operativa, el término de saltos discretos ($+ \gamma dN_{puerta}(t)$) se elimina por completo durante un corte de luz. Esto debido a los protocolos operativos normativos: ante una falla eléctrica, el personal médico tiene estrictamente prohibido abrir el refrigerador. Al mantener la puerta sellada, se protege la inercia térmica provista por las botellas de agua y los paquetes refrigerantes, garantizando que la dinámica de la temperatura dependa exclusivamente de la pérdida pasiva hacia el ambiente exterior.
+
+Cada término de la ecuación representa lo siguiente:
 
 * **$T(t)$:** La temperatura interna del equipo en el tiempo $t$.
 * **$\theta_{set}$:** La temperatura ideal u objetivo configurada en el termostato.
@@ -395,7 +397,9 @@ Para garantizar el rigor de la simulación, los parámetros de inercia térmica 
 
 ![Refrigerador institucional para vacunas Haier HBC-150. Este equipo tipo cofre cuenta con certificación PQS de la OMS y masa térmica incorporada para mantener la red de frío estable durante fallas prolongadas del suministro eléctrico.](haier_hbc150.jpg){#fig-haier-hbc150 width="70%" fig-align="center"}
 
-Con el propósito de aproximar de manera precisa el comportamiento de este equipo bajo los rigurosos estándares operativos de la OMS, cada coeficiente de la @eq-ede-operativa se calculó a partir de las leyes físicas de transferencia de calor y la mecánica de fluidos. El desarrollo analítico para cada parámetro se detalla a continuación:
+Con el propósito de aproximar de manera precisa el comportamiento de este equipo bajo los rigurosos estándares operativos de la OMS, cada coeficiente de la @eq-ede-operativa se calculó a partir de las leyes físicas de transferencia de calor y la mecánica de fluidos. 
+
+El desarrollo analítico para cada parámetro se detalla a continuación:
 
 # HASTA AQUI
 

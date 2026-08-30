@@ -221,7 +221,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-08-16}
+\date{2026-08-30}
 \begin{document}
 \maketitle
 
@@ -2323,11 +2323,21 @@ del estado del suministro eléctrico \(\alpha(t)\):
 dT(t) = 
 \begin{cases} 
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + \gamma dN_{puerta}(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
-\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) + \gamma dN_{puerta}(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
+\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
 \end{cases}
 }\end{equation}
 
-Donde cada término de la ecuación representa lo siguiente:
+Como se observa en el segundo escenario de la
+Ecuación~\ref{eq-ede-operativa}, el término de saltos discretos
+(\(+ \gamma dN_{puerta}(t)\)) se elimina por completo durante un corte
+de luz. Esto debido a los protocolos operativos normativos: ante una
+falla eléctrica, el personal médico tiene estrictamente prohibido abrir
+el refrigerador. Al mantener la puerta sellada, se protege la inercia
+térmica provista por las botellas de agua y los paquetes refrigerantes,
+garantizando que la dinámica de la temperatura dependa exclusivamente de
+la pérdida pasiva hacia el ambiente exterior.
+
+Cada término de la ecuación representa lo siguiente:
 
 \begin{itemize}
 \tightlist
@@ -2395,8 +2405,9 @@ durante fallas prolongadas del suministro eléctrico.}
 Con el propósito de aproximar de manera precisa el comportamiento de
 este equipo bajo los rigurosos estándares operativos de la OMS, cada
 coeficiente de la Ecuación~\ref{eq-ede-operativa} se calculó a partir de
-las leyes físicas de transferencia de calor y la mecánica de fluidos. El
-desarrollo analítico para cada parámetro se detalla a continuación:
+las leyes físicas de transferencia de calor y la mecánica de fluidos.
+
+El desarrollo analítico para cada parámetro se detalla a continuación:
 
 \chapter{HASTA AQUI}\label{hasta-aqui}
 
