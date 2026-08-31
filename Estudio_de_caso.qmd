@@ -425,8 +425,9 @@ Este estado se activa cuando el Proceso de Poisson registra un apagón. El motor
   Usando nuevamente la Ley de Enfriamiento de Newton [@vollmer2009newton] hacia el atractor externo:
   $$10 = 43 + (5 - 43) e^{-\kappa_{off} (60.833)}$$
   Al resolver el despeje $\left(\ln\left(\frac{33}{38}\right) = -60.833 \kappa_{off}\right)$, el resultado es **$\kappa_{off} \approx 0.00232 \text{ hr}^{-1}$**.
+
   La enorme diferencia de magnitud entre $\kappa_{on}$ (rápido) y $\kappa_{off}$ (muy lento) comprueba matemáticamente la alta efectividad térmica de los paquetes refrigerantes.
-* **Volatilidad Externa ($\sigma_{off}$)**: Al cortarse la electricidad y apagarse los ventiladores, el aire interior deja de mezclarse a la fuerza (convección forzada) y pasa a un estado de reposo (convección natural estática). Según la mecánica de fluidos, esta ausencia de turbulencia reduce las variaciones aleatorias en un orden de magnitud. Por ello, la volatilidad térmica sin energía se calcula como la décima parte de la volatilidad activa: $\sigma_{off} = \dfrac{\sigma_on}{10} = \frac{0.4804}{10} \approx 0.048$.
+* **Volatilidad Externa ($\sigma_{off}$)**: Al cortarse la electricidad y apagarse los ventiladores, el aire interior deja de mezclarse a la fuerza (convección forzada) y pasa a un estado de reposo (convección natural estática). Según la mecánica de fluidos, esta ausencia de turbulencia reduce las variaciones aleatorias en un orden de magnitud. Por ello, la volatilidad térmica sin energía se calcula como la décima parte de la volatilidad activa: $\sigma_{off} = \dfrac{\sigma_{on}}{10} \approx \frac{0.4804}{10} \approx 0.048$.
 
 ### Perturbaciones Discretas: Apertura de Puertas ($N_{puerta}(t)$)
 De acuerdo con las normativas internacionales de manejo de red de frío, el refrigerador debe abrirse idealmente un máximo de dos veces al día: una apertura rutinaria matutina para extraer los frascos necesarios para la jornada y una vespertina para resguardar los sobrantes.
