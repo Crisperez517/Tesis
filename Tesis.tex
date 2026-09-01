@@ -187,10 +187,10 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -221,7 +221,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-08-30}
+\date{2026-09-01}
 \begin{document}
 \maketitle
 
@@ -2461,9 +2461,10 @@ temperatura interna hacia su nivel ideal.
 
   La varianza de un proceso de Ornstein-Uhlenbeck clásico depende del
   tiempo \(t\). Sin embargo, dado que el refrigerador opera de manera
-  continua durante meses, la inercia inicial se desvanece y el sistema
-  alcanza un estado estacionario (el límite cuando \(t \to \infty\)).
-  Sustituyendo en la fórmula asintótica de la desviación estándar
+  continua durante bastante tiempo, la inercia inicial se desvanece y el
+  sistema alcanza un estado estacionario (el límite cuando
+  \(t \to \infty\)). Sustituyendo en la fórmula asintótica de la
+  desviación estándar
   \(\left(SD = \frac{\sigma_{on}}{\sqrt{2\kappa_{on}}}\right)\):
   \[1 = \frac{\sigma_{on}}{\sqrt{2(0.1154)}} \implies \sigma_{on} = \sqrt{0.2308} \approx 0.4804\]
 \end{itemize}
@@ -2501,8 +2502,8 @@ exterior.
   (\(10^\circ \text{C}\) en las pruebas de autonomía de la OMS). Usando
   nuevamente la Ley de Enfriamiento de Newton
   (\citeproc{ref-vollmer2009newton}{Vollmer 2009}) hacia el atractor
-  externo: \[10 = 43 + (5 - 43) e^{-\kappa_{off} (60.833)}\] Al resolver
-  el despeje
+  externo: \[10 = 43 + (5 - 43) e^{-\kappa_{off} (60.833)}\] Al despejar
+  la ecuación
   \(\left(\ln\left(\frac{33}{38}\right) = -60.833 \kappa_{off}\right)\),
   el resultado es
   \textbf{\(\kappa_{off} \approx 0.00232 \text{ hr}^{-1}\)}.
@@ -2518,41 +2519,124 @@ exterior.
   esta ausencia de turbulencia reduce las variaciones aleatorias en un
   orden de magnitud. Por ello, la volatilidad térmica sin energía se
   calcula como la décima parte de la volatilidad activa:
-  \(\sigma_{off} = \dfrac{\sigma_{on}}{10} = \frac{0.4804}{10} \approx 0.048\).
+  \(\sigma_{off} = \dfrac{\sigma_{on}}{10} \approx \frac{0.4804}{10} \approx 0.048\).
 \end{itemize}
 
 \subsection{\texorpdfstring{Perturbaciones Discretas: Apertura de
 Puertas
 (\(N_{puerta}(t)\))}{Perturbaciones Discretas: Apertura de Puertas (N\_\{puerta\}(t))}}\label{perturbaciones-discretas-apertura-de-puertas-n_puertat}
 
-De acuerdo con las normativas internacionales de manejo de red de frío,
-el refrigerador debe abrirse idealmente un máximo de dos veces al día:
-una apertura rutinaria matutina para extraer los frascos necesarios para
-la jornada y una vespertina para resguardar los sobrantes.
+De acuerdo con las normativas internacionales de manejo de la red de
+frío, el refrigerador debe abrirse idealmente un máximo de dos veces al
+día: una apertura rutinaria matutina (típicamente a las 8:00 hrs) para
+extraer los frascos necesarios para la jornada, y una vespertina para
+resguardar los sobrantes.
+
+Dado que la apertura de las 8:00 hrs es un evento operativo determinista
+y predecible, la estocasticidad del sistema recae en el resto de la
+jornada, condicionada por la variabilidad de la demanda clínica. Para
+aproximar el modelo matemático a la realidad y aislar el factor humano,
+el Proceso de Poisson se segmenta en tres escenarios de simulación,
+definiendo tasas de intensidad (\(\lambda\)) dependientes del tiempo:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Tasa de Aperturas (\(\lambda_{puerta}\))}: Dado que la
-  apertura matutina es un evento operativo fijo, la verdadera
-  estocasticidad recae en la tarde, ya que el ingreso de biológicos
-  depende de si hubo sobrantes en los termos clínicos. Por ello, la
-  perturbación aleatoria se restringe a este momento y se modela
-  computacionalmente con un Proceso de Poisson Homogéneo con una tasa de
-  \(\lambda = 1\) evento/día.
+  \textbf{Escenario A (Control Absoluto):} Simula días de inactividad
+  clínica, como fines de semana o días festivos. La tasa del proceso
+  estocástico es nula en todo momento (\(\lambda = 0\)). Las variaciones
+  de la temperatura interna dependen exclusivamente de los cortes
+  eléctricos y la temperatura ambiente exterior.
 \item
-  \textbf{Impacto de la Apertura (\(\gamma\))}: Al tratarse de un equipo
-  tipo cofre (\emph{Icelined Refrigerator}), la pérdida térmica es mucho
-  menor que en equipos verticales, ya que el aire frío, siendo más
-  denso, tiende a permanecer en el fondo del gabinete. Sin embargo,
-  basándonos en estudios de convección para una apertura prolongada
-  típica de 5 minutos (tiempo estimado para organizar y contabilizar
-  viales), se introduce una carga térmica inesperada. Asignamos un
-  incremento de \textbf{\(\gamma = +1^\circ \text{C}\)} por evento. Esta
-  es una perturbación instantánea que rompe la continuidad de la
-  trayectoria y reduce críticamente el ``colchón térmico'' disponible en
-  caso de ocurrir un apagón durante la noche.
+  \textbf{Escenario B (Apego Normativo):} Respeta la única apertura
+  extra permitida por la norma para resguardar biológicos sobrantes.
+  Esta perturbación se modela como un Proceso de Poisson con una tasa de
+  \(1\) evento/día. Operativamente, esta tarea se realiza al final de la
+  jornada de consulta. Al distribuir esta probabilidad en una ventana
+  vespertina de 2 horas (de 15:00 a 17:00 hrs), la intensidad local se
+  calcula como:
+  \[\lambda_{tarde} = \frac{1 \text{ evento}}{2 \text{ horas}} = 0.5 \text{ eventos/hora}\]
+  Fuera de este horario, la intensidad del proceso estocástico es
+  estrictamente cero.
+\item
+  \textbf{Escenario C (Estrés Operativo y Contingencia):} Modela la
+  saturación clínica donde la demanda sobrepasa la capacidad de los
+  termos auxiliares de las enfermeras, obligando a realizar ``viajes de
+  resurtido'' al refrigerador principal. Con base en los cercos
+  epidemiológicos registrados en Chiapas durante 2025, el volumen de
+  aplicación superó las 415,000 dosis mensuales, triplicando el consumo
+  regular (aprox. 130,000 dosis). Al escalar operativamente este
+  incremento, la necesidad de extracción matutina se triplica (1
+  apertura fija a las 8:00 hrs + 2 aperturas estocásticas de resurtido).
+  El retorno vespertino se mantiene normativo (1 apertura estocástica).
+  Esto divide el proceso en dos ventanas activas:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \emph{Ventana Matutina (Resurtido):} Se esperan 2 eventos
+    distribuidos de 09:00 a 14:00 hrs.
+    \[\lambda_{mañana} = \frac{2 \text{ eventos}}{5 \text{ horas}} = 0.4 \text{ eventos/hora}\]
+  \item
+    \emph{Ventana Vespertina (Sobrantes):} Se mantiene en
+    \(0.5 \text{ eventos/hora}\) de 15:00 a 17:00 hrs.
+  \end{enumerate}
 \end{itemize}
+
+\subsection{\texorpdfstring{Impacto de la Apertura y Salto Térmico
+(\(\gamma\))}{Impacto de la Apertura y Salto Térmico (\textbackslash gamma)}}\label{impacto-de-la-apertura-y-salto-tuxe9rmico-gamma}
+
+Al tratarse de un equipo tipo cofre (\emph{Icelined Refrigerator}), la
+pérdida térmica por convección es físicamente menor que en equipos
+verticales, ya que el aire frío es más denso y tiende a permanecer en el
+fondo. Sin embargo, el ingreso de aire caliente es inevitable y su
+magnitud no es una constante; depende del tiempo que la puerta
+permanezca abierta y de la correcta disposición del balasto térmico
+(botellas de agua).
+
+Para modelar rigurosamente este choque térmico, nos basamos en los
+estudios experimentales del \emph{National Institute of Standards and
+Technology (NIST)} (\citeproc{ref-nist2015thermal}{Chojnacky, Strouse, y
+Miller 2015}). En sus pruebas de uso clínico, el NIST demostró que: 1.
+En el mejor escenario (aperturas rápidas con botellas de agua como
+barrera), el incremento de temperatura en la vacuna es mínimo,
+limitándose a \textbf{\(0.16^\circ\text{C}\)}. 2. En un escenario de
+descuido o falta de balasto térmico, el ingreso de calor genera un
+incremento adicional de \(1.2^\circ\text{C}\), resultando en un choque
+máximo esperado de \textbf{\(1.36^\circ\text{C}\)} (\(0.16 + 1.2\)).
+
+Dado que en la práctica clínica intervienen múltiples factores humanos
+aleatorios e independientes, el Teorema del Límite Central justifica
+modelar la magnitud del salto \(\gamma\) como una variable aleatoria con
+distribución Normal (\(\mathcal{N}(\mu, \sigma^2)\)).
+
+La media esperada (\(\mu\)) se calcula como el punto medio entre los
+límites operativos del NIST:
+\[\mu = \frac{0.16 + 1.36}{2} = 0.76^\circ\text{C}\]
+
+Para determinar la volatilidad, aplicamos la regla empírica (regla de
+las tres sigmas), asumiendo que el 99.7\% de los eventos clínicos caerán
+dentro de los límites físicos observados. Igualando la distancia desde
+la media hasta el extremo superior con \(3\sigma\):
+\[3\sigma = 1.36 - 0.76 = 0.60 \implies \sigma = 0.20^\circ\text{C}\]
+
+\textbf{Restricción Termodinámica (Filtro de Truncamiento):} Las colas
+de una distribución Normal estándar se extienden hasta el infinito
+negativo. En el contexto físico, un valor \(\gamma < 0\) implicaría que
+al abrir la puerta el refrigerador absorbe frío del exterior cálido, lo
+cual viola la Segunda Ley de la Termodinámica. Asimismo, el estudio del
+NIST establece que el ingreso mínimo absoluto de calor es de
+\(0.16^\circ\text{C}\).
+
+Para garantizar la viabilidad física del proceso estocástico durante las
+simulaciones de Montecarlo, la variable aleatoria se define formalmente
+como una distribución truncada inferiormente, aplicando un filtro de
+maximización:
+\[\gamma = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)\]
+De esta forma, la Ecuación Diferencial Estocástica absorbe la
+variabilidad operativa del personal médico sin riesgo de arrojar
+perturbaciones termodinámicamente imposibles.
 
 \section{Cinética de Degradación Térmica (Ecuación de
 Arrhenius)}\label{sec-Arrhenius}
@@ -3287,6 +3371,12 @@ Springer-Verlag. \url{https://doi.org/10.1007/0-387-21525-5_2}.
 Chen, Dexiang, y Debra Kristensen. 2009. {«Opportunities and challenges
 of developing thermostable vaccines»}. \emph{Expert review of vaccines}
 8 (5): 547-57. \url{https://doi.org/10.1586/erv.09.20}.
+
+\bibitem[\citeproctext]{ref-nist2015thermal}
+Chojnacky, Michal, Gregory Strouse, y Wyatt Miller. 2015. {«Thermal
+Analysis of Refrigeration Systems Used for Vaccine Storage»}. NIST
+Interagency/Internal Report (NISTIR) 8128. National Institute of
+Standards; Technology. \url{https://doi.org/10.6028/NIST.IR.8128}.
 
 \bibitem[\citeproctext]{ref-cfe2024informe}
 Comisión Federal de Electricidad. 2024. {«Informe Anual 2024»}. Ciudad
