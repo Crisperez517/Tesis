@@ -364,7 +364,7 @@ Por este motivo, en la presente investigación se añadió a la ecuación difere
 
 En primer lugar, el estado del suministro eléctrico actúa como un interruptor determinado por un Proceso de Poisson No Homogéneo. Esta conmutación permite vincular el clima exterior con el riesgo operativo de la red; cuando el proceso de Poisson registra un apagón, el modelo simula un cambio radical en la termodinámica del equipo, pasando de un régimen de convección forzada (enfriamiento activo) a un régimen de convección natural pasiva (calentamiento inercial).
 
-En segundo lugar, se incorpora un Proceso de Poisson compuesto ($dN_{puerta}(t)$) para simular las perturbaciones del sistema ocasionadas por la operación clínica diaria. Cada apertura de la puerta del refrigerador por parte del personal médico inyecta choques térmicos instantáneos al equipo. Modelar estos eventos como saltos discretos permite simular cómo el calor externo entra de golpe y desplaza momentáneamente la temperatura antes de que la inercia térmica logre estabilizarla nuevamente.
+En segundo lugar, se incorpora un Proceso de Poisson Compuesto, denotado como $J(t)$, para simular las perturbaciones del sistema ocasionadas por la operación clínica diaria. Matemáticamente, este término de salto se define como $J(t) = \sum_{i=1}^{N_{puerta}(t)} \gamma_i$, donde la magnitud del choque térmico $\gamma_i$ posee una distribución de probabilidad preestablecida (en este modelo, una distribución normal truncada) y $N_{puerta}(t)$ es un Proceso de Poisson No Homogéneo, el cual es estrictamente independiente del movimiento browniano $W(t)$. Cada apertura de la puerta del refrigerador por parte del personal médico inyecta estos choques instantáneos al equipo. Modelar estos eventos mediante la adición de $dJ(t)$ a la ecuación diferencial permite  simular cómo el calor externo entra de golpe y desplaza momentáneamente la temperatura interna antes de que la inercia térmica logre estabilizarla nuevamente.
 
 ## Calibración de la Ecuación Diferencial Estocástica (EDE)
 
@@ -373,12 +373,12 @@ Para conectar el comportamiento aleatorio de la red eléctrica con la termodiná
 $$
 dT(t) = 
 \begin{cases} 
-\kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + \gamma dN_{puerta}(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
+\kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
-\end{cases}
+\end{cases}, \quad 0 \leq t \leq T
 $$ {#eq-ede-operativa}
 
-Como se observa en el segundo escenario de la @eq-ede-operativa, el término de saltos discretos ($+ \gamma dN_{puerta}(t)$) se elimina por completo durante un corte de luz, esto debido a los protocolos operativos normativos: ante una falla eléctrica, el personal médico tiene estrictamente prohibido abrir el refrigerador. Al mantener la puerta sellada, se protege la inercia térmica provista por las botellas de agua y los paquetes refrigerantes, garantizando que la dinámica de la temperatura dependa exclusivamente de la pérdida pasiva hacia el ambiente exterior.
+Como se observa en el segundo escenario de la @eq-ede-operativa, el término de saltos discretos ($+ dJ(t)$) se elimina por completo durante un corte de luz, esto debido a los protocolos operativos normativos: ante una falla eléctrica, el personal médico tiene estrictamente prohibido abrir el refrigerador. Al mantener la puerta sellada, se protege la inercia térmica provista por las botellas de agua y los paquetes refrigerantes, garantizando que la dinámica de la temperatura dependa exclusivamente de la pérdida pasiva hacia el ambiente exterior.
 
 Cada término de la ecuación representa lo siguiente:
 
@@ -390,8 +390,9 @@ Cada término de la ecuación representa lo siguiente:
 * **$\sigma_{on}$:** La volatilidad térmica originada por la turbulencia y mezcla del aire interno cuando los ventiladores están encendidos.
 * **$\sigma_{off}$:** La volatilidad térmica presente durante un corte de luz, cuando el fluido interno transita a un estado de convección natural estática.
 * **$dW(t)$:** El incremento del movimiento browniano estándar, el cual captura las fluctuaciones aleatorias continuas.
-* **$\gamma$:** La magnitud del choque térmico instantáneo provocado por la entrada de calor exterior cada vez que se abre el equipo.
-* **$dN_{puerta}(t)$:** Los eventos discretos que modelan el número de veces que el personal médico abre la puerta del refrigerador.
+* **$dJ(t)$:** El incremento del Proceso de Poisson Compuesto que inyecta los choques térmicos al sistema.
+* **$\gamma_i$:** La magnitud aleatoria del choque térmico instantáneo provocado por la entrada de calor exterior en la $i$-ésima apertura del equipo.
+* **$N_{puerta}(t)$:** El Proceso de Poisson que modela el número de veces que el personal médico abre la puerta del refrigerador.
 
 Para garantizar el rigor de la simulación, los coeficientes térmicos se dedujeron utilizando las especificaciones técnicas del refrigerador institucional Haier HBC-150. De acuerdo con el catálogo oficial PQS de la Organización Mundial de la Salud (OMS) [@oms_pqs_e003, pp. 89-90], este equipo cuenta con certificación de protección Grado A y está diseñado específicamente para mantener la red de frío en condiciones climáticas severas. 
 
@@ -431,42 +432,47 @@ Este estado se activa cuando el Proceso de Poisson registra un apagón. El motor
 
 ### Perturbaciones Discretas: Apertura de Puertas ($N_{puerta}(t)$)
 
-De acuerdo con las normativas internacionales de manejo de la red de frío, el refrigerador debe abrirse idealmente un máximo de dos veces al día: una apertura rutinaria matutina (típicamente a las 8:00 hrs) para extraer los frascos necesarios para la jornada, y una vespertina para resguardar los sobrantes. 
+De acuerdo con las normativas internacionales de manejo de la red de frío, la manipulación de los equipos de refrigeración debe limitarse estrictamente a los días hábiles (de lunes a viernes). Durante estas jornadas, el refrigerador debe abrirse idealmente un máximo de dos veces: una apertura rutinaria matutina (típicamente a las 8:00 hrs) para extraer los biológicos necesarios para el turno, y una apertura vespertina destinada a resguardar los sobrantes. Por el contrario, durante los fines de semana y días festivos, la unidad debe permanecer completamente sellada para maximizar la preservación de la inercia térmica, anulando por completo la inyección de calor exterior generada por el factor humano.
 
-Dado que la apertura de las 8:00 hrs es un evento operativo determinista y predecible, la estocasticidad del sistema recae en el resto de la jornada, condicionada por la variabilidad de la demanda clínica. Para aproximar el modelo matemático a la realidad y aislar el factor humano, el Proceso de Poisson se segmenta en tres escenarios de simulación, definiendo tasas de intensidad ($\lambda$) dependientes del tiempo:
+Dado que la apertura de las 8:00 hrs es un evento operativo determinista y predecible, la aleatoriedad del sistema recae en el resto de la jornada, condicionada por la variabilidad de la demanda clínica. Para aproximar el modelo matemático a la realidad, aislar el factor humano y evaluar sistemáticamente la resiliencia termodinámica del equipo frente a fallas eléctricas, el Proceso de Poisson se segmenta en tres escenarios de simulación. Cada escenario persigue un objetivo analítico particular, definiendo tasas de intensidad ($\lambda$) dependientes del tiempo:
 
-*   **Escenario A (Control Absoluto):** Simula días de inactividad clínica, como fines de semana o días festivos. La tasa del proceso estocástico es nula en todo momento ($\lambda = 0$). Las variaciones de la temperatura interna dependen exclusivamente de los cortes eléctricos y la temperatura ambiente exterior.
-*   **Escenario B (Apego Normativo):** Respeta la única apertura extra permitida por la norma para resguardar biológicos sobrantes. Esta perturbación se modela como un Proceso de Poisson con una tasa de $1$ evento/día. Operativamente, esta tarea se realiza al final de la jornada de consulta. Al distribuir esta probabilidad en una ventana vespertina de 2 horas (de 15:00 a 17:00 hrs), la intensidad local se calcula como:
+* **Escenario A (Control Absoluto):** Diseñado como línea base para evaluar la eficiencia térmica pura del equipo, respondiendo a la pregunta de cuánto tiempo el refrigerador es capaz de mantener la cadena de frío sin intervención humana. Simula días de inactividad clínica, como fines de semana o días festivos, con lo cual la intensidad del proceso de Poisson es nula en todo momento ($\lambda = 0$). Las variaciones de la temperatura interna dependen exclusivamente de los cortes eléctricos y la temperatura ambiente exterior.
+* **Escenario B (Apego Normativo):** Su objetivo es establecer el margen de seguridad del equipo operando bajo un entorno clínico ideal. Respeta la única apertura extra permitida por la norma para resguardar biológicos sobrantes. Esta perturbación se modela como un Proceso de Poisson con una intensidad de $1$ evento/día. Operativamente, esta tarea se realiza al final de la jornada de consulta. Al distribuir esta probabilidad en un horario vespertino de 2 horas (de 15:00 a 17:00 hrs), la intensidad local se calcula como:
     $$\lambda_{tarde} = \frac{1 \text{ evento}}{2 \text{ horas}} = 0.5 \text{ eventos/hora}$$
-    Fuera de este horario, la intensidad del proceso estocástico es estrictamente cero.
-*   **Escenario C (Estrés Operativo y Contingencia):** Modela la saturación clínica donde la demanda sobrepasa la capacidad de los termos auxiliares de las enfermeras, obligando a realizar "viajes de resurtido" al refrigerador principal. Con base en los cercos epidemiológicos registrados en Chiapas durante 2025, el volumen de aplicación superó las 415,000 dosis mensuales, triplicando el consumo regular (aprox. 130,000 dosis). 
-    Al escalar operativamente este incremento, la necesidad de extracción matutina se triplica (1 apertura fija a las 8:00 hrs + 2 aperturas estocásticas de resurtido). El retorno vespertino se mantiene normativo (1 apertura estocástica). Esto divide el proceso en dos ventanas activas:
+    Fuera de este horario, la intensidad del proceso es estrictamente cero.
+* **Escenario C (Estrés Operativo y Contingencia):** Busca cuantificar la vulnerabilidad del sistema ante situaciones de crisis, analizando cómo el exceso de aperturas agota el "colchón térmico" de la unidad dejándola indefensa si ocurre un apagón. Modela la saturación clínica donde la demanda sobrepasa la capacidad de los termos auxiliares de las enfermeras, obligando a realizar "viajes de resurtido" al refrigerador principal. Con base en los cercos epidemiológicos registrados en Chiapas durante 2025, el volumen de aplicación superó las 415,000 dosis mensuales, triplicando el consumo regular (aprox. 130,000 dosis). 
+    Al escalar operativamente este incremento, la necesidad de extracción matutina se triplica (1 apertura fija a las 8:00 hrs + 2 aperturas de resurtido). El retorno vespertino se mantiene normativo (1 apertura si es que sobran vacunas para resguardar nuevamente). Esto divide el proceso en dos ventanas activas:
     1.  *Ventana Matutina (Resurtido):* Se esperan 2 eventos distribuidos de 09:00 a 14:00 hrs. 
         $$\lambda_{mañana} = \frac{2 \text{ eventos}}{5 \text{ horas}} = 0.4 \text{ eventos/hora}$$
     2.  *Ventana Vespertina (Sobrantes):* Se mantiene en $0.5 \text{ eventos/hora}$ de 15:00 a 17:00 hrs.
+
+    Fuera de estos horarios, la intensidad del proceso es estrictamente cero.
     
-### Impacto de la Apertura y Salto Térmico ($\gamma$)
+### Impacto de la Apertura y Salto Térmico ($\gamma_i$)
 
 Al tratarse de un equipo tipo cofre (*Icelined Refrigerator*), la pérdida térmica por convección es físicamente menor que en equipos verticales, ya que el aire frío es más denso y tiende a permanecer en el fondo. Sin embargo, el ingreso de aire caliente es inevitable y su magnitud no es una constante; depende del tiempo que la puerta permanezca abierta y de la correcta disposición del balasto térmico (botellas de agua).
 
 Para modelar rigurosamente este choque térmico, nos basamos en los estudios experimentales del *National Institute of Standards and Technology (NIST)* [@nist2015thermal]. En sus pruebas de uso clínico, el NIST demostró que:
+
 1.  En el mejor escenario (aperturas rápidas con botellas de agua como barrera), el incremento de temperatura en la vacuna es mínimo, limitándose a **$0.16^\circ\text{C}$**.
 2.  En un escenario de descuido o falta de balasto térmico, el ingreso de calor genera un incremento adicional de $1.2^\circ\text{C}$, resultando en un choque máximo esperado de **$1.36^\circ\text{C}$** ($0.16 + 1.2$).
 
-Dado que en la práctica clínica intervienen múltiples factores humanos aleatorios e independientes, el Teorema del Límite Central justifica modelar la magnitud del salto $\gamma$ como una variable aleatoria con distribución Normal ($\mathcal{N}(\mu, \sigma^2)$). 
+Dado que en la práctica clínica intervienen múltiples factores humanos aleatorios e independientes, el Teorema del Límite Central justifica modelar la magnitud del salto $\gamma_i$ como una variable aleatoria con distribución Normal ($\mathcal{N}(\mu, \sigma^2)$). 
 
 La media esperada ($\mu$) se calcula como el punto medio entre los límites operativos del NIST:
 $$\mu = \frac{0.16 + 1.36}{2} = 0.76^\circ\text{C}$$
 
-Para determinar la volatilidad, aplicamos la regla empírica (regla de las tres sigmas), asumiendo que el 99.7% de los eventos clínicos caerán dentro de los límites físicos observados. Igualando la distancia desde la media hasta el extremo superior con $3\sigma$:
+Para determinar la varianza, aplicamos la regla empírica (regla de las tres sigmas), asumiendo que el 99.7% de los eventos clínicos caerán dentro de los límites físicos observados. Igualando la distancia desde la media hasta el extremo superior con $3\sigma$:
 $$3\sigma = 1.36 - 0.76 = 0.60 \implies \sigma = 0.20^\circ\text{C}$$
 
 **Restricción Termodinámica (Filtro de Truncamiento):**
-Las colas de una distribución Normal estándar se extienden hasta el infinito negativo. En el contexto físico, un valor $\gamma < 0$ implicaría que al abrir la puerta el refrigerador absorbe frío del exterior cálido, lo cual viola la Segunda Ley de la Termodinámica. Asimismo, el estudio del NIST establece que el ingreso mínimo absoluto de calor es de $0.16^\circ\text{C}$.
+Las colas de una distribución Normal estándar se extienden hasta menos infinito. En el contexto físico, un valor de $\gamma_i < 0$ implicaría que al abrir la puerta el refrigerador absorbe frío del exterior cálido, lo cual viola la Segunda Ley de la Termodinámica. Asimismo, el estudio del NIST establece que el ingreso mínimo absoluto de calor es de $0.16^\circ\text{C}$.
 
-Para garantizar la viabilidad física del proceso estocástico durante las simulaciones de Montecarlo, la variable aleatoria se define formalmente como una distribución truncada inferiormente, aplicando un filtro de maximización:
-$$\gamma = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)$$
+Para garantizar la viabilidad física del proceso estocástico durante las simulaciones de Montecarlo, la variable aleatoria $\gamma_i$ se define como una distribución truncada inferiormente, aplicando un filtro de maximización:
+$$\gamma_i = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)$$
 De esta forma, la Ecuación Diferencial Estocástica absorbe la variabilidad operativa del personal médico sin riesgo de arrojar perturbaciones termodinámicamente imposibles.
+
+# HASTA AQUI
 
 ## Cinética de Degradación Térmica (Ecuación de Arrhenius) {#sec-Arrhenius}
 
