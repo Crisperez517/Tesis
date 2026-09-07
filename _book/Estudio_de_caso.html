@@ -451,12 +451,16 @@ window.Quarto = {
   <li><a href="#perturbaciones-discretas-apertura-de-puertas-n_puertat" id="toc-perturbaciones-discretas-apertura-de-puertas-n_puertat" class="nav-link" data-scroll-target="#perturbaciones-discretas-apertura-de-puertas-n_puertat"><span class="header-section-number">3.9.3</span> Perturbaciones Discretas: Apertura de Puertas (<span class="math inline">\(N_{puerta}(t)\)</span>)</a></li>
   <li><a href="#impacto-de-la-apertura-y-salto-térmico-gamma_i" id="toc-impacto-de-la-apertura-y-salto-térmico-gamma_i" class="nav-link" data-scroll-target="#impacto-de-la-apertura-y-salto-térmico-gamma_i"><span class="header-section-number">3.9.4</span> Impacto de la Apertura y Salto Térmico (<span class="math inline">\(\gamma_i\)</span>)</a></li>
   </ul></li>
-  <li><a href="#hasta-aqui" id="toc-hasta-aqui" class="nav-link" data-scroll-target="#hasta-aqui"><span class="header-section-number">4</span> HASTA AQUI</a>
+  <li><a href="#sec-Arrhenius" id="toc-sec-Arrhenius" class="nav-link" data-scroll-target="#sec-Arrhenius"><span class="header-section-number">3.10</span> Cinética de Degradación Térmica (Ecuación de Arrhenius)</a>
   <ul class="collapse">
-  <li><a href="#sec-Arrhenius" id="toc-sec-Arrhenius" class="nav-link" data-scroll-target="#sec-Arrhenius"><span class="header-section-number">4.1</span> Cinética de Degradación Térmica (Ecuación de Arrhenius)</a>
-  <ul class="collapse">
-  <li><a href="#el-modelo-de-daño-térmico-acumulado-da" id="toc-el-modelo-de-daño-térmico-acumulado-da" class="nav-link" data-scroll-target="#el-modelo-de-daño-térmico-acumulado-da"><span class="header-section-number">4.1.1</span> El Modelo de Daño Térmico Acumulado (<span class="math inline">\(DA\)</span>)</a></li>
+  <li><a href="#el-modelo-de-daño-térmico-acumulado-y-merma-de-inventario" id="toc-el-modelo-de-daño-térmico-acumulado-y-merma-de-inventario" class="nav-link" data-scroll-target="#el-modelo-de-daño-térmico-acumulado-y-merma-de-inventario"><span class="header-section-number">3.10.1</span> El Modelo de Daño Térmico Acumulado y Merma de Inventario</a></li>
+  <li><a href="#exclusión-del-riesgo-por-congelamiento-t-2circtextc" id="toc-exclusión-del-riesgo-por-congelamiento-t-2circtextc" class="nav-link" data-scroll-target="#exclusión-del-riesgo-por-congelamiento-t-2circtextc"><span class="header-section-number">3.10.2</span> Exclusión del Riesgo por Congelamiento (<span class="math inline">\(T &lt; 2^\circ\text{C}\)</span>)</a></li>
   </ul></li>
+  <li><a href="#dinámica-de-inventario-y-demanda-clínica" id="toc-dinámica-de-inventario-y-demanda-clínica" class="nav-link" data-scroll-target="#dinámica-de-inventario-y-demanda-clínica"><span class="header-section-number">3.11</span> Dinámica de Inventario y Demanda Clínica</a>
+  <ul class="collapse">
+  <li><a href="#capacidad-logística-y-reglas-de-reabastecimiento" id="toc-capacidad-logística-y-reglas-de-reabastecimiento" class="nav-link" data-scroll-target="#capacidad-logística-y-reglas-de-reabastecimiento"><span class="header-section-number">3.11.1</span> Capacidad Logística y Reglas de Reabastecimiento</a></li>
+  <li><a href="#comportamiento-estacional-de-la-demanda" id="toc-comportamiento-estacional-de-la-demanda" class="nav-link" data-scroll-target="#comportamiento-estacional-de-la-demanda"><span class="header-section-number">3.11.2</span> Comportamiento Estacional de la Demanda</a></li>
+  <li><a href="#acoplamiento-estocástico-termodinámico-logístico" id="toc-acoplamiento-estocástico-termodinámico-logístico" class="nav-link" data-scroll-target="#acoplamiento-estocástico-termodinámico-logístico"><span class="header-section-number">3.11.3</span> Acoplamiento Estocástico Termodinámico-Logístico</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1349,35 +1353,140 @@ Fuera de estos horarios, la intensidad del proceso es estrictamente cero.</li>
 <p>Para garantizar la viabilidad física del proceso estocástico durante las simulaciones de Montecarlo, la variable aleatoria <span class="math inline">\(\gamma_i\)</span> se define como una distribución truncada inferiormente, aplicando un filtro de maximización: <span class="math display">\[\gamma_i = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)\]</span> De esta forma, la Ecuación Diferencial Estocástica absorbe la variabilidad operativa del personal médico sin riesgo de arrojar perturbaciones termodinámicamente imposibles.</p>
 </section>
 </section>
-<section id="hasta-aqui" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> HASTA AQUI</h1>
-<section id="sec-Arrhenius" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="sec-Arrhenius"><span class="header-section-number">4.1</span> Cinética de Degradación Térmica (Ecuación de Arrhenius)</h2>
-<p>La Ecuación Diferencial Estocástica calibrada anteriormente nos permite simular con alta precisión la temperatura interna del refrigerador <span class="math inline">\(T(t)\)</span>. Sin embargo, para evaluar el impacto en la salud pública, es necesario traducir estas variaciones térmicas en pérdida de viabilidad del biológico.</p>
-<p>La degradación de las vacunas (particularmente las vivas atenuadas, como el biológico contra el Sarampión o la Poliomielitis) es un proceso de desnaturalización proteica que se acelera exponencialmente con el calor. Esta velocidad de degradación <span class="math inline">\(k(T)\)</span> se modela mediante la <strong>Ecuación de Arrhenius</strong> <span class="citation" data-cites="chen2009thermostable">(<a href="references.html#ref-chen2009thermostable" role="doc-biblioref">Chen y Kristensen 2009</a>)</span>:</p>
+<section id="sec-Arrhenius" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="sec-Arrhenius"><span class="header-section-number">3.10</span> Cinética de Degradación Térmica (Ecuación de Arrhenius)</h2>
+<p>La Ecuación Diferencial Estocástica calibrada anteriormente permite simular con alta precisión la trayectoria térmica interna del refrigerador, <span class="math inline">\(T(t)\)</span>. Sin embargo, para evaluar el impacto logístico y en la salud pública, es necesario traducir estas variaciones térmicas en pérdida de viabilidad del biológico.</p>
+<p>La degradación de las vacunas (particularmente las vivas atenuadas, como el biológico contra el Sarampión o la Poliomielitis) es un proceso de desnaturalización proteica que se acelera exponencialmente con el incremento de temperatura. Desde una perspectiva fisicoquímica, la concentración de ingrediente activo decae siguiendo una cinética de primer orden, cuya velocidad de reacción <span class="math inline">\(k(T)\)</span> se modela mediante la <strong>Ecuación de Arrhenius</strong> <span class="citation" data-cites="sinko2011martin">(<a href="references.html#ref-sinko2011martin" role="doc-biblioref">Sinko 2011</a>)</span>:</p>
 <p><span id="eq-Arrhenius"><span class="math display">\[
 k(T(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right)
-\tag{4.1}\]</span></span></p>
-<p>Donde la temperatura <span class="math inline">\(T_K(t) = T(t) + 273.15\)</span> se expresa en grados Kelvin y los parámetros cinéticos para un biológico termosensible genérico se establecen como:</p>
+\tag{3.18}\]</span></span></p>
+<p>Cada parámetro de la ecuación representa lo siguiente:</p>
 <ul>
-<li><strong>Constante Universal de los Gases (<span class="math inline">\(R\)</span>)</strong>: <span class="math inline">\(8.314 \, \text{J/(mol} \cdot \text{K)}\)</span>.</li>
-<li><strong>Energía de Activación (<span class="math inline">\(E_a\)</span>)</strong>: Se calibra en <strong><span class="math inline">\(85,000 \, \text{J/mol}\)</span></strong> (<span class="math inline">\(85 \text{ kJ/mol}\)</span>). Este valor representa la barrera energética que debe superarse para que las proteínas del antígeno comiencen a romperse irreversiblemente.</li>
-<li><strong>Factor Pre-exponencial (<span class="math inline">\(A\)</span>)</strong>: Se ajusta a un valor de <strong><span class="math inline">\(1.2 \times 10^{14}\)</span></strong>. Este factor de frecuencia asegura que la tasa de degradación sea prácticamente nula cuando el equipo opera correctamente en el rango normativo de 2°C a 8°C, pero escale logarítmicamente durante una excursión térmica severa.</li>
+<li><strong><span class="math inline">\(k(T(t))\)</span></strong>: La constante de velocidad de degradación térmica en el instante <span class="math inline">\(t\)</span>, expresada en <span class="math inline">\(\text{s}^{-1}\)</span>.</li>
+<li><strong><span class="math inline">\(T_K(t)\)</span></strong>: La temperatura interna del fluido convertida a escala absoluta (grados Kelvin), calculada como <span class="math inline">\(T(t) + 273.15\)</span>.</li>
+<li><strong><span class="math inline">\(R\)</span></strong>: La Constante Universal de los Gases, con un valor fijo de <span class="math inline">\(8.314 \, \text{J/(mol} \cdot \text{K)}\)</span>.</li>
+<li><strong><span class="math inline">\(E_a\)</span></strong>: La Energía de Activación, calibrada en <strong><span class="math inline">\(85,000 \, \text{J/mol}\)</span></strong> (<span class="math inline">\(85 \text{ kJ/mol}\)</span>). Representa la barrera energética mínima que las moléculas del antígeno deben superar para iniciar el proceso irreversible de ruptura estructural.</li>
+<li><strong><span class="math inline">\(A\)</span></strong>: El Factor Pre-exponencial (o factor de frecuencia), ajustado a un valor empírico de <strong><span class="math inline">\(1.2 \times 10^{14} \, \text{s}^{-1}\)</span></strong>. Este parámetro asegura que la tasa de degradación sea prácticamente nula cuando el equipo opera correctamente dentro de la red de frío (2°C a 8°C), pero que escale de forma logarítmica severa ante una excursión térmica crítica.</li>
 </ul>
-<section id="el-modelo-de-daño-térmico-acumulado-da" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="el-modelo-de-daño-térmico-acumulado-da"><span class="header-section-number">4.1.1</span> El Modelo de Daño Térmico Acumulado (<span class="math inline">\(DA\)</span>)</h3>
-<p>En la práctica clínica normativa, las variaciones térmicas dentro del rango seguro (2°C a 8°C) se consideran tolerables y su impacto en la caducidad a corto plazo es ignorado. El daño crítico ocurre exclusivamente cuando la red de frío se rompe.</p>
-<p>Para modelar este protocolo operativo dentro de nuestra simulación, el <strong>Daño Acumulado (<span class="math inline">\(DA\)</span>)</strong> se calcula como la integral de la tasa de Arrhenius, condicionada por una función indicadora <span class="math inline">\(\mathbb{I}_{\{T(t) &gt; 8^\circ\text{C}\}}\)</span> que “enciende” el reloj de degradación únicamente cuando la temperatura cruza el límite superior de seguridad:</p>
+<section id="el-modelo-de-daño-térmico-acumulado-y-merma-de-inventario" class="level3" data-number="3.10.1">
+<h3 data-number="3.10.1" class="anchored" data-anchor-id="el-modelo-de-daño-térmico-acumulado-y-merma-de-inventario"><span class="header-section-number">3.10.1</span> El Modelo de Daño Térmico Acumulado y Merma de Inventario</h3>
+<p>En la práctica clínica normativa, las variaciones térmicas que oscilan dentro del rango seguro (2°C a 8°C) se consideran tolerables, y su impacto en la caducidad a corto plazo es ignorado. El daño logístico ocurre exclusivamente cuando la red de frío se rompe. Para incorporar este protocolo operativo al modelo matemático, la degradación se condiciona mediante una función indicadora <span class="math inline">\(\mathbb{I}_{\{T(t) &gt; 8^\circ\text{C}\}}\)</span>, la cual activa el proceso de pérdida térmica únicamente cuando la temperatura cruza el límite superior de seguridad.</p>
+<p>Bajo este esquema, la cantidad de vacunas viables en el inventario, <span class="math inline">\(I(t)\)</span>, se rige por una Ecuación Diferencial Ordinaria (EDO) de primer orden, donde la tasa de pérdida es proporcional al inventario actual <span class="citation" data-cites="sinko2011martin">(<a href="references.html#ref-sinko2011martin" role="doc-biblioref">Sinko 2011</a>)</span>:</p>
 <p><span class="math display">\[
-DA(t) = \int_{0}^{t} \mathbb{I}_{\{T(s) &gt; 8\}} \cdot k(T(s)) \, ds
+\frac{dI(t)}{dt} = -k(T(t)) \cdot I(t) \cdot \mathbb{I}_{\{T(t) &gt; 8\}}
 \]</span></p>
-<p>Esta formulación integral permite que el simulador de Montecarlo contabilice el estrés térmico exacto de cada trayectoria. Si durante un apagón prolongado la EDE empuja a <span class="math inline">\(T(t)\)</span> muy por encima de los 8°C, el integrando crecerá rápidamente. Si al final de un año simulado el <span class="math inline">\(DA(t)\)</span> rebasa un umbral de descarte crítico predefinido, el lote de vacunas se considerará como pérdida total.</p>
+<p>Al resolver esta ecuación diferencial mediante variables separables e integrando desde el inicio de la simulación (<span class="math inline">\(t=0\)</span>) hasta un tiempo <span class="math inline">\(t\)</span>, se obtiene la cantidad exacta de inventario sobreviviente:</p>
+<p><span class="math display">\[
+\int_{I(0)}^{I(t)} \frac{dI}{I} = - \int_{0}^{t} k(T(s)) \cdot \mathbb{I}_{\{T(s) &gt; 8\}} \, ds \implies I(t) = I(0) \exp\left( - \int_{0}^{t} k(T(s)) \cdot \mathbb{I}_{\{T(s) &gt; 8\}} \, ds \right)
+\]</span></p>
+<p>El término integral dentro de la función exponencial define formalmente el <strong>Daño Acumulado (<span class="math inline">\(DA\)</span>)</strong>:</p>
+<p><span class="math display">\[
+DA(t) = \int_{0}^{t} k(T(s)) \cdot \mathbb{I}_{\{T(s) &gt; 8\}} \, ds
+\]</span></p>
+<p>Esta formulación integral permite contabilizar analíticamente el estrés térmico exacto de cada trayectoria. Computacionalmente, para actualizar el estado del sistema en pasos discretos de tiempo <span class="math inline">\(\Delta t\)</span> dentro de la simulación de Montecarlo, la solución analítica de la EDO estipula que la fracción de inventario perdido (merma instantánea) durante ese diferencial de tiempo se calcula extrayendo el complemento del factor de supervivencia:</p>
+<p><span class="math display">\[
+\text{Merma}(t) = I(t) \left( 1 - e^{-k(T(t)) \Delta t} \right)
+\]</span></p>
+<p>Esta discretización asegura que el modelo numérico refleje con precisión la cinética fisicoquímica. En cada iteración, el algoritmo descuenta las dosis destruidas por la exposición al calor durante los apagones, permitiendo la activación automatizada de los protocolos logísticos de reabastecimiento si el inventario cae por debajo de los umbrales críticos de operación.</p>
+</section>
+<section id="exclusión-del-riesgo-por-congelamiento-t-2circtextc" class="level3" data-number="3.10.2">
+<h3 data-number="3.10.2" class="anchored" data-anchor-id="exclusión-del-riesgo-por-congelamiento-t-2circtextc"><span class="header-section-number">3.10.2</span> Exclusión del Riesgo por Congelamiento (<span class="math inline">\(T &lt; 2^\circ\text{C}\)</span>)</h3>
+<p>Es importante destacar que el modelo de daño térmico propuesto se restringe exclusivamente a cuando la temperatura interna del equipo es mayor que 8°C (<span class="math inline">\(T(t) &gt; 8^\circ\text{C}\)</span>). Aunque el descenso de la temperatura por debajo de los <span class="math inline">\(2^\circ\text{C}\)</span> (y especialmente hacia el punto de congelación a <span class="math inline">\(0^\circ\text{C}\)</span>) representa un riesgo logístico crítico que destruye la viabilidad del biológico debido a la cristalización del agua, este fenómeno se excluye de la simulación por tres motivos teóricos y prácticos fundamentales:</p>
+<ol type="1">
+<li><strong>Incompatibilidad Cinética:</strong> El daño por congelamiento obedece a un cambio de fase físico y estructural, no a una reacción química progresiva. Por lo tanto, la Ecuación de Arrhenius carece de validez termodinámica para modelar este deterioro continuo, imposibilitando su incorporación bajo la misma Ecuación Diferencial Ordinaria.</li>
+<li><strong>Deriva Térmica del Entorno:</strong> La estructura matemática de la Ecuación Diferencial Estocástica formulada no posee fuerzas de deriva que empujen el sistema hacia el sobreenfriamiento. Con suministro eléctrico, el equipo gravita hacia el termostato (<span class="math inline">\(\theta_{set} = 5^\circ\text{C}\)</span>). Durante un apagón, la temperatura interna tiende hacia el ambiente cálido exterior (<span class="math inline">\(T_{amb}(t) \ge 5^\circ\text{C}\)</span>), mientras que las perturbaciones por apertura de puertas (<span class="math inline">\(dJ(t)\)</span>) únicamente inyectan energía térmica positiva.</li>
+<li><strong>Arquitectura del Equipo:</strong> La simulación asume un equipo tipo cofre precalificado (<em>Icelined Refrigerator</em>). El diseño de estas unidades incorpora un revestimiento estabilizador (balasto de agua/hielo) cuya función termodinámica es precisamente absorber los picos de frío directo del compresor, protegiendo al biológico de caídas accidentales de temperatura.</li>
+</ol>
+<p>Por consiguiente, bajo las condiciones operativas y climáticas simuladas, la probabilidad de sobreenfriamiento se considera nula. El análisis de vulnerabilidad del inventario queda acotado al estrés por calor derivado de la interrupción del suministro eléctrico.</p>
+</section>
+</section>
+<section id="dinámica-de-inventario-y-demanda-clínica" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="dinámica-de-inventario-y-demanda-clínica"><span class="header-section-number">3.11</span> Dinámica de Inventario y Demanda Clínica</h2>
+<p>Para evaluar la capacidad de la red de frío, el modelo termodinámico debe interactuar con las variaciones operativas del inventario. La simulación incorpora parámetros logísticos basados en la teoría de gestión de inventarios y en el calendario de salud pública mexicano.</p>
+<section id="capacidad-logística-y-reglas-de-reabastecimiento" class="level3" data-number="3.11.1">
+<h3 data-number="3.11.1" class="anchored" data-anchor-id="capacidad-logística-y-reglas-de-reabastecimiento"><span class="header-section-number">3.11.1</span> Capacidad Logística y Reglas de Reabastecimiento</h3>
+<p>El modelo asume el uso de un equipo precalificado tipo cofre (<em>Icelined Refrigerator</em>), específicamente el modelo Haier HBC-150. Con un volumen útil de almacenamiento de aproximadamente 122 litros, la capacidad máxima del sistema se establece en <span class="math inline">\(5,000\)</span> dosis. Esta cifra contempla el volumen físico de los empaques secundarios y el espacio necesario para garantizar la correcta convección del aire interno.</p>
+<p>Para gestionar el riesgo de desabasto provocado por la merma térmica, se define un <strong>Punto de Reorden</strong> de <span class="math inline">\(1,000\)</span> dosis. Este valor representa un <em>stock</em> de seguridad estratégico del 20%, el cual garantiza un colchón operativo para que la clínica continúe sus labores de inmunización mientras se activa el protocolo de reabastecimiento jurisdiccional.</p>
+</section>
+<section id="comportamiento-estacional-de-la-demanda" class="level3" data-number="3.11.2">
+<h3 data-number="3.11.2" class="anchored" data-anchor-id="comportamiento-estacional-de-la-demanda"><span class="header-section-number">3.11.2</span> Comportamiento Estacional de la Demanda</h3>
+<p>Ante la variabilidad de las aplicaciones diarias, el consumo se modela mediante una demanda sintética representativa, calibrada para reflejar la afluencia de un Centro de Salud Urbano de primer nivel. Esta demanda base no es constante, sino que obedece al comportamiento estacional del sistema de salud en México, tal como se detalla en la siguiente tabla:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Mes</th>
+<th style="text-align: left;">Demanda Base Diaria (Dosis)</th>
+<th style="text-align: left;">Justificación Epidemiológica</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Enero</td>
+<td style="text-align: left;">65</td>
+<td style="text-align: left;">Consumo regular de esquema básico.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Febrero</td>
+<td style="text-align: left;">110</td>
+<td style="text-align: left;">1ª Jornada Nacional de Salud Pública.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Marzo</td>
+<td style="text-align: left;">87</td>
+<td style="text-align: left;">Regulación post-campaña.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Abril</td>
+<td style="text-align: left;">65</td>
+<td style="text-align: left;">Consumo regular de esquema básico.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mayo</td>
+<td style="text-align: left;">110</td>
+<td style="text-align: left;">2ª Jornada Nacional de Salud Pública.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Junio - Agosto</td>
+<td style="text-align: left;">65</td>
+<td style="text-align: left;">Periodo de consumo valle (vacaciones/lluvias).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Septiembre</td>
+<td style="text-align: left;">76</td>
+<td style="text-align: left;">Transición a temporada otoñal.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Octubre</td>
+<td style="text-align: left;">163</td>
+<td style="text-align: left;">Inicio de campaña invernal (Influenza/Neumococo).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Noviembre</td>
+<td style="text-align: left;">130</td>
+<td style="text-align: left;">Continuación de campaña invernal.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Diciembre</td>
+<td style="text-align: left;">87</td>
+<td style="text-align: left;">Desaceleración por periodo vacacional de invierno.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="acoplamiento-estocástico-termodinámico-logístico" class="level3" data-number="3.11.3">
+<h3 data-number="3.11.3" class="anchored" data-anchor-id="acoplamiento-estocástico-termodinámico-logístico"><span class="header-section-number">3.11.3</span> Acoplamiento Estocástico Termodinámico-Logístico</h3>
+<p>La innovación principal de este bloque logístico radica en la dependencia entre el estrés térmico y el estrés de inventario. La demanda diaria real en el modelo, <span class="math inline">\(D(t)\)</span>, no es un escalar estático, sino una variable aleatoria que se acopla dinámicamente a las perturbaciones del proceso de Poisson <span class="math inline">\(N_{puerta}(t)\)</span> calibrado en la sección anterior.</p>
+<p>La regla de consumo se define a partir de los tres escenarios de simulación:</p>
+<ol type="1">
+<li><p><strong>Escenario A (Control Absoluto):</strong> Al simular días de inactividad clínica (fines de semana o días festivos), el personal no abre el equipo (<span class="math inline">\(\lambda = 0\)</span>). Consecuentemente, no hay extracción de biológicos: <span class="math display">\[D_A(t) = 0\]</span></p></li>
+<li><p><strong>Escenario B (Apego Normativo):</strong> Simula una jornada clínica estándar con una única apertura matutina de extracción. El consumo diario es exactamente igual a la demanda base dictada por el mes correspondiente: <span class="math display">\[D_B(t) = D_{base}\]</span></p></li>
+<li><p><strong>Escenario C (Estrés Operativo):</strong> Durante contingencias o cercos epidemiológicos, la demanda sobrepasa la capacidad de los termos auxiliares, forzando viajes de resurtido al equipo principal. Dado que el proceso general <span class="math inline">\(N_{puerta}(t)\)</span> engloba todas las aperturas del día, definimos a <span class="math inline">\(N_{resurtido}(t)\)</span> como el subconjunto de eventos ocurridos exclusivamente durante la ventana de máxima afluencia matutina (09:00 a 14:00 hrs).</p>
+<p>Matemáticamente, por cada evento de resurtido generado, se extrae un bloque adicional de vacunas equivalente a la demanda base. Así, la demanda diaria total se convierte en una variable aleatoria dependiente del proceso de Poisson, definida por: <span class="math display">\[D_C(t) = D_{base} + \left( N_{resurtido}(t) \times D_{base} \right)\]</span></p></li>
+</ol>
+<p>Este acoplamiento estocástico garantiza que las trayectorias de Montecarlo con mayor cantidad de aperturas de puerta y por ende, mayor ingreso de calor y daño térmico correspondan exactamente a los días con mayor rotación de inventario, reflejando con precisión la saturación logística de una crisis sanitaria.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-chen2009thermostable" class="csl-entry" role="listitem">
-Chen, Dexiang, y Debra Kristensen. 2009. <span>«Opportunities and challenges of developing thermostable vaccines»</span>. <em>Expert review of vaccines</em> 8 (5): 547-57. <a href="https://doi.org/10.1586/erv.09.20">https://doi.org/10.1586/erv.09.20</a>.
-</div>
 <div id="ref-nist2015thermal" class="csl-entry" role="listitem">
 Chojnacky, Michal, Wyatt Miller, Dean Ripple, y Gregory Strouse. 2010. <span>«Thermal Analysis of Refrigeration Systems Used for Vaccine Storage»</span>. NIST Interagency/Internal Report (NISTIR), n.º 8128.
 </div>
@@ -1393,11 +1502,13 @@ Organización Mundial de la Salud. 2024. <em>WHO Immunisation Devices - Performa
 <div id="ref-sener2024prodesen" class="csl-entry" role="listitem">
 Secretaría de Energía. 2024. <span>«Programa para el Desarrollo del Sistema Eléctrico Nacional (PRODESEN) 2024-2038»</span>. Ciudad de México: Gobierno de México.
 </div>
+<div id="ref-sinko2011martin" class="csl-entry" role="listitem">
+Sinko, Patrick J. 2011. <em>Martin’s Physical Pharmacy and Pharmaceutical Sciences: Physical Chemical and Biopharmaceutical Principles in the Pharmaceutical Sciences</em>. 6th ed. Baltimore, MD: Lippincott Williams &amp; Wilkins.
+</div>
 <div id="ref-vollmer2009newton" class="csl-entry" role="listitem">
 Vollmer, Michael. 2009. <span>«Newton’s law of cooling revisited»</span>. <em>European Journal of Physics</em> 30 (5): 1063-84. <a href="https://doi.org/10.1088/0143-0807/30/5/014">https://doi.org/10.1088/0143-0807/30/5/014</a>.
 </div>
 </div>
-</section>
 </section>
 </section>
 
