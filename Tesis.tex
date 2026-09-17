@@ -187,10 +187,10 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -221,7 +221,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-09-06}
+\date{2026-09-16}
 \begin{document}
 \maketitle
 
@@ -1318,7 +1318,7 @@ biológicos de alto valor inmunológico operan bajo condiciones de estrés
 continuo.
 
 Para garantizar la validez y la utilidad del modelo computacional, se
-evitara la parametrización arbitraria de la Ecuación Diferencial
+evitará la parametrización arbitraria de la Ecuación Diferencial
 Estocástica (EDE). Un modelo probabilístico con tasas de intensidad o
 volatilidades carentes de fundamento físico produciría trayectorias
 desconectadas de la realidad operativa. Por consiguiente, el objetivo
@@ -1346,11 +1346,11 @@ las siguientes tres fases analíticas:
   volatilidades térmicas (\(\sigma\)) que dictan el enfriamiento activo
   y la inercia pasiva del refrigerador de estudio.
 \item
-  \textbf{Cinética de Degradación Biológica:} Finalmente, se vinculara
+  \textbf{Cinética de Degradación Biológica:} Finalmente, se vinculará
   el comportamiento térmico dada por la EDE con la Ecuación de
   Arrhenius, estableciendo el marco cuantitativo necesario para evaluar
   la pérdida de viabilidad farmacológica que sufren las vacunas durante
-  algun fallo.
+  algún fallo.
 \end{enumerate}
 
 \section{Datos Base e Histórico de Interrupciones
@@ -1418,7 +1418,7 @@ industrial y a la saturación de los transformadores de distribución en
 la mancha urbana.
 
 Para la calibración de la EDE en este trabajo de investigación, se
-selecciono el año \textbf{2024} como el escenario de línea base. Dicho
+seleccionó el año \textbf{2024} como el escenario de línea base. Dicho
 año presenta una media mensual de \textbf{43 interrupciones por mes} con
 una duración promedio por corte de \textbf{2.39 horas}. Al proyectar
 esta tasa mensual a una tasa anual, se tiene que el número total de
@@ -1436,7 +1436,7 @@ Escala}\label{justificaciuxf3n-de-la-reducciuxf3n-de-escala}
 
 El valor de \(516\) cortes al año obtenido en la
 Ecuación~\ref{eq-cortes-totales} es un dato agregado de todo el
-municipio, asi que utilizar directamente este valor para un solo
+municipio, así que utilizar directamente este valor para un solo
 refrigerador implicaría asumir que el centro de almacenamiento de
 vacunas sufre más de un apagón diario, lo cual no es físicamente real.
 Este error ocurre al ignorar que un edificio está conectado a un solo
@@ -1879,7 +1879,7 @@ extraordinarios o contingencias locales impredecibles ocurridas
 específicamente a inicios del año 2024.
 
 \section{Distribución Log-Normal de las Duraciones de las Fallas
-electrícas}\label{sec-lognormal-duracion}
+eléctricas}\label{sec-lognormal-duracion}
 
 Una vez modelada la frecuencia con la que ocurren las interrupciones
 eléctricas mediante el Proceso de Poisson, el siguiente componente
@@ -2719,15 +2719,15 @@ Cada parámetro de la ecuación representa lo siguiente:
 \item
   \textbf{\(A\)}: El Factor Pre-exponencial (o factor de frecuencia),
   ajustado a un valor empírico de
-  \textbf{\(1.2 \times 10^{14} \, \text{s}^{-1}\)}. Este parámetro
+  \textbf{\(1.2 \times 10^{13} \, \text{s}^{-1}\)}. Este parámetro
   asegura que la tasa de degradación sea prácticamente nula cuando el
   equipo opera correctamente dentro de la red de frío (2°C a 8°C), pero
   que escale de forma logarítmica severa ante una excursión térmica
   crítica.
 \end{itemize}
 
-\subsection{El Modelo de Daño Térmico Acumulado y Merma de
-Inventario}\label{el-modelo-de-dauxf1o-tuxe9rmico-acumulado-y-merma-de-inventario}
+\subsection{Modelo de Daño Térmico Acumulado y Merma de
+Inventario}\label{modelo-de-dauxf1o-tuxe9rmico-acumulado-y-merma-de-inventario}
 
 En la práctica clínica normativa, las variaciones térmicas que oscilan
 dentro del rango seguro (2°C a 8°C) se consideran tolerables, y su
@@ -2921,11 +2921,11 @@ simulación:
   \[D_C(t) = D_{base} + \left( N_{resurtido}(t) \times D_{base} \right)\]
 \end{enumerate}
 
-Este acoplamiento estocástico garantiza que las trayectorias de
-Montecarlo con mayor cantidad de aperturas de puerta y por ende, mayor
-ingreso de calor y daño térmico correspondan exactamente a los días con
-mayor rotación de inventario, reflejando con precisión la saturación
-logística de una crisis sanitaria.
+Este acoplamiento garantiza que las trayectorias de Montecarlo con mayor
+cantidad de aperturas de puerta y por ende, mayor ingreso de calor y
+daño térmico correspondan exactamente a los días con mayor rotación de
+inventario, reflejando con precisión la saturación logística de una
+crisis sanitaria.
 
 \part{Simulación de Equipos (Haier HBC-150)}
 

@@ -4,13 +4,13 @@
 
 El presente capítulo consolida el marco teórico desarrollado previamente, trasladándolo de una formulación matemática abstracta a un escenario de aplicación altamente crítico: la red de frío para la preservación de vacunas en Tuxtla Gutiérrez, Chiapas. La elección de esta región geográfica como caso de estudio se debe a la combinación de condiciones climatológicas de calor extremo y a la vulnerabilidad de la infraestructura eléctrica local ante fenómenos meteorológicos. Bajo este entorno, los refrigeradores institucionales que resguardan los biológicos de alto valor inmunológico operan bajo condiciones de estrés continuo.
 
-Para garantizar la validez y la utilidad del modelo computacional, se evitara la parametrización arbitraria de la Ecuación Diferencial Estocástica (EDE). Un modelo probabilístico con tasas de intensidad o volatilidades carentes de fundamento físico produciría trayectorias desconectadas de la realidad operativa. Por consiguiente, el objetivo central de este capítulo es la calibración rigurosa de las variables del sistema. 
+Para garantizar la validez y la utilidad del modelo computacional, se evitará la parametrización arbitraria de la Ecuación Diferencial Estocástica (EDE). Un modelo probabilístico con tasas de intensidad o volatilidades carentes de fundamento físico produciría trayectorias desconectadas de la realidad operativa. Por consiguiente, el objetivo central de este capítulo es la calibración rigurosa de las variables del sistema. 
 
 El proceso de estimación y asignación de parámetros se desarrollará en las siguientes tres fases analíticas:
 
 1. **Caracterización Estocástica del Suministro Eléctrico:** Mediante el análisis de datos oficiales de la Comisión Federal de Electricidad (CFE), se modelará la frecuencia y la duración de las interrupciones del servicio eléctrico. Estas estimaciones permitirán estructurar la conmutación de la cadena de Markov y los Procesos de Poisson No Homogéneos acoplados a la ecuación.
 2. **Calibración Termodinámica del Equipo Operativo:** A partir de las especificaciones técnicas y requerimientos normados por la Organización Mundial de la Salud (OMS), se deducirán analíticamente los coeficientes de reversión a la media ($\kappa$) y las volatilidades térmicas ($\sigma$) que dictan el enfriamiento activo y la inercia pasiva del refrigerador de estudio.
-3. **Cinética de Degradación Biológica:** Finalmente, se vinculara el comportamiento térmico dada por la EDE con la Ecuación de Arrhenius, estableciendo el marco cuantitativo necesario para evaluar la pérdida de viabilidad farmacológica que sufren las vacunas durante algun fallo.
+3. **Cinética de Degradación Biológica:** Finalmente, se vinculará el comportamiento térmico dada por la EDE con la Ecuación de Arrhenius, estableciendo el marco cuantitativo necesario para evaluar la pérdida de viabilidad farmacológica que sufren las vacunas durante algún fallo.
 
 ## Datos Base e Histórico de Interrupciones Eléctricas {#sec-datos-cfe}
 
@@ -32,7 +32,7 @@ A partir de dicha solicitud, se recabó el comportamiento histórico del municip
 
 El análisis de la @tbl-interrupciones-cfe muestra un incremento significativo en la frecuencia de fallas a partir del año 2020, estabilizándose en una franja superior a los 40 cortes mensuales. Este cambio se debe al crecimiento de la carga térmica residencial e industrial y a la saturación de los transformadores de distribución en la mancha urbana.
 
-Para la calibración de la EDE en este trabajo de investigación, se selecciono el año **2024** como el escenario de línea base. Dicho año presenta una media mensual de **43 interrupciones por mes** con una duración promedio por corte de **2.39 horas**. Al proyectar esta tasa mensual a una tasa anual, se tiene que el número total de interrupciones al año esperadas a nivel municipal ($N_{total}$) es:
+Para la calibración de la EDE en este trabajo de investigación, se seleccionó el año **2024** como el escenario de línea base. Dicho año presenta una media mensual de **43 interrupciones por mes** con una duración promedio por corte de **2.39 horas**. Al proyectar esta tasa mensual a una tasa anual, se tiene que el número total de interrupciones al año esperadas a nivel municipal ($N_{total}$) es:
 
 $$
 N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/año}
@@ -41,7 +41,7 @@ $$ {#eq-cortes-totales}
 ## Corrección de Escala Espacial (Factor $\kappa_{espacial}$) {#sec-escala-espacial}
 
 ### Justificación de la Reducción de Escala
-El valor de $516$ cortes al año obtenido en la @eq-cortes-totales es un dato agregado de todo el municipio, asi que utilizar directamente este valor para un solo refrigerador implicaría asumir que el centro de almacenamiento de vacunas sufre más de un apagón diario, lo cual no es físicamente real. Este error ocurre al ignorar que un edificio está conectado a un solo nodo de la red, no a todos simultáneamente.
+El valor de $516$ cortes al año obtenido en la @eq-cortes-totales es un dato agregado de todo el municipio, así que utilizar directamente este valor para un solo refrigerador implicaría asumir que el centro de almacenamiento de vacunas sufre más de un apagón diario, lo cual no es físicamente real. Este error ocurre al ignorar que un edificio está conectado a un solo nodo de la red, no a todos simultáneamente.
 
 Para solucionar esto, introducimos un factor de escala espacial. De acuerdo con el Programa para el Desarrollo del Sistema Eléctrico Nacional (PRODESEN) y los diagramas de infraestructura del Centro Nacional de Control de Energía (CENACE) [@sener2024prodesen], la mancha urbana de Tuxtla Gutiérrez está alimentada de manera sectorizada por exactamente **8 subestaciones principales** de distribución (Tuxtla Céntrica, Oriente, Poniente, Terán, Tuxtla Norte, Tuxtla Dos, Mactumatzá y Real del Bosque).
 
@@ -219,7 +219,7 @@ La suma acumulada de las 12 integrales arroja un total de **65.90 cortes esperad
 
 Finalmente, es importante destacar la inexactitud observada exclusivamente en el mes de **Enero** (7 cortes empíricos frente a los $2.15$ esperados por la integral). Dado que enero es un periodo climatológicamente estable (sin huracanes ni olas de calor), esta desviación es originada muy probablemente por mantenimientos extraordinarios o contingencias locales impredecibles ocurridas específicamente a inicios del año 2024.
 
-## Distribución Log-Normal de las Duraciones de las Fallas electrícas {#sec-lognormal-duracion}
+## Distribución Log-Normal de las Duraciones de las Fallas eléctricas {#sec-lognormal-duracion}
 
 Una vez modelada la frecuencia con la que ocurren las interrupciones eléctricas mediante el Proceso de Poisson, el siguiente componente crítico es determinar la duración exacta de cada apagón ($D$). En teoría de probabilidad aplicada a la ingeniería de confiabilidad, el tiempo de reparación o restablecimiento de un sistema no sigue a una distribución normal estándar. 
 
@@ -488,9 +488,9 @@ Cada parámetro de la ecuación representa lo siguiente:
 * **$T_K(t)$**: La temperatura interna del fluido convertida a escala absoluta (grados Kelvin), calculada como $T(t) + 273.15$.
 * **$R$**: La Constante Universal de los Gases, con un valor fijo de $8.314 \, \text{J/(mol} \cdot \text{K)}$.
 * **$E_a$**: La Energía de Activación, calibrada en **$85,000 \, \text{J/mol}$** ($85 \text{ kJ/mol}$). Representa la barrera energética mínima que las moléculas del antígeno deben superar para iniciar el proceso irreversible de ruptura estructural.
-* **$A$**: El Factor Pre-exponencial (o factor de frecuencia), ajustado a un valor empírico de **$1.2 \times 10^{14} \, \text{s}^{-1}$**. Este parámetro asegura que la tasa de degradación sea prácticamente nula cuando el equipo opera correctamente dentro de la red de frío (2°C a 8°C), pero que escale de forma logarítmica severa ante una excursión térmica crítica.
+* **$A$**: El Factor Pre-exponencial (o factor de frecuencia), ajustado a un valor empírico de **$1.2 \times 10^{13} \, \text{s}^{-1}$**. Este parámetro asegura que la tasa de degradación sea prácticamente nula cuando el equipo opera correctamente dentro de la red de frío (2°C a 8°C), pero que escale de forma logarítmica severa ante una excursión térmica crítica.
 
-### El Modelo de Daño Térmico Acumulado y Merma de Inventario
+### Modelo de Daño Térmico Acumulado y Merma de Inventario
 
 En la práctica clínica normativa, las variaciones térmicas que oscilan dentro del rango seguro (2°C a 8°C) se consideran tolerables, y su impacto en la caducidad a corto plazo es ignorado. El daño logístico ocurre exclusivamente cuando la red de frío se rompe. Para incorporar este protocolo operativo al modelo matemático, la degradación se condiciona mediante una función indicadora $\mathbb{I}_{\{T(t) > 8^\circ\text{C}\}}$, la cual activa el proceso de pérdida térmica únicamente cuando la temperatura cruza el límite superior de seguridad.
 
@@ -572,4 +572,4 @@ La regla de consumo se define a partir de los tres escenarios de simulación:
    Matemáticamente, por cada evento de resurtido generado, se extrae un bloque adicional de vacunas equivalente a la demanda base. Así, la demanda diaria total se convierte en una variable aleatoria dependiente del proceso de Poisson, definida por:
    $$D_C(t) = D_{base} + \left( N_{resurtido}(t) \times D_{base} \right)$$
 
-Este acoplamiento estocástico garantiza que las trayectorias de Montecarlo con mayor cantidad de aperturas de puerta y por ende, mayor ingreso de calor y daño térmico correspondan exactamente a los días con mayor rotación de inventario, reflejando con precisión la saturación logística de una crisis sanitaria.
+Este acoplamiento garantiza que las trayectorias de Montecarlo con mayor cantidad de aperturas de puerta y por ende, mayor ingreso de calor y daño térmico correspondan exactamente a los días con mayor rotación de inventario, reflejando con precisión la saturación logística de una crisis sanitaria.
