@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Metodología de Simulación Computacional y Análisis Estadístico de Riesgo – Tesis</title>
+<title>4&nbsp; Capítulo 4: Simulación Computacional y Análisis de Resultados – Tesis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -305,7 +305,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./montecarlo.html">Simulación de Equipos (Haier HBC-150)</a></li><li class="breadcrumb-item"><a href="./montecarlo.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Metodología de Simulación Computacional y Análisis Estadístico de Riesgo</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./montecarlo.html">Simulación de Equipos (Haier HBC-150)</a></li><li class="breadcrumb-item"><a href="./montecarlo.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Capítulo 4: Simulación Computacional y Análisis de Resultados</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -391,7 +391,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./montecarlo.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Metodología de Simulación Computacional y Análisis Estadístico de Riesgo</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Capítulo 4: Simulación Computacional y Análisis de Resultados</span></span></a>
   </div>
 </li>
       </ul>
@@ -439,9 +439,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./montecarlo.html">Simulación de Equipos (Haier HBC-150)</a></li><li class="breadcrumb-item"><a href="./montecarlo.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Metodología de Simulación Computacional y Análisis Estadístico de Riesgo</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./montecarlo.html">Simulación de Equipos (Haier HBC-150)</a></li><li class="breadcrumb-item"><a href="./montecarlo.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Capítulo 4: Simulación Computacional y Análisis de Resultados</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Metodología de Simulación Computacional y Análisis Estadístico de Riesgo</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Capítulo 4: Simulación Computacional y Análisis de Resultados</span></h1>
 </div>
 
 
@@ -458,11 +458,17 @@ window.Quarto = {
 </header>
 
 
-<p>Para evaluar la confiabilidad de la red de frío frente a la volatilidad del suministro eléctrico y las condiciones climáticas de Tuxtla Gutiérrez, Chiapas, desarrollamos un simulador estocástico en Python enfocado en el refrigerador institucional Haier HBC-150 presentado en la sección anterior. Debido a la interacción de múltiples procesos aleatorios inesperados (cortes de energía de CFE, aperturas de puerta y variaciones extremas de temperatura), el sistema no posee una solución matemática analítica cerrada. En consecuencia, recurrimos a la integración numérica de trayectorias acoplada al método de Montecarlo.</p>
+<p>Para evaluar la confiabilidad de la red de frío frente a la volatilidad del suministro eléctrico y las condiciones climáticas de Tuxtla Gutiérrez, Chiapas, desarrollamos una simulación en Python enfocado en el equipo institucional Haier HBC-150 presentado en la sección anterior. Debido a la interacción simultánea de múltiples procesos aleatorios (cortes de energía, aperturas de puerta, inercia térmica y consumo logístico), el sistema no posee una solución analítica cerrada. En consecuencia, recurrimos a la integración numérica de trayectorias acoplada al método de Montecarlo.</p>
+<p>A diferencia de modelos estáticos tradicionales, esta investigación evalúa el riesgo bajo tres contextos operativos distintos para medir el impacto de la interacción humana:</p>
+<ul>
+<li><strong>Escenario A (Línea Base):</strong> Control absoluto sin interacción operativa. Aísla el riesgo provocado exclusivamente por el clima exterior y las fallas de la red eléctrica.</li>
+<li><strong>Escenario B (Apego Normativo):</strong> Consumo y aperturas bajo los lineamientos estándar recomendados.</li>
+<li><strong>Escenario C (Contingencia):</strong> Estrés operativo severo, modelando alta rotación del inventario y resurtidos aleatorios mediante procesos de Poisson.</li>
+</ul>
 <blockquote class="blockquote">
-<p><strong>Nota sobre Reproducibilidad:</strong> Con el fin de mantener este reporte de investigación con un formato académico limpio y legible, hemos omitido el código fuente de programación. El script completo se encuentra documentado detalladamente en el repositorio público de GitHub de este proyecto <span class="citation" data-cites="CPG2026Delfin">(<a href="references.html#ref-CPG2026Delfin" role="doc-biblioref">Repositorio de GitHub</a>)</span>.</p>
+<p><strong>Nota sobre Reproducibilidad:</strong> Con el fin de mantener este documento con un formato limpio y legible, hemos omitido el código fuente de programación en el texto. Los algoritmos completos para cada escenario se encuentran documentados detalladamente en el repositorio público de GitHub de este proyecto <span class="citation" data-cites="Perez2026EscenarioA Perez2026EscenarioB Perez2026EscenarioC">(<a href="references.html#ref-Perez2026EscenarioA" role="doc-biblioref">Pérez, C. 2026a</a>, <a href="references.html#ref-Perez2026EscenarioB" role="doc-biblioref">2026b</a>, <a href="references.html#ref-Perez2026EscenarioC" role="doc-biblioref">2026c</a>)</span>.</p>
 </blockquote>
-<p>A continuación, exponemos detalladamente el diseño metodológico de la simulación estructurado según el orden lógico de las celdas del algoritmo computacional, seguido de la discusión profunda de los resultados obtenidos.</p>
+<p>A continuación, explicamos la metodología de la simulación, la estructuración del código y los supuestos físicos considerados (como la inercia térmica del biológico). Posteriormente, presentamos el análisis estadístico y la discusión de los resultados obtenidos para cada escenario.</p>
 <section id="procesamiento-temporal-y-entorno-climático" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="procesamiento-temporal-y-entorno-climático"><span class="header-section-number">4.1</span> 1. Procesamiento Temporal y Entorno Climático</h2>
 <p>El primer módulo de la simulación constituye el eje central del sistema. Definimos una malla de tiempo continua para cubrir un año completo (<span class="math inline">\(366\)</span> días, contemplando el año bisiesto 2024). Para capturar las microfluctuaciones de la temperatura interna del refrigerador, seleccionamos un paso de integración discreto de exactamente 5 minutos (<span class="math inline">\(\Delta t = 5/60\)</span> horas), lo que genera un total de <span class="math inline">\(105408\)</span> iteraciones por cada trayectoria anual simulada.</p>
@@ -645,8 +651,14 @@ Figura&nbsp;4.9: Histograma para el porcentaje de vacunas perdidas anualmente. S
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-CPG2026Delfin" class="csl-entry" role="listitem">
-Repositorio de GitHub. <span>«Simulador Estocástico y Análisis de Riesgo en la Red de Frío para Vacunas: Código Fuente en Python»</span>. <a href="https://github.com/Crisperez517/VERANO-DELFIN/blob/3a3f49b27bca9671e71b40c738dec826c8eb30cc/VERANO_DELFIN_SIMULACION_CODIGO_DE_PYTHON.ipynb">https://github.com/Crisperez517/VERANO-DELFIN/blob/3a3f49b27bca9671e71b40c738dec826c8eb30cc/VERANO_DELFIN_SIMULACION_CODIGO_DE_PYTHON.ipynb</a>.
+<div id="ref-Perez2026EscenarioA" class="csl-entry" role="listitem">
+Pérez, C. 2026a. <span>«Simulación y Análisis de Riesgo en la Red de Frío para Vacunas - Escenario A (Línea Base): Código Fuente en Python»</span>. <a href="https://github.com/Crisperez517/Tesis/blob/dd475b5346eeefe92d64385f7e8993b8f93b66b5/TESIS_Simulaci%C3%B3n_Escenario_A.ipynb">https://github.com/Crisperez517/Tesis/blob/dd475b5346eeefe92d64385f7e8993b8f93b66b5/TESIS_Simulaci%C3%B3n_Escenario_A.ipynb</a>.
+</div>
+<div id="ref-Perez2026EscenarioB" class="csl-entry" role="listitem">
+———. 2026b. <span>«Simulación y Análisis de Riesgo en la Red de Frío para Vacunas - Escenario B (Apego Normativo): Código Fuente en Python»</span>. <a href="https://github.com/Crisperez517/Tesis/blob/dd475b5346eeefe92d64385f7e8993b8f93b66b5/TESIS_Simulaci%C3%B3n_Escenario_B.ipynb">https://github.com/Crisperez517/Tesis/blob/dd475b5346eeefe92d64385f7e8993b8f93b66b5/TESIS_Simulaci%C3%B3n_Escenario_B.ipynb</a>.
+</div>
+<div id="ref-Perez2026EscenarioC" class="csl-entry" role="listitem">
+———. 2026c. <span>«Simulación y Análisis de Riesgo en la Red de Frío para Vacunas - Escenario C (Contingencia Operativa): Código Fuente en Python»</span>. <a href="https://github.com/Crisperez517/Tesis/blob/dd475b5346eeefe92d64385f7e8993b8f93b66b5/TESIS_Simulaci%C3%B3n_Escenario_C.ipynb">https://github.com/Crisperez517/Tesis/blob/dd475b5346eeefe92d64385f7e8993b8f93b66b5/TESIS_Simulaci%C3%B3n_Escenario_C.ipynb</a>.
 </div>
 <div id="ref-ross2018first" class="csl-entry" role="listitem">
 Ross, Sheldon M. 2018. <em>A First Course in Probability</em>. 10th ed. Pearson.
