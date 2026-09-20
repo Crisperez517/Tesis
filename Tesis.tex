@@ -2978,53 +2978,59 @@ inercia térmica del biológico). Posteriormente, presentamos el análisis
 estadístico y la discusión de los resultados obtenidos para cada
 escenario.
 
-\section{1. Procesamiento Temporal y Entorno
-Climático}\label{procesamiento-temporal-y-entorno-climuxe1tico}
+\section{1. Malla Temporal y Clima
+Exterior}\label{malla-temporal-y-clima-exterior}
 
-El primer módulo de la simulación constituye el eje central del sistema.
-Definimos una malla de tiempo continua para cubrir un año completo
-(\(366\) días, contemplando el año bisiesto 2024). Para capturar las
-microfluctuaciones de la temperatura interna del refrigerador,
-seleccionamos un paso de integración discreto de exactamente 5 minutos
-(\(\Delta t = 5/60\) horas), lo que genera un total de \(105408\)
-iteraciones por cada trayectoria anual simulada.
+El primer módulo de la simulación establece el tiempo y el clima de
+Tuxtla Gutiérrez. Creamos una malla de tiempo para cubrir un año
+bisiesto completo de 366 días. Para capturar los cambios rápidos en la
+temperatura interna del refrigerador, elegimos un paso de integración
+discreto de exactamente 5 minutos (\(\Delta t = 5/60\) horas). Esto
+genera un total de 105,408 iteraciones por cada año simulado.
 
-Para acoplar con la logística institucional, programamos un calendario
-interno que identifica los días hábiles (lunes a viernes) y los fines de
-semana (sábados y domingos), debido a que la extracción de vacunas
-ocurren exclusivamente en jornadas laborales.
+Para sincronizar el modelo con la logística institucional, programamos
+un calendario interno que identifica los días hábiles (lunes a viernes)
+y excluye tanto los fines de semana (sábados y domingos) como los días
+festivos oficiales. De esta manera, garantizamos que la extracción
+operativa de vacunas ocurra exclusivamente durante las jornadas
+laborales reales.
 
-Primero cargamos la base de datos meteorológicos reales de Tuxtla
-Gutiérrez. No obstante, las bases de datos públicas solo proveen la
-temperatura promedio diaria (\(T_{media}\)), ocultando el estrés térmico
-entre días. Para solucionar, expandimos el vector diario a la escala de
-5 minutos mediante una función armónica (onda senoidal) con una amplitud
-térmica calibrada de \(7^\circ\text{C}\) (equivalente a una oscilación
-típica de 14°C entre la madrugada y la tarde chiapaneca). Desfasamos el
-argumento del coseno por 15 horas para forzar que el pico de calor sea a
-las 15:00 horas de cada día simulado:
+En cuanto al entorno climático, cargamos una base de datos meteorológica
+real de la ciudad. Sin embargo, los registros públicos solo proveen la
+temperatura promedio diaria (\(T_{media}\)), lo cual oculta el verdadero
+estrés térmico que ocurre a lo largo del día. Para solucionar esto,
+expandimos el dato diario a nuestra escala de 5 minutos utilizando una
+función senoidal. Calibramos esta función con una amplitud de
+\textbf{7°C}, lo que equivale a una variación típica de \textbf{14°C}
+entre el frío de la madrugada y el calor máximo de la tarde de Tuxtla
+Gutiérrez. Además, ajustamos la ecuación para forzar que el pico máximo
+de la temperatura golpee exactamente a las 15:00 horas de cada día
+simulado:
 
-\[
-T_{amb}(t) = T_{media}(t) + 7.0 \cdot \cos\left(2\pi \frac{t - 15}{24}\right).
-\]
+\[T_{amb}(t) = T_{media}(t) + 7.0 \cdot \cos\left(2\pi \frac{t - 15}{24}\right)\]
 
 Donde \(t\) representa el tiempo en horas, es decir, \(t \in [0, 8784)\)
-para un año de 366 días. La oscilación de la temperatura ambiente se
-presenta en la Figura~\ref{fig-clima-anual}, que muestra el
-comportamiento anual, y en la Figura~\ref{fig-clima-zoom}, que demuestra
-la consistencia del ciclo diurno continuo.
+para un año completo de 366 días.
+
+El resultado de esta oscilación se observa en la
+Figura~\ref{fig-clima-anual}, que muestra el comportamiento térmico para
+todo el año, y en la Figura~\ref{fig-clima-zoom}, que demuestra la
+consistencia del ciclo diurno. Es importante destacar que, dado que el
+clima de la ciudad es un factor independiente, estas condiciones
+ambientales y gráficas aplican de manera idéntica para los tres
+escenarios evaluados (A, B y C).
 
 \begin{figure}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{temp_anual_tuxtla.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{temp_anual_tuxtla_escenario_A.png}}
 
 }
 
 \caption{\label{fig-clima-anual}Temperatura ambiente continua simulada
-para Tuxtla Gutiérrez a lo largo de un año completo, comparada con los
-promedios diarios de la base de datos meteorológica original.}
+para Tuxtla Gutiérrez a lo largo de un año, comparada con los promedios
+diarios de la base meteorológica.}
 
 \end{figure}%
 
@@ -3032,16 +3038,17 @@ promedios diarios de la base de datos meteorológica original.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{temp_zoom_tuxtla.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{temp_zoom_tuxtla_escenario_A.png}}
 
 }
 
 \caption{\label{fig-clima-zoom}Acercamiento a un periodo de 5 días de
-simulación climática (Mayo), donde se observa el comportamiento de la
-oscilación senoidal entre días y la ubicación exacta de los picos
-térmicos a las 15:00 horas.}
+simulación climática (Mayo), donde se observa el ciclo senoidal y los
+picos térmicos a las 15:00 horas.}
 
 \end{figure}%
+
+\chapter{HASTA AQUI}\label{hasta-aqui}
 
 \section{2. Parametrización Física, Cinética y Estocástica de la
 Red}\label{parametrizaciuxf3n-fuxedsica-cinuxe9tica-y-estocuxe1stica-de-la-red}
