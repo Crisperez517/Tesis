@@ -221,7 +221,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-09-16}
+\date{2026-09-19}
 \begin{document}
 \maketitle
 
@@ -2929,32 +2929,54 @@ crisis sanitaria.
 
 \part{Simulación de Equipos (Haier HBC-150)}
 
-\chapter{Metodología de Simulación Computacional y Análisis Estadístico
-de
-Riesgo}\label{metodologuxeda-de-simulaciuxf3n-computacional-y-anuxe1lisis-estaduxedstico-de-riesgo}
+\chapter{Capítulo 4: Simulación Computacional y Análisis de
+Resultados}\label{capuxedtulo-4-simulaciuxf3n-computacional-y-anuxe1lisis-de-resultados}
 
 Para evaluar la confiabilidad de la red de frío frente a la volatilidad
 del suministro eléctrico y las condiciones climáticas de Tuxtla
-Gutiérrez, Chiapas, desarrollamos un simulador estocástico en Python
-enfocado en el refrigerador institucional Haier HBC-150 presentado en la
-sección anterior. Debido a la interacción de múltiples procesos
-aleatorios inesperados (cortes de energía de CFE, aperturas de puerta y
-variaciones extremas de temperatura), el sistema no posee una solución
-matemática analítica cerrada. En consecuencia, recurrimos a la
-integración numérica de trayectorias acoplada al método de Montecarlo.
+Gutiérrez, Chiapas, desarrollamos una simulación en Python enfocado en
+el equipo institucional Haier HBC-150 presentado en la sección anterior.
+Debido a la interacción simultánea de múltiples procesos aleatorios
+(cortes de energía, aperturas de puerta, inercia térmica y consumo
+logístico), el sistema no posee una solución analítica cerrada. En
+consecuencia, recurrimos a la integración numérica de trayectorias
+acoplada al método de Montecarlo.
+
+A diferencia de modelos estáticos tradicionales, esta investigación
+evalúa el riesgo bajo tres contextos operativos distintos para medir el
+impacto de la interacción humana:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Escenario A (Línea Base):} Control absoluto sin interacción
+  operativa. Aísla el riesgo provocado exclusivamente por el clima
+  exterior y las fallas de la red eléctrica.
+\item
+  \textbf{Escenario B (Apego Normativo):} Consumo y aperturas bajo los
+  lineamientos estándar recomendados.
+\item
+  \textbf{Escenario C (Contingencia):} Estrés operativo severo,
+  modelando alta rotación del inventario y resurtidos aleatorios
+  mediante procesos de Poisson.
+\end{itemize}
 
 \begin{quote}
 \textbf{Nota sobre Reproducibilidad:} Con el fin de mantener este
-reporte de investigación con un formato académico limpio y legible,
-hemos omitido el código fuente de programación. El script completo se
-encuentra documentado detalladamente en el repositorio público de GitHub
-de este proyecto (\citeproc{ref-CPG2026Delfin}{Repositorio de GitHub}).
+documento con un formato limpio y legible, hemos omitido el código
+fuente de programación en el texto. Los algoritmos completos para cada
+escenario se encuentran documentados detalladamente en el repositorio
+público de GitHub de este proyecto
+(\citeproc{ref-Perez2026EscenarioA}{Pérez, C. 2026a},
+\citeproc{ref-Perez2026EscenarioB}{2026b},
+\citeproc{ref-Perez2026EscenarioC}{2026c}).
 \end{quote}
 
-A continuación, exponemos detalladamente el diseño metodológico de la
-simulación estructurado según el orden lógico de las celdas del
-algoritmo computacional, seguido de la discusión profunda de los
-resultados obtenidos.
+A continuación, explicamos la metodología de la simulación, la
+estructuración del código y los supuestos físicos considerados (como la
+inercia térmica del biológico). Posteriormente, presentamos el análisis
+estadístico y la discusión de los resultados obtenidos para cada
+escenario.
 
 \section{1. Procesamiento Temporal y Entorno
 Climático}\label{procesamiento-temporal-y-entorno-climuxe1tico}
@@ -3625,16 +3647,27 @@ Performance, Quality \& Safety. E003: Refrigerators and freezers}. World
 Health Organization.
 \url{https://apps.who.int/immunization_standards/vaccine_quality/pqs_catalogue/index.aspx}.
 
+\bibitem[\citeproctext]{ref-Perez2026EscenarioA}
+Pérez, C. 2026a. {«Simulación y Análisis de Riesgo en la Red de Frío
+para Vacunas - Escenario A (Línea Base): Código Fuente en Python»}.
+\url{https://github.com/Crisperez517/Tesis/blob/dd475b5346eeefe92d64385f7e8993b8f93b66b5/TESIS_Simulaci\%C3\%B3n_Escenario_A.ipynb}.
+
+\bibitem[\citeproctext]{ref-Perez2026EscenarioB}
+---------. 2026b. {«Simulación y Análisis de Riesgo en la Red de Frío
+para Vacunas - Escenario B (Apego Normativo): Código Fuente en Python»}.
+\url{https://github.com/Crisperez517/Tesis/blob/dd475b5346eeefe92d64385f7e8993b8f93b66b5/TESIS_Simulaci\%C3\%B3n_Escenario_B.ipynb}.
+
+\bibitem[\citeproctext]{ref-Perez2026EscenarioC}
+---------. 2026c. {«Simulación y Análisis de Riesgo en la Red de Frío
+para Vacunas - Escenario C (Contingencia Operativa): Código Fuente en
+Python»}.
+\url{https://github.com/Crisperez517/Tesis/blob/dd475b5346eeefe92d64385f7e8993b8f93b66b5/TESIS_Simulaci\%C3\%B3n_Escenario_C.ipynb}.
+
 \bibitem[\citeproctext]{ref-platen2010numerical}
 Platen, Eckhard, y Nicola Bruti-Liberati. 2010. \emph{Numerical Solution
 of Stochastic Differential Equations with Jumps in Finance}. Vol. 64.
 Stochastic Modelling y Applied Probability. Berlin, Heidelberg:
 Springer-Verlag. \url{https://doi.org/10.1007/978-3-642-13694-8}.
-
-\bibitem[\citeproctext]{ref-CPG2026Delfin}
-Repositorio de GitHub. {«Simulador Estocástico y Análisis de Riesgo en
-la Red de Frío para Vacunas: Código Fuente en Python»}.
-\url{https://github.com/Crisperez517/VERANO-DELFIN/blob/3a3f49b27bca9671e71b40c738dec826c8eb30cc/VERANO_DELFIN_SIMULACION_CODIGO_DE_PYTHON.ipynb}.
 
 \bibitem[\citeproctext]{ref-ross1996stochastic}
 Ross, Sheldon M. 1996. \emph{Stochastic Processes}. 2nd ed. New York,
