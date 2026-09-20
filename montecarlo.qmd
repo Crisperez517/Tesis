@@ -62,25 +62,25 @@ $$
 
 Para la duración de estos cortes, utilizamos una distribución Log-Normal calibrada por el método de los momentos en la @sec-lognormal-duracion para las distintas épocas del año: 
 
-* **Temporada Base:** $\mu = 0.6766, \sigma = 0.6202$ 
-* **Temporada de Calor:** $\mu = 0.9627, \sigma = 0.5106$ 
-* **Temporada de Lluvias:** $\mu = 0.4668, \sigma = 0.3372$ 
-
-# HASTA AQUI
+* **Temporada Base:** $\mu = 0.6766, \ \sigma = 0.6202$ 
+* **Temporada de Calor:** $\mu = 0.9627, \ \sigma = 0.5106$ 
+* **Temporada de Lluvias:** $\mu = 0.4668, \ \sigma = 0.3372$ 
 
 ## 3. Precalibración Vectorizada de Eventos Externos
 
-Antes de ponernos a resolver la ecuación diferencial estocástica de la temperatura, el algoritmo ejecuta un módulo de precalculabilidad vectorizada para optimizar los tiempos de cómputo. En esta fase, el programa simula de manera independiente las variables externas que afectarán al refrigerador a lo largo del año de prueba.
+Antes de resolver numéricamente la Ecuación Diferencial Estocástica para la temperatura, el algoritmo ejecuta un módulo de precalculo vectorizado para optimizar los tiempos de ejecución. En esta fase, el programa simula de manera independiente las variables externas que afectarán al equipo institucional a lo largo del año.
 
-Para el suministro eléctrico, el algoritmo recorre secuencialmente los 366 días del año. Para cada día, consultamos la intensidad estacional de la CFE y realizamos un muestreo aleatorio de Poisson para determinar cuántas fallas eléctricas ocurrirán en esa jornada. Si el resultado es mayor a cero, el algoritmo selecciona una hora de inicio distribuida de manera uniforme entre las 0 y las 24 horas de ese día, y realiza un muestreo Log-Normal condicionado a la fecha para determinar la duración del corte en horas. Con estos datos, el algoritmo calcula los índices temporales correspondientes y modifica el vector de estado eléctrico $S(t)$, cambiando su valor de 1 (hay energía electrica) a 0 (no hay energía electrica) durante el intervalo afectado.
+Para el suministro eléctrico, el algoritmo recorre secuencialmente los 366 días del año. En cada jornada, consulta la intensidad estacional de la CFE y realiza un muestreo aleatorio de Poisson para determinar cuántas fallas eléctricas ocurrirán. Si el resultado es mayor a cero, selecciona una hora de inicio distribuida de manera uniforme entre las 0 y las 24 horas del día, y realiza un muestreo Log-Normal condicionado a la época del año para determinar la duración del corte. Con estos datos, el algoritmo modifica el vector de estado eléctrico $S(t)$, cambiando su valor de 1 (con energía) a 0 (falla eléctrica) durante el intervalo afectado.
 
-Para las aperturas de la puerta del refrigerador, el algoritmo genera un vector binario de eventos evaluado en el dominio de tiempo discreto $t \in \{0, \Delta t, 2\Delta t, \dots, 8784\}$ horas. Dado que el paso de integración se fijó en $\Delta t = 5/60$ horas (es decir 5 minutos), este conjunto se particiona exactamente en $105408$ iteraciones para cubrir la totalidad del año. Este vector se construye combinando la apertura de las 8:00 AM con un muestreo de Poisson ejecutado sobre la tasa de intensidad de la tarde ($\lambda_{tarde} \cdot \Delta t$).
+Por otro lado, para modelar las aperturas de la puerta del equipo, se genera un vector binario de eventos evaluado en el dominio de tiempo discreto $t \in \{0, \Delta t, 2\Delta t, \dots, 8784\}$ horas. Dado que el paso de integración se fijó en $\Delta t = 5/60$ horas (5 minutos), este conjunto se particiona exactamente en 105,408 iteraciones para cubrir la totalidad del año. Este vector se construye de manera dinámica dependiendo del modelo evaluado: se mantiene nulo para el Escenario A, combina las aperturas matutinas fijas con la probabilidad vespertina ($\lambda_{tarde} \cdot \Delta t$) para el Escenario B, y adiciona la perturbación logística de resurtidos ($\lambda_{resurtido} \cdot \Delta t$) para el Escenario C.
 
-Posteriormente, el algoritmo aplica una regla estricta de control sanitario: multiplica el vector de aperturas por la función de estado eléctrico $S(t)$, donde la variable de entrada $t$ en $S(t)$ se mueve exactamente en el mismo intervalo discreto de $[0, 8784]$ horas. Esto garantiza que si la central de almacenamiento de vacunas se encuentra bajo un apagón en un instante específico ($S(t)=0$), la probabilidad de apertura en ese mismo $t$ se reduce a cero de forma absoluta, reflejando el protocolo médico real que prohíbe abrir el refrigerador si no hay energía para evitar la pérdida acelerada de frío.
+Posteriormente, el algoritmo aplica una regla estricta de control operativo: multiplica el vector de aperturas por la función de estado eléctrico $S(t)$, evaluada en el mismo dominio de $[0, 8784]$ horas. Esto garantiza que si el centro de almacenamiento de vacunas se encuentra bajo un apagón en un instante específico ($S(t)=0$), la probabilidad de apertura en ese mismo instante de tiempo $t$ se reduce a cero de forma absoluta. Esto refleja el protocolo normativo real que prohíbe abrir el equipo sin energía eléctrica para evitar la pérdida acelerada de frío.
 
-Finalmente, los eventos válidos se multiplican por la magnitud del impacto térmico ($\gamma = 1.0^\circ\text{C}$) para terminar el vector discreto temporal de saltos térmicos ($Saltos\_Termicos(t)$).
+Finalmente, los eventos validos de apertura de la puerta del equipo se sustituyen por su respectiva magnitud de impacto térmico ($\gamma_i$), el cual es extraído de una distribución Normal truncada (@eq-salto-termico), finalizando así el vector discreto de saltos térmicos ($Saltos\_Termicos(t)$).
 
-En el año de prueba inicial con semilla controlada, la simulación arrojó que hay **68 apagones** y un total de **508 aperturas de puerta** hechas por el personal clínico.
+Para validar la correcta precalibración del entorno, ejecutamos una trayectoria anual de prueba fijando una semilla de control (`np.random.seed(42)`). La simulación generó una trayectoria eléctrica idéntica para los tres casos con un total de **68 apagones** en el año, en dónde hubo una notoria diferencia fue en el vector de saltos térmicos: el personal registró **0 aperturas** para el Escenario A (Línea Base), **493 aperturas** para el Escenario B (Apego Normativo), y **995 aperturas** debido a la saturación logística en el Escenario C (Contingencia).
+
+# HASTA AQUI
 
 ## 4. Resolución de la SDE
 
