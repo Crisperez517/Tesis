@@ -187,10 +187,10 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -2532,7 +2532,7 @@ exterior.
 
 \subsection{\texorpdfstring{Perturbaciones Discretas: Apertura de
 Puertas
-(\(N_{puerta}(t)\))}{Perturbaciones Discretas: Apertura de Puertas (N\_\{puerta\}(t))}}\label{perturbaciones-discretas-apertura-de-puertas-n_puertat}
+(\(N_{puerta}(t)\))}{Perturbaciones Discretas: Apertura de Puertas (N\_\{puerta\}(t))}}\label{sec-perturbaciones-discretas}
 
 De acuerdo con las normativas internacionales de manejo de la red de
 frío, la manipulación de los equipos de refrigeración debe limitarse
@@ -2614,7 +2614,7 @@ del tiempo:
 \end{itemize}
 
 \subsection{\texorpdfstring{Impacto de la Apertura y Salto Térmico
-(\(\gamma_i\))}{Impacto de la Apertura y Salto Térmico (\textbackslash gamma\_i)}}\label{impacto-de-la-apertura-y-salto-tuxe9rmico-gamma_i}
+(\(\gamma_i\))}{Impacto de la Apertura y Salto Térmico (\textbackslash gamma\_i)}}\label{sec-salto-termico}
 
 Al tratarse de un equipo tipo cofre (\emph{Icelined Refrigerator}), la
 pérdida térmica por convección es físicamente menor que en equipos
@@ -2670,7 +2670,7 @@ Para garantizar la viabilidad física del proceso estocástico durante las
 simulaciones de Montecarlo, la variable aleatoria \(\gamma_i\) se define
 como una distribución truncada inferiormente, aplicando un filtro de
 maximización:
-\[\gamma_i = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)\]
+\begin{equation}\phantomsection\label{eq-salto-termico}{\gamma_i = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)}\end{equation}
 De esta forma, la Ecuación Diferencial Estocástica absorbe la
 variabilidad operativa del personal médico sin riesgo de arrojar
 perturbaciones termodinámicamente imposibles.
@@ -3048,93 +3048,106 @@ picos térmicos a las 15:00 horas.}
 
 \end{figure}%
 
-\chapter{HASTA AQUI}\label{hasta-aqui}
+\section{2. Parametrización Física, Cinética y
+Estocástica}\label{sec-parametrizacion-fisica}
 
-\section{2. Parametrización Física, Cinética y Estocástica de la
-Red}\label{parametrizaciuxf3n-fuxedsica-cinuxe9tica-y-estocuxe1stica-de-la-red}
+Una vez construido el entorno climático, inicializamos las constantes
+que controlan la termodinámica del equipo institucional Haier HBC-150 y
+las propiedades fisicoquímicas de las vacunas.
 
-Una vez construido el entorno temporal y climático, procedemos a
-inicializar las constantes que controlan las fuerzas físicas del
-refrigerador Haier HBC-150 y las propiedades biológicas de las vacunas.
+\subsection{Parámetros Termodinámicos y
+Biológicos}\label{sec-params-termo}
 
-\subsection{Parámetros Termodinámicos y Cinéticos del
-Equipo}\label{paruxe1metros-termodinuxe1micos-y-cinuxe9ticos-del-equipo}
+Asignamos los coeficientes térmicos estimados para la Ecuación
+Diferencial Estocástica (EDE) de Orstein Uhlenbeck. Alineados a las
+normativas vigentes, el termostato y la temperatura inicial del equipo
+se establecen en \(\theta = 5.0^\circ\text{C}\) y
+\(T_0 = 5.0^\circ\text{C}\). Cuando el equipo tiene suministro
+eléctrico, la tasa de abatimiento térmico es de
+\(\kappa_{on} = 0.1154\,\text{hr}^{-1}\), con una volatilidad interna
+debido a los ventiladores de \(\sigma_{on} = 0.4804\), calculados en la
+Sección~\ref{sec-regimen-1}.
 
-Asignamos los coeficientes térmicos constantes previamente estimados
-para el modelo de Ornstein-Uhlenbeck (EDE). Cuando el equipo cuenta con
-electricidad, la tasa de abatimiento térmico se fija en
-\(\kappa_{on} = 0.1188\,\text{hr}^{-1}\) con una volatilidad interna de
-los ventiladores de \(\sigma_{on} = 0.325\), obtenidos con los calculos
-de la sección anterior Sección~\ref{sec-regimen-1}. Ante un escenario de
-falla eléctrica, el compresor se apaga y el aislamiento de alta densidad
-del equipo (reforzado por sus paquetes de hielo internos) frena la
-transferencia de calor, lo que se modela con una inercia pasiva
-sumamente lenta de \(\kappa_{off} = 0.00178\,\text{hr}^{-1}\) y un ruido
-por microfiltraciones de aire de \(\sigma_{off} = 0.05\), estimado en la
-Sección~\ref{sec-regimen-2}. La temperatura objetivo del termostato se
-establece en \(\theta = 4.0^\circ\text{C}\) y el equipo arranca en esta
-misma condición inicial (\(T_0 = 4.0^\circ\text{C}\)).
+Ante una falla eléctrica, el compresor se apaga. El aislamiento de alta
+densidad del equipo frena la transferencia de calor exterior con una
+inercia pasiva de \(\kappa_{off} = 0.00232\,\text{hr}^{-1}\) y un ruido
+por microfiltraciones de \(\sigma_{off} = 0.048\), estimado en la
+Sección~\ref{sec-regimen-2}.
 
-Para modelar la degradación biológica, configuramos las constantes de la
-ecuación de Arrhenius Ecuación~\ref{eq-Arrhenius} para un biológico
-termosensible genérico (perfil biológico representativo de vacunas vivas
-atenuadas como Sarampión o Poliomielitis). La energía de activación
-crítica se establece en \(E_a = 85,000\,\text{J/mol}\)
-(\(85\,\text{kJ/mol}\)), la constante universal de los gases en
-\(R = 8.314\,\text{J/(mol}\cdot\text{K)}\) y el factor de frecuencia
-preexponencial en \(A = 1.2 \times 10^{14}\), estos parámtros se
-obtuvieron de la Sección~\ref{sec-Arrhenius}.
+Para modelar la degradación biológica, utilizamos la ecuación de
+Arrhenius (Ecuación~\ref{eq-Arrhenius}) calibrada para un biológico
+termosensible representativo. La energía de activación se fija en
+\(E_a = 85,000\,\text{J/mol}\), la constante de los gases en
+\(R = 8.314\,\text{J/(mol}\cdot\text{K)}\) y el factor preexponencial en
+\(A = 1.2 \times 10^{13} \, \text{s}^{-1}\) (obtenidos en la
+Sección~\ref{sec-Arrhenius}). Adicionalmente, fundamentados en la
+termodinámica de fluidos, introducimos un \textbf{filtro de inercia
+térmica de 30 minutos}; es decir, asumimos que el biológico líquido
+dentro del frasco de vidrio tarda este periodo en igualar la temperatura
+interna del equipo, evitando contabilizar falsos daños por picos
+térmicos breves.
 
-Finalmente, programamos la lógica operativa para las aperturas de puerta
-durante las jornadas de consulta (lunes a viernes). Para aproximarnos a
-la realidad clínica, dividimos este comportamiento operativo en dos
-reglas independientes:
+\subsection{\texorpdfstring{Perturbaciones Discretas: Apertura de
+Puertas
+(\(N_{puerta}(t)\))}{Perturbaciones Discretas: Apertura de Puertas (N\_\{puerta\}(t))}}\label{sec-aperturas-puerta}
 
-\begin{enumerate}
-\def\labelenumi{\alph{enumi})}
+La interacción humana se modela extrayendo vacunas únicamente durante
+las jornadas laborales (lunes a viernes). Para evaluar el impacto
+logístico, la simulación adapta estas perturbaciones dependiendo del
+contexto operativo (como se vio en la
+Sección~\ref{sec-perturbaciones-discretas}), los tres escenarios de
+prueba se definen de la siguiente manera:
+
+\begin{itemize}
+\tightlist
 \item
-  \textbf{Regla Matutina (Determinista):} Se programa una apertura fija
-  y obligatoria exactamente a las 8:00 AM, momento en el que el personal
-  de enfermería extrae los lotes de vacunas que se utilizarán en la
-  jornada matutina.
+  \textbf{Escenario A (Línea Base):} No existe interacción humana; la
+  tasa de aperturas es estrictamente cero durante todo el año.
 \item
-  \textbf{Regla Vespertina (Estocástica):} Entre las 15:00 y las 17:00
-  horas (horario de cierre y resguardo), se activa una tasa de
-  probabilidad basada en un proceso de Poisson con una intensidad de
-  \(\lambda_{tarde} = 0.5\) aperturas por hora, en proporción a la
-  longitud del horario vespertino, modelando asi las aperturas
-  aleatorias para almacenar los frascos sobrantes. Cada evento de
-  apertura incrementa instantáneamente un salto térmico constante de
-  \(\gamma = +1.0^\circ\text{C}\) al interior del equipo. Ambas reglas
-  dejan de funcionar por completo si el indicador de fin de semana es
-  verdadero.
-\end{enumerate}
+  \textbf{Escenario B (Apego Normativo):} Se programa una apertura
+  determinista a las 8:00 AM para la extracción de dosis diarias.
+  Posteriormente, se activa un proceso de Poisson con intensidad
+  \(\lambda_{tarde} = 0.5 \text{ eventos/hora}\)\$ en un horario
+  vespertino de 2 horas (de 15:00 a 17:00 hrs) para las aperturas
+  aleatorias vespertinas de resguardo.
+\item
+  \textbf{Escenario C (Contingencia):} Además de la extracción matutina
+  y vespertina del Escenario B, se usa otro proceso de Poisson de alta
+  frecuencia (\(\lambda_{resurtido} = 0.4 \text{ eventos/hora}\)) en un
+  horario matutino de 5 horas (de 09:00 a 14:00 hrs) para simular viajes
+  masivos de abastecimiento debido a la saturación del inventario.
+\end{itemize}
 
-\subsection{Parámetros Estocásticos de Fallas de la
-CFE}\label{paruxe1metros-estocuxe1sticos-de-fallas-de-la-cfe}
+Como se analizó en la Sección~\ref{sec-salto-termico}, cada apertura
+inyecta aire caliente al interior del equipo. Este impacto se calcula
+mediante un salto térmico aleatorio \(\gamma_i\), extraído de una
+distribución Normal truncada (Ecuación~\ref{eq-salto-termico}) para
+reflejar la variabilidad real en el tiempo que la puerta permanece
+abierta.
 
-El riesgo externo del suministro eléctrico se parametriza mediante el
-comportamiento histórico de fallas de la Comisión Federal de
-Electricidad (CFE) en la región Sureste. Retomando los calculos de la
-Sección~\ref{sec-ppnh}, programamos la tasa de fallas diarias
-\(\lambda_{cfe}(t), t > 0\) como un Proceso de Poisson No Homogéneo,
-donde combinamos un riesgo base de fallas locales (\(0.0667\)
-cortes/día) con dos campanas gaussianas estacionales que modelan los
-picos de cortes debidos al sobrecalentamiento de transformadores en
-verano (centrada en el día 152) y la temporada de tormentas tropicales
-(centrada en el día 244):
+\subsection{Riesgo Eléctrico de la CFE}\label{sec-riesgo-cfe}
+
+El riesgo del suministro eléctrico se parametriza utilizando el
+comportamiento histórico de la Comisión Federal de Electricidad (CFE).
+Retomando los cálculos de la Sección~\ref{sec-ppnh}, programamos la tasa
+de fallas diarias \(\lambda_{cfe}(t)\) para el Proceso de Poisson No
+Homogéneo. Este modelo promedia un aproximado de 64 cortes anuales,
+combinando un riesgo base constante con dos campanas estacionales que
+simulan el sobrecalentamiento de transformadores en primavera y la
+temporada de tormentas en verano:
 
 \[
-\lambda_{cfe}(t) = 0.0667 + 0.2333 \cdot \exp\left(-\frac{(t - 152)^2}{3200}\right) + 0.2333 \cdot \exp\left(-\frac{(t - 244)^2}{1800}\right).
+\lambda_{cfe}(t) = 0.0667 + 0.2314 \cdot \exp\left(-\frac{(t - 152)^2}{4050}\right) + 0.2048 \cdot \exp\left(-\frac{(t - 244)^2}{1800}\right)
 \]
 
-Para la duración de dichos cortes, incorporamos los parámetros de escala
-y forma (\(\mu\) y \(\sigma\)) de una distribución Log-Normal calibrada
-por el método de los momentos para tres estaciones del año, usando para
-su estimación los datos históricos: temporada base
-(\(\mu = 0.7933, \sigma = 0.6838\)), temporada de estrés por calor
-(\(\mu = 0.8529, \sigma = 0.2485\)) y temporada de lluvias de alta
-intensidad (\(\mu = 0.4667, \sigma = 0.3371\)).
+Para la duración de estos cortes, utilizamos una distribución Log-Normal
+calibrada por el método de los momentos en la
+Sección~\ref{sec-lognormal-duracion} para las distintas épocas del año:
+temporada base (\(\mu = 0.6766, \sigma = 0.6202\)), temporada de calor
+(\(\mu = 0.9627, \sigma = 0.5106\)) y temporada de lluvias
+(\(\mu = 0.4668, \sigma = 0.3372\)).
+
+\chapter{HASTA AQUI}\label{hasta-aqui}
 
 \section{3. Precalibración Vectorizada de Eventos
 Externos}\label{precalibraciuxf3n-vectorizada-de-eventos-externos}

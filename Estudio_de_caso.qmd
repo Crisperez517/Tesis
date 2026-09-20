@@ -430,7 +430,7 @@ Este estado se activa cuando el Proceso de Poisson registra un apagón. El motor
   La enorme diferencia de magnitud entre $\kappa_{on}$ (rápido) y $\kappa_{off}$ (muy lento) comprueba matemáticamente la alta efectividad térmica de los paquetes refrigerantes.
 * **Volatilidad Externa ($\sigma_{off}$)**: Al cortarse la electricidad y apagarse los ventiladores, el aire interior deja de mezclarse a la fuerza (convección forzada) y pasa a un estado de reposo (convección natural estática). Según la mecánica de fluidos, esta ausencia de turbulencia reduce las variaciones aleatorias en un orden de magnitud. Por ello, la volatilidad térmica sin energía se calcula como la décima parte de la volatilidad activa: $\sigma_{off} = \dfrac{\sigma_{on}}{10} \approx \frac{0.4804}{10} \approx 0.048$.
 
-### Perturbaciones Discretas: Apertura de Puertas ($N_{puerta}(t)$)
+### Perturbaciones Discretas: Apertura de Puertas ($N_{puerta}(t)$){#sec-perturbaciones-discretas}
 
 De acuerdo con las normativas internacionales de manejo de la red de frío, la manipulación de los equipos de refrigeración debe limitarse estrictamente a los días hábiles (de lunes a viernes). Durante estas jornadas, el refrigerador debe abrirse idealmente un máximo de dos veces: una apertura rutinaria matutina (típicamente a las 8:00 hrs) para extraer los biológicos necesarios para el turno, y una apertura vespertina destinada a resguardar los sobrantes. Por el contrario, durante los fines de semana y días festivos, la unidad debe permanecer completamente sellada para maximizar la preservación de la inercia térmica, anulando por completo la inyección de calor exterior generada por el factor humano.
 
@@ -448,7 +448,7 @@ Dado que la apertura de las 8:00 hrs es un evento operativo determinista y prede
 
     Fuera de estos horarios, la intensidad del proceso es estrictamente cero.
     
-### Impacto de la Apertura y Salto Térmico ($\gamma_i$)
+### Impacto de la Apertura y Salto Térmico ($\gamma_i$){#sec-salto-termico}
 
 Al tratarse de un equipo tipo cofre (*Icelined Refrigerator*), la pérdida térmica por convección es físicamente menor que en equipos verticales, ya que el aire frío es más denso y tiende a permanecer en el fondo. Sin embargo, el ingreso de aire caliente es inevitable y su magnitud no es una constante; depende del tiempo que la puerta permanezca abierta y de la correcta disposición del balasto térmico (botellas de agua).
 
@@ -469,7 +469,7 @@ $$3\sigma = 1.36 - 0.76 = 0.60 \implies \sigma = 0.20^\circ\text{C}$$
 Las colas de una distribución Normal estándar se extienden hasta menos infinito. En el contexto físico, un valor de $\gamma_i < 0$ implicaría que al abrir la puerta el refrigerador absorbe frío del exterior cálido, lo cual viola la Segunda Ley de la Termodinámica. Asimismo, el estudio del NIST establece que el ingreso mínimo absoluto de calor es de $0.16^\circ\text{C}$.
 
 Para garantizar la viabilidad física del proceso estocástico durante las simulaciones de Montecarlo, la variable aleatoria $\gamma_i$ se define como una distribución truncada inferiormente, aplicando un filtro de maximización:
-$$\gamma_i = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)$$
+$$\gamma_i = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)$${#eq-salto-termico}
 De esta forma, la Ecuación Diferencial Estocástica absorbe la variabilidad operativa del personal médico sin riesgo de arrojar perturbaciones termodinámicamente imposibles.
 
 ## Cinética de Degradación Térmica (Ecuación de Arrhenius) {#sec-Arrhenius}
