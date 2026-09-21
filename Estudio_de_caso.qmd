@@ -530,7 +530,7 @@ Es importante destacar que el modelo de daño térmico propuesto se restringe ex
 
 Por consiguiente, bajo las condiciones operativas y climáticas simuladas, la probabilidad de sobreenfriamiento se considera nula. El análisis de vulnerabilidad del inventario queda acotado al estrés por calor derivado de la interrupción del suministro eléctrico.
 
-## Dinámica de Inventario y Demanda Clínica
+## Dinámica de Inventario y Demanda Clínica {#sec-dinamica-inventario}
 
 Para evaluar la capacidad de la red de frío, el modelo termodinámico debe interactuar con las variaciones operativas del inventario. La simulación incorpora parámetros logísticos basados en la teoría de gestión de inventarios y en el calendario de salud pública mexicano.
 
