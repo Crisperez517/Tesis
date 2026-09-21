@@ -2978,7 +2978,7 @@ inercia térmica del biológico). Posteriormente, presentamos el análisis
 estadístico y la discusión de los resultados obtenidos para cada
 escenario.
 
-\section{1. Malla Temporal y Clima
+\section{Malla Temporal y Clima
 Exterior}\label{malla-temporal-y-clima-exterior}
 
 El primer módulo de la simulación establece el tiempo y el clima de
@@ -3048,7 +3048,7 @@ picos térmicos a las 15:00 horas.}
 
 \end{figure}%
 
-\section{2. Parametrización Física, Cinética y
+\section{Parametrización Física, Cinética y
 Estocástica}\label{sec-parametrizacion-fisica}
 
 Una vez construido el entorno climático, inicializamos las constantes
@@ -3153,7 +3153,7 @@ Sección~\ref{sec-lognormal-duracion} para las distintas épocas del año:
   \textbf{Temporada de Lluvias:} \(\mu = 0.4668, \ \sigma = 0.3372\)
 \end{itemize}
 
-\section{3. Precalibración Vectorizada de Eventos
+\section{Precalibración Vectorizada de Eventos
 Externos}\label{precalibraciuxf3n-vectorizada-de-eventos-externos}
 
 Antes de resolver numéricamente la Ecuación Diferencial Estocástica para
@@ -3211,70 +3211,115 @@ para el Escenario A (Línea Base), \textbf{493 aperturas} para el
 Escenario B (Apego Normativo), y \textbf{995 aperturas} debido a la
 saturación logística en el Escenario C (Contingencia).
 
-\chapter{HASTA AQUI}\label{hasta-aqui}
+\section{Resolución Numérica de la Ecuación Diferencial Estocástica
+(EDE)}\label{resoluciuxf3n-numuxe9rica-de-la-ecuaciuxf3n-diferencial-estocuxe1stica-ede}
 
-\section{4. Resolución de la SDE}\label{resoluciuxf3n-de-la-sde}
+Con los vectores de perturbaciones externas precalculados, el algoritmo
+ejecuta la resolución de la evolución de la temperatura interna del
+equipo y extrae las métricas de seguridad termodinámica para el equipo
+institucional.
 
-Con todos los vectores de perturbaciones externas precalculados, se
-procede a ejecutar el núcleo analítico del modelo, resolviendo la
-evolución de la temperatura interna y su impacto directo sobre el lote
-de vacunas.
+\subsection{Integración Numérica por Cambios de
+Régimen}\label{integraciuxf3n-numuxe9rica-por-cambios-de-ruxe9gimen}
 
-\subsection{Integración de la Temperatura por Cambios de
-Régimen}\label{integraciuxf3n-de-la-temperatura-por-cambios-de-ruxe9gimen}
+Para avanzar en el tiempo, el algoritmo recorre cada iteración
+\(i \in [1, 105407]\). El índice arranca en 1 porque el primer valor
+corresponde a la condición inicial térmica del equipo
+(\(T_0 = 5.0^\circ\text{C}\)). En cada paso, se evalúa el estado del
+suministro eléctrico previo (\(S_{t}[i-1]\)), activando un cambio de
+régimen dinámico (\emph{regime-switching}):
 
-Para avanzar en el tiempo, el algoritmo recorre la iteración \(i\) en el
-intervalo \(i \in [1, 105407]\). El índice arranca en 1 y no en 0 porque
-el primer valor de la matriz corresponde a la condición inicial ya
-conocida de la temperatura interna del refrigerador
-(\(T_0 = 4^\circ\text{C}\)). En cada iteración \(i\), evalúa el estado
-del suministro eléctrico en el paso previo (\(S_{t}[i-1]\)), activando
-un cambio de régimen dinámico (\emph{regime-switching}). Si el
-suministro está activo, aplica los parámetros de convección forzada
-(\(\kappa_{on}, \sigma_{on}\)) llevando a la temperatura hacia la
-temperatura ideal (\(\theta = 4.0^\circ\text{C}\)) y le suma el salto
-térmico si la puerta fué manipulada. Si el suministro está apagado, el
-algoritmo desactiva los ventiladores y acopla la inercia térmica pasiva
-(\(\kappa_{off}, \sigma_{off}\)), provocando que la temperatura del
-refrigerador sea atraída hacia la temperatura ambiente exterior de
-Tuxtla Gutiérrez (\(T_{amb}[i-1]\)).
+\begin{itemize}
+\tightlist
+\item
+  Si el suministro está activo (\(S=1\)), se aplican los parámetros de
+  convección forzada (\(\kappa_{on}, \sigma_{on}\)), llevando la
+  temperatura hacia el objetivo del termostato
+  (\(\theta = 5.0^\circ\text{C}\)) y sumando el salto térmico
+  \(\gamma_i\) si la puerta fue manipulada.
+\item
+  Si el suministro presenta una falla (\(S=0\)), se aplican los
+  parámetros de inercia térmica pasiva (\(\kappa_{off}, \sigma_{off}\)),
+  provocando que la temperatura interna sea atraída lentamente hacia la
+  temperatura ambiente exterior de Tuxtla Gutiérrez (\(T_{amb}[i-1]\)).
+\end{itemize}
 
 La solución numérica se ejecuta mediante el esquema de Euler-Maruyama
-desarrollado en la Sección~\ref{sec-euler-maruyama}. Es fundamental
+desarrollado en la Sección~\ref{sec-euler-maruyama}. Es importante
 destacar que, dado que las volatilidades térmicas (\(\sigma_{on}\) y
-\(\sigma_{off}\)) actúan como ruidos aditivos constantes independientes
-del estado de la temperatura \(X(t)\), sus derivadas parciales respecto
-al estado son nulas (\(\frac{\partial \sigma}{\partial x} = 0\)). Debido
-a esta propiedad del cálculo estocástico, el término de corrección de
-segundo orden del método de Milstein se multiplica por cero y desaparece
-por completo, demostrando que el esquema de Milstein se reduce de forma
-exacta al método de Euler-Maruyama aquí empleado.
+\(\sigma_{off}\)) actúan como ruidos aditivos constantes (independientes
+del estado de la temperatura \(T(t)\)), sus derivadas parciales respecto
+al estado son nulas (\(\frac{\partial \sigma}{\partial x} = 0\)), con lo
+cual por propiedades del cálculo estocástico, el término de corrección
+de segundo orden del método de Milstein se multiplica por cero y
+desaparece, reduciéndose de forma exacta al esquema de Euler-Maruyama
+empleado en esta simulación.
 
-Simultáneamente, el ciclo evalúa el daño térmico acumulado mediante la
-ecuación de Arrhenius. Si la temperatura interna del refrigerador supera
-el límite normativo de seguridad (\(X_{t}[i] > 8.0^\circ\text{C}\)), el
-algoritmo convierte la temperatura a grados Kelvin, calcula la constante
-cinética instantánea \(k(t)\) y actualiza la viabilidad de la vacuna
-(\(V_t\)) aplicando un decaimiento exponencial dependiente de
-\(\Delta t\). Si la temperatura se mantiene a salvo dentro del rango
-seguro, la viabilidad farmacológica permanece congelada en su valor
-previo. La dinámica resultante para el año completo se expone en la
-Figura~\ref{fig-sde-anual}, mientras que la Figura~\ref{fig-sde-zoom}
-presenta un acercamiento exclusivo al mes crítico de junio.
+\subsection{Resultados de Seguridad
+Termodinámica}\label{resultados-de-seguridad-termodinuxe1mica}
+
+El algoritmo registra cada evento en el que la temperatura interna del
+equipo cruza los límites normativos de seguridad (por encima de los
+\(8^\circ\text{C}\) o por debajo de los \(2^\circ\text{C}\)). Es
+importante destacar que en esta trayectoria de prueba, la temperatura de
+la simulación nunca descendió por debajo del punto de congelación
+crítico (\(0^\circ\text{C}\)) en ninguno de los tres escenarios. El
+cálculo exacto del riesgo para la trayectoria de control inicial
+(semilla 13) arrojó los siguientes resultados para cada escenario
+operativo:
+
+\textbf{Escenario A (Línea Base):} * \textbf{\(T(t)>8^\circ\text{C}\):}
+Se tuvo un total de 40 eventos, sumando un tiempo acumulado de 22.25
+horas que representa el 0.25\% del año; el primer registro ocurrió en el
+Día 60.99. * \textbf{\(T(t)<2^\circ\text{C}\):} Se tuvo un total de 13
+eventos, sumando un tiempo acumulado de 3.58 horas que representa el
+0.04\% del año, registrando la primera caída térmica fuera de la norma
+en el Día 110.25. * \textbf{Tiempo Total Fuera de Rango:} La suma de las
+excursiones térmicas resultó en un total de 25.83 horas que representa
+el 0.29\% del año operando fuera del rango normativo.
+
+\textbf{Escenario B (Apego Normativo):} *
+\textbf{\(T(t)>8^\circ\text{C}\):} Se observó un incremento notable con
+un total de 177 eventos, acumulando un total de 121.83 horas que
+representa el 1.39\% del año; debido a la interacción humana, la primera
+falla crítica se adelantó drásticamente hasta el Día 4.65. *
+\textbf{\(T(t)<2^\circ\text{C}\):} Ocurrieron únicamente 3 eventos con
+un tiempo acumulado de 0.83 horas que representa el 0.01\% del año,
+manteniendo su primer registro en el Día 110.25. * \textbf{Tiempo Total
+Fuera de Rango:} El equipo operó en condiciones de riesgo durante un
+total de 122.67 horas que representa el 1.40\% del año simulado.
+
+\textbf{Escenario C (Contingencia):} *
+\textbf{\(T(t)>8^\circ\text{C}\):} El estrés logístico provocó un total
+de 435 eventos, alcanzando un tiempo acumulado severo de 475 horas que
+representa el 5.41\% del año; al igual que en el escenario anterior, el
+primer registro de falla ocurrió rápidamente en el Día 4.65. *
+\textbf{\(T(t)<2^\circ\text{C}\):} Debido a la saturación de calor por
+aperturas constantes, no se registró ningún evento de enfriamiento
+excesivo, manteniéndose un acumulado de 0.00 horas. * \textbf{Tiempo
+Total Fuera de Rango:} En este contexto, el equipo sumó un total de 475
+horas operando fuera de rango, lo que representa el 5.41\% del año.
+
+\subsection{Análisis Comparativo de Trayectorias: Visión Macro
+(Anual)}\label{anuxe1lisis-comparativo-de-trayectorias-visiuxf3n-macro-anual}
+
+A continuación, se presentan las soluciones numéricas completas para un
+año de simulación bajo los tres escenarios.
 
 \begin{figure}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{sde_anual.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{sde_anual_escenario_A.png}}
 
 }
 
-\caption{\label{fig-sde-anual}Dinámica térmica anual simulada para el
-refrigerador Haier HBC-150. Las zonas sombreadas en rojo indican la
-ocurrencia de los 68 apagones a lo largo del año, la trayectoria de
-color azul indica la tempertura interna del refrigerador (la solución
-numerica de la EDE), y la trayectoria de color amarillo inidica la
+\caption{\label{fig-anual-a}Comportamiento térmico anual (Escenario A).
+Las zonas sombreadas en rojo indican la ocurrencia de los 68 apagones.
+La trayectoria azul representa la temperatura interna del equipo (la
+solución numérica de la EDE) la cual se mantiene estable y rara vez
+rompe la cadena de frío, viéndose afectada únicamente por fallas
+eléctricas prolongadas, y la trayectoria de color amarillo indica la
 temperatura ambiente en Tuxtla Gutiérrez, Chiapas.}
 
 \end{figure}%
@@ -3283,16 +3328,109 @@ temperatura ambiente en Tuxtla Gutiérrez, Chiapas.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{sde_zoom.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{sde_anual_escenario_B.png}}
 
 }
 
-\caption{\label{fig-sde-zoom}Acercamiento del comportamiento de la EDE
-durante el mes de junio. Se omitió el clima exterior para observar la
-estabilidad del termostato (4°C), los impactos de las aperturas
-(triángulos verdes inferiores) y la pérdida de frío en los apagones.}
+\caption{\label{fig-anual-b}Comportamiento térmico anual (Escenario B).
+La interacción humana controlada engrosa la trayectoria azul,
+incrementando los picos térmicos debido a las aperturas matutinas y
+vespertinas.}
 
 \end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{sde_anual_escenario_C.png}}
+
+}
+
+\caption{\label{fig-anual-c}Comportamiento térmico anual (Escenario C).
+La saturación logística colapsa el control termodinámico; la trayectoria
+azul se muestra muy oscilatoria, rompiendo continuamente la barrera de
+los 8°C.}
+
+\end{figure}%
+
+\textbf{Interpretación Anual:} La visualización anual demuestra de forma
+contundente la sensibilidad del sistema a la interacción humana. En el
+Escenario A, el aislamiento térmico del equipo y el clima de la región
+son suficientes para mantener la temperatura segura durante los primeros
+dos meses (enero y febrero), presentando fallas a partir de la época de
+calor extremo. Conforme avanzamos al Escenario B y C, el volumen de
+excursiones superiores a \(8^\circ\text{C}\) crece agresivamente
+(pasando de 40 a 435 eventos). Esto prueba que el suministro eléctrico
+de la CFE, aunque deficiente, no es el destructor principal de la cadena
+de frío, sino el estrés logístico de las aperturas continuas.
+
+\subsection{Análisis Comparativo de Trayectorias: Visión Micro
+(Acercamiento
+Mensual)}\label{anuxe1lisis-comparativo-de-trayectorias-visiuxf3n-micro-acercamiento-mensual}
+
+Para aislar el comportamiento de la Ecuación Diferencial Estocástica y
+los impactos térmicos instantáneos (\(\gamma_i\)), se realizó un
+acercamiento al primer mes de la simulación.
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{sde_zoom_escenario_A.png}}
+
+}
+
+\caption{\label{fig-zoom-a}Acercamiento del comportamiento de la EDE
+durante el mes de enero (Escenario A). Se omitió el clima exterior para
+observar la estabilidad del termostato (5°C), sin la presencia de
+personal clínico, las únicas perturbaciones observables son curvas
+suaves de calentamiento pasivo durante los cortes de energía.}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{sde_zoom_escenario_B.png}}
+
+}
+
+\caption{\label{fig-zoom-b}Acercamiento del comportamiento de la EDE
+durante el mes de enero (Escenario B). Se observan picos verticales
+(salto térmico) debido a las aperturas de la puerta del refrigerador
+(triángulos verdes inferiores), seguidos de una recuperación exponencial
+forzada por el compresor.}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{sde_zoom_escenario_C.png}}
+
+}
+
+\caption{\label{fig-zoom-c}Acercamiento del comportamiento de la EDE
+durante el mes de enero (Escenario C). La temperatura rebasa el límite
+de los 8°C de forma constante debido a la alta frecuencia del proceso de
+Poisson para viajes de resurtido (mayor cantidad de triángulos verdes).}
+
+\end{figure}%
+
+\textbf{Interpretación Mensual:} A nivel mensual, se observa cómo el
+esquema de Euler-Maruyama resuelve la dinámica de reversión a la media
+(atracción hacia el termostato de \(5^\circ\text{C}\)). Un hallazgo
+estadístico notable es la coincidencia exacta del primer evento de
+excursión crítica en los escenarios B y C (ocurrido en el Día 4.65).
+Esto no es un error numérico, sino la consecuencia directa del modelo
+acoplado: en el Día 4.65 en el Escenario B y C ocurrió una apertura
+vespertina con un impacto térmico (\(\gamma_i\)) alto que provocó que la
+temperatura del equipo rompiera el umbral de los \(8^\circ\text{C}\).
+
+\chapter{HASTA AQUI}\label{hasta-aqui}
 
 \subsection{Integración de la Dinámica Logística de Inventario y
 Mermas}\label{integraciuxf3n-de-la-dinuxe1mica-loguxedstica-de-inventario-y-mermas}
