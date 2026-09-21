@@ -187,10 +187,10 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -3268,37 +3268,63 @@ cálculo exacto del riesgo para la trayectoria de control inicial
 (semilla 13) arrojó los siguientes resultados para cada escenario
 operativo:
 
-\textbf{Escenario A (Línea Base):} * \textbf{\(T(t)>8^\circ\text{C}\):}
-Se tuvo un total de 40 eventos, sumando un tiempo acumulado de 22.25
-horas que representa el 0.25\% del año; el primer registro ocurrió en el
-Día 60.99. * \textbf{\(T(t)<2^\circ\text{C}\):} Se tuvo un total de 13
-eventos, sumando un tiempo acumulado de 3.58 horas que representa el
-0.04\% del año, registrando la primera caída térmica fuera de la norma
-en el Día 110.25. * \textbf{Tiempo Total Fuera de Rango:} La suma de las
-excursiones térmicas resultó en un total de 25.83 horas que representa
-el 0.29\% del año operando fuera del rango normativo.
+\textbf{Escenario A (Línea Base):}
 
-\textbf{Escenario B (Apego Normativo):} *
-\textbf{\(T(t)>8^\circ\text{C}\):} Se observó un incremento notable con
-un total de 177 eventos, acumulando un total de 121.83 horas que
-representa el 1.39\% del año; debido a la interacción humana, la primera
-falla crítica se adelantó drásticamente hasta el Día 4.65. *
-\textbf{\(T(t)<2^\circ\text{C}\):} Ocurrieron únicamente 3 eventos con
-un tiempo acumulado de 0.83 horas que representa el 0.01\% del año,
-manteniendo su primer registro en el Día 110.25. * \textbf{Tiempo Total
-Fuera de Rango:} El equipo operó en condiciones de riesgo durante un
-total de 122.67 horas que representa el 1.40\% del año simulado.
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\(T(t)>8^\circ\text{C}\):} Se tuvo un total de 40 eventos,
+  sumando un tiempo acumulado de 22.25 horas que representa el 0.25\%
+  del año; el primer registro ocurrió en el Día 60.99.
+\item
+  \textbf{\(T(t)<2^\circ\text{C}\):} Se tuvo un total de 13 eventos,
+  sumando un tiempo acumulado de 3.58 horas que representa el 0.04\% del
+  año, registrando la primera caída térmica fuera de la norma en el Día
+  110.25.
+\item
+  \textbf{Tiempo Total Fuera de Rango:} La suma de las excursiones
+  térmicas resultó en un total de 25.83 horas que representa el 0.29\%
+  del año operando fuera del rango normativo.
+\end{itemize}
 
-\textbf{Escenario C (Contingencia):} *
-\textbf{\(T(t)>8^\circ\text{C}\):} El estrés logístico provocó un total
-de 435 eventos, alcanzando un tiempo acumulado severo de 475 horas que
-representa el 5.41\% del año; al igual que en el escenario anterior, el
-primer registro de falla ocurrió rápidamente en el Día 4.65. *
-\textbf{\(T(t)<2^\circ\text{C}\):} Debido a la saturación de calor por
-aperturas constantes, no se registró ningún evento de enfriamiento
-excesivo, manteniéndose un acumulado de 0.00 horas. * \textbf{Tiempo
-Total Fuera de Rango:} En este contexto, el equipo sumó un total de 475
-horas operando fuera de rango, lo que representa el 5.41\% del año.
+\textbf{Escenario B (Apego Normativo):}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\(T(t)>8^\circ\text{C}\):} Se observó un incremento notable
+  con un total de 177 eventos, acumulando un total de 121.83 horas que
+  representa el 1.39\% del año; debido a la interacción humana, la
+  primera falla crítica se adelantó drásticamente hasta el Día 4.65.
+\item
+  \textbf{\(T(t)<2^\circ\text{C}\):} Ocurrieron únicamente 3 eventos con
+  un tiempo acumulado de 0.83 horas que representa el 0.01\% del año,
+  manteniendo su primer registro en el Día 110.25.
+\item
+  \textbf{Tiempo Total Fuera de Rango:} El equipo operó en condiciones
+  de riesgo durante un total de 122.67 horas que representa el 1.40\%
+  del año simulado.
+\end{itemize}
+
+\textbf{Escenario C (Contingencia):}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\(T(t)>8^\circ\text{C}\):} El estrés logístico provocó un
+  total de 435 eventos, alcanzando un tiempo acumulado severo de 475
+  horas que representa el 5.41\% del año; al igual que en el escenario
+  anterior, el primer registro de falla ocurrió rápidamente en el Día
+  4.65.
+\item
+  \textbf{\(T(t)<2^\circ\text{C}\):} Debido a la saturación de calor por
+  aperturas constantes, no se registró ningún evento de enfriamiento
+  excesivo, manteniéndose un acumulado de 0.00 horas.
+\item
+  \textbf{Tiempo Total Fuera de Rango:} En este contexto, el equipo sumó
+  un total de 475 horas operando fuera de rango, lo que representa el
+  5.41\% del año.
+\end{itemize}
 
 \subsection{Análisis Comparativo de Trayectorias: Visión Macro
 (Anual)}\label{anuxe1lisis-comparativo-de-trayectorias-visiuxf3n-macro-anual}
