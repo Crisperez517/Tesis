@@ -221,7 +221,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-09-20}
+\date{2026-09-22}
 \begin{document}
 \maketitle
 
@@ -3464,11 +3464,12 @@ acomodamos la simulación a un modelo de inventario dinámico (\(I(t)\)),
 donde \(t\) representa el tiempo cada 5 minutos. El algoritmo avanza en
 el tiempo y evalúa tres reglas operativas clave para la logística:
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{1. Consumo Logístico:} Dependiendo del escenario como se vio
-  en la Sección~\ref{sec-dinamica-inventario}, el volumen de vacunas se
+  \textbf{Consumo Logístico:} Dependiendo del escenario como se vio en
+  la Sección~\ref{sec-dinamica-inventario}, el volumen de vacunas se
   descuenta del inventario. Para el Escenario A (Línea Base), el consumo
   es cero. Para el Escenario B (Apego Normativo), se extrae una cantidad
   diaria fija a las 8:00 AM que varía según el mes (ej. mayor demanda en
@@ -3476,23 +3477,23 @@ el tiempo y evalúa tres reglas operativas clave para la logística:
   (Contingencia), el consumo acelera y se acopla de manera dinámica a
   los eventos de resurtido a lo largo de la jornada.
 \item
-  \textbf{2. Inercia Térmica y Daño Farmacológico:} La temperatura
-  \(T(t)\) calculada por la EDE corresponde al aire interno del equipo.
-  Sin embargo, el biológico líquido dentro de los frascos de vidrio
-  posee inercia térmica. Para modelar este retardo físico, el algoritmo
-  aplica un filtro de tolerancia de 30 minutos: la ecuación de Arrhenius
-  solo entra en vigor si el aire permanece por encima de los 8°C de
-  manera ininterrumpida durante 6 iteraciones continuas. Cumplida esta
+  \textbf{Inercia Térmica y Daño Farmacológico:} La temperatura \(T(t)\)
+  calculada por la EDE corresponde al aire interno del equipo. Sin
+  embargo, el biológico líquido dentro de los frascos de vidrio posee
+  inercia térmica. Para modelar este retardo físico, el algoritmo aplica
+  un filtro de tolerancia de 30 minutos: la ecuación de Arrhenius solo
+  entra en vigor si el aire permanece por encima de los 8°C de manera
+  ininterrumpida durante 6 iteraciones continuas. Cumplida esta
   condición, se extrae la fracción de pérdida y se multiplica por el
   inventario actual en ese instante de tiempo, sumando el resultado al
   vector de dosis destruidas.
 \item
-  \textbf{3. Reabastecimiento Automático:} Si el inventario cae por
-  debajo del punto de reorden de 1000 dosis (el 20\% de su capacidad
-  máxima), se simula la llegada de la ruta jurisdiccional que llena el
-  equipo hasta su capacidad máxima de 5000 dosis, registrando el ingreso
-  en la sumatoria anual para calcular el porcentaje de pérdida final.
-\end{itemize}
+  \textbf{Reabastecimiento Automático:} Si el inventario cae por debajo
+  del punto de reorden de 1000 dosis (el 20\% de su capacidad máxima),
+  se simula la llegada de la ruta jurisdiccional que llena el equipo
+  hasta su capacidad máxima de 5000 dosis, registrando el ingreso en la
+  sumatoria anual para calcular el porcentaje de pérdida final.
+\end{enumerate}
 
 \subsection{Resultados del Impacto
 Logístico}\label{resultados-del-impacto-loguxedstico}
@@ -3777,6 +3778,329 @@ condiciones eléctricas.
 vacunas perdidas anualmente. Se detallan las casillas de centralidad
 (media y mediana) y las líneas de acotación del intervalo de predicción
 del 95\%.}
+
+\end{figure}%
+
+\#imagenes finales sin interpretacion momentanea
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{abanico_riesgo_escenario_A.png}}
+
+}
+
+\caption{\label{fig-abanico_escenario-A}30 trayectorias anuales
+aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a
+lo largo de los 366 días del año.}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{abanico_riesgo_escenario_B.png}}
+
+}
+
+\caption{\label{fig-abanico_escenario-B}30 trayectorias anuales
+aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a
+lo largo de los 366 días del año.}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{abanico_riesgo_escenario_C.png}}
+
+}
+
+\caption{\label{fig-abanico_escenario-C}30 trayectorias anuales
+aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a
+lo largo de los 366 días del año.}
+
+\end{figure}%
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{barras_estacionales_promedio_escenario_A.png}}
+
+}
+
+\caption{\label{fig-barras-promedio_escenario-A}Pérdida promedio de
+dosis de vacunas por mes calculada sobre las 1,000 trayectorias de
+Montecarlo, mostrando el impacto crítico durante los meses de calor.}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{barras_estacionales_mediana_escenario_A.png}}
+
+}
+
+\caption{\label{fig-barras-mediana_escenario-A}Pérdida mediana de dosis
+de vacunas por mes, confirmando que el mes de abril representa el
+escenario de mayor riesgo operativo para la red de frío.}
+
+\end{figure}%
+
+\end{minipage}%
+
+\end{figure}%
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{barras_estacionales_promedio_escenario_B.png}}
+
+}
+
+\caption{\label{fig-barras-promedio_escenario-B}Pérdida promedio de
+dosis de vacunas por mes calculada sobre las 1,000 trayectorias de
+Montecarlo, mostrando el impacto crítico durante los meses de calor.}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{barras_estacionales_mediana_escenario_B.png}}
+
+}
+
+\caption{\label{fig-barras-mediana_escenario-B}Pérdida mediana de dosis
+de vacunas por mes, confirmando que el mes de abril representa el
+escenario de mayor riesgo operativo para la red de frío.}
+
+\end{figure}%
+
+\end{minipage}%
+
+\end{figure}%
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{barras_estacionales_promedio_escenario_C.png}}
+
+}
+
+\caption{\label{fig-barras-promedio_escenario-C}Pérdida promedio de
+dosis de vacunas por mes calculada sobre las 1,000 trayectorias de
+Montecarlo, mostrando el impacto crítico durante los meses de calor.}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\begin{figure}[H]
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{barras_estacionales_mediana_escenario_C.png}}
+
+}
+
+\caption{\label{fig-barras-mediana_escenario-C}Pérdida mediana de dosis
+de vacunas por mes, confirmando que el mes de abril representa el
+escenario de mayor riesgo operativo para la red de frío.}
+
+\end{figure}%
+
+\end{minipage}%
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{histograma_porcentajes_escenario_A.png}}
+
+}
+
+\caption{\label{fig-histograma-final-escenario-A}Histograma para el
+porcentaje de vacunas perdidas anualmente. Se detallan las casillas de
+centralidad (media y mediana) y las líneas de acotación del intervalo de
+predicción del 95\%.}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{histograma_porcentajes_escenario_B.png}}
+
+}
+
+\caption{\label{fig-histograma-final-escenario-B}Histograma para el
+porcentaje de vacunas perdidas anualmente. Se detallan las casillas de
+centralidad (media y mediana) y las líneas de acotación del intervalo de
+predicción del 95\%.}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{histograma_porcentajes_escenario_C.png}}
+
+}
+
+\caption{\label{fig-histograma-final-escenario-C}Histograma para el
+porcentaje de vacunas perdidas anualmente. Se detallan las casillas de
+centralidad (media y mediana) y las líneas de acotación del intervalo de
+predicción del 95\%.}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{boxplot_angosto_escenario_A.png}}
+
+}
+
+\caption{\label{fig-boxplot-final-escenario-A}gráfica de caja}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{boxplot_angosto_escenario_B.png}}
+
+}
+
+\caption{\label{fig-boxplot-final-escenario-B}gráfica de caja}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{boxplot_angosto_escenario_C.png}}
+
+}
+
+\caption{\label{fig-boxplot-final-escenario-C}gráfica de caja}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{histograma_bootstrap_escenario_A.png}}
+
+}
+
+\caption{\label{fig-histograma-bootstrap-escenario-A}histograma
+Bootstrap}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{histograma_bootstrap_escenario_B.png}}
+
+}
+
+\caption{\label{fig-histograma-bootstrap-escenario-B}histograma
+Bootstrap}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{histograma_bootstrap_escenario_C.png}}
+
+}
+
+\caption{\label{fig-histograma-bootstrap-escenario-C}histograma
+Bootstrap}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{boxplot_bootstrap_escenario_A.png}}
+
+}
+
+\caption{\label{fig-boxplot-bootstrap-escenario-A}Grafica de caja
+Boostrap}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{boxplot_bootstrap_escenario_B.png}}
+
+}
+
+\caption{\label{fig-boxplot-bootstrap-escenario-B}Grafica de caja
+Boostrap}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{boxplot_bootstrap_escenario_C.png}}
+
+}
+
+\caption{\label{fig-boxplot-bootstrap-escenario-C}Grafica de caja
+Boostrap}
 
 \end{figure}%
 

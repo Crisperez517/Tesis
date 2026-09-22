@@ -145,9 +145,9 @@ A nivel mensual, se observa cómo el esquema de Euler-Maruyama resuelve la diná
 
 Para pasar de una pérdida de viabilidad teórica a la pérdida de vacunas, acomodamos la simulación a un modelo de inventario dinámico ($I(t)$), donde $t$ representa el tiempo cada 5 minutos. El algoritmo avanza en el tiempo y evalúa tres reglas operativas clave para la logística:
 
-* **1. Consumo Logístico:** Dependiendo del escenario como se vio en la @sec-dinamica-inventario, el volumen de vacunas se descuenta del inventario. Para el Escenario A (Línea Base), el consumo es cero. Para el Escenario B (Apego Normativo), se extrae una cantidad diaria fija a las 8:00 AM que varía según el mes (ej. mayor demanda en octubre por la campaña de Influenza). Para el Escenario C (Contingencia), el consumo acelera y se acopla de manera dinámica a los eventos de resurtido a lo largo de la jornada.
-* **2. Inercia Térmica y Daño Farmacológico:** La temperatura $T(t)$ calculada por la EDE corresponde al aire interno del equipo. Sin embargo, el biológico líquido dentro de los frascos de vidrio posee inercia térmica. Para modelar este retardo físico, el algoritmo aplica un filtro de tolerancia de 30 minutos: la ecuación de Arrhenius solo entra en vigor si el aire permanece por encima de los 8°C de manera ininterrumpida durante 6 iteraciones continuas. Cumplida esta condición, se extrae la fracción de pérdida y se multiplica por el inventario actual en ese instante de tiempo, sumando el resultado al vector de dosis destruidas.
-* **3. Reabastecimiento Automático:** Si el inventario cae por debajo del punto de reorden de 1000 dosis (el 20% de su capacidad máxima), se simula la llegada de la ruta jurisdiccional que llena el equipo hasta su capacidad máxima de 5000 dosis, registrando el ingreso en la sumatoria anual para calcular el porcentaje de pérdida final.
+1. **Consumo Logístico:** Dependiendo del escenario como se vio en la @sec-dinamica-inventario, el volumen de vacunas se descuenta del inventario. Para el Escenario A (Línea Base), el consumo es cero. Para el Escenario B (Apego Normativo), se extrae una cantidad diaria fija a las 8:00 AM que varía según el mes (ej. mayor demanda en octubre por la campaña de Influenza). Para el Escenario C (Contingencia), el consumo acelera y se acopla de manera dinámica a los eventos de resurtido a lo largo de la jornada.
+2. **Inercia Térmica y Daño Farmacológico:** La temperatura $T(t)$ calculada por la EDE corresponde al aire interno del equipo. Sin embargo, el biológico líquido dentro de los frascos de vidrio posee inercia térmica. Para modelar este retardo físico, el algoritmo aplica un filtro de tolerancia de 30 minutos: la ecuación de Arrhenius solo entra en vigor si el aire permanece por encima de los 8°C de manera ininterrumpida durante 6 iteraciones continuas. Cumplida esta condición, se extrae la fracción de pérdida y se multiplica por el inventario actual en ese instante de tiempo, sumando el resultado al vector de dosis destruidas.
+3. **Reabastecimiento Automático:** Si el inventario cae por debajo del punto de reorden de 1000 dosis (el 20% de su capacidad máxima), se simula la llegada de la ruta jurisdiccional que llena el equipo hasta su capacidad máxima de 5000 dosis, registrando el ingreso en la sumatoria anual para calcular el porcentaje de pérdida final.
 
 ### Resultados del Impacto Logístico
 
@@ -219,3 +219,53 @@ Finalmente, para estandarizar el riesgo sin importar la escala de la unidad méd
 A partir de los percentiles del histograma, podemos concluir con un **95% de nivel de confianza (Intervalo de Predicción)** que un centro de almacenamiento de vacunas en Tuxtla Gutiérrez, operando con un equipo normado por la OMS de última generación (Haier HBC-150), **sufrirá una pérdida inevitable de entre el 0.72% y el 6.57% de su inventario anual** debido a las condiciones climáticas locales y las condiciones eléctricas.
 
 ![Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.](histograma_porcentajes.png){#fig-histograma-final}
+
+#imagenes finales sin interpretacion momentanea
+
+![30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.](abanico_riesgo_escenario_A.png){#fig-abanico_escenario-A}
+
+![30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.](abanico_riesgo_escenario_B.png){#fig-abanico_escenario-B}
+
+![30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.](abanico_riesgo_escenario_C.png){#fig-abanico_escenario-C}
+
+::: {#layout-barras layout-ncol=2}
+![Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.](barras_estacionales_promedio_escenario_A.png){#fig-barras-promedio_escenario-A}
+
+![Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.](barras_estacionales_mediana_escenario_A.png){#fig-barras-mediana_escenario-A}
+:::
+
+::: {#layout-barras layout-ncol=2}
+![Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.](barras_estacionales_promedio_escenario_B.png){#fig-barras-promedio_escenario-B}
+
+![Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.](barras_estacionales_mediana_escenario_B.png){#fig-barras-mediana_escenario-B}
+:::
+
+::: {#layout-barras layout-ncol=2}
+![Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.](barras_estacionales_promedio_escenario_C.png){#fig-barras-promedio_escenario-C}
+
+![Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.](barras_estacionales_mediana_escenario_C.png){#fig-barras-mediana_escenario-C}
+:::
+
+![Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.](histograma_porcentajes_escenario_A.png){#fig-histograma-final-escenario-A}
+
+![Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.](histograma_porcentajes_escenario_B.png){#fig-histograma-final-escenario-B}
+
+![Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.](histograma_porcentajes_escenario_C.png){#fig-histograma-final-escenario-C}
+
+![gráfica de caja](boxplot_angosto_escenario_A.png){#fig-boxplot-final-escenario-A}
+
+![gráfica de caja](boxplot_angosto_escenario_B.png){#fig-boxplot-final-escenario-B}
+
+![gráfica de caja](boxplot_angosto_escenario_C.png){#fig-boxplot-final-escenario-C}
+
+![histograma Bootstrap](histograma_bootstrap_escenario_A.png){#fig-histograma-bootstrap-escenario-A} 
+
+![histograma Bootstrap](histograma_bootstrap_escenario_B.png){#fig-histograma-bootstrap-escenario-B}
+
+![histograma Bootstrap](histograma_bootstrap_escenario_C.png){#fig-histograma-bootstrap-escenario-C}
+
+![Grafica de caja Boostrap](boxplot_bootstrap_escenario_A.png){#fig-boxplot-bootstrap-escenario-A}
+
+![Grafica de caja Boostrap](boxplot_bootstrap_escenario_B.png){#fig-boxplot-bootstrap-escenario-B}
+
+![Grafica de caja Boostrap](boxplot_bootstrap_escenario_C.png){#fig-boxplot-bootstrap-escenario-C}

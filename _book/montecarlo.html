@@ -659,11 +659,11 @@ Figura&nbsp;4.8: Acercamiento del comportamiento de la EDE durante el mes de ene
 <section id="integración-de-la-dinámica-logística-y-mermas" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="integración-de-la-dinámica-logística-y-mermas"><span class="header-section-number">4.5</span> Integración de la Dinámica Logística y Mermas</h2>
 <p>Para pasar de una pérdida de viabilidad teórica a la pérdida de vacunas, acomodamos la simulación a un modelo de inventario dinámico (<span class="math inline">\(I(t)\)</span>), donde <span class="math inline">\(t\)</span> representa el tiempo cada 5 minutos. El algoritmo avanza en el tiempo y evalúa tres reglas operativas clave para la logística:</p>
-<ul>
-<li><strong>1. Consumo Logístico:</strong> Dependiendo del escenario como se vio en la <a href="Estudio_de_caso.html#sec-dinamica-inventario" class="quarto-xref"><span>Sección 3.11</span></a>, el volumen de vacunas se descuenta del inventario. Para el Escenario A (Línea Base), el consumo es cero. Para el Escenario B (Apego Normativo), se extrae una cantidad diaria fija a las 8:00 AM que varía según el mes (ej. mayor demanda en octubre por la campaña de Influenza). Para el Escenario C (Contingencia), el consumo acelera y se acopla de manera dinámica a los eventos de resurtido a lo largo de la jornada.</li>
-<li><strong>2. Inercia Térmica y Daño Farmacológico:</strong> La temperatura <span class="math inline">\(T(t)\)</span> calculada por la EDE corresponde al aire interno del equipo. Sin embargo, el biológico líquido dentro de los frascos de vidrio posee inercia térmica. Para modelar este retardo físico, el algoritmo aplica un filtro de tolerancia de 30 minutos: la ecuación de Arrhenius solo entra en vigor si el aire permanece por encima de los 8°C de manera ininterrumpida durante 6 iteraciones continuas. Cumplida esta condición, se extrae la fracción de pérdida y se multiplica por el inventario actual en ese instante de tiempo, sumando el resultado al vector de dosis destruidas.</li>
-<li><strong>3. Reabastecimiento Automático:</strong> Si el inventario cae por debajo del punto de reorden de 1000 dosis (el 20% de su capacidad máxima), se simula la llegada de la ruta jurisdiccional que llena el equipo hasta su capacidad máxima de 5000 dosis, registrando el ingreso en la sumatoria anual para calcular el porcentaje de pérdida final.</li>
-</ul>
+<ol type="1">
+<li><strong>Consumo Logístico:</strong> Dependiendo del escenario como se vio en la <a href="Estudio_de_caso.html#sec-dinamica-inventario" class="quarto-xref"><span>Sección 3.11</span></a>, el volumen de vacunas se descuenta del inventario. Para el Escenario A (Línea Base), el consumo es cero. Para el Escenario B (Apego Normativo), se extrae una cantidad diaria fija a las 8:00 AM que varía según el mes (ej. mayor demanda en octubre por la campaña de Influenza). Para el Escenario C (Contingencia), el consumo acelera y se acopla de manera dinámica a los eventos de resurtido a lo largo de la jornada.</li>
+<li><strong>Inercia Térmica y Daño Farmacológico:</strong> La temperatura <span class="math inline">\(T(t)\)</span> calculada por la EDE corresponde al aire interno del equipo. Sin embargo, el biológico líquido dentro de los frascos de vidrio posee inercia térmica. Para modelar este retardo físico, el algoritmo aplica un filtro de tolerancia de 30 minutos: la ecuación de Arrhenius solo entra en vigor si el aire permanece por encima de los 8°C de manera ininterrumpida durante 6 iteraciones continuas. Cumplida esta condición, se extrae la fracción de pérdida y se multiplica por el inventario actual en ese instante de tiempo, sumando el resultado al vector de dosis destruidas.</li>
+<li><strong>Reabastecimiento Automático:</strong> Si el inventario cae por debajo del punto de reorden de 1000 dosis (el 20% de su capacidad máxima), se simula la llegada de la ruta jurisdiccional que llena el equipo hasta su capacidad máxima de 5000 dosis, registrando el ingreso en la sumatoria anual para calcular el porcentaje de pérdida final.</li>
+</ol>
 <section id="resultados-del-impacto-logístico" class="level3" data-number="4.5.1">
 <h3 data-number="4.5.1" class="anchored" data-anchor-id="resultados-del-impacto-logístico"><span class="header-section-number">4.5.1</span> Resultados del Impacto Logístico</h3>
 <p>Al finalizar el año de simulación para la trayectoria de control (semilla 13), la interacción entre la EDE, el filtro de inercia de 30 minutos y el modelo de inventario arrojó los siguientes resultados totales de pérdida física:</p>
@@ -777,6 +777,241 @@ Figura&nbsp;5.3: Pérdida mediana de dosis de vacunas por mes, confirmando que e
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-final-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;5.4: Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.
+</figcaption>
+</figure>
+</div>
+<p>#imagenes finales sin interpretacion momentanea</p>
+<div id="fig-abanico_escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-abanico_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="abanico_riesgo_escenario_A.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abanico_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.5: 30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.
+</figcaption>
+</figure>
+</div>
+<div id="fig-abanico_escenario-B" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-abanico_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="abanico_riesgo_escenario_B.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abanico_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.6: 30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.
+</figcaption>
+</figure>
+</div>
+<div id="fig-abanico_escenario-C" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-abanico_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="abanico_riesgo_escenario_C.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abanico_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.7: 30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.
+</figcaption>
+</figure>
+</div>
+<div id="layout-barras" class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-barras-promedio_escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barras-promedio_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="barras_estacionales_promedio_escenario_A.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-promedio_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.8: Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-barras-mediana_escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barras-mediana_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="barras_estacionales_mediana_escenario_A.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-mediana_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.9: Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="layout-barras" class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-barras-promedio_escenario-B" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barras-promedio_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="barras_estacionales_promedio_escenario_B.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-promedio_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.10: Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-barras-mediana_escenario-B" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barras-mediana_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="barras_estacionales_mediana_escenario_B.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-mediana_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.11: Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="layout-barras" class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-barras-promedio_escenario-C" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barras-promedio_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="barras_estacionales_promedio_escenario_C.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-promedio_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.12: Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-barras-mediana_escenario-C" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barras-mediana_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="barras_estacionales_mediana_escenario_C.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-mediana_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.13: Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="fig-histograma-final-escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histograma-final-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="histograma_porcentajes_escenario_A.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-final-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.14: Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.
+</figcaption>
+</figure>
+</div>
+<div id="fig-histograma-final-escenario-B" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histograma-final-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="histograma_porcentajes_escenario_B.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-final-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.15: Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.
+</figcaption>
+</figure>
+</div>
+<div id="fig-histograma-final-escenario-C" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histograma-final-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="histograma_porcentajes_escenario_C.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-final-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.16: Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.
+</figcaption>
+</figure>
+</div>
+<div id="fig-boxplot-final-escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-final-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="boxplot_angosto_escenario_A.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-final-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.17: gráfica de caja
+</figcaption>
+</figure>
+</div>
+<div id="fig-boxplot-final-escenario-B" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-final-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="boxplot_angosto_escenario_B.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-final-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.18: gráfica de caja
+</figcaption>
+</figure>
+</div>
+<div id="fig-boxplot-final-escenario-C" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-final-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="boxplot_angosto_escenario_C.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-final-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.19: gráfica de caja
+</figcaption>
+</figure>
+</div>
+<div id="fig-histograma-bootstrap-escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histograma-bootstrap-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="histograma_bootstrap_escenario_A.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-bootstrap-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.20: histograma Bootstrap
+</figcaption>
+</figure>
+</div>
+<div id="fig-histograma-bootstrap-escenario-B" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histograma-bootstrap-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="histograma_bootstrap_escenario_B.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-bootstrap-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.21: histograma Bootstrap
+</figcaption>
+</figure>
+</div>
+<div id="fig-histograma-bootstrap-escenario-C" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histograma-bootstrap-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="histograma_bootstrap_escenario_C.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-bootstrap-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.22: histograma Bootstrap
+</figcaption>
+</figure>
+</div>
+<div id="fig-boxplot-bootstrap-escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-bootstrap-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="boxplot_bootstrap_escenario_A.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-bootstrap-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.23: Grafica de caja Boostrap
+</figcaption>
+</figure>
+</div>
+<div id="fig-boxplot-bootstrap-escenario-B" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-bootstrap-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="boxplot_bootstrap_escenario_B.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-bootstrap-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.24: Grafica de caja Boostrap
+</figcaption>
+</figure>
+</div>
+<div id="fig-boxplot-bootstrap-escenario-C" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-bootstrap-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="boxplot_bootstrap_escenario_C.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-bootstrap-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.25: Grafica de caja Boostrap
 </figcaption>
 </figure>
 </div>
