@@ -178,15 +178,18 @@ La visualización del inventario revela una aparente contradicción de riesgo. C
 
 No obstante, cuando el ritmo logístico sale de control (Escenario C), esta protección colapsa. El exceso de aperturas no solo rompe la cadena de frío, sino que al estar el equipo constantemente lleno, cada excursión térmica encuentra miles de vacunas vulnerables al mismo tiempo, multiplicando el daño absoluto a 2395 dosis, es decir, un 3.08% de pérdida anual.
 
-# HASTA AQUI
+## Estructura de la Simulación de Montecarlo
 
-## Estructura de la Simulación Montecarlo
+Con el fin de obtener validez científica y no depender del resultado de un solo escenario al azar, el algoritmo completo se incluyo dentro de una función para simular años completos de manera repetitiva. Para optimizar drásticamente la velocidad de ejecución y evitar el desbordamiento de la memoria RAM del sistema durante el análisis masivo, el programa se diseñó para extraer y almacenar únicamente métricas estadísticas clave en cada iteración, omitiendo la conservación de los arreglos gigantes de datos por cada año evaluado. 
 
-Con el fin de obtener validez científica y no depender del escenario de una sola simulación, empaquetamos el algoritmo completo dentro de la función `simular_un_ano(semilla)`. Para optimizar drásticamente la velocidad de ejecución en Google Colab y permitir análisis masivos, vectorizamos la generación del ruido browniano creando el arreglo global de variables normales `dW_vec` al inicio de la función.
+Entre las métricas extraídas de esta función se incluyen:
 
-Invocamos esta función dentro de un bucle de **Montecarlo con 1,000 simulaciones independientes**, asignando en cada iteración una semilla de aleatoriedad indexada (`semilla = sim + 42`). Al correr 1,000 años simulados, el algoritmo elimina las fluctuaciones extremas de los escenarios individuales y permite que actúe la **Ley de los Grandes Números** [@ross2018first]. Esto provoca que las métricas de control se estabilicen firmemente en promedios realistas: el simulador reportó un promedio global de **64.0 apagones por año** (alineado con los datos meteorológicos de la zona de Tuxtla Gutiérrez, Chiapas de la CFE) y un promedio de **515 aperturas de puerta anuales**, validando el comportamiento del personal clínico y la infraestructura eléctrica de entrada.
+* **Termodinámica:** Horas acumuladas y conteo de excursiones fuera del rango normativo ($>8^\circ\text{C}$ y $<2^\circ\text{C}$), así como la vigilancia del riesgo crítico de congelación ($<0^\circ\text{C}$).
+* **Logística y Riesgo:** El día exacto en que ocurrió la primera falla crítica, el total de dosis perdidas, el porcentaje anual de pérdida y la merma por mes para evaluar la estacionalidad del riesgo.
 
-## 6. Resultados Estadísticos y Riesgo Operativo
+Esta función se ejecuta dentro de un bucle de Montecarlo con **5,000 simulaciones independientes**, asignando en cada paso una semilla de aleatoriedad indexada para garantizar la reproducibilidad del experimento. Al correr los 5,000 años simulados, el algoritmo elimina las variaciones extremas de los casos individuales y permite que actúe la **Ley de los Grandes Números** [@ross2018first]. Esto provoca que las métricas de control se estabilicen firmemente, permitiendo extraer promedios poblacionales realistas sobre el comportamiento del equipo institucional bajo cada uno de los tres escenarios operativos evaluados.
+
+## Resultados Estadísticos y Riesgo Operativo
 
 Después de simular las 1,000 trayectorias de Montecarlo, procedemos a realizar el análisis de inferencia estadística para determinar el verdadero nivel de riesgo al que están expuestas las vacunas en Tuxtla Gutiérrez.
 
