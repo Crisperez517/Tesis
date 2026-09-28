@@ -184,76 +184,121 @@ Con el fin de obtener validez científica y no depender del resultado de un solo
 
 Entre las métricas extraídas de esta función se incluyen:
 
-* **Termodinámica:** Horas acumuladas y conteo de excursiones fuera del rango normativo ($>8^\circ\text{C}$ y $<2^\circ\text{C}$), así como la vigilancia del riesgo crítico de congelación ($<0^\circ\text{C}$).
+* **Termodinámica:** Horas acumuladas y conteo de las rupturas de la cadena de frío ($T(t)>8^\circ\text{C}$ y $T(t)<2^\circ\text{C}$), así como la vigilancia del riesgo crítico de congelación ($T(t)<0^\circ\text{C}$).
 * **Logística y Riesgo:** El día exacto en que ocurrió la primera falla crítica, el total de dosis perdidas, el porcentaje anual de pérdida y la merma por mes para evaluar la estacionalidad del riesgo.
 
 Esta función se ejecuta dentro de un bucle de Montecarlo con **5,000 simulaciones independientes**, asignando en cada paso una semilla de aleatoriedad indexada para garantizar la reproducibilidad del experimento. Al correr los 5,000 años simulados, el algoritmo elimina las variaciones extremas de los casos individuales y permite que actúe la **Ley de los Grandes Números** [@ross2018first]. Esto provoca que las métricas de control se estabilicen firmemente, permitiendo extraer promedios poblacionales realistas sobre el comportamiento del equipo institucional bajo cada uno de los tres escenarios operativos evaluados.
 
-## Resultados Estadísticos y Riesgo Operativo
+## Resultados Estadísticos y Análisis de Riesgo
 
-Después de simular las 1,000 trayectorias de Montecarlo, procedemos a realizar el análisis de inferencia estadística para determinar el verdadero nivel de riesgo al que están expuestas las vacunas en Tuxtla Gutiérrez.
+Una vez completadas las 5,000 simulaciones de Montecarlo, procedemos a extraer las métricas operativas y termodinámicas de todos los años simulados. La simulación masiva de trayectorias revela el verdadero comportamiento del sistema a largo plazo, eliminando las variaciones extremas de un solo año al azar. 
 
-El comportamiento de los daños acumulados se aprecia con claridad en las trayectorias aleatorias presentadas en la @fig-abanico. El comportamiento de las curvas demuestra que el riesgo no es lineal; la tendencia de la merma anual depende estrictamente de la coincidencia temporal entre la duración de un apagón de la CFE y el nivel de saturación del almacenamiento de vacunas en ese día específico del año.
+A continuación, se presenta la tabla comparativa con los promedios poblacionales empíricos, seguida del análisis descriptivo de dispersión e intervalos de confianza para cada escenario.
 
-![30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.](abanico_riesgo.png){#fig-abanico}
+| Métrica (Promedio Anual) | Escenario A (Línea Base) | Escenario B (Apego Normativo) | Escenario C (Contingencia) |
+| :--- | :---: | :---: | :---: |
+| **Perturbaciones Externas** | | | |
+| Apagones de la CFE | 64.3 | 64.3 | 64.3 |
+| Aperturas de Puerta | 0 | 499 | 998 |
+| **Riesgo Termodinámico** | | | |
+| $T(t) > 8^\circ\text{C}$ | 26.4 eventos | 134.6 eventos | 419.7 eventos |
+| $T(t) < 2^\circ\text{C}$ | 25.2 eventos | 12.5 eventos | 9.0 eventos |
+| $T(t) < 0^\circ\text{C}$ | 0 eventos | 0 eventos | 0 eventos |
+| Tiempo Fuera de Rango Normativo| 24.4 horas (0.28%) | 95.6 horas (1.09%) | 420.6 horas (4.79%) |
+| **Impacto Logístico (Mermas)** | | | |
+| Dosis Perdidas (Volumen) | 61 dosis | 343 dosis | 1,905 dosis |
+| Pérdida Relativa (%) | 1.21% | 1.36% | 2.57% |
 
-Al desglosar las pérdidas de dosis de forma mensual, los datos revelan el verdadero comportamiento del riesgo operativo a lo largo del año, expuesto en la @fig-barras-promedio (Promedio mensual) y en la @fig-barras-mediana (Mediana mensual). 
+### Riesgo Operativo y Termodinámico Empírico
 
-Inicialmente, desde un punto de vista puramente logístico, se podría pensar que los meses de otoño (octubre y noviembre) presentarían la mayor cantidad de vacunas perdidas, debido a que en esa temporada el refrigerador opera a su máxima capacidad por el arranque de la campaña nacional invernal contra la Influenza. Sin embargo, la simulación muestra que **el factor termodinámico y eléctrico domina por completo al volumen de inventario.** Tanto el promedio como la mediana revelan que **el verdadero pico de pérdidas materiales se concentra severamente en la temporada de calor extremo: marzo, abril y mayo.**
+**Escenario A (Línea Base):**
+La simulación de Montecarlo estabilizó el riesgo externo en un promedio de 64.3 apagones anuales. Al no existir interacción humana (cero aperturas), el riesgo recae puramente en la termodinámica pasiva del equipo. Se registró un promedio de 26.4 rupturas de la cadena de frío anuales por encima de los $8^\circ\text{C}$ (acumulando 12.6 horas) y 25.2 rupturas por debajo de los $2^\circ\text{C}$ (acumulando 11.8 horas). Es necesario destacar que la inercia térmica protegió al equipo de la congelación profunda, manteniendo el riesgo por debajo de los $0^\circ\text{C}$ estrictamente en cero. En el ámbito logístico, esta exposición pasiva provocó una destrucción promedio de 61 dosis (1.21% de pérdida anual). Sin embargo, el intervalo de confianza del 95% resulta muy amplio, oscilando entre apenas 2 y hasta 179 dosis destruidas al año, lo que sugiere una alta volatilidad ante apagones inusualmente largos.
 
-Durante este trimestre, Tuxtla Gutiérrez experimenta sus temperaturas ambientales máximas. Este calor extremo genera un doble impacto en el sistema: por un lado, dispara el estrés sobre la infraestructura de la CFE (debido al uso masivo de aires acondicionados en la ciudad), provocando la mayor tasa de apagones por sobrecalentamiento de transformadores; por otro lado, reduce drásticamente el tiempo de autonomía pasiva del refrigerador apagado, acelerando la cinética de degradación de Arrhenius de las vacunas. 
+**Escenario B (Apego Normativo):**
+Al introducir la interacción humana con un promedio de 499 aperturas anuales, el riesgo termodinámico aumentó significativamente. Los eventos donde $T(t) > 8^\circ\text{C}$ aumentaron a un promedio de 134.6, acumulando 90 horas de riesgo térmico (1.02% del año), en cambio, los eventos por debajo de los $2^\circ\text{C}$ disminuyeron a un promedio de 12.5, acumulando 5.6 horas (0.06% del año). Adicionalmente, el primer registro de falla crítica se adelantó drásticamente: de promediar en el Día 38 (Escenario A) a ocurrir en el Día 8. Este nivel de estrés aumentó las pérdidas a un promedio de 343 dosis anuales (1.36% de pérdida anual), con un intervalo de confianza del 95% que advierte escenarios de riesgo donde un equipo normado puede perder entre 166 y hasta 573 dosis en un solo año.
 
-En el gráfico de promedios, estos tres meses resultan casi idénticos en su alto nivel de pérdidas, confirmando que la primavera es la temporada crítica. Al observar la métrica de la mediana (estadísticamente más robusta porque aísla los años atípicamente catastróficos), el mes de **abril** sobresale como el periodo donde la pérdida de vacunas es superior a la de los otros meses. Queda comprobado que la red de frío chiapaneca es altamente vulnerable al choque térmico primaveral, superando cualquier riesgo derivado de la saturación logística de otras temporadas.   
+**Escenario C (Contingencia):**
+La saturación logística colapsa por completo la cadena de frío. Con casi 1,000 aperturas anuales (998), el equipo sufre 419.7 rupturas de la cadena de frío anuales por encima de los $8^\circ\text{C}$ en promedio (acumulando 416.5 horas) y 9 rupturas por debajo de los $2^\circ\text{C}$ (acumulando 4.1 horas), acumulando un valor crítico total de 420.6 horas (4.79% del año) operando fuera de rango. Bajo este escenario de estrés extremo, el primer cruce fuera de la norma ocurre en promedio apenas en el Día 3 de operación. El impacto en el inventario es devastador: se pierden en promedio 1,905 dosis por año (2.57% de pérdida anual), con un intervalo de confianza del 95% que va de 1348 hasta las 2,521 dosis destruidas.
 
-::: {#layout-barras layout-ncol=2}
-![Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.](barras_estacionales_promedio.png){#fig-barras-promedio}
+**Interpretación Comparativa del Modelo:**
 
-![Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.](barras_estacionales_mediana.png){#fig-barras-mediana}
+Aplicando la **Ley de los Grandes Números**, a través de las 5,000 simulaciones se resolvió la contradicción de riesgo observada en la trayectoria de prueba inicial. Aunque en años individuales aislados la inmovilidad del inventario (Escenario A) puede resultar en una mayor pérdida relativa frente al consumo normativo (Escenario B) debido al efecto protector de la rotación de vacunas, el promedio poblacional a largo plazo demuestra lo contrario. A la larga, el volumen masivo de rupturas de la cadena de frío provocadas por las 499 aperturas del Escenario B sobrepasa cualquier beneficio de rotación, situando su pérdida promedio (1.36%) por encima del aislamiento absoluto (1.21%). Además, se confirma que el colapso operativo (Escenario C) no es un riesgo lineal, sino exponencial: duplicar las aperturas de puerta no duplicó las pérdidas, sino que las multiplicó por más de cinco veces (de 343 a 1,905 dosis), evidenciando la fragilidad termodinámica de los equipos frente a la saturación clínica.
+
+### Análisis de Trayectorias
+
+La tabla anterior revela que los intervalos de confianza del 95% para la pérdida de biológicos son muy amplios en todos los escenarios operativos. Para comprender visualmente la causa de esta dispersión, se extrajo una submuestra aleatoria de 30 trayectorias (30 años simulados distintos) para cada escenario. 
+
+El comportamiento de los daños acumulados demuestra que el riesgo no es lineal. La tendencia de las dosis perdidas a lo largo de los 366 días depende estrictamente de la coincidencia temporal exacta entre la ocurrencia de un apagón prolongado de la CFE y el nivel de saturación de vacunas almacenadas en ese día específico.
+
+![30 trayectorias anuales aleatorias (Escenario A). Las trayectorias se mantienen planas (cero pérdidas) durante largos periodos de tiempo. Cuando ocurre un apagón que supera la inercia térmica, la trayectoria sube drásticamente (escalón vertical). La gran separación vertical entre las líneas al final del año (Día 366) explica visualmente la alta varianza del modelo.](abanico_riesgo_escenario_A.png){#fig-abanico-a}
+
+![30 trayectorias anuales aleatorias (Escenario B). El estrés introducido por las aperturas matutinas y vespertinas aumenta la acumulación de daños. En lugar de escalones aislados, las trayectorias muestran un crecimiento en forma de escalera continua a lo largo de todo el año, evidenciando una constante ruptura de la cadena de frío.](abanico_riesgo_escenario_B.png){#fig-abanico-b}
+
+![30 trayectorias anuales aleatorias (Escenario C). La saturación logística colapsa la termodinámica del sistema. Las trayectorias abandonan el comportamiento escalonado y adoptan una pendiente positiva continua casi recta. Todas las líneas se disparan uniformemente hacia arriba, superando rápidamente el umbral de las 1,000 dosis destruidas.](abanico_riesgo_escenario_C.png){#fig-abanico-c}
+
+**Interpretación Comparativa de las Trayectorias:**
+
+Al observar el comportamiento de las 30 trayectorias conjuntas, se comprueba la hipótesis de fragilidad de la red de frío. En el Escenario A, el aislamiento absoluto permite que existan "años afortunados" donde el equipo apenas pierde unas cuantas dosis, pero basta un solo año con un apagón crítico prolongado para que la pérdida escale drásticamente (como se observa en la línea superior en la @fig-abanico-a que cruza las 200 dosis). 
+
+Por el contrario, el Escenario C demuestra que la contingencia operativa elimina el factor "suerte". La densidad y homogeneidad de las trayectorias confirman que, bajo estrés logístico masivo, el colapso del biológico está garantizado independientemente de si el clima de ese año fue favorable o si hubo menos apagones. La saturación de aperturas domina por completo al sistema, provocando una destrucción acelerada, continua e inevitable.
+
+### Estacionalidad del Riesgo Operativo
+
+Al desglosar las pérdidas de dosis de forma mensual, los datos revelan el verdadero comportamiento del riesgo termodinámico a lo largo del año. Para evaluar esta métrica de forma rigurosa, se analizaron dos estimadores de centralidad: el promedio mensual (que es sensible a los años con apagones catastróficos) y la mediana mensual (estadísticamente más robusta porque representa el escenario más probable, aislando las fluctuaciones extremas).
+
+Inicialmente, desde un punto de vista puramente climático, se podría suponer que los meses de calor extremo en Tuxtla Gutiérrez (abril y mayo) presentarían la mayor cantidad de vacunas perdidas debido al estrés térmico ambiental sobre el equipo. No obstante, las 5,000 simulaciones de Montecarlo demuestran que la interacción humana modifica por completo este patrón natural.
+
+**Escenario A (Línea Base):**
+
+::: {#layout-barras-a layout-ncol=2}
+![Pérdida promedio mensual (Escenario A). Se observa una pérdida uniforme de alrededor de 5 dosis mensuales, con un ligero pico en mayo debido a las fallas eléctricas por estrés térmico.](barras_estacionales_promedio_escenario_A.png){#fig-promedio-a}
+
+![Pérdida mediana mensual (Escenario A). La mediana se mantiene estrictamente en cero durante los 12 meses del año, demostrando que en al menos el 50% de los escenarios climáticos normales no se pierde ni una sola vacuna al mes.](barras_estacionales_mediana_escenario_A.png){#fig-mediana-a}
 :::
 
-Finalmente, para estandarizar el riesgo sin importar la escala de la unidad médica, transformamos las dosis destruidas en porcentajes relativos respecto al volumen total de vacunas manejadas por el equipo en el año. Al hacer las 1,000 simulaciones, el algoritmo arrojó el histograma presentado en la @fig-histograma-final. La distribución presenta una asimetría positiva (cola estirada hacia la derecha), comportamiento típico de los sistemas de riesgo operativo expuestos a fallas intermitentes severas.
+**Escenario B (Apego Normativo):**
 
-**Los estadísticos descriptivos e inferenciales del modelo revelan que:**
+::: {#layout-barras-b layout-ncol=2}
+![Pérdida promedio mensual (Escenario B). El estrés logístico aumenta significativamente las pérdidas. El mes de enero alcanza casi 40 dosis perdidas, seguido por un pico secundario en agosto durante la temporada de tormentas.](barras_estacionales_promedio_escenario_B.png){#fig-promedio-b}
 
-* La **mediana de mermas** anuales se ubica en **751 dosis**, lo que representa una tasa de pérdida del **2.57%** de los lotes administrados.
-* El **promedio de mermas** anuales se eleva a **827 dosis** (tasa del **2.87%**), el cual es mas alto por la presencia de años atípicamente catastróficos en la cola de la distribución.
-* El **Value at Risk (VaR) al 95% de confianza** (riesgo severo) advierte que los centros de almacenamiento de vacunas se enfrentan a escenarios extremos donde se perderán hasta **1,736 dosis** en un solo refrigerador institucional.
+![Pérdida mediana mensual (Escenario B). A diferencia del Escenario A, la mediana ya no es cero. Enero y agosto se consolidan como los meses de mayor riesgo operativo esperado.](barras_estacionales_mediana_escenario_B.png){#fig-mediana-b}
+:::
 
-A partir de los percentiles del histograma, podemos concluir con un **95% de nivel de confianza (Intervalo de Predicción)** que un centro de almacenamiento de vacunas en Tuxtla Gutiérrez, operando con un equipo normado por la OMS de última generación (Haier HBC-150), **sufrirá una pérdida inevitable de entre el 0.72% y el 6.57% de su inventario anual** debido a las condiciones climáticas locales y las condiciones eléctricas.
+**Escenario C (Contingencia):**
 
-![Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.](histograma_porcentajes.png){#fig-histograma-final}
+::: {#layout-barras-c layout-ncol=2}
+![Pérdida promedio mensual (Escenario C). La saturación logística domina el sistema, superando las 150 dosis mensuales de forma casi homogénea a lo largo del año.](barras_estacionales_promedio_escenario_C.png){#fig-promedio-c}
+
+![Pérdida mediana mensual (Escenario C). El colapso se confirma. Julio destaca ligeramente como el mes más crítico, superando las 160 dosis perdidas como escenario más probable.](barras_estacionales_mediana_escenario_C.png){#fig-mediana-c}
+:::
+
+**Interpretación de la Estacionalidad:**
+
+El análisis estacional confirma que **el estrés operativo domina por completo al factor climático.** En el Escenario A, la @fig-mediana-a demuestra que la infraestructura termoaislante del equipo Haier HBC-150 es lo suficientemente robusta para sobrevivir a la intemperie chiapaneca sin sufrir daños (mediana igual a cero en todos los meses). Las pérdidas residuales observadas en el promedio del Escenario A son producto exclusivo de la cola de la distribución (años atípicamente catastróficos).
+
+Sin embargo, al introducir la interacción humana, el patrón climático desaparece. En el Escenario B, la vulnerabilidad ya no recae en la primavera, sino que se desplaza hacia enero y agosto, coincidiendo con las épocas donde el volumen del inventario interactúa de manera letal con las perturbaciones eléctricas. Finalmente, en el Escenario C, la contingencia operativa nivela el riesgo: el equipo pierde su capacidad de recuperación térmica provocando que todos los meses del año (sin importar si es invierno o verano) resulten devastadores para la viabilidad de las vacunas, consolidando la destrucción sistemática del inventario activo.
+
+# DE AQUI
+
+### Distribución del Riesgo Operativo
+
+Para estandarizar el nivel de riesgo sin importar la escala de la unidad médica, las dosis destruidas se transformaron en porcentajes de pérdida relativa respecto al volumen total de vacunas manejadas por el equipo en cada año simulado. La visualización de la frecuencia de estas pérdidas a lo largo de las 5,000 iteraciones de Montecarlo nos permite analizar la forma de la distribución del riesgo para cada escenario operativo.
+
+![Histograma del porcentaje de vacunas perdidas anualmente (Escenario A)[cite: 13]. La distribución presenta una fuerte asimetría positiva (una cola larga estirada hacia la derecha). Esto indica que, aunque la concentración principal de los datos sugiere pérdidas bajas (mediana del 1.01%), existen años atípicamente catastróficos que arrastran el promedio general hacia arriba (1.21%). Las líneas rojas punteadas delimitan el intervalo empírico del 95%, mostrando la alta dispersión hacia escenarios extremos.](histograma_porcentajes_escenario_A.png){#fig-hist-a}
+
+![Histograma del porcentaje de vacunas perdidas anualmente (Escenario B)[cite: 14]. Al introducir el estrés logístico normativo, la distribución completa se desplaza hacia la derecha, incrementando tanto la mediana (1.32%) como la media (1.36%). Aunque la asimetría disminuye ligeramente en comparación con la Línea Base, la cola derecha sigue advirtiendo de escenarios de riesgo donde la pérdida relativa supera el 2.20%.](histograma_porcentajes_escenario_B.png){#fig-hist-b}
+
+![Histograma del porcentaje de vacunas perdidas anualmente (Escenario C)[cite: 15]. La contingencia extrema transforma drásticamente la forma de la distribución, volviéndola visualmente simétrica (similar a una campana de Gauss). La media (2.57%) y la mediana (2.56%) prácticamente se igualan, consolidando un nivel de destrucción base sumamente alto y un intervalo de confianza del 95% altamente concentrado.](histograma_porcentajes_escenario_C.png){#fig-hist-c}
+
+**Interpretación de las Distribuciones:**
+
+La visualización de los histogramas demuestra que la dinámica del riesgo evoluciona conforme aumenta la interacción humana. En el Escenario A y B, la clara separación entre la media (línea azul) y la mediana (línea verde) evidencia que los datos están sesgados; este comportamiento asimétrico es típico de los sistemas de riesgo operativo pasivos, donde los daños dependen de fallas externas intermitentes y severas (como los apagones prolongados de la CFE). 
+
+Sin embargo, en el Escenario C, la distribución adopta una forma simétrica. Esto ocurre gracias al Teorema del Límite Central: la altísima frecuencia de aperturas de puerta (casi 1,000 al año) se convierte en el factor dominante del sistema, "suavizando" el impacto de los apagones aislados y garantizando una tasa de pérdida constante y predeciblemente alta. La asimetría visual observada en los primeros dos escenarios sugiere fuertemente que las distribuciones no siguen un comportamiento normal, lo cual requiere una comprobación matemática estricta antes de realizar inferencias poblacionales definitivas.
+
+# HASTA AQUI
 
 #imagenes finales sin interpretacion momentanea
-
-![30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.](abanico_riesgo_escenario_A.png){#fig-abanico_escenario-A}
-
-![30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.](abanico_riesgo_escenario_B.png){#fig-abanico_escenario-B}
-
-![30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.](abanico_riesgo_escenario_C.png){#fig-abanico_escenario-C}
-
-::: {#layout-barras layout-ncol=2}
-![Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.](barras_estacionales_promedio_escenario_A.png){#fig-barras-promedio_escenario-A}
-
-![Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.](barras_estacionales_mediana_escenario_A.png){#fig-barras-mediana_escenario-A}
-:::
-
-::: {#layout-barras layout-ncol=2}
-![Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.](barras_estacionales_promedio_escenario_B.png){#fig-barras-promedio_escenario-B}
-
-![Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.](barras_estacionales_mediana_escenario_B.png){#fig-barras-mediana_escenario-B}
-:::
-
-::: {#layout-barras layout-ncol=2}
-![Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.](barras_estacionales_promedio_escenario_C.png){#fig-barras-promedio_escenario-C}
-
-![Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.](barras_estacionales_mediana_escenario_C.png){#fig-barras-mediana_escenario-C}
-:::
-
-![Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.](histograma_porcentajes_escenario_A.png){#fig-histograma-final-escenario-A}
-
-![Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.](histograma_porcentajes_escenario_B.png){#fig-histograma-final-escenario-B}
-
-![Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.](histograma_porcentajes_escenario_C.png){#fig-histograma-final-escenario-C}
 
 ![gráfica de caja](boxplot_angosto_escenario_A.png){#fig-boxplot-final-escenario-A}
 
