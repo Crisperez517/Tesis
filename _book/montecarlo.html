@@ -439,7 +439,17 @@ window.Quarto = {
   <li><a href="#análisis-comparativo-del-inventario-y-riesgo-materializado" id="toc-análisis-comparativo-del-inventario-y-riesgo-materializado" class="nav-link" data-scroll-target="#análisis-comparativo-del-inventario-y-riesgo-materializado"><span class="header-section-number">4.5.2</span> Análisis Comparativo del Inventario y Riesgo Materializado</a></li>
   </ul></li>
   <li><a href="#estructura-de-la-simulación-de-montecarlo" id="toc-estructura-de-la-simulación-de-montecarlo" class="nav-link" data-scroll-target="#estructura-de-la-simulación-de-montecarlo"><span class="header-section-number">4.6</span> Estructura de la Simulación de Montecarlo</a></li>
-  <li><a href="#resultados-estadísticos-y-riesgo-operativo" id="toc-resultados-estadísticos-y-riesgo-operativo" class="nav-link" data-scroll-target="#resultados-estadísticos-y-riesgo-operativo"><span class="header-section-number">4.7</span> Resultados Estadísticos y Riesgo Operativo</a></li>
+  <li><a href="#resultados-estadísticos-y-análisis-de-riesgo" id="toc-resultados-estadísticos-y-análisis-de-riesgo" class="nav-link" data-scroll-target="#resultados-estadísticos-y-análisis-de-riesgo"><span class="header-section-number">4.7</span> Resultados Estadísticos y Análisis de Riesgo</a>
+  <ul class="collapse">
+  <li><a href="#riesgo-operativo-y-termodinámico-empírico" id="toc-riesgo-operativo-y-termodinámico-empírico" class="nav-link" data-scroll-target="#riesgo-operativo-y-termodinámico-empírico"><span class="header-section-number">4.7.1</span> Riesgo Operativo y Termodinámico Empírico</a></li>
+  <li><a href="#análisis-de-trayectorias" id="toc-análisis-de-trayectorias" class="nav-link" data-scroll-target="#análisis-de-trayectorias"><span class="header-section-number">4.7.2</span> Análisis de Trayectorias</a></li>
+  <li><a href="#estacionalidad-del-riesgo-operativo" id="toc-estacionalidad-del-riesgo-operativo" class="nav-link" data-scroll-target="#estacionalidad-del-riesgo-operativo"><span class="header-section-number">4.7.3</span> Estacionalidad del Riesgo Operativo</a></li>
+  </ul></li>
+  <li><a href="#de-aqui" id="toc-de-aqui" class="nav-link" data-scroll-target="#de-aqui"><span class="header-section-number">5</span> DE AQUI</a>
+  <ul class="collapse">
+  <li><a href="#distribución-del-riesgo-operativo" id="toc-distribución-del-riesgo-operativo" class="nav-link" data-scroll-target="#distribución-del-riesgo-operativo"><span class="header-section-number">5.0.1</span> Distribución del Riesgo Operativo</a></li>
+  </ul></li>
+  <li><a href="#hasta-aqui" id="toc-hasta-aqui" class="nav-link" data-scroll-target="#hasta-aqui"><span class="header-section-number">6</span> HASTA AQUI</a></li>
   </ul>
 </nav>
     </div>
@@ -711,227 +721,291 @@ Figura&nbsp;4.11: Dinámica logística anual (Escenario C). La trayectoria azul 
 <p>Con el fin de obtener validez científica y no depender del resultado de un solo escenario al azar, el algoritmo completo se incluyo dentro de una función para simular años completos de manera repetitiva. Para optimizar drásticamente la velocidad de ejecución y evitar el desbordamiento de la memoria RAM del sistema durante el análisis masivo, el programa se diseñó para extraer y almacenar únicamente métricas estadísticas clave en cada iteración, omitiendo la conservación de los arreglos gigantes de datos por cada año evaluado.</p>
 <p>Entre las métricas extraídas de esta función se incluyen:</p>
 <ul>
-<li><strong>Termodinámica:</strong> Horas acumuladas y conteo de excursiones fuera del rango normativo (<span class="math inline">\(&gt;8^\circ\text{C}\)</span> y <span class="math inline">\(&lt;2^\circ\text{C}\)</span>), así como la vigilancia del riesgo crítico de congelación (<span class="math inline">\(&lt;0^\circ\text{C}\)</span>).</li>
+<li><strong>Termodinámica:</strong> Horas acumuladas y conteo de las rupturas de la cadena de frío (<span class="math inline">\(T(t)&gt;8^\circ\text{C}\)</span> y <span class="math inline">\(T(t)&lt;2^\circ\text{C}\)</span>), así como la vigilancia del riesgo crítico de congelación (<span class="math inline">\(T(t)&lt;0^\circ\text{C}\)</span>).</li>
 <li><strong>Logística y Riesgo:</strong> El día exacto en que ocurrió la primera falla crítica, el total de dosis perdidas, el porcentaje anual de pérdida y la merma por mes para evaluar la estacionalidad del riesgo.</li>
 </ul>
 <p>Esta función se ejecuta dentro de un bucle de Montecarlo con <strong>5,000 simulaciones independientes</strong>, asignando en cada paso una semilla de aleatoriedad indexada para garantizar la reproducibilidad del experimento. Al correr los 5,000 años simulados, el algoritmo elimina las variaciones extremas de los casos individuales y permite que actúe la <strong>Ley de los Grandes Números</strong> <span class="citation" data-cites="ross2018first">(<a href="references.html#ref-ross2018first" role="doc-biblioref">Ross 2018</a>)</span>. Esto provoca que las métricas de control se estabilicen firmemente, permitiendo extraer promedios poblacionales realistas sobre el comportamiento del equipo institucional bajo cada uno de los tres escenarios operativos evaluados.</p>
 </section>
-<section id="resultados-estadísticos-y-riesgo-operativo" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="resultados-estadísticos-y-riesgo-operativo"><span class="header-section-number">4.7</span> Resultados Estadísticos y Riesgo Operativo</h2>
-<p>Después de simular las 1,000 trayectorias de Montecarlo, procedemos a realizar el análisis de inferencia estadística para determinar el verdadero nivel de riesgo al que están expuestas las vacunas en Tuxtla Gutiérrez.</p>
-<p>El comportamiento de los daños acumulados se aprecia con claridad en las trayectorias aleatorias presentadas en la <a href="#fig-abanico" class="quarto-xref">Figura&nbsp;<span>4.12</span></a>. El comportamiento de las curvas demuestra que el riesgo no es lineal; la tendencia de la merma anual depende estrictamente de la coincidencia temporal entre la duración de un apagón de la CFE y el nivel de saturación del almacenamiento de vacunas en ese día específico del año.</p>
-<div id="fig-abanico" class="quarto-float quarto-figure quarto-figure-center anchored">
+<section id="resultados-estadísticos-y-análisis-de-riesgo" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="resultados-estadísticos-y-análisis-de-riesgo"><span class="header-section-number">4.7</span> Resultados Estadísticos y Análisis de Riesgo</h2>
+<p>Una vez completadas las 5,000 simulaciones de Montecarlo, procedemos a extraer las métricas operativas y termodinámicas de todos los años simulados. La simulación masiva de trayectorias revela el verdadero comportamiento del sistema a largo plazo, eliminando las variaciones extremas de un solo año al azar.</p>
+<p>A continuación, se presenta la tabla comparativa con los promedios poblacionales empíricos, seguida del análisis descriptivo de dispersión e intervalos de confianza para cada escenario.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Métrica (Promedio Anual)</th>
+<th style="text-align: center;">Escenario A (Línea Base)</th>
+<th style="text-align: center;">Escenario B (Apego Normativo)</th>
+<th style="text-align: center;">Escenario C (Contingencia)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Perturbaciones Externas</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Apagones de la CFE</td>
+<td style="text-align: center;">64.3</td>
+<td style="text-align: center;">64.3</td>
+<td style="text-align: center;">64.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Aperturas de Puerta</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">499</td>
+<td style="text-align: center;">998</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Riesgo Termodinámico</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T(t) &gt; 8^\circ\text{C}\)</span></td>
+<td style="text-align: center;">26.4 eventos</td>
+<td style="text-align: center;">134.6 eventos</td>
+<td style="text-align: center;">419.7 eventos</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T(t) &lt; 2^\circ\text{C}\)</span></td>
+<td style="text-align: center;">25.2 eventos</td>
+<td style="text-align: center;">12.5 eventos</td>
+<td style="text-align: center;">9.0 eventos</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T(t) &lt; 0^\circ\text{C}\)</span></td>
+<td style="text-align: center;">0 eventos</td>
+<td style="text-align: center;">0 eventos</td>
+<td style="text-align: center;">0 eventos</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tiempo Fuera de Rango Normativo</td>
+<td style="text-align: center;">24.4 horas (0.28%)</td>
+<td style="text-align: center;">95.6 horas (1.09%)</td>
+<td style="text-align: center;">420.6 horas (4.79%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Impacto Logístico (Mermas)</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dosis Perdidas (Volumen)</td>
+<td style="text-align: center;">61 dosis</td>
+<td style="text-align: center;">343 dosis</td>
+<td style="text-align: center;">1,905 dosis</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pérdida Relativa (%)</td>
+<td style="text-align: center;">1.21%</td>
+<td style="text-align: center;">1.36%</td>
+<td style="text-align: center;">2.57%</td>
+</tr>
+</tbody>
+</table>
+<section id="riesgo-operativo-y-termodinámico-empírico" class="level3" data-number="4.7.1">
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="riesgo-operativo-y-termodinámico-empírico"><span class="header-section-number">4.7.1</span> Riesgo Operativo y Termodinámico Empírico</h3>
+<p><strong>Escenario A (Línea Base):</strong> La simulación de Montecarlo estabilizó el riesgo externo en un promedio de 64.3 apagones anuales. Al no existir interacción humana (cero aperturas), el riesgo recae puramente en la termodinámica pasiva del equipo. Se registró un promedio de 26.4 rupturas de la cadena de frío anuales por encima de los <span class="math inline">\(8^\circ\text{C}\)</span> (acumulando 12.6 horas) y 25.2 rupturas por debajo de los <span class="math inline">\(2^\circ\text{C}\)</span> (acumulando 11.8 horas). Es necesario destacar que la inercia térmica protegió al equipo de la congelación profunda, manteniendo el riesgo por debajo de los <span class="math inline">\(0^\circ\text{C}\)</span> estrictamente en cero. En el ámbito logístico, esta exposición pasiva provocó una destrucción promedio de 61 dosis (1.21% de pérdida anual). Sin embargo, el intervalo de confianza del 95% resulta muy amplio, oscilando entre apenas 2 y hasta 179 dosis destruidas al año, lo que sugiere una alta volatilidad ante apagones inusualmente largos.</p>
+<p><strong>Escenario B (Apego Normativo):</strong> Al introducir la interacción humana con un promedio de 499 aperturas anuales, el riesgo termodinámico aumentó significativamente. Los eventos donde <span class="math inline">\(T(t) &gt; 8^\circ\text{C}\)</span> aumentaron a un promedio de 134.6, acumulando 90 horas de riesgo térmico (1.02% del año), en cambio, los eventos por debajo de los <span class="math inline">\(2^\circ\text{C}\)</span> disminuyeron a un promedio de 12.5, acumulando 5.6 horas (0.06% del año). Adicionalmente, el primer registro de falla crítica se adelantó drásticamente: de promediar en el Día 38 (Escenario A) a ocurrir en el Día 8. Este nivel de estrés aumentó las pérdidas a un promedio de 343 dosis anuales (1.36% de pérdida anual), con un intervalo de confianza del 95% que advierte escenarios de riesgo donde un equipo normado puede perder entre 166 y hasta 573 dosis en un solo año.</p>
+<p><strong>Escenario C (Contingencia):</strong> La saturación logística colapsa por completo la cadena de frío. Con casi 1,000 aperturas anuales (998), el equipo sufre 419.7 rupturas de la cadena de frío anuales por encima de los <span class="math inline">\(8^\circ\text{C}\)</span> en promedio (acumulando 416.5 horas) y 9 rupturas por debajo de los <span class="math inline">\(2^\circ\text{C}\)</span> (acumulando 4.1 horas), acumulando un valor crítico total de 420.6 horas (4.79% del año) operando fuera de rango. Bajo este escenario de estrés extremo, el primer cruce fuera de la norma ocurre en promedio apenas en el Día 3 de operación. El impacto en el inventario es devastador: se pierden en promedio 1,905 dosis por año (2.57% de pérdida anual), con un intervalo de confianza del 95% que va de 1348 hasta las 2,521 dosis destruidas.</p>
+<p><strong>Interpretación Comparativa del Modelo:</strong></p>
+<p>Aplicando la <strong>Ley de los Grandes Números</strong>, a través de las 5,000 simulaciones se resolvió la contradicción de riesgo observada en la trayectoria de prueba inicial. Aunque en años individuales aislados la inmovilidad del inventario (Escenario A) puede resultar en una mayor pérdida relativa frente al consumo normativo (Escenario B) debido al efecto protector de la rotación de vacunas, el promedio poblacional a largo plazo demuestra lo contrario. A la larga, el volumen masivo de rupturas de la cadena de frío provocadas por las 499 aperturas del Escenario B sobrepasa cualquier beneficio de rotación, situando su pérdida promedio (1.36%) por encima del aislamiento absoluto (1.21%). Además, se confirma que el colapso operativo (Escenario C) no es un riesgo lineal, sino exponencial: duplicar las aperturas de puerta no duplicó las pérdidas, sino que las multiplicó por más de cinco veces (de 343 a 1,905 dosis), evidenciando la fragilidad termodinámica de los equipos frente a la saturación clínica.</p>
+</section>
+<section id="análisis-de-trayectorias" class="level3" data-number="4.7.2">
+<h3 data-number="4.7.2" class="anchored" data-anchor-id="análisis-de-trayectorias"><span class="header-section-number">4.7.2</span> Análisis de Trayectorias</h3>
+<p>La tabla anterior revela que los intervalos de confianza del 95% para la pérdida de biológicos son muy amplios en todos los escenarios operativos. Para comprender visualmente la causa de esta dispersión, se extrajo una submuestra aleatoria de 30 trayectorias (30 años simulados distintos) para cada escenario.</p>
+<p>El comportamiento de los daños acumulados demuestra que el riesgo no es lineal. La tendencia de las dosis perdidas a lo largo de los 366 días depende estrictamente de la coincidencia temporal exacta entre la ocurrencia de un apagón prolongado de la CFE y el nivel de saturación de vacunas almacenadas en ese día específico.</p>
+<div id="fig-abanico-a" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-abanico-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="abanico_riesgo.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abanico-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.12: 30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.
-</figcaption>
-</figure>
-</div>
-<p>Al desglosar las pérdidas de dosis de forma mensual, los datos revelan el verdadero comportamiento del riesgo operativo a lo largo del año, expuesto en la <a href="#fig-barras-promedio" class="quarto-xref">Figura&nbsp;<span>4.13</span></a> (Promedio mensual) y en la <a href="#fig-barras-mediana" class="quarto-xref">Figura&nbsp;<span>4.14</span></a> (Mediana mensual).</p>
-<p>Inicialmente, desde un punto de vista puramente logístico, se podría pensar que los meses de otoño (octubre y noviembre) presentarían la mayor cantidad de vacunas perdidas, debido a que en esa temporada el refrigerador opera a su máxima capacidad por el arranque de la campaña nacional invernal contra la Influenza. Sin embargo, la simulación muestra que <strong>el factor termodinámico y eléctrico domina por completo al volumen de inventario.</strong> Tanto el promedio como la mediana revelan que <strong>el verdadero pico de pérdidas materiales se concentra severamente en la temporada de calor extremo: marzo, abril y mayo.</strong></p>
-<p>Durante este trimestre, Tuxtla Gutiérrez experimenta sus temperaturas ambientales máximas. Este calor extremo genera un doble impacto en el sistema: por un lado, dispara el estrés sobre la infraestructura de la CFE (debido al uso masivo de aires acondicionados en la ciudad), provocando la mayor tasa de apagones por sobrecalentamiento de transformadores; por otro lado, reduce drásticamente el tiempo de autonomía pasiva del refrigerador apagado, acelerando la cinética de degradación de Arrhenius de las vacunas.</p>
-<p>En el gráfico de promedios, estos tres meses resultan casi idénticos en su alto nivel de pérdidas, confirmando que la primavera es la temporada crítica. Al observar la métrica de la mediana (estadísticamente más robusta porque aísla los años atípicamente catastróficos), el mes de <strong>abril</strong> sobresale como el periodo donde la pérdida de vacunas es superior a la de los otros meses. Queda comprobado que la red de frío chiapaneca es altamente vulnerable al choque térmico primaveral, superando cualquier riesgo derivado de la saturación logística de otras temporadas.</p>
-<div id="layout-barras" class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-barras-promedio" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-barras-promedio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="barras_estacionales_promedio.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-promedio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.13: Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.
-</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-barras-mediana" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-barras-mediana-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="barras_estacionales_mediana.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-mediana-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.14: Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>Finalmente, para estandarizar el riesgo sin importar la escala de la unidad médica, transformamos las dosis destruidas en porcentajes relativos respecto al volumen total de vacunas manejadas por el equipo en el año. Al hacer las 1,000 simulaciones, el algoritmo arrojó el histograma presentado en la <a href="#fig-histograma-final" class="quarto-xref">Figura&nbsp;<span>4.15</span></a>. La distribución presenta una asimetría positiva (cola estirada hacia la derecha), comportamiento típico de los sistemas de riesgo operativo expuestos a fallas intermitentes severas.</p>
-<p><strong>Los estadísticos descriptivos e inferenciales del modelo revelan que:</strong></p>
-<ul>
-<li>La <strong>mediana de mermas</strong> anuales se ubica en <strong>751 dosis</strong>, lo que representa una tasa de pérdida del <strong>2.57%</strong> de los lotes administrados.</li>
-<li>El <strong>promedio de mermas</strong> anuales se eleva a <strong>827 dosis</strong> (tasa del <strong>2.87%</strong>), el cual es mas alto por la presencia de años atípicamente catastróficos en la cola de la distribución.</li>
-<li>El <strong>Value at Risk (VaR) al 95% de confianza</strong> (riesgo severo) advierte que los centros de almacenamiento de vacunas se enfrentan a escenarios extremos donde se perderán hasta <strong>1,736 dosis</strong> en un solo refrigerador institucional.</li>
-</ul>
-<p>A partir de los percentiles del histograma, podemos concluir con un <strong>95% de nivel de confianza (Intervalo de Predicción)</strong> que un centro de almacenamiento de vacunas en Tuxtla Gutiérrez, operando con un equipo normado por la OMS de última generación (Haier HBC-150), <strong>sufrirá una pérdida inevitable de entre el 0.72% y el 6.57% de su inventario anual</strong> debido a las condiciones climáticas locales y las condiciones eléctricas.</p>
-<div id="fig-histograma-final" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-histograma-final-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="histograma_porcentajes.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-final-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.15: Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.
-</figcaption>
-</figure>
-</div>
-<p>#imagenes finales sin interpretacion momentanea</p>
-<div id="fig-abanico_escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-abanico_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-abanico-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="abanico_riesgo_escenario_A.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abanico_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.16: 30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abanico-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.12: 30 trayectorias anuales aleatorias (Escenario A). Las trayectorias se mantienen planas (cero pérdidas) durante largos periodos de tiempo. Cuando ocurre un apagón que supera la inercia térmica, la trayectoria sube drásticamente (escalón vertical). La gran separación vertical entre las líneas al final del año (Día 366) explica visualmente la alta varianza del modelo.
 </figcaption>
 </figure>
 </div>
-<div id="fig-abanico_escenario-B" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-abanico-b" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-abanico_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-abanico-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="abanico_riesgo_escenario_B.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abanico_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.17: 30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abanico-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.13: 30 trayectorias anuales aleatorias (Escenario B). El estrés introducido por las aperturas matutinas y vespertinas aumenta la acumulación de daños. En lugar de escalones aislados, las trayectorias muestran un crecimiento en forma de escalera continua a lo largo de todo el año, evidenciando una constante ruptura de la cadena de frío.
 </figcaption>
 </figure>
 </div>
-<div id="fig-abanico_escenario-C" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-abanico-c" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-abanico_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-abanico-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="abanico_riesgo_escenario_C.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abanico_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.18: 30 trayectorias anuales aleatorias. Muestra la tendencia en la acumulación de dosis destruidas a lo largo de los 366 días del año.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abanico-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.14: 30 trayectorias anuales aleatorias (Escenario C). La saturación logística colapsa la termodinámica del sistema. Las trayectorias abandonan el comportamiento escalonado y adoptan una pendiente positiva continua casi recta. Todas las líneas se disparan uniformemente hacia arriba, superando rápidamente el umbral de las 1,000 dosis destruidas.
 </figcaption>
 </figure>
 </div>
-<div id="layout-barras" class="quarto-layout-panel" data-layout-ncol="2">
+<p><strong>Interpretación Comparativa de las Trayectorias:</strong></p>
+<p>Al observar el comportamiento de las 30 trayectorias conjuntas, se comprueba la hipótesis de fragilidad de la red de frío. En el Escenario A, el aislamiento absoluto permite que existan “años afortunados” donde el equipo apenas pierde unas cuantas dosis, pero basta un solo año con un apagón crítico prolongado para que la pérdida escale drásticamente (como se observa en la línea superior en la <a href="#fig-abanico-a" class="quarto-xref">Figura&nbsp;<span>4.12</span></a> que cruza las 200 dosis).</p>
+<p>Por el contrario, el Escenario C demuestra que la contingencia operativa elimina el factor “suerte”. La densidad y homogeneidad de las trayectorias confirman que, bajo estrés logístico masivo, el colapso del biológico está garantizado independientemente de si el clima de ese año fue favorable o si hubo menos apagones. La saturación de aperturas domina por completo al sistema, provocando una destrucción acelerada, continua e inevitable.</p>
+</section>
+<section id="estacionalidad-del-riesgo-operativo" class="level3" data-number="4.7.3">
+<h3 data-number="4.7.3" class="anchored" data-anchor-id="estacionalidad-del-riesgo-operativo"><span class="header-section-number">4.7.3</span> Estacionalidad del Riesgo Operativo</h3>
+<p>Al desglosar las pérdidas de dosis de forma mensual, los datos revelan el verdadero comportamiento del riesgo termodinámico a lo largo del año. Para evaluar esta métrica de forma rigurosa, se analizaron dos estimadores de centralidad: el promedio mensual (que es sensible a los años con apagones catastróficos) y la mediana mensual (estadísticamente más robusta porque representa el escenario más probable, aislando las fluctuaciones extremas).</p>
+<p>Inicialmente, desde un punto de vista puramente climático, se podría suponer que los meses de calor extremo en Tuxtla Gutiérrez (abril y mayo) presentarían la mayor cantidad de vacunas perdidas debido al estrés térmico ambiental sobre el equipo. No obstante, las 5,000 simulaciones de Montecarlo demuestran que la interacción humana modifica por completo este patrón natural.</p>
+<p><strong>Escenario A (Línea Base):</strong></p>
+<div id="layout-barras-a" class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-barras-promedio_escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-promedio-a" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-barras-promedio_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-promedio-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="barras_estacionales_promedio_escenario_A.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-promedio_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.19: Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-promedio-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.15: Pérdida promedio mensual (Escenario A). Se observa una pérdida uniforme de alrededor de 5 dosis mensuales, con un ligero pico en mayo debido a las fallas eléctricas por estrés térmico.
 </figcaption>
 </figure>
 </div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-barras-mediana_escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-mediana-a" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-barras-mediana_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-mediana-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="barras_estacionales_mediana_escenario_A.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-mediana_escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.20: Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mediana-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.16: Pérdida mediana mensual (Escenario A). La mediana se mantiene estrictamente en cero durante los 12 meses del año, demostrando que en al menos el 50% de los escenarios climáticos normales no se pierde ni una sola vacuna al mes.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="layout-barras" class="quarto-layout-panel" data-layout-ncol="2">
+<p><strong>Escenario B (Apego Normativo):</strong></p>
+<div id="layout-barras-b" class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-barras-promedio_escenario-B" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-promedio-b" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-barras-promedio_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-promedio-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="barras_estacionales_promedio_escenario_B.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-promedio_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.21: Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-promedio-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.17: Pérdida promedio mensual (Escenario B). El estrés logístico aumenta significativamente las pérdidas. El mes de enero alcanza casi 40 dosis perdidas, seguido por un pico secundario en agosto durante la temporada de tormentas.
 </figcaption>
 </figure>
 </div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-barras-mediana_escenario-B" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-mediana-b" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-barras-mediana_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-mediana-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="barras_estacionales_mediana_escenario_B.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-mediana_escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.22: Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mediana-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.18: Pérdida mediana mensual (Escenario B). A diferencia del Escenario A, la mediana ya no es cero. Enero y agosto se consolidan como los meses de mayor riesgo operativo esperado.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="layout-barras" class="quarto-layout-panel" data-layout-ncol="2">
+<p><strong>Escenario C (Contingencia):</strong></p>
+<div id="layout-barras-c" class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-barras-promedio_escenario-C" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-promedio-c" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-barras-promedio_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-promedio-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="barras_estacionales_promedio_escenario_C.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-promedio_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.23: Pérdida promedio de dosis de vacunas por mes calculada sobre las 1,000 trayectorias de Montecarlo, mostrando el impacto crítico durante los meses de calor.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-promedio-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.19: Pérdida promedio mensual (Escenario C). La saturación logística domina el sistema, superando las 150 dosis mensuales de forma casi homogénea a lo largo del año.
 </figcaption>
 </figure>
 </div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-barras-mediana_escenario-C" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-mediana-c" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-barras-mediana_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-mediana-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="barras_estacionales_mediana_escenario_C.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-mediana_escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.24: Pérdida mediana de dosis de vacunas por mes, confirmando que el mes de abril representa el escenario de mayor riesgo operativo para la red de frío.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mediana-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.20: Pérdida mediana mensual (Escenario C). El colapso se confirma. Julio destaca ligeramente como el mes más crítico, superando las 160 dosis perdidas como escenario más probable.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="fig-histograma-final-escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
+<p><strong>Interpretación de la Estacionalidad:</strong></p>
+<p>El análisis estacional confirma que <strong>el estrés operativo domina por completo al factor climático.</strong> En el Escenario A, la <a href="#fig-mediana-a" class="quarto-xref">Figura&nbsp;<span>4.16</span></a> demuestra que la infraestructura termoaislante del equipo Haier HBC-150 es lo suficientemente robusta para sobrevivir a la intemperie chiapaneca sin sufrir daños (mediana igual a cero en todos los meses). Las pérdidas residuales observadas en el promedio del Escenario A son producto exclusivo de la cola de la distribución (años atípicamente catastróficos).</p>
+<p>Sin embargo, al introducir la interacción humana, el patrón climático desaparece. En el Escenario B, la vulnerabilidad ya no recae en la primavera, sino que se desplaza hacia enero y agosto, coincidiendo con las épocas donde el volumen del inventario interactúa de manera letal con las perturbaciones eléctricas. Finalmente, en el Escenario C, la contingencia operativa nivela el riesgo: el equipo pierde su capacidad de recuperación térmica provocando que todos los meses del año (sin importar si es invierno o verano) resulten devastadores para la viabilidad de las vacunas, consolidando la destrucción sistemática del inventario activo.</p>
+</section>
+</section>
+<section id="de-aqui" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> DE AQUI</h1>
+<section id="distribución-del-riesgo-operativo" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="distribución-del-riesgo-operativo"><span class="header-section-number">5.0.1</span> Distribución del Riesgo Operativo</h3>
+<p>Para estandarizar el nivel de riesgo sin importar la escala de la unidad médica, las dosis destruidas se transformaron en porcentajes de pérdida relativa respecto al volumen total de vacunas manejadas por el equipo en cada año simulado. La visualización de la frecuencia de estas pérdidas a lo largo de las 5,000 iteraciones de Montecarlo nos permite analizar la forma de la distribución del riesgo para cada escenario operativo.</p>
+<div id="fig-hist-a" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-histograma-final-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-hist-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="histograma_porcentajes_escenario_A.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-final-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.25: Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.1: Histograma del porcentaje de vacunas perdidas anualmente (Escenario A)[cite: 13]. La distribución presenta una fuerte asimetría positiva (una cola larga estirada hacia la derecha). Esto indica que, aunque la concentración principal de los datos sugiere pérdidas bajas (mediana del 1.01%), existen años atípicamente catastróficos que arrastran el promedio general hacia arriba (1.21%). Las líneas rojas punteadas delimitan el intervalo empírico del 95%, mostrando la alta dispersión hacia escenarios extremos.
 </figcaption>
 </figure>
 </div>
-<div id="fig-histograma-final-escenario-B" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-hist-b" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-histograma-final-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-hist-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="histograma_porcentajes_escenario_B.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-final-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.26: Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.2: Histograma del porcentaje de vacunas perdidas anualmente (Escenario B)[cite: 14]. Al introducir el estrés logístico normativo, la distribución completa se desplaza hacia la derecha, incrementando tanto la mediana (1.32%) como la media (1.36%). Aunque la asimetría disminuye ligeramente en comparación con la Línea Base, la cola derecha sigue advirtiendo de escenarios de riesgo donde la pérdida relativa supera el 2.20%.
 </figcaption>
 </figure>
 </div>
-<div id="fig-histograma-final-escenario-C" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-hist-c" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-histograma-final-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-hist-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="histograma_porcentajes_escenario_C.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-final-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.27: Histograma para el porcentaje de vacunas perdidas anualmente. Se detallan las casillas de centralidad (media y mediana) y las líneas de acotación del intervalo de predicción del 95%.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.3: Histograma del porcentaje de vacunas perdidas anualmente (Escenario C)[cite: 15]. La contingencia extrema transforma drásticamente la forma de la distribución, volviéndola visualmente simétrica (similar a una campana de Gauss). La media (2.57%) y la mediana (2.56%) prácticamente se igualan, consolidando un nivel de destrucción base sumamente alto y un intervalo de confianza del 95% altamente concentrado.
 </figcaption>
 </figure>
 </div>
+<p><strong>Interpretación de las Distribuciones:</strong></p>
+<p>La visualización de los histogramas demuestra que la dinámica del riesgo evoluciona conforme aumenta la interacción humana. En el Escenario A y B, la clara separación entre la media (línea azul) y la mediana (línea verde) evidencia que los datos están sesgados; este comportamiento asimétrico es típico de los sistemas de riesgo operativo pasivos, donde los daños dependen de fallas externas intermitentes y severas (como los apagones prolongados de la CFE).</p>
+<p>Sin embargo, en el Escenario C, la distribución adopta una forma simétrica. Esto ocurre gracias al Teorema del Límite Central: la altísima frecuencia de aperturas de puerta (casi 1,000 al año) se convierte en el factor dominante del sistema, “suavizando” el impacto de los apagones aislados y garantizando una tasa de pérdida constante y predeciblemente alta. La asimetría visual observada en los primeros dos escenarios sugiere fuertemente que las distribuciones no siguen un comportamiento normal, lo cual requiere una comprobación matemática estricta antes de realizar inferencias poblacionales definitivas.</p>
+</section>
+</section>
+<section id="hasta-aqui" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> HASTA AQUI</h1>
+<p>#imagenes finales sin interpretacion momentanea:</p>
 <div id="fig-boxplot-final-escenario-A" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-boxplot-final-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="boxplot_angosto_escenario_A.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-final-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.28: gráfica de caja
+Figura&nbsp;6.1: gráfica de caja
 </figcaption>
 </figure>
 </div>
@@ -941,7 +1015,7 @@ Figura&nbsp;4.28: gráfica de caja
 <img src="boxplot_angosto_escenario_B.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-final-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.29: gráfica de caja
+Figura&nbsp;6.2: gráfica de caja
 </figcaption>
 </figure>
 </div>
@@ -951,7 +1025,7 @@ Figura&nbsp;4.29: gráfica de caja
 <img src="boxplot_angosto_escenario_C.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-final-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.30: gráfica de caja
+Figura&nbsp;6.3: gráfica de caja
 </figcaption>
 </figure>
 </div>
@@ -961,7 +1035,7 @@ Figura&nbsp;4.30: gráfica de caja
 <img src="histograma_bootstrap_escenario_A.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-bootstrap-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.31: histograma Bootstrap
+Figura&nbsp;6.4: histograma Bootstrap
 </figcaption>
 </figure>
 </div>
@@ -971,7 +1045,7 @@ Figura&nbsp;4.31: histograma Bootstrap
 <img src="histograma_bootstrap_escenario_B.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-bootstrap-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.32: histograma Bootstrap
+Figura&nbsp;6.5: histograma Bootstrap
 </figcaption>
 </figure>
 </div>
@@ -981,7 +1055,7 @@ Figura&nbsp;4.32: histograma Bootstrap
 <img src="histograma_bootstrap_escenario_C.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histograma-bootstrap-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.33: histograma Bootstrap
+Figura&nbsp;6.6: histograma Bootstrap
 </figcaption>
 </figure>
 </div>
@@ -991,7 +1065,7 @@ Figura&nbsp;4.33: histograma Bootstrap
 <img src="boxplot_bootstrap_escenario_A.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-bootstrap-escenario-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.34: Grafica de caja Boostrap
+Figura&nbsp;6.7: Grafica de caja Boostrap
 </figcaption>
 </figure>
 </div>
@@ -1001,7 +1075,7 @@ Figura&nbsp;4.34: Grafica de caja Boostrap
 <img src="boxplot_bootstrap_escenario_B.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-bootstrap-escenario-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.35: Grafica de caja Boostrap
+Figura&nbsp;6.8: Grafica de caja Boostrap
 </figcaption>
 </figure>
 </div>
@@ -1011,7 +1085,7 @@ Figura&nbsp;4.35: Grafica de caja Boostrap
 <img src="boxplot_bootstrap_escenario_C.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-bootstrap-escenario-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.36: Grafica de caja Boostrap
+Figura&nbsp;6.9: Grafica de caja Boostrap
 </figcaption>
 </figure>
 </div>

@@ -298,7 +298,7 @@ Sin embargo, en el Escenario C, la distribución adopta una forma simétrica. Es
 
 # HASTA AQUI
 
-#imagenes finales sin interpretacion momentanea
+#imagenes finales sin interpretacion momentanea:
 
 ![gráfica de caja](boxplot_angosto_escenario_A.png){#fig-boxplot-final-escenario-A}
 
