@@ -187,10 +187,10 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -221,7 +221,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-10-10}
+\date{2026-10-11}
 \begin{document}
 \maketitle
 
@@ -3634,7 +3634,7 @@ Entre las métricas extraídas de esta función se incluyen:
 \end{itemize}
 
 Esta función se ejecuta dentro de un bucle de Montecarlo con
-\textbf{5,000 simulaciones independientes}, asignando en cada paso una
+\textbf{5000 simulaciones independientes}, asignando en cada paso una
 semilla de aleatoriedad indexada para garantizar la reproducibilidad del
 experimento. Al correr los 5,000 años simulados, el algoritmo elimina
 las variaciones extremas de los casos individuales y permite que actúe
@@ -3647,7 +3647,7 @@ de los tres escenarios operativos evaluados.
 \section{Resultados Estadísticos y Análisis de
 Riesgo}\label{resultados-estaduxedsticos-y-anuxe1lisis-de-riesgo}
 
-Una vez completadas las 5,000 simulaciones de Montecarlo, procedemos a
+Una vez completadas las 5000 simulaciones de Montecarlo, procedemos a
 extraer las métricas operativas y termodinámicas de todos los años
 simulados. La simulación masiva de trayectorias revela el verdadero
 comportamiento del sistema a largo plazo, eliminando las variaciones
@@ -3748,7 +3748,7 @@ operando fuera de rango. Bajo este escenario de estrés extremo, el
 primer cruce fuera de la norma ocurre en promedio apenas en el Día 3 de
 operación. El impacto en el inventario es devastador: se pierden en
 promedio 1,905 dosis por año (2.57\% de pérdida anual), con un intervalo
-de confianza del 95\% que va de 1348 hasta las 2,521 dosis destruidas.
+de confianza del 95\% que va de 1348 hasta las 2521 dosis destruidas.
 
 \textbf{Interpretación Comparativa del Modelo:}
 
@@ -3765,7 +3765,7 @@ pérdida promedio (1.36\%) por encima del aislamiento absoluto (1.21\%).
 Además, se confirma que el colapso operativo (Escenario C) no es un
 riesgo lineal, sino exponencial: duplicar las aperturas de puerta no
 duplicó las pérdidas, sino que las multiplicó por más de cinco veces (de
-343 a 1,905 dosis), evidenciando la fragilidad termodinámica de los
+343 a 1905 dosis), evidenciando la fragilidad termodinámica de los
 equipos frente a la saturación clínica.
 
 \subsection{Análisis de Trayectorias}\label{anuxe1lisis-de-trayectorias}
@@ -3865,7 +3865,7 @@ fluctuaciones extremas).
 Inicialmente, desde un punto de vista puramente climático, se podría
 suponer que los meses de calor extremo en Tuxtla Gutiérrez (abril y
 mayo) presentarían la mayor cantidad de vacunas perdidas debido al
-estrés térmico ambiental sobre el equipo. No obstante, las 5,000
+estrés térmico ambiental sobre el equipo. No obstante, las 5000
 simulaciones de Montecarlo demuestran que la interacción humana modifica
 por completo este patrón natural.
 
@@ -4027,7 +4027,7 @@ Para estandarizar el nivel de riesgo sin importar la escala de la unidad
 médica, las dosis perdidas se transformaron en porcentajes de pérdida
 relativa respecto al volumen total de vacunas manejadas por el equipo en
 cada año simulado. La visualización de la frecuencia de estas pérdidas a
-lo largo de las 5,000 simulaciones de Montecarlo permite analizar la
+lo largo de las 5000 simulaciones de Montecarlo permite analizar la
 forma de la distribución del riesgo para cada escenario operativo.
 
 \begin{figure}
@@ -4097,7 +4097,7 @@ apagones prolongados de la CFE).
 
 Sin embargo, en el Escenario C, la distribución tiene una forma casi
 simétrica. Esto ocurre gracias al Teorema del Límite Central: la
-altísima frecuencia de aperturas de puerta (casi 1,000 al año) se
+altísima frecuencia de aperturas de puerta (casi 1000 al año) se
 convierte en el factor dominante del sistema, ``suavizando'' el impacto
 de los apagones aislados y garantizando una tasa de pérdida constante y
 predeciblemente alta. La asimetría visual observada en los primeros dos
@@ -4172,9 +4172,9 @@ perdidas.}
 anualmente (Escenario C). La caja se posiciona en un nivel de
 destrucción extremo. A diferencia de los escenarios anteriores, el
 aumento masivo de la varianza provoca que aparezcan valores atípicos
-tanto en la cola superior (superando las 3,000 dosis) como en la
-inferior (cayendo a 1,000 dosis), confirmando la forma de campana
-observada en su histograma.}
+tanto en la cola superior (superando las 3000 dosis) como en la inferior
+(cayendo a 1000 dosis), confirmando la forma de campana observada en su
+histograma.}
 
 \end{figure}%
 
@@ -4211,13 +4211,13 @@ sugieren una fuerte asimetría en los datos; sin embargo, en la
 estadística, la forma visual debe comprobarse mediante una prueba de
 bondad de ajuste paramétrica.
 
-Para este fin, se aplicó la \textbf{Prueba de Normalidad de
-Shapiro-Wilk} a las métricas operativas obtenidas de las 5,000
-simulaciones de Montecarlo. Este test evalúa estadísticamente la
-hipótesis nula (\(H_0\)) de que los datos provienen de una distribución
-Normal. Siguiendo la metodología estándar para pruebas de bondad de
-ajuste (\citeproc{ref-montgomery2014applied}{Montgomery y Runger 2014}),
-la regla de decisión se basa en comparar el nivel de significancia
+Para ello, se aplicó la \textbf{Prueba de Normalidad de Shapiro-Wilk} a
+las métricas operativas obtenidas de las 5000 simulaciones de
+Montecarlo. Este test evalúa estadísticamente la hipótesis nula
+(\(H_0\)) de que los datos provienen de una distribución Normal.
+Siguiendo la metodología estándar para pruebas de bondad de ajuste
+(\citeproc{ref-montgomery2014applied}{Montgomery y Runger 2014}), la
+regla de decisión se basa en comparar el nivel de significancia
 (\(\alpha = 0.05\)) contra el valor-p obtenido:
 
 \begin{itemize}
@@ -4314,7 +4314,7 @@ frío por encima de los \(8^\circ\text{C}\), el Valor-p (\(0.0491\))
 estuvo a milésimas de cruzar el umbral del \(0.05\).
 
 Esta evolución demuestra que la alta frecuencia de variables aleatorias
-(casi 1,000 resurtidos anuales) empuja la geometría del riesgo hacia la
+(casi 1000 resurtidos anuales) empuja la geometría del riesgo hacia la
 normalidad. Bajo un estrés operativo masivo, el colapso del sistema deja
 de ser un ``evento raro e impredecible'' en la cola de la distribución
 para convertirse en un comportamiento constante, determinista y
@@ -4340,15 +4340,22 @@ Para resolver este problema de forma rigurosa, se implementó el método
 inferencial no paramétrico de \textbf{Bootstrap}
 (\citeproc{ref-efron1993introduction}{Efron y Tibshirani 1993}). El
 funcionamiento de este algoritmo consiste en realizar un remuestreo
-masivo: se extraen aleatoriamente (con reemplazo) 10,000 nuevas muestras
-de tamaño 5,000 a partir de los 5,000 años originales simulados en la
-Simulación de Montecarlo. Al calcular el promedio de cada una de estas
-10,000 nuevas muestras, el Teorema del Límite Central garantiza que la
-distribución de dichas medias convergerá hacia una distribución normal,
-independientemente de la forma asimétrica de los datos originales. Esto
+masivo: se extraen aleatoriamente (con reemplazo) 10000 nuevas muestras
+de tamaño \(n = 5000\) a partir de los 5000 años originales generados en
+la Simulación de Montecarlo. Al calcular el promedio de cada una de
+estas 10000 nuevas muestras, la interacción de dos propiedades
+estadísticas fundamentales estabiliza el sistema: por un lado, la
+\textbf{Ley de los Grandes Números} garantiza que, dado el tamaño
+sustancial de la muestra, la varianza del estimador colapse
+drásticamente, asegurando que las medias se agrupen con extrema
+precisión alrededor de la verdadera media poblacional; por otro lado, el
+\textbf{Teorema del Límite Central} asegura que, sobre esta varianza
+residual, la distribución de dichas medias adoptará la forma de una
+distribución Normal \(N(\mu, \sigma^2/n)\), independientemente de la
+fuerte asimetría y las colas pesadas de los datos originales. Esto
 permite aislar el ruido de los años atípicamente catastróficos y
-calcular un \textbf{Intervalo de Confianza (IC) al 95\%} para afirmar
-con absoluta certeza en qué rangos operará verdaderamente el centro de
+calcular un \textbf{Intervalo de Confianza (IC) al 95\%}, proporcionando
+una estimación robusta sobre los rangos en los que operará el centro de
 almacenamiento de vacunas.
 
 A continuación, se presenta la tabla resumen con los promedios
@@ -4406,96 +4413,98 @@ Dosis Perdidas (Volumen) & 61 dosis & 343 dosis & 1,905 dosis \\
 Pérdida Relativa (\%) & 1.21\% & 1.36\% & 2.57\% \\
 \end{longtable}
 
-\chapter{HASTA AQUI}\label{hasta-aqui}
-
 \subsection{Análisis Inferencial de Riesgo (Intervalos al
 95\%)}\label{anuxe1lisis-inferencial-de-riesgo-intervalos-al-95}
 
-\textbf{Escenario A (Línea Base):} Bajo un régimen de aislamiento
-absoluto, el método Bootstrap redujo drásticamente la incertidumbre
-estadística. Se proyecta un promedio de 26.4 rupturas de la cadena de
-frío por encima de los \(8^\circ\text{C}\), acumulando 12.6 horas
-(0.14\% del año) con un IC del 95\% de {[}12.4 h (0.14\%), 12.8 h
-(0.15\%){]}. Las rupturas por debajo de los \(2^\circ\text{C}\)
-promedian 25.2 eventos, acumulando 11.8 horas (0.13\%) con un IC del
-95\% de {[}11.7 h (0.13\%), 12.0 h (0.14\%){]}. El primer evento crítico
-de falla ocurre en promedio en el Día 38, con un IC del 95\% sumamente
-acotado entre el Día 37 y el Día 39. En cuanto a la congelación
-(\(<0^\circ\text{C}\)), el biológico sufrió daños únicamente en 23 de
-los 5,000 años simulados (0.46\%), promediando un tiempo acumulado de
-0.00 horas (0.000\%) con un primer registro en el Día 195. En el ámbito
-logístico, el equipo operó un total de 24.4 horas (0.28\%) fuera del
-rango normativo con un IC del 95\% de {[}24.1 h (0.27\%), 24.7 h
-(0.28\%){]}, lo que genera una destrucción promedio de 61 dosis (1.21\%
-de pérdida relativa) altamente acotada dentro de un IC del 95\% de
-{[}59, 62{]} dosis.
+\textbf{Escenario A (Línea Base):}
 
-\textbf{Escenario B (Apego Normativo):} Al estabilizar los datos con la
-interacción humana normada, se proyecta un promedio de 134.6 rupturas de
-la cadena de frío por encima de los \(8^\circ\text{C}\), acumulando 90.0
-horas (1.02\% del año) con un IC del 95\% de {[}89.4 h (1.02\%), 90.6 h
-(1.03\%){]}. Las rupturas por debajo de los \(2^\circ\text{C}\)
-promedian 12.5 eventos, acumulando 5.6 horas (0.06\%) con un IC del 95\%
-de {[}5.5 h (0.06\%), 5.7 h (0.07\%){]}. El primer evento crítico de
-falla se adelanta al Día 8, con un IC del 95\% entre el Día 8 y el Día
-9. El riesgo de congelación profunda (\(<0^\circ\text{C}\)) afectó solo
-a 9 de los 5,000 años (0.18\%), promediando 0.00 horas (0.000\%) con un
-primer registro en el Día 187. En el ámbito logístico, el equipo operó
-un total de 95.6 horas (1.09\%) fuera del rango normativo con un IC del
-95\% de {[}95.0 h (1.08\%), 96.2 h (1.10\%){]}, resultando en una
-destrucción promedio de 343 dosis (1.36\% de pérdida relativa),
-limitando estadísticamente el daño real esperado dentro de un IC del
-95\% de {[}340, 346{]} dosis.
+Bajo un régimen de aislamiento absoluto (cero aperturas), el método
+Bootstrap redujo drásticamente la incertidumbre. Se estima un promedio
+de 26.4 rupturas de la cadena de frío por encima de los
+\(8^\circ\text{C}\), acumulando 12.6 horas (0.14\% del año) con un IC
+del 95\% de {[}12.4 h (0.14\%), 12.8 h (0.15\%){]}. Las rupturas por
+debajo de los \(2^\circ\text{C}\) promedian 25.2 eventos, acumulando
+11.8 horas (0.13\% del año) con un IC del 95\% de {[}11.7 h (0.13\%),
+12.0 h (0.14\%){]}. El primer evento crítico de falla ocurre en promedio
+en el Día 38, con un IC del 95\% extremadamente acotado entre el Día 37
+y el Día 39. En cuanto a la congelación (\(T(t)<0^\circ\text{C}\)), el
+biológico sufrió daños únicamente en 23 de los 5000 años simulados
+(0.46\%), promediando un tiempo acumulado de 0.0 horas (0.0\%) con un
+primer registro en el Día 195. En el ámbito logístico, el equipo operó
+un total de 24.4 horas (0.28\% del año) fuera del rango normativo con un
+IC del 95\% de {[}24.1 h (0.27\%), 24.7 h (0.28\%){]}, lo que genera una
+pérdida promedio de 61 dosis (1.21\% de pérdida relativa) altamente
+acotada dentro de un IC del 95\% de {[}59, 62{]} dosis.
 
-\textbf{Escenario C (Contingencia):} Bajo el régimen de estrés masivo,
-el método inferencial proyecta un promedio de 419.7 rupturas de la
-cadena de frío por encima de los \(8^\circ\text{C}\), acumulando un
-crítico de 416.5 horas (4.74\% del año) con un IC del 95\% de {[}415.1 h
-(4.73\%), 417.9 h (4.76\%){]}. Las rupturas por debajo de los
-\(2^\circ\text{C}\) se reducen a un promedio de 9.0 eventos, acumulando
-4.1 horas (0.05\%) con un IC del 95\% de {[}4.0 h (0.05\%), 4.2 h
-(0.05\%){]}. El colapso del sistema es inminente, presentándose el
-primer evento crítico en el Día 3, con un IC del 95\% exacto en el Día
-3. La congelación (\(<0^\circ\text{C}\)) fue prácticamente nula,
-ocurriendo en apenas 7 años (0.14\%), promediando 0.00 horas (0.000\%)
-con un primer registro en el Día 210. En el impacto logístico global, el
-equipo operó 420.6 horas (4.79\%) fuera del rango normativo con un IC
-del 95\% de {[}419.1 h (4.77\%), 422.0 h (4.80\%){]}, detonando una
-destrucción masiva promedio de 1,905 dosis (2.57\% de pérdida relativa),
-garantizando un margen de daño acotado dentro de un IC del 95\% de
-{[}1896, 1913{]} dosis.
+\textbf{Escenario B (Apego Normativo):}
+
+Al estabilizar los datos con la interacción humana normada, se estima un
+promedio de 134.6 rupturas de la cadena de frío por encima de los
+\(8^\circ\text{C}\), acumulando 90.0 horas (1.02\% del año) con un IC
+del 95\% de {[}89.4 h (1.02\%), 90.6 h (1.03\%){]}. Las rupturas por
+debajo de los \(2^\circ\text{C}\) promedian 12.5 eventos, acumulando 5.6
+horas (0.06\% del año) con un IC del 95\% de {[}5.5 h (0.06\%), 5.7 h
+(0.07\%){]}. El primer evento crítico de falla se adelanta al Día 8, con
+un IC del 95\% entre el Día 8 y el Día 9. El riesgo de congelación
+(\(T(t)<0^\circ\text{C}\)) afectó solo a 9 de los 5000 años simulados
+(0.18\%), promediando 0.0 horas (0.0\%) con un primer registro en el Día
+187. En el ámbito logístico, el equipo operó un total de 95.6 horas
+(1.09\% del año) fuera del rango normativo con un IC del 95\% de {[}95.0
+h (1.08\%), 96.2 h (1.10\%){]}, resultando en una pérdida promedio de
+343 dosis (1.36\% de pérdida relativa), limitando estadísticamente el
+daño real esperado dentro de un IC del 95\% de {[}340, 346{]} dosis.
+
+\textbf{Escenario C (Contingencia):}
+
+Bajo el régimen de estrés masivo, se estima un promedio de 419.7
+rupturas de la cadena de frío por encima de los \(8^\circ\text{C}\),
+acumulando un valor crítico de 416.5 horas (4.74\% del año) con un IC
+del 95\% de {[}415.1 h (4.73\%), 417.9 h (4.76\%){]}. Las rupturas por
+debajo de los \(2^\circ\text{C}\) se reducen a un promedio de 9.0
+eventos, acumulando 4.1 horas (0.05\% del año) con un IC del 95\% de
+{[}4.0 h (0.05\%), 4.2 h (0.05\%){]}. El colapso del sistema es
+inminente, presentándose el primer evento crítico en el Día 3, con un IC
+del 95\% exacto en el Día 3. El riesgo de congelación
+(\(T(t)<0^\circ\text{C}\)) fue prácticamente nula, ocurriendo en apenas
+7 de los 5000 años simulados (0.14\%), promediando 0.0 horas (0.0\%) con
+un primer registro en el Día 210. En el impacto logístico global, el
+equipo operó 420.6 horas (4.79\% del año) fuera del rango normativo con
+un IC del 95\% de {[}419.1 h (4.77\%), 422.0 h (4.80\%){]}, provocando
+una pérdida masiva promedio de 1,905 dosis (2.57\% de pérdida relativa),
+con un margen de daño acotado dentro de un IC del 95\% de {[}1896,
+1913{]} dosis.
 
 \textbf{Interpretación Inferencial Conjunta:}
 
 La aplicación del método Bootstrap revela el verdadero poder de la
-inferencia estadística sobre sistemas caóticos. Antes de este análisis,
-los datos descriptivos empíricos del Escenario A mostraban una
+inferencia estadística sobre sistemas caóticos como este. Antes de este
+análisis, los datos descriptivos empíricos del Escenario A mostraban una
 volatilidad engañosa (sugiriendo que la pérdida podía ir desde 2 hasta
 179 dosis). Sin embargo, el remuestreo de las medias colapsó esa
 incertidumbre, demostrando que la verdadera pérdida poblacional esperada
-para un equipo Haier HBC-150 sin aperturas de puerta es de apenas {[}59,
-62{]} dosis anuales.
+para el equipo Haier HBC-150 sin aperturas de puerta es de apenas 59 a
+62 dosis anuales con una confianza del 95\%.
 
 Al comparar los tres intervalos de confianza estabilizados, la tendencia
 de riesgo queda demostrada con rigor absoluto. El paso de una operación
 pasiva (Escenario A) al apego normativo (Escenario B) quintuplica el
-daño poblacional real, pasando de 61 a 343 dosis destruidas. Finalmente,
+daño poblacional real, pasando de 61 a 343 dosis pérdidas. Finalmente,
 la contingencia logística (Escenario C) destruye cualquier margen de
 salvación termodinámica: el intervalo de confianza {[}1896, 1913{]}
 comprueba que, bajo una saturación de resurtidos, el colapso de la red
-de frío no es una probabilidad, sino una certeza determinista que
-arrasará con al menos el 2.56\% de los biológicos administrados por el
-centro de salud en Tuxtla Gutiérrez, independientemente de la
-benevolencia del clima o las fallas de la CFE en ese año específico.
+de frío es inevitable, ya que con una confianza del 95\% se perdera al
+menos el 2.56\% de los biológicos administrados por el centro de salud
+en Tuxtla Gutiérrez, independientemente del clima o las fallas
+eléctricas en ese año específico.
 
-\subsection{Validación Visual de la Inferencia (Estabilización
-Estocástica)}\label{validaciuxf3n-visual-de-la-inferencia-estabilizaciuxf3n-estocuxe1stica}
+\subsection{Validación Visual de la
+Inferencia}\label{validaciuxf3n-visual-de-la-inferencia}
 
 Para comprobar visualmente la eficacia del método no paramétrico y
-garantizar que el Teorema del Límite Central actuó correctamente sobre
-el ruido del sistema, se graficaron las distribuciones normalizadas
-obtenidas a partir de las 10,000 medias muestrales de remuestreo para
-cada escenario.
+garantizar que el Teorema del Límite Central y la Ley de los Grandes
+Números actuaran correctamente sobre el ruido del sistema, se graficaron
+las distribuciones normalizadas obtenidas a partir de las 10000 medias
+muestrales de remuestreo para cada escenario.
 
 \begin{figure}
 
@@ -4507,13 +4516,13 @@ cada escenario.
 
 \caption{\label{fig-boot-a}Distribución normalizada del porcentaje de
 pérdida (Escenario A). El eje horizontal representa el promedio esperado
-de vacunas perdidas, mientras que el eje vertical contabiliza la
-frecuencia de las 10,000 medias de remuestreo. La línea azul sólida
-indica la Media Bootstrap poblacional (1.21\%), y las líneas rojas
+del porcentaje de vacunas perdidas, mientras que el eje vertical
+contabiliza la frecuencia de las 10000 medias de remuestreo. La línea
+azul indica la Media Bootstrap poblacional (1.21\%), y las líneas rojas
 punteadas delimitan los límites exactos del Intervalo de Confianza
 Inferior (1.18\%) y Superior (1.24\%) al 95\%. La distribución ha
-perdido por completo su asimetría original, adoptando la forma perfecta
-de una campana de Gauss.}
+perdido por completo su asimetría original, adoptando la forma de una
+campana de Gauss.}
 
 \end{figure}%
 
@@ -4526,10 +4535,9 @@ de una campana de Gauss.}
 }
 
 \caption{\label{fig-boot-b}Distribución normalizada del porcentaje de
-pérdida (Escenario B). La distribución de medias también converge a una
-campana simétrica centrada en una pérdida poblacional del 1.36\%, con
-márgenes de error estadísticamente reducidos entre el 1.34\% y el
-1.37\%.}
+pérdida (Escenario B). La distribución de medias converge a una campana
+simétrica centrada en una pérdida poblacional del 1.36\%, con un
+intervalo de confianza del 95\% reducido que va del 1.34\% al 1.37\%.}
 
 \end{figure}%
 
@@ -4543,39 +4551,36 @@ márgenes de error estadísticamente reducidos entre el 1.34\% y el
 
 \caption{\label{fig-boot-c}Distribución normalizada del porcentaje de
 pérdida (Escenario C). La campana se establece en el nivel más crítico
-del análisis, confirmando con absoluta precisión geométrica que la
-pérdida poblacional esperada es del 2.57\%, acotada estrictamente entre
-el 2.56\% y el 2.58\%.}
+del análisis, confirmando con absoluta precisión que la pérdida
+poblacional esperada es del 2.57\%, acotada estrictamente entre el
+2.56\% y el 2.58\% con una confianza del 95\%.}
 
 \end{figure}%
 
-\textbf{Interpretación de la Estabilización Estocástica:}
+\textbf{Interpretación de la Estabilización:}
 
-La visualización de los histogramas de medias de Bootstrap constituye la
-prueba matemática definitiva de la investigación. Al observar las
-figuras, se comprueba que la asimetría positiva y las colas pesadas de
-valores atípicos (visibles en los análisis empíricos previos) han sido
-completamente erradicadas. En los tres escenarios, independientemente de
-la brutal dispersión original generada por los apagones extremos de la
-CFE o la saturación clínica, el método logró converger el estimador
-hacia una distribución Normal simétrica.
+Al observar los histogramas de medias de Bootstrap, se comprueba que la
+asimetría positiva y las colas pesadas de valores atípicos (visibles en
+los análisis empíricos previos) han sido completamente eliminadas. En
+los tres escenarios, independientemente de la alta dispersión original
+generada por los apagones extremos o la saturación clínica, el método
+logró converger el estimador hacia una distribución Normal.
 
 Este nivel de estabilización permite concluir que los Intervalos de
-Confianza al 95\% calculados son exactos e irrefutables. Gracias al
-remuestreo masivo de Montecarlo y Bootstrap, la aleatoriedad climática y
-eléctrica del estado de Chiapas ha sido ``domada'' matemáticamente,
-logrando transformar la incertidumbre estocástica de la red de frío
-institucional en una predicción de riesgo determinista, precisa y lista
-para sustentar la toma de decisiones normativas.
+Confianza al 95\% calculados son precisos. Gracias al remuestreo masivo
+de Montecarlo y Bootstrap, la aleatoriedad climática y eléctrica del
+estado de Chiapas ha sido controlada, logrando transformar la
+incertidumbre de la red de frío institucional en una predicción de
+riesgo determinista, precisa y lista para sustentar la toma de
+decisiones normativas.
 
 \subsection{Precisión del Estimador (Dispersión de Medias
 Bootstrap)}\label{precisiuxf3n-del-estimador-dispersiuxf3n-de-medias-bootstrap}
 
-Para ilustrar de manera concluyente la reducción de la incertidumbre
-lograda por la inferencia no paramétrica, se construyeron diagramas de
-caja (\emph{boxplots}) aplicados exclusivamente a las 10,000 medias
-muestrales obtenidas mediante el método Bootstrap para la métrica de
-dosis perdidas.
+Para ilustrar la reducción de la incertidumbre lograda por la inferencia
+no paramétrica, se construyeron diagramas de caja (\emph{boxplots})
+aplicados exclusivamente a las 10000 medias muestrales obtenidas
+mediante el método Bootstrap para la métrica de dosis perdidas.
 
 \begin{figure}
 
@@ -4592,9 +4597,10 @@ dosis perdidas.
 \caption{\label{fig-box-boot-a}Diagrama de caja de la media poblacional
 (Escenario A). La caja naranja representa el 50\% central del estimador,
 con la línea verde indicando la verdadera media poblacional. A
-diferencia del diagrama de caja empírico (que mostraba atípicos de hasta
-179 dosis), la varianza del estimador ha colapsado; el rango total de
-las medias fluctúa microscópicamente entre 58 y 63 dosis.}
+diferencia del diagrama de caja empírico Figura~\ref{fig-boxplot-a} (que
+mostraba datos atípicos de hasta mas de 300 dosis), la varianza del
+estimador se ha reducido significativamente; el rango total de las
+medias fluctúa solamente entre 58 y 63 dosis.}
 
 \end{figure}%
 
@@ -4611,10 +4617,10 @@ las medias fluctúa microscópicamente entre 58 y 63 dosis.}
 }
 
 \caption{\label{fig-box-boot-b}Diagrama de caja de la media poblacional
-(Escenario B). El estimador se estabiliza con precisión milimétrica. La
-media poblacional esperada se concentra rígidamente alrededor de las 343
-dosis, con una fluctuación máxima contenida en un rango absoluto de
-apenas 10 dosis (de 338 a 348).}
+(Escenario B). El estimador se estabiliza con una precisión milimétrica.
+La media poblacional esperada se concentra alrededor de las 343 dosis,
+con una fluctuación máxima contenida en un rango absoluto de apenas 10
+dosis (de 338 a 348).}
 
 \end{figure}%
 
@@ -4632,10 +4638,10 @@ apenas 10 dosis (de 338 a 348).}
 
 \caption{\label{fig-box-boot-c}Diagrama de caja de la media poblacional
 (Escenario C). A pesar del colapso logístico del sistema, el Teorema del
-Límite Central garantiza la precisión del estimador. La media
-poblacional se aísla de las trayectorias catastróficas individuales y se
-fija firmemente en las 1,905 dosis, con un margen de dispersión
-sumamente estricto (de 1,890 a 1,920 dosis).}
+Límite Central y la Ley de los Grandes Números garantizan la precisión
+del estimador. La media poblacional se aísla de las trayectorias
+catastróficas individuales y se fija en 1905 dosis, con un margen de
+dispersión de 1890 a 1920 dosis.}
 
 \end{figure}%
 
@@ -4643,47 +4649,45 @@ sumamente estricto (de 1,890 a 1,920 dosis).}
 
 \end{figure}%
 
-\textbf{Interpretación de la Dispersión Inferencial:}
+\textbf{Interpretación de la Dispersión:}
 
 La visualización de los diagramas de caja aplicados a las medias
 muestrales demuestra visualmente la robustez del método Bootstrap. Al
 comparar estas figuras con los diagramas empíricos originales, el
 contraste es absoluto: mientras que la estadística descriptiva inicial
 mostraba una varianza gigantesca y colas pesadas llenas de años
-atípicamente destructivos, el remuestreo logró ``aplastar'' esa
-varianza. Los \emph{boxplots} naranjas demuestran que, al evaluar el
-riesgo a nivel poblacional y no a nivel de un año fortuito, la
-incertidumbre desaparece, permitiendo proyectar el daño con un margen de
-error de apenas unas cuantas dosis.
+atípicamente destructivos, el remuestreo logró disminuir esa varianza.
+Los \emph{boxplots} naranjas demuestran que, al evaluar el riesgo a
+nivel poblacional y no a nivel de un año al azar, la incertidumbre
+desaparece, permitiendo estimar el daño con un margen de error de apenas
+unas cuantas dosis.
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\subsection{Conclusión de la Simulación y Análisis de
+\section{Conclusión de la Simulación y Análisis de
 Riesgo}\label{conclusiuxf3n-de-la-simulaciuxf3n-y-anuxe1lisis-de-riesgo}
 
 La integración del modelado estocástico (Ecuaciones Diferenciales
 Estocásticas) con el análisis inferencial masivo (Montecarlo y
-Bootstrap) ha permitido cuantificar, de manera rigurosa e irrefutable,
-el verdadero nivel de riesgo operativo que enfrenta la red de frío
-institucional en Tuxtla Gutiérrez, Chiapas.
+Bootstrap) ha permitido cuantificar, de manera rigurosa el verdadero
+nivel de riesgo operativo que enfrenta la red de frío en Tuxtla
+Gutiérrez, Chiapas.
 
 El análisis demuestra que el aislamiento térmico del equipo Haier
-HBC-150 y las fallas eléctricas intermitentes de la CFE, por sí solos,
-no representan una amenaza sistemática para la viabilidad de las vacunas
-(Escenario A). El verdadero catalizador del colapso térmico es la
-interacción humana. El apego normativo (Escenario B) expone la
-fragilidad de la cadena de frío al demostrar que el simple acto de
-extraer dosis de manera controlada quintuplica las pérdidas
-poblacionales. Peor aún, bajo condiciones de contingencia y saturación
-logística (Escenario C), el sistema pierde toda capacidad de
-recuperación térmica, transformando las excursiones aisladas en una
-destrucción exponencial, continua y estadísticamente inevitable.
+HBC-150 y las fallas eléctricas, por sí solos, no representan una
+amenaza sistemática para la viabilidad de las vacunas (Escenario A). La
+verdadera causa del colapso térmico es la interacción humana. El apego
+normativo (Escenario B) expone la fragilidad de la cadena de frío al
+demostrar que el simple acto de extraer dosis de manera controlada
+quintuplica las pérdidas poblacionales. Peor aún, bajo condiciones de
+contingencia y saturación logística (Escenario C), el sistema pierde
+toda capacidad de recuperación térmica, transformando las rupturas de la
+cadena de frío en una destrucción exponencial, continua y
+estadísticamente inevitable.
 
 Esta evidencia matemática confirma que la preservación de los biológicos
 no depende únicamente de la modernización de la infraestructura
-eléctrica o del aislamiento pasivo de los equipos, sino que exige una
-reestructuración urgente de los protocolos logísticos de resurtido y
-manejo de inventario en las unidades de salud.
+eléctrica o del aislamiento pasivo de los equipos, sino que depende
+mayormente de los protocolos logísticos de resurtido y manejo de
+inventario en las unidades de salud.
 
 \bookmarksetup{startatroot}
 
