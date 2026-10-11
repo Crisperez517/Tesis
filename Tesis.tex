@@ -2993,7 +2993,7 @@ Tuxtla Gutiérrez. Creamos una malla de tiempo para cubrir un año
 bisiesto completo de 366 días. Para capturar los cambios rápidos en la
 temperatura interna del refrigerador, elegimos un paso de integración
 discreto de exactamente 5 minutos (\(\Delta t = 5/60\) horas). Esto
-genera un total de 105,408 iteraciones por cada año simulado.
+genera un total de 105408 iteraciones por cada año simulado.
 
 Para sincronizar el modelo con la logística institucional, programamos
 un calendario interno que identifica los días hábiles (lunes a viernes)
@@ -3709,46 +3709,51 @@ Pérdida Relativa (\%) & 1.21\% & 1.36\% & 2.57\% \\
 \subsection{Riesgo Operativo y Termodinámico
 Empírico}\label{riesgo-operativo-y-termodinuxe1mico-empuxedrico}
 
-\textbf{Escenario A (Línea Base):} La simulación de Montecarlo
-estabilizó el riesgo externo en un promedio de 64.3 apagones anuales. Al
-no existir interacción humana (cero aperturas), el riesgo recae
-puramente en la termodinámica pasiva del equipo. Se registró un promedio
-de 26.4 rupturas de la cadena de frío anuales por encima de los
-\(8^\circ\text{C}\) (acumulando 12.6 horas) y 25.2 rupturas por debajo
-de los \(2^\circ\text{C}\) (acumulando 11.8 horas). Es necesario
-destacar que la inercia térmica protegió al equipo de la congelación
-profunda, manteniendo el riesgo por debajo de los \(0^\circ\text{C}\)
-estrictamente en cero. En el ámbito logístico, esta exposición pasiva
-provocó una destrucción promedio de 61 dosis (1.21\% de pérdida anual).
-Sin embargo, el intervalo de confianza del 95\% resulta muy amplio,
-oscilando entre apenas 2 y hasta 179 dosis destruidas al año, lo que
-sugiere una alta volatilidad ante apagones inusualmente largos.
+\textbf{Escenario A (Línea Base):}
 
-\textbf{Escenario B (Apego Normativo):} Al introducir la interacción
-humana con un promedio de 499 aperturas anuales, el riesgo termodinámico
-aumentó significativamente. Los eventos donde \(T(t) > 8^\circ\text{C}\)
-aumentaron a un promedio de 134.6, acumulando 90 horas de riesgo térmico
-(1.02\% del año), en cambio, los eventos por debajo de los
-\(2^\circ\text{C}\) disminuyeron a un promedio de 12.5, acumulando 5.6
-horas (0.06\% del año). Adicionalmente, el primer registro de falla
-crítica se adelantó drásticamente: de promediar en el Día 38 (Escenario
-A) a ocurrir en el Día 8. Este nivel de estrés aumentó las pérdidas a un
-promedio de 343 dosis anuales (1.36\% de pérdida anual), con un
-intervalo de confianza del 95\% que advierte escenarios de riesgo donde
-un equipo normado puede perder entre 166 y hasta 573 dosis en un solo
-año.
+La simulación de Montecarlo estabilizó el riesgo externo en un promedio
+de 64.3 apagones anuales. Al no existir interacción humana (cero
+aperturas), el riesgo recae puramente en la termodinámica pasiva del
+equipo. Se registró un promedio de 26.4 rupturas de la cadena de frío
+anuales por encima de los \(8^\circ\text{C}\) (acumulando 12.6 horas) y
+25.2 rupturas por debajo de los \(2^\circ\text{C}\) (acumulando 11.8
+horas). Es necesario destacar que la inercia térmica protegió al equipo
+de la congelación profunda, manteniendo el riesgo por debajo de los
+\(0^\circ\text{C}\) estrictamente en cero. En el ámbito logístico, esta
+exposición pasiva provocó una destrucción promedio de 61 dosis (1.21\%
+de pérdida anual). Sin embargo, el intervalo de confianza del 95\%
+resulta muy amplio, oscilando entre apenas 2 y hasta 179 dosis
+destruidas al año, lo que sugiere una alta volatilidad ante apagones
+inusualmente largos.
 
-\textbf{Escenario C (Contingencia):} La saturación logística colapsa por
-completo la cadena de frío. Con casi 1,000 aperturas anuales (998), el
-equipo sufre 419.7 rupturas de la cadena de frío anuales por encima de
-los \(8^\circ\text{C}\) en promedio (acumulando 416.5 horas) y 9
-rupturas por debajo de los \(2^\circ\text{C}\) (acumulando 4.1 horas),
-acumulando un valor crítico total de 420.6 horas (4.79\% del año)
-operando fuera de rango. Bajo este escenario de estrés extremo, el
-primer cruce fuera de la norma ocurre en promedio apenas en el Día 3 de
-operación. El impacto en el inventario es devastador: se pierden en
-promedio 1,905 dosis por año (2.57\% de pérdida anual), con un intervalo
-de confianza del 95\% que va de 1348 hasta las 2521 dosis destruidas.
+\textbf{Escenario B (Apego Normativo):}
+
+Al introducir la interacción humana con un promedio de 499 aperturas
+anuales, el riesgo termodinámico aumentó significativamente. Los eventos
+donde \(T(t) > 8^\circ\text{C}\) aumentaron a un promedio de 134.6,
+acumulando 90 horas de riesgo térmico (1.02\% del año), en cambio, los
+eventos por debajo de los \(2^\circ\text{C}\) disminuyeron a un promedio
+de 12.5, acumulando 5.6 horas (0.06\% del año). Adicionalmente, el
+primer registro de falla crítica se adelantó drásticamente: de promediar
+en el Día 38 (Escenario A) a ocurrir en el Día 8. Este nivel de estrés
+aumentó las pérdidas a un promedio de 343 dosis anuales (1.36\% de
+pérdida anual), con un intervalo de confianza del 95\% que advierte
+escenarios de riesgo donde un equipo normado puede perder entre 166 y
+hasta 573 dosis en un solo año.
+
+\textbf{Escenario C (Contingencia):}
+
+La saturación logística colapsa por completo la cadena de frío. Con casi
+1,000 aperturas anuales (998), el equipo sufre 419.7 rupturas de la
+cadena de frío anuales por encima de los \(8^\circ\text{C}\) en promedio
+(acumulando 416.5 horas) y 9 rupturas por debajo de los
+\(2^\circ\text{C}\) (acumulando 4.1 horas), acumulando un valor crítico
+total de 420.6 horas (4.79\% del año) operando fuera de rango. Bajo este
+escenario de estrés extremo, el primer cruce fuera de la norma ocurre en
+promedio apenas en el Día 3 de operación. El impacto en el inventario es
+devastador: se pierden en promedio 1,905 dosis por año (2.57\% de
+pérdida anual), con un intervalo de confianza del 95\% que va de 1348
+hasta las 2521 dosis destruidas.
 
 \textbf{Interpretación Comparativa del Modelo:}
 
@@ -4409,7 +4414,7 @@ eventos \\
 Tiempo Fuera de Rango Normativo & 24.4 horas (0.28\%) & 95.6 horas
 (1.09\%) & 420.6 horas (4.79\%) \\
 \textbf{Impacto Logístico (Mermas)} & & & \\
-Dosis Perdidas (Volumen) & 61 dosis & 343 dosis & 1,905 dosis \\
+Dosis Perdidas (Volumen) & 61 dosis & 343 dosis & 1905 dosis \\
 Pérdida Relativa (\%) & 1.21\% & 1.36\% & 2.57\% \\
 \end{longtable}
 
