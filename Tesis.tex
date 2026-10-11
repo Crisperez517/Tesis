@@ -221,7 +221,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-09-29}
+\date{2026-10-10}
 \begin{document}
 \maketitle
 
@@ -2862,6 +2862,13 @@ base no es constante, sino que obedece al comportamiento estacional del
 sistema de salud en México, tal como se detalla en la siguiente tabla:
 
 \begin{longtable}[]{@{}lll@{}}
+\caption{Demanda base diaria de vacunas por mes, ajustada a la
+estacionalidad epidemiológica y a las campañas nacionales de salud
+pública en México. \{\#tab-demanda-base\}}\tabularnewline
+\toprule\noalign{}
+Mes & Demanda Base Diaria (Dosis) & Justificación Epidemiológica \\
+\midrule\noalign{}
+\endfirsthead
 \toprule\noalign{}
 Mes & Demanda Base Diaria (Dosis) & Justificación Epidemiológica \\
 \midrule\noalign{}
@@ -3633,9 +3640,9 @@ experimento. Al correr los 5,000 años simulados, el algoritmo elimina
 las variaciones extremas de los casos individuales y permite que actúe
 la \textbf{Ley de los Grandes Números}
 (\citeproc{ref-ross2018first}{Ross 2018}). Esto provoca que las métricas
-de control se estabilicen firmemente, permitiendo extraer promedios
-poblacionales realistas sobre el comportamiento del equipo institucional
-bajo cada uno de los tres escenarios operativos evaluados.
+de control se estabilicen, permitiendo extraer promedios poblacionales
+realistas sobre el comportamiento del equipo institucional bajo cada uno
+de los tres escenarios operativos evaluados.
 
 \section{Resultados Estadísticos y Análisis de
 Riesgo}\label{resultados-estaduxedsticos-y-anuxe1lisis-de-riesgo}
@@ -3644,7 +3651,7 @@ Una vez completadas las 5,000 simulaciones de Montecarlo, procedemos a
 extraer las métricas operativas y termodinámicas de todos los años
 simulados. La simulación masiva de trayectorias revela el verdadero
 comportamiento del sistema a largo plazo, eliminando las variaciones
-extremas de un solo año al azar.
+extremas de un solo año.
 
 A continuación, se presenta la tabla comparativa con los promedios
 poblacionales empíricos, seguida del análisis descriptivo de dispersión
@@ -3655,6 +3662,20 @@ e intervalos de confianza para cada escenario.
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}@{}}
+\caption{Estadísticas de riesgo promedio anual para los tres escenarios
+operativos. \{\#tab-riesgo-operativo\}}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Métrica (Promedio Anual)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Escenario A (Línea Base)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Escenario B (Apego Normativo)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Escenario C (Contingencia)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Métrica (Promedio Anual)
@@ -3678,7 +3699,7 @@ eventos \\
 \(T(t) < 2^\circ\text{C}\) & 25.2 eventos & 12.5 eventos & 9.0
 eventos \\
 \(T(t) < 0^\circ\text{C}\) & 0 eventos & 0 eventos & 0 eventos \\
-Tiempo Fuera de Rango Normativo & 24.4 horas (0.28\%) & 95.6 horas
+Tiempo Fuera del Rango Normativo & 24.4 horas (0.28\%) & 95.6 horas
 (1.09\%) & 420.6 horas (4.79\%) \\
 \textbf{Impacto Logístico (Mermas)} & & & \\
 Dosis Perdidas (Volumen) & 61 dosis & 343 dosis & 1,905 dosis \\
@@ -3731,7 +3752,7 @@ de confianza del 95\% que va de 1348 hasta las 2,521 dosis destruidas.
 
 \textbf{Interpretación Comparativa del Modelo:}
 
-Aplicando la \textbf{Ley de los Grandes Números}, a través de las 5,000
+Por la \textbf{Ley de los Grandes Números}, a través de las 5,000
 simulaciones se resolvió la contradicción de riesgo observada en la
 trayectoria de prueba inicial. Aunque en años individuales aislados la
 inmovilidad del inventario (Escenario A) puede resultar en una mayor
@@ -3790,8 +3811,8 @@ explica visualmente la alta varianza del modelo.}
 (Escenario B). El estrés introducido por las aperturas matutinas y
 vespertinas aumenta la acumulación de daños. En lugar de escalones
 aislados, las trayectorias muestran un crecimiento en forma de escalera
-continua a lo largo de todo el año, evidenciando una constante ruptura
-de la cadena de frío.}
+a lo largo de todo el año, evidenciando una constante ruptura de la
+cadena de frío.}
 
 \end{figure}%
 
@@ -4003,10 +4024,10 @@ inventario activo.
 Operativo}\label{distribuciuxf3n-del-riesgo-operativo}
 
 Para estandarizar el nivel de riesgo sin importar la escala de la unidad
-médica, las dosis destruidas se transformaron en porcentajes de pérdida
+médica, las dosis perdidas se transformaron en porcentajes de pérdida
 relativa respecto al volumen total de vacunas manejadas por el equipo en
 cada año simulado. La visualización de la frecuencia de estas pérdidas a
-lo largo de las 5,000 iteraciones de Montecarlo nos permite analizar la
+lo largo de las 5,000 simulaciones de Montecarlo permite analizar la
 forma de la distribución del riesgo para cada escenario operativo.
 
 \begin{figure}
@@ -4021,10 +4042,10 @@ forma de la distribución del riesgo para cada escenario operativo.
 anualmente (Escenario A). La distribución presenta una fuerte asimetría
 positiva (una cola larga estirada hacia la derecha). Esto indica que,
 aunque la concentración principal de los datos sugiere pérdidas bajas
-(mediana del 1.01\%), existen años atípicamente catastróficos que
-arrastran el promedio general hacia arriba (1.21\%). Las líneas rojas
-punteadas delimitan el intervalo empírico del 95\%, mostrando la alta
-dispersión hacia escenarios extremos.}
+(mediana del 1.01\% (línea verde)), existen años atípicamente
+catastróficos que arrastran el promedio general hacia arriba (media del
+1.21\% (línea azul)). Las líneas rojas punteadas delimitan el intervalo
+empírico del 95\%, mostrando la alta dispersión hacia años extremos.}
 
 \end{figure}%
 
@@ -4037,12 +4058,12 @@ dispersión hacia escenarios extremos.}
 }
 
 \caption{\label{fig-hist-b}Histograma del porcentaje de vacunas perdidas
-anualmente (Escenario B). Al introducir el estrés logístico normativo,
-la distribución completa se desplaza hacia la derecha, incrementando
-tanto la mediana (1.32\%) como la media (1.36\%). Aunque la asimetría
-disminuye ligeramente en comparación con la Línea Base, la cola derecha
-sigue advirtiendo de escenarios de riesgo donde la pérdida relativa
-supera el 2.20\%.}
+anualmente (Escenario B). Al introducir el estrés logístico normativo
+(aperturas de la puerta del equipo), la distribución completa se
+desplaza hacia la derecha, incrementando tanto la mediana (1.32\%) como
+la media (1.36\%). Aunque la asimetría disminuye ligeramente en
+comparación con el Escenario A, la cola derecha sigue advirtiendo de
+años de riesgo donde la pérdida relativa supera el 2.27\%.}
 
 \end{figure}%
 
@@ -4057,24 +4078,24 @@ supera el 2.20\%.}
 \caption{\label{fig-hist-c}Histograma del porcentaje de vacunas perdidas
 anualmente (Escenario C). La contingencia extrema transforma
 drásticamente la forma de la distribución, volviéndola visualmente
-simétrica (similar a una campana de Gauss). La media (2.57\%) y la
-mediana (2.56\%) prácticamente se igualan, consolidando un nivel de
-destrucción base sumamente alto y un intervalo de confianza del 95\%
+simétrica (similar a una campana de Gauss). La mediana (2.56\%) y la
+media (2.57\%) prácticamente se igualan, indicando un nivel de
+destrucción sumamente alto y un intervalo de confianza del 95\%
 altamente concentrado.}
 
 \end{figure}%
 
 \textbf{Interpretación de las Distribuciones:}
 
-La visualización de los histogramas demuestra que la dinámica del riesgo
-evoluciona conforme aumenta la interacción humana. En el Escenario A y
-B, la clara separación entre la media (línea azul) y la mediana (línea
+La visualización de los histogramas muestra que el comportamiento del
+riesgo cambia conforme aumenta la interacción humana. En el Escenario A
+y B, la clara separación entre la media (línea azul) y la mediana (línea
 verde) evidencia que los datos están sesgados; este comportamiento
 asimétrico es típico de los sistemas de riesgo operativo pasivos, donde
 los daños dependen de fallas externas intermitentes y severas (como los
 apagones prolongados de la CFE).
 
-Sin embargo, en el Escenario C, la distribución adopta una forma
+Sin embargo, en el Escenario C, la distribución tiene una forma casi
 simétrica. Esto ocurre gracias al Teorema del Límite Central: la
 altísima frecuencia de aperturas de puerta (casi 1,000 al año) se
 convierte en el factor dominante del sistema, ``suavizando'' el impacto
@@ -4090,7 +4111,7 @@ Caja)}\label{dispersiuxf3n-y-valores-atuxedpicos-diagramas-de-caja}
 Para cuantificar visualmente la varianza, los rangos intercuartílicos y
 la magnitud exacta de los años extremos observados en las colas de los
 histogramas, se construyeron diagramas de caja (\emph{boxplots}) para la
-pérdida absoluta de dosis en los tres escenarios operativos.
+pérdida absoluta de vacunas en los tres escenarios operativos.
 
 \begin{figure}
 
@@ -4104,8 +4125,8 @@ pérdida absoluta de dosis en los tres escenarios operativos.
 
 }
 
-\caption{\label{fig-boxplot-a}Diagrama de caja de dosis perdidas
-(Escenario A). La caja morada contiene el 50\% central de las
+\caption{\label{fig-boxplot-a}Diagrama de caja de vacunas perdidas
+anualmente (Escenario A). La caja morada contiene el 50\% central de las
 simulaciones, con la línea horizontal verde marcando la mediana. Se
 observa una caja muy estrecha, pero con una inmensa cantidad de puntos
 negros por encima del bigote superior; estos representan los años
@@ -4126,12 +4147,12 @@ arriba.}
 
 }
 
-\caption{\label{fig-boxplot-b}Diagrama de caja de dosis perdidas
-(Escenario B). La caja se eleva y se ensancha verticalmente, reflejando
-un aumento tanto en la mediana como en la varianza general del sistema.
-Los valores atípicos siguen concentrados exclusivamente en la cola
-superior, alcanzando escenarios de riesgo con casi 900 dosis
-destruidas.}
+\caption{\label{fig-boxplot-b}Diagrama de caja de vacunas perdidas
+anualmente (Escenario B). La caja se eleva y se ensancha verticalmente,
+reflejando un aumento tanto en la mediana como en la varianza general
+del sistema. Los valores atípicos siguen concentrados exclusivamente en
+la cola superior, alcanzando escenarios de riesgo con casi 900 dosis
+perdidas.}
 
 \end{figure}%
 
@@ -4147,13 +4168,13 @@ destruidas.}
 
 }
 
-\caption{\label{fig-boxplot-c}Diagrama de caja de dosis perdidas
-(Escenario C). La caja se posiciona en un nivel de destrucción extremo.
-A diferencia de los escenarios anteriores, el aumento masivo de la
-varianza provoca que aparezcan valores atípicos tanto en la cola
-superior (superando las 3,000 dosis) como en la inferior (cayendo a
-1,000 dosis), confirmando la forma de campana observada en su
-histograma.}
+\caption{\label{fig-boxplot-c}Diagrama de caja de vacunas perdidas
+anualmente (Escenario C). La caja se posiciona en un nivel de
+destrucción extremo. A diferencia de los escenarios anteriores, el
+aumento masivo de la varianza provoca que aparezcan valores atípicos
+tanto en la cola superior (superando las 3,000 dosis) como en la
+inferior (cayendo a 1,000 dosis), confirmando la forma de campana
+observada en su histograma.}
 
 \end{figure}%
 
@@ -4163,54 +4184,56 @@ histograma.}
 
 \textbf{Interpretación de la Dispersión:}
 
-El análisis de los diagramas de caja confirma matemáticamente la
-asimetría del riesgo termodinámico. En el Escenario A, el rango
-intercuartílico (la altura de la caja morada) es sumamente pequeño,
-indicando que en la mayoría de los años las pérdidas son mínimas y muy
-similares entre sí. Sin embargo, la red de frío es víctima de valores
-atípicos extremos: años donde apagones severos rompen la inercia térmica
-y disparan las pérdidas muy por encima del comportamiento normal.
+El análisis de los diagramas de caja confirma la asimetría del riesgo
+termodinámico. En el Escenario A, el rango intercuartílico (la altura de
+la caja morada) es sumamente pequeño, indicando que en la mayoría de los
+años las pérdidas son mínimas y muy similares entre sí. Sin embargo, hay
+una alta cantidad de valores atípicos extremos: años donde apagones
+severos rompen la inercia térmica y disparan las pérdidas muy por encima
+del comportamiento normal.
 
 Conforme se introduce la interacción humana (Escenario B y C), el tamaño
 de la caja crece significativamente, demostrando que las aperturas de
 puerta inyectan una enorme varianza e incertidumbre al sistema. Esta
 evidencia visual (cajas asimétricas y colas pesadas de valores atípicos)
 indica fuertemente que los datos de las mermas no provienen de una
-distribución Normal estándar. Para justificar el uso de estadística
-inferencial avanzada, es estrictamente necesario comprobar esta falta de
-normalidad mediante una prueba de bondad de ajuste paramétrica.
+distribución Normal. Para justificar el uso de estadística inferencial
+avanzada, es necesario comprobar esta falta de normalidad mediante una
+prueba de bondad de ajuste.
 
 \subsection{Análisis de Distribuciones y Prueba de
 Normalidad}\label{anuxe1lisis-de-distribuciones-y-prueba-de-normalidad}
 
-En el cálculo estocástico aplicado al análisis de riesgo, comprender la
-``forma'' de las distribuciones resultantes es tan importante como
-conocer sus promedios. Las representaciones visuales anteriores
-(histogramas y diagramas de caja) sugieren una fuerte asimetría en los
-datos; sin embargo, en la estadística rigurosa, la forma visual debe
-comprobarse mediante una prueba de bondad de ajuste paramétrica.
+En el cálculo estocástico comprender la forma de las distribuciones
+resultantes es tan importante como conocer sus promedios. Las
+representaciones visuales anteriores (histogramas y diagramas de caja)
+sugieren una fuerte asimetría en los datos; sin embargo, en la
+estadística, la forma visual debe comprobarse mediante una prueba de
+bondad de ajuste paramétrica.
 
 Para este fin, se aplicó la \textbf{Prueba de Normalidad de
 Shapiro-Wilk} a las métricas operativas obtenidas de las 5,000
-simulaciones de Montecarlo. Este test evalúa la hipótesis nula (\(H_0\))
-de que los datos provienen de una distribución Normal (Gaussiana)
-perfecta. La regla de decisión se basa en el nivel de significancia
-(\(\alpha = 0.05\)):
+simulaciones de Montecarlo. Este test evalúa estadísticamente la
+hipótesis nula (\(H_0\)) de que los datos provienen de una distribución
+Normal. Siguiendo la metodología estándar para pruebas de bondad de
+ajuste (\citeproc{ref-montgomery2014applied}{Montgomery y Runger 2014}),
+la regla de decisión se basa en comparar el nivel de significancia
+(\(\alpha = 0.05\)) contra el valor-p obtenido:
 
 \begin{itemize}
 \tightlist
 \item
-  Si el \textbf{Valor-p \(< 0.05\)}, se rechaza \(H_0\), concluyendo
-  matemáticamente que la distribución es asimétrica, posee colas pesadas
-  y su varianza está dominada por eventos extremos.
+  Si el \textbf{Valor-p \(< 0.05\)}, se rechaza \(H_0\), concluyendo que
+  la distribución es asimétrica, posee colas pesadas y su varianza está
+  dominada por eventos extremos.
 \item
   Si el \textbf{Valor-p \(> 0.05\)}, no se rechaza \(H_0\), confirmando
-  que los datos se distribuyen como una campana simétrica.
+  que los datos provienen de una distribución Normal.
 \end{itemize}
 
 A continuación, se presenta la tabla comparativa con los Valores-p
 obtenidos para las métricas críticas de la red de frío en los tres
-contextos operativos:
+escenarios operativos.:
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1667}}
@@ -4218,9 +4241,25 @@ contextos operativos:
   >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2083}}
   >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2083}}
   >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2083}}@{}}
+\caption{Prueba de Normalidad de Shapiro-Wilk aplicada a las métricas
+críticas de la red de frío.}\label{tbl-shapiro-wilk}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-Métrica (Prueba de Shapiro-Wilk)
+Métrica
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Escenario A (Valor-p)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Escenario B (Valor-p)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Escenario C (Valor-p)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+¿Distribución Normal?
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Métrica
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Escenario A (Valor-p)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -4245,7 +4284,7 @@ Tiempo Fuera de Rango Normativo & \(2.44 \times 10^{-30}\) &
 \(1.90 \times 10^{-18}\) & \(2.48 \times 10^{-4}\) & No (Se rechaza
 \(H_0\)) \\
 \textbf{Impacto Logístico (Mermas)} & & & & \\
-Dosis Perdidas (Volumen) & \(1.74 \times 10^{-48}\) &
+Vacunas Perdidas (Volumen) & \(1.74 \times 10^{-48}\) &
 \(1.93 \times 10^{-24}\) & \(3.45 \times 10^{-8}\) & No (Se rechaza
 \(H_0\)) \\
 Pérdida Relativa (\%) & \(1.74 \times 10^{-48}\) &
@@ -4255,18 +4294,18 @@ Pérdida Relativa (\%) & \(1.74 \times 10^{-48}\) &
 
 \textbf{Interpretación del Test de Normalidad:}
 
-Los resultados de la prueba de Shapiro-Wilk confirman matemáticamente
-que \textbf{el riesgo en la red de frío no sigue una distribución
-Normal.} En el Escenario A (Línea Base), el Valor-p para las dosis
-perdidas es extremadamente cercano a cero (\(1.74 \times 10^{-48}\)), lo
-que dictamina un rechazo absoluto de la normalidad. Esto comprueba de
-manera irrefutable que el aislamiento pasivo del equipo depende por
-completo de eventos raros en la cola de la distribución (los apagones
-catastróficos aleatorios).
+Los resultados de la prueba de Shapiro-Wilk confirman que \textbf{el
+riesgo en la red de frío no sigue una distribución Normal.} En el
+Escenario A (Línea Base), el Valor-p para las vacunas perdidas es
+extremadamente cercano a cero (\(1.74 \times 10^{-48}\)), lo que implica
+un rechazo absoluto de la normalidad. Esto comprueba de manera
+irrefutable que el aislamiento pasivo del equipo depende por completo de
+eventos raros en la cola de la distribución (los apagones catastróficos
+aleatorios).
 
 No obstante, al analizar la evolución de los Valores-p hacia la derecha
-de la tabla, se observa un fenómeno estadístico fascinante impulsado por
-el \textbf{Teorema del Límite Central}. Conforme aumenta el estrés
+de la tabla, se observa un fenómeno estadístico interesante debido al
+\textbf{Teorema del Límite Central}. Conforme aumenta el estrés
 logístico debido a la saturación de aperturas de puerta, los Valores-p
 se hacen cada vez más grandes. En el Escenario C (Contingencia), el
 Valor-p de las pérdidas relativas asciende hasta
@@ -4275,19 +4314,20 @@ frío por encima de los \(8^\circ\text{C}\), el Valor-p (\(0.0491\))
 estuvo a milésimas de cruzar el umbral del \(0.05\).
 
 Esta evolución demuestra que la alta frecuencia de variables aleatorias
-(casi 1,000 resurtidos anuales) empuja fuertemente la geometría del
-riesgo hacia la normalidad. Bajo un estrés operativo masivo, el colapso
-del sistema deja de ser un ``evento raro e impredecible'' en la cola de
-la distribución para convertirse en un comportamiento constante,
-determinista y centrado.
+(casi 1,000 resurtidos anuales) empuja la geometría del riesgo hacia la
+normalidad. Bajo un estrés operativo masivo, el colapso del sistema deja
+de ser un ``evento raro e impredecible'' en la cola de la distribución
+para convertirse en un comportamiento constante, determinista y
+centrado.
 
-A pesar de este empuje geométrico, el rechazo uniforme de la hipótesis
-nula (\(H_0\)) en todas las métricas de pérdida de dosis exige descartar
-por completo el uso de estadística inferencial clásica paramétrica (como
-la desviación estándar tradicional o los intervalos Z). Para calcular el
-riesgo real y el intervalo de predicción final de la investigación con
-total rigor, es indispensable recurrir a métodos de inferencia no
-paramétrica.
+A pesar de esto, el rechazo de la hipótesis nula (\(H_0\)) en todas las
+métricas de pérdida de dosis exige descartar por completo el uso de
+estadística inferencial clásica paramétrica (como la desviación estándar
+tradicional o los intervalos Z). Por ello, para calcular el riesgo real
+y el intervalo de predicción final, es necesario recurrir a métodos de
+estadística no paramétrica.
+
+\chapter{HASTA AQUI}\label{hasta-aqui}
 
 \section{Inferencia Estadística No Paramétrica (Método
 Bootstrap)}\label{inferencia-estaduxedstica-no-paramuxe9trica-muxe9todo-bootstrap}
@@ -4779,6 +4819,11 @@ Stochastic Modeling}. 3rd ed. San Diego, CA: Academic Press.
 Kloeden, Peter E., y Eckhard Platen. 1992. \emph{Numerical Solution of
 Stochastic Differential Equations}. Vol. 23. Stochastic Modelling y
 Applied Probability. Berlin, Heidelberg: Springer-Verlag.
+
+\bibitem[\citeproctext]{ref-montgomery2014applied}
+Montgomery, Douglas C., y George C. Runger. 2014. \emph{Applied
+Statistics and Probability for Engineers}. 6th ed. Hoboken, NJ: John
+Wiley \& Sons.
 
 \bibitem[\citeproctext]{ref-oms_pqs_e003}
 Organización Mundial de la Salud. 2024. \emph{WHO Immunisation Devices -
