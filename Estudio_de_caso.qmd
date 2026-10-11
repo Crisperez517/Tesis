@@ -557,7 +557,7 @@ Ante la variabilidad de las aplicaciones diarias, el consumo se modela mediante 
 | Noviembre | 130 | Continuación de campaña invernal. |
 | Diciembre | 87 | Desaceleración por periodo vacacional de invierno. |
 
-: Demanda base diaria de vacunas por mes, ajustada a la estacionalidad epidemiológica y a las campañas nacionales de salud pública en México. {#tab-demanda-base}
+: Demanda base diaria de vacunas por mes, ajustada a la estacionalidad epidemiológica y a las campañas nacionales de salud pública en México. {#tbl-demanda-base}
 
 ### Acoplamiento Estocástico Termodinámico-Logístico
 

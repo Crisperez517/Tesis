@@ -209,7 +209,7 @@ A continuación, se presenta la tabla comparativa con los promedios poblacionale
 | Dosis Perdidas (Volumen) | 61 dosis | 343 dosis | 1,905 dosis |
 | Pérdida Relativa (%) | 1.21% | 1.36% | 2.57% |
 
-: Estadísticas de riesgo promedio anual para los tres escenarios operativos. {#tab-riesgo-operativo}
+: Estadísticas de riesgo promedio anual para los tres escenarios operativos. {#tbl-riesgo-operativo}
 
 ### Riesgo Operativo y Termodinámico Empírico
 

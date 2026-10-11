@@ -738,8 +738,13 @@ Figura&nbsp;4.11: Dinámica logística anual (Escenario C). La trayectoria azul 
 <h2 data-number="4.7" class="anchored" data-anchor-id="resultados-estadísticos-y-análisis-de-riesgo"><span class="header-section-number">4.7</span> Resultados Estadísticos y Análisis de Riesgo</h2>
 <p>Una vez completadas las 5,000 simulaciones de Montecarlo, procedemos a extraer las métricas operativas y termodinámicas de todos los años simulados. La simulación masiva de trayectorias revela el verdadero comportamiento del sistema a largo plazo, eliminando las variaciones extremas de un solo año.</p>
 <p>A continuación, se presenta la tabla comparativa con los promedios poblacionales empíricos, seguida del análisis descriptivo de dispersión e intervalos de confianza para cada escenario.</p>
+<div id="tbl-riesgo-operativo" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-riesgo-operativo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;4.1: Estadísticas de riesgo promedio anual para los tres escenarios operativos.
+</figcaption>
+<div aria-describedby="tbl-riesgo-operativo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Estadísticas de riesgo promedio anual para los tres escenarios operativos. {#tab-riesgo-operativo}</caption>
 <colgroup>
 <col style="width: 21%">
 <col style="width: 26%">
@@ -823,6 +828,9 @@ Figura&nbsp;4.11: Dinámica logística anual (Escenario C). La trayectoria azul 
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <section id="riesgo-operativo-y-termodinámico-empírico" class="level3" data-number="4.7.1">
 <h3 data-number="4.7.1" class="anchored" data-anchor-id="riesgo-operativo-y-termodinámico-empírico"><span class="header-section-number">4.7.1</span> Riesgo Operativo y Termodinámico Empírico</h3>
 <p><strong>Escenario A (Línea Base):</strong> La simulación de Montecarlo estabilizó el riesgo externo en un promedio de 64.3 apagones anuales. Al no existir interacción humana (cero aperturas), el riesgo recae puramente en la termodinámica pasiva del equipo. Se registró un promedio de 26.4 rupturas de la cadena de frío anuales por encima de los <span class="math inline">\(8^\circ\text{C}\)</span> (acumulando 12.6 horas) y 25.2 rupturas por debajo de los <span class="math inline">\(2^\circ\text{C}\)</span> (acumulando 11.8 horas). Es necesario destacar que la inercia térmica protegió al equipo de la congelación profunda, manteniendo el riesgo por debajo de los <span class="math inline">\(0^\circ\text{C}\)</span> estrictamente en cero. En el ámbito logístico, esta exposición pasiva provocó una destrucción promedio de 61 dosis (1.21% de pérdida anual). Sin embargo, el intervalo de confianza del 95% resulta muy amplio, oscilando entre apenas 2 y hasta 179 dosis destruidas al año, lo que sugiere una alta volatilidad ante apagones inusualmente largos.</p>
@@ -1060,7 +1068,7 @@ Figura&nbsp;4.26: Diagrama de caja de vacunas perdidas anualmente (Escenario C).
 <div id="tbl-shapiro-wilk" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-shapiro-wilk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabla&nbsp;4.1: Prueba de Normalidad de Shapiro-Wilk aplicada a las métricas críticas de la red de frío.
+Tabla&nbsp;4.2: Prueba de Normalidad de Shapiro-Wilk aplicada a las métricas críticas de la red de frío.
 </figcaption>
 <div aria-describedby="tbl-shapiro-wilk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
