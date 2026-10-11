@@ -448,15 +448,13 @@ window.Quarto = {
   <li><a href="#dispersión-y-valores-atípicos-diagramas-de-caja" id="toc-dispersión-y-valores-atípicos-diagramas-de-caja" class="nav-link" data-scroll-target="#dispersión-y-valores-atípicos-diagramas-de-caja"><span class="header-section-number">4.7.5</span> Dispersión y Valores Atípicos (Diagramas de Caja)</a></li>
   <li><a href="#análisis-de-distribuciones-y-prueba-de-normalidad" id="toc-análisis-de-distribuciones-y-prueba-de-normalidad" class="nav-link" data-scroll-target="#análisis-de-distribuciones-y-prueba-de-normalidad"><span class="header-section-number">4.7.6</span> Análisis de Distribuciones y Prueba de Normalidad</a></li>
   </ul></li>
+  <li><a href="#inferencia-estadística-no-paramétrica-método-bootstrap" id="toc-inferencia-estadística-no-paramétrica-método-bootstrap" class="nav-link" data-scroll-target="#inferencia-estadística-no-paramétrica-método-bootstrap"><span class="header-section-number">4.8</span> Inferencia Estadística No Paramétrica (Método Bootstrap)</a></li>
   <li><a href="#hasta-aqui" id="toc-hasta-aqui" class="nav-link" data-scroll-target="#hasta-aqui"><span class="header-section-number">5</span> HASTA AQUI</a>
   <ul class="collapse">
-  <li><a href="#inferencia-estadística-no-paramétrica-método-bootstrap" id="toc-inferencia-estadística-no-paramétrica-método-bootstrap" class="nav-link" data-scroll-target="#inferencia-estadística-no-paramétrica-método-bootstrap"><span class="header-section-number">5.1</span> Inferencia Estadística No Paramétrica (Método Bootstrap)</a>
-  <ul class="collapse">
-  <li><a href="#análisis-inferencial-de-riesgo-intervalos-al-95" id="toc-análisis-inferencial-de-riesgo-intervalos-al-95" class="nav-link" data-scroll-target="#análisis-inferencial-de-riesgo-intervalos-al-95"><span class="header-section-number">5.1.1</span> Análisis Inferencial de Riesgo (Intervalos al 95%)</a></li>
-  <li><a href="#validación-visual-de-la-inferencia-estabilización-estocástica" id="toc-validación-visual-de-la-inferencia-estabilización-estocástica" class="nav-link" data-scroll-target="#validación-visual-de-la-inferencia-estabilización-estocástica"><span class="header-section-number">5.1.2</span> Validación Visual de la Inferencia (Estabilización Estocástica)</a></li>
-  <li><a href="#precisión-del-estimador-dispersión-de-medias-bootstrap" id="toc-precisión-del-estimador-dispersión-de-medias-bootstrap" class="nav-link" data-scroll-target="#precisión-del-estimador-dispersión-de-medias-bootstrap"><span class="header-section-number">5.1.3</span> Precisión del Estimador (Dispersión de Medias Bootstrap)</a></li>
-  <li><a href="#conclusión-de-la-simulación-y-análisis-de-riesgo" id="toc-conclusión-de-la-simulación-y-análisis-de-riesgo" class="nav-link" data-scroll-target="#conclusión-de-la-simulación-y-análisis-de-riesgo"><span class="header-section-number">5.1.4</span> Conclusión de la Simulación y Análisis de Riesgo</a></li>
-  </ul></li>
+  <li><a href="#análisis-inferencial-de-riesgo-intervalos-al-95" id="toc-análisis-inferencial-de-riesgo-intervalos-al-95" class="nav-link" data-scroll-target="#análisis-inferencial-de-riesgo-intervalos-al-95"><span class="header-section-number">5.0.1</span> Análisis Inferencial de Riesgo (Intervalos al 95%)</a></li>
+  <li><a href="#validación-visual-de-la-inferencia-estabilización-estocástica" id="toc-validación-visual-de-la-inferencia-estabilización-estocástica" class="nav-link" data-scroll-target="#validación-visual-de-la-inferencia-estabilización-estocástica"><span class="header-section-number">5.0.2</span> Validación Visual de la Inferencia (Estabilización Estocástica)</a></li>
+  <li><a href="#precisión-del-estimador-dispersión-de-medias-bootstrap" id="toc-precisión-del-estimador-dispersión-de-medias-bootstrap" class="nav-link" data-scroll-target="#precisión-del-estimador-dispersión-de-medias-bootstrap"><span class="header-section-number">5.0.3</span> Precisión del Estimador (Dispersión de Medias Bootstrap)</a></li>
+  <li><a href="#conclusión-de-la-simulación-y-análisis-de-riesgo" id="toc-conclusión-de-la-simulación-y-análisis-de-riesgo" class="nav-link" data-scroll-target="#conclusión-de-la-simulación-y-análisis-de-riesgo"><span class="header-section-number">5.0.4</span> Conclusión de la Simulación y Análisis de Riesgo</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -741,7 +739,7 @@ Figura&nbsp;4.11: Dinámica logística anual (Escenario C). La trayectoria azul 
 <div id="tbl-riesgo-operativo" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-riesgo-operativo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabla&nbsp;4.1: Estadísticas de riesgo promedio anual para los tres escenarios operativos.
+Tabla&nbsp;4.1: Estadísticas de riesgo: Promedio anual para los tres escenarios operativos.
 </figcaption>
 <div aria-describedby="tbl-riesgo-operativo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -753,7 +751,7 @@ Tabla&nbsp;4.1: Estadísticas de riesgo promedio anual para los tres escenarios 
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Métrica (Promedio Anual)</th>
+<th style="text-align: left;">Métrica</th>
 <th style="text-align: center;">Escenario A (Línea Base)</th>
 <th style="text-align: center;">Escenario B (Apego Normativo)</th>
 <th style="text-align: center;">Escenario C (Contingencia)</th>
@@ -767,7 +765,7 @@ Tabla&nbsp;4.1: Estadísticas de riesgo promedio anual para los tres escenarios 
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Apagones de la CFE</td>
+<td style="text-align: left;">Apagones</td>
 <td style="text-align: center;">64.3</td>
 <td style="text-align: center;">64.3</td>
 <td style="text-align: center;">64.3</td>
@@ -1150,13 +1148,17 @@ Tabla&nbsp;4.2: Prueba de Normalidad de Shapiro-Wilk aplicada a las métricas cr
 <p>A pesar de esto, el rechazo de la hipótesis nula (<span class="math inline">\(H_0\)</span>) en todas las métricas de pérdida de dosis exige descartar por completo el uso de estadística inferencial clásica paramétrica (como la desviación estándar tradicional o los intervalos Z). Por ello, para calcular el riesgo real y el intervalo de predicción final, es necesario recurrir a métodos de estadística no paramétrica.</p>
 </section>
 </section>
-<section id="hasta-aqui" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> HASTA AQUI</h1>
-<section id="inferencia-estadística-no-paramétrica-método-bootstrap" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="inferencia-estadística-no-paramétrica-método-bootstrap"><span class="header-section-number">5.1</span> Inferencia Estadística No Paramétrica (Método Bootstrap)</h2>
-<p>Debido a que la prueba de Shapiro-Wilk rechazó la normalidad de las distribuciones de riesgo (las cuales presentan una fuerte asimetría y colas pesadas provocadas por apagones extremos), el uso de la estadística inferencial clásica (como la desviación estándar o los intervalos paramétricos Z) resulta matemáticamente incorrecto y sesgaría los resultados.</p>
-<p>Para resolver este problema de forma rigurosa, se implementó el método inferencial no paramétrico de <strong>Bootstrap</strong>. El funcionamiento de este algoritmo consiste en realizar un remuestreo masivo: se extraen aleatoriamente (con reemplazo) 10,000 nuevas muestras a partir de los 5,000 años originales simulados en el Montecarlo. Al calcular el promedio de cada una de estas 10,000 nuevas muestras, el Teorema del Límite Central garantiza que la distribución de dichas medias convergerá hacia una campana de Gauss perfecta, independientemente de la forma asimétrica de los datos originales. Esto permite aislar el ruido de los años atípicamente catastróficos y calcular un <strong>Intervalo de Confianza (IC) al 95%</strong> para afirmar con absoluta certeza matemática en qué rangos operará verdaderamente el centro de almacenamiento de vacunas.</p>
-<p>A continuación, se presenta la tabla resumen con los promedios esperados, seguida del desglose inferencial detallado con los intervalos de confianza del 95% para cada escenario operativo.</p>
+<section id="inferencia-estadística-no-paramétrica-método-bootstrap" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="inferencia-estadística-no-paramétrica-método-bootstrap"><span class="header-section-number">4.8</span> Inferencia Estadística No Paramétrica (Método Bootstrap)</h2>
+<p>Debido a que la prueba de Shapiro-Wilk rechazó la normalidad de las distribuciones de riesgo (las cuales presentan una fuerte asimetría y colas pesadas provocadas por apagones extremos), el uso de la estadística inferencial clásica resulta incorrecto y sesgaría los resultados.</p>
+<p>Para resolver este problema de forma rigurosa, se implementó el método inferencial no paramétrico de <strong>Bootstrap</strong> <span class="citation" data-cites="efron1993introduction">(<a href="references.html#ref-efron1993introduction" role="doc-biblioref">Efron y Tibshirani 1993</a>)</span>. El funcionamiento de este algoritmo consiste en realizar un remuestreo masivo: se extraen aleatoriamente (con reemplazo) 10,000 nuevas muestras de tamaño 5,000 a partir de los 5,000 años originales simulados en la Simulación de Montecarlo. Al calcular el promedio de cada una de estas 10,000 nuevas muestras, el Teorema del Límite Central garantiza que la distribución de dichas medias convergerá hacia una distribución normal, independientemente de la forma asimétrica de los datos originales. Esto permite aislar el ruido de los años atípicamente catastróficos y calcular un <strong>Intervalo de Confianza (IC) al 95%</strong> para afirmar con absoluta certeza en qué rangos operará verdaderamente el centro de almacenamiento de vacunas.</p>
+<p>A continuación, se presenta la tabla resumen con los promedios esperados, seguida del desglose detallado con los intervalos de confianza del 95% para cada escenario operativo.</p>
+<div id="tbl-riesgo-operativo-bootstrap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-riesgo-operativo-bootstrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;4.3: Estadísticas de riesgo: Promedio anual esperado aplicando el Método Bootstrap para los tres escenarios operativos.
+</figcaption>
+<div aria-describedby="tbl-riesgo-operativo-bootstrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 21%">
@@ -1166,7 +1168,7 @@ Tabla&nbsp;4.2: Prueba de Normalidad de Shapiro-Wilk aplicada a las métricas cr
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Métrica (Promedio Anual Esperado)</th>
+<th style="text-align: left;">Métrica</th>
 <th style="text-align: center;">Escenario A (Línea Base)</th>
 <th style="text-align: center;">Escenario B (Apego Normativo)</th>
 <th style="text-align: center;">Escenario C (Contingencia)</th>
@@ -1180,7 +1182,7 @@ Tabla&nbsp;4.2: Prueba de Normalidad de Shapiro-Wilk aplicada a las métricas cr
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Apagones de la CFE</td>
+<td style="text-align: left;">Apagones</td>
 <td style="text-align: center;">64.3</td>
 <td style="text-align: center;">64.3</td>
 <td style="text-align: center;">64.3</td>
@@ -1241,8 +1243,14 @@ Tabla&nbsp;4.2: Prueba de Normalidad de Shapiro-Wilk aplicada a las métricas cr
 </tr>
 </tbody>
 </table>
-<section id="análisis-inferencial-de-riesgo-intervalos-al-95" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="análisis-inferencial-de-riesgo-intervalos-al-95"><span class="header-section-number">5.1.1</span> Análisis Inferencial de Riesgo (Intervalos al 95%)</h3>
+</div>
+</figure>
+</div>
+</section>
+<section id="hasta-aqui" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> HASTA AQUI</h1>
+<section id="análisis-inferencial-de-riesgo-intervalos-al-95" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="análisis-inferencial-de-riesgo-intervalos-al-95"><span class="header-section-number">5.0.1</span> Análisis Inferencial de Riesgo (Intervalos al 95%)</h3>
 <p><strong>Escenario A (Línea Base):</strong> Bajo un régimen de aislamiento absoluto, el método Bootstrap redujo drásticamente la incertidumbre estadística. Se proyecta un promedio de 26.4 rupturas de la cadena de frío por encima de los <span class="math inline">\(8^\circ\text{C}\)</span>, acumulando 12.6 horas (0.14% del año) con un IC del 95% de [12.4 h (0.14%), 12.8 h (0.15%)]. Las rupturas por debajo de los <span class="math inline">\(2^\circ\text{C}\)</span> promedian 25.2 eventos, acumulando 11.8 horas (0.13%) con un IC del 95% de [11.7 h (0.13%), 12.0 h (0.14%)]. El primer evento crítico de falla ocurre en promedio en el Día 38, con un IC del 95% sumamente acotado entre el Día 37 y el Día 39. En cuanto a la congelación (<span class="math inline">\(&lt;0^\circ\text{C}\)</span>), el biológico sufrió daños únicamente en 23 de los 5,000 años simulados (0.46%), promediando un tiempo acumulado de 0.00 horas (0.000%) con un primer registro en el Día 195. En el ámbito logístico, el equipo operó un total de 24.4 horas (0.28%) fuera del rango normativo con un IC del 95% de [24.1 h (0.27%), 24.7 h (0.28%)], lo que genera una destrucción promedio de 61 dosis (1.21% de pérdida relativa) altamente acotada dentro de un IC del 95% de [59, 62] dosis.</p>
 <p><strong>Escenario B (Apego Normativo):</strong> Al estabilizar los datos con la interacción humana normada, se proyecta un promedio de 134.6 rupturas de la cadena de frío por encima de los <span class="math inline">\(8^\circ\text{C}\)</span>, acumulando 90.0 horas (1.02% del año) con un IC del 95% de [89.4 h (1.02%), 90.6 h (1.03%)]. Las rupturas por debajo de los <span class="math inline">\(2^\circ\text{C}\)</span> promedian 12.5 eventos, acumulando 5.6 horas (0.06%) con un IC del 95% de [5.5 h (0.06%), 5.7 h (0.07%)]. El primer evento crítico de falla se adelanta al Día 8, con un IC del 95% entre el Día 8 y el Día 9. El riesgo de congelación profunda (<span class="math inline">\(&lt;0^\circ\text{C}\)</span>) afectó solo a 9 de los 5,000 años (0.18%), promediando 0.00 horas (0.000%) con un primer registro en el Día 187. En el ámbito logístico, el equipo operó un total de 95.6 horas (1.09%) fuera del rango normativo con un IC del 95% de [95.0 h (1.08%), 96.2 h (1.10%)], resultando en una destrucción promedio de 343 dosis (1.36% de pérdida relativa), limitando estadísticamente el daño real esperado dentro de un IC del 95% de [340, 346] dosis.</p>
 <p><strong>Escenario C (Contingencia):</strong> Bajo el régimen de estrés masivo, el método inferencial proyecta un promedio de 419.7 rupturas de la cadena de frío por encima de los <span class="math inline">\(8^\circ\text{C}\)</span>, acumulando un crítico de 416.5 horas (4.74% del año) con un IC del 95% de [415.1 h (4.73%), 417.9 h (4.76%)]. Las rupturas por debajo de los <span class="math inline">\(2^\circ\text{C}\)</span> se reducen a un promedio de 9.0 eventos, acumulando 4.1 horas (0.05%) con un IC del 95% de [4.0 h (0.05%), 4.2 h (0.05%)]. El colapso del sistema es inminente, presentándose el primer evento crítico en el Día 3, con un IC del 95% exacto en el Día 3. La congelación (<span class="math inline">\(&lt;0^\circ\text{C}\)</span>) fue prácticamente nula, ocurriendo en apenas 7 años (0.14%), promediando 0.00 horas (0.000%) con un primer registro en el Día 210. En el impacto logístico global, el equipo operó 420.6 horas (4.79%) fuera del rango normativo con un IC del 95% de [419.1 h (4.77%), 422.0 h (4.80%)], detonando una destrucción masiva promedio de 1,905 dosis (2.57% de pérdida relativa), garantizando un margen de daño acotado dentro de un IC del 95% de [1896, 1913] dosis.</p>
@@ -1250,8 +1258,8 @@ Tabla&nbsp;4.2: Prueba de Normalidad de Shapiro-Wilk aplicada a las métricas cr
 <p>La aplicación del método Bootstrap revela el verdadero poder de la inferencia estadística sobre sistemas caóticos. Antes de este análisis, los datos descriptivos empíricos del Escenario A mostraban una volatilidad engañosa (sugiriendo que la pérdida podía ir desde 2 hasta 179 dosis). Sin embargo, el remuestreo de las medias colapsó esa incertidumbre, demostrando que la verdadera pérdida poblacional esperada para un equipo Haier HBC-150 sin aperturas de puerta es de apenas [59, 62] dosis anuales.</p>
 <p>Al comparar los tres intervalos de confianza estabilizados, la tendencia de riesgo queda demostrada con rigor absoluto. El paso de una operación pasiva (Escenario A) al apego normativo (Escenario B) quintuplica el daño poblacional real, pasando de 61 a 343 dosis destruidas. Finalmente, la contingencia logística (Escenario C) destruye cualquier margen de salvación termodinámica: el intervalo de confianza [1896, 1913] comprueba que, bajo una saturación de resurtidos, el colapso de la red de frío no es una probabilidad, sino una certeza determinista que arrasará con al menos el 2.56% de los biológicos administrados por el centro de salud en Tuxtla Gutiérrez, independientemente de la benevolencia del clima o las fallas de la CFE en ese año específico.</p>
 </section>
-<section id="validación-visual-de-la-inferencia-estabilización-estocástica" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="validación-visual-de-la-inferencia-estabilización-estocástica"><span class="header-section-number">5.1.2</span> Validación Visual de la Inferencia (Estabilización Estocástica)</h3>
+<section id="validación-visual-de-la-inferencia-estabilización-estocástica" class="level3" data-number="5.0.2">
+<h3 data-number="5.0.2" class="anchored" data-anchor-id="validación-visual-de-la-inferencia-estabilización-estocástica"><span class="header-section-number">5.0.2</span> Validación Visual de la Inferencia (Estabilización Estocástica)</h3>
 <p>Para comprobar visualmente la eficacia del método no paramétrico y garantizar que el Teorema del Límite Central actuó correctamente sobre el ruido del sistema, se graficaron las distribuciones normalizadas obtenidas a partir de las 10,000 medias muestrales de remuestreo para cada escenario.</p>
 <div id="fig-boot-a" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1287,8 +1295,8 @@ Figura&nbsp;5.3: Distribución normalizada del porcentaje de pérdida (Escenario
 <p>La visualización de los histogramas de medias de Bootstrap constituye la prueba matemática definitiva de la investigación. Al observar las figuras, se comprueba que la asimetría positiva y las colas pesadas de valores atípicos (visibles en los análisis empíricos previos) han sido completamente erradicadas. En los tres escenarios, independientemente de la brutal dispersión original generada por los apagones extremos de la CFE o la saturación clínica, el método logró converger el estimador hacia una distribución Normal simétrica.</p>
 <p>Este nivel de estabilización permite concluir que los Intervalos de Confianza al 95% calculados son exactos e irrefutables. Gracias al remuestreo masivo de Montecarlo y Bootstrap, la aleatoriedad climática y eléctrica del estado de Chiapas ha sido “domada” matemáticamente, logrando transformar la incertidumbre estocástica de la red de frío institucional en una predicción de riesgo determinista, precisa y lista para sustentar la toma de decisiones normativas.</p>
 </section>
-<section id="precisión-del-estimador-dispersión-de-medias-bootstrap" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="precisión-del-estimador-dispersión-de-medias-bootstrap"><span class="header-section-number">5.1.3</span> Precisión del Estimador (Dispersión de Medias Bootstrap)</h3>
+<section id="precisión-del-estimador-dispersión-de-medias-bootstrap" class="level3" data-number="5.0.3">
+<h3 data-number="5.0.3" class="anchored" data-anchor-id="precisión-del-estimador-dispersión-de-medias-bootstrap"><span class="header-section-number">5.0.3</span> Precisión del Estimador (Dispersión de Medias Bootstrap)</h3>
 <p>Para ilustrar de manera concluyente la reducción de la incertidumbre lograda por la inferencia no paramétrica, se construyeron diagramas de caja (<em>boxplots</em>) aplicados exclusivamente a las 10,000 medias muestrales obtenidas mediante el método Bootstrap para la métrica de dosis perdidas.</p>
 <div id="layout-boxplots-boot" class="quarto-layout-panel" data-layout-ncol="3">
 <div class="quarto-layout-row">
@@ -1334,14 +1342,17 @@ Figura&nbsp;5.6: Diagrama de caja de la media poblacional (Escenario C). A pesar
 <p>La visualización de los diagramas de caja aplicados a las medias muestrales demuestra visualmente la robustez del método Bootstrap. Al comparar estas figuras con los diagramas empíricos originales, el contraste es absoluto: mientras que la estadística descriptiva inicial mostraba una varianza gigantesca y colas pesadas llenas de años atípicamente destructivos, el remuestreo logró “aplastar” esa varianza. Los <em>boxplots</em> naranjas demuestran que, al evaluar el riesgo a nivel poblacional y no a nivel de un año fortuito, la incertidumbre desaparece, permitiendo proyectar el daño con un margen de error de apenas unas cuantas dosis.</p>
 <hr>
 </section>
-<section id="conclusión-de-la-simulación-y-análisis-de-riesgo" class="level3" data-number="5.1.4">
-<h3 data-number="5.1.4" class="anchored" data-anchor-id="conclusión-de-la-simulación-y-análisis-de-riesgo"><span class="header-section-number">5.1.4</span> Conclusión de la Simulación y Análisis de Riesgo</h3>
+<section id="conclusión-de-la-simulación-y-análisis-de-riesgo" class="level3" data-number="5.0.4">
+<h3 data-number="5.0.4" class="anchored" data-anchor-id="conclusión-de-la-simulación-y-análisis-de-riesgo"><span class="header-section-number">5.0.4</span> Conclusión de la Simulación y Análisis de Riesgo</h3>
 <p>La integración del modelado estocástico (Ecuaciones Diferenciales Estocásticas) con el análisis inferencial masivo (Montecarlo y Bootstrap) ha permitido cuantificar, de manera rigurosa e irrefutable, el verdadero nivel de riesgo operativo que enfrenta la red de frío institucional en Tuxtla Gutiérrez, Chiapas.</p>
 <p>El análisis demuestra que el aislamiento térmico del equipo Haier HBC-150 y las fallas eléctricas intermitentes de la CFE, por sí solos, no representan una amenaza sistemática para la viabilidad de las vacunas (Escenario A). El verdadero catalizador del colapso térmico es la interacción humana. El apego normativo (Escenario B) expone la fragilidad de la cadena de frío al demostrar que el simple acto de extraer dosis de manera controlada quintuplica las pérdidas poblacionales. Peor aún, bajo condiciones de contingencia y saturación logística (Escenario C), el sistema pierde toda capacidad de recuperación térmica, transformando las excursiones aisladas en una destrucción exponencial, continua y estadísticamente inevitable.</p>
 <p>Esta evidencia matemática confirma que la preservación de los biológicos no depende únicamente de la modernización de la infraestructura eléctrica o del aislamiento pasivo de los equipos, sino que exige una reestructuración urgente de los protocolos logísticos de resurtido y manejo de inventario en las unidades de salud.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-efron1993introduction" class="csl-entry" role="listitem">
+Efron, Bradley, y Robert J. Tibshirani. 1993. <em>An Introduction to the Bootstrap</em>. Boca Raton, FL: Chapman; Hall/CRC.
+</div>
 <div id="ref-montgomery2014applied" class="csl-entry" role="listitem">
 Montgomery, Douglas C., y George C. Runger. 2014. <em>Applied Statistics and Probability for Engineers</em>. 6th ed. Hoboken, NJ: John Wiley &amp; Sons.
 </div>
@@ -1358,7 +1369,6 @@ Pérez, C. 2026a. <span>«Simulación y Análisis de Riesgo en la Red de Frío p
 Ross, Sheldon M. 2018. <em>A First Course in Probability</em>. 10th ed. Pearson.
 </div>
 </div>
-</section>
 </section>
 </section>
 

@@ -187,10 +187,10 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -3662,11 +3662,11 @@ e intervalos de confianza para cada escenario.
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}@{}}
-\caption{Estadísticas de riesgo promedio anual para los tres escenarios
+\caption{Estadísticas de riesgo: Promedio anual para los tres escenarios
 operativos.}\label{tbl-riesgo-operativo}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-Métrica (Promedio Anual)
+Métrica
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Escenario A (Línea Base)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -3678,7 +3678,7 @@ Escenario C (Contingencia)
 \endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-Métrica (Promedio Anual)
+Métrica
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Escenario A (Línea Base)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -3691,7 +3691,7 @@ Escenario C (Contingencia)
 \bottomrule\noalign{}
 \endlastfoot
 \textbf{Perturbaciones Externas} & & & \\
-Apagones de la CFE & 64.3 & 64.3 & 64.3 \\
+Apagones & 64.3 & 64.3 & 64.3 \\
 Aperturas de Puerta & 0 & 499 & 998 \\
 \textbf{Riesgo Termodinámico} & & & \\
 \(T(t) > 8^\circ\text{C}\) & 26.4 eventos & 134.6 eventos & 419.7
@@ -4327,44 +4327,57 @@ tradicional o los intervalos Z). Por ello, para calcular el riesgo real
 y el intervalo de predicción final, es necesario recurrir a métodos de
 estadística no paramétrica.
 
-\chapter{HASTA AQUI}\label{hasta-aqui}
-
 \section{Inferencia Estadística No Paramétrica (Método
 Bootstrap)}\label{inferencia-estaduxedstica-no-paramuxe9trica-muxe9todo-bootstrap}
 
 Debido a que la prueba de Shapiro-Wilk rechazó la normalidad de las
 distribuciones de riesgo (las cuales presentan una fuerte asimetría y
 colas pesadas provocadas por apagones extremos), el uso de la
-estadística inferencial clásica (como la desviación estándar o los
-intervalos paramétricos Z) resulta matemáticamente incorrecto y sesgaría
-los resultados.
+estadística inferencial clásica resulta incorrecto y sesgaría los
+resultados.
 
 Para resolver este problema de forma rigurosa, se implementó el método
-inferencial no paramétrico de \textbf{Bootstrap}. El funcionamiento de
-este algoritmo consiste en realizar un remuestreo masivo: se extraen
-aleatoriamente (con reemplazo) 10,000 nuevas muestras a partir de los
-5,000 años originales simulados en el Montecarlo. Al calcular el
-promedio de cada una de estas 10,000 nuevas muestras, el Teorema del
-Límite Central garantiza que la distribución de dichas medias convergerá
-hacia una campana de Gauss perfecta, independientemente de la forma
-asimétrica de los datos originales. Esto permite aislar el ruido de los
-años atípicamente catastróficos y calcular un \textbf{Intervalo de
-Confianza (IC) al 95\%} para afirmar con absoluta certeza matemática en
-qué rangos operará verdaderamente el centro de almacenamiento de
-vacunas.
+inferencial no paramétrico de \textbf{Bootstrap}
+(\citeproc{ref-efron1993introduction}{Efron y Tibshirani 1993}). El
+funcionamiento de este algoritmo consiste en realizar un remuestreo
+masivo: se extraen aleatoriamente (con reemplazo) 10,000 nuevas muestras
+de tamaño 5,000 a partir de los 5,000 años originales simulados en la
+Simulación de Montecarlo. Al calcular el promedio de cada una de estas
+10,000 nuevas muestras, el Teorema del Límite Central garantiza que la
+distribución de dichas medias convergerá hacia una distribución normal,
+independientemente de la forma asimétrica de los datos originales. Esto
+permite aislar el ruido de los años atípicamente catastróficos y
+calcular un \textbf{Intervalo de Confianza (IC) al 95\%} para afirmar
+con absoluta certeza en qué rangos operará verdaderamente el centro de
+almacenamiento de vacunas.
 
 A continuación, se presenta la tabla resumen con los promedios
-esperados, seguida del desglose inferencial detallado con los intervalos
-de confianza del 95\% para cada escenario operativo.
+esperados, seguida del desglose detallado con los intervalos de
+confianza del 95\% para cada escenario operativo.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2105}}
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
   >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}@{}}
+\caption{Estadísticas de riesgo: Promedio anual esperado aplicando el
+Método Bootstrap para los tres escenarios
+operativos.}\label{tbl-riesgo-operativo-bootstrap}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-Métrica (Promedio Anual Esperado)
+Métrica
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Escenario A (Línea Base)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Escenario B (Apego Normativo)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Escenario C (Contingencia)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Métrica
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Escenario A (Línea Base)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -4377,7 +4390,7 @@ Escenario C (Contingencia)
 \bottomrule\noalign{}
 \endlastfoot
 \textbf{Perturbaciones Externas} & & & \\
-Apagones de la CFE & 64.3 & 64.3 & 64.3 \\
+Apagones & 64.3 & 64.3 & 64.3 \\
 Aperturas de Puerta & 0 & 499 & 998 \\
 \textbf{Riesgo Termodinámico} & & & \\
 \(T(t) > 8^\circ\text{C}\) & 26.4 eventos & 134.6 eventos & 419.7
@@ -4392,6 +4405,8 @@ Tiempo Fuera de Rango Normativo & 24.4 horas (0.28\%) & 95.6 horas
 Dosis Perdidas (Volumen) & 61 dosis & 343 dosis & 1,905 dosis \\
 Pérdida Relativa (\%) & 1.21\% & 1.36\% & 2.57\% \\
 \end{longtable}
+
+\chapter{HASTA AQUI}\label{hasta-aqui}
 
 \subsection{Análisis Inferencial de Riesgo (Intervalos al
 95\%)}\label{anuxe1lisis-inferencial-de-riesgo-intervalos-al-95}
@@ -4804,6 +4819,10 @@ Bacher, y Henrik Madsen. 2013. {«Grey-box modeling for system
 identification of household refrigerators: A step toward smart
 appliances»}. En \emph{2013 4th International Youth Conference on Energy
 (IYCE)}, 1-5. IEEE. \url{https://doi.org/10.1109/IYCE.2013.6604197}.
+
+\bibitem[\citeproctext]{ref-efron1993introduction}
+Efron, Bradley, y Robert J. Tibshirani. 1993. \emph{An Introduction to
+the Bootstrap}. Boca Raton, FL: Chapman; Hall/CRC.
 
 \bibitem[\citeproctext]{ref-karatzas1998brownian}
 Karatzas, Ioannis, y Steven E. Shreve. 1998. \emph{Brownian Motion and

@@ -195,10 +195,10 @@ Una vez completadas las 5,000 simulaciones de Montecarlo, procedemos a extraer l
 
 A continuación, se presenta la tabla comparativa con los promedios poblacionales empíricos, seguida del análisis descriptivo de dispersión e intervalos de confianza para cada escenario.
 
-| Métrica (Promedio Anual) | Escenario A (Línea Base) | Escenario B (Apego Normativo) | Escenario C (Contingencia) |
+| Métrica | Escenario A (Línea Base) | Escenario B (Apego Normativo) | Escenario C (Contingencia) |
 | :--- | :---: | :---: | :---: |
 | **Perturbaciones Externas** | | | |
-| Apagones de la CFE | 64.3 | 64.3 | 64.3 |
+| Apagones | 64.3 | 64.3 | 64.3 |
 | Aperturas de Puerta | 0 | 499 | 998 |
 | **Riesgo Termodinámico** | | | |
 | $T(t) > 8^\circ\text{C}$ | 26.4 eventos | 134.6 eventos | 419.7 eventos |
@@ -209,7 +209,7 @@ A continuación, se presenta la tabla comparativa con los promedios poblacionale
 | Dosis Perdidas (Volumen) | 61 dosis | 343 dosis | 1,905 dosis |
 | Pérdida Relativa (%) | 1.21% | 1.36% | 2.57% |
 
-: Estadísticas de riesgo promedio anual para los tres escenarios operativos. {#tbl-riesgo-operativo}
+: Estadísticas de riesgo: Promedio anual para los tres escenarios operativos. {#tbl-riesgo-operativo}
 
 ### Riesgo Operativo y Termodinámico Empírico
 
@@ -347,29 +347,31 @@ Esta evolución demuestra que la alta frecuencia de variables aleatorias (casi 1
 
 A pesar de esto, el rechazo de la hipótesis nula ($H_0$) en todas las métricas de pérdida de dosis exige descartar por completo el uso de estadística inferencial clásica paramétrica (como la desviación estándar tradicional o los intervalos Z). Por ello, para calcular el riesgo real y el intervalo de predicción final, es necesario recurrir a métodos de estadística no paramétrica.
 
-# HASTA AQUI
-
 ## Inferencia Estadística No Paramétrica (Método Bootstrap)
 
-Debido a que la prueba de Shapiro-Wilk rechazó la normalidad de las distribuciones de riesgo (las cuales presentan una fuerte asimetría y colas pesadas provocadas por apagones extremos), el uso de la estadística inferencial clásica (como la desviación estándar o los intervalos paramétricos Z) resulta matemáticamente incorrecto y sesgaría los resultados.
+Debido a que la prueba de Shapiro-Wilk rechazó la normalidad de las distribuciones de riesgo (las cuales presentan una fuerte asimetría y colas pesadas provocadas por apagones extremos), el uso de la estadística inferencial clásica resulta incorrecto y sesgaría los resultados.
 
-Para resolver este problema de forma rigurosa, se implementó el método inferencial no paramétrico de **Bootstrap**. El funcionamiento de este algoritmo consiste en realizar un remuestreo masivo: se extraen aleatoriamente (con reemplazo) 10,000 nuevas muestras a partir de los 5,000 años originales simulados en el Montecarlo. Al calcular el promedio de cada una de estas 10,000 nuevas muestras, el Teorema del Límite Central garantiza que la distribución de dichas medias convergerá hacia una campana de Gauss perfecta, independientemente de la forma asimétrica de los datos originales. Esto permite aislar el ruido de los años atípicamente catastróficos y calcular un **Intervalo de Confianza (IC) al 95%** para afirmar con absoluta certeza matemática en qué rangos operará verdaderamente el centro de almacenamiento de vacunas.
+Para resolver este problema de forma rigurosa, se implementó el método inferencial no paramétrico de **Bootstrap** [@efron1993introduction]. El funcionamiento de este algoritmo consiste en realizar un remuestreo masivo: se extraen aleatoriamente (con reemplazo) 10,000 nuevas muestras de tamaño 5,000 a partir de los 5,000 años originales simulados en la Simulación de Montecarlo. Al calcular el promedio de cada una de estas 10,000 nuevas muestras, el Teorema del Límite Central garantiza que la distribución de dichas medias convergerá hacia una distribución normal, independientemente de la forma asimétrica de los datos originales. Esto permite aislar el ruido de los años atípicamente catastróficos y calcular un **Intervalo de Confianza (IC) al 95%** para afirmar con absoluta certeza en qué rangos operará verdaderamente el centro de almacenamiento de vacunas.
 
-A continuación, se presenta la tabla resumen con los promedios esperados, seguida del desglose inferencial detallado con los intervalos de confianza del 95% para cada escenario operativo.
+A continuación, se presenta la tabla resumen con los promedios esperados, seguida del desglose detallado con los intervalos de confianza del 95% para cada escenario operativo.
 
-| Métrica (Promedio Anual Esperado) | Escenario A (Línea Base) | Escenario B (Apego Normativo) | Escenario C (Contingencia) |
+| Métrica | Escenario A (Línea Base) | Escenario B (Apego Normativo) | Escenario C (Contingencia) |
 | :--- | :---: | :---: | :---: |
 | **Perturbaciones Externas** | | | |
-| Apagones de la CFE | 64.3 | 64.3 | 64.3 |
+| Apagones | 64.3 | 64.3 | 64.3 |
 | Aperturas de Puerta | 0 | 499 | 998 |
 | **Riesgo Termodinámico** | | | |
 | $T(t) > 8^\circ\text{C}$ | 26.4 eventos | 134.6 eventos | 419.7 eventos |
 | $T(t) < 2^\circ\text{C}$ | 25.2 eventos | 12.5 eventos | 9.0 eventos |
 | $T(t) < 0^\circ\text{C}$ | 0.01 eventos | 0.00 eventos | 0.00 eventos |
-| Tiempo Fuera de Rango Normativo| 24.4 horas (0.28%) | 95.6 horas (1.09%) | 420.6 horas (4.79%) |
+| Tiempo Fuera de Rango Normativo | 24.4 horas (0.28%) | 95.6 horas (1.09%) | 420.6 horas (4.79%) |
 | **Impacto Logístico (Mermas)** | | | |
 | Dosis Perdidas (Volumen) | 61 dosis | 343 dosis | 1,905 dosis |
 | Pérdida Relativa (%) | 1.21% | 1.36% | 2.57% |
+
+: Estadísticas de riesgo: Promedio anual esperado aplicando el Método Bootstrap para los tres escenarios operativos. {#tbl-riesgo-operativo-bootstrap}
+
+# HASTA AQUI
 
 ### Análisis Inferencial de Riesgo (Intervalos al 95%)
 
