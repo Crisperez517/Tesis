@@ -758,40 +758,76 @@ Entonces, para cualquier condición inicial $\mathcal{F}_0$-medible tal que $\ma
 Una vez garantizada la solución bajo un régimen constante mediante la métrica de R. Situ, la validación global del sistema híbrido se obtiene mediante una demostración constructiva basada en la técnica de empalme topológico en los tiempos de parada estocásticos de la cadena de Markov. Demostraremos formalmente este resultado fundamental que asocia la teoría de difusiones con la teoría de switching de Mao y Yuan, y Yin y Zhu [@yin2010hybrid].
 
 ::: {#thm-mao-switching}
-### Teorema de Concatenación de Soluciones Híbridas (Switching Markoviano)
-Sea $\alpha(t)$ una cadena de Markov en tiempo continuo sobre un espacio de estados finito $\mathcal{M}$, definida por una matriz generadora acotada $Q$. Sean $0 = \tau_0 < \tau_1 < \tau_2 < \dots$ los tiempos de parada aleatorios correspondientes a los saltos de régimen de $\alpha(t)$. 
+### Teorema de Existencia y Unicidad para la EDE con Régimen de Markov
+Sea $\alpha(t)$ una cadena de Markov en tiempo continuo con espacio de estados finito $\mathcal{M} = \{1, 2, \dots, m\}$ y matriz generadora acotada $Q = (q_{ij})$, cuyas tasas de transición son finitas. Consideremos la ecuación diferencial estocástica híbrida:
+$$ \begin{aligned} dX(t) ={}& b_{\alpha(t^-)}(t, X(t^-)) dt \\ &+ \sigma_{\alpha(t^-)}(t, X(t^-)) dW(t) \\ &+ \int_{\mathbb{R}} \gamma_{\alpha(t^-)}(t, X(t^-), z) \tilde{N}(dt, dz), \end{aligned} $$
+con condición inicial $X(0) = X_0$, donde $X_0$ es $\mathcal{F}_0$-medible y $\mathbb{E}[|X_0|^2] < \infty$.
 
-Puesto que el espacio de estados es finito y las tasas de transición $q_{ij}$ están acotadas, la cadena es no explosiva, es decir, $\mathbb{P}(\lim_{k \to \infty} \tau_k = \infty) = 1$. Si en cada intervalo aleatorio $[\tau_k, \tau_{k+1})$ el sistema satisface las condiciones del @thm-situ-existencia para el régimen estacionario $i_k \in \mathcal{M}$, la solución puede ser concatenada de forma iterativa tomando el límite por la izquierda $\lim_{t \uparrow \tau_k} X^{(k-1)}(t)$ como la nueva condición inicial fuerte $X^{(k)}(\tau_k)$. 
+Supongamos que se cumplen las siguientes hipótesis:
 
-En consecuencia, el sistema híbrido global posee una única solución fuerte bien definida para todo $t \in [0, \infty)$, y las trayectorias no divergen a infinito en tiempo finito.
+1. Para cada régimen $i \in \mathcal{M}$, los coeficientes $b_i, \sigma_i, \gamma_i$ satisfacen las condiciones de Lipschitz global y de crecimiento lineal del Teorema de Existencia y Unicidad con Saltos de Poisson (Teorema de Situ).
+2. Los procesos $W(t)$, $N(dt, dz)$ y $\alpha(t)$ son mutuamente independientes, y la medida compensadora de $N$ está dada por $\nu_t(dz)dt = \lambda(t)F(dz)dt$, donde la intensidad $\lambda(t)$ es una función localmente integrable.
+3. La cadena de Markov no presenta explosión, es decir, tiene un número finito de cambios de régimen casi seguramente en cualquier intervalo temporal acotado.
+
+Entonces, para todo horizonte finito $H < \infty$, la ecuación híbrida admite una única solución fuerte con trayectorias càdlàg en el intervalo $[0, H]$, casi seguramente. Además, bajo las condiciones de crecimiento lineal uniformes en los regímenes, la solución satisface la condición de integrabilidad del supremo:
+$$ \mathbb{E}\left[ \sup_{0 \le t \le H} |X(t)|^2 \right] < \infty. $$
 :::
 
 **Demostración:**
 
-La prueba de este teorema procede mediante un argumento de inducción estocástica sobre la secuencia de tiempos de parada $\{\tau_k\}_{k=0}^\infty$ asociados a los cambios de estado de la cadena de Markov $\alpha(t)$.
+La prueba se construye mediante un argumento de inducción estocástica, concatenando las soluciones locales entre los tiempos de cambio de régimen.
 
-*Paso 1: Localización y Existencia en el Primer Intervalo.*
-Consideremos el primer intervalo estocástico $[0, \tau_1)$. En este dominio temporal, la cadena de Markov se encuentra fija en su estado inicial $\alpha(t) = \alpha(0) = i_0$. El sistema híbrido se reduce temporalmente a una ecuación diferencial estocástica con saltos impulsados por una medida compensada, pero sin cambios de régimen:
-$$dX^{(0)}(t) = b(t, X^{(0)}(t^-), i_0)dt + \sigma(t, X^{(0)}(t^-), i_0)dW(t) + \int_{\mathbb{R}} \gamma(t, X^{(0)}(t^-), i_0, z) \tilde{N}(dt, dz)$$
-Puesto que, por hipótesis, los coeficientes satisfacen las condiciones de Lipschitz y de Crecimiento Lineal del `@thm-situ-existencia` para el régimen estacionario $i_0$, existe una solución estocástica fuerte y única, $X^{(0)}(t)$, bien definida para todo $t \in [0, \tau_1)$.
+*Paso 1: Tiempos de cambio de régimen.*
+Sean $\tau_0 = 0$ y definamos recursivamente la secuencia de tiempos de parada:
+$$ \tau_{n+1} = \inf\{t > \tau_n : \alpha(t) \neq \alpha(t^-)\}, \quad n \ge 0, $$
+los cuales corresponden a los instantes sucesivos de cambio de régimen. Por la hipótesis 3 (no explosión), para cualquier horizonte temporal finito $H < \infty$, el número de transiciones en dicho intervalo es finito casi seguramente:
+$$ N_\alpha(H) := \#\{n \ge 1 : \tau_n \le H\} < \infty \quad \text{casi seguramente.} $$
+En consecuencia, casi seguramente, el intervalo $[0, H]$ queda particionado en un número finito de subintervalos estocásticos semiabiertos en los que el régimen de la cadena permanece constante:
+$$ [\tau_0, \tau_1), [\tau_1, \tau_2), \dots, [\tau_{N_\alpha(H)}, H]. $$
+En el interior de cada uno de estos subintervalos, la dinámica de $X(t)$ corresponde a una EDE con coeficientes fijos asociados a un único régimen.
 
-*Paso 2: Empalme Topológico y Continuidad Càdlàg.*
-Para extender la solución más allá de $\tau_1$, debemos establecer una condición inicial para el siguiente intervalo. Dado que el proceso debe habitar el espacio de trayectorias *càdlàg* (continuas por la derecha, con límites por la izquierda), definimos el límite de la solución justo antes del cambio de régimen:
-$$X(\tau_1^-) = \lim_{t \uparrow \tau_1} X^{(0)}(t)$$
-Este límite existe con probabilidad 1 y es una variable aleatoria finita y $\mathcal{F}_{\tau_1}$-medible. Establecemos la condición inicial para el siguiente régimen como $X^{(1)}(\tau_1) = X(\tau_1^-)$. 
+*Paso 2: Existencia y unicidad en el primer intervalo.*
+En el intervalo inicial $[0, \tau_1)$, el régimen del sistema es constante e igual a $\alpha(0)$. Por lo tanto, la ecuación híbrida colapsa a la siguiente EDE clásica con saltos:
+$$ \begin{aligned} dX(t) ={}& b_{\alpha(0)}(t, X(t^-)) dt \\ &+ \sigma_{\alpha(0)}(t, X(t^-)) dW(t) \\ &+ \int_{\mathbb{R}} \gamma_{\alpha(0)}(t, X(t^-), z) \tilde{N}(dt, dz). \end{aligned} $$
+Por la hipótesis 1, los coeficientes correspondientes al régimen $\alpha(0)$ satisfacen estrictamente las condiciones de Lipschitz global y de crecimiento lineal. En consecuencia, el Teorema de Existencia y Unicidad con Saltos de Poisson (Teorema de Situ) garantiza la existencia y unicidad de una solución fuerte para esta ecuación en el intervalo dado.
 
-*Paso 3: Unicidad en el Intervalo mediante Grönwall.*
-Para garantizar la unicidad de la solución en el intervalo $[\tau_1, \tau_2)$ bajo el nuevo régimen $i_1$, supongamos que existen dos soluciones estocásticas fuertes, $X(t)$ e $Y(t)$, que parten de la misma condición inicial empalmada $X(\tau_1^-)$. Evaluamos la esperanza matemática del supremo de la diferencia cuadrática entre ambas soluciones. Aplicando las isometrías de Itô (para el movimiento Browniano y la medida de Poisson compensada) y utilizando las desigualdades de Cauchy-Schwarz, la condición de Lipschitz nos asegura la existencia de una constante universal $C > 0$ tal que:
-$$\mathbb{E}\left[ \sup_{\tau_1 \le s \le t} \vert{}X(s) - Y(s)\vert{}^2 \right] \le C \int_{\tau_1}^t \mathbb{E}\left[ \sup_{\tau_1 \le u \le s} \vert{}X(u) - Y(u)\vert{}^2 \right] ds$$
-Definiendo la función no negativa $u(t) = \mathbb{E}\left[ \sup_{\tau_1 \le s \le t} \vert{}X(s) - Y(s)\vert{}^2 \right]$, la desigualdad anterior se reescribe como $u(t) \le 0 + C \int_{\tau_1}^t u(s) ds$. Aplicando la Desigualdad Integral de Grönwall (`@lem-gronwall`), deducimos estrictamente que:
-$$u(t) \le 0 \cdot \exp(C(t-\tau_1)) = 0$$
-Por lo tanto, $\mathbb{E}\left[ \sup_{\tau_1 \le s \le t} \vert{}X(s) - Y(s)\vert{}^2 \right] = 0$, lo que implica que $X(t) = Y(t)$ casi seguramente para todo $t \in [\tau_1, \tau_2)$. La unicidad fuerte queda demostrada.
+Construimos la solución hasta el primer tiempo de cambio estocástico y definimos su valor en ese instante crítico mediante el límite por la izquierda:
+$$ X(\tau_1) = X(\tau_1^-). $$
+Esta igualdad matemática expresa que el cambio de régimen en sí mismo no induce un salto instantáneo en la variable de estado. Las discontinuidades de $X(t)$ provienen exclusivamente de las perturbaciones integradas respecto a la medida aleatoria de Poisson $\tilde{N}(dt, dz)$.
 
-*Paso 4: Existencia Global y No Explosión.*
-Por el principio de inducción matemática, el proceso de concatenación y unicidad puede repetirse para generar una solución $X^{(k)}(t)$ en cada intervalo sucesivo $[\tau_k, \tau_{k+1})$. Para que la solución sea global, es imperativo que el sistema no experimente infinitas conmutaciones de régimen en un tiempo finito (fenómeno conocido como explosión o comportamiento de Zenón).
-Como la cadena de Markov $\alpha(t)$ toma valores en un espacio de estados estrictamente finito $\mathcal{M}$, y los elementos de su matriz generadora $Q$ están uniformemente acotados ($\vert{}q_{ij}\vert{} \le \max_{i} \vert{}q_{ii}\vert{} < \infty$), la cadena es intrínsecamente no explosiva. Es decir, los tiempos de parada tienden a infinito con probabilidad 1:
-$$\mathbb{P}\left(\lim_{k \to \infty} \tau_k = \infty\right) = 1$$
-Consecuentemente, la solución concatenada $X(t)$ puede extenderse hasta cubrir todo el semieje temporal $[0, \infty)$, garantizando la existencia de una única solución fuerte global cuyas trayectorias no divergen a infinito en tiempo finito. $\blacksquare$
+*Paso 3: Continuación después de un cambio de régimen.*
+Supongamos, como hipótesis de inducción, que la solución ha sido construida de forma única y fuerte hasta el tiempo de parada $\tau_n$, y que el estado $X(\tau_n)$ está bien definido y es $\mathcal{F}_{\tau_n}$-medible. En el subsecuente intervalo $[\tau_n, \tau_{n+1})$, el régimen del sistema permanece constante e igual a $\alpha(\tau_n)$.
+
+La condición inicial para la evolución en este nuevo intervalo es precisamente $X(\tau_n)$. Gracias a la hipótesis 2 (independencia de los procesos conductores $W$, $N$ y $\alpha$) y a la propiedad de los incrementos independientes posteriores a un tiempo de parada para el movimiento Browniano y los procesos de Poisson, la ecuación en este intervalo adopta nuevamente la forma de una EDE con régimen fijo, condicionada a la información en $\tau_n$.
+
+Aplicando iterativamente el teorema de Situ al régimen $\alpha(\tau_n)$, se obtiene una solución fuerte y única en dicho subintervalo. El valor del estado en el siguiente tiempo de cambio se define por continuidad respecto al cambio de régimen:
+$$ X(\tau_{n+1}) = X(\tau_{n+1}^-), $$
+salvo, por supuesto, por los saltos intrínsecos que provengan de la propia medida de Poisson evaluada en ese instante. Bajo la suposición de independencia mutua, la probabilidad de que un salto generado por la medida de Poisson ocurra simultáneamente y coincida exactamente con un tiempo de cambio de la cadena de Markov es de medida cero.
+
+Aplicando este argumento por inducción matemática, se construye de manera rigurosa una solución única en cada subintervalo de régimen constante.
+
+*Paso 4: Concatenación topológica de las soluciones.*
+Dado que en el horizonte acotado $[0, H]$ ocurren casi seguramente un número finito de cambios de régimen ($N_\alpha(H) < \infty$), el procedimiento iterativo detallado anteriormente requiere un número estrictamente finito de aplicaciones del teorema de Situ. Las soluciones locales construidas en los distintos subintervalos coinciden analíticamente en los tiempos de empalme $\{\tau_n\}$, puesto que el valor inicial de cada nuevo tramo corresponde exactamente al valor final límite del tramo predecesor.
+
+Por consiguiente, podemos definir una única trayectoria global $X(t)$ en todo el dominio $[0, H]$ concatenando las soluciones locales de los distintos regímenes. Puesto que cada tramo individual habita el espacio de funciones càdlàg, y los empalmes en los tiempos $\tau_n$ no introducen discontinuidades adicionales en la variable de estado, se concluye que la trayectoria global $X(t)$ también es globalmente càdlàg.
+Esto demuestra concluyentemente la **existencia fuerte** de una solución en el intervalo $[0, H]$.
+
+*Paso 5: Unicidad global de la solución.*
+Para demostrar la unicidad, sean $X(t)$ y $\widehat{X}(t)$ dos soluciones de la ecuación diferencial estocástica híbrida, partiendo de la misma condición inicial $\mathcal{F}_0$-medible y gobernadas por los mismos procesos conductores $W(t)$, $N(dt, dz)$ y $\alpha(t)$.
+
+En el primer intervalo de régimen constante $[0, \tau_1)$, ambas soluciones satisfacen idéntica EDE y comparten la condición inicial $X(0)$. Por la unicidad dictaminada por el teorema de Situ, se cumple que:
+$$ X(t) = \widehat{X}(t) $$
+para todo $t \in [0, \tau_1)$, casi seguramente.
+En particular, sus valores en el primer tiempo de cambio estocástico coinciden: $X(\tau_1) = \widehat{X}(\tau_1)$. Por ende, en el subsecuente intervalo $[\tau_1, \tau_2)$, ambas soluciones vuelven a satisfacer la misma EDE con idéntica condición inicial, y la unicidad local de Situ vuelve a implicar que coinciden en dicho intervalo.
+
+Repitiendo el argumento lógico en cada subintervalo sucesivo, y amparándonos en que el número de cambios en $[0, H]$ es finito casi seguramente, obtenemos la igualdad global de las trayectorias:
+$$ \mathbb{P}\left( X(t) = \widehat{X}(t) \text{ para todo } t \in [0, H] \right) = 1. $$
+Por consiguiente, la solución híbrida es estrictamente única.
+
+Finalmente, las condiciones de crecimiento lineal asumidas de manera uniforme en todos los regímenes, en conjunción con las cotas de segundo momento para las integrales de Itô y de salto compensado, y sumadas a la propiedad de no explosión de la cadena de Markov, permiten aplicar las estimaciones de momento (como la desigualdad de Grönwall y las isometrías) tramo a tramo. De ello se deduce la integrabilidad del supremo de la solución en cualquier horizonte de tiempo finito $H$. De manera rigurosa, se satisface la cota de estabilidad del segundo momento:
+$$ \mathbb{E}\left[ \sup_{0 \le t \le H} |X(t)|^2 \right] < \infty. $$
+
+Con este resultado, quedan demostradas formalmente tanto la existencia como la unicidad fuerte de la solución híbrida. $\blacksquare$
 
 ## El Modelo Estocástico Termodinámico (Ornstein-Uhlenbeck Híbrido)
 
