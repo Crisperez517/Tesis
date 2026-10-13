@@ -407,7 +407,7 @@ Como se puede apreciar en la @fig-sde-metodos, la trayectoria roja que correspon
 
 # DEMOSTRACION DEL TEOREMA
 
-En este capítulo se presentarán las bases conceptuales y el marco formal del cálculo estocástico que fundamentan el desarrollo de nuestro modelo matemático para la red de frío. Se definirán en primer lugar los procesos estocásticos elementales para, posteriormente, formalizar la teoría de medidas aleatorias de salto y construir la ecuación diferencial estocástica (EDE) híbrida que rige el sistema.
+En este capítulo se presentarán las bases conceptuales y el marco formal del cálculo estocástico que fundamentan el desarrollo de nuestro modelo matemático para la red de frío. Se definirán en primer lugar los procesos estocásticos elementales para, posteriormente, formalizar la teoría de medidas aleatorias de salto, establecer la teoría de integración de Itô, demostrar el teorema general de concatenación híbrida y concluir con la verificación analítica del sistema propuesto.
 
 ## Espacios de Probabilidad, Filtraciones y Procesos Estocásticos
 
@@ -417,84 +417,87 @@ Para dotar de rigor a la evolución temporal de la información del sistema, def
 
 ::: {#def-espacio-filtrado}
 ### Espacio de Probabilidad Filtrado
-Sea $(\Omega, \mathcal{F}, \mathbb{P})$ un espacio de probabilidad completo. Una filtración es una familia no decreciente de sub-$\sigma$-álgebras $\{\mathcal{F}_t\}_{t \ge 0}$ de $\mathcal{F}$, tal que $\mathcal{F}_s \subseteq \mathcal{F}_t \subseteq \mathcal{F}$ para todo $0 \le s \le t$. La cuaterna $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})$ se denomina espacio de probabilidad filtrado. Se asume que la filtración satisface las *condiciones habituales*: 
+Sea $(\Omega, \mathcal{F}, \mathbb{P})$ un espacio de probabilidad completo. Una filtración es una familia no decreciente de sub-$\sigma$-álgebras $\{\mathcal{F}_t\}_{t \ge 0}$ de $\mathcal{F}$, tal que $\mathcal{F}_s \subseteq \mathcal{F}_t \subseteq \mathcal{F}$ para todo $0 \le s \le t$. La cuaterna $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})$ se denomina espacio de probabilidad filtrado. Asumiremos que la filtración satisface las *condiciones habituales*: 
+
 1. $\mathcal{F}_0$ contiene todos los conjuntos $\mathbb{P}$-nulos de $\mathcal{F}$.
-2. La filtración es continua por la derecha, es decir, $\mathcal{F}_t = \bigcap_{\varepsilon > 0} \mathcal{F}_{t+\varepsilon}$.
+2. La filtración es continua por la derecha: $\mathcal{F}_t = \bigcap_{\varepsilon > 0} \mathcal{F}_{t+\varepsilon}$ para todo $t \ge 0$.
 :::
 
-Intuitivamente, la $\sigma$-álgebra $\mathcal{F}_t$ representa todo el historial de información observable del sistema físico hasta el instante $t$. 
+Intuitivamente, la $\sigma$-álgebra $\mathcal{F}_t$ representa el historial completo de información observable del sistema físico (temperaturas, fallos eléctricos, aperturas de puertas) hasta el instante $t$.
 
 ::: {#def-proceso-estocastico}
 ### Proceso Estocástico
-Sea un espacio muestral $\mathcal{S} \subseteq \mathbb{R}^d$ dotado de su respectiva $\sigma$-álgebra de Borel $\mathcal{B}(\mathcal{S})$. Un proceso estocástico es una familia de variables aleatorias $\{X_t\}_{t \in \mathcal{T}}$ parametrizadas por $t \in \mathcal{T}$, donde $\mathcal{T} \subseteq \mathbb{R}$. Formalmente, es una función medible $X: \mathcal{T} \times \Omega \to \mathcal{S}$.
+Sea un espacio de estados $\mathcal{S} \subseteq \mathbb{R}^d$ dotado de su respectiva $\sigma$-álgebra de Borel $\mathcal{B}(\mathcal{S})$. Un proceso estocástico es una familia de variables aleatorias $\{X_t\}_{t \in \mathcal{T}}$ parametrizadas por $t \in \mathcal{T}$, donde $\mathcal{T} \subseteq \mathbb{R}$ representa el espacio paramétrico (temporal). Formalmente, es una función medible $X: \mathcal{T} \times \Omega \to \mathcal{S}$.
 :::
 
-Dependiendo de cómo es el conjunto de índices $\mathcal{T}$, los procesos estocásticos se clasifican en dos:
+Dependiendo de cómo es el conjunto de índices $\mathcal{T}$, los procesos estocásticos se clasifican en dos grandes familias:
 
-1. **Procesos estocásticos a tiempo discreto:** Si $\mathcal{T}$ es numerable, por lo general $\mathcal{T} = \mathbb{N}_0 = \{0, 1, 2, \dots\}$ o $\mathcal{T} = \mathbb{Z}$, decimos que el proceso estocástico es a tiempo discreto. En este escenario, el sistema evoluciona mediante transiciones discretas en pasos fijos discretizados.
-2. **Procesos estocásticos a tiempo continuo:** Si $\mathcal{T}$ es un intervalo de $\mathbb{R}$, por lo general $\mathcal{T} = [0, \infty)$ o un intervalo acotado $\mathcal{T} = [0, T]$, con $T > 0$, se dice que el proceso estocástico es a tiempo continuo. Esta estructura es la adecuada para modelar fenómenos físicos continuos, como la transferencia térmica.
+1. **Procesos estocásticos a tiempo discreto:** Si $\mathcal{T}$ es numerable, por lo general $\mathcal{T} = \mathbb{N}_0 = \{0, 1, 2, \dots\}$ o $\mathcal{T} = \mathbb{Z}$, decimos que el proceso estocástico es a tiempo discreto. En este escenario, el sistema evoluciona mediante transiciones en pasos fijos discretizados.
+2. **Procesos estocásticos a tiempo continuo:** Si $\mathcal{T}$ es un intervalo continuo de $\mathbb{R}$, por lo general $\mathcal{T} = [0, \infty)$ o un intervalo acotado $\mathcal{T} = [0, T]$ con $T > 0$, el proceso es a tiempo continuo. Esta estructura es la adecuada para modelar fenómenos físicos continuos en el dominio temporal, como la dinámica de transferencia térmica.
 
-Para enlazar la teoría probabilística con la observación empírica de un fenómeno, es indispensable establecer la distinción entre el espacio funcional del proceso y sus realizaciones particulares.
+Para enlazar la teoría probabilística con la observación empírica de un fenómeno estocástico, es indispensable establecer la distinción entre el espacio funcional del proceso y sus realizaciones particulares.
 
 ::: {#def-trayectoria}
 ### Trayectorias del Proceso Estocástico
-Si $\{X_t\}_{t \geq 0}$ es un proceso estocástico a tiempo continuo, para cada $\omega \in \Omega$ fijo y $\mathcal{S} = \mathbb{R}$, se definen las trayectorias (o caminos muestrales) del proceso como la aplicación topológica:
+Si $\{X_t\}_{t \geq 0}$ es un proceso estocástico a tiempo continuo, para cada $\omega \in \Omega$ fijo (un escenario o estado de la naturaleza) y asumiendo $\mathcal{S} = \mathbb{R}$, se definen las trayectorias (o caminos muestrales) del proceso como la aplicación topológica:
 $$t \mapsto X_t(\omega), \quad t \in [0, \infty).$$
 :::
 
-Para la formulación de integrales estocásticas, el proceso debe respetar la temporalidad de la información, lo cual se formaliza mediante la adaptabilidad.
+Para la formulación rigurosa de integrales estocásticas (tanto respecto a difusiones como a medidas de salto), el proceso debe respetar la causalidad de la información, lo cual se formaliza mediante la adaptabilidad y la medibilidad progresiva.
 
-::: {#def-adaptabilidad}
-### Proceso Adaptado y Espacio Càdlàg
-Un proceso estocástico $\{X_t\}_{t \ge 0}$ es **adaptado** a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$ si, para cada $t \ge 0$, la variable aleatoria $X_t$ es $\mathcal{F}_t$-medible. Adicionalmente, decimos que el proceso pertenece al **espacio càdlàg** (del francés *continu à droite, limite à gauche*) si sus trayectorias $t \mapsto X_t(\omega)$ son continuas por la derecha y poseen límites finitos por la izquierda para casi todo $\omega \in \Omega$. 
+::: {#def-adaptabilidad-cadlag}
+### Proceso Adaptado, Medibilidad Progresiva y el Espacio Càdlàg
+Un proceso estocástico $\{X_t\}_{t \ge 0}$ es **adaptado** a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$ si, para cada $t \ge 0$, la variable aleatoria $X_t$ es $\mathcal{F}_t$-medible. Un requisito analítico más riguroso para la integración es la *medibilidad progresiva*, donde la aplicación $(s, \omega) \mapsto X_s(\omega)$ sobre el espacio producto $[0, t] \times \Omega$ es medible respecto a la $\sigma$-álgebra producto $\mathcal{B}([0, t]) \otimes \mathcal{F}_t$.
+
+Adicionalmente, diremos que el proceso pertenece al **espacio càdlàg** (del francés *continu à droite, limite à gauche*) si sus trayectorias $t \mapsto X_t(\omega)$ son continuas por la derecha y poseen límites finitos por la izquierda para casi todo $\omega \in \Omega$. 
 :::
 
-La propiedad càdlàg es un requisito analítico ineludible en nuestra investigación, puesto que las perturbaciones de la red de frío por aperturas de puerta inducen discontinuidades instantáneas (saltos) en la temperatura.
+La restricción topológica de trayectorias *càdlàg* es un requisito analítico ineludible en nuestra investigación, puesto que las perturbaciones de la red de frío por aperturas de puerta inducen discontinuidades instantáneas (saltos finitos) en la temperatura.
 
-Finalmente, para evaluar eventos que ocurren en tiempos aleatorios (como fallas de energía de la CFE), requerimos la siguiente definición:
+Finalmente, para evaluar eventos estructurales que ocurren en tiempos aleatorios (como fallas abruptas de energía de la red pública), requerimos el concepto de tiempo de parada.
 
 ::: {#def-tiempo-parada}
 ### Tiempo de Parada (Stopping Time)
-Una variable aleatoria $\tau: \Omega \to [0, \infty]$ es un tiempo de parada respecto a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$ si para todo $t \ge 0$, el evento de que el tiempo ocurra antes o en el instante $t$ depende únicamente de la información disponible hasta ese instante; matemáticamente: $\{\omega \in \Omega : \tau(\omega) \le t\} \in \mathcal{F}_t$.
+Una variable aleatoria $\tau: \Omega \to [0, \infty]$ es un tiempo de parada respecto a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$ si, para todo instante $t \ge 0$, la ocurrencia del evento estocástico antes o en el tiempo $t$ depende únicamente de la información histórica disponible hasta ese instante; matemáticamente: $\{\omega \in \Omega : \tau(\omega) \le t\} \in \mathcal{F}_t$.
 :::
 
 ## Componentes Estocásticos Fundamentales
 
-Las propiedades analíticas de un proceso estocástico se definen estrictamente a partir del comportamiento de sus componentes [@karlin1998introduction]. Los componentes aleatorios de nuestro sistema se sustentan en una clase específica de procesos equilibrados.
+Las propiedades analíticas y el comportamiento asintótico de un proceso estocástico se definen estrictamente a partir del comportamiento de sus componentes [@karlin1998introduction]. Los componentes aleatorios de nuestro sistema se sustentan en una clase específica de procesos equilibrados.
 
 ::: {#def-martingala}
 ### Martingala
-Un proceso estocástico a tiempo continuo $\{M_t\}_{t \ge 0}$ integrable (i.e., $\mathbb{E}[\vert{}M_t\vert{}] < \infty$ para todo $t$) y adaptado a $\{\mathcal{F}_t\}_{t \ge 0}$, es una martingala si cumple la propiedad de valor esperado condicional nulo para incrementos futuros:
+Un proceso estocástico a tiempo continuo $\{M_t\}_{t \ge 0}$, integrable (i.e., $\mathbb{E}[\vert{}M_t\vert{}] < \infty$ para todo $t$) y adaptado a $\{\mathcal{F}_t\}_{t \ge 0}$, es una martingala si cumple la propiedad de valor esperado condicional nulo para los incrementos futuros:
 $$\mathbb{E}[M_t \mid \mathcal{F}_s] = M_s, \quad \text{casi seguramente para todo } 0 \le s \le t.$$
 :::
 
-La martingala representa matemáticamente un "juego justo" sin tendencia predictible. Esta propiedad es el pilar para construir integrales estocásticas no sesgadas.
+La condición de martingala implica la ausencia de tendencia predictible (representa matemáticamente un "juego justo"). Esta propiedad estructural es el fundamento innegociable para definir las integrales estocásticas (tanto de Itô como de Poisson) sin sesgo acumulativo.
 
 ### Movimiento Browniano (Proceso de Wiener)
 
-Para representar las fluctuaciones térmicas continuas de baja intensidad asociadas al ruido intrínseco del termostato y microtransferencias de calor, se utiliza el movimiento Browniano.
+Las perturbaciones térmicas de origen endógeno, de baja amplitud y alta frecuencia (como el ruido intrínseco del termostato y microtransferencias de calor continuas), se modelan matemáticamente mediante la clase más célebre de procesos difusivos.
 
 ::: {#def-movimiento-browniano}
 ### Proceso de Wiener
-Un proceso estocástico a tiempo continuo $\{W(t)\}_{t \ge 0}$ definido sobre un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}, \mathbb{P})$ es un movimiento Browniano estándar o proceso de Wiener si cumple con las siguientes propiedades:
+Un proceso estocástico a tiempo continuo $\{W(t)\}_{t \ge 0}$ definido sobre un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})$ es un movimiento Browniano estándar o proceso de Wiener si cumple con los siguientes axiomas:
 
 1. $W(0) = 0$ con probabilidad 1.
-2. Posee incrementos independientes; es decir, para cualesquiera tiempos $0 \le t_1 < t_2 < \dots < t_n$, las variables aleatorias $W(t_2)-W(t_1), \dots, W(t_n)-W(t_{n-1})$ son mutuamente independientes y son independientes de la $\sigma$-álgebra $\mathcal{F}_{t_1}$.
-3. Posee incrementos estacionarios gaussianos: para todo $t > s \ge 0$, $W(t) - W(s) \sim \mathcal{N}(0, t-s)$.
-4. Es una martingala respecto a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$.
+2. **Incrementos independientes:** Para cualesquiera tiempos $0 \le t_1 < t_2 \le t_3 < t_4$, las variables aleatorias $W(t_4)-W(t_3)$ y $W(t_2)-W(t_1)$ son mutuamente independientes y son independientes de la $\sigma$-álgebra histórica $\mathcal{F}_{t_1}$.
+3. **Incrementos estacionarios gaussianos:** Para todo $t > s \ge 0$, el incremento espacial está normalmente distribuido con media cero y varianza igual a la amplitud temporal: $W(t) - W(s) \sim \mathcal{N}(0, t-s)$.
+4. Es una martingala de cuadrado integrable con trayectorias continuas casi seguramente respecto a $\{\mathcal{F}_t\}_{t \ge 0}$.
 :::
 
-El término $dW(t) = W(t+dt) - W(t)$ representa el diferencial del proceso de Wiener. Este denota una perturbación gaussiana elemental en un intervalo infinitesimal $dt$, caracterizada por una media $\mathbb{E}[dW(t)] = 0$ y una varianza $\mathbb{E}[(dW(t))^2] = dt$. Un rasgo crítico del movimiento Browniano es que, aunque sus trayectorias son continuas, son **diferenciables en ningún punto** con probabilidad 1. Para una revisión detallada de estas construcciones analíticas, se sugiere consultar a [@karatzas1998brownian].
+El diferencial del proceso de Wiener, denotado como $dW(t) = W(t+dt) - W(t)$, representa una perturbación gaussiana elemental en un intervalo infinitesimal $dt$, caracterizada por una media $\mathbb{E}[dW(t)] = 0$ y una varianza $\mathbb{E}[(dW(t))^2] = dt$. Un rasgo crítico del movimiento Browniano, derivado de la Ley del Logaritmo Iterado y de su variación cuadrática no nula, es que, aunque sus trayectorias son continuas en el espacio y en el tiempo, son **diferenciables en ningún punto** con probabilidad 1. Esta restricción analítica invalida el uso del cálculo de Newton-Leibniz e impone la necesidad del cálculo de Itô. Para una revisión detallada de estas construcciones analíticas, se sugiere consultar a [@karatzas1998brownian].
 
 ![Trayectoria simulada del proceso de Wiener. El eje horizontal representa el avance del tiempo continuo en un horizonte parametrizado de $T = 1.0$ con incrementos de $dt = 0.001$. El eje vertical denota la posición de las fluctuaciones aleatorias $W(t)$, iniciando en el origen $W(0) = 0$.](proceso_wiener.png){#fig-wiener width="80%" fig-align="center"}
 
-### Procesos de Poisson y Saltos
+### Procesos de Poisson y Discontinuidades por Saltos
 
-Las aperturas de las puertas del refrigerador por el personal médico constituyen eventos discretos y repentinos que alteran instantáneamente la temperatura interna. Este fenómeno pertenece a la clase de procesos de saltos puros.
+Las aperturas de las puertas del refrigerador por el personal médico constituyen eventos que, por su naturaleza física temporal, no son continuos. Representan inyecciones discretas, repentinas y finitas de aire cálido al sistema, alterando la temperatura instantáneamente. El modelo matemático de tales eventos discretos recae en la familia de los procesos de conteo y saltos puros [@ross1996stochastic].
 
 ::: {#def-proceso-poisson}
 ### Proceso de Poisson Homogéneo
-Un proceso estocástico a tiempo continuo $\{N(t)\}_{t \ge 0}$ que toma valores enteros en $\mathbb{N}_0$ es un proceso de Poisson homogéneo con parámetro de intensidad constante $\lambda > 0$ si:
+Un proceso estocástico a tiempo continuo $\{N(t)\}_{t \ge 0}$ que toma valores enteros en el espacio de estados $\mathbb{N}_0$ es un proceso de Poisson homogéneo con parámetro de intensidad constante $\lambda > 0$ si satisface las siguientes condiciones:
 
 1. $N(0) = 0$ con probabilidad 1.
 2. Posee incrementos independientes.
@@ -502,134 +505,140 @@ Un proceso estocástico a tiempo continuo $\{N(t)\}_{t \ge 0}$ que toma valores 
 $$\mathbb{P}(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}, \quad n = 0, 1, 2, \dots$$
 :::
 
-Las probabilidades de transición en un intervalo acotado $h > 0$ se especifican rigurosamente mediante el límite asintótico cuando $h \to 0$:
+De manera asintótica local, las probabilidades de transición en un incremento infinitesimal $h > 0$ están rigurosamente caracterizadas por:
 $$\mathbb{P}(N(t+h) - N(t) = 1) = \lambda h + o(h), \quad \mathbb{P}(N(t+h) - N(t) \ge 2) = o(h)$$
 
-Sin embargo, en la dinámica real de un centro de salud, la tasa de aperturas del refrigerador no es constante; exhibe una estacionalidad diaria.
+Donde la notación algebraico-asintótica de Landau $o(h)$ asegura analíticamente que la probabilidad de que ocurran dos eventos en un mismo instante es idénticamente nula.
+
+Sin embargo, en la dinámica real de un centro de salud, la tasa de aperturas del refrigerador no es constante; exhibe una fuerte estacionalidad laboral diaria. Para capturar esta variabilidad, generalizamos el modelo relajando la propiedad de incrementos estacionarios.
 
 ::: {#def-poisson-no-homogeneo}
 ### Proceso de Poisson No Homogéneo
-Un proceso estocástico a tiempo continuo $\{N(t)\}_{t \ge 0}$ es un proceso de Poisson no homogéneo con función de intensidad localmente integrable $\lambda(t) \ge 0$ si sus incrementos son independientes y para todo $t \ge 0$ y $h > 0$:
+Un proceso estocástico a tiempo continuo $\{N(t)\}_{t \ge 0}$ es un proceso de Poisson no homogéneo si posee una función de intensidad determinista localmente integrable $\lambda(t) \ge 0$ para todo $t \ge 0$. Sus incrementos son independientes y la variable aleatoria de incremento $N(t) - N(s)$ (con $0 \le s < t$) obedece a una distribución de Poisson con parámetro integral acumulado $\Lambda(s, t) = \int_s^t \lambda(u) du$. La caracterización asintótica local se redefine como:
 $$\mathbb{P}(N(t+h) - N(t) = 1) = \lambda(t) h + o(h)$$
 :::
 
-Para acoplar la magnitud física del calor que ingresa en cada apertura, definimos la composición del proceso de conteo con magnitudes aleatorias.
+El proceso de conteo nos indica *cuándo* ocurren los eventos. Para acoplar la magnitud física real del evento (el tamaño de la masa de aire que ingresa al equipo y modifica su entalpía), debemos componer el proceso de conteo con magnitudes aleatorias discretas.
 
 ::: {#def-poisson-compuesto}
-### Proceso de Poisson Compuesto
-Sea $\{N(t)\}_{t \ge 0}$ un proceso de Poisson con función de intensidad $\lambda(t)$, y sea $\{\gamma_i\}_{i \ge 1}$ una sucesión de variables aleatorias independientes e idénticamente distribuidas, independientes de $N(t)$. El proceso de Poisson compuesto $J(t)$ se define como:
+### Proceso de Poisson Compuesto y Magnitudes Censuradas
+Sea $\{N(t)\}_{t \ge 0}$ un proceso de Poisson no homogéneo con función de intensidad $\lambda(t)$, y sea $\{\gamma_i\}_{i \ge 1}$ una sucesión de variables aleatorias independientes e idénticamente distribuidas (i.i.d.) que representan la magnitud o impacto espacial de cada evento, y que son estrictamente independientes del proceso temporal $N(t)$. El proceso de Poisson compuesto $J(t)$ acumula la magnitud de estos saltos en el tiempo y se define como:
 $$J(t) = \sum_{i=1}^{N(t)} \gamma_i$$
 :::
 
-Para una exposición rigurosa sobre los procesos de conteo y sus aplicaciones en sistemas con discontinuidades, consúltese [@ross1996stochastic].
+En nuestra aplicación termodinámica, el diferencial de impacto térmico $\gamma_i$ por apertura de puerta está restringido físicamente. Si el aire exterior es relativamente frío, el intercambio térmico convectivo puede ser insignificante o alcanzar un piso mínimo de perturbación, pero no enfría al refrigerador (pues $T_{amb} > \theta_{set}$). La naturaleza empírica del impacto se modela analíticamente mediante una **distribución normal censurada inferiormente** (con suelo).
 
-![Trayectorias simuladas de dos procesos de Poisson. La línea continua (azul) ilustra un Proceso Homogéneo ($\lambda = 1$). La línea punteada (roja) representa un Proceso No Homogéneo con $\lambda(t) = \frac{1}{2} + \frac{5}{2} \sin\left(\frac{\pi t}{10}\right)$, concentrando mayor densidad de saltos en el periodo central. Ambas gráficas exhiben la naturaleza càdlàg.](proceso_poisson.png){#fig-poisson width="85%" fig-align="center"}
+Definimos una variable latente de intercambio convectivo no acotado $Z \sim \mathcal{N}(\mu_\gamma, \sigma_\gamma^2)$ (e.g., $Z \sim \mathcal{N}(0.76, 0.20^2)$). El tamaño del salto efectivo $\gamma_i$ censurado en un umbral mínimo operativo $U_{min}$ (e.g., $0.16$ °C) se define mediante la función:
+$$ \gamma_i = \max(U_{min}, Z) $$
+Esta formulación acumula la masa de probabilidad de la cola izquierda gaussiana en una masa puntual exacta en el umbral inferior $U_{min}$, lo cual es coherente con un aporte térmico mínimo garantizado cada vez que se interrumpe la hermeticidad de la cámara de conservación.
+
+![Trayectorias simuladas de dos procesos de Poisson. El eje horizontal representa el tiempo de observación en un horizonte de $T = 10.0$ con incrementos discretos de $dt = 0.01$. El eje vertical contabiliza el número acumulado de eventos discretos $N(t)$, iniciando en $N(0) = 0$. La línea continua (azul) ilustra un Proceso de Poisson Homogéneo con una tasa de intensidad constante $\lambda = 1$. La línea punteada (roja) representa un Proceso de Poisson No Homogéneo con una intensidad de $\lambda(t) = \frac{1}{2} + \frac{5}{2} \sin\left(\frac{\pi t}{10}\right)$, concentrando mayor densidad de saltos en el periodo central, capturando la estacionalidad laboral. Ambas gráficas exhiben la naturaleza càdlàg de la evolución discreta.](proceso_poisson.png){#fig-poisson width="85%" fig-align="center"}
 
 ### Cadenas de Markov a Tiempo Continuo
 
-Para modelar los fallos prolongados en el suministro eléctrico de la red pública, introducimos una cadena de Markov.
+Los fallos prolongados en el suministro eléctrico de la red pública alteran estructuralmente el régimen de disipación de calor del sistema (compresor encendido versus apagado). Para modelar rigurosamente las transiciones estocásticas entre estos macroestados termodinámicos, introducimos una Cadena de Markov a Tiempo Continuo (CTMC).
 
 ::: {#def-cadena-markov}
 ### Cadena de Markov a Tiempo Continuo
-Sea $\{\alpha(t)\}_{t \ge 0}$ un proceso estocástico que toma valores en un espacio de estados finito y discreto $\mathcal{M} = \{1, 2, \dots, m\}$. Se dice que $\alpha(t)$ es una cadena de Markov en tiempo continuo si cumple la propiedad de Markov:
-$$\mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i, \mathcal{F}_s) = \mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i)$$
+Sea $\{\alpha(t)\}_{t \ge 0}$ un proceso estocástico definido en el espacio medible $(\Omega, \mathcal{F}, \mathbb{P})$, que toma valores en un espacio de estados finito y discreto de regímenes operativos $\mathcal{M} = \{1, 2, \dots, m\}$. Se dice que el proceso estocástico de régimen $\alpha(t)$ es una cadena de Markov en tiempo continuo si satisface estrictamente la propiedad de pérdida de memoria de Markov para cualquier historia pasada filtrada $\mathcal{F}_s$:
+$$\mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i, \mathcal{F}_s) = \mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i) \quad \text{para } t, s \ge 0.$$
 :::
 
-La evolución temporal se caracteriza por la matriz generadora de intensidades de transición $Q = (q_{ij}) \in \mathbb{R}^{m \times m}$, donde las tasas de conmutación desde el régimen $i$ hacia el régimen $j$ están dadas por $p_{ij}(h) = q_{ij}h + o(h)$ para $i \neq j$. Por conservación de probabilidad, las entradas diagonales satisfacen $q_{ii} = -\sum_{j \neq i} q_{ij}$. Los detalles asintóticos de estos procesos híbridos se discuten en [@asmussen2003markov].
+La evolución probabilística temporal de los regímenes se encuentra gobernada por una matriz generadora (o matriz de intensidades de transición) $Q = (q_{ij}) \in \mathbb{R}^{m \times m}$. Si definimos la probabilidad de transición condicional infinitesimal como $p_{ij}(h) = \mathbb{P}(\alpha(t+h) = j \mid \alpha(t) = i)$ para un incremento de tiempo $h \downarrow 0$, la dinámica local cumple:
+$$p_{ij}(h) = q_{ij}h + o(h) \quad \text{para } i \neq j.$$
+
+Por el teorema de conservación total de probabilidad, la diagonal principal de intensidades absorbe las fugas de masa probabilística tal que las sumas por filas de la matriz sean idénticamente nulas:
+$$q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i, j \in \mathcal{M}} q_{ij}.$$
+
+En nuestro análisis de la red de frío, la matriz $Q$ encapsula las métricas de confiabilidad energética, modelando las conmutaciones macroscópicas de la dinámica del refrigerador. El análisis asintótico de sistemas con switching continuo está profundamente arraigado en la teoría moderna de fiabilidad, discutida a profundidad por [@asmussen2003markov].
 
 ## Teoría de Medidas Aleatorias y Saltos Estocásticos
 
-En el modelado estocástico riguroso, la representación de perturbaciones por saltos (como el diferencial $dJ(t)$ de un proceso de Poisson compuesto) requiere la formalización mediante teoría de la medida. Esto es estrictamente necesario para poder aplicar teoremas de existencia y unicidad avanzados [@situ2005theory]. 
+En el modelado estocástico riguroso, la representación analítica de perturbaciones por saltos discretos (como el diferencial $dJ(t)$ de un proceso de Poisson compuesto) en ecuaciones diferenciales requiere su formalización mediante teoría de la medida. Esto es estrictamente necesario para dotar de sentido a las integrales y poder aplicar teoremas avanzados de existencia, unicidad y convergencia [@situ2005theory]. 
 
 ::: {#def-medida-conteo-poisson}
 ### Medida Aleatoria de Conteo de Poisson
-Sea un espacio medible de "marcas" $(\mathcal{Z}, \mathcal{B}(\mathcal{Z}))$, donde $\mathcal{Z} \subseteq \mathbb{R}$. Una medida aleatoria de Poisson $N(dt, dz)$ sobre $[0, \infty) \times \mathcal{Z}$ se define de manera que, para cualquier intervalo de tiempo $(s, t]$ y subconjunto espacial $A \in \mathcal{B}(\mathcal{Z})$, la integral evaluada $N((s,t] \times A) = \int_s^t \int_A N(du, dz)$ cuenta exactamente el número de saltos que ocurrieron en el intervalo de tiempo $(s, t]$ cuya magnitud métrica (marca) perteneció al conjunto $A$. 
+Sea un espacio medible de "marcas" espaciales $(\mathcal{Z}, \mathcal{B}(\mathcal{Z}))$, donde $\mathcal{Z} \subseteq \mathbb{R}$. Una medida aleatoria de Poisson $N(dt, dz)$ sobre el espacio producto $[0, \infty) \times \mathcal{Z}$ se define de manera que, para cualquier intervalo de tiempo $(s, t]$ y subconjunto espacial $A \in \mathcal{B}(\mathcal{Z})$, la integral bidimensional evaluada:
+$$N((s,t] \times A) = \int_s^t \int_A N(du, dz)$$
+cuenta exactamente el número de saltos discretos que ocurrieron en el intervalo de tiempo $(s, t]$ cuya magnitud o intensidad métrica (la marca $z$) perteneció al conjunto $A$. 
 :::
 
-Para que el modelo sea manejable analíticamente, debe extraerse la esperanza matemática de estos saltos.
+Dado que la medida $N(dt, dz)$ es una variable aleatoria que acumula eventos monótonamente (es un proceso de variación acotada pero estrictamente no decreciente), su esperanza matemática condicional no es nula. Para que el modelo sea manejable analíticamente y compatible con el cálculo de Itô, debe extraerse la tendencia esperada de estos saltos.
 
 ::: {#def-medida-levy}
-### Medida de Intensidad (Medida de Lévy)
-La esperanza de la medida de conteo se denota por la medida producto $\nu(dt, dz) = \mathbb{E}[N(dt, dz)]$. Si el proceso de saltos es generado por un proceso de Poisson no homogéneo con tasa $\lambda(t)$ y los tamaños de salto tienen una distribución de probabilidad espacial $F(z)$, la medida de intensidad se factoriza analíticamente como:
+### Medida de Intensidad (Medida de Lévy compensadora)
+La esperanza incondicional de la medida de conteo se denota formalmente por la medida determinista producto $\nu(dt, dz) = \mathbb{E}[N(dt, dz)]$. Si el proceso de saltos subyacente es generado por un proceso de Poisson no homogéneo con tasa temporal de intensidad $\lambda(t)$, y las magnitudes de salto (marcas) poseen una distribución de probabilidad espacial caracterizada por la función de distribución $F(z)$, la medida de intensidad se factoriza analíticamente como:
 $$\nu(dt, dz) = \lambda(t) dF(z) dt$$
-donde $\nu(dz) = \lambda(t) dF(z)$ se conoce como la **medida de Lévy** o compensador determinista del salto espacial.
+donde la componente espacial $\nu(dz) = \lambda(t) dF(z)$ se conoce como la **medida de Lévy**. Su función es cuantificar la tasa local esperada de eventos de un tamaño particular por unidad de tiempo.
 :::
 
-Debido a que la medida de conteo $N(dt, dz)$ acumula valores monótonamente crecientes, su esperanza matemática no es nula, lo que impide utilizarla directamente para construir integrales de martingala (como sí lo permite el diferencial Browniano $dW(t)$). Para solucionar esto, el cálculo estocástico define la medida centrada.
+Debido a que la medida de conteo $N(dt, dz)$ tiene esperanza no nula, la integral estocástica directa respecto a ella genera un proceso con tendencia (drift). Para construir integrales que conserven la propiedad de martingala (como el diferencial Browniano $dW(t)$), el cálculo estocástico con saltos exige el centrado de la medida.
 
 ::: {#def-medida-compensada}
 ### Medida de Poisson Compensada
-Se define la medida aleatoria de Poisson compensada $\tilde{N}(dt, dz)$ como la diferencia algebraica entre la medida empírica observada y su intensidad esperada:
-$$\tilde{N}(dt, dz) = N(dt, dz) - \nu(dz) dt$$
-Por definición estricta de la esperanza condicional, el proceso $M_t = \int_0^t \int_A \tilde{N}(ds, dz)$ constituye una verdadera martingala respecto a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$, con $\mathbb{E}[M_t] = 0$.
+Se define la medida aleatoria de Poisson compensada $\tilde{N}(dt, dz)$ como la diferencia algebraica entre la medida de conteo empírica observada y su intensidad estocástica esperada (el compensador determinista):
+$$\tilde{N}(dt, dz) = N(dt, dz) - \nu(dt, dz) = N(dt, dz) - \lambda(t) dF(z) dt$$
+Por definición estricta y bajo el teorema de descomposición de Doob-Meyer, para cualquier integrando predecible suficientemente regular, el proceso $M_t = \int_0^t \int_A \tilde{N}(ds, dz)$ constituye una verdadera martingala local respecto a la filtración histórica $\{\mathcal{F}_t\}_{t \ge 0}$, satisfaciendo $\mathbb{E}[M_t] = 0$.
 :::
 
-Con este herramental analítico, es posible enunciar un lema de equivalencia que resulta ser la "piedra angular" para validar la inclusión del Proceso de Poisson Compuesto dentro del marco del análisis estocástico general con medidas de salto.
+Con este herramental analítico fundamentado, es posible enunciar un lema de equivalencia funcional que resulta ser la "piedra angular" para validar la inclusión de Procesos de Poisson Compuestos dentro del marco del análisis estocástico general con medidas de salto, como el desarrollado por R. Situ [@situ2005theory].
 
 ::: {#lem-equivalencia-saltos}
 ### Lema de Equivalencia del Proceso de Poisson Compuesto
-Sea $J(t) = \sum_{i=1}^{N(t)} \gamma_i$ un proceso de Poisson compuesto con función de intensidad de eventos $\lambda(t)$ y magnitudes de salto independientes $\gamma_i$ distribuidas mediante una medida de densidad empírica $dF(z)$. El diferencial estocástico puro de dicho proceso admite la siguiente equivalencia en teoría de medidas:
+Sea $J(t) = \sum_{i=1}^{N(t)} \gamma_i$ un proceso de Poisson compuesto con función de intensidad de eventos $\lambda(t)$ y magnitudes de salto independientes $\gamma_i$ distribuidas mediante una medida de densidad $dF(z)$. El diferencial estocástico puro de dicho proceso admite la siguiente equivalencia integral directa en teoría de medidas:
 $$dJ(t) = \int_{\mathbb{R}} z N(dt, dz)$$
-Consecuentemente, mediante la inserción de la medida de Lévy $\nu(dz)dt = \lambda(t)dF(z)dt$, el diferencial puede descomponerse analíticamente en una martingala de salto compensado y una deriva de arrastre determinista:
+Consecuentemente, mediante la inserción algebraica de la medida de Lévy factorizada $\nu(dt, dz) = \lambda(t)dF(z)dt$, el diferencial puede descomponerse analíticamente en una martingala de salto compensado puro (ruido blanco de saltos) y una deriva de arrastre determinista (drift esperado):
 $$dJ(t) = \int_{\mathbb{R}} z \tilde{N}(dt, dz) + \left( \lambda(t) \int_{\mathbb{R}} z dF(z) \right) dt$$
-Lo que es equivalente a afirmar que el salto total se separa en ruido estocástico purificado y un valor esperado incondicional dado por $\left( \lambda(t) \mathbb{E}[\gamma_i] \right) dt$.
+Lo cual es matemáticamente equivalente a afirmar que el salto total acumulado se separa en una perturbación estocástica de media cero y un término de valor esperado incondicional dado exactamente por $\left( \lambda(t) \mathbb{E}[\gamma_i] \right) dt$.
 :::
 
-Esta equivalencia (`@lem-equivalencia-saltos`) nos permitirá, en secciones posteriores, transformar la EDE fenomenológica de la red de frío en una ecuación equivalente estandarizada para evaluar formalmente sus condiciones de existencia y unicidad apoyándonos en los postulados rigurosos de R. Situ [@situ2005theory].
+Esta equivalencia estructural (`@lem-equivalencia-saltos`) nos permitirá transformar la EDE fenomenológica de la red de frío —formulada en términos de eventos discretos $dJ(t)$— en una ecuación estocástica compensada equivalente estandarizada, requerimiento indispensable para evaluar formalmente sus condiciones analíticas de existencia y unicidad.
 
-## Teoría de Integración Estocástica
+## Teoría de Integración Estocástica de Itô
 
-Para dotar de significado analítico a las perturbaciones aleatorias, es imperativo establecer un marco riguroso de integración. Dado que el movimiento Browniano es de variación cuadrática no nula y no diferenciable, la integral de Riemann-Stieltjes es inaplicable. De manera análoga, la integración respecto a las medidas de salto requiere fundamentos en la teoría de martingalas de cuadrado integrable.
+Para dotar de significado analítico estricto a las ecuaciones diferenciales perturbadas por ruido, es imperativo establecer un marco riguroso de integración. Puesto que las trayectorias del movimiento Browniano son de variación cuadrática finita pero variación total infinita en cualquier intervalo, la integral determinista de Riemann-Stieltjes es inaplicable casi seguramente. De manera homóloga, la integración respecto a las medidas de salto aleatorias requiere cimentación en la teoría de martingalas de cuadrado integrable.
 
 ### Integración respecto al Movimiento Browniano
 
-Sea $\mathcal{L}^2(0, T)$ el espacio de los procesos estocásticos $\{X(t)\}_{t \ge 0}$ que son adaptados a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$, progresivamente medibles, y que satisfacen la condición de integrabilidad estricta $\mathbb{E}\left[\int_0^T X^2(t) dt\right] < \infty$. 
+Sea $\mathcal{L}^2(\Omega \times [0, T])$ el espacio de Hilbert de los procesos estocásticos $\{X(t)\}_{t \ge 0}$ que son progresivamente medibles respecto a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$, y que satisfacen la condición de integrabilidad de segundo momento: $\mathbb{E}\left[\int_0^T X^2(t) dt\right] < \infty$. 
 
 ::: {#def-integral-ito}
-### Integral de Itô
-Sea $\{X(t)\}_{t \ge 0} \in \mathcal{L}^2(0, T)$. La integral de Itô de $X(t)$ respecto al proceso de Wiener $W(t)$ se define como el límite en media cuadrática ($L^2$) de sumas de Riemann aproximadas estrictamente por la izquierda:
+### Integral Estocástica de Itô
+Sea un proceso integrando $\{X(t)\}_{t \ge 0} \in \mathcal{L}^2(\Omega \times [0, T])$. La integral de Itô del proceso $X(t)$ respecto al proceso de Wiener estándar $W(t)$ se define como el límite en media cuadrática (en el espacio $L^2(\Omega, \mathbb{P})$) de una sucesión de sumas de Riemann evaluadas estrictamente en el límite izquierdo (punto inicial) de cada subintervalo:
 
-$$
-\int_0^T X(t) dW(t) = \lim_{n \to \infty} \sum_{i=0}^{n-1} X(t_i) [W(t_{i+1}) - W(t_i)] \quad \text{en } L^2(\Omega, \mathbb{P})
-$$
+$$ \int_0^T X(t) dW(t) = \lim_{n \to \infty} \sum_{i=0}^{n-1} X(t_i) [W(t_{i+1}) - W(t_i)] \quad \text{en } L^2 $$
 
-donde $0 = t_0 < t_1 < \dots < t_n = T$ es una partición del intervalo $[0, T]$ cuyo diámetro tiende a cero cuando $n \to \infty$.
+donde $\Pi_n = \{0 = t_0 < t_1 < \dots < t_n = T\}$ es una sucesión de particiones del intervalo acotado $[0, T]$ tal que el diámetro de la malla $\max_{i} (t_{i+1} - t_i)$ converge asintóticamente a cero.
 :::
 
-Al evaluar el integrando en el extremo izquierdo de cada subintervalo, la integral resultante hereda la propiedad de martingala del movimiento Browniano, garantizando que $\mathbb{E}\left[\int_0^T X(t) dW(t)\right] = 0$. Esta construcción nos provee de una de las herramientas de acotación más poderosas del cálculo estocástico.
+La restricción fundamental de evaluar el integrando $X(t_i)$ en el extremo izquierdo del incremento estocástico $\Delta W(t_i)$ es lo que garantiza la no-anticipatividad. Matemáticamente, esto preserva la propiedad de martingala del movimiento Browniano en la integral resultante, asegurando que su esperanza matemática incondicional sea idénticamente nula: $\mathbb{E}\left[\int_0^T X(t) dW(t)\right] = 0$. Esta construcción provee una de las métricas de acotación analítica más poderosas del cálculo estocástico.
 
 ::: {#thm-isometria-ito}
-### Isometría de Itô
-Para cualquier proceso $\{X(t)\}_{t \ge 0} \in \mathcal{L}^2(0, T)$, la varianza de la integral estocástica es exactamente igual a la esperanza de la integral determinista del proceso al cuadrado respecto al tiempo de Lebesgue:
+### Isometría de Itô para el Proceso de Wiener
+Para cualquier proceso progresivamente medible $\{X(t)\}_{t \ge 0} \in \mathcal{L}^2(\Omega \times [0, T])$, la varianza topológica de la integral estocástica es exactamente equivalente a la esperanza matemática de la integral determinista del cuadrado del proceso respecto a la medida de Lebesgue temporal:
 
-$$
-\mathbb{E}\left[ \left( \int_0^T X(t) dW(t) \right)^2 \right] = \mathbb{E}\left[ \int_0^T X^2(t) dt \right]
-$$
+$$ \mathbb{E}\left[ \left( \int_0^T X(t) dW(t) \right)^2 \right] = \mathbb{E}\left[ \int_0^T X^2(t) dt \right] $$
 :::
-La demostración de esta isometría descansa en la independencia de los incrementos de $W(t)$ y es un pilar para demostrar la unicidad de soluciones en ecuaciones estocásticas [@karatzas1998brownian].
+La demostración de esta isometría descansa en la ortogonalidad de los incrementos independientes de $W(t)$ y constituye el pilar analítico indispensable para acotar los errores cuadráticos y demostrar la convergencia y unicidad de soluciones en ecuaciones estocásticas [@karatzas1998brownian].
 
-### Integración Estocástica respecto a Medidas de Salto
+### Integración Estocástica respecto a Medidas Aleatorias de Salto
 
-Para modelar la acumulación de energía o masa proveniente de eventos discretos, definimos la integral respecto a la medida aleatoria de Poisson compensada $\tilde{N}(dt, dz)$, la cual fue definida formalmente en la sección anterior.
+Para modelar matemáticamente la acumulación de energía térmica proveniente de eventos discretos aleatorios, definimos la integral de línea respecto a la medida aleatoria de Poisson compensada $\tilde{N}(dt, dz)$.
 
 ::: {#def-integral-saltos}
-### Integral Estocástica con Saltos
-Sea $H(t, z, \omega)$ un proceso predecible respecto a $\mathcal{F}_t$, tal que $\mathbb{E} \left[ \int_0^T \int_{\mathbb{R}} |H(t, z)|^2 \nu(dz) dt \right] < \infty$. La integral estocástica de $H$ respecto a la medida compensada de Poisson $\tilde{N}$ está bien definida en $L^2(\Omega, \mathbb{P})$ y constituye una martingala de cuadrado integrable centrada, cuya esperanza matemática es nula:
-$$
-\mathbb{E}\left[ \int_0^T \int_{\mathbb{R}} H(t, z) \tilde{N}(dt, dz) \right] = 0
-$$
+### Integral Estocástica respecto a la Medida de Poisson Compensada
+Sea $H(t, z, \omega): [0, \infty) \times \mathbb{R} \times \Omega \to \mathbb{R}$ un proceso de integración predecible respecto a la filtración generada $\mathcal{F}_t$, tal que satisface la condición de acotación de la medida producto: $\mathbb{E} \left[ \int_0^T \int_{\mathbb{R}} \vert{}H(t, z)\vert{}^2 \nu(dz) dt \right] < \infty$. La integral estocástica de $H$ respecto a la medida compensada $\tilde{N}(dt, dz)$ está analíticamente bien definida en $L^2(\Omega, \mathbb{P})$ y constituye, por construcción, una martingala de cuadrado integrable centrada:
+$$ \mathbb{E}\left[ \int_0^T \int_{\mathbb{R}} H(t, z) \tilde{N}(dt, dz) \right] = 0, \quad \text{para todo } T \ge 0. $$
 :::
 
-De forma homóloga a la difusión continua, existe una isometría exacta para los saltos que permite controlar analíticamente las varianzas de los choques discretos.
+De forma homóloga a la isometría de difusión continua, existe una isometría exacta para los operadores de salto que permite transferir el control analítico de las varianzas discretas al dominio de la integral de Lebesgue convencional.
 
 ::: {#thm-isometria-saltos}
 ### Isometría de Itô para la Medida Compensada
-Para todo integrando admisible $H(t, z)$, la norma en el espacio de Hilbert $L^2$ de la integral estocástica de salto satisface la siguiente identidad geométrica:
-$$
-\mathbb{E}\left[ \left( \int_0^T \int_{\mathbb{R}} H(t, z) \tilde{N}(dt, dz) \right)^2 \right] = \mathbb{E}\left[ \int_0^T \int_{\mathbb{R}} |H(t, z)|^2 \nu(dz) dt \right]
-$$
+Para todo integrando espacial predecible admisible $H(t, z)$, el segundo momento de la norma en el espacio de Hilbert de la integral estocástica de salto satisface la siguiente identidad fundamental:
+$$ \mathbb{E}\left[ \left( \int_0^T \int_{\mathbb{R}} H(t, z) \tilde{N}(dt, dz) \right)^2 \right] = \mathbb{E}\left[ \int_0^T \int_{\mathbb{R}} \vert{}H(t, z)\vert{}^2 \nu(dz) dt \right] $$
 :::
-Este resultado, documentado exhaustivamente por R. Situ [@situ2005theory], confirma que el segundo momento del ruido de saltos se comporta como una integral determinista sobre la medida de Lévy $\nu(dz)$, habilitando el uso del cálculo diferencial para el análisis de riesgo.
+Este resultado riguroso, documentado extensamente en la teoría de Situ [@situ2005theory], confirma que la variabilidad estocástica del ruido de saltos se comporta asintóticamente como una integral determinista sobre el compensador de Lévy $\nu(dz)dt$, habilitando el uso del cálculo de variaciones y cotas integrales para el análisis de estabilidad del modelo de refrigeración.
 
 ## Ecuaciones Diferenciales Estocásticas Continuas
 
@@ -639,33 +648,25 @@ Con el andamiaje de integración establecido, es posible formular ecuaciones que
 ### Ecuación Diferencial Estocástica Clásica
 Una ecuación diferencial estocástica continua para un proceso $\{X(t)\}_{t \ge 0}$ es una relación simbólica expresada en su forma diferencial mediante:
 
-$$
-dX(t) = b(t, X(t)) dt + \sigma(t, X(t)) dW(t)
-$$ {#eq-ede-general-diff}
+$$ dX(t) = b(t, X(t)) dt + \sigma(t, X(t)) dW(t) $$ {#eq-ede-general-diff}
 
 donde el término $b(t, X(t))$ denota el coeficiente de deriva (tendencia determinista) y $\sigma(t, X(t))$ representa el coeficiente de difusión (volatilidad).
 :::
 
 El término $dX(t)$ en la @eq-ede-general-diff no debe interpretarse como una derivada ordinaria, sino como una representación abreviada de su ecuación integral equivalente, la cual otorga el verdadero sentido matemático a la igualdad:
 
-$$
-X(t) = X(0) + \int_0^t b(s, X(s)) ds + \int_0^t \sigma(s, X(s)) dW(s) \quad \text{casi seguramente.}
-$$ {#eq-ede-general-int}
+$$ X(t) = X(0) + \int_0^t b(s, X(s)) ds + \int_0^t \sigma(s, X(s)) dW(s) \quad \text{casi seguramente.} $$ {#eq-ede-general-int}
 
 Para garantizar que el modelo matemático no resulte en comportamientos explosivos ni ambiguos (múltiples trayectorias cruzadas), se exige el cumplimiento de restricciones geométricas sobre los coeficientes.
 
 ::: {#thm-existencia-unicidad}
 ### Teorema Clásico de Existencia y Unicidad de Itô
-Sea la EDE definida en la @eq-ede-general-diff con una condición inicial $X(0) = x_0$, medible respecto a $\mathcal{F}_0$ e independiente del proceso de Wiener, con $\mathbb{E}[|x_0|^2] < \infty$. Supóngase que para todo $t \in [0, T]$ y estados $x, y \in \mathbb{R}$, los coeficientes satisfacen las siguientes dos restricciones para constantes positivas $K, L > 0$:
+Sea la EDE definida en la @eq-ede-general-diff con una condición inicial $X(0) = x_0$, medible respecto a $\mathcal{F}_0$ e independiente del proceso de Wiener, con $\mathbb{E}[\vert{}x_0\vert{}^2] < \infty$. Supóngase que para todo $t \in [0, T]$ y estados $x, y \in \mathbb{R}$, los coeficientes satisfacen las siguientes dos restricciones para constantes positivas $K, L > 0$:
 
 1. **Condición de Lipschitz Global:** Las funciones no cambian tan bruscamente como para permitir bifurcaciones en el espacio de fase:
-$$
-|b(t, x) - b(t, y)|^2 + |\sigma(t, x) - \sigma(t, y)|^2 \le L |x - y|^2
-$$
+$$ \vert{}b(t, x) - b(t, y)\vert{}^2 + \vert{}\sigma(t, x) - \sigma(t, y)\vert{}^2 \le L \vert{}x - y\vert{}^2 $$
 2. **Condición de Crecimiento Lineal:** El sistema no diverge a infinito en tiempo finito:
-$$
-|b(t, x)|^2 + |\sigma(t, x)|^2 \le K (1 + |x|^2)
-$$
+$$ \vert{}b(t, x)\vert{}^2 + \vert{}\sigma(t, x)\vert{}^2 \le K (1 + \vert{}x\vert{}^2) $$
 
 Bajo el cumplimiento de ambas condiciones, la ecuación tiene una solución fuerte global única $\{X(t)\}_{t \in [0, T]}$, adaptada a la filtración $\mathcal{F}_t$, con trayectorias continuas con probabilidad 1 [@karatzas1998brownian].
 :::
@@ -676,9 +677,7 @@ Para transformar analíticamente las soluciones o funciones dependientes de una 
 ### Lema de Itô para Difusiones Continuas
 Sea un proceso estocástico $\{X(t)\}_{t \ge 0}$ que satisface la @eq-ede-general-diff, y sea $V(t, x)$ una función escalar continuamente diferenciable en su componente temporal $t$ ($\mathcal{C}^1$) y dos veces continuamente diferenciable en su componente espacial $x$ ($\mathcal{C}^2$). El diferencial estocástico de la función compuesta viene dado por:
 
-$$
-dV(t, X(t)) = \left[ \frac{\partial V}{\partial t} + b(t, X(t))\frac{\partial V}{\partial x} + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 V}{\partial x^2} \right] dt + \sigma(t, X(t))\frac{\partial V}{\partial x} dW(t)
-$$
+$$ dV(t, X(t)) = \left[ \frac{\partial V}{\partial t} + b(t, X(t))\frac{\partial V}{\partial x} + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 V}{\partial x^2} \right] dt + \sigma(t, X(t))\frac{\partial V}{\partial x} dW(t) $$
 :::
 
 El término de segundo orden respecto a la derivada espacial es el núcleo de la corrección de Itô. Surge del hecho topológico de que la variación cuadrática del movimiento Browniano sobre un intervalo infinitesimal obedece la regla $(dW(t))^2 \to dt$ en un sentido probabilístico en $L^2$.
@@ -689,11 +688,9 @@ Como paso previo al desarrollo de nuestro modelo termodinámico final, es indisp
 
 ::: {#def-ou-clasico}
 ### Proceso de Ornstein-Uhlenbeck
-Un proceso estocástico $\{X(t)\}_{t \ge 0}$ es un proceso de Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial estocástica lineal:
+Un proceso estocástico $\{X(t)\}_{t \ge 0}$ es un proceso de Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial estocástica lineal homogénea:
 
-$$
-dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t)
-$$ {#eq-ou-clasica}
+$$ dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t) $$ {#eq-ou-clasica}
 
 donde $\kappa > 0$ representa la velocidad o tasa de reversión a la media, $\theta \in \mathbb{R}$ denota el nivel asintótico de equilibrio a largo plazo y $\sigma > 0$ es la magnitud del ruido térmico intrínseco.
 :::
@@ -702,49 +699,49 @@ La característica principal de la @eq-ou-clasica radica en su deriva lineal $b(
 
 ## Herramientas Analíticas Auxiliares
 
-Antes de formalizar la teoría de los sistemas estocásticos híbridos y proceder con la verificación de nuestro modelo, es necesario enunciar dos resultados clásicos del análisis matemático. Estas herramientas proporcionan el soporte lógico para acotar el crecimiento de las trayectorias estocásticas y para demostrar la unicidad de las soluciones.
+Antes de formalizar la teoría de los sistemas estocásticos híbridos y proceder con la verificación teórica y el desarrollo de nuestro modelo, es necesario enunciar dos resultados clásicos del análisis matemático. Estas herramientas proporcionan el soporte lógico para acotar el crecimiento de las trayectorias estocásticas y para demostrar la unicidad de las soluciones.
 
 ::: {#lem-desigualdad-algebraica}
 ### Desigualdad de Potencias (Cauchy-Schwarz elemental)
 Para cualesquiera números reales $a, b \in \mathbb{R}$ y para cualquier entero $p \ge 1$, la convexidad de la función $x \mapsto \vert{}x\vert{}^p$ implica la siguiente cota superior geométrica:
 $$\vert{}a \pm b\vert{}^p \le 2^{p-1} (\vert{}a\vert{}^p + \vert{}b\vert{}^p)$$
-En el contexto del análisis en $L^2$ (donde $p=2$), esta desigualdad se reduce a la forma fundamental que utilizaremos para acotar el operador de deriva y varianza:
+En el contexto del análisis en $L^2$ (donde $p=2$), esta desigualdad se reduce a la forma fundamental que utilizaremos para acotar la combinación de operadores de deriva y varianza estocástica:
 $$\vert{}a \pm b\vert{}^2 \le 2\vert{}a\vert{}^2 + 2\vert{}b\vert{}^2$$
 :::
 
 ::: {#lem-gronwall}
 ### Desigualdad Integral de Grönwall
-Sea $T > 0$ y sean $u(t)$ y $v(t)$ funciones reales, continuas y no negativas definidas en el intervalo $[0, T]$. Si existe una constante $C \ge 0$ tal que para todo $t \in [0, T]$ se cumple la desigualdad integral:
+Sea $T > 0$ y sean $u(t)$ y $v(t)$ funciones reales, continuas y no negativas definidas en el intervalo $[0, T]$. Si existe una constante $C \ge 0$ tal que para todo $t \in [0, T]$ se cumple la desigualdad integral implícita:
 $$u(t) \le C + \int_0^t v(s) u(s) ds$$
 Entonces, la función $u(t)$ está estrictamente acotada por la función exponencial de la integral de $v(t)$:
 $$u(t) \le C \exp\left( \int_0^t v(s) ds \right)$$
 :::
-En la teoría de ecuaciones diferenciales estocásticas, el Lema de Grönwall se utiliza asumiendo que $u(t)$ representa la esperanza matemática de la diferencia al cuadrado entre dos posibles soluciones, i.e., $u(t) = \mathbb{E}[\vert{}X_1(t) - X_2(t)\vert{}^2]$. Si se logra demostrar que $u(t) \le 0 + \int L u(s)ds$, el lema dictamina que $u(t) \le 0 \cdot e^{Lt} = 0$, probando así la unicidad casi segura de la solución.
+En la teoría de ecuaciones diferenciales estocásticas, el Lema de Grönwall se utiliza asumiendo que la función de estado $u(t)$ representa la esperanza matemática de la diferencia al cuadrado entre dos posibles soluciones de un sistema, i.e., $u(t) = \mathbb{E}[\vert{}X_1(t) - X_2(t)\vert{}^2]$. Si mediante estimaciones de Itô se logra demostrar que $u(t) \le 0 + \int L u(s)ds$, el lema dictamina que $u(t) \le 0 \cdot e^{Lt} = 0$, probando así analíticamente la unicidad casi segura de la solución a lo largo del tiempo.
 
-## Sistemas Híbridos: Discontinuidades y Cambios de Régimen
+## Teoría de Existencia y Unicidad para Sistemas Híbridos (Discontinuidades y Cambios de Régimen)
 
-Los modelos de difusión continua resultan insuficientes cuando el fenómeno físico exhibe transiciones estructurales de entorno (como un fallo eléctrico general) y choques discretos instantáneos (como la apertura de una puerta). La amalgama de estos comportamientos da lugar a un sistema híbrido impulsado por medidas de salto.
+Los modelos de difusión continua resultan insuficientes cuando el fenómeno físico exhibe transiciones estructurales de entorno (como un fallo eléctrico general en la red pública) y choques discretos instantáneos (como la apertura de la puerta de un refrigerador). La amalgama de estos comportamientos da lugar a un sistema híbrido impulsado por medidas de salto espacial y conmutaciones markovianas.
 
 ::: {#def-ede-hibrida}
 ### Ecuación Diferencial Estocástica Híbrida
-Sea $\alpha(t)$ una cadena de Markov a tiempo continuo en un espacio de estados finito $\mathcal{M}$. Una EDE híbrida con saltos es una ecuación gobernada por un régimen markoviano y perturbada por una medida de Poisson compensada $\tilde{N}(dt, dz) = N(dt, dz) - \nu(dz)dt$, cuya forma diferencial es:
+Sea $\alpha(t)$ una cadena de Markov a tiempo continuo en un espacio de estados finito $\mathcal{M}$. Una EDE híbrida con saltos es una ecuación gobernada por un régimen markoviano y perturbada por una medida de Poisson compensada $\tilde{N}(dt, dz) = N(dt, dz) - \nu(dt, dz)$, cuya forma diferencial es:
 
-$$dX(t) = b(t, X(t^-), \alpha(t^-)) dt + \sigma(t, X(t^-), \alpha(t^-)) dW(t) + \int_{\mathbb{R}} \gamma(t, X(t^-), \alpha(t^-), z) \tilde{N}(dt, dz)$$
+$$ dX(t) = b(t, X(t^-), \alpha(t^-)) dt + \sigma(t, X(t^-), \alpha(t^-)) dW(t) + \int_{\mathbb{R}} \gamma(t, X(t^-), \alpha(t^-), z) \tilde{N}(dt, dz) $$
 :::
 
-Dado que la función objetivo presenta discontinuidades puntuales, el teorema fundamental de Itô debe expandirse.
+Dado que la función objetivo presenta discontinuidades puntuales y cambios estructurales, el teorema fundamental de Itô debe expandirse para incluir la interacción con las medidas de salto y la matriz generadora del régimen discreto.
 
 ::: {#thm-lema-ito-saltos}
 ### Fórmula de Itô Generalizada para Sistemas Híbridos
 Sea $V(t, x, i)$ una función continuamente diferenciable en el tiempo $t$ ($\mathcal{C}^1$) y dos veces continuamente diferenciable en el espacio $x$ ($\mathcal{C}^2$) para cada régimen operativo $i \in \mathcal{M}$. Si $X(t)$ es un proceso que satisface la EDE híbrida descrita anteriormente, el diferencial estocástico de la función compuesta viene dado por:
 
-$$\begin{aligned} dV(t, X(t), \alpha(t)) = & \left[ \frac{\partial V}{\partial t} + \frac{\partial V}{\partial x}b(t, X, \alpha) + \frac{1}{2}\frac{\partial^2 V}{\partial x^2}\sigma^2(t, X, \alpha) + \sum_{j \in \mathcal{M}} q_{\alpha(t)j} V(t, X, j) \right] dt \\ & + \int_{\mathbb{R}} \left[ V(t, X(t^-) + \gamma, \alpha(t^-)) - V(t, X(t^-), \alpha(t^-)) - \frac{\partial V}{\partial x}\gamma(t, X(t^-), \alpha(t^-), z) \right] \nu(dz) dt \\ & + \frac{\partial V}{\partial x}\sigma(t, X, \alpha) dW(t) \\ & + \int_{\mathbb{R}} \left[ V(t, X(t^-) + \gamma, \alpha(t^-)) - V(t, X(t^-), \alpha(t^-)) \right] \tilde{N}(dt, dz) \end{aligned}$$
+$$ \begin{aligned} dV(t, X(t), \alpha(t)) = & \left[ \frac{\partial V}{\partial t} + \frac{\partial V}{\partial x}b(t, X, \alpha) + \frac{1}{2}\frac{\partial^2 V}{\partial x^2}\sigma^2(t, X, \alpha) + \sum_{j \in \mathcal{M}} q_{\alpha(t)j} V(t, X, j) \right] dt \\ & + \int_{\mathbb{R}} \left[ V(t, X(t^-) + \gamma, \alpha(t^-)) - V(t, X(t^-), \alpha(t^-)) - \frac{\partial V}{\partial x}\gamma(t, X(t^-), \alpha(t^-), z) \right] \nu(dz) dt \\ & + \frac{\partial V}{\partial x}\sigma(t, X, \alpha) dW(t) \\ & + \int_{\mathbb{R}} \left[ V(t, X(t^-) + \gamma, \alpha(t^-)) - V(t, X(t^-), \alpha(t^-)) \right] \tilde{N}(dt, dz) \end{aligned} $$
 :::
-Esta formulación rigurosa añade al operador diferencial clásico una sumatoria ponderada por la matriz de transición $Q$ y un operador de diferencias finitas que absorbe las discontinuidades generadas por la medida de salto espacial $\nu(dz)$.
+Esta formulación rigurosa añade al operador diferencial clásico una sumatoria ponderada por las intensidades de transición de la matriz $Q$ de la cadena de Markov y un operador de diferencias finitas exacto que absorbe las discontinuidades generadas por la medida de salto $\nu(dz)$.
 
 ### Teoremas de Existencia y Unicidad Híbrida
 
-Para garantizar que un sistema estocástico híbrido posea viabilidad analítica, la existencia y unicidad de sus soluciones se construyen en dos fases teóricas: primero garantizando el comportamiento frente a los saltos de Poisson, y luego concatenando la solución a través de los cambios de régimen de la cadena de Markov.
+Para garantizar que un sistema estocástico híbrido posea viabilidad analítica, la existencia y unicidad de sus soluciones se construyen en dos fases teóricas: primero garantizando el comportamiento frente a los saltos de Poisson, y luego concatenando la solución a través de los tiempos de conmutación del régimen de la cadena de Markov.
 
 ::: {#thm-situ-existencia}
 ### Teorema de Existencia y Unicidad con Saltos de Poisson (Teorema 117 de R. Situ)
@@ -755,99 +752,136 @@ $$\vert{}b(t, x) - b(t, y)\vert{}^2 + \vert{}\sigma(t, x) - \sigma(t, y)\vert{}^
 2. **Condición de Crecimiento Lineal:**
 $$\vert{}b(t, x)\vert{}^2 + \vert{}\sigma(t, x)\vert{}^2 + \int_{\mathbb{R}} \vert{}\gamma(t, x, z)\vert{}^2 \nu(dz) \le K (1 + \vert{}x\vert{}^2)$$
 
-Entonces, para cualquier condición inicial $\mathcal{F}_0$-medible tal que $\mathbb{E}[\vert{}X(0)\vert{}^2] < \infty$, la EDE admite una solución fuerte global y única, con trayectorias càdlàg casi seguramente.
+Entonces, para cualquier condición inicial $\mathcal{F}_0$-medible tal que $\mathbb{E}[\vert{}X(0)\vert{}^2] < \infty$, la EDE admite una solución fuerte global y única, con trayectorias càdlàg casi seguramente [@situ2005theory].
 :::
 
-Una vez garantizada la solución bajo un régimen constante mediante la métrica de R. Situ [@situ2005theory], la validación global del sistema híbrido se obtiene mediante la técnica de empalme topológico en los tiempos de parada estocásticos de la cadena de Markov, tal como fue formalizado por Mao y Yuan, y Yin y Zhu [@yin2010hybrid].
+Una vez garantizada la solución bajo un régimen constante mediante la métrica de R. Situ, la validación global del sistema híbrido se obtiene mediante una demostración constructiva basada en la técnica de empalme topológico en los tiempos de parada estocásticos de la cadena de Markov. Demostraremos formalmente este resultado fundamental que asocia la teoría de difusiones con la teoría de switching de Mao y Yuan, y Yin y Zhu [@yin2010hybrid].
 
 ::: {#thm-mao-switching}
 ### Teorema de Concatenación de Soluciones Híbridas (Switching Markoviano)
 Sea $\alpha(t)$ una cadena de Markov en tiempo continuo sobre un espacio de estados finito $\mathcal{M}$, definida por una matriz generadora acotada $Q$. Sean $0 = \tau_0 < \tau_1 < \tau_2 < \dots$ los tiempos de parada aleatorios correspondientes a los saltos de régimen de $\alpha(t)$. 
 
-Puesto que el espacio de estados es finito y las tasas de transición $q_{ij}$ están acotadas, la cadena es no explosiva, es decir, $\mathbb{P}(\lim_{k \to \infty} \tau_k = \infty) = 1$. Si en cada intervalo aleatorio $[\tau_k, \tau_{k+1})$ el sistema satisface las condiciones del `@thm-situ-existencia` para el régimen estacionario $i_k \in \mathcal{M}$, la solución puede ser concatenada de forma iterativa tomando el límite por la izquierda $\lim_{t \uparrow \tau_k} X^{(k-1)}(t)$ como la nueva condición inicial fuerte $X^{(k)}(\tau_k)$. 
+Puesto que el espacio de estados es finito y las tasas de transición $q_{ij}$ están acotadas, la cadena es no explosiva, es decir, $\mathbb{P}(\lim_{k \to \infty} \tau_k = \infty) = 1$. Si en cada intervalo aleatorio $[\tau_k, \tau_{k+1})$ el sistema satisface las condiciones del @thm-situ-existencia para el régimen estacionario $i_k \in \mathcal{M}$, la solución puede ser concatenada de forma iterativa tomando el límite por la izquierda $\lim_{t \uparrow \tau_k} X^{(k-1)}(t)$ como la nueva condición inicial fuerte $X^{(k)}(\tau_k)$. 
 
 En consecuencia, el sistema híbrido global posee una única solución fuerte bien definida para todo $t \in [0, \infty)$, y las trayectorias no divergen a infinito en tiempo finito.
 :::
 
+**Demostración:**
+
+La prueba de este teorema procede mediante un argumento de inducción estocástica sobre la secuencia de tiempos de parada $\{\tau_k\}_{k=0}^\infty$ asociados a los cambios de estado de la cadena de Markov $\alpha(t)$.
+
+*Paso 1: Localización y Existencia en el Primer Intervalo.*
+Consideremos el primer intervalo estocástico $[0, \tau_1)$. En este dominio temporal, la cadena de Markov se encuentra fija en su estado inicial $\alpha(t) = \alpha(0) = i_0$. El sistema híbrido se reduce temporalmente a una ecuación diferencial estocástica con saltos impulsados por una medida compensada, pero sin cambios de régimen:
+$$dX^{(0)}(t) = b(t, X^{(0)}(t^-), i_0)dt + \sigma(t, X^{(0)}(t^-), i_0)dW(t) + \int_{\mathbb{R}} \gamma(t, X^{(0)}(t^-), i_0, z) \tilde{N}(dt, dz)$$
+Puesto que, por hipótesis, los coeficientes satisfacen las condiciones de Lipschitz y de Crecimiento Lineal del `@thm-situ-existencia` para el régimen estacionario $i_0$, existe una solución estocástica fuerte y única, $X^{(0)}(t)$, bien definida para todo $t \in [0, \tau_1)$.
+
+*Paso 2: Empalme Topológico y Continuidad Càdlàg.*
+Para extender la solución más allá de $\tau_1$, debemos establecer una condición inicial para el siguiente intervalo. Dado que el proceso debe habitar el espacio de trayectorias *càdlàg* (continuas por la derecha, con límites por la izquierda), definimos el límite de la solución justo antes del cambio de régimen:
+$$X(\tau_1^-) = \lim_{t \uparrow \tau_1} X^{(0)}(t)$$
+Este límite existe con probabilidad 1 y es una variable aleatoria finita y $\mathcal{F}_{\tau_1}$-medible. Establecemos la condición inicial para el siguiente régimen como $X^{(1)}(\tau_1) = X(\tau_1^-)$. 
+
+*Paso 3: Unicidad en el Intervalo mediante Grönwall.*
+Para garantizar la unicidad de la solución en el intervalo $[\tau_1, \tau_2)$ bajo el nuevo régimen $i_1$, supongamos que existen dos soluciones estocásticas fuertes, $X(t)$ e $Y(t)$, que parten de la misma condición inicial empalmada $X(\tau_1^-)$. Evaluamos la esperanza matemática del supremo de la diferencia cuadrática entre ambas soluciones. Aplicando las isometrías de Itô (para el movimiento Browniano y la medida de Poisson compensada) y utilizando las desigualdades de Cauchy-Schwarz, la condición de Lipschitz nos asegura la existencia de una constante universal $C > 0$ tal que:
+$$\mathbb{E}\left[ \sup_{\tau_1 \le s \le t} \vert{}X(s) - Y(s)\vert{}^2 \right] \le C \int_{\tau_1}^t \mathbb{E}\left[ \sup_{\tau_1 \le u \le s} \vert{}X(u) - Y(u)\vert{}^2 \right] ds$$
+Definiendo la función no negativa $u(t) = \mathbb{E}\left[ \sup_{\tau_1 \le s \le t} \vert{}X(s) - Y(s)\vert{}^2 \right]$, la desigualdad anterior se reescribe como $u(t) \le 0 + C \int_{\tau_1}^t u(s) ds$. Aplicando la Desigualdad Integral de Grönwall (`@lem-gronwall`), deducimos estrictamente que:
+$$u(t) \le 0 \cdot \exp(C(t-\tau_1)) = 0$$
+Por lo tanto, $\mathbb{E}\left[ \sup_{\tau_1 \le s \le t} \vert{}X(s) - Y(s)\vert{}^2 \right] = 0$, lo que implica que $X(t) = Y(t)$ casi seguramente para todo $t \in [\tau_1, \tau_2)$. La unicidad fuerte queda demostrada.
+
+*Paso 4: Existencia Global y No Explosión.*
+Por el principio de inducción matemática, el proceso de concatenación y unicidad puede repetirse para generar una solución $X^{(k)}(t)$ en cada intervalo sucesivo $[\tau_k, \tau_{k+1})$. Para que la solución sea global, es imperativo que el sistema no experimente infinitas conmutaciones de régimen en un tiempo finito (fenómeno conocido como explosión o comportamiento de Zenón).
+Como la cadena de Markov $\alpha(t)$ toma valores en un espacio de estados estrictamente finito $\mathcal{M}$, y los elementos de su matriz generadora $Q$ están uniformemente acotados ($\vert{}q_{ij}\vert{} \le \max_{i} \vert{}q_{ii}\vert{} < \infty$), la cadena es intrínsecamente no explosiva. Es decir, los tiempos de parada tienden a infinito con probabilidad 1:
+$$\mathbb{P}\left(\lim_{k \to \infty} \tau_k = \infty\right) = 1$$
+Consecuentemente, la solución concatenada $X(t)$ puede extenderse hasta cubrir todo el semieje temporal $[0, \infty)$, garantizando la existencia de una única solución fuerte global cuyas trayectorias no divergen a infinito en tiempo finito. $\blacksquare$
+
 ## El Modelo Estocástico Termodinámico (Ornstein-Uhlenbeck Híbrido)
 
-Habiendo establecido el marco analítico de las ecuaciones diferenciales estocásticas con discontinuidades y cambios de régimen, procedemos a formalizar la ecuación que rige la dinámica térmica del refrigerador de vacunas.
+Habiendo establecido la demostración matemática formal que avala la existencia y unicidad de las ecuaciones diferenciales estocásticas con discontinuidades y cambios de régimen, procedemos a formalizar la ecuación específica que rige la dinámica térmica de nuestro refrigerador de vacunas.
 
-Bajo los principios termodinámicos de la ley de enfriamiento de Newton, la temperatura interna $T(t)$ del equipo se modela mediante una EDE de Ornstein-Uhlenbeck sujeta a perturbaciones gaussianas, saltos discretos y un estado de suministro eléctrico dictado por una cadena de Markov $\alpha(t) \in \mathcal{M} = \{1, 2\}$:
+Bajo los principios termodinámicos de la ley empírica de enfriamiento de Newton, la temperatura interna $T(t)$ del equipo se modela mediante un proceso de Ornstein-Uhlenbeck sujeto a perturbaciones gaussianas (el ruido del termostato y las fugas microscópicas), saltos discretos por aperturas de puerta, y un estado de suministro eléctrico dictado por una cadena de Markov $\alpha(t) \in \mathcal{M} = \{1, 2\}$:
 
-$$dT(t) = b(t, T(t^-), \alpha(t^-)) dt + \sigma(T(t^-), \alpha(t^-)) dW(t) + dJ(t)$$
+$$dT(t) = b(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + dJ(t)$$
 {#eq-modelo-termodinamico}
 
-Donde los regímenes operativos se definen como $\alpha(t) = 1$ (suministro eléctrico activo) y $\alpha(t) = 2$ (corte de energía). Los coeficientes de deriva $b$ y difusión $\sigma$ toman las siguientes formas paramétricas:
+Donde los regímenes operativos se definen como $\alpha(t) = 1$ (suministro eléctrico activo de la red pública) y $\alpha(t) = 2$ (corte de energía). Los coeficientes de deriva determinista $b$ y la difusión continua $\sigma$ toman las siguientes formas paramétricas:
 
 **Régimen 1 (Con energía):**
 $$b(t, T, 1) = \kappa_{on}(\theta_{set} - T)$$
-$$\sigma(T, 1) = \sigma_{on}$$
+$$\sigma(1) = \sigma_{on}$$
 
 **Régimen 2 (Falla eléctrica):**
 $$b(t, T, 2) = \kappa_{off}(T_{amb}(t) - T)$$
-$$\sigma(T, 2) = \sigma_{off}$$
+$$\sigma(2) = \sigma_{off}$$
 
-El término $dJ(t)$ representa un proceso de Poisson compuesto que inyecta calor al sistema producto de las aperturas de la puerta por el personal médico. Ocurre exclusivamente en el Régimen 1, dictado por un proceso de Poisson no homogéneo con tasa $\lambda(t)$. La magnitud de cada salto $\gamma_i$ es una variable aleatoria extraída de una distribución normal truncada $Z \sim \mathcal{N}(0.76, 0.20^2)$ tal que $\gamma_i = \max(0.16, Z)$.
+El término estocástico $dJ(t)$ representa un proceso de Poisson compuesto que inyecta calor al sistema producto de las aperturas de la puerta por el personal médico. Físicamente, este proceso ocurre exclusivamente en el Régimen 1, y se encuentra dictado por un proceso de Poisson no homogéneo con una función de intensidad horaria $\lambda(t)$. La magnitud de cada salto térmico o evento convectivo $\gamma_i$ es una variable aleatoria extraída de una distribución normal latente $Z \sim \mathcal{N}(0.76, 0.20^2)$ y censurada inferiormente (con suelo) en un umbral operativo de $0.16$ °C, tal que $\gamma_i = \max(0.16, Z)$. 
+
+Para representar analíticamente la condición de que los saltos térmicos masivos (aperturas programadas de puerta) solo ocurren cuando el refrigerador está operando normalmente (Régimen 1), definimos la función espacial del salto condicionada al régimen como:
+$$\gamma(1, z) = z$$
+$$\gamma(2, z) = 0$$
 
 ### Transformación Analítica de la Medida de Salto
 
-Para someter nuestro modelo a los criterios de existencia y unicidad del `@thm-situ-existencia`, debemos reescribir el diferencial del proceso de Poisson compuesto $dJ(t)$ en términos de la medida de Poisson compensada $\tilde{N}(dt, dz)$. Invocando el `@lem-equivalencia-saltos`, definimos la medida de intensidad $\nu(dz) = \lambda(t) dF(z)$, donde $F(z)$ es la función de distribución acumulada de los saltos $\gamma_i$. 
+Para someter nuestro modelo termodinámico a los criterios abstractos de existencia y unicidad del `@thm-situ-existencia` que forman la base del `@thm-mao-switching`, debemos reescribir el diferencial empírico del proceso de Poisson compuesto $dJ(t)$ en términos de una integral respecto a la medida de Poisson compensada $\tilde{N}(dt, dz)$. Invocando el `@lem-equivalencia-saltos`, definimos la medida de intensidad espacial como $\nu(dz) = \lambda(t) dF(z)$, donde $F(z)$ representa la función de distribución acumulada de los saltos térmicos censurados $\gamma_i$. 
 
-Transformamos el diferencial de salto sumando y restando el compensador determinista:
-$$dJ(t) = \int_{\mathbb{R}} z N(dt, dz) = \int_{\mathbb{R}} z \tilde{N}(dt, dz) + \left( \lambda(t) \int_{\mathbb{R}} z dF(z) \right) dt$$
+Transformamos el diferencial de salto sumando y restando algebraicamente el compensador de la intensidad determinista:
+$$dJ(t) = \int_{\mathbb{R}} \gamma(1, z) N(dt, dz) = \int_{\mathbb{R}} z \tilde{N}(dt, dz) + \left( \lambda(t) \int_{\mathbb{R}} z dF(z) \right) dt$$
 
-Dado que la integral respecto a la distribución de probabilidad $dF(z)$ es el valor esperado de la magnitud del salto térmico, $\mathbb{E}[\gamma]$, la ecuación puede reescribirse absorbiendo este término determinista en una "deriva modificada" $\tilde{b}(t, T, \alpha)$:
+Dado que la integral respecto a la medida de probabilidad empírica $dF(z)$ es, por definición en la teoría de la medida, el valor esperado incondicional de la magnitud del salto térmico $\mathbb{E}[\gamma]$, la ecuación puede reescribirse elegantemente absorbiendo este término determinista integrador en una "deriva modificada" o compensada, denotada a partir de ahora por $\tilde{b}(t, T, \alpha)$:
 
-**Deriva Compensada:**
+**Derivas Compensadas:**
 $$\tilde{b}(t, T, 1) = \kappa_{on}(\theta_{set} - T) + \lambda(t)\mathbb{E}[\gamma]$$
 $$\tilde{b}(t, T, 2) = \kappa_{off}(T_{amb}(t) - T)$$
 
-La ecuación híbrida en su forma final y estrictamente compatible con la teoría clásica de saltos es:
+Nótese que para el Régimen 2, el término de salto esperado es nulo ($\gamma(2,z)=0$), preservando inalterada la dinámica difusiva de enfriamiento pasivo. La ecuación termodinámica híbrida en su forma final y estrictamente compatible con la teoría clásica de integrales de martingala para sistemas de salto queda formulada como:
 
 $$dT(t) = \tilde{b}(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \int_{\mathbb{R}} \gamma(\alpha(t^-), z) \tilde{N}(dt, dz)$$
 {#eq-modelo-compensado}
 
-## Verificación Analítica de Existencia y Unicidad
+## Verificación Analítica de Existencia y Unicidad del Modelo Termodinámico
 
-Para demostrar que la @eq-modelo-compensado posee una solución fuerte, única y global, procedemos a verificar analíticamente que sus coeficientes satisfacen las condiciones del `@thm-situ-existencia` y del `@thm-mao-switching`.
+Para demostrar matemáticamente que la EDE estocástica compensada en la `@eq-modelo-compensado` es una representación funcional viable de la red de frío, debemos verificar analíticamente que sus coeficientes termodinámicos satisfacen de manera estricta las condiciones del `@thm-situ-existencia` y, por extensión, las del Teorema de Concatenación de Soluciones Híbridas (`@thm-mao-switching`).
 
-**Paso 1: Localización del Intervalo de Análisis**
-Sea $\tau_k$ la secuencia de tiempos de parada estocásticos donde la cadena $\alpha(t)$ conmuta de régimen. Puesto que el espacio de estados es finito ($m=2$) y las tasas de la matriz de transición de fallos eléctricos no son infinitas, la cadena es no explosiva ($\tau_k \to \infty$ casi seguramente). Evaluaremos el sistema condicionado en el intervalo $[\tau_k, \tau_{k+1})$, donde el régimen $\alpha(t) = i \in \{1, 2\}$ es constante.
+**Paso 1: Localización del Intervalo Físico de Análisis**
+Consideramos un intervalo semiabierto entre dos cambios de suministro eléctrico consecutivos $[\tau_k, \tau_{k+1})$. Puesto que el sistema de suministro eléctrico se encuentra en un estado estacionario en este intervalo, evaluaremos las condiciones del sistema condicionado a un régimen fijo $\alpha(t) = i \in \{1, 2\}$.
 
-**Paso 2: Comprobación de la Condición de Lipschitz Global**
-Debemos demostrar que la tasa de cambio de la ecuación está acotada por la diferencia de los estados. Sean $T_1$ y $T_2$ dos temperaturas internas arbitrarias. Evaluamos la diferencia cuadrática de los coeficientes:
+**Paso 2: Comprobación Rigurosa de la Condición de Lipschitz Global**
+Debemos demostrar que la tasa instantánea de cambio de la ecuación térmica está linealmente acotada por la diferencia de las variables espaciales de estado, impidiendo cruces de trayectorias. Sean $T_1$ y $T_2$ dos temperaturas internas hipotéticas de evaluación. Computamos la suma de las diferencias cuadráticas de los tres coeficientes de nuestra ecuación:
 
-1. **Difusión:** Dado que $\sigma_{on}$ y $\sigma_{off}$ son constantes reales independientes del estado $T$, se cumple trivialmente que:
+1. **Coeficiente de Difusión:** Dado que $\sigma_{on}$ y $\sigma_{off}$ representan el ruido gaussiano base y son constantes reales estrictamente independientes de la temperatura actual $T$, se cumple de forma trivial que su diferencia es idénticamente nula en ambos regímenes:
    $$\vert{}\sigma(i) - \sigma(i)\vert{}^2 = 0$$
 
-2. **Medida Espacial de Saltos:** Puesto que la magnitud de la masa de aire que ingresa al abrir la puerta ($\gamma=z$) depende exclusivamente del entorno externo y no de la temperatura interna actual $T(t^-)$, la diferencia espacial es nula:
+2. **Medida Espacial de Saltos:** La condición de Lipschitz para el operador de salto exige evaluar la integral de las diferencias espaciales. Sin embargo, en nuestro modelo fenomenológico, la magnitud del aire caliente que ingresa al abrir la puerta ($\gamma(\alpha, z)$) depende exclusivamente de la temperatura y volumen del entorno externo censurado (la marca estocástica $z$) y no depende endógenamente de la temperatura interna previa del refrigerador $T(t^-)$. Por tanto, la función espacial es estática respecto a $T$, resultando en una diferencia nula:
    $$\int_{\mathbb{R}} \vert{}\gamma(i, z) - \gamma(i, z)\vert{}^2 \nu(dz) = \int_{\mathbb{R}} \vert{}z - z\vert{}^2 \lambda(t) dF(z) = 0$$
 
-3. **Deriva Compensada:** Para el Régimen 1, evaluamos la diferencia absoluta al cuadrado. Nótese que el término estocástico esperado $\lambda(t)\mathbb{E}[\gamma]$ se cancela algebraicamente:
-   $$\vert{}\tilde{b}(t, T_1, 1) - \tilde{b}(t, T_2, 1)\vert{}^2 = \left\vert{} (\kappa_{on}(\theta_{set} - T_1) + \lambda(t)\mathbb{E}[\gamma]) - (\kappa_{on}(\theta_{set} - T_2) + \lambda(t)\mathbb{E}[\gamma]) \right\vert{}^2$$
+3. **Deriva Termodinámica Compensada:** Para el Régimen operativo 1 (con suministro de CFE), evaluamos la diferencia absoluta al cuadrado de las derivas para $T_1$ y $T_2$. Como hemos transformado la ecuación a la medida de martingala, el término de salto esperado o determinista $\lambda(t)\mathbb{E}[\gamma]$ es un sumando aditivo estricto, independiente de $T$, por lo que se anula en la sustracción algebraica de Itô:
+   $$\vert{}\tilde{b}(t, T_1, 1) - \tilde{b}(t, T_2, 1)\vert{}^2 = \left\vert{} [\kappa_{on}(\theta_{set} - T_1) + \lambda(t)\mathbb{E}[\gamma]] - [\kappa_{on}(\theta_{set} - T_2) + \lambda(t)\mathbb{E}[\gamma]] \right\vert{}^2$$
    $$= \vert{}-\kappa_{on}(T_1 - T_2)\vert{}^2 = \kappa_{on}^2 \vert{}T_1 - T_2\vert{}^2$$
-   De manera análoga, para el Régimen 2 obtenemos $\kappa_{off}^2 \vert{}T_1 - T_2\vert{}^2$.
+   Siguiendo un tratamiento analítico análogo para el Régimen de fallo eléctrico 2, obtenemos la cota estricta asintótica $\kappa_{off}^2 \vert{}T_1 - T_2\vert{}^2$.
 
-Definiendo la constante global de Lipschitz como la máxima inercia térmica al cuadrado, $L = \max(\kappa_{on}^2, \kappa_{off}^2)$, se satisface estrictamente:
+Definiendo la constante matemática global de Lipschitz como el cuadrado de la máxima inercia térmica disipativa del sistema, es decir, $L = \max(\kappa_{on}^2, \kappa_{off}^2)$, se satisface de manera universal e irrefutable que para el modelo propuesto:
 $$\vert{}\tilde{b}(t, T_1, i) - \tilde{b}(t, T_2, i)\vert{}^2 + \vert{}\sigma(i) - \sigma(i)\vert{}^2 + \int_{\mathbb{R}} \vert{}\gamma(i, z) - \gamma(i, z)\vert{}^2 \nu(dz) \le L \vert{}T_1 - T_2\vert{}^2$$
-Esta acotación garantiza matemáticamente que las trayectorias de temperatura no se intersectan (unicidad).
+Esta acotación asegura formalmente el cumplimiento de la condición para la **unicidad fuerte** del proceso estocástico térmico en estudio.
 
-**Paso 3: Comprobación de la Condición de Crecimiento Lineal**
-Debemos probar que el crecimiento del sistema está termodinámicamente acotado para prevenir explosiones en tiempo finito. Para la deriva en el Régimen 1, empleamos la desigualdad algebraica del `@lem-desigualdad-algebraica` $(\vert{}a-b\vert{}^2 \le 2\vert{}a\vert{}^2 + 2\vert{}b\vert{}^2)$ asumiendo una cota máxima para la tasa de apertura de puertas $\lambda_{max}$:
+**Paso 3: Comprobación Analítica de la Condición de Crecimiento Lineal**
+Para garantizar la viabilidad existencial global del sistema estocástico, debemos probar que el crecimiento acumulativo del sistema está termodinámicamente acotado, previniendo asintóticamente fenómenos de explosión en tiempo finito (i.e. evitar que la temperatura interna del refrigerador tienda al infinito de manera instantánea, lo cual sería un absurdo físico).
+
+Para evaluar la deriva compensada en el Régimen 1, empleamos la desigualdad algebraica demostrada en el `@lem-desigualdad-algebraica` $(\vert{}a-b\vert{}^2 \le 2\vert{}a\vert{}^2 + 2\vert{}b\vert{}^2)$ y asumimos la existencia de una cota superior natural en la modelación empírica para la intensidad máxima de apertura de puertas en el centro de salud $\lambda_{max} = \sup_{t} \lambda(t)$:
 $$\vert{}\tilde{b}(t, T, 1)\vert{}^2 = \vert{}\kappa_{on}\theta_{set} + \lambda(t)\mathbb{E}[\gamma] - \kappa_{on}T\vert{}^2 \le 2(\kappa_{on}\theta_{set} + \lambda_{max}\mathbb{E}[\gamma])^2 + 2\kappa_{on}^2 \vert{}T\vert{}^2$$
 
-Para el Régimen 2, definimos $T_{max}$ como la temperatura ambiental histórica máxima absoluta de la ubicación geográfica (i.e., $\vert{}T_{amb}(t)\vert{} \le T_{max}$), obteniendo:
+Para el Régimen 2 de disipación de calor, definimos la constante escalar $T_{max}$ como la temperatura ambiental histórica máxima absoluta de la ubicación geográfica de estudio de Tuxtla Gutiérrez, Chiapas (i.e., $\vert{}T_{amb}(t)\vert{} \le T_{max}$ para todo $t$), obteniendo por la misma cota del lema:
 $$\vert{}\tilde{b}(t, T, 2)\vert{}^2 = \vert{}\kappa_{off}T_{amb}(t) - \kappa_{off}T\vert{}^2 \le 2\kappa_{off}^2 T_{max}^2 + 2\kappa_{off}^2 \vert{}T\vert{}^2$$
 
-Evaluando el segundo momento de la medida de saltos (varianza de las perturbaciones), denotando $\mathbb{E}[\gamma^2] = M_\gamma$:
-$$\int_{\mathbb{R}} \vert{}\gamma(i, z)\vert{}^2 \nu(dz) = \lambda(t) \int_{\mathbb{R}} z^2 dF(z) = \lambda(t) \mathbb{E}[\gamma^2] \le \lambda_{max} M_\gamma$$
+Evaluamos simultáneamente el segundo momento probabilístico incondicional de la medida de saltos (la varianza del ruido del impacto térmico), denotando el momento latente $\mathbb{E}[\gamma^2] = M_\gamma$:
+$$\int_{\mathbb{R}} \vert{}\gamma(1, z)\vert{}^2 \nu(dz) = \lambda(t) \int_{\mathbb{R}} z^2 dF(z) = \lambda(t) \mathbb{E}[\gamma^2] \le \lambda_{max} M_\gamma$$
 
-Agrupando todos los términos (deriva, volatilidad constante $\Sigma_{max} = \max(\sigma_{on}^2, \sigma_{off}^2)$ y saltos) y factorizando, se demuestra que existe una constante estática de crecimiento $K$:
+Agrupando iterativamente la suma de los componentes del modelo (derivas compensadas, volatilidad térmica cuadrática constante $\Sigma_{max} = \max(\sigma_{on}^2, \sigma_{off}^2)$ y la cota integral estocástica de los saltos) y factorizando algebraicamente los términos estáticos y aquellos proporcionales al cuadrado del estado $T^2$, demostramos que existe una macro-constante limitante de crecimiento sistémico $K$, definida estrictamente como:
 $$K = \max \left( \max[2(\kappa_{on}\theta_{set} + \lambda_{max}\mathbb{E}[\gamma])^2, 2\kappa_{off}^2 T_{max}^2] + \Sigma_{max} + \lambda_{max} M_\gamma, \quad \max(2\kappa_{on}^2, 2\kappa_{off}^2) \right)$$
-Tal que se cumple rigurosamente:
+Tal que se cumple rigurosamente la desigualdad para la ecuación en todos sus regímenes $i \in \{1, 2\}$:
 $$\vert{}\tilde{b}(t, T, i)\vert{}^2 + \vert{}\sigma(i)\vert{}^2 + \int_{\mathbb{R}} \vert{}\gamma(i, z)\vert{}^2 \nu(dz) \le K(1 + \vert{}T\vert{}^2)$$
-Esta cota demuestra que el intercambio de calor está físicamente limitado, garantizando que el proceso $T(t)$ es globalmente estable.
+Esta acotación superior estructural demuestra matemáticamente que la transferencia de calor simulada está físicamente acotada por las fronteras climáticas empíricas del entorno y los parámetros fijos del equipo electromecánico. Esta condición previene de forma segura que $\lim_{t \to \tau} \vert{}T(t)\vert{} = \infty$, garantizando la **existencia global** de la trayectoria sin rupturas o singularidades en tiempo finito. Cabe señalar que esta existencia global no implica necesariamente estabilidad operativa dentro de los rangos normativos térmicos de la vacuna ($2^\circ$C a $8^\circ$C), lo cual es competencia del análisis inferencial numérico.
 
-**Paso 4: Concatenación Global y Conclusión**
-Habiendo demostrado las condiciones de Lipschitz y Crecimiento Lineal en los pasos 2 y 3, el `@thm-situ-existencia` avala que, en el intervalo $[\tau_k, \tau_{k+1})$, la EDE posee una solución fuerte y única. Al ser la cadena de Markov no explosiva, el `@thm-mao-switching` nos permite aplicar el lema de Grönwall iterativamente en los límites de salto para concatenar las soluciones hasta el infinito. En conclusión, el modelo estocástico propuesto de red de frío posee una trayectoria global única, continua por la derecha, validando su implementación para el análisis inferencial mediante métodos de Monte Carlo.
+**Paso 4: Conclusión Analítica Integral**
+Habiendo validado de forma deductiva el cumplimiento estricto de las condiciones de Lipschitz y de Crecimiento Lineal en los análisis previos (Paso 2 y 3), las hipótesis del `@thm-situ-existencia` se cumplen y avalan la aseveración de que, en cada intervalo de suministro constante $[\tau_k, \tau_{k+1})$, la EDE termodinámica posee una única y robusta solución estocástica en sentido fuerte.
+
+Adicionalmente, al validar que la matriz de intensidad de fallos de la red eléctrica comercial $Q$ es dimensional y espectralmente acotada, se cumple la condición de no explosividad de la cadena de Markov descrita en el Teorema de Concatenación de Soluciones Híbridas (`@thm-mao-switching`). 
+
+La convergencia de estos dos paradigmas analíticos certifica que el modelo matemático híbrido general de la red de frío expuesto a fallos sistémicos y perturbaciones ambientales posee una trayectoria estocástica global única, sin singularidades y adaptada a la filtración histórica generada por la evolución térmica, posibilitando, validando y blindando metodológicamente cualquier implementación posterior de estimación de densidades empíricas y pronóstico mediante metodologías de Monte Carlo o técnicas de inferencia asintótica.
