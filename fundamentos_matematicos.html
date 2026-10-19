@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Fundamentos Teóricos – Tesis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./fundamentos_numericos.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e0fdce12ac1367d4b47c179a2935dd10.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-2d6d8467bf2e75a99e72accc3c25dba4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e0fdce12ac1367d4b47c179a2935dd10.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fundamentos_matematicos.html">Marco Teórico</a></li><li class="breadcrumb-item"><a href="./fundamentos_matematicos.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentos Teóricos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./LOGOunach.jpeg" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./LOGOunach.jpeg" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tesis</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/Crisperez517/VERANO-DELFIN.git" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Tesis.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Marco Teórico</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fundamentos_matematicos.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentos Teóricos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fundamentos_numericos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fundamentos_epidemiologicos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fundamentos Teóricos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modelo Matemático</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Estudio_de_caso.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Estudio de Caso: Calibración Termodinámica, Eléctrica y Cinética de Degradación</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Simulación de Equipos (Haier HBC-150)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./montecarlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulación Computacional y Análisis de Resultados</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conclusiones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conclusiones y Trabajo Futuro</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#espacios-de-probabilidad-filtraciones-y-procesos-estocásticos" id="toc-espacios-de-probabilidad-filtraciones-y-procesos-estocásticos" class="nav-link active" data-scroll-target="#espacios-de-probabilidad-filtraciones-y-procesos-estocásticos"><span class="header-section-number">2.1</span> Espacios de Probabilidad, Filtraciones y Procesos Estocásticos</a></li>
+  <li><a href="#componentes-estocásticos-fundamentales" id="toc-componentes-estocásticos-fundamentales" class="nav-link" data-scroll-target="#componentes-estocásticos-fundamentales"><span class="header-section-number">2.2</span> Componentes Estocásticos Fundamentales</a>
+  <ul class="collapse">
+  <li><a href="#movimiento-browniano-proceso-de-wiener" id="toc-movimiento-browniano-proceso-de-wiener" class="nav-link" data-scroll-target="#movimiento-browniano-proceso-de-wiener"><span class="header-section-number">2.2.1</span> Movimiento Browniano (Proceso de Wiener)</a></li>
+  <li><a href="#procesos-de-poisson-y-discontinuidades-por-saltos" id="toc-procesos-de-poisson-y-discontinuidades-por-saltos" class="nav-link" data-scroll-target="#procesos-de-poisson-y-discontinuidades-por-saltos"><span class="header-section-number">2.2.2</span> Procesos de Poisson y Discontinuidades por Saltos</a></li>
+  <li><a href="#cadenas-de-markov-a-tiempo-continuo" id="toc-cadenas-de-markov-a-tiempo-continuo" class="nav-link" data-scroll-target="#cadenas-de-markov-a-tiempo-continuo"><span class="header-section-number">2.2.3</span> Cadenas de Markov a Tiempo Continuo</a></li>
+  </ul></li>
+  <li><a href="#teoría-de-medidas-aleatorias-y-saltos-estocásticos" id="toc-teoría-de-medidas-aleatorias-y-saltos-estocásticos" class="nav-link" data-scroll-target="#teoría-de-medidas-aleatorias-y-saltos-estocásticos"><span class="header-section-number">2.3</span> Teoría de Medidas Aleatorias y Saltos Estocásticos</a></li>
+  <li><a href="#teoría-de-integración-estocástica-de-itô" id="toc-teoría-de-integración-estocástica-de-itô" class="nav-link" data-scroll-target="#teoría-de-integración-estocástica-de-itô"><span class="header-section-number">2.4</span> Teoría de Integración Estocástica de Itô</a>
+  <ul class="collapse">
+  <li><a href="#integración-respecto-al-movimiento-browniano" id="toc-integración-respecto-al-movimiento-browniano" class="nav-link" data-scroll-target="#integración-respecto-al-movimiento-browniano"><span class="header-section-number">2.4.1</span> Integración respecto al Movimiento Browniano</a></li>
+  <li><a href="#integración-estocástica-respecto-a-medidas-aleatorias-de-salto" id="toc-integración-estocástica-respecto-a-medidas-aleatorias-de-salto" class="nav-link" data-scroll-target="#integración-estocástica-respecto-a-medidas-aleatorias-de-salto"><span class="header-section-number">2.4.2</span> Integración Estocástica respecto a Medidas Aleatorias de Salto</a></li>
+  </ul></li>
+  <li><a href="#ecuaciones-diferenciales-estocásticas-continuas" id="toc-ecuaciones-diferenciales-estocásticas-continuas" class="nav-link" data-scroll-target="#ecuaciones-diferenciales-estocásticas-continuas"><span class="header-section-number">2.5</span> Ecuaciones Diferenciales Estocásticas Continuas</a>
+  <ul class="collapse">
+  <li><a href="#el-proceso-de-ornstein-uhlenbeck-clásico" id="toc-el-proceso-de-ornstein-uhlenbeck-clásico" class="nav-link" data-scroll-target="#el-proceso-de-ornstein-uhlenbeck-clásico"><span class="header-section-number">2.5.1</span> El Proceso de Ornstein-Uhlenbeck Clásico</a></li>
+  </ul></li>
+  <li><a href="#herramientas-analíticas-auxiliares" id="toc-herramientas-analíticas-auxiliares" class="nav-link" data-scroll-target="#herramientas-analíticas-auxiliares"><span class="header-section-number">2.6</span> Herramientas Analíticas Auxiliares</a></li>
+  <li><a href="#teoría-de-existencia-y-unicidad-para-sistemas-híbridos-discontinuidades-y-cambios-de-régimen" id="toc-teoría-de-existencia-y-unicidad-para-sistemas-híbridos-discontinuidades-y-cambios-de-régimen" class="nav-link" data-scroll-target="#teoría-de-existencia-y-unicidad-para-sistemas-híbridos-discontinuidades-y-cambios-de-régimen"><span class="header-section-number">2.7</span> Teoría de Existencia y Unicidad para Sistemas Híbridos (Discontinuidades y Cambios de Régimen)</a>
+  <ul class="collapse">
+  <li><a href="#teoremas-de-existencia-y-unicidad-híbrida" id="toc-teoremas-de-existencia-y-unicidad-híbrida" class="nav-link" data-scroll-target="#teoremas-de-existencia-y-unicidad-híbrida"><span class="header-section-number">2.7.1</span> Teoremas de Existencia y Unicidad Híbrida</a></li>
+  </ul></li>
+  <li><a href="#el-modelo-estocástico-termodinámico-ornstein-uhlenbeck-híbrido" id="toc-el-modelo-estocástico-termodinámico-ornstein-uhlenbeck-híbrido" class="nav-link" data-scroll-target="#el-modelo-estocástico-termodinámico-ornstein-uhlenbeck-híbrido"><span class="header-section-number">2.8</span> El Modelo Estocástico Termodinámico (Ornstein-Uhlenbeck Híbrido)</a>
+  <ul class="collapse">
+  <li><a href="#transformación-analítica-de-la-medida-de-salto" id="toc-transformación-analítica-de-la-medida-de-salto" class="nav-link" data-scroll-target="#transformación-analítica-de-la-medida-de-salto"><span class="header-section-number">2.8.1</span> Transformación Analítica de la Medida de Salto</a></li>
+  </ul></li>
+  <li><a href="#verificación-analítica-de-existencia-y-unicidad-del-modelo-termodinámico" id="toc-verificación-analítica-de-existencia-y-unicidad-del-modelo-termodinámico" class="nav-link" data-scroll-target="#verificación-analítica-de-existencia-y-unicidad-del-modelo-termodinámico"><span class="header-section-number">2.9</span> Verificación Analítica de Existencia y Unicidad del Modelo Termodinámico</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fundamentos_matematicos.html">Marco Teórico</a></li><li class="breadcrumb-item"><a href="./fundamentos_matematicos.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentos Teóricos</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentos Teóricos</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>En este capítulo se presentarán las bases conceptuales y el marco formal del cálculo estocástico que fundamentan el desarrollo de nuestro modelo matemático para la red de frío. Se definirán en primer lugar los procesos estocásticos elementales para, posteriormente, formalizar la teoría de medidas aleatorias de salto, establecer la teoría de integración de Itô, demostrar el teorema general de concatenación híbrida y concluir con la verificación analítica del sistema propuesto.</p>
+<section id="espacios-de-probabilidad-filtraciones-y-procesos-estocásticos" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="espacios-de-probabilidad-filtraciones-y-procesos-estocásticos"><span class="header-section-number">2.1</span> Espacios de Probabilidad, Filtraciones y Procesos Estocásticos</h2>
+<p>El modelado térmico de un refrigerador de vacunas expuesto a incertidumbres continuas y perturbaciones discretas requiere herramientas más allá del cálculo determinista. Desde una perspectiva analítica, un proceso estocástico representa la generalización de una variable aleatoria indexada en un conjunto ordenado, parametrizando la evolución de un sistema bajo incertidumbre.</p>
+<div id="def-espacio-filtrado" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.1 (Espacio de Probabilidad Filtrado)</strong></span> Sea <span class="math inline">\((\Omega, \mathcal{F}, \mathbb{P})\)</span> un espacio de probabilidad. Una filtración es una familia no decreciente de sub-<span class="math inline">\(\sigma\)</span>-álgebras <span class="math inline">\(\{\mathcal{F}_t\}_{t \ge 0}\)</span> de <span class="math inline">\(\mathcal{F}\)</span>, tal que <span class="math inline">\(\mathcal{F}_s \subseteq \mathcal{F}_t \subseteq \mathcal{F}\)</span> para todo <span class="math inline">\(0 \le s \le t\)</span>. La cuaterna <span class="math inline">\((\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})\)</span> se denomina espacio de probabilidad filtrado. Asumiremos que la filtración satisface las <em>condiciones habituales</em>:</p>
+<ol type="1">
+<li><span class="math inline">\(\mathcal{F}_0\)</span> contiene todos los conjuntos <span class="math inline">\(\mathbb{P}\)</span>-nulos de <span class="math inline">\(\mathcal{F}\)</span>.</li>
+<li>La filtración es continua por la derecha, i.e: <span class="math inline">\(\mathcal{F}_t = \bigcap_{\varepsilon &gt; 0} \mathcal{F}_{t+\varepsilon}\)</span> para todo <span class="math inline">\(t \ge 0\)</span>.</li>
+</ol>
+</div>
+<p>Intuitivamente, la <span class="math inline">\(\sigma\)</span>-álgebra <span class="math inline">\(\mathcal{F}_t\)</span> representa el historial completo de información observable del sistema físico (temperaturas, fallos eléctricos, aperturas de puertas) hasta el instante <span class="math inline">\(t\)</span>.</p>
+<div id="def-proceso-estocastico" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.2 (Proceso Estocástico)</strong></span> Sea un espacio de estados <span class="math inline">\(\mathcal{S} \subseteq \mathbb{R}^d\)</span> dotado de su respectiva <span class="math inline">\(\sigma\)</span>-álgebra de Borel <span class="math inline">\(\mathcal{B}(\mathcal{S})\)</span>. Un proceso estocástico es una familia de variables aleatorias <span class="math inline">\(\{X_t\}_{t \in \mathcal{T}}\)</span> parametrizadas por <span class="math inline">\(t \in \mathcal{T}\)</span>, donde <span class="math inline">\(\mathcal{T} \subseteq \mathbb{R}\)</span> representa el espacio paramétrico (temporal). Formalmente, es una función medible <span class="math inline">\(X: \mathcal{T} \times \Omega \to \mathcal{S}\)</span>.</p>
+</div>
+<p>Dependiendo de cómo es el conjunto de índices <span class="math inline">\(\mathcal{T}\)</span>, los procesos estocásticos se clasifican en dos grandes familias:</p>
+<ol type="1">
+<li><strong>Procesos estocásticos a tiempo discreto:</strong> Si <span class="math inline">\(\mathcal{T}\)</span> es numerable, por lo general <span class="math inline">\(\mathcal{T} = \mathbb{N}_0 = \{0, 1, 2, \dots\}\)</span> o <span class="math inline">\(\mathcal{T} = \mathbb{Z}\)</span>, decimos que el proceso estocástico es a tiempo discreto. En este escenario, el sistema evoluciona mediante transiciones en pasos fijos discretizados.</li>
+<li><strong>Procesos estocásticos a tiempo continuo:</strong> Si <span class="math inline">\(\mathcal{T}\)</span> es un intervalo continuo de <span class="math inline">\(\mathbb{R}\)</span>, por lo general <span class="math inline">\(\mathcal{T} = [0, \infty)\)</span> o un intervalo acotado <span class="math inline">\(\mathcal{T} = [0, T]\)</span> con <span class="math inline">\(T &gt; 0\)</span>, el proceso es a tiempo continuo. Esta estructura es la adecuada para modelar fenómenos físicos continuos en el dominio temporal, como la dinámica de transferencia térmica.</li>
+</ol>
+<p>Para enlazar la teoría probabilística con la observación empírica de un fenómeno estocástico, es indispensable establecer la distinción entre el espacio funcional del proceso y sus realizaciones particulares.</p>
+<div id="def-trayectoria" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.3 (Trayectorias del Proceso Estocástico)</strong></span> Si <span class="math inline">\(\{X_t\}_{t \geq 0}\)</span> es un proceso estocástico a tiempo continuo, para cada <span class="math inline">\(\omega \in \Omega\)</span> fijo (un escenario o estado de la naturaleza) y asumiendo <span class="math inline">\(\mathcal{S} = \mathbb{R}\)</span>, se definen las trayectorias (o caminos muestrales) del proceso como la aplicación topológica: <span class="math display">\[t \mapsto X_t(\omega), \quad t \in [0, \infty).\]</span></p>
+</div>
+<p>Para la formulación rigurosa de integrales estocásticas (tanto respecto a difusiones como a medidas de salto), el proceso debe respetar la causalidad de la información, lo cual se formaliza mediante la adaptabilidad y la medibilidad progresiva.</p>
+<div id="def-adaptabilidad-cadlag" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.4 (Proceso Adaptado, Medibilidad Progresiva y el Espacio Càdlàg)</strong></span> Un proceso estocástico <span class="math inline">\(\{X_t\}_{t \ge 0}\)</span> es <strong>adaptado</strong> a la filtración <span class="math inline">\(\{\mathcal{F}_t\}_{t \ge 0}\)</span> si, para cada <span class="math inline">\(t \ge 0\)</span>, la variable aleatoria <span class="math inline">\(X_t\)</span> es <span class="math inline">\(\mathcal{F}_t\)</span>-medible. Un requisito analítico más riguroso para la integración es la <em>medibilidad progresiva</em>, donde la aplicación <span class="math inline">\((s, \omega) \mapsto X_s(\omega)\)</span> sobre el espacio producto <span class="math inline">\([0, t] \times \Omega\)</span> es medible respecto a la <span class="math inline">\(\sigma\)</span>-álgebra producto <span class="math inline">\(\mathcal{B}([0, t]) \otimes \mathcal{F}_t\)</span>.</p>
+<p>Adicionalmente, diremos que el proceso pertenece al <strong>espacio càdlàg</strong> (del francés <em>continu à droite, limite à gauche</em>) si sus trayectorias <span class="math inline">\(t \mapsto X_t(\omega)\)</span> son continuas por la derecha y poseen límites finitos por la izquierda para casi todo <span class="math inline">\(\omega \in \Omega\)</span>.</p>
+</div>
+<p>La restricción topológica de trayectorias <em>càdlàg</em> es un requisito analítico ineludible en nuestra investigación, puesto que las perturbaciones de la red de frío por aperturas de puerta inducen discontinuidades instantáneas (saltos finitos) en la temperatura.</p>
+<p>Finalmente, para evaluar eventos estructurales que ocurren en tiempos aleatorios (como fallas abruptas de energía de la red pública), requerimos el concepto de tiempo de parada.</p>
+<div id="def-tiempo-parada" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.5 (Tiempo de Parada (Stopping Time))</strong></span> Una variable aleatoria <span class="math inline">\(\tau: \Omega \to [0, \infty]\)</span> es un tiempo de parada respecto a la filtración <span class="math inline">\(\{\mathcal{F}_t\}_{t \ge 0}\)</span> si, para todo instante <span class="math inline">\(t \ge 0\)</span>, la ocurrencia del evento estocástico antes o en el tiempo <span class="math inline">\(t\)</span> depende únicamente de la información histórica disponible hasta ese instante; matemáticamente: <span class="math inline">\(\{\omega \in \Omega : \tau(\omega) \le t\} \in \mathcal{F}_t\)</span>.</p>
+</div>
+</section>
+<section id="componentes-estocásticos-fundamentales" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="componentes-estocásticos-fundamentales"><span class="header-section-number">2.2</span> Componentes Estocásticos Fundamentales</h2>
+<p>Las propiedades analíticas y el comportamiento asintótico de un proceso estocástico se definen estrictamente a partir del comportamiento de sus componentes <span class="citation" data-cites="karlin1998introduction">(<a href="references.html#ref-karlin1998introduction" role="doc-biblioref">Karlin y Taylor 1998</a>)</span>. Los componentes aleatorios de nuestro sistema se sustentan en una clase específica de procesos equilibrados.</p>
+<div id="def-martingala" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.6 (Martingala)</strong></span> Un proceso estocástico a tiempo continuo <span class="math inline">\(\{M_t\}_{t \ge 0}\)</span>, integrable (i.e., <span class="math inline">\(\mathbb{E}[\vert{}M_t\vert{}] &lt; \infty\)</span> para todo <span class="math inline">\(t\)</span>) y adaptado a <span class="math inline">\(\{\mathcal{F}_t\}_{t \ge 0}\)</span>, es una martingala si cumple la propiedad de valor esperado condicional nulo para los incrementos futuros: <span class="math display">\[\mathbb{E}[M_t \mid \mathcal{F}_s] = M_s, \quad \text{casi seguramente para todo } 0 \le s \le t.\]</span></p>
+</div>
+<p>La condición de martingala implica la ausencia de tendencia predictible (representa matemáticamente un “juego justo”). Esta propiedad estructural es el fundamento innegociable para definir las integrales estocásticas (tanto de Itô como de Poisson) sin sesgo acumulativo.</p>
+<section id="movimiento-browniano-proceso-de-wiener" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="movimiento-browniano-proceso-de-wiener"><span class="header-section-number">2.2.1</span> Movimiento Browniano (Proceso de Wiener)</h3>
+<p>Las perturbaciones térmicas de origen endógeno, de baja amplitud y alta frecuencia (como el ruido intrínseco del termostato y microtransferencias de calor continuas), se modelan matemáticamente mediante la clase más célebre de procesos difusivos.</p>
+<div id="def-movimiento-browniano" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.7 (Proceso de Wiener)</strong></span> Un proceso estocástico a tiempo continuo <span class="math inline">\(\{W(t)\}_{t \ge 0}\)</span> definido sobre un espacio de probabilidad filtrado <span class="math inline">\((\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})\)</span> es un movimiento Browniano estándar o proceso de Wiener si cumple con los siguientes axiomas:</p>
+<ol type="1">
+<li><span class="math inline">\(W(0) = 0\)</span> con probabilidad 1.</li>
+<li><strong>Incrementos independientes:</strong> Para cualesquiera tiempos <span class="math inline">\(0 \le t_1 &lt; t_2 \le t_3 &lt; t_4\)</span>, las variables aleatorias <span class="math inline">\(W(t_4)-W(t_3)\)</span> y <span class="math inline">\(W(t_2)-W(t_1)\)</span> son mutuamente independientes y son independientes de la <span class="math inline">\(\sigma\)</span>-álgebra histórica <span class="math inline">\(\mathcal{F}_{t_1}\)</span>.</li>
+<li><strong>Incrementos estacionarios gaussianos:</strong> Para todo <span class="math inline">\(t &gt; s \ge 0\)</span>, el incremento espacial está normalmente distribuido con media cero y varianza igual a la amplitud temporal: <span class="math inline">\(W(t) - W(s) \sim \mathcal{N}(0, t-s)\)</span>.</li>
+<li>Es una martingala de cuadrado integrable con trayectorias continuas casi seguramente respecto a <span class="math inline">\(\{\mathcal{F}_t\}_{t \ge 0}\)</span>.</li>
+</ol>
+</div>
+<p>El diferencial del proceso de Wiener, denotado como <span class="math inline">\(dW(t) = W(t+dt) - W(t)\)</span>, representa una perturbación gaussiana elemental en un intervalo infinitesimal <span class="math inline">\(dt\)</span>, caracterizada por una media <span class="math inline">\(\mathbb{E}[dW(t)] = 0\)</span> y una varianza <span class="math inline">\(\mathbb{E}[(dW(t))^2] = dt\)</span>. Un rasgo crítico del movimiento Browniano, derivado de la Ley del Logaritmo Iterado y de su variación cuadrática no nula, es que, aunque sus trayectorias son continuas en el espacio y en el tiempo, son <strong>diferenciables en ningún punto</strong> con probabilidad 1. Esta restricción analítica invalida el uso del cálculo de Newton-Leibniz e impone la necesidad del cálculo de Itô. Para una revisión detallada de estas construcciones analíticas, se sugiere consultar a <span class="citation" data-cites="karatzas1998brownian">(<a href="references.html#ref-karatzas1998brownian" role="doc-biblioref">Karatzas y Shreve 1998</a>)</span>.</p>
+<div id="fig-wiener" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wiener-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="proceso_wiener.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wiener-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.1: Trayectoria simulada del proceso de Wiener. El eje horizontal representa el avance del tiempo continuo en un horizonte parametrizado de <span class="math inline">\(T = 1.0\)</span> con incrementos de <span class="math inline">\(dt = 0.001\)</span>. El eje vertical denota la posición de las fluctuaciones aleatorias <span class="math inline">\(W(t)\)</span>, iniciando en el origen <span class="math inline">\(W(0) = 0\)</span>.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="procesos-de-poisson-y-discontinuidades-por-saltos" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="procesos-de-poisson-y-discontinuidades-por-saltos"><span class="header-section-number">2.2.2</span> Procesos de Poisson y Discontinuidades por Saltos</h3>
+<p>Las aperturas de las puertas del refrigerador por el personal médico constituyen eventos que, por su naturaleza física temporal, no son continuos. Representan inyecciones discretas, repentinas y finitas de aire cálido al sistema, alterando la temperatura instantáneamente. El modelo matemático de tales eventos discretos recae en la familia de los procesos de conteo y saltos puros <span class="citation" data-cites="ross1996stochastic">(<a href="references.html#ref-ross1996stochastic" role="doc-biblioref">Ross 1996</a>)</span>.</p>
+<div id="def-proceso-poisson" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.8 (Proceso de Poisson Homogéneo)</strong></span> Un proceso estocástico a tiempo continuo <span class="math inline">\(\{N(t)\}_{t \ge 0}\)</span> que toma valores enteros en el espacio de estados <span class="math inline">\(\mathbb{N}_0\)</span> es un proceso de Poisson homogéneo con parámetro de intensidad constante <span class="math inline">\(\lambda &gt; 0\)</span> si satisface las siguientes condiciones:</p>
+<ol type="1">
+<li><span class="math inline">\(N(0) = 0\)</span> con probabilidad 1.</li>
+<li>Posee incrementos independientes.</li>
+<li>Posee incrementos estacionarios. La variable aleatoria <span class="math inline">\(N(t)\)</span> sigue una distribución de Poisson con parámetro <span class="math inline">\(\lambda t\)</span>: <span class="math display">\[\mathbb{P}(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}, \quad n = 0, 1, 2, \dots\]</span></li>
+</ol>
+</div>
+<p>De manera asintótica local, las probabilidades de transición en un incremento infinitesimal <span class="math inline">\(h &gt; 0\)</span> están rigurosamente caracterizadas por: <span class="math display">\[\mathbb{P}(N(t+h) - N(t) = 1) = \lambda h + o(h), \quad \mathbb{P}(N(t+h) - N(t) \ge 2) = o(h)\]</span></p>
+<p>Donde la notación algebraico-asintótica de Landau <span class="math inline">\(o(h)\)</span> asegura analíticamente que la probabilidad de que ocurran dos eventos en un mismo instante es idénticamente nula.</p>
+<p>Sin embargo, en la dinámica real de un centro de salud, la tasa de aperturas del refrigerador no es constante; exhibe una fuerte estacionalidad laboral diaria. Para capturar esta variabilidad, generalizamos el modelo relajando la propiedad de incrementos estacionarios.</p>
+<div id="def-poisson-no-homogeneo" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.9 (Proceso de Poisson No Homogéneo)</strong></span> Un proceso estocástico a tiempo continuo <span class="math inline">\(\{N(t)\}_{t \ge 0}\)</span> es un proceso de Poisson no homogéneo si posee una función de intensidad determinista localmente integrable <span class="math inline">\(\lambda(t) \ge 0\)</span> para todo <span class="math inline">\(t \ge 0\)</span>. Sus incrementos son independientes y la variable aleatoria de incremento <span class="math inline">\(N(t) - N(s)\)</span> (con <span class="math inline">\(0 \le s &lt; t\)</span>) obedece a una distribución de Poisson con parámetro integral acumulado <span class="math inline">\(\Lambda(s, t) = \int_s^t \lambda(u) du\)</span>. La caracterización asintótica local se redefine como: <span class="math display">\[\mathbb{P}(N(t+h) - N(t) = 1) = \lambda(t) h + o(h)\]</span></p>
+</div>
+<p>El proceso de conteo nos indica <em>cuándo</em> ocurren los eventos. Para acoplar la magnitud física real del evento (el tamaño de la masa de aire que ingresa al equipo y modifica su entalpía), debemos componer el proceso de conteo con magnitudes aleatorias discretas.</p>
+<div id="def-poisson-compuesto" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.10 (Proceso de Poisson Compuesto y Magnitudes Censuradas)</strong></span> Sea <span class="math inline">\(\{N(t)\}_{t \ge 0}\)</span> un proceso de Poisson no homogéneo con función de intensidad <span class="math inline">\(\lambda(t)\)</span>, y sea <span class="math inline">\(\{\gamma_i\}_{i \ge 1}\)</span> una sucesión de variables aleatorias independientes e idénticamente distribuidas (i.i.d.) que representan la magnitud o impacto espacial de cada evento, y que son estrictamente independientes del proceso temporal <span class="math inline">\(N(t)\)</span>. El proceso de Poisson compuesto <span class="math inline">\(J(t)\)</span> acumula la magnitud de estos saltos en el tiempo y se define como: <span class="math display">\[J(t) = \sum_{i=1}^{N(t)} \gamma_i\]</span></p>
+</div>
+<p>En nuestra aplicación termodinámica, el diferencial de impacto térmico <span class="math inline">\(\gamma_i\)</span> por apertura de puerta está restringido físicamente. Si el aire exterior es relativamente frío, el intercambio térmico convectivo puede ser insignificante o alcanzar un piso mínimo de perturbación, pero no enfría al refrigerador (pues <span class="math inline">\(T_{amb} &gt; \theta_{set}\)</span>). La naturaleza empírica del impacto se modela analíticamente mediante una <strong>distribución normal censurada inferiormente</strong> (con suelo).</p>
+<p>Definimos una variable latente de intercambio convectivo no acotado <span class="math inline">\(Z \sim \mathcal{N}(\mu_\gamma, \sigma_\gamma^2)\)</span> (e.g., <span class="math inline">\(Z \sim \mathcal{N}(0.76, 0.20^2)\)</span>). El tamaño del salto efectivo <span class="math inline">\(\gamma_i\)</span> censurado en un umbral mínimo operativo <span class="math inline">\(U_{min}\)</span> (e.g., <span class="math inline">\(0.16\)</span> °C) se define mediante la función: <span class="math display">\[ \gamma_i = \max(U_{min}, Z) \]</span> Esta formulación acumula la masa de probabilidad de la cola izquierda gaussiana en una masa puntual exacta en el umbral inferior <span class="math inline">\(U_{min}\)</span>, lo cual es coherente con un aporte térmico mínimo garantizado cada vez que se interrumpe la hermeticidad de la cámara de conservación.</p>
+<div id="fig-poisson" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-poisson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="proceso_poisson.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-poisson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.2: Trayectorias simuladas de dos procesos de Poisson. El eje horizontal representa el tiempo de observación en un horizonte de <span class="math inline">\(T = 10.0\)</span> con incrementos discretos de <span class="math inline">\(dt = 0.01\)</span>. El eje vertical contabiliza el número acumulado de eventos discretos <span class="math inline">\(N(t)\)</span>, iniciando en <span class="math inline">\(N(0) = 0\)</span>. La línea continua (azul) ilustra un Proceso de Poisson Homogéneo con una tasa de intensidad constante <span class="math inline">\(\lambda = 1\)</span>. La línea punteada (roja) representa un Proceso de Poisson No Homogéneo con una intensidad de <span class="math inline">\(\lambda(t) = \frac{1}{2} + \frac{5}{2} \sin\left(\frac{\pi t}{10}\right)\)</span>, concentrando mayor densidad de saltos en el periodo central, capturando la estacionalidad laboral. Ambas gráficas exhiben la naturaleza càdlàg de la evolución discreta.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="cadenas-de-markov-a-tiempo-continuo" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="cadenas-de-markov-a-tiempo-continuo"><span class="header-section-number">2.2.3</span> Cadenas de Markov a Tiempo Continuo</h3>
+<p>Los fallos prolongados en el suministro eléctrico de la red pública alteran estructuralmente el régimen de disipación de calor del sistema (compresor encendido versus apagado). Para modelar rigurosamente las transiciones estocásticas entre estos macroestados termodinámicos, introducimos una Cadena de Markov a Tiempo Continuo (CTMC).</p>
+<div id="def-cadena-markov" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.11 (Cadena de Markov a Tiempo Continuo)</strong></span> Sea <span class="math inline">\(\{\alpha(t)\}_{t \ge 0}\)</span> un proceso estocástico definido en el espacio medible <span class="math inline">\((\Omega, \mathcal{F}, \mathbb{P})\)</span>, que toma valores en un espacio de estados finito y discreto de regímenes operativos <span class="math inline">\(\mathcal{M} = \{1, 2, \dots, m\}\)</span>. Se dice que el proceso estocástico de régimen <span class="math inline">\(\alpha(t)\)</span> es una cadena de Markov en tiempo continuo si satisface estrictamente la propiedad de pérdida de memoria de Markov para cualquier historia pasada filtrada <span class="math inline">\(\mathcal{F}_s\)</span>: <span class="math display">\[\mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i, \mathcal{F}_s) = \mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i) \quad \text{para } t, s \ge 0.\]</span></p>
+</div>
+<p>La evolución probabilística temporal de los regímenes se encuentra gobernada por una matriz generadora (o matriz de intensidades de transición) <span class="math inline">\(Q = (q_{ij}) \in \mathbb{R}^{m \times m}\)</span>. Si definimos la probabilidad de transición condicional infinitesimal como <span class="math inline">\(p_{ij}(h) = \mathbb{P}(\alpha(t+h) = j \mid \alpha(t) = i)\)</span> para un incremento de tiempo <span class="math inline">\(h \downarrow 0\)</span>, la dinámica local cumple: <span class="math display">\[p_{ij}(h) = q_{ij}h + o(h) \quad \text{para } i \neq j.\]</span></p>
+<p>Por el teorema de conservación total de probabilidad, la diagonal principal de intensidades absorbe las fugas de masa probabilística tal que las sumas por filas de la matriz sean idénticamente nulas: <span class="math display">\[q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i, j \in \mathcal{M}} q_{ij}.\]</span></p>
+<p>En nuestro análisis de la red de frío, la matriz <span class="math inline">\(Q\)</span> encapsula las métricas de confiabilidad energética, modelando las conmutaciones macroscópicas de la dinámica del refrigerador. El análisis asintótico de sistemas con switching continuo está profundamente arraigado en la teoría moderna de fiabilidad, discutida a profundidad por <span class="citation" data-cites="asmussen2003markov">(<a href="references.html#ref-asmussen2003markov" role="doc-biblioref">Asmussen 2003</a>)</span>.</p>
+</section>
+</section>
+<section id="teoría-de-medidas-aleatorias-y-saltos-estocásticos" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="teoría-de-medidas-aleatorias-y-saltos-estocásticos"><span class="header-section-number">2.3</span> Teoría de Medidas Aleatorias y Saltos Estocásticos</h2>
+<p>En el modelado estocástico riguroso, la representación analítica de perturbaciones por saltos discretos (como el diferencial <span class="math inline">\(dJ(t)\)</span> de un proceso de Poisson compuesto) en ecuaciones diferenciales requiere su formalización mediante teoría de la medida. Esto es estrictamente necesario para dotar de sentido a las integrales y poder aplicar teoremas avanzados de existencia, unicidad y convergencia <span class="citation" data-cites="situ2005theory">(<a href="references.html#ref-situ2005theory" role="doc-biblioref"><strong>situ2005theory?</strong></a>)</span>.</p>
+<div id="def-medida-conteo-poisson" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.12 (Medida Aleatoria de Conteo de Poisson)</strong></span> Sea un espacio medible de “marcas” espaciales <span class="math inline">\((\mathcal{Z}, \mathcal{B}(\mathcal{Z}))\)</span>, donde <span class="math inline">\(\mathcal{Z} \subseteq \mathbb{R}\)</span>. Una medida aleatoria de Poisson <span class="math inline">\(N(dt, dz)\)</span> sobre el espacio producto <span class="math inline">\([0, \infty) \times \mathcal{Z}\)</span> se define de manera que, para cualquier intervalo de tiempo <span class="math inline">\((s, t]\)</span> y subconjunto espacial <span class="math inline">\(A \in \mathcal{B}(\mathcal{Z})\)</span>, la integral bidimensional evaluada: <span class="math display">\[N((s,t] \times A) = \int_s^t \int_A N(du, dz)\]</span> cuenta exactamente el número de saltos discretos que ocurrieron en el intervalo de tiempo <span class="math inline">\((s, t]\)</span> cuya magnitud o intensidad métrica (la marca <span class="math inline">\(z\)</span>) perteneció al conjunto <span class="math inline">\(A\)</span>.</p>
+</div>
+<p>Dado que la medida <span class="math inline">\(N(dt, dz)\)</span> es una variable aleatoria que acumula eventos monótonamente (es un proceso de variación acotada pero estrictamente no decreciente), su esperanza matemática condicional no es nula. Para que el modelo sea manejable analíticamente y compatible con el cálculo de Itô, debe extraerse la tendencia esperada de estos saltos.</p>
+<div id="def-medida-levy" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.13 (Medida de Intensidad (Medida de Lévy compensadora))</strong></span> La esperanza incondicional de la medida de conteo se denota formalmente por la medida determinista producto <span class="math inline">\(\nu(dt, dz) = \mathbb{E}[N(dt, dz)]\)</span>. Si el proceso de saltos subyacente es generado por un proceso de Poisson no homogéneo con tasa temporal de intensidad <span class="math inline">\(\lambda(t)\)</span>, y las magnitudes de salto (marcas) poseen una distribución de probabilidad espacial caracterizada por la función de distribución <span class="math inline">\(F(z)\)</span>, la medida de intensidad se factoriza analíticamente como: <span class="math display">\[\nu(dt, dz) = \lambda(t) dF(z) dt\]</span> donde la componente espacial <span class="math inline">\(\nu(dz) = \lambda(t) dF(z)\)</span> se conoce como la <strong>medida de Lévy</strong>. Su función es cuantificar la tasa local esperada de eventos de un tamaño particular por unidad de tiempo.</p>
+</div>
+<p>Debido a que la medida de conteo <span class="math inline">\(N(dt, dz)\)</span> tiene esperanza no nula, la integral estocástica directa respecto a ella genera un proceso con tendencia (drift). Para construir integrales que conserven la propiedad de martingala (como el diferencial Browniano <span class="math inline">\(dW(t)\)</span>), el cálculo estocástico con saltos exige el centrado de la medida.</p>
+<div id="def-medida-compensada" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.14 (Medida de Poisson Compensada)</strong></span> Se define la medida aleatoria de Poisson compensada <span class="math inline">\(\tilde{N}(dt, dz)\)</span> como la diferencia algebraica entre la medida de conteo empírica observada y su intensidad estocástica esperada (el compensador determinista): <span class="math display">\[\tilde{N}(dt, dz) = N(dt, dz) - \nu(dt, dz) = N(dt, dz) - \lambda(t) dF(z) dt\]</span> Por definición estricta y bajo el teorema de descomposición de Doob-Meyer, para cualquier integrando predecible suficientemente regular, el proceso <span class="math inline">\(M_t = \int_0^t \int_A \tilde{N}(ds, dz)\)</span> constituye una verdadera martingala local respecto a la filtración histórica <span class="math inline">\(\{\mathcal{F}_t\}_{t \ge 0}\)</span>, satisfaciendo <span class="math inline">\(\mathbb{E}[M_t] = 0\)</span>.</p>
+</div>
+<p>Con este herramental analítico fundamentado, es posible enunciar un lema de equivalencia funcional que resulta ser la “piedra angular” para validar la inclusión de Procesos de Poisson Compuestos dentro del marco del análisis estocástico general con medidas de salto, como el desarrollado por R. Situ <span class="citation" data-cites="situ2005theory">(<a href="references.html#ref-situ2005theory" role="doc-biblioref"><strong>situ2005theory?</strong></a>)</span>.</p>
+<div id="lem-equivalencia-saltos" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lema 2.1 (Lema de Equivalencia del Proceso de Poisson Compuesto)</strong></span> Sea <span class="math inline">\(J(t) = \sum_{i=1}^{N(t)} \gamma_i\)</span> un proceso de Poisson compuesto con función de intensidad de eventos <span class="math inline">\(\lambda(t)\)</span> y magnitudes de salto independientes <span class="math inline">\(\gamma_i\)</span> distribuidas mediante una medida de densidad <span class="math inline">\(dF(z)\)</span>. El diferencial estocástico puro de dicho proceso admite la siguiente equivalencia integral directa en teoría de medidas: <span class="math display">\[dJ(t) = \int_{\mathbb{R}} z N(dt, dz)\]</span> Consecuentemente, mediante la inserción algebraica de la medida de Lévy factorizada <span class="math inline">\(\nu(dt, dz) = \lambda(t)dF(z)dt\)</span>, el diferencial puede descomponerse analíticamente en una martingala de salto compensado puro (ruido blanco de saltos) y una deriva de arrastre determinista (drift esperado): <span class="math display">\[dJ(t) = \int_{\mathbb{R}} z \tilde{N}(dt, dz) + \left( \lambda(t) \int_{\mathbb{R}} z dF(z) \right) dt\]</span> Lo cual es matemáticamente equivalente a afirmar que el salto total acumulado se separa en una perturbación estocástica de media cero y un término de valor esperado incondicional dado exactamente por <span class="math inline">\(\left( \lambda(t) \mathbb{E}[\gamma_i] \right) dt\)</span>.</p>
+</div>
+<p>Esta equivalencia estructural (<code>@lem-equivalencia-saltos</code>) nos permitirá transformar la EDE fenomenológica de la red de frío —formulada en términos de eventos discretos <span class="math inline">\(dJ(t)\)</span>— en una ecuación estocástica compensada equivalente estandarizada, requerimiento indispensable para evaluar formalmente sus condiciones analíticas de existencia y unicidad.</p>
+</section>
+<section id="teoría-de-integración-estocástica-de-itô" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="teoría-de-integración-estocástica-de-itô"><span class="header-section-number">2.4</span> Teoría de Integración Estocástica de Itô</h2>
+<p>Para dotar de significado analítico estricto a las ecuaciones diferenciales perturbadas por ruido, es imperativo establecer un marco riguroso de integración. Puesto que las trayectorias del movimiento Browniano son de variación cuadrática finita pero variación total infinita en cualquier intervalo, la integral determinista de Riemann-Stieltjes es inaplicable casi seguramente. De manera homóloga, la integración respecto a las medidas de salto aleatorias requiere cimentación en la teoría de martingalas de cuadrado integrable.</p>
+<section id="integración-respecto-al-movimiento-browniano" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="integración-respecto-al-movimiento-browniano"><span class="header-section-number">2.4.1</span> Integración respecto al Movimiento Browniano</h3>
+<p>Sea <span class="math inline">\(\mathcal{L}^2(\Omega \times [0, T])\)</span> el espacio de Hilbert de los procesos estocásticos <span class="math inline">\(\{X(t)\}_{t \ge 0}\)</span> que son progresivamente medibles respecto a la filtración <span class="math inline">\(\{\mathcal{F}_t\}_{t \ge 0}\)</span>, y que satisfacen la condición de integrabilidad de segundo momento: <span class="math inline">\(\mathbb{E}\left[\int_0^T X^2(t) dt\right] &lt; \infty\)</span>.</p>
+<div id="def-integral-ito" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.15 (Integral Estocástica de Itô)</strong></span> Sea un proceso integrando <span class="math inline">\(\{X(t)\}_{t \ge 0} \in \mathcal{L}^2(\Omega \times [0, T])\)</span>. La integral de Itô del proceso <span class="math inline">\(X(t)\)</span> respecto al proceso de Wiener estándar <span class="math inline">\(W(t)\)</span> se define como el límite en media cuadrática (en el espacio <span class="math inline">\(L^2(\Omega, \mathbb{P})\)</span>) de una sucesión de sumas de Riemann evaluadas estrictamente en el límite izquierdo (punto inicial) de cada subintervalo:</p>
+<p><span class="math display">\[ \int_0^T X(t) dW(t) = \lim_{n \to \infty} \sum_{i=0}^{n-1} X(t_i) [W(t_{i+1}) - W(t_i)] \quad \text{en } L^2 \]</span></p>
+<p>donde <span class="math inline">\(\Pi_n = \{0 = t_0 &lt; t_1 &lt; \dots &lt; t_n = T\}\)</span> es una sucesión de particiones del intervalo acotado <span class="math inline">\([0, T]\)</span> tal que el diámetro de la malla <span class="math inline">\(\max_{i} (t_{i+1} - t_i)\)</span> converge asintóticamente a cero.</p>
+</div>
+<p>La restricción fundamental de evaluar el integrando <span class="math inline">\(X(t_i)\)</span> en el extremo izquierdo del incremento estocástico <span class="math inline">\(\Delta W(t_i)\)</span> es lo que garantiza la no-anticipatividad. Matemáticamente, esto preserva la propiedad de martingala del movimiento Browniano en la integral resultante, asegurando que su esperanza matemática incondicional sea idénticamente nula: <span class="math inline">\(\mathbb{E}\left[\int_0^T X(t) dW(t)\right] = 0\)</span>. Esta construcción provee una de las métricas de acotación analítica más poderosas del cálculo estocástico.</p>
+<div id="thm-isometria-ito" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 2.1 (Isometría de Itô para el Proceso de Wiener)</strong></span> Para cualquier proceso progresivamente medible <span class="math inline">\(\{X(t)\}_{t \ge 0} \in \mathcal{L}^2(\Omega \times [0, T])\)</span>, la varianza topológica de la integral estocástica es exactamente equivalente a la esperanza matemática de la integral determinista del cuadrado del proceso respecto a la medida de Lebesgue temporal:</p>
+<p><span class="math display">\[ \mathbb{E}\left[ \left( \int_0^T X(t) dW(t) \right)^2 \right] = \mathbb{E}\left[ \int_0^T X^2(t) dt \right] \]</span></p>
+</div>
+<p>La demostración de esta isometría descansa en la ortogonalidad de los incrementos independientes de <span class="math inline">\(W(t)\)</span> y constituye el pilar analítico indispensable para acotar los errores cuadráticos y demostrar la convergencia y unicidad de soluciones en ecuaciones estocásticas <span class="citation" data-cites="karatzas1998brownian">(<a href="references.html#ref-karatzas1998brownian" role="doc-biblioref">Karatzas y Shreve 1998</a>)</span>.</p>
+</section>
+<section id="integración-estocástica-respecto-a-medidas-aleatorias-de-salto" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="integración-estocástica-respecto-a-medidas-aleatorias-de-salto"><span class="header-section-number">2.4.2</span> Integración Estocástica respecto a Medidas Aleatorias de Salto</h3>
+<p>Para modelar matemáticamente la acumulación de energía térmica proveniente de eventos discretos aleatorios, definimos la integral de línea respecto a la medida aleatoria de Poisson compensada <span class="math inline">\(\tilde{N}(dt, dz)\)</span>.</p>
+<div id="def-integral-saltos" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.16 (Integral Estocástica respecto a la Medida de Poisson Compensada)</strong></span> Sea <span class="math inline">\(H(t, z, \omega): [0, \infty) \times \mathbb{R} \times \Omega \to \mathbb{R}\)</span> un proceso de integración predecible respecto a la filtración generada <span class="math inline">\(\mathcal{F}_t\)</span>, tal que satisface la condición de acotación de la medida producto: <span class="math inline">\(\mathbb{E} \left[ \int_0^T \int_{\mathbb{R}} \vert{}H(t, z)\vert{}^2 \nu(dz) dt \right] &lt; \infty\)</span>. La integral estocástica de <span class="math inline">\(H\)</span> respecto a la medida compensada <span class="math inline">\(\tilde{N}(dt, dz)\)</span> está analíticamente bien definida en <span class="math inline">\(L^2(\Omega, \mathbb{P})\)</span> y constituye, por construcción, una martingala de cuadrado integrable centrada: <span class="math display">\[ \mathbb{E}\left[ \int_0^T \int_{\mathbb{R}} H(t, z) \tilde{N}(dt, dz) \right] = 0, \quad \text{para todo } T \ge 0. \]</span></p>
+</div>
+<p>De forma homóloga a la isometría de difusión continua, existe una isometría exacta para los operadores de salto que permite transferir el control analítico de las varianzas discretas al dominio de la integral de Lebesgue convencional.</p>
+<div id="thm-isometria-saltos" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 2.2 (Isometría de Itô para la Medida Compensada)</strong></span> Para todo integrando espacial predecible admisible <span class="math inline">\(H(t, z)\)</span>, el segundo momento de la norma en el espacio de Hilbert de la integral estocástica de salto satisface la siguiente identidad fundamental: <span class="math display">\[ \mathbb{E}\left[ \left( \int_0^T \int_{\mathbb{R}} H(t, z) \tilde{N}(dt, dz) \right)^2 \right] = \mathbb{E}\left[ \int_0^T \int_{\mathbb{R}} \vert{}H(t, z)\vert{}^2 \nu(dz) dt \right] \]</span></p>
+</div>
+<p>Este resultado riguroso, documentado extensamente en la teoría de Situ <span class="citation" data-cites="situ2005theory">(<a href="references.html#ref-situ2005theory" role="doc-biblioref"><strong>situ2005theory?</strong></a>)</span>, confirma que la variabilidad estocástica del ruido de saltos se comporta asintóticamente como una integral determinista sobre el compensador de Lévy <span class="math inline">\(\nu(dz)dt\)</span>, habilitando el uso del cálculo de variaciones y cotas integrales para el análisis de estabilidad del modelo de refrigeración.</p>
+</section>
+</section>
+<section id="ecuaciones-diferenciales-estocásticas-continuas" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="ecuaciones-diferenciales-estocásticas-continuas"><span class="header-section-number">2.5</span> Ecuaciones Diferenciales Estocásticas Continuas</h2>
+<p>Con el andamiaje de integración establecido, es posible formular ecuaciones que combinan una tendencia física determinista con perturbaciones aleatorias.</p>
+<div id="def-ede-general" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.17 (Ecuación Diferencial Estocástica Clásica)</strong></span> Una ecuación diferencial estocástica continua para un proceso <span class="math inline">\(\{X(t)\}_{t \ge 0}\)</span> es una relación simbólica expresada en su forma diferencial mediante:</p>
+<p><span id="eq-ede-general-diff"><span class="math display">\[ dX(t) = b(t, X(t)) dt + \sigma(t, X(t)) dW(t)  \tag{2.1}\]</span></span></p>
+<p>donde el término <span class="math inline">\(b(t, X(t))\)</span> denota el coeficiente de deriva (tendencia determinista) y <span class="math inline">\(\sigma(t, X(t))\)</span> representa el coeficiente de difusión (volatilidad).</p>
+</div>
+<p>El término <span class="math inline">\(dX(t)\)</span> en la <a href="fundamentos_epidemiologicos.html#eq-ede-general-diff" class="quarto-xref">Ecuación&nbsp;<span>4.1</span></a> no debe interpretarse como una derivada ordinaria, sino como una representación abreviada de su ecuación integral equivalente, la cual otorga el verdadero sentido matemático a la igualdad:</p>
+<p><span id="eq-ede-general-int"><span class="math display">\[ X(t) = X(0) + \int_0^t b(s, X(s)) ds + \int_0^t \sigma(s, X(s)) dW(s) \quad \text{casi seguramente.}  \tag{2.2}\]</span></span></p>
+<p>Para garantizar que el modelo matemático no resulte en comportamientos explosivos ni ambiguos (múltiples trayectorias cruzadas), se exige el cumplimiento de restricciones geométricas sobre los coeficientes.</p>
+<div id="thm-existencia-unicidad" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 2.3 (Teorema Clásico de Existencia y Unicidad de Itô)</strong></span> Sea la EDE definida en la <a href="fundamentos_epidemiologicos.html#eq-ede-general-diff" class="quarto-xref">Ecuación&nbsp;<span>4.1</span></a> con una condición inicial <span class="math inline">\(X(0) = x_0\)</span>, medible respecto a <span class="math inline">\(\mathcal{F}_0\)</span> e independiente del proceso de Wiener, con <span class="math inline">\(\mathbb{E}[\vert{}x_0\vert{}^2] &lt; \infty\)</span>. Supóngase que para todo <span class="math inline">\(t \in [0, T]\)</span> y estados <span class="math inline">\(x, y \in \mathbb{R}\)</span>, los coeficientes satisfacen las siguientes dos restricciones para constantes positivas <span class="math inline">\(K, L &gt; 0\)</span>:</p>
+<ol type="1">
+<li><strong>Condición de Lipschitz Global:</strong> Las funciones no cambian tan bruscamente como para permitir bifurcaciones en el espacio de fase: <span class="math display">\[ \vert{}b(t, x) - b(t, y)\vert{}^2 + \vert{}\sigma(t, x) - \sigma(t, y)\vert{}^2 \le L \vert{}x - y\vert{}^2 \]</span></li>
+<li><strong>Condición de Crecimiento Lineal:</strong> El sistema no diverge a infinito en tiempo finito: <span class="math display">\[ \vert{}b(t, x)\vert{}^2 + \vert{}\sigma(t, x)\vert{}^2 \le K (1 + \vert{}x\vert{}^2) \]</span></li>
+</ol>
+<p>Bajo el cumplimiento de ambas condiciones, la ecuación tiene una solución fuerte global única <span class="math inline">\(\{X(t)\}_{t \in [0, T]}\)</span>, adaptada a la filtración <span class="math inline">\(\mathcal{F}_t\)</span>, con trayectorias continuas con probabilidad 1 <span class="citation" data-cites="karatzas1998brownian">(<a href="references.html#ref-karatzas1998brownian" role="doc-biblioref">Karatzas y Shreve 1998</a>)</span>.</p>
+</div>
+<p>Para transformar analíticamente las soluciones o funciones dependientes de una EDE continua, el cálculo tradicional se sustituye por la regla de la cadena estocástica.</p>
+<div id="thm-ito-clasico" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 2.4 (Lema de Itô para Difusiones Continuas)</strong></span> Sea un proceso estocástico <span class="math inline">\(\{X(t)\}_{t \ge 0}\)</span> que satisface la <a href="fundamentos_epidemiologicos.html#eq-ede-general-diff" class="quarto-xref">Ecuación&nbsp;<span>4.1</span></a>, y sea <span class="math inline">\(V(t, x)\)</span> una función escalar continuamente diferenciable en su componente temporal <span class="math inline">\(t\)</span> (<span class="math inline">\(\mathcal{C}^1\)</span>) y dos veces continuamente diferenciable en su componente espacial <span class="math inline">\(x\)</span> (<span class="math inline">\(\mathcal{C}^2\)</span>). El diferencial estocástico de la función compuesta viene dado por:</p>
+<p><span class="math display">\[ dV(t, X(t)) = \left[ \frac{\partial V}{\partial t} + b(t, X(t))\frac{\partial V}{\partial x} + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 V}{\partial x^2} \right] dt + \sigma(t, X(t))\frac{\partial V}{\partial x} dW(t) \]</span></p>
+</div>
+<p>El término de segundo orden respecto a la derivada espacial es el núcleo de la corrección de Itô. Surge del hecho topológico de que la variación cuadrática del movimiento Browniano sobre un intervalo infinitesimal obedece la regla <span class="math inline">\((dW(t))^2 \to dt\)</span> en un sentido probabilístico en <span class="math inline">\(L^2\)</span>.</p>
+<section id="el-proceso-de-ornstein-uhlenbeck-clásico" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="el-proceso-de-ornstein-uhlenbeck-clásico"><span class="header-section-number">2.5.1</span> El Proceso de Ornstein-Uhlenbeck Clásico</h3>
+<p>Como paso previo al desarrollo de nuestro modelo termodinámico final, es indispensable introducir un tipo particular de EDE que modela la inercia física y la atracción hacia un estado de equilibrio en un sistema cerrado.</p>
+<div id="def-ou-clasico" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.18 (Proceso de Ornstein-Uhlenbeck)</strong></span> Un proceso estocástico <span class="math inline">\(\{X(t)\}_{t \ge 0}\)</span> es un proceso de Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial estocástica lineal homogénea:</p>
+<p><span id="eq-ou-clasica"><span class="math display">\[ dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t)  \tag{2.3}\]</span></span></p>
+<p>donde <span class="math inline">\(\kappa &gt; 0\)</span> representa la velocidad o tasa de reversión a la media, <span class="math inline">\(\theta \in \mathbb{R}\)</span> denota el nivel asintótico de equilibrio a largo plazo y <span class="math inline">\(\sigma &gt; 0\)</span> es la magnitud del ruido térmico intrínseco.</p>
+</div>
+<p>La característica principal de la <a href="fundamentos_epidemiologicos.html#eq-ou-clasica" class="quarto-xref">Ecuación&nbsp;<span>4.3</span></a> radica en su deriva lineal <span class="math inline">\(b(x) = \kappa(\theta - x)\)</span>. Cuando el estado del proceso supera el valor de equilibrio (<span class="math inline">\(X(t) &gt; \theta\)</span>), el término de deriva se vuelve estrictamente negativo, forzando a la trayectoria a descender; inversamente, si el proceso se encuentra por debajo del nivel de consigna (<span class="math inline">\(X(t) &lt; \theta\)</span>), la deriva se vuelve positiva, propulsando un crecimiento correctivo. Esta propiedad topológica de atracción (convergencia estocástica a la media) convierte a este proceso en la base fenomenológica ideal para simular la oscilación térmica de refrigeradores de vacunas regidos por la ley empírica de enfriamiento de Newton.</p>
+</section>
+</section>
+<section id="herramientas-analíticas-auxiliares" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="herramientas-analíticas-auxiliares"><span class="header-section-number">2.6</span> Herramientas Analíticas Auxiliares</h2>
+<p>Antes de formalizar la teoría de los sistemas estocásticos híbridos y proceder con la verificación teórica y el desarrollo de nuestro modelo, es necesario enunciar dos resultados clásicos del análisis matemático. Estas herramientas proporcionan el soporte lógico para acotar el crecimiento de las trayectorias estocásticas y para demostrar la unicidad de las soluciones.</p>
+<div id="lem-desigualdad-algebraica" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lema 2.2 (Desigualdad de Potencias (Cauchy-Schwarz elemental))</strong></span> Para cualesquiera números reales <span class="math inline">\(a, b \in \mathbb{R}\)</span> y para cualquier entero <span class="math inline">\(p \ge 1\)</span>, la convexidad de la función <span class="math inline">\(x \mapsto \vert{}x\vert{}^p\)</span> implica la siguiente cota superior geométrica: <span class="math display">\[\vert{}a \pm b\vert{}^p \le 2^{p-1} (\vert{}a\vert{}^p + \vert{}b\vert{}^p)\]</span> En el contexto del análisis en <span class="math inline">\(L^2\)</span> (donde <span class="math inline">\(p=2\)</span>), esta desigualdad se reduce a la forma fundamental que utilizaremos para acotar la combinación de operadores de deriva y varianza estocástica: <span class="math display">\[\vert{}a \pm b\vert{}^2 \le 2\vert{}a\vert{}^2 + 2\vert{}b\vert{}^2\]</span></p>
+</div>
+<div id="lem-gronwall" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lema 2.3 (Desigualdad Integral de Grönwall)</strong></span> Sea <span class="math inline">\(T &gt; 0\)</span> y sean <span class="math inline">\(u(t)\)</span> y <span class="math inline">\(v(t)\)</span> funciones reales, continuas y no negativas definidas en el intervalo <span class="math inline">\([0, T]\)</span>. Si existe una constante <span class="math inline">\(C \ge 0\)</span> tal que para todo <span class="math inline">\(t \in [0, T]\)</span> se cumple la desigualdad integral implícita: <span class="math display">\[u(t) \le C + \int_0^t v(s) u(s) ds\]</span> Entonces, la función <span class="math inline">\(u(t)\)</span> está estrictamente acotada por la función exponencial de la integral de <span class="math inline">\(v(t)\)</span>: <span class="math display">\[u(t) \le C \exp\left( \int_0^t v(s) ds \right)\]</span></p>
+</div>
+<p>En la teoría de ecuaciones diferenciales estocásticas, el Lema de Grönwall se utiliza asumiendo que la función de estado <span class="math inline">\(u(t)\)</span> representa la esperanza matemática de la diferencia al cuadrado entre dos posibles soluciones de un sistema, i.e., <span class="math inline">\(u(t) = \mathbb{E}[\vert{}X_1(t) - X_2(t)\vert{}^2]\)</span>. Si mediante estimaciones de Itô se logra demostrar que <span class="math inline">\(u(t) \le 0 + \int L u(s)ds\)</span>, el lema dictamina que <span class="math inline">\(u(t) \le 0 \cdot e^{Lt} = 0\)</span>, probando así analíticamente la unicidad casi segura de la solución a lo largo del tiempo.</p>
+</section>
+<section id="teoría-de-existencia-y-unicidad-para-sistemas-híbridos-discontinuidades-y-cambios-de-régimen" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="teoría-de-existencia-y-unicidad-para-sistemas-híbridos-discontinuidades-y-cambios-de-régimen"><span class="header-section-number">2.7</span> Teoría de Existencia y Unicidad para Sistemas Híbridos (Discontinuidades y Cambios de Régimen)</h2>
+<p>Los modelos de difusión continua resultan insuficientes cuando el fenómeno físico exhibe transiciones estructurales de entorno (como un fallo eléctrico general en la red pública) y choques discretos instantáneos (como la apertura de la puerta de un refrigerador). La amalgama de estos comportamientos da lugar a un sistema híbrido impulsado por medidas de salto espacial y conmutaciones markovianas.</p>
+<div id="def-ede-hibrida" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 2.19 (Ecuación Diferencial Estocástica Híbrida)</strong></span> Sea <span class="math inline">\(\alpha(t)\)</span> una cadena de Markov a tiempo continuo en un espacio de estados finito <span class="math inline">\(\mathcal{M}\)</span>. Una EDE híbrida con saltos es una ecuación gobernada por un régimen markoviano y perturbada por una medida de Poisson compensada <span class="math inline">\(\tilde{N}(dt, dz) = N(dt, dz) - \nu(dt, dz)\)</span>, cuya forma diferencial es:</p>
+<p><span class="math display">\[ dX(t) = b(t, X(t^-), \alpha(t^-)) dt + \sigma(t, X(t^-), \alpha(t^-)) dW(t) + \int_{\mathbb{R}} \gamma(t, X(t^-), \alpha(t^-), z) \tilde{N}(dt, dz) \]</span></p>
+</div>
+<p>Dado que la función objetivo presenta discontinuidades puntuales y cambios estructurales, el teorema fundamental de Itô debe expandirse para incluir la interacción con las medidas de salto y la matriz generadora del régimen discreto.</p>
+<div id="thm-lema-ito-saltos" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 2.5 (Fórmula de Itô Generalizada para Sistemas Híbridos)</strong></span> Sea <span class="math inline">\(V(t, x, i)\)</span> una función continuamente diferenciable en el tiempo <span class="math inline">\(t\)</span> (<span class="math inline">\(\mathcal{C}^1\)</span>) y dos veces continuamente diferenciable en el espacio <span class="math inline">\(x\)</span> (<span class="math inline">\(\mathcal{C}^2\)</span>) para cada régimen operativo <span class="math inline">\(i \in \mathcal{M}\)</span>. Si <span class="math inline">\(X(t)\)</span> es un proceso que satisface la EDE híbrida descrita anteriormente, el diferencial estocástico de la función compuesta viene dado por:</p>
+<p><span class="math display">\[ \begin{aligned} dV(t, X(t), \alpha(t)) = &amp; \left[ \frac{\partial V}{\partial t} + \frac{\partial V}{\partial x}b(t, X, \alpha) + \frac{1}{2}\frac{\partial^2 V}{\partial x^2}\sigma^2(t, X, \alpha) + \sum_{j \in \mathcal{M}} q_{\alpha(t)j} V(t, X, j) \right] dt \\ &amp; + \int_{\mathbb{R}} \left[ V(t, X(t^-) + \gamma, \alpha(t^-)) - V(t, X(t^-), \alpha(t^-)) - \frac{\partial V}{\partial x}\gamma(t, X(t^-), \alpha(t^-), z) \right] \nu(dz) dt \\ &amp; + \frac{\partial V}{\partial x}\sigma(t, X, \alpha) dW(t) \\ &amp; + \int_{\mathbb{R}} \left[ V(t, X(t^-) + \gamma, \alpha(t^-)) - V(t, X(t^-), \alpha(t^-)) \right] \tilde{N}(dt, dz) \end{aligned} \]</span></p>
+</div>
+<p>Esta formulación rigurosa añade al operador diferencial clásico una sumatoria ponderada por las intensidades de transición de la matriz <span class="math inline">\(Q\)</span> de la cadena de Markov y un operador de diferencias finitas exacto que absorbe las discontinuidades generadas por la medida de salto <span class="math inline">\(\nu(dz)\)</span>.</p>
+<section id="teoremas-de-existencia-y-unicidad-híbrida" class="level3" data-number="2.7.1">
+<h3 data-number="2.7.1" class="anchored" data-anchor-id="teoremas-de-existencia-y-unicidad-híbrida"><span class="header-section-number">2.7.1</span> Teoremas de Existencia y Unicidad Híbrida</h3>
+<p>Para garantizar que un sistema estocástico híbrido posea viabilidad analítica, la existencia y unicidad de sus soluciones se construyen en dos fases teóricas: primero garantizando el comportamiento frente a los saltos de Poisson, y luego concatenando la solución a través de los tiempos de conmutación del régimen de la cadena de Markov.</p>
+<div id="thm-situ-existencia" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 2.6 (Teorema de Existencia y Unicidad con Saltos de Poisson (Teorema 117 de R. Situ))</strong></span> Para un régimen estático <span class="math inline">\(\alpha(t) = i\)</span>, sea la ecuación diferencial estocástica <span class="math inline">\(dX(t) = b(t, X(t^-))dt + \sigma(t, X(t^-))dW(t) + \int_{\mathbb{R}} \gamma(t, X(t^-), z) \tilde{N}(dt, dz)\)</span>. Supóngase que los coeficientes satisfacen de manera estricta las siguientes dos condiciones para constantes <span class="math inline">\(K, L &gt; 0\)</span>:</p>
+<ol type="1">
+<li><strong>Condición de Lipschitz Global:</strong> <span class="math display">\[\vert{}b(t, x) - b(t, y)\vert{}^2 + \vert{}\sigma(t, x) - \sigma(t, y)\vert{}^2 + \int_{\mathbb{R}} \vert{}\gamma(t, x, z) - \gamma(t, y, z)\vert{}^2 \nu(dz) \le L \vert{}x - y\vert{}^2\]</span></li>
+<li><strong>Condición de Crecimiento Lineal:</strong> <span class="math display">\[\vert{}b(t, x)\vert{}^2 + \vert{}\sigma(t, x)\vert{}^2 + \int_{\mathbb{R}} \vert{}\gamma(t, x, z)\vert{}^2 \nu(dz) \le K (1 + \vert{}x\vert{}^2)\]</span></li>
+</ol>
+<p>Entonces, para cualquier condición inicial <span class="math inline">\(\mathcal{F}_0\)</span>-medible tal que <span class="math inline">\(\mathbb{E}[\vert{}X(0)\vert{}^2] &lt; \infty\)</span>, la EDE admite una solución fuerte global y única, con trayectorias càdlàg casi seguramente <span class="citation" data-cites="situ2005theory">(<a href="references.html#ref-situ2005theory" role="doc-biblioref"><strong>situ2005theory?</strong></a>)</span>.</p>
+</div>
+<p>Una vez garantizada la solución bajo un régimen constante mediante la métrica de R. Situ, la validación global del sistema híbrido se obtiene mediante una demostración constructiva basada en la técnica de empalme topológico en los tiempos de parada estocásticos de la cadena de Markov. Demostraremos formalmente este resultado fundamental que asocia la teoría de difusiones con la teoría de switching de Mao y Yuan, y Yin y Zhu <span class="citation" data-cites="yin2010hybrid">(<a href="references.html#ref-yin2010hybrid" role="doc-biblioref">Yin y Zhu 2010</a>)</span>.</p>
+<div id="thm-mao-switching" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 2.7 (Teorema de Existencia y Unicidad para la EDE con Régimen de Markov)</strong></span> Sea <span class="math inline">\(\alpha(t)\)</span> una cadena de Markov en tiempo continuo con espacio de estados finito <span class="math inline">\(\mathcal{M} = \{1, 2, \dots, m\}\)</span> y matriz generadora acotada <span class="math inline">\(Q = (q_{ij})\)</span>, cuyas tasas de transición son finitas. Consideremos la ecuación diferencial estocástica híbrida: <span class="math display">\[ \begin{aligned} dX(t) ={}&amp; b_{\alpha(t^-)}(t, X(t^-)) dt \\ &amp;+ \sigma_{\alpha(t^-)}(t, X(t^-)) dW(t) \\ &amp;+ \int_{\mathbb{R}} \gamma_{\alpha(t^-)}(t, X(t^-), z) \tilde{N}(dt, dz), \end{aligned} \]</span> con condición inicial <span class="math inline">\(X(0) = X_0\)</span>, donde <span class="math inline">\(X_0\)</span> es <span class="math inline">\(\mathcal{F}_0\)</span>-medible y <span class="math inline">\(\mathbb{E}[|X_0|^2] &lt; \infty\)</span>.</p>
+<p>Supongamos que se cumplen las siguientes hipótesis:</p>
+<ol type="1">
+<li>Para cada régimen <span class="math inline">\(i \in \mathcal{M}\)</span>, los coeficientes <span class="math inline">\(b_i, \sigma_i, \gamma_i\)</span> satisfacen las condiciones de Lipschitz global y de crecimiento lineal del Teorema de Existencia y Unicidad con Saltos de Poisson (Teorema de Situ).</li>
+<li>Los procesos <span class="math inline">\(W(t)\)</span>, <span class="math inline">\(N(dt, dz)\)</span> y <span class="math inline">\(\alpha(t)\)</span> son mutuamente independientes, y la medida compensadora de <span class="math inline">\(N\)</span> está dada por <span class="math inline">\(\nu_t(dz)dt = \lambda(t)F(dz)dt\)</span>, donde la intensidad <span class="math inline">\(\lambda(t)\)</span> es una función localmente integrable.</li>
+<li>La cadena de Markov no presenta explosión, es decir, tiene un número finito de cambios de régimen casi seguramente en cualquier intervalo temporal acotado.</li>
+</ol>
+<p>Entonces, para todo horizonte finito <span class="math inline">\(H &lt; \infty\)</span>, la ecuación híbrida admite una única solución fuerte con trayectorias càdlàg en el intervalo <span class="math inline">\([0, H]\)</span>, casi seguramente. Además, bajo las condiciones de crecimiento lineal uniformes en los regímenes, la solución satisface la condición de integrabilidad del supremo: <span class="math display">\[ \mathbb{E}\left[ \sup_{0 \le t \le H} |X(t)|^2 \right] &lt; \infty. \]</span></p>
+</div>
+<p><strong>Demostración:</strong></p>
+<p>La prueba se construye mediante un argumento de inducción estocástica, concatenando las soluciones locales entre los tiempos de cambio de régimen.</p>
+<p><em>Paso 1: Tiempos de cambio de régimen.</em> Sean <span class="math inline">\(\tau_0 = 0\)</span> y definamos recursivamente la secuencia de tiempos de parada: <span class="math display">\[ \tau_{n+1} = \inf\{t &gt; \tau_n : \alpha(t) \neq \alpha(t^-)\}, \quad n \ge 0, \]</span> los cuales corresponden a los instantes sucesivos de cambio de régimen. Por la hipótesis 3 (no explosión), para cualquier horizonte temporal finito <span class="math inline">\(H &lt; \infty\)</span>, el número de transiciones en dicho intervalo es finito casi seguramente: <span class="math display">\[ N_\alpha(H) := \#\{n \ge 1 : \tau_n \le H\} &lt; \infty \quad \text{casi seguramente.} \]</span> En consecuencia, casi seguramente, el intervalo <span class="math inline">\([0, H]\)</span> queda particionado en un número finito de subintervalos estocásticos semiabiertos en los que el régimen de la cadena permanece constante: <span class="math display">\[ [\tau_0, \tau_1), [\tau_1, \tau_2), \dots, [\tau_{N_\alpha(H)}, H]. \]</span> En el interior de cada uno de estos subintervalos, la dinámica de <span class="math inline">\(X(t)\)</span> corresponde a una EDE con coeficientes fijos asociados a un único régimen.</p>
+<p><em>Paso 2: Existencia y unicidad en el primer intervalo.</em> En el intervalo inicial <span class="math inline">\([0, \tau_1)\)</span>, el régimen del sistema es constante e igual a <span class="math inline">\(\alpha(0)\)</span>. Por lo tanto, la ecuación híbrida colapsa a la siguiente EDE clásica con saltos: <span class="math display">\[ \begin{aligned} dX(t) ={}&amp; b_{\alpha(0)}(t, X(t^-)) dt \\ &amp;+ \sigma_{\alpha(0)}(t, X(t^-)) dW(t) \\ &amp;+ \int_{\mathbb{R}} \gamma_{\alpha(0)}(t, X(t^-), z) \tilde{N}(dt, dz). \end{aligned} \]</span> Por la hipótesis 1, los coeficientes correspondientes al régimen <span class="math inline">\(\alpha(0)\)</span> satisfacen estrictamente las condiciones de Lipschitz global y de crecimiento lineal. En consecuencia, el Teorema de Existencia y Unicidad con Saltos de Poisson (Teorema de Situ) garantiza la existencia y unicidad de una solución fuerte para esta ecuación en el intervalo dado.</p>
+<p>Construimos la solución hasta el primer tiempo de cambio estocástico y definimos su valor en ese instante crítico mediante el límite por la izquierda: <span class="math display">\[ X(\tau_1) = X(\tau_1^-). \]</span> Esta igualdad matemática expresa que el cambio de régimen en sí mismo no induce un salto instantáneo en la variable de estado. Las discontinuidades de <span class="math inline">\(X(t)\)</span> provienen exclusivamente de las perturbaciones integradas respecto a la medida aleatoria de Poisson <span class="math inline">\(\tilde{N}(dt, dz)\)</span>.</p>
+<p><em>Paso 3: Continuación después de un cambio de régimen.</em> Supongamos, como hipótesis de inducción, que la solución ha sido construida de forma única y fuerte hasta el tiempo de parada <span class="math inline">\(\tau_n\)</span>, y que el estado <span class="math inline">\(X(\tau_n)\)</span> está bien definido y es <span class="math inline">\(\mathcal{F}_{\tau_n}\)</span>-medible. En el subsecuente intervalo <span class="math inline">\([\tau_n, \tau_{n+1})\)</span>, el régimen del sistema permanece constante e igual a <span class="math inline">\(\alpha(\tau_n)\)</span>.</p>
+<p>La condición inicial para la evolución en este nuevo intervalo es precisamente <span class="math inline">\(X(\tau_n)\)</span>. Gracias a la hipótesis 2 (independencia de los procesos conductores <span class="math inline">\(W\)</span>, <span class="math inline">\(N\)</span> y <span class="math inline">\(\alpha\)</span>) y a la propiedad de los incrementos independientes posteriores a un tiempo de parada para el movimiento Browniano y los procesos de Poisson, la ecuación en este intervalo adopta nuevamente la forma de una EDE con régimen fijo, condicionada a la información en <span class="math inline">\(\tau_n\)</span>.</p>
+<p>Aplicando iterativamente el teorema de Situ al régimen <span class="math inline">\(\alpha(\tau_n)\)</span>, se obtiene una solución fuerte y única en dicho subintervalo. El valor del estado en el siguiente tiempo de cambio se define por continuidad respecto al cambio de régimen: <span class="math display">\[ X(\tau_{n+1}) = X(\tau_{n+1}^-), \]</span> salvo, por supuesto, por los saltos intrínsecos que provengan de la propia medida de Poisson evaluada en ese instante. Bajo la suposición de independencia mutua, la probabilidad de que un salto generado por la medida de Poisson ocurra simultáneamente y coincida exactamente con un tiempo de cambio de la cadena de Markov es de medida cero.</p>
+<p>Aplicando este argumento por inducción matemática, se construye de manera rigurosa una solución única en cada subintervalo de régimen constante.</p>
+<p><em>Paso 4: Concatenación topológica de las soluciones.</em> Dado que en el horizonte acotado <span class="math inline">\([0, H]\)</span> ocurren casi seguramente un número finito de cambios de régimen (<span class="math inline">\(N_\alpha(H) &lt; \infty\)</span>), el procedimiento iterativo detallado anteriormente requiere un número estrictamente finito de aplicaciones del teorema de Situ. Las soluciones locales construidas en los distintos subintervalos coinciden analíticamente en los tiempos de empalme <span class="math inline">\(\{\tau_n\}\)</span>, puesto que el valor inicial de cada nuevo tramo corresponde exactamente al valor final límite del tramo predecesor.</p>
+<p>Por consiguiente, podemos definir una única trayectoria global <span class="math inline">\(X(t)\)</span> en todo el dominio <span class="math inline">\([0, H]\)</span> concatenando las soluciones locales de los distintos regímenes. Puesto que cada tramo individual habita el espacio de funciones càdlàg, y los empalmes en los tiempos <span class="math inline">\(\tau_n\)</span> no introducen discontinuidades adicionales en la variable de estado, se concluye que la trayectoria global <span class="math inline">\(X(t)\)</span> también es globalmente càdlàg. Esto demuestra concluyentemente la <strong>existencia fuerte</strong> de una solución en el intervalo <span class="math inline">\([0, H]\)</span>.</p>
+<p><em>Paso 5: Unicidad global de la solución.</em> Para demostrar la unicidad, sean <span class="math inline">\(X(t)\)</span> y <span class="math inline">\(\widehat{X}(t)\)</span> dos soluciones de la ecuación diferencial estocástica híbrida, partiendo de la misma condición inicial <span class="math inline">\(\mathcal{F}_0\)</span>-medible y gobernadas por los mismos procesos conductores <span class="math inline">\(W(t)\)</span>, <span class="math inline">\(N(dt, dz)\)</span> y <span class="math inline">\(\alpha(t)\)</span>.</p>
+<p>En el primer intervalo de régimen constante <span class="math inline">\([0, \tau_1)\)</span>, ambas soluciones satisfacen idéntica EDE y comparten la condición inicial <span class="math inline">\(X(0)\)</span>. Por la unicidad dictaminada por el teorema de Situ, se cumple que: <span class="math display">\[ X(t) = \widehat{X}(t) \]</span> para todo <span class="math inline">\(t \in [0, \tau_1)\)</span>, casi seguramente. En particular, sus valores en el primer tiempo de cambio estocástico coinciden: <span class="math inline">\(X(\tau_1) = \widehat{X}(\tau_1)\)</span>. Por ende, en el subsecuente intervalo <span class="math inline">\([\tau_1, \tau_2)\)</span>, ambas soluciones vuelven a satisfacer la misma EDE con idéntica condición inicial, y la unicidad local de Situ vuelve a implicar que coinciden en dicho intervalo.</p>
+<p>Repitiendo el argumento lógico en cada subintervalo sucesivo, y amparándonos en que el número de cambios en <span class="math inline">\([0, H]\)</span> es finito casi seguramente, obtenemos la igualdad global de las trayectorias: <span class="math display">\[ \mathbb{P}\left( X(t) = \widehat{X}(t) \text{ para todo } t \in [0, H] \right) = 1. \]</span> Por consiguiente, la solución híbrida es estrictamente única.</p>
+<p>Finalmente, las condiciones de crecimiento lineal asumidas de manera uniforme en todos los regímenes, en conjunción con las cotas de segundo momento para las integrales de Itô y de salto compensado, y sumadas a la propiedad de no explosión de la cadena de Markov, permiten aplicar las estimaciones de momento (como la desigualdad de Grönwall y las isometrías) tramo a tramo. De ello se deduce la integrabilidad del supremo de la solución en cualquier horizonte de tiempo finito <span class="math inline">\(H\)</span>. De manera rigurosa, se satisface la cota de estabilidad del segundo momento: <span class="math display">\[ \mathbb{E}\left[ \sup_{0 \le t \le H} |X(t)|^2 \right] &lt; \infty. \]</span></p>
+<p>Con este resultado, quedan demostradas formalmente tanto la existencia como la unicidad fuerte de la solución híbrida. <span class="math inline">\(\blacksquare\)</span></p>
+</section>
+</section>
+<section id="el-modelo-estocástico-termodinámico-ornstein-uhlenbeck-híbrido" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="el-modelo-estocástico-termodinámico-ornstein-uhlenbeck-híbrido"><span class="header-section-number">2.8</span> El Modelo Estocástico Termodinámico (Ornstein-Uhlenbeck Híbrido)</h2>
+<p>Habiendo establecido la demostración matemática formal que avala la existencia y unicidad de las ecuaciones diferenciales estocásticas con discontinuidades y cambios de régimen, procedemos a formalizar la ecuación específica que rige la dinámica térmica de nuestro refrigerador de vacunas.</p>
+<p>Bajo los principios termodinámicos de la ley empírica de enfriamiento de Newton, la temperatura interna <span class="math inline">\(T(t)\)</span> del equipo se modela mediante un proceso de Ornstein-Uhlenbeck sujeto a perturbaciones gaussianas (el ruido del termostato y las fugas microscópicas), saltos discretos por aperturas de puerta, y un estado de suministro eléctrico dictado por una cadena de Markov <span class="math inline">\(\alpha(t) \in \mathcal{M} = \{1, 2\}\)</span>:</p>
+<p><span class="math display">\[dT(t) = b(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + dJ(t)\]</span> {#eq-modelo-termodinamico}</p>
+<p>Donde los regímenes operativos se definen como <span class="math inline">\(\alpha(t) = 1\)</span> (suministro eléctrico activo de la red pública) y <span class="math inline">\(\alpha(t) = 2\)</span> (corte de energía). Los coeficientes de deriva determinista <span class="math inline">\(b\)</span> y la difusión continua <span class="math inline">\(\sigma\)</span> toman las siguientes formas paramétricas:</p>
+<p><strong>Régimen 1 (Con energía):</strong> <span class="math display">\[b(t, T, 1) = \kappa_{on}(\theta_{set} - T)\]</span> <span class="math display">\[\sigma(1) = \sigma_{on}\]</span></p>
+<p><strong>Régimen 2 (Falla eléctrica):</strong> <span class="math display">\[b(t, T, 2) = \kappa_{off}(T_{amb}(t) - T)\]</span> <span class="math display">\[\sigma(2) = \sigma_{off}\]</span></p>
+<p>El término estocástico <span class="math inline">\(dJ(t)\)</span> representa un proceso de Poisson compuesto que inyecta calor al sistema producto de las aperturas de la puerta por el personal médico. Físicamente, este proceso ocurre exclusivamente en el Régimen 1, y se encuentra dictado por un proceso de Poisson no homogéneo con una función de intensidad horaria <span class="math inline">\(\lambda(t)\)</span>. La magnitud de cada salto térmico o evento convectivo <span class="math inline">\(\gamma_i\)</span> es una variable aleatoria extraída de una distribución normal latente <span class="math inline">\(Z \sim \mathcal{N}(0.76, 0.20^2)\)</span> y censurada inferiormente (con suelo) en un umbral operativo de <span class="math inline">\(0.16\)</span> °C, tal que <span class="math inline">\(\gamma_i = \max(0.16, Z)\)</span>.</p>
+<p>Para representar analíticamente la condición de que los saltos térmicos masivos (aperturas programadas de puerta) solo ocurren cuando el refrigerador está operando normalmente (Régimen 1), definimos la función espacial del salto condicionada al régimen como: <span class="math display">\[\gamma(1, z) = z\]</span> <span class="math display">\[\gamma(2, z) = 0\]</span></p>
+<section id="transformación-analítica-de-la-medida-de-salto" class="level3" data-number="2.8.1">
+<h3 data-number="2.8.1" class="anchored" data-anchor-id="transformación-analítica-de-la-medida-de-salto"><span class="header-section-number">2.8.1</span> Transformación Analítica de la Medida de Salto</h3>
+<p>Para someter nuestro modelo termodinámico a los criterios abstractos de existencia y unicidad del <code>@thm-situ-existencia</code> que forman la base del <code>@thm-mao-switching</code>, debemos reescribir el diferencial empírico del proceso de Poisson compuesto <span class="math inline">\(dJ(t)\)</span> en términos de una integral respecto a la medida de Poisson compensada <span class="math inline">\(\tilde{N}(dt, dz)\)</span>. Invocando el <code>@lem-equivalencia-saltos</code>, definimos la medida de intensidad espacial como <span class="math inline">\(\nu(dz) = \lambda(t) dF(z)\)</span>, donde <span class="math inline">\(F(z)\)</span> representa la función de distribución acumulada de los saltos térmicos censurados <span class="math inline">\(\gamma_i\)</span>.</p>
+<p>Transformamos el diferencial de salto sumando y restando algebraicamente el compensador de la intensidad determinista: <span class="math display">\[dJ(t) = \int_{\mathbb{R}} \gamma(1, z) N(dt, dz) = \int_{\mathbb{R}} z \tilde{N}(dt, dz) + \left( \lambda(t) \int_{\mathbb{R}} z dF(z) \right) dt\]</span></p>
+<p>Dado que la integral respecto a la medida de probabilidad empírica <span class="math inline">\(dF(z)\)</span> es, por definición en la teoría de la medida, el valor esperado incondicional de la magnitud del salto térmico <span class="math inline">\(\mathbb{E}[\gamma]\)</span>, la ecuación puede reescribirse elegantemente absorbiendo este término determinista integrador en una “deriva modificada” o compensada, denotada a partir de ahora por <span class="math inline">\(\tilde{b}(t, T, \alpha)\)</span>:</p>
+<p><strong>Derivas Compensadas:</strong> <span class="math display">\[\tilde{b}(t, T, 1) = \kappa_{on}(\theta_{set} - T) + \lambda(t)\mathbb{E}[\gamma]\]</span> <span class="math display">\[\tilde{b}(t, T, 2) = \kappa_{off}(T_{amb}(t) - T)\]</span></p>
+<p>Nótese que para el Régimen 2, el término de salto esperado es nulo (<span class="math inline">\(\gamma(2,z)=0\)</span>), preservando inalterada la dinámica difusiva de enfriamiento pasivo. La ecuación termodinámica híbrida en su forma final y estrictamente compatible con la teoría clásica de integrales de martingala para sistemas de salto queda formulada como:</p>
+<p><span class="math display">\[dT(t) = \tilde{b}(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \int_{\mathbb{R}} \gamma(\alpha(t^-), z) \tilde{N}(dt, dz)\]</span> {#eq-modelo-compensado}</p>
+</section>
+</section>
+<section id="verificación-analítica-de-existencia-y-unicidad-del-modelo-termodinámico" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="verificación-analítica-de-existencia-y-unicidad-del-modelo-termodinámico"><span class="header-section-number">2.9</span> Verificación Analítica de Existencia y Unicidad del Modelo Termodinámico</h2>
+<p>Para demostrar matemáticamente que la EDE estocástica compensada en la <code>@eq-modelo-compensado</code> es una representación funcional viable de la red de frío, debemos verificar analíticamente que sus coeficientes termodinámicos satisfacen de manera estricta las condiciones del <code>@thm-situ-existencia</code> y, por extensión, las del Teorema de Concatenación de Soluciones Híbridas (<code>@thm-mao-switching</code>).</p>
+<p><strong>Paso 1: Localización del Intervalo Físico de Análisis</strong> Consideramos un intervalo semiabierto entre dos cambios de suministro eléctrico consecutivos <span class="math inline">\([\tau_k, \tau_{k+1})\)</span>. Puesto que el sistema de suministro eléctrico se encuentra en un estado estacionario en este intervalo, evaluaremos las condiciones del sistema condicionado a un régimen fijo <span class="math inline">\(\alpha(t) = i \in \{1, 2\}\)</span>.</p>
+<p><strong>Paso 2: Comprobación Rigurosa de la Condición de Lipschitz Global</strong> Debemos demostrar que la tasa instantánea de cambio de la ecuación térmica está linealmente acotada por la diferencia de las variables espaciales de estado, impidiendo cruces de trayectorias. Sean <span class="math inline">\(T_1\)</span> y <span class="math inline">\(T_2\)</span> dos temperaturas internas hipotéticas de evaluación. Computamos la suma de las diferencias cuadráticas de los tres coeficientes de nuestra ecuación:</p>
+<ol type="1">
+<li><p><strong>Coeficiente de Difusión:</strong> Dado que <span class="math inline">\(\sigma_{on}\)</span> y <span class="math inline">\(\sigma_{off}\)</span> representan el ruido gaussiano base y son constantes reales estrictamente independientes de la temperatura actual <span class="math inline">\(T\)</span>, se cumple de forma trivial que su diferencia es idénticamente nula en ambos regímenes: <span class="math display">\[\vert{}\sigma(i) - \sigma(i)\vert{}^2 = 0\]</span></p></li>
+<li><p><strong>Medida Espacial de Saltos:</strong> La condición de Lipschitz para el operador de salto exige evaluar la integral de las diferencias espaciales. Sin embargo, en nuestro modelo fenomenológico, la magnitud del aire caliente que ingresa al abrir la puerta (<span class="math inline">\(\gamma(\alpha, z)\)</span>) depende exclusivamente de la temperatura y volumen del entorno externo censurado (la marca estocástica <span class="math inline">\(z\)</span>) y no depende endógenamente de la temperatura interna previa del refrigerador <span class="math inline">\(T(t^-)\)</span>. Por tanto, la función espacial es estática respecto a <span class="math inline">\(T\)</span>, resultando en una diferencia nula: <span class="math display">\[\int_{\mathbb{R}} \vert{}\gamma(i, z) - \gamma(i, z)\vert{}^2 \nu(dz) = \int_{\mathbb{R}} \vert{}z - z\vert{}^2 \lambda(t) dF(z) = 0\]</span></p></li>
+<li><p><strong>Deriva Termodinámica Compensada:</strong> Para el Régimen operativo 1 (con suministro de CFE), evaluamos la diferencia absoluta al cuadrado de las derivas para <span class="math inline">\(T_1\)</span> y <span class="math inline">\(T_2\)</span>. Como hemos transformado la ecuación a la medida de martingala, el término de salto esperado o determinista <span class="math inline">\(\lambda(t)\mathbb{E}[\gamma]\)</span> es un sumando aditivo estricto, independiente de <span class="math inline">\(T\)</span>, por lo que se anula en la sustracción algebraica de Itô: <span class="math display">\[\vert{}\tilde{b}(t, T_1, 1) - \tilde{b}(t, T_2, 1)\vert{}^2 = \left\vert{} [\kappa_{on}(\theta_{set} - T_1) + \lambda(t)\mathbb{E}[\gamma]] - [\kappa_{on}(\theta_{set} - T_2) + \lambda(t)\mathbb{E}[\gamma]] \right\vert{}^2\]</span> <span class="math display">\[= \vert{}-\kappa_{on}(T_1 - T_2)\vert{}^2 = \kappa_{on}^2 \vert{}T_1 - T_2\vert{}^2\]</span> Siguiendo un tratamiento analítico análogo para el Régimen de fallo eléctrico 2, obtenemos la cota estricta asintótica <span class="math inline">\(\kappa_{off}^2 \vert{}T_1 - T_2\vert{}^2\)</span>.</p></li>
+</ol>
+<p>Definiendo la constante matemática global de Lipschitz como el cuadrado de la máxima inercia térmica disipativa del sistema, es decir, <span class="math inline">\(L = \max(\kappa_{on}^2, \kappa_{off}^2)\)</span>, se satisface de manera universal e irrefutable que para el modelo propuesto: <span class="math display">\[\vert{}\tilde{b}(t, T_1, i) - \tilde{b}(t, T_2, i)\vert{}^2 + \vert{}\sigma(i) - \sigma(i)\vert{}^2 + \int_{\mathbb{R}} \vert{}\gamma(i, z) - \gamma(i, z)\vert{}^2 \nu(dz) \le L \vert{}T_1 - T_2\vert{}^2\]</span> Esta acotación asegura formalmente el cumplimiento de la condición para la <strong>unicidad fuerte</strong> del proceso estocástico térmico en estudio.</p>
+<p><strong>Paso 3: Comprobación Analítica de la Condición de Crecimiento Lineal</strong> Para garantizar la viabilidad existencial global del sistema estocástico, debemos probar que el crecimiento acumulativo del sistema está termodinámicamente acotado, previniendo asintóticamente fenómenos de explosión en tiempo finito (i.e.&nbsp;evitar que la temperatura interna del refrigerador tienda al infinito de manera instantánea, lo cual sería un absurdo físico).</p>
+<p>Para evaluar la deriva compensada en el Régimen 1, empleamos la desigualdad algebraica demostrada en el <code>@lem-desigualdad-algebraica</code> <span class="math inline">\((\vert{}a-b\vert{}^2 \le 2\vert{}a\vert{}^2 + 2\vert{}b\vert{}^2)\)</span> y asumimos la existencia de una cota superior natural en la modelación empírica para la intensidad máxima de apertura de puertas en el centro de salud <span class="math inline">\(\lambda_{max} = \sup_{t} \lambda(t)\)</span>: <span class="math display">\[\vert{}\tilde{b}(t, T, 1)\vert{}^2 = \vert{}\kappa_{on}\theta_{set} + \lambda(t)\mathbb{E}[\gamma] - \kappa_{on}T\vert{}^2 \le 2(\kappa_{on}\theta_{set} + \lambda_{max}\mathbb{E}[\gamma])^2 + 2\kappa_{on}^2 \vert{}T\vert{}^2\]</span></p>
+<p>Para el Régimen 2 de disipación de calor, definimos la constante escalar <span class="math inline">\(T_{max}\)</span> como la temperatura ambiental histórica máxima absoluta de la ubicación geográfica de estudio de Tuxtla Gutiérrez, Chiapas (i.e., <span class="math inline">\(\vert{}T_{amb}(t)\vert{} \le T_{max}\)</span> para todo <span class="math inline">\(t\)</span>), obteniendo por la misma cota del lema: <span class="math display">\[\vert{}\tilde{b}(t, T, 2)\vert{}^2 = \vert{}\kappa_{off}T_{amb}(t) - \kappa_{off}T\vert{}^2 \le 2\kappa_{off}^2 T_{max}^2 + 2\kappa_{off}^2 \vert{}T\vert{}^2\]</span></p>
+<p>Evaluamos simultáneamente el segundo momento probabilístico incondicional de la medida de saltos (la varianza del ruido del impacto térmico), denotando el momento latente <span class="math inline">\(\mathbb{E}[\gamma^2] = M_\gamma\)</span>: <span class="math display">\[\int_{\mathbb{R}} \vert{}\gamma(1, z)\vert{}^2 \nu(dz) = \lambda(t) \int_{\mathbb{R}} z^2 dF(z) = \lambda(t) \mathbb{E}[\gamma^2] \le \lambda_{max} M_\gamma\]</span></p>
+<p>Agrupando iterativamente la suma de los componentes del modelo (derivas compensadas, volatilidad térmica cuadrática constante <span class="math inline">\(\Sigma_{max} = \max(\sigma_{on}^2, \sigma_{off}^2)\)</span> y la cota integral estocástica de los saltos) y factorizando algebraicamente los términos estáticos y aquellos proporcionales al cuadrado del estado <span class="math inline">\(T^2\)</span>, demostramos que existe una macro-constante limitante de crecimiento sistémico <span class="math inline">\(K\)</span>, definida estrictamente como: <span class="math display">\[K = \max \left( \max[2(\kappa_{on}\theta_{set} + \lambda_{max}\mathbb{E}[\gamma])^2, 2\kappa_{off}^2 T_{max}^2] + \Sigma_{max} + \lambda_{max} M_\gamma, \quad \max(2\kappa_{on}^2, 2\kappa_{off}^2) \right)\]</span> Tal que se cumple rigurosamente la desigualdad para la ecuación en todos sus regímenes <span class="math inline">\(i \in \{1, 2\}\)</span>: <span class="math display">\[\vert{}\tilde{b}(t, T, i)\vert{}^2 + \vert{}\sigma(i)\vert{}^2 + \int_{\mathbb{R}} \vert{}\gamma(i, z)\vert{}^2 \nu(dz) \le K(1 + \vert{}T\vert{}^2)\]</span> Esta acotación superior estructural demuestra matemáticamente que la transferencia de calor simulada está físicamente acotada por las fronteras climáticas empíricas del entorno y los parámetros fijos del equipo electromecánico. Esta condición previene de forma segura que <span class="math inline">\(\lim_{t \to \tau} \vert{}T(t)\vert{} = \infty\)</span>, garantizando la <strong>existencia global</strong> de la trayectoria sin rupturas o singularidades en tiempo finito. Cabe señalar que esta existencia global no implica necesariamente estabilidad operativa dentro de los rangos normativos térmicos de la vacuna (<span class="math inline">\(2^\circ\)</span>C a <span class="math inline">\(8^\circ\)</span>C), lo cual es competencia del análisis inferencial numérico.</p>
+<p><strong>Paso 4: Conclusión Analítica Integral</strong> Habiendo validado de forma deductiva el cumplimiento estricto de las condiciones de Lipschitz y de Crecimiento Lineal en los análisis previos (Paso 2 y 3), las hipótesis del <code>@thm-situ-existencia</code> se cumplen y avalan la aseveración de que, en cada intervalo de suministro constante <span class="math inline">\([\tau_k, \tau_{k+1})\)</span>, la EDE termodinámica posee una única y robusta solución estocástica en sentido fuerte.</p>
+<p>Adicionalmente, al validar que la matriz de intensidad de fallos de la red eléctrica comercial <span class="math inline">\(Q\)</span> es dimensional y espectralmente acotada, se cumple la condición de no explosividad de la cadena de Markov descrita en el Teorema de Concatenación de Soluciones Híbridas (<code>@thm-mao-switching</code>).</p>
+<p>La convergencia de estos dos paradigmas analíticos certifica que el modelo matemático híbrido general de la red de frío expuesto a fallos sistémicos y perturbaciones ambientales posee una trayectoria estocástica global única, sin singularidades y adaptada a la filtración histórica generada por la evolución térmica, posibilitando, validando y blindando metodológicamente cualquier implementación posterior de estimación de densidades empíricas y pronóstico mediante metodologías de Monte Carlo o técnicas de inferencia asintótica.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-asmussen2003markov" class="csl-entry" role="listitem">
+Asmussen, Søren. 2003. <span>«Applied Probability and Queues»</span>. En, 2nd ed., 51:39-59. Stochastic Modelling y Applied Probability. New York, NY: Springer-Verlag. <a href="https://doi.org/10.1007/0-387-21525-5_2">https://doi.org/10.1007/0-387-21525-5_2</a>.
+</div>
+<div id="ref-karatzas1998brownian" class="csl-entry" role="listitem">
+Karatzas, Ioannis, y Steven E. Shreve. 1998. <em>Brownian Motion and Stochastic Calculus</em>. 2nd ed. Vol. 113. Graduate Texts en Mathematics. New York, NY: Springer-Verlag. <a href="https://doi.org/10.1007/978-1-4612-0949-2">https://doi.org/10.1007/978-1-4612-0949-2</a>.
+</div>
+<div id="ref-karlin1998introduction" class="csl-entry" role="listitem">
+Karlin, Samuel, y Howard M. Taylor. 1998. <em>An Introduction to Stochastic Modeling</em>. 3rd ed. San Diego, CA: Academic Press.
+</div>
+<div id="ref-ross1996stochastic" class="csl-entry" role="listitem">
+Ross, Sheldon M. 1996. <em>Stochastic Processes</em>. 2nd ed. New York, NY: Wiley.
+</div>
+<div id="ref-yin2010hybrid" class="csl-entry" role="listitem">
+Yin, G. George, y Chao Zhu. 2010. <em>Hybrid Switching Diffusions: Properties and Applications</em>. Vol. 63. Stochastic Modelling y Applied Probability. New York, NY: Springer. <a href="https://doi.org/10.1007/978-1-4419-1105-6">https://doi.org/10.1007/978-1-4419-1105-6</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Introducción">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./fundamentos_numericos.html" class="pagination-link" aria-label="Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
