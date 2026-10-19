@@ -22,9 +22,11 @@ book:
   chapters:
     - index.qmd
     
-    - part: "Marco Teórico y Normativa"
+    - part: "Marco Teórico"
       chapters: 
-        - fundamentos_teoricos.qmd
+        - fundamentos_matematicos.qmd
+        - fundamentos_numericos.qmd
+        - fundamentos_epidemiologicos.qmd
 
     - part: "Modelo Matemático"
       chapters: 
