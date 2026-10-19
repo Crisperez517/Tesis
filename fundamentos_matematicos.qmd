@@ -1,4 +1,4 @@
-# Fundamentos Teóricos
+# Fundamentos Teóricos Matemáticos
 
 En este capítulo se presentarán las bases conceptuales y el marco formal del cálculo estocástico que fundamentan el desarrollo de nuestro modelo matemático para la red de frío. Se definirán en primer lugar los procesos estocásticos elementales para, posteriormente, formalizar la teoría de medidas aleatorias de salto, establecer la teoría de integración de Itô, demostrar el teorema general de concatenación híbrida y concluir con la verificación analítica del sistema propuesto.
 
