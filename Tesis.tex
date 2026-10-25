@@ -188,11 +188,11 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -777,10 +777,11 @@ punto y poseen \textbf{variación total infinita (no acotada)} sobre
 cualquier intervalo temporal finito con probabilidad 1; esto es, para
 una partición \(0 = t_0 < t_1 < \dots < t_n = T,\) se cumple que: \[
 \lim_{n \to \infty} \sum_{i=0}^{n-1} \vert W(t_{i+1}) - W(t_i) \vert = \infty \quad \text{casi seguramente.}
-\] Esta propiedad impide definir la integral \(\int_0^T X(t) dW(t)\)
-trayectoria por trayectoria para cada \(\omega \in \Omega\). No
-obstante, el movimiento Browniano posee \textbf{variación cuadrática
-finita} e igual a la longitud del intervalo temporal: \[
+\] Esta propiedad impide definir la integral
+\(\displaystyle \int_0^T X(t) dW(t)\) trayectoria por trayectoria para
+cada \(\omega \in \Omega\). No obstante, el movimiento Browniano posee
+\textbf{variación cuadrática finita} e igual a la longitud del intervalo
+temporal, es decir: \[
 \lim_{n \to \infty} \sum_{i=0}^{n-1} \left( W(t_{i+1}) - W(t_i) \right)^2 = T \quad \text{en } L^2(\Omega, \mathbb{P}).
 \] Aprovechando esta propiedad de segundo momento y la independencia de
 los incrementos, K. Itô construyó la integral estocástica no como un
@@ -802,26 +803,27 @@ integrabilidad en media cuadrática: \[
 
 La construcción de la integral procede inicialmente sobre procesos
 simples (escalonados) adaptados de la forma
-\(X_n(t) = \sum_{i=0}^{n-1} \xi_i \mathbf{1}_{(t_i, t_{i+1}]}(t)\),
+\(\displaystyle X_n(t) = \sum_{i=0}^{n-1} \xi_i \mathbf{1}_{(t_i, t_{i+1}]}(t)\),
 donde cada variable aleatoria \(\xi_i\) es
 \(\mathcal{F}_{t_i}\)-medible. Dado que el conjunto de procesos simples
 es denso en \(\mathcal{L}^2([0, T]; \mathbb{R})\), el operador integral
 se extiende por continuidad a cualquier proceso de dicho espacio
 mediante el siguiente límite.
 
-\begin{definition}[Integral Estocástica de
+\begin{definition}[Integral de
 Itô]\protect\hypertarget{def-integral-ito}{}\label{def-integral-ito}
 
 Sea \(\{X(t)\}_{t \in [0, T]} \in \mathcal{L}^2([0, T]; \mathbb{R})\) y
 sea \(\{W(t)\}_{t \ge 0}\) un movimiento Browniano estándar adaptado a
 \(\{\mathcal{F}_t\}_{t \ge 0}\). Sea
 \(\Pi_n = \{0 = t_0 < t_1 < \dots < t_n = T\}\) una sucesión de
-particiones del intervalo \([0, T]\) cuya norma de malla
-\(\max_{0 \le i \le n-1} (t_{i+1} - t_i)\) tiende a cero cuando
-\(n \to \infty\). La integral estocástica de Itô de \(X(t)\) respecto a
-\(W(t)\) en el intervalo \([0, T]\) se define como el límite en media
-cuadrática en el espacio \(L^2(\Omega, \mathbb{P})\) de las sumas
-parciales evaluadas en el extremo izquierdo de cada subintervalo: \[
+particiones del intervalo \([0, T]\) cuya norma
+\(\displaystyle N_{\Pi_n} = \max_{0 \le i \le n-1} (t_{i+1} - t_i)\)
+tiende a cero cuando \(n \to \infty\). La integral de Itô de \(X(t)\)
+respecto a \(W(t)\) en el intervalo \([0, T]\) se define como el límite
+en media cuadrática en el espacio \(L^2(\Omega, \mathbb{P})\) de las
+sumas parciales evaluadas en el extremo izquierdo de cada subintervalo,
+es decir: \[
 \int_0^T X(t) dW(t) = \lim_{n \to \infty} \sum_{i=0}^{n-1} X(t_i) \left[ W(t_{i+1}) - W(t_i) \right] \quad \text{en } L^2(\Omega, \mathbb{P}),
 \] lo que significa explícitamente que: \[
 \lim_{n \to \infty} \mathbb{E}\left[ \left\vert \int_0^T X(t) dW(t) - \sum_{i=0}^{n-1} X(t_i) \left[ W(t_{i+1}) - W(t_i) \right] \right\vert^2 \right] = 0.
@@ -829,19 +831,18 @@ parciales evaluadas en el extremo izquierdo de cada subintervalo: \[
 
 \end{definition}
 
-La prescripción de evaluar el integrando \(X(t_i)\) estrictamente en el
+El hecho de evaluar el integrando \(X(t_i)\) estrictamente en el
 instante inicial \(t_i\) de cada incremento
 \(\Delta W(t_i) = W(t_{i+1}) - W(t_i)\) garantiza que el integrando no
 anticipe información futura. Dado que \(X(t_i)\) es
 \(\mathcal{F}_{t_i}\)-medible y el incremento \(W(t_{i+1}) - W(t_i)\) es
-estocásticamente independiente de \(\mathcal{F}_{t_i}\), el valor
-esperado de cada término de la suma se factoriza como
+independiente de \(\mathcal{F}_{t_i}\), el valor esperado de cada
+término de la suma se factoriza como
 \(\mathbb{E}[X(t_i)]\mathbb{E}[W(t_{i+1}) - W(t_i)] = 0\). En
-consecuencia, el proceso de integral indefinida
-\(I(t) = \int_0^t X(s) dW(s)\) hereda la estructura de una
-\textbf{martingala continua de cuadrado integrable} respecto a
-\(\{\mathcal{F}_t\}_{t \ge 0}\), satisfaciendo la propiedad de media
-nula: \[
+consecuencia, la integral definida \(I(t) = \int_0^t X(s) dW(s)\) hereda
+la estructura de una \textbf{martingala continua de cuadrado integrable}
+respecto a \(\{\mathcal{F}_t\}_{t \ge 0}\), satisfaciendo la propiedad
+de media nula: \[
 \mathbb{E}\left[ \int_0^T X(t) dW(t) \right] = 0.
 \]
 
@@ -856,9 +857,9 @@ Browniano]\protect\hypertarget{thm-isometria-ito}{}\label{thm-isometria-ito}
 
 Para todo proceso estocástico
 \(\{X(t)\}_{t \in [0, T]} \in \mathcal{L}^2([0, T]; \mathbb{R})\), el
-segundo momento de su integral estocástica de Itô coincide exactamente
-con la esperanza matemática de la integral ordinaria de Lebesgue del
-proceso al cuadrado respecto al tiempo: \[
+segundo momento de su integral de Itô coincide exactamente con la
+esperanza de la integral ordinaria de Riemann del proceso al cuadrado
+respecto al tiempo: \[
 \mathbb{E}\left[ \left\vert \int_0^T X(t) dW(t) \right\vert^2 \right] = \mathbb{E}\left[ \int_0^T \vert X(t) \vert^2 dt \right].
 \]
 
@@ -872,8 +873,8 @@ y unicidad.
 \section{Teoría de Medidas Aleatorias e Integración Estocástica con
 Saltos}\label{teoruxeda-de-medidas-aleatorias-e-integraciuxf3n-estocuxe1stica-con-saltos}
 
-A diferencia del movimiento Browniano ---cuyas trayectorias cambian
-continuamente con variación no acotada---, los procesos de conteo y de
+A diferencia del movimiento Browniano cuyas trayectorias cambian
+continuamente con variación no acotada, los procesos de conteo y de
 saltos puros (como el proceso de Poisson compuesto \(J(t)\)) permanecen
 constantes entre eventos sucesivos y solo experimentan un número finito
 de discontinuidades en cualquier intervalo acotado \([0, T]\). Por
@@ -921,7 +922,7 @@ mediante un par ordenado de variables aleatorias: \[
 
 Mientras que un proceso de Poisson ordinario \(N(t)\) cuenta únicamente
 cuántos eventos ocurrieron hasta el instante \(t\) sin distinguir su
-tamaño, una medida aleatoria de conteo clasifica y contabiliza los
+magnitud, una medida aleatoria de conteo clasifica y contabiliza los
 saltos simultáneamente según el intervalo temporal en que ocurren y el
 rango de valores al que pertenece su magnitud.
 
@@ -930,7 +931,7 @@ Poisson]\protect\hypertarget{def-medida-conteo-poisson}{}\label{def-medida-conte
 
 Sea \((\mathcal{Z}, \mathcal{B}(\mathcal{Z}))\) el espacio medible de
 marcas y sea \(\{(T_k, \gamma_k)\}_{k \ge 1}\) la sucesión de tiempos de
-ocurrencia y magnitudes de un proceso de saltos adaptado a
+ocurrencia y magnitudes de un proceso de saltos adaptado a la filtración
 \(\{\mathcal{F}_t\}_{t \ge 0}\). Para cualquier intervalo temporal
 \((s, t] \subset [0, \infty)\) y cualquier subconjunto medible de
 magnitudes \(A \in \mathcal{B}(\mathcal{Z})\), el conteo aleatorio de
@@ -973,14 +974,14 @@ torno a \(z \in dz\), y vale \(0\) si no ocurre ningún salto de tales
 características.
 
 Dado que \(N((0, t] \times A)\) acumula conteos enteros no negativos a
-medida que avanza el tiempo, es un proceso monótonamente no decreciente.
-En consecuencia, su esperanza matemática es estrictamente positiva
+medida que avanza el tiempo, es un proceso monótonamente creciente. En
+consecuencia, su esperanza es estrictamente positiva
 (\(\mathbb{E}[N((0, t] \times A)] > 0\)) y no constituye una martingala.
 Para caracterizar el valor esperado de estos conteos, se introduce la
 medida de intensidad.
 
-\begin{definition}[Medida de Intensidad (Compensador
-Determinista)]\protect\hypertarget{def-medida-levy}{}\label{def-medida-levy}
+\begin{definition}[Medida de
+Intensidad]\protect\hypertarget{def-medida-levy}{}\label{def-medida-levy}
 
 Sea \(N(dt, dz)\) una medida aleatoria de conteo de Poisson. La
 \textbf{medida de intensidad} asociada a \(N\) es la medida determinista
@@ -988,13 +989,13 @@ Sea \(N(dt, dz)\) una medida aleatoria de conteo de Poisson. La
 cada región temporal y espacial el número esperado de saltos: \[
 \nu((s, t] \times A) = \mathbb{E}\left[ N((s, t] \times A) \right] = \mathbb{E}\left[ \int_s^t \int_A N(du, dz) \right].
 \] Si los instantes de ocurrencia de los eventos siguen un proceso de
-Poisson no homogéneo con función de intensidad temporal
-\(\lambda(t) \ge 0\) localmente integrable, y las magnitudes de los
-saltos \(\{\gamma_k\}_{k \ge 1}\) son variables aleatorias
-independientes e idénticamente distribuidas con función de distribución
-acumulada \(F(z) = \mathbb{P}(\gamma_k \le z)\) (independientes de los
-tiempos de salto), la medida de intensidad en forma diferencial se
-factoriza como: \[
+Poisson no homogéneo con función de intensidad \(\lambda(t) \ge 0\)
+localmente integrable, y las magnitudes de los saltos
+\(\{\gamma_k\}_{k \ge 1}\) son variables aleatorias independientes e
+idénticamente distribuidas con función de distribución acumulada
+\(F(z) = \mathbb{P}(\gamma_k \le z)\) (independientes de los tiempos de
+salto), la medida de intensidad en forma diferencial se factoriza como:
+\[
 \nu_t(dz) dt = \mathbb{E}\left[ N(dt, dz) \right] = \lambda(t) dF(z) dt,
 \] donde \(dF(z)\) representa la medida de probabilidad inducida por la
 distribución de las magnitudes de salto (si las marcas poseen función de
@@ -1014,10 +1015,10 @@ tenga una magnitud de tamaño \(z\).
 Debido a que la medida de conteo \(N(dt, dz)\) posee una tendencia media
 creciente dada por \(\nu_t(dz)dt\), integrarla directamente introduce un
 arrastre determinista en el sistema. Para separar la fluctuación
-puramente aleatoria de su tendencia media y obtener un integrador que
-goce de la propiedad de martingala ---de forma análoga al diferencial
-Browniano \(dW(t)\)---, se centra la medida aleatoria restándole su
-valor esperado (\citeproc{ref-situ2005theory}{Situ 2005}).
+puramente aleatoria de su tendencia media y obtener un integrador con la
+propiedad de martingala de forma análoga al diferencial Browniano
+\(dW(t)\), se centra la medida aleatoria restándole su valor esperado
+(\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{definition}[Medida Aleatoria de Poisson
 Compensada]\protect\hypertarget{def-medida-compensada}{}\label{def-medida-compensada}
@@ -1025,8 +1026,8 @@ Compensada]\protect\hypertarget{def-medida-compensada}{}\label{def-medida-compen
 Sea \(N(dt, dz)\) una medida aleatoria de conteo de Poisson con medida
 de intensidad \(\nu_t(dz)dt = \lambda(t)dF(z)dt\). Se define la
 \textbf{medida aleatoria de Poisson compensada}, denotada por
-\(\tilde{N}(dt, dz)\), como la diferencia algebraica entre la medida de
-conteo observada y su medida de intensidad esperada: \[
+\(\tilde{N}(dt, dz)\), como la diferencia entre la medida de conteo
+observada y su medida de intensidad esperada: \[
 \tilde{N}(dt, dz) = N(dt, dz) - \nu_t(dz) dt = N(dt, dz) - \lambda(t) dF(z) dt.
 \] Para cualquier subconjunto de marcas
 \(A \in \mathcal{B}(\mathcal{Z})\) tal que
@@ -1045,12 +1046,12 @@ la filtración \(\{\mathcal{F}_t\}_{t \ge 0}\), cumpliendo para todo
 Salto}\label{integraciuxf3n-estocuxe1stica-respecto-a-medidas-aleatorias-de-salto}
 
 Una vez definidas las medidas \(N(dt, dz)\) y \(\tilde{N}(dt, dz)\),
-procedemos a establecer cómo se integran funciones estocásticas respecto
-a ellas. En la teoría de integración con saltos, es fundamental exigir
-que el integrando no dependa del valor exacto del salto en el mismo
-instante en que este ocurre, sino únicamente de la información
-disponible inmediatamente antes del salto. Esta propiedad de causalidad
-se formaliza mediante el concepto de predecibilidad
+procedemos a establecer cómo se integran funciones y procesos
+estocásticos respecto a ellas. En la teoría de integración con saltos,
+es fundamental exigir que el integrando no dependa del valor exacto del
+salto en el mismo instante en que este ocurre, sino únicamente de la
+información disponible inmediatamente antes del salto. Esta propiedad de
+causalidad se formaliza mediante el concepto de predecibilidad
 (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
 \citeproc{ref-situ2005theory}{Situ 2005}).
 
@@ -1088,7 +1089,7 @@ de
 Poisson]\protect\hypertarget{def-integral-conteo}{}\label{def-integral-conteo}
 
 Sea \(H(t, z, \omega)\) un integrando predecible tal que
-\(\int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert N(dt, dz) < \infty\)
+\(\displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert N(dt, dz) < \infty\)
 casi seguramente. La integral estocástica de \(H\) respecto a la medida
 aleatoria de conteo \(N(dt, dz)\) en el intervalo \([0, T]\) se define
 trayectoria por trayectoria como la suma finita de las contribuciones
@@ -1132,14 +1133,14 @@ para todo \(T > 0\) la condición: \[
 M_t = \int_0^t \int_{\mathcal{Z}} H(s, z) \tilde{N}(ds, dz), \quad t \in [0, T],
 \] está bien definido en \(L^2(\Omega, \mathbb{P})\) y constituye una
 martingala de cuadrado integrable con trayectorias càdlàg respecto a la
-filtración \(\{\mathcal{F}_t\}_{t \ge 0}\), cuya esperanza matemática es
+filtración \(\{\mathcal{F}_t\}_{t \ge 0}\), cuya esperanza es
 idénticamente nula: \[
 \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) \tilde{N}(dt, dz) \right] = 0.
 \]
 
 \end{definition}
 
-De forma homóloga a la difusión Browniana, la integral respecto a la
+De forma analoga al Movimiento Browniano, la integral respecto a la
 medida aleatoria de Poisson compensada posee una propiedad de isometría
 en \(L^2(\Omega, \mathbb{P})\) que relaciona su varianza con una
 integral determinista respecto al compensador \(\nu_t(dz)dt\)
@@ -1157,44 +1158,45 @@ compensada \(\tilde{N}(dt, dz)\) satisface la identidad: \[
 
 \end{theorem}
 
-Con este marco de integración establecido, podemos enunciar y demostrar
-de manera inmediata el lema que vincula al proceso de Poisson compuesto
-definido en la sección anterior con las integrales estocásticas respecto
-a medidas aleatorias de salto.
+Con este marco de integración establecido, podemos enunciar el lema que
+vincula al proceso de Poisson compuesto definido en la sección anterior
+Definición~\ref{def-poisson-compuesto} con las integrales estocásticas
+respecto a medidas aleatorias de salto.
 
 \begin{lemma}[Lema de Equivalencia del Proceso de Poisson
 Compuesto]\protect\hypertarget{lem-equivalencia-saltos}{}\label{lem-equivalencia-saltos}
 
 Sea \(J(t) = \sum_{i=1}^{N(t)} \gamma_i\) un proceso de Poisson
-compuesto donde \(\{N(t)\}_{t \ge 0}\) es un proceso de Poisson no
-homogéneo con función de intensidad \(\lambda(t) \ge 0\), y
+compuesto donde \(\displaystyle \{N(t)\}_{t \ge 0}\) es un proceso de
+Poisson no homogéneo con función de intensidad \(\lambda(t) \ge 0\), y
 \(\{\gamma_i\}_{i \in \mathbb{N}}\) es una sucesión de variables
 aleatorias independientes e idénticamente distribuidas con función de
 distribución \(F(z)\) y media finita
 \(\mathbb{E}[\vert \gamma_i \vert] < \infty\), independientes de
-\(N(t)\). Entonces, el proceso \(J(t)\) admite la representación
-integral exacta respecto a la medida aleatoria de conteo \(N(dt, dz)\):
-\[
+\(N(t)\). Entonces, el proceso \(J(t)\) admite la siguiente
+representación integral respecto a la medida aleatoria de conteo
+\(N(dt, dz)\): \[
 J(t) = \int_0^t \int_{\mathbb{R}} z N(ds, dz), \quad \text{o en forma diferencial,} \quad dJ(t) = \int_{\mathbb{R}} z N(dt, dz).
 \] En consecuencia, sustituyendo la relación de la medida compensada
 \(N(dt, dz) = \tilde{N}(dt, dz) + \lambda(t)dF(z)dt\), el diferencial
-del proceso de Poisson compuesto se descompone analíticamente en el
-diferencial de una martingala de salto compensado (de media cero) más un
-término de deriva determinista proporcional al tamaño esperado del
-salto: \[
+del proceso de Poisson compuesto se descompone en el diferencial de una
+martingala de salto compensado (de media cero) más un término de deriva
+determinista proporcional al tamaño esperado del salto: \[
 dJ(t) = \int_{\mathbb{R}} z \tilde{N}(dt, dz) + \left( \lambda(t) \int_{\mathbb{R}} z dF(z) \right) dt = \int_{\mathbb{R}} z \tilde{N}(dt, dz) + \lambda(t) \mathbb{E}[\gamma_i] dt.
 \]
 
 \end{lemma}
 
-Esta equivalencia (\texttt{@lem-equivalencia-saltos}) es fundamental
+Esta equivalencia (Lema~\ref{lem-equivalencia-saltos}) es fundamental
 para nuestra investigación, ya que nos permitirá reescribir la ecuación
-diferencial estocástica del refrigerador de vacunas ---planteada
+diferencial estocástica para el refrigerador de vacunas planteada
 originalmente mediante incrementos del proceso de Poisson compuesto
-\(dJ(t)\)--- en la forma canónica de una ecuación impulsada por
-martingalas (\(\tilde{N}(dt, dz)\) y \(dW(t)\)), requisito indispensable
-para aplicar los teoremas de existencia y unicidad de R. Situ
+\(dJ(t)\) en la forma canónica de una EDE impulsada por martingalas
+(\(\tilde{N}(dt, dz)\) y \(dW(t)\)), requisito indispensable para
+aplicar los teoremas de existencia y unicidad de R. Situ
 (\citeproc{ref-situ2005theory}{Situ 2005}).
+
+\chapter{HASTA AQUI}\label{hasta-aqui}
 
 \section{Ecuaciones Diferenciales Estocásticas
 Continuas}\label{ecuaciones-diferenciales-estocuxe1sticas-continuas}
