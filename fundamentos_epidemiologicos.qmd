@@ -1,34 +1,5 @@
 # Fundamentos Teóricos Epidemiológicos
 
-### Cadenas de Markov a Tiempo Continuo
-
-Los fallos prolongados en el suministro eléctrico de la red pública alteran estructuralmente la dinámica del sistema. Para modelar estas transiciones entre estados macroscópicos del entorno, introducimos una cadena de Markov en tiempo continuo.
-
-::: {#def-cadena-markov}
-### Cadena de Markov a Tiempo Continuo
-Sea $\{\alpha(t)\}_{t \ge 0}$ un proceso estocástico que toma valores en un espacio de estados finito y discreto $\mathcal{M} = \{1, 2, \dots, m\}$. Se dice que $\alpha(t)$ es una cadena de Markov en tiempo continuo si para todo $s, t \ge 0$ y estados $i, j \in \mathcal{M}$, cumple la propiedad de Markov:
-
-$$
-\mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i, \alpha(u) = \alpha_u, 0 \le u < s) = \mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i)
-$$
-:::
-
-Las leyes de transición y la evolución temporal de las probabilidades de estado de la cadena $\{\alpha(t)\}_{t \ge 0}$ se encuentran completamente caracterizadas por la matriz de intensidades de transición $Q = (q_{ij}) \in \mathbb{R}^{m \times m}$. Si definimos las funciones de probabilidad de transición condicional mediante $p_{ij}(h) = \mathbb{P}(\alpha(t+h) = j \mid \alpha(t) = i)$ para un incremento temporal positivo $h > 0$, las componentes de la matriz $Q$ se determinan evaluando el límite analítico en el origen:
-
-1. Para transiciones entre estados distintos ($i \neq j$), la componente $q_{ij}$ representa la tasa instantánea o intensidad de conmutación desde el régimen $i$ hacia el régimen $j$, definida como:
-
-$$
-q_{ij} = \lim_{h \to 0^+} \frac{p_{ij}(h)}{h} \ge 0
-$$
-
-2. Para los elementos situados sobre la diagonal principal ($i = j$), la componente $q_{ii}$ representa la tasa neta de salida del estado $i$, cumpliendo por conservación de la probabilidad que la suma por filas de la matriz $Q$ sea idénticamente nula:
-
-$$
-q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i} q_{ij}
-$$
-
-A través de esta formulación basada en límites, las probabilidades de transición de primer orden quedan descritas mediante las expresiones $p_{ij}(h) = q_{ij}h + o(h)$ para $i \neq j$, y $p_{ii}(h) = 1 + q_{ii}h + o(h)$. Esto permite modelar las conmutaciones macroscópicas de la dinámica del refrigerador sin necesidad de introducir variables temporales discretas ni heurísticas. Los lectores interesados en profundizar en las propiedades asintóticas y de estabilidad de estos procesos híbridos pueden remitirse al texto especializado de [@asmussen2003markov].
-
 ## Ecuaciones Diferenciales Estocásticas y la  Integral de Itô
 
 Una vez establecidos los procesos estocásticos de soporte, es necesario definir las reglas operacionales que permiten construir y resolver ecuaciones sujetas a perturbaciones aleatorias continuas. Dado que las trayectorias del movimiento Browniano no son de variación acotada y tampoco son diferenciables en ningún punto, entonces la expresión clásica $dW(t)/dt$ no tiene sentido dentro del cálculo ordinario. Por lo tanto, la integración respecto a procesos estocásticos requiere la construcción de una nueva herramienta analítica conocida como la integral de Itô.

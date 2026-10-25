@@ -189,10 +189,10 @@
 \usepackage{amsthm}
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -688,50 +688,78 @@ càdlàg.}
 
 \end{figure}%
 
-\chapter{HASTA AQUI}\label{hasta-aqui}
-
 \subsection{Cadenas de Markov a Tiempo
 Continuo}\label{cadenas-de-markov-a-tiempo-continuo}
 
 Los fallos prolongados en el suministro eléctrico de la red pública
-alteran estructuralmente el régimen de disipación de calor del sistema
-(compresor encendido versus apagado). Para modelar rigurosamente las
-transiciones estocásticas entre estos macroestados termodinámicos,
-introducimos una Cadena de Markov a Tiempo Continuo (CTMC).
+alteran el comportamiento de la temperatura interna del refrigerador.
+Para modelar estas transiciones entre estados macroscópicos del entorno,
+introducimos una cadena de Markov a tiempo continuo.
 
 \begin{definition}[Cadena de Markov a Tiempo
 Continuo]\protect\hypertarget{def-cadena-markov}{}\label{def-cadena-markov}
 
-Sea \(\{\alpha(t)\}_{t \ge 0}\) un proceso estocástico definido en el
-espacio medible \((\Omega, \mathcal{F}, \mathbb{P})\), que toma valores
-en un espacio de estados finito y discreto de regímenes operativos
-\(\mathcal{M} = \{1, 2, \dots, m\}\). Se dice que el proceso estocástico
-de régimen \(\alpha(t)\) es una cadena de Markov en tiempo continuo si
-satisface estrictamente la propiedad de pérdida de memoria de Markov
-para cualquier historia pasada filtrada \(\mathcal{F}_s\):
-\[\mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i, \mathcal{F}_s) = \mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i) \quad \text{para } t, s \ge 0.\]
+Sea \(\{\alpha(t)\}_{t \ge 0}\) un proceso estocástico definido sobre un
+espacio de probabilidad \((\Omega, \mathcal{F}, \mathbb{P})\), que toma
+valores en un espacio de estados finito y discreto
+\(\mathcal{M} = \{1, 2, \dots, m\}\). Se dice que el proceso
+\(\alpha(t)\) es una cadena de Markov a tiempo continuo si para todo
+\(s, t \ge 0\) y estados \(i, j \in \mathcal{M}\), se satisface la
+propiedad de pérdida de memoria de Markov: \[
+\mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i, \alpha(u) = \alpha_u, 0 \le u < s) = \mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i)
+\]
 
 \end{definition}
 
-La evolución probabilística temporal de los regímenes se encuentra
-gobernada por una matriz generadora (o matriz de intensidades de
-transición) \(Q = (q_{ij}) \in \mathbb{R}^{m \times m}\). Si definimos
-la probabilidad de transición condicional infinitesimal como
+Las leyes de transición y la evolución temporal de las probabilidades de
+estado de la cadena \(\{\alpha(t)\}_{t \ge 0}\) se encuentran
+completamente caracterizadas por la matriz de intensidades de transición
+\(Q = (q_{ij}) \in \mathbb{R}^{m \times m}\). Si definimos las funciones
+de probabilidad de transición condicional mediante
 \(p_{ij}(h) = \mathbb{P}(\alpha(t+h) = j \mid \alpha(t) = i)\) para un
-incremento de tiempo \(h \downarrow 0\), la dinámica local cumple:
-\[p_{ij}(h) = q_{ij}h + o(h) \quad \text{para } i \neq j.\]
+incremento temporal positivo \(h > 0\), las componentes de la matriz
+\(Q\) se determinan evaluando el límite analítico en el origen:
 
-Por el teorema de conservación total de probabilidad, la diagonal
-principal de intensidades absorbe las fugas de masa probabilística tal
-que las sumas por filas de la matriz sean idénticamente nulas:
-\[q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i, j \in \mathcal{M}} q_{ij}.\]
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Para transiciones entre estados distintos (\(i \neq j\)), la
+  componente \(q_{ij}\) representa la tasa instantánea o intensidad de
+  conmutación desde el régimen \(i\) hacia el régimen \(j\), definida
+  como:
+\end{enumerate}
 
-En nuestro análisis de la red de frío, la matriz \(Q\) encapsula las
-métricas de confiabilidad energética, modelando las conmutaciones
-macroscópicas de la dinámica del refrigerador. El análisis asintótico de
-sistemas con switching continuo está profundamente arraigado en la
-teoría moderna de fiabilidad, discutida a profundidad por
-(\citeproc{ref-asmussen2003markov}{Asmussen 2003}).
+\[
+q_{ij} = \lim_{h \to 0^+} \frac{p_{ij}(h)}{h} \ge 0
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Para los elementos que se encuentran en la diagonal principal
+  (\(i = j\)), la componente \(q_{ii}\) representa la tasa neta de
+  salida del estado \(i\), cumpliendo por conservación de la
+  probabilidad que la suma por filas de la matriz \(Q\) sea
+  idénticamente nula se tiene que:
+\end{enumerate}
+
+\[
+q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i} q_{ij}
+\]
+
+A través de esta formulación basada en límites, las probabilidades de
+transición de primer orden quedan descritas mediante las expresiones
+\(p_{ij}(h) = q_{ij}h + o(h)\) para \(i \neq j\), y
+\(p_{ii}(h) = 1 + q_{ii}h + o(h)\). Esto permite modelar las
+conmutaciones macroscópicas de la dinámica del refrigerador sin
+necesidad de introducir variables temporales discretas ni heurísticas.
+Las propiedades asintóticas y de estabilidad de estos procesos híbridos
+se encuentran en (\citeproc{ref-asmussen2003markov}{Asmussen 2003}).
+
+\chapter{HASTA AQUI}\label{hasta-aqui}
 
 \section{Teoría de Medidas Aleatorias y Saltos
 Estocásticos}\label{teoruxeda-de-medidas-aleatorias-y-saltos-estocuxe1sticos}
@@ -742,7 +770,7 @@ proceso de Poisson compuesto) en ecuaciones diferenciales requiere su
 formalización mediante teoría de la medida. Esto es estrictamente
 necesario para dotar de sentido a las integrales y poder aplicar
 teoremas avanzados de existencia, unicidad y convergencia
-(\citeproc{ref-situ2005theory}{\textbf{situ2005theory?}}).
+(\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{definition}[Medida Aleatoria de Conteo de
 Poisson]\protect\hypertarget{def-medida-conteo-poisson}{}\label{def-medida-conteo-poisson}
@@ -811,8 +839,7 @@ Con este herramental analítico fundamentado, es posible enunciar un lema
 de equivalencia funcional que resulta ser la ``piedra angular'' para
 validar la inclusión de Procesos de Poisson Compuestos dentro del marco
 del análisis estocástico general con medidas de salto, como el
-desarrollado por R. Situ
-(\citeproc{ref-situ2005theory}{\textbf{situ2005theory?}}).
+desarrollado por R. Situ (\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{lemma}[Lema de Equivalencia del Proceso de Poisson
 Compuesto]\protect\hypertarget{lem-equivalencia-saltos}{}\label{lem-equivalencia-saltos}
@@ -952,12 +979,11 @@ estocástica de salto satisface la siguiente identidad fundamental:
 \end{theorem}
 
 Este resultado riguroso, documentado extensamente en la teoría de Situ
-(\citeproc{ref-situ2005theory}{\textbf{situ2005theory?}}), confirma que
-la variabilidad estocástica del ruido de saltos se comporta
-asintóticamente como una integral determinista sobre el compensador de
-Lévy \(\nu(dz)dt\), habilitando el uso del cálculo de variaciones y
-cotas integrales para el análisis de estabilidad del modelo de
-refrigeración.
+(\citeproc{ref-situ2005theory}{Situ 2005}), confirma que la variabilidad
+estocástica del ruido de saltos se comporta asintóticamente como una
+integral determinista sobre el compensador de Lévy \(\nu(dz)dt\),
+habilitando el uso del cálculo de variaciones y cotas integrales para el
+análisis de estabilidad del modelo de refrigeración.
 
 \section{Ecuaciones Diferenciales Estocásticas
 Continuas}\label{ecuaciones-diferenciales-estocuxe1sticas-continuas}
@@ -1214,7 +1240,7 @@ siguientes dos condiciones para constantes \(K, L > 0\):
 Entonces, para cualquier condición inicial \(\mathcal{F}_0\)-medible tal
 que \(\mathbb{E}[\vert{}X(0)\vert{}^2] < \infty\), la EDE admite una
 solución fuerte global y única, con trayectorias càdlàg casi seguramente
-(\citeproc{ref-situ2005theory}{\textbf{situ2005theory?}}).
+(\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \end{theorem}
 
@@ -1932,77 +1958,6 @@ de trayectorias erráticas.
 
 \chapter{Fundamentos Teóricos
 Epidemiológicos}\label{fundamentos-teuxf3ricos-epidemioluxf3gicos}
-
-\subsection{Cadenas de Markov a Tiempo
-Continuo}\label{cadenas-de-markov-a-tiempo-continuo-1}
-
-Los fallos prolongados en el suministro eléctrico de la red pública
-alteran estructuralmente la dinámica del sistema. Para modelar estas
-transiciones entre estados macroscópicos del entorno, introducimos una
-cadena de Markov en tiempo continuo.
-
-\begin{definition}[Cadena de Markov a Tiempo
-Continuo]\protect\hypertarget{def-cadena-markov}{}\label{def-cadena-markov}
-
-Sea \(\{\alpha(t)\}_{t \ge 0}\) un proceso estocástico que toma valores
-en un espacio de estados finito y discreto
-\(\mathcal{M} = \{1, 2, \dots, m\}\). Se dice que \(\alpha(t)\) es una
-cadena de Markov en tiempo continuo si para todo \(s, t \ge 0\) y
-estados \(i, j \in \mathcal{M}\), cumple la propiedad de Markov:
-
-\[
-\mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i, \alpha(u) = \alpha_u, 0 \le u < s) = \mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i)
-\]
-
-\end{definition}
-
-Las leyes de transición y la evolución temporal de las probabilidades de
-estado de la cadena \(\{\alpha(t)\}_{t \ge 0}\) se encuentran
-completamente caracterizadas por la matriz de intensidades de transición
-\(Q = (q_{ij}) \in \mathbb{R}^{m \times m}\). Si definimos las funciones
-de probabilidad de transición condicional mediante
-\(p_{ij}(h) = \mathbb{P}(\alpha(t+h) = j \mid \alpha(t) = i)\) para un
-incremento temporal positivo \(h > 0\), las componentes de la matriz
-\(Q\) se determinan evaluando el límite analítico en el origen:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Para transiciones entre estados distintos (\(i \neq j\)), la
-  componente \(q_{ij}\) representa la tasa instantánea o intensidad de
-  conmutación desde el régimen \(i\) hacia el régimen \(j\), definida
-  como:
-\end{enumerate}
-
-\[
-q_{ij} = \lim_{h \to 0^+} \frac{p_{ij}(h)}{h} \ge 0
-\]
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  Para los elementos situados sobre la diagonal principal (\(i = j\)),
-  la componente \(q_{ii}\) representa la tasa neta de salida del estado
-  \(i\), cumpliendo por conservación de la probabilidad que la suma por
-  filas de la matriz \(Q\) sea idénticamente nula:
-\end{enumerate}
-
-\[
-q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i} q_{ij}
-\]
-
-A través de esta formulación basada en límites, las probabilidades de
-transición de primer orden quedan descritas mediante las expresiones
-\(p_{ij}(h) = q_{ij}h + o(h)\) para \(i \neq j\), y
-\(p_{ii}(h) = 1 + q_{ii}h + o(h)\). Esto permite modelar las
-conmutaciones macroscópicas de la dinámica del refrigerador sin
-necesidad de introducir variables temporales discretas ni heurísticas.
-Los lectores interesados en profundizar en las propiedades asintóticas y
-de estabilidad de estos procesos híbridos pueden remitirse al texto
-especializado de (\citeproc{ref-asmussen2003markov}{Asmussen 2003}).
 
 \section{Ecuaciones Diferenciales Estocásticas y la Integral de
 Itô}\label{ecuaciones-diferenciales-estocuxe1sticas-y-la-integral-de-ituxf4}
@@ -5966,6 +5921,11 @@ Sinko, Patrick J. 2011. \emph{Martin's Physical Pharmacy and
 Pharmaceutical Sciences: Physical Chemical and Biopharmaceutical
 Principles in the Pharmaceutical Sciences}. 6th ed. Baltimore, MD:
 Lippincott Williams \& Wilkins.
+
+\bibitem[\citeproctext]{ref-situ2005theory}
+Situ, Rong. 2005. \emph{Theory of Stochastic Differential Equations with
+Jumps and Applications: Mathematical and Analytical Techniques with
+Applications to Engineering}. New York, NY: Springer.
 
 \bibitem[\citeproctext]{ref-vollmer2009newton}
 Vollmer, Michael. 2009. {«Newton's law of cooling revisited»}.

@@ -139,25 +139,35 @@ $$J(t) = \sum_{i=1}^{N(t)} \gamma_i$$
 
 ![Trayectorias simuladas de las tres variantes del proceso de Poisson. El eje horizontal representa el avance del tiempo en un horizonte de $T = 10.0$ con incrementos discretos de $dt = 0.01$. El eje vertical contabiliza la evolución del estado. La línea azul representa un Proceso de Poisson Homogéneo con una tasa de intensidad constante $\lambda = 1.0$, caracterizado por eventos de saltos estrictamente unitarios. La línea roja representa un Proceso de Poisson No Homogéneo cuya función de intensidad está dada por $\lambda(t) = 1 + \sin\left(\frac{\pi t}{10}\right)$, es decir es dependiente del tiempo, concentrando una mayor cantidad de saltos unitarios en el periodo central temporal. Por ultimo, la línea verde representa un Proceso de Poisson Compuesto $J(t)$ construido exactamente con la misma función de intensidad y los mismos instantes de salto que el proceso no homogéneo; sin embargo, en lugar de acumular una constante unitaria por evento, la magnitud de cada salto $\gamma_i$ es extraída de una distribución Exponencial con parámetro $\beta = 1.0$ (i.e., $\gamma_i \sim \text{Exp}(1.0)$). Esta superposición evidencia cómo, a pesar de que los eventos ocurren simultáneamente, las magnitudes aleatorias provoca que el proceso compuesto crezca a un ritmo asimétrico, generando escalones de impacto severo intercalados con alteraciones menores, finalmente se ve que todas las trayectorias son càdlàg.](proceso_poisson.png){#fig-poisson width="90%" fig-align="center"}
 
-# HASTA AQUI
-
 ### Cadenas de Markov a Tiempo Continuo
 
-Los fallos prolongados en el suministro eléctrico de la red pública alteran estructuralmente el régimen de disipación de calor del sistema (compresor encendido versus apagado). Para modelar rigurosamente las transiciones estocásticas entre estos macroestados termodinámicos, introducimos una Cadena de Markov a Tiempo Continuo (CTMC).
+Los fallos prolongados en el suministro eléctrico de la red pública alteran el comportamiento de la temperatura interna del refrigerador. Para modelar estas transiciones entre estados macroscópicos del entorno, introducimos una cadena de Markov a tiempo continuo.
 
 ::: {#def-cadena-markov}
 ### Cadena de Markov a Tiempo Continuo
-Sea $\{\alpha(t)\}_{t \ge 0}$ un proceso estocástico definido en el espacio medible $(\Omega, \mathcal{F}, \mathbb{P})$, que toma valores en un espacio de estados finito y discreto de regímenes operativos $\mathcal{M} = \{1, 2, \dots, m\}$. Se dice que el proceso estocástico de régimen $\alpha(t)$ es una cadena de Markov en tiempo continuo si satisface estrictamente la propiedad de pérdida de memoria de Markov para cualquier historia pasada filtrada $\mathcal{F}_s$:
-$$\mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i, \mathcal{F}_s) = \mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i) \quad \text{para } t, s \ge 0.$$
+Sea $\{\alpha(t)\}_{t \ge 0}$ un proceso estocástico definido sobre un espacio de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$, que toma valores en un espacio de estados finito y discreto $\mathcal{M} = \{1, 2, \dots, m\}$. Se dice que el proceso $\alpha(t)$ es una cadena de Markov a tiempo continuo si para todo $s, t \ge 0$ y estados $i, j \in \mathcal{M}$, se satisface la propiedad de pérdida de memoria de Markov:
+$$
+\mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i, \alpha(u) = \alpha_u, 0 \le u < s) = \mathbb{P}(\alpha(t+s) = j \mid \alpha(s) = i)
+$$
 :::
 
-La evolución probabilística temporal de los regímenes se encuentra gobernada por una matriz generadora (o matriz de intensidades de transición) $Q = (q_{ij}) \in \mathbb{R}^{m \times m}$. Si definimos la probabilidad de transición condicional infinitesimal como $p_{ij}(h) = \mathbb{P}(\alpha(t+h) = j \mid \alpha(t) = i)$ para un incremento de tiempo $h \downarrow 0$, la dinámica local cumple:
-$$p_{ij}(h) = q_{ij}h + o(h) \quad \text{para } i \neq j.$$
+Las leyes de transición y la evolución temporal de las probabilidades de estado de la cadena $\{\alpha(t)\}_{t \ge 0}$ se encuentran completamente caracterizadas por la matriz de intensidades de transición $Q = (q_{ij}) \in \mathbb{R}^{m \times m}$. Si definimos las funciones de probabilidad de transición condicional mediante $p_{ij}(h) = \mathbb{P}(\alpha(t+h) = j \mid \alpha(t) = i)$ para un incremento temporal positivo $h > 0$, las componentes de la matriz $Q$ se determinan evaluando el límite analítico en el origen:
 
-Por el teorema de conservación total de probabilidad, la diagonal principal de intensidades absorbe las fugas de masa probabilística tal que las sumas por filas de la matriz sean idénticamente nulas:
-$$q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i, j \in \mathcal{M}} q_{ij}.$$
+1. Para transiciones entre estados distintos ($i \neq j$), la componente $q_{ij}$ representa la tasa instantánea o intensidad de conmutación desde el régimen $i$ hacia el régimen $j$, definida como:
 
-En nuestro análisis de la red de frío, la matriz $Q$ encapsula las métricas de confiabilidad energética, modelando las conmutaciones macroscópicas de la dinámica del refrigerador. El análisis asintótico de sistemas con switching continuo está profundamente arraigado en la teoría moderna de fiabilidad, discutida a profundidad por [@asmussen2003markov].
+$$
+q_{ij} = \lim_{h \to 0^+} \frac{p_{ij}(h)}{h} \ge 0
+$$
+
+2. Para los elementos que se encuentran en la diagonal principal ($i = j$), la componente $q_{ii}$ representa la tasa neta de salida del estado $i$, cumpliendo por conservación de la probabilidad que la suma por filas de la matriz $Q$ sea idénticamente nula se tiene que:
+
+$$
+q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i} q_{ij}
+$$
+
+A través de esta formulación basada en límites, las probabilidades de transición de primer orden quedan descritas mediante las expresiones $p_{ij}(h) = q_{ij}h + o(h)$ para $i \neq j$, y $p_{ii}(h) = 1 + q_{ii}h + o(h)$. Esto permite modelar las conmutaciones macroscópicas de la dinámica del refrigerador sin necesidad de introducir variables temporales discretas ni heurísticas. Las propiedades asintóticas y de estabilidad de estos procesos híbridos se encuentran en [@asmussen2003markov].
+
+# HASTA AQUI
 
 ## Teoría de Medidas Aleatorias y Saltos Estocásticos
 
