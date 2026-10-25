@@ -187,12 +187,12 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -223,7 +223,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-10-22}
+\date{2026-10-24}
 \begin{document}
 \maketitle
 
@@ -535,10 +535,10 @@ analíticas, se sugiere consultar a
 }
 
 \caption{\label{fig-wiener}Trayectoria simulada del proceso de Wiener.
-El eje horizontal representa el avance del tiempo continuo en un
-horizonte parametrizado de \(T = 1.0\) con incrementos de
-\(dt = 0.001\). El eje vertical denota la posición de las fluctuaciones
-aleatorias \(W(t)\), iniciando en el origen \(W(0) = 0\).}
+El eje horizontal representa el avance del tiempo en un horizonte
+parametrizado de \(T = 1.0\) con incrementos de \(dt = 0.001\). El eje
+vertical denota la posición de las fluctuaciones aleatorias \(W(t)\),
+iniciando en el origen \(W(0) = 0\).}
 
 \end{figure}%
 
@@ -659,22 +659,32 @@ acumula la magnitud de estos saltos en el tiempo y se define como:
 
 \centering{
 
-\includegraphics[width=0.85\linewidth,height=\textheight,keepaspectratio]{proceso_poisson.png}
+\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{proceso_poisson.png}
 
 }
 
-\caption{\label{fig-poisson}Trayectorias simuladas de dos procesos de
-Poisson. El eje horizontal representa el tiempo de observación en un
-horizonte de \(T = 10.0\) con incrementos discretos de \(dt = 0.01\). El
-eje vertical contabiliza el número acumulado de eventos discretos
-\(N(t)\), iniciando en \(N(0) = 0\). La línea continua (azul) ilustra un
-Proceso de Poisson Homogéneo con una tasa de intensidad constante
-\(\lambda = 1\). La línea punteada (roja) representa un Proceso de
-Poisson No Homogéneo con una intensidad de
-\(\lambda(t) = \frac{1}{2} + \frac{5}{2} \sin\left(\frac{\pi t}{10}\right)\),
-concentrando mayor densidad de saltos en el periodo central, capturando
-la estacionalidad laboral. Ambas gráficas exhiben la naturaleza càdlàg
-de la evolución discreta.}
+\caption{\label{fig-poisson}Trayectorias simuladas de las tres variantes
+del proceso de Poisson. El eje horizontal representa el avance del
+tiempo en un horizonte de \(T = 10.0\) con incrementos discretos de
+\(dt = 0.01\). El eje vertical contabiliza la evolución del estado. La
+línea azul representa un Proceso de Poisson Homogéneo con una tasa de
+intensidad constante \(\lambda = 1.0\), caracterizado por eventos de
+saltos estrictamente unitarios. La línea roja representa un Proceso de
+Poisson No Homogéneo cuya función de intensidad está dada por
+\(\lambda(t) = 1 + \sin\left(\frac{\pi t}{10}\right)\), es decir es
+dependiente del tiempo, concentrando una mayor cantidad de saltos
+unitarios en el periodo central temporal. Por ultimo, la línea verde
+representa un Proceso de Poisson Compuesto \(J(t)\) construido
+exactamente con la misma función de intensidad y los mismos instantes de
+salto que el proceso no homogéneo; sin embargo, en lugar de acumular una
+constante unitaria por evento, la magnitud de cada salto \(\gamma_i\) es
+extraída de una distribución Exponencial con parámetro \(\beta = 1.0\)
+(i.e., \(\gamma_i \sim \text{Exp}(1.0)\)). Esta superposición evidencia
+cómo, a pesar de que los eventos ocurren simultáneamente, las magnitudes
+aleatorias provoca que el proceso compuesto crezca a un ritmo
+asimétrico, generando escalones de impacto severo intercalados con
+alteraciones menores, finalmente se ve que todas las trayectorias son
+càdlàg.}
 
 \end{figure}%
 
@@ -1922,263 +1932,6 @@ de trayectorias erráticas.
 
 \chapter{Fundamentos Teóricos
 Epidemiológicos}\label{fundamentos-teuxf3ricos-epidemioluxf3gicos}
-
-En este capítulo se presentarán las bases conceptuales y el marco formal
-del cálculo estocástico que fundamentan el desarrollo de nuestro modelo
-matemático para la red de frío. Se definirán en primer lugar los
-procesos estocásticos elementales para, posteriormente, construir la
-ecuación diferencial estocástica (EDE) híbrida que rige el sistema.
-
-\section{Procesos Estocásticos}\label{procesos-estocuxe1sticos}
-
-El modelado térmico de un refrigerador de vacunas expuesto a
-incertidumbres continuas y perturbaciones discretas requiere
-herramientas más allá del cálculo determinista. Desde una perspectiva
-analítica, un proceso estocástico representa la generalización de una
-variable aleatoria indexada en un conjunto ordenado, parametrizando la
-evolución de un sistema bajo incertidumbre.
-
-\begin{definition}[Proceso
-Estocástico]\protect\hypertarget{def-proceso-estocastico}{}\label{def-proceso-estocastico}
-
-Sea \((\Omega, \mathcal{F}, \mathbb{P})\) un espacio de probabilidad y
-sea \(\mathcal{S} \subseteq \mathbb{R}^d\) un espacio muestral dotado de
-su respectiva \(\sigma\)-álgebra de Borel. Un proceso estocástico es una
-familia de variables aleatorias \(\{X_t\}_{t \in \mathcal{T}}\)
-parametrizadas por \(t \in \mathcal{T}\), donde
-\(\mathcal{T} \subseteq \mathbb{R}\).
-
-\end{definition}
-
-Dependiendo de como es el conjunto de índices \(\mathcal{T}\), los
-procesos estocásticos se clasifican en dos:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \textbf{Procesos estocásticos a tiempo discreto:} Si \(\mathcal{T}\)
-  es numerable, por lo general
-  \(\mathcal{T} = \mathbb{N}_0 = \{0, 1, 2, \dots\}\) o
-  \(\mathcal{T} = \mathbb{Z}\), decimos que el proceso estocástico es a
-  tiempo discreto. En este escenario, el sistema evoluciona mediante
-  transiciones discretas en pasos fijos discretizados.
-\item
-  \textbf{Procesos estocásticos a tiempo continuo:} Si \(\mathcal{T}\)
-  es un intervalo de \(\mathbb{R}\), por lo general
-  \(\mathcal{T} = [0, \infty)\) o un intervalo acotado
-  \(\mathcal{T} = [0, T]\), \(T > 0\), se dice que el proceso
-  estocástico es a tiempo continuo. Esta estructura es la adecuada para
-  modelar fenómenos físicos continuos, como la transferencia térmica.
-\end{enumerate}
-
-Para enlazar la teoría probabilística con la observación empírica de un
-fenómeno estocástico, es indispensable establecer la distinción entre el
-espacio funcional del proceso y sus realizaciones particulares.
-
-\begin{definition}[Trayectorias del Proceso
-Estocástico]\protect\hypertarget{def-trayectoria}{}\label{def-trayectoria}
-
-Si \(\{X_t\}_{t \geq 0}\) es un proceso estocástico a tiempo continuo,
-para cada \(\omega \in \Omega\) fijo y \(\mathcal{S} = \mathbb{R}\), se
-definen las trayectorias del proceso como: \[
-    \mathcal{T} = [0, \infty) \rightarrow \mathcal{S} = \mathbb{R}
-\] \[
-    t \rightarrow X_t(\omega).
-\]
-
-\end{definition}
-
-Las propiedades analíticas de un proceso estocástico, tales como la
-continuidad, la diferenciabilidad y la presencia de discontinuidades
-finitas, se definen estrictamente a partir del comportamiento de varias
-componentes, para más detalles consultar
-(\citeproc{ref-karlin1998introduction}{Karlin y Taylor 1998}). Los
-componentes aleatorios de nuestro sistema se sustentan en tres procesos
-estocásticos específicos a tiempo continuo.
-
-\subsection{Movimiento Browniano (Proceso de
-Wiener)}\label{movimiento-browniano-proceso-de-wiener-1}
-
-Para representar las fluctuaciones térmicas continuas de baja intensidad
-asociadas al ruido intrínseco del termostato y microtransferencias de
-calor se utiliza el movimiento Browniano.
-
-\begin{definition}[Proceso de
-Wiener]\protect\hypertarget{def-movimiento-browniano}{}\label{def-movimiento-browniano}
-
-Un proceso estocástico a tiempo continuo \(\{W(t)\}_{t \ge 0}\) definido
-sobre un espacio de probabilidad filtrado
-\((\Omega, \mathcal{F}, \{\mathcal{F}_t\}, \mathbb{P})\) es un
-movimiento Browniano estándar o proceso de Wiener si cumple con las
-siguientes propiedades:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \(W(0) = 0\) con probabilidad 1.
-\item
-  Posee incrementos independientes; es decir, para cualesquiera tiempos
-  \(0 \le t_1 < t_2 < \dots < t_n\), las variables aleatorias
-  \(W(t_2)-W(t_1), \dots, W(t_n)-W(t_{n-1})\) son mutuamente
-  independientes.
-\item
-  Posee incrementos estacionarios gaussianos, es decir, para todo
-  \(t > s \ge 0\), \(W(t) - W(s) \sim \mathcal{N}(0, t-s)\).
-\end{enumerate}
-
-\end{definition}
-
-El término \(dW(t) = W(t+dt) - W(t)\) representa el diferencial del
-proceso de Wiener. Este denota una perturbación gaussiana elemental en
-un intervalo infinitesimal \(dt\), caracterizada por una media
-\(\mathbb{E}[dW(t)] = 0\) y una varianza \(\mathbb{E}[(dW(t))^2] = dt\).
-Para una revisión detallada sobre las propiedades de medida y
-construcciones analíticas de este proceso, se sugiere consultar a
-(\citeproc{ref-karatzas1998brownian}{Karatzas y Shreve 1998}).
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=0.8\linewidth,height=\textheight,keepaspectratio]{proceso_wiener.png}
-
-}
-
-\caption{\label{fig-wiener}Trayectoria simulada del proceso de Wiener.
-El eje horizontal representa el avance del tiempo continuo en un
-horizonte parametrizado de \(T = 1.0\) con incrementos de
-\(dt = 0.001\). El eje vertical denota la posición de las fluctuaciones
-aleatorias \(W(t)\), iniciando en el origen \(W(0) = 0\).}
-
-\end{figure}%
-
-\subsection{Procesos de Poisson}\label{procesos-de-poisson}
-
-Las aperturas de las puertas del refrigerador por el personal médico
-constituyen eventos discretos y repentinos que alteran instantáneamente
-la temperatura interna. Este tipo de fenómenos se modela mediante un
-proceso estocástico a tiempo continuo de saltos puros.
-
-\begin{definition}[Proceso de Poisson
-Homogéneo]\protect\hypertarget{def-proceso-poisson}{}\label{def-proceso-poisson}
-
-Un proceso estocástico a tiempo continuo \(\{N(t)\}_{t \ge 0}\) que toma
-valores enteros en el espacio de estados \(\mathcal{S} = \mathbb{N}_0\)
-es un proceso de Poisson homogéneo con parámetro de intensidad constante
-\(\lambda > 0\) si satisface las siguientes condiciones:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \(N(0) = 0\) con probabilidad 1.
-\item
-  Posee incrementos independientes; es decir, para cualesquiera tiempos
-  \(0 \le t_1 < t_2 < \dots < t_n\), las variables aleatorias discretas
-  \(N(t_2)-N(t_1), \dots, N(t_n)-N(t_{n-1})\) son mutuamente
-  independientes.
-\item
-  Posee incrementos estacionarios; lo que implica que la ley de
-  probabilidad de cualquier incremento \(N(t+s) - N(s)\) depende
-  únicamente de la amplitud temporal \(t\) y resulta invariante ante
-  traslaciones sobre el origen cronológico \(s\). De forma explícita, la
-  variable aleatoria \(N(t)\) sigue una distribución de Poisson con
-  parámetro o tasa media dada por el producto \(\lambda t\), es decir:
-\end{enumerate}
-
-\[
-\mathbb{P}(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}, \quad n = 0, 1, 2, \dots
-\]
-
-\end{definition}
-
-Para formalizar analíticamente el comportamiento probabilístico de los
-saltos sin recurrir a nociones intuitivas, las probabilidades de
-transición asociadas al incremento del proceso en un intervalo acotado
-de longitud \(h > 0\) se especifican rigurosamente mediante el límite
-asintótico cuando \(h \to 0\):
-
-\[
-\mathbb{P}(N(t+h) - N(t) = 1) = \lambda h + o(h)
-\] \[
-\mathbb{P}(N(t+h) - N(t) \ge 2) = o(h)
-\]
-
-donde la notación algebraico-asintótica de Landau \(o(h)\) denota una
-función de orden superior tal que \(\lim_{h \to 0} \frac{o(h)}{h} = 0\).
-Esto garantiza formalmente que la probabilidad de ocurrencia de
-múltiples eventos simultáneos en una fracción temporal infinitesimal es
-prácticamente nula.
-
-Sin embargo, en la dinámica real de un centro de salud, la tasa de
-aperturas del refrigerador no es constante; exhibe una estacionalidad
-diaria (por ejemplo, mayor actividad en horas pico). Para capturar esta
-variabilidad, generalizamos el modelo relajando la propiedad de
-incrementos estacionarios.
-
-\begin{definition}[Proceso de Poisson No
-Homogéneo]\protect\hypertarget{def-poisson-no-homogeneo}{}\label{def-poisson-no-homogeneo}
-
-Un proceso estocástico a tiempo continuo \(\{N(t)\}_{t \ge 0}\) es un
-proceso de Poisson no homogéneo con función de intensidad
-\(\lambda(t) \ge 0\) (para \(t \ge 0\)) si satisface las siguientes
-condiciones:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \(N(0) = 0\) con probabilidad 1.
-\item
-  Posee incrementos independientes.
-\item
-  Para todo \(t \ge 0\) y \(h > 0\), la probabilidad de que ocurra
-  exactamente un evento en el intervalo \((t, t+h]\) está dada por la
-  tasa instantánea en el tiempo \(t\): \[
-  \mathbb{P}(N(t+h) - N(t) = 1) = \lambda(t) h + o(h)
-  \]
-\item
-  La probabilidad de observar dos o más eventos en dicho intervalo es de
-  orden superior a \(h\): \[
-  \mathbb{P}(N(t+h) - N(t) \ge 2) = o(h)
-  \]
-\end{enumerate}
-
-\end{definition}
-
-Una exposición rigurosa sobre los procesos de conteo, sus
-generalizaciones no homogéneas y sus aplicaciones en sistemas con
-discontinuidades puede encontrarse en
-(\citeproc{ref-ross1996stochastic}{Ross 1996}).
-
-\begin{figure}
-
-\centering{
-
-\includegraphics[width=0.85\linewidth,height=\textheight,keepaspectratio]{proceso_poisson.png}
-
-}
-
-\caption{\label{fig-poisson}Trayectorias simuladas de dos procesos de
-Poisson. El eje horizontal representa el tiempo de observación en un
-horizonte de \(T = 10.0\) con incrementos discretos de \(dt = 0.01\). El
-eje vertical contabiliza el número acumulado de eventos discretos
-\(N(t)\), iniciando en \(N(0) = 0\). La línea continua (azul) ilustra un
-Proceso de Poisson Homogéneo con una tasa de intensidad constante
-\(\lambda = 1\), evidenciando incrementos estacionarios, por otro lado
-la línea punteada (roja) representa un Proceso de Poisson No Homogéneo
-con una intensidad de
-\(\lambda(t) = \frac{1}{2} + \frac{5}{2} \sin\left(\frac{\pi t}{10}\right)\),
-es decir es dependiente del tiempo, concentrando una mayor densidad de
-saltos en el periodo central del intervalo (simulando, por ejemplo, las
-horas pico de aperturas del refrigerador durante una jornada clínica).
-Ambas gráficas exhiben la naturaleza escalonada continua por la derecha
-con límites por la izquierda, por sus siglas en francés (càdlàg), propia
-de los procesos de saltos puros.}
-
-\end{figure}%
 
 \subsection{Cadenas de Markov a Tiempo
 Continuo}\label{cadenas-de-markov-a-tiempo-continuo-1}
