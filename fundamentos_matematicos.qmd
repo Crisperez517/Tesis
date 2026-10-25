@@ -171,7 +171,7 @@ A través de esta formulación basada en límites, las probabilidades de transic
 
 Para darle significado analítico a las ecuaciones diferenciales perturbadas por ruido continuo, es necesario ver la integración respecto al movimiento Browniano. En el cálculo determinista clásico, una integral de la forma $\displaystyle \int_0^T X(t) dg(t)$ puede definirse trayectoria por trayectoria en el sentido de Riemann-Stieltjes o Lebesgue-Stieltjes siempre que la función integradora $g(t)$ sea diferenciable o, al menos, posea variación finita (acotada) en el intervalo $[0, T]$. 
 
-Sin embargo, como se estableció previamente, las trayectorias del proceso de Wiener $\{W(t)\}_{t \ge 0}$ no son diferenciables en ningún punto y poseen **variación total infinita (no acotada)** sobre cualquier intervalo temporal finito con probabilidad 1; esto es, para una partición $0 = t_0 < t_1 < \dots < t_n = T$, se cumple que:
+Sin embargo, como se estableció previamente, las trayectorias del proceso de Wiener $\{W(t)\}_{t \ge 0}$ no son diferenciables en ningún punto y poseen **variación total infinita (no acotada)** sobre cualquier intervalo temporal finito con probabilidad 1; esto es, para una partición $0 = t_0 < t_1 < \dots < t_n = T,$ se cumple que:
 $$
 \lim_{n \to \infty} \sum_{i=0}^{n-1} \vert W(t_{i+1}) - W(t_i) \vert = \infty \quad \text{casi seguramente.}
 $$

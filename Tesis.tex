@@ -188,9 +188,9 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
@@ -775,7 +775,7 @@ Sin embargo, como se estableció previamente, las trayectorias del
 proceso de Wiener \(\{W(t)\}_{t \ge 0}\) no son diferenciables en ningún
 punto y poseen \textbf{variación total infinita (no acotada)} sobre
 cualquier intervalo temporal finito con probabilidad 1; esto es, para
-una partición \(0 = t_0 < t_1 < \dots < t_n = T\), se cumple que: \[
+una partición \(0 = t_0 < t_1 < \dots < t_n = T,\) se cumple que: \[
 \lim_{n \to \infty} \sum_{i=0}^{n-1} \vert W(t_{i+1}) - W(t_i) \vert = \infty \quad \text{casi seguramente.}
 \] Esta propiedad impide definir la integral \(\int_0^T X(t) dW(t)\)
 trayectoria por trayectoria para cada \(\omega \in \Omega\). No
