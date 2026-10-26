@@ -189,10 +189,10 @@
 \usepackage{amsthm}
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -1200,127 +1200,183 @@ aplicar los teoremas de existencia y unicidad de R. Situ
 \section{Ecuaciones Diferenciales Estocásticas
 Continuas}\label{ecuaciones-diferenciales-estocuxe1sticas-continuas}
 
-Con el andamiaje de integración establecido, es posible formular
-ecuaciones que combinan una tendencia física determinista con
-perturbaciones aleatorias.
+Una vez definida la integral de Itô, es posible formular ecuaciones que
+combinan una dinámica determinista con perturbaciones aleatorias
+continuas.
 
 \begin{definition}[Ecuación Diferencial Estocástica
 Clásica]\protect\hypertarget{def-ede-general}{}\label{def-ede-general}
 
-Una ecuación diferencial estocástica continua para un proceso
-\(\{X(t)\}_{t \ge 0}\) es una relación simbólica expresada en su forma
-diferencial mediante:
+Una ecuación diferencial estocástica (EDE) continua para un proceso
+\(\{X(t)\}_{t \ge 0}\) es una relación expresada en su forma diferencial
+mediante:
 
-\begin{equation}\phantomsection\label{eq-ede-general-diff}{ dX(t) = b(t, X(t)) dt + \sigma(t, X(t)) dW(t) }\end{equation}
+\begin{equation}\phantomsection\label{eq-ede-general-diff}{
+dX(t) = b(t, X(t)) dt + \sigma(t, X(t)) dW(t)
+}\end{equation}
 
-donde el término \(b(t, X(t))\) denota el coeficiente de deriva
-(tendencia determinista) y \(\sigma(t, X(t))\) representa el coeficiente
-de difusión (volatilidad).
+donde \(b(t, X(t))\) denota el coeficiente de deriva y
+\(\sigma(t, X(t))\) representa el coeficiente de difusión.
 
 \end{definition}
 
-El término \(dX(t)\) en la Ecuación~\ref{eq-ede-general-diff} no debe
-interpretarse como una derivada ordinaria, sino como una representación
-abreviada de su ecuación integral equivalente, la cual otorga el
-verdadero sentido matemático a la igualdad:
+Dado que el movimiento Browniano no es diferenciable, el término
+\(dX(t)\) en la Ecuación~\ref{eq-ede-general-diff} no representa una
+derivada ordinaria, sino una notación abreviada de su ecuación integral
+equivalente:
 
-\begin{equation}\phantomsection\label{eq-ede-general-int}{ X(t) = X(0) + \int_0^t b(s, X(s)) ds + \int_0^t \sigma(s, X(s)) dW(s) \quad \text{casi seguramente.} }\end{equation}
+\begin{equation}\phantomsection\label{eq-ede-general-int}{
+X(t) = X(0) + \int_0^t b(s, X(s)) ds + \int_0^t \sigma(s, X(s)) dW(s) \quad \text{casi seguramente.}
+}\end{equation}
 
-Para garantizar que el modelo matemático no resulte en comportamientos
-explosivos ni ambiguos (múltiples trayectorias cruzadas), se exige el
-cumplimiento de restricciones geométricas sobre los coeficientes.
+En la Ecuación~\ref{eq-ede-general-int}, la primera integral es una
+integral ordinaria respecto al tiempo que captura la tendencia
+determinista del sistema, mientras que la segunda es una integral
+estocástica de Itô que modela la acumulación del ruido continuo. Para
+una revisión detallada del cálculo estocástico elemental, se sugiere
+consultar a (\citeproc{ref-karatzas1998brownian}{Karatzas y Shreve
+1998}).
 
-\begin{theorem}[Teorema Clásico de Existencia y Unicidad de
-Itô]\protect\hypertarget{thm-existencia-unicidad}{}\label{thm-existencia-unicidad}
+Para asegurar que una EDE posea una solución única y bien definida en
+todo su dominio temporal, los coeficientes de deriva y difusión deben
+satisfacer las restricciones del siguiente teorema.
+
+\begin{theorem}[Teorema Clásico de Existencia y
+Unicidad]\protect\hypertarget{thm-existencia-unicidad}{}\label{thm-existencia-unicidad}
 
 Sea la EDE definida en la Ecuación~\ref{eq-ede-general-diff} con una
 condición inicial \(X(0) = x_0\), medible respecto a \(\mathcal{F}_0\) e
-independiente del proceso de Wiener, con
-\(\mathbb{E}[\vert{}x_0\vert{}^2] < \infty\). Supóngase que para todo
-\(t \in [0, T]\) y estados \(x, y \in \mathbb{R}\), los coeficientes
-satisfacen las siguientes dos restricciones para constantes positivas
-\(K, L > 0\):
+independiente del proceso de Wiener \(\{W(t)\}_{t \ge 0}\), tal que
+\(\mathbb{E}[\vert x_0 \vert^2] < \infty\). Supóngase que para todo
+\(t \in [0, T]\) y cualesquiera estados \(x, y \in \mathbb{R}\), los
+coeficientes satisfacen las siguientes dos condiciones para constantes
+positivas \(L, K > 0\):
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Condición de Lipschitz Global:} Las funciones no cambian tan
-  bruscamente como para permitir bifurcaciones en el espacio de fase:
-  \[ \vert{}b(t, x) - b(t, y)\vert{}^2 + \vert{}\sigma(t, x) - \sigma(t, y)\vert{}^2 \le L \vert{}x - y\vert{}^2 \]
+  \textbf{Condición de Lipschitz Global:} \[
+  \vert b(t, x) - b(t, y) \vert^2 + \vert \sigma(t, x) - \sigma(t, y) \vert^2 \le L \vert x - y \vert^2
+  \]
 \item
-  \textbf{Condición de Crecimiento Lineal:} El sistema no diverge a
-  infinito en tiempo finito:
-  \[ \vert{}b(t, x)\vert{}^2 + \vert{}\sigma(t, x)\vert{}^2 \le K (1 + \vert{}x\vert{}^2) \]
+  \textbf{Condición de Crecimiento Lineal:} \[
+  \vert b(t, x) \vert^2 + \vert \sigma(t, x) \vert^2 \le K (1 + \vert x \vert^2)
+  \]
 \end{enumerate}
 
-Bajo el cumplimiento de ambas condiciones, la ecuación tiene una
-solución fuerte global única \(\{X(t)\}_{t \in [0, T]}\), adaptada a la
-filtración \(\mathcal{F}_t\), con trayectorias continuas con
-probabilidad 1 (\citeproc{ref-karatzas1998brownian}{Karatzas y Shreve
-1998}).
+Bajo el cumplimiento de ambas condiciones, existe una única solución
+fuerte \(\{X(t)\}_{t \in [0, T]}\) adaptada a la filtración
+\(\{\mathcal{F}_t\}_{t \ge 0}\), con trayectorias continuas con
+probabilidad 1 y tal que
+\(\mathbb{E}\left[\sup_{0 \le t \le T} \vert X(t) \vert^2\right] < \infty\).
+Una demostración detallada de este teorema, basada en el método de
+iteraciones sucesivas de Picard, se encuentra en
+(\citeproc{ref-arnold1974stochastic}{Arnold 1974}).
 
 \end{theorem}
 
-Para transformar analíticamente las soluciones o funciones dependientes
-de una EDE continua, el cálculo tradicional se sustituye por la regla de
-la cadena estocástica.
+En este resultado, la condición de Lipschitz garantiza que dos
+trayectorias con la misma condición inicial sean indistinguibles
+(unicidad fuerte), mientras que la condición de crecimiento lineal acota
+la tasa de cambio de los coeficientes para evitar que la solución
+diverja a infinito en un tiempo finito (existencia global).
+
+Para evaluar funciones diferenciables que dependen de la solución de una
+EDE continua, la regla de la cadena del cálculo ordinario se sustituye
+por el Lema de Itô.
 
 \begin{theorem}[Lema de Itô para Difusiones
 Continuas]\protect\hypertarget{thm-ito-clasico}{}\label{thm-ito-clasico}
 
-Sea un proceso estocástico \(\{X(t)\}_{t \ge 0}\) que satisface la
+Sea \(\{X(t)\}_{t \ge 0}\) un proceso estocástico que satisface la
 Ecuación~\ref{eq-ede-general-diff}, y sea \(V(t, x)\) una función
-escalar continuamente diferenciable en su componente temporal \(t\)
-(\(\mathcal{C}^1\)) y dos veces continuamente diferenciable en su
-componente espacial \(x\) (\(\mathcal{C}^2\)). El diferencial
-estocástico de la función compuesta viene dado por:
+escalar continuamente diferenciable respecto a \(t\) (\(\mathcal{C}^1\))
+y dos veces continuamente diferenciable respecto a \(x\)
+(\(\mathcal{C}^2\)). El diferencial estocástico de la función compuesta
+\(V(t, X(t))\) está dado por:
 
-\[ dV(t, X(t)) = \left[ \frac{\partial V}{\partial t} + b(t, X(t))\frac{\partial V}{\partial x} + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 V}{\partial x^2} \right] dt + \sigma(t, X(t))\frac{\partial V}{\partial x} dW(t) \]
+\[
+dV(t, X(t)) = \left[ \frac{\partial V}{\partial t} + b(t, X(t))\frac{\partial V}{\partial x} + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 V}{\partial x^2} \right] dt + \sigma(t, X(t))\frac{\partial V}{\partial x} dW(t)
+\]
 
 \end{theorem}
 
-El término de segundo orden respecto a la derivada espacial es el núcleo
-de la corrección de Itô. Surge del hecho topológico de que la variación
-cuadrática del movimiento Browniano sobre un intervalo infinitesimal
-obedece la regla \((dW(t))^2 \to dt\) en un sentido probabilístico en
-\(L^2\).
+A diferencia del cálculo clásico, aparece el término adicional de
+segundo orden
+\(\frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 V}{\partial x^2} dt\).
+Este término proviene de que la variación cuadrática del movimiento
+Browniano no es nula, por lo que en una expansión de Taylor los
+incrementos cuadráticos aportan una contribución de primer orden
+temporal, cumpliendo formalmente la regla operacional
+\((dW(t))^2 = dt\).
 
 \subsection{El Proceso de Ornstein-Uhlenbeck
 Clásico}\label{el-proceso-de-ornstein-uhlenbeck-cluxe1sico}
 
-Como paso previo al desarrollo de nuestro modelo termodinámico final, es
-indispensable introducir un tipo particular de EDE que modela la inercia
-física y la atracción hacia un estado de equilibrio en un sistema
-cerrado.
+Como paso previo al desarrollo del modelo termodinámico híbrido, se
+introduce una EDE lineal que modela sistemas físicos con disipación y
+retorno hacia un estado de equilibrio: el proceso de Ornstein-Uhlenbeck.
 
 \begin{definition}[Proceso de
 Ornstein-Uhlenbeck]\protect\hypertarget{def-ou-clasico}{}\label{def-ou-clasico}
 
 Un proceso estocástico \(\{X(t)\}_{t \ge 0}\) es un proceso de
-Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial
-estocástica lineal homogénea:
+Ornstein-Uhlenbeck si satisface la ecuación diferencial estocástica
+lineal:
 
-\begin{equation}\phantomsection\label{eq-ou-clasica}{ dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t) }\end{equation}
+\begin{equation}\phantomsection\label{eq-ou-clasica}{
+dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t), \quad X(0) = x_0,
+}\end{equation}
 
-donde \(\kappa > 0\) representa la velocidad o tasa de reversión a la
-media, \(\theta \in \mathbb{R}\) denota el nivel asintótico de
-equilibrio a largo plazo y \(\sigma > 0\) es la magnitud del ruido
-térmico intrínseco.
+donde \(\kappa > 0\) representa la tasa de reversión a la media,
+\(\theta \in \mathbb{R}\) denota el nivel de equilibrio a largo plazo y
+\(\sigma > 0\) es el coeficiente de difusión constante.
 
 \end{definition}
 
 La característica principal de la Ecuación~\ref{eq-ou-clasica} radica en
 su deriva lineal \(b(x) = \kappa(\theta - x)\). Cuando el estado del
-proceso supera el valor de equilibrio (\(X(t) > \theta\)), el término de
-deriva se vuelve estrictamente negativo, forzando a la trayectoria a
-descender; inversamente, si el proceso se encuentra por debajo del nivel
-de consigna (\(X(t) < \theta\)), la deriva se vuelve positiva,
-propulsando un crecimiento correctivo. Esta propiedad topológica de
-atracción (convergencia estocástica a la media) convierte a este proceso
-en la base fenomenológica ideal para simular la oscilación térmica de
-refrigeradores de vacunas regidos por la ley empírica de enfriamiento de
-Newton.
+proceso supera el valor de equilibrio (\(X(t) > \theta\)), la deriva es
+negativa y dirige la trayectoria hacia abajo; inversamente, si el
+proceso se encuentra por debajo del nivel de referencia
+(\(X(t) < \theta\)), la deriva es positiva e impulsa un crecimiento
+hacia \(\theta\). Esta propiedad de reversión a la media convierte a
+este proceso en el modelo base para describir la evolución térmica de
+sistemas regidos por la ley de enfriamiento de Newton.
+
+Aplicando el Lema de Itô (\texttt{@thm-ito-clasico}) a la función
+auxiliar \(V(t, x) = x e^{\kappa t}\), se obtiene que
+\(d(X(t)e^{\kappa t}) = \kappa \theta e^{\kappa t} dt + \sigma e^{\kappa t} dW(t)\).
+Integrando en el intervalo \([0, t]\) y despejando \(X(t)\), se obtiene
+la solución analítica explícita del proceso:
+
+\begin{equation}\phantomsection\label{eq-ou-solucion}{
+X(t) = \theta + (x_0 - \theta)e^{-\kappa t} + \sigma \int_0^t e^{-\kappa(t-s)} dW(s).
+}\end{equation}
+
+Dado que el integrando \(e^{-\kappa(t-s)}\) es una función determinista,
+la integral de Itô en la Ecuación~\ref{eq-ou-solucion} es una variable
+aleatoria gaussiana centrada. Asumiendo una condición inicial
+determinista \(x_0\), la función de valor esperado y la varianza del
+proceso (calculada mediante la Isometría de Itô,
+\texttt{@thm-isometria-ito}) están dadas por:
+
+\[
+\mathbb{E}[X(t)] = \theta + (x_0 - \theta)e^{-\kappa t}, \qquad \text{Var}(X(t)) = \sigma^2 \int_0^t e^{-2\kappa(t-s)} ds = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right).
+\]
+
+Por consiguiente, para todo instante \(t > 0\), la variable de estado
+sigue una distribución normal exacta:
+
+\[
+X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right) \right),
+\]
+
+la cual converge cuando \(t \to \infty\) a una distribución estacionaria
+gaussiana \(\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)\)
+independiente del estado inicial \(x_0\)
+(\citeproc{ref-karlin1998introduction}{Karlin y Taylor 1998}).
 
 \section{Herramientas Analíticas
 Auxiliares}\label{herramientas-analuxedticas-auxiliares}
