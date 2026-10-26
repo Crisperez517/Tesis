@@ -223,7 +223,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-10-25}
+\date{2026-10-26}
 \begin{document}
 \maketitle
 
@@ -1195,8 +1195,8 @@ originalmente mediante incrementos del proceso de Poisson compuesto
 aplicar los teoremas de existencia y unicidad de R. Situ
 (\citeproc{ref-situ2005theory}{Situ 2005}).
 
-\section{Ecuaciones Diferenciales
-Estocásticas}\label{ecuaciones-diferenciales-estocuxe1sticas}
+\section{Ecuaciones Diferenciales Estocásticas
+Continuas}\label{ecuaciones-diferenciales-estocuxe1sticas-continuas}
 
 Una vez definida la integral de Itô, es posible formular ecuaciones que
 combinan una dinámica determinista con perturbaciones aleatorias
@@ -1365,7 +1365,7 @@ Teorema~\ref{thm-isometria-ito}) están dadas por:
 \]
 
 Por consiguiente, para todo instante \(t > 0\), la variable aleatoria
-\(X(t)\) sigue una distribución normal exacta:
+\(X(t)\) sigue una distribución normal:
 
 \[
 X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right) \right),
@@ -1376,318 +1376,615 @@ gaussiana \(\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)\)
 independientemente del estado inicial \(x_0\)
 (\citeproc{ref-karlin1998introduction}{Karlin y Taylor 1998}).
 
-\chapter{HASTA AQUI}\label{hasta-aqui}
+\chapter{DE AQUI}\label{de-aqui}
 
-\section{Herramientas Analíticas
-Auxiliares}\label{herramientas-analuxedticas-auxiliares}
+\section{Ecuaciones Diferenciales Estocásticas con
+Saltos}\label{ecuaciones-diferenciales-estocuxe1sticas-con-saltos}
 
-Antes de formalizar la teoría de los sistemas estocásticos híbridos y
-proceder con la verificación teórica y el desarrollo de nuestro modelo,
-es necesario enunciar dos resultados clásicos del análisis matemático.
-Estas herramientas proporcionan el soporte lógico para acotar el
-crecimiento de las trayectorias estocásticas y para demostrar la
-unicidad de las soluciones.
+Los modelos de difusión continua basados únicamente en el movimiento
+Browniano resultan insuficientes cuando el sistema físico experimenta
+perturbaciones discretas e instantáneas. Al incorporar la medida
+aleatoria de Poisson compensada \(\tilde{N}(dt, dz)\) dentro de la
+dinámica diferencial, se obtiene una ecuación diferencial estocástica
+con saltos (\citeproc{ref-situ2005theory}{Situ 2005}).
 
-\begin{lemma}[Desigualdad de Potencias (Cauchy-Schwarz
-elemental)]\protect\hypertarget{lem-desigualdad-algebraica}{}\label{lem-desigualdad-algebraica}
+\begin{definition}[Ecuación Diferencial Estocástica con Saltos de
+Poisson]\protect\hypertarget{def-ede-saltos}{}\label{def-ede-saltos}
 
-Para cualesquiera números reales \(a, b \in \mathbb{R}\) y para
-cualquier entero \(p \ge 1\), la convexidad de la función
-\(x \mapsto \vert{}x\vert{}^p\) implica la siguiente cota superior
-geométrica:
-\[\vert{}a \pm b\vert{}^p \le 2^{p-1} (\vert{}a\vert{}^p + \vert{}b\vert{}^p)\]
-En el contexto del análisis en \(L^2\) (donde \(p=2\)), esta desigualdad
-se reduce a la forma fundamental que utilizaremos para acotar la
-combinación de operadores de deriva y varianza estocástica:
-\[\vert{}a \pm b\vert{}^2 \le 2\vert{}a\vert{}^2 + 2\vert{}b\vert{}^2\]
+Sea \((\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})\)
+un espacio de probabilidad filtrado. Sean \(W(t)\) un movimiento
+Browniano estándar y \(\tilde{N}(dt, dz) = N(dt, dz) - \nu_t(dz)dt\) una
+medida aleatoria de Poisson compensada sobre
+\([0, \infty) \times \mathcal{Z}\), ambos adaptados a
+\(\{\mathcal{F}_t\}_{t \ge 0}\) y mutuamente independientes. Una
+ecuación diferencial estocástica con saltos en el intervalo \([t_0, T]\)
+(con \(0 \le t_0 < T < \infty\)) es una relación simbólica de la forma:
 
-\end{lemma}
+\begin{equation}\phantomsection\label{eq-ede-saltos-diff}{
+dX(t) = b(t, X(t^-)) dt + \sigma(t, X(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(t, X(t^-), z) \tilde{N}(dt, dz), \quad X(t_0) = x_0,
+}\end{equation}
 
-\begin{lemma}[Desigualdad Integral de
-Grönwall]\protect\hypertarget{lem-gronwall}{}\label{lem-gronwall}
+donde \(b: [t_0, T] \times \mathbb{R} \to \mathbb{R}\) es el coeficiente
+de deriva compensada,
+\(\sigma: [t_0, T] \times \mathbb{R} \to \mathbb{R}\) es el coeficiente
+de difusión continua y
+\(\gamma: [t_0, T] \times \mathbb{R} \times \mathcal{Z} \to \mathbb{R}\)
+cuantifica la amplitud de los saltos.
 
-Sea \(T > 0\) y sean \(u(t)\) y \(v(t)\) funciones reales, continuas y
-no negativas definidas en el intervalo \([0, T]\). Si existe una
-constante \(C \ge 0\) tal que para todo \(t \in [0, T]\) se cumple la
-desigualdad integral implícita: \[u(t) \le C + \int_0^t v(s) u(s) ds\]
-Entonces, la función \(u(t)\) está estrictamente acotada por la función
-exponencial de la integral de \(v(t)\):
-\[u(t) \le C \exp\left( \int_0^t v(s) ds \right)\]
+Un proceso estocástico \(\{X(t)\}_{t \in [t_0, T]}\) adaptado a
+\(\{\mathcal{F}_t\}_{t \ge 0}\) y con trayectorias càdlàg es una
+\textbf{solución fuerte} de la Ecuación~\ref{eq-ede-saltos-diff} si sus
+coeficientes evaluados a lo largo de la trayectoria son integrables casi
+seguramente y si para todo \(t \in [t_0, T]\) se satisface con
+probabilidad 1 la ecuación integral equivalente:
 
-\end{lemma}
-
-En la teoría de ecuaciones diferenciales estocásticas, el Lema de
-Grönwall se utiliza asumiendo que la función de estado \(u(t)\)
-representa la esperanza matemática de la diferencia al cuadrado entre
-dos posibles soluciones de un sistema, i.e.,
-\(u(t) = \mathbb{E}[\vert{}X_1(t) - X_2(t)\vert{}^2]\). Si mediante
-estimaciones de Itô se logra demostrar que
-\(u(t) \le 0 + \int L u(s)ds\), el lema dictamina que
-\(u(t) \le 0 \cdot e^{Lt} = 0\), probando así analíticamente la unicidad
-casi segura de la solución a lo largo del tiempo.
-
-\section{Teoría de Existencia y Unicidad para Sistemas Híbridos
-(Discontinuidades y Cambios de
-Régimen)}\label{teoruxeda-de-existencia-y-unicidad-para-sistemas-huxedbridos-discontinuidades-y-cambios-de-ruxe9gimen}
-
-Los modelos de difusión continua resultan insuficientes cuando el
-fenómeno físico exhibe transiciones estructurales de entorno (como un
-fallo eléctrico general en la red pública) y choques discretos
-instantáneos (como la apertura de la puerta de un refrigerador). La
-amalgama de estos comportamientos da lugar a un sistema híbrido
-impulsado por medidas de salto espacial y conmutaciones markovianas.
-
-\begin{definition}[Ecuación Diferencial Estocástica
-Híbrida]\protect\hypertarget{def-ede-hibrida}{}\label{def-ede-hibrida}
-
-Sea \(\alpha(t)\) una cadena de Markov a tiempo continuo en un espacio
-de estados finito \(\mathcal{M}\). Una EDE híbrida con saltos es una
-ecuación gobernada por un régimen markoviano y perturbada por una medida
-de Poisson compensada \(\tilde{N}(dt, dz) = N(dt, dz) - \nu(dt, dz)\),
-cuya forma diferencial es:
-
-\[ dX(t) = b(t, X(t^-), \alpha(t^-)) dt + \sigma(t, X(t^-), \alpha(t^-)) dW(t) + \int_{\mathbb{R}} \gamma(t, X(t^-), \alpha(t^-), z) \tilde{N}(dt, dz) \]
+\begin{equation}\phantomsection\label{eq-ede-saltos-int}{
+X(t) = x_0 + \int_{t_0}^t b(s, X(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-)) dW(s) + \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X(s^-), z) \tilde{N}(ds, dz).
+}\end{equation}
 
 \end{definition}
 
-Dado que la función objetivo presenta discontinuidades puntuales y
-cambios estructurales, el teorema fundamental de Itô debe expandirse
-para incluir la interacción con las medidas de salto y la matriz
-generadora del régimen discreto.
+En la Ecuación~\ref{eq-ede-saltos-diff} y la
+Ecuación~\ref{eq-ede-saltos-int}, el integrando se evalúa en el límite
+por la izquierda \(X(t^-) = \lim_{s \uparrow t} X(s)\) para asegurar que
+sea un proceso predecible (Definición~\ref{def-proceso-predecible}) y
+que la integral respecto a la medida compensada \(\tilde{N}(dt, dz)\)
+preserve la propiedad de martingala (\citeproc{ref-situ2005theory}{Situ
+2005}). Cabe notar que en las integrales respecto a \(ds\) y \(dW(s)\)
+es indistinto escribir \(X(s)\) o \(X(s^-)\), dado que toda trayectoria
+càdlàg posee a lo sumo un número numerable de discontinuidades, el cual
+constituye un conjunto de medida de Lebesgue nula.
 
-\begin{theorem}[Fórmula de Itô Generalizada para Sistemas
-Híbridos]\protect\hypertarget{thm-lema-ito-saltos}{}\label{thm-lema-ito-saltos}
+Para ilustrar la diferencia analítica y cualitativa entre una difusión
+continua y un proceso gobernado por una EDE con saltos, en la
+Figura~\ref{fig-sde-comparacion} se contrastan dos trayectorias
+simuladas de un proceso con reversión a la media.
 
-Sea \(V(t, x, i)\) una función continuamente diferenciable en el tiempo
-\(t\) (\(\mathcal{C}^1\)) y dos veces continuamente diferenciable en el
-espacio \(x\) (\(\mathcal{C}^2\)) para cada régimen operativo
-\(i \in \mathcal{M}\). Si \(X(t)\) es un proceso que satisface la EDE
-híbrida descrita anteriormente, el diferencial estocástico de la función
-compuesta viene dado por:
+\begin{figure}
 
-\[ \begin{aligned} dV(t, X(t), \alpha(t)) = & \left[ \frac{\partial V}{\partial t} + \frac{\partial V}{\partial x}b(t, X, \alpha) + \frac{1}{2}\frac{\partial^2 V}{\partial x^2}\sigma^2(t, X, \alpha) + \sum_{j \in \mathcal{M}} q_{\alpha(t)j} V(t, X, j) \right] dt \\ & + \int_{\mathbb{R}} \left[ V(t, X(t^-) + \gamma, \alpha(t^-)) - V(t, X(t^-), \alpha(t^-)) - \frac{\partial V}{\partial x}\gamma(t, X(t^-), \alpha(t^-), z) \right] \nu(dz) dt \\ & + \frac{\partial V}{\partial x}\sigma(t, X, \alpha) dW(t) \\ & + \int_{\mathbb{R}} \left[ V(t, X(t^-) + \gamma, \alpha(t^-)) - V(t, X(t^-), \alpha(t^-)) \right] \tilde{N}(dt, dz) \end{aligned} \]
+\centering{
+
+\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{trayectorias_sde.png}
+
+}
+
+\caption{\label{fig-sde-comparacion}Trayectorias simuladas de una
+ecuación diferencial estocástica de tipo Ornstein-Uhlenbeck con y sin
+saltos en el contexto térmico de un refrigerador de vacunas. El eje
+horizontal representa el tiempo de observación en un horizonte de
+\(T = 10.0\) horas con incrementos discretos de \(dt = 0.01\). La línea
+horizontal punteada negra indica el nivel de equilibrio
+\(\theta = 4^\circ\text{C}\). La trayectoria continua (azul) muestra una
+difusión clásica perturbada únicamente por el movimiento Browniano
+\(dW(t)\), reflejando oscilaciones gaussianas de baja amplitud alrededor
+del equilibrio. Por su parte, la trayectoria discontinua (roja)
+incorpora perturbaciones discretas mediante un proceso de saltos de
+Poisson, generando incrementos instantáneos de temperatura seguidos por
+etapas de decaimiento exponencial controladas por la tasa de reversión
+\(\kappa\).}
+
+\end{figure}%
+
+Como se observa en la Figura~\ref{fig-sde-comparacion}, la presencia de
+discontinuidades puntuales modifica sustancialmente el comportamiento de
+las realizaciones del proceso. Debido a que estos saltos ocurren de
+forma instantánea (\(\Delta X(t) = X(t) - X(t^-) \neq 0\)), el Lema de
+Itô continuo (Teorema~\ref{thm-ito-clasico}) debe extenderse
+incorporando un operador de diferencias finitas que contabilice el
+cambio exacto de cualquier función diferenciable en los instantes de
+discontinuidad (\citeproc{ref-situ2005theory}{Situ 2005};
+\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}).
+
+\begin{theorem}[Fórmula de Itô para Difusiones con
+Saltos]\protect\hypertarget{thm-ito-saltos-fijo}{}\label{thm-ito-saltos-fijo}
+
+Sea \(\{X(t)\}_{t \ge t_0}\) una solución de la EDE con saltos
+(Ecuación~\ref{eq-ede-saltos-diff}) cuya medida de conteo \(N(dt, dz)\)
+posee medida de intensidad \(\nu_t(dz)dt = \lambda(t)dF(z)dt\). Sea
+\(f(t, x)\) una función real continuamente diferenciable respecto a
+\(t\) (\(\mathcal{C}^1\)) y dos veces continuamente diferenciable
+respecto a \(x\) (\(\mathcal{C}^2\)). Entonces el proceso compuesto
+\(f(t, X(t))\) satisface el diferencial estocástico:
+
+\begin{equation}\phantomsection\label{eq-ito-saltos-fijo}{
+\begin{aligned}
+df(t, X(t)) = & \left[ \frac{\partial f}{\partial t}(t, X(t)) + b(t, X(t))\frac{\partial f}{\partial x}(t, X(t)) + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2}(t, X(t)) \right] dt \\
+& + \int_{\mathcal{Z}} \left[ f(t, X(t^-) + \gamma(t, X(t^-), z)) - f(t, X(t^-)) - \gamma(t, X(t^-), z)\frac{\partial f}{\partial x}(t, X(t^-)) \right] \nu_t(dz) dt \\
+& + \sigma(t, X(t^-))\frac{\partial f}{\partial x}(t, X(t^-)) dW(t) \\
+& + \int_{\mathcal{Z}} \left[ f(t, X(t^-) + \gamma(t, X(t^-), z)) - f(t, X(t^-)) \right] \tilde{N}(dt, dz).
+\end{aligned}
+}\end{equation}
 
 \end{theorem}
 
-Esta formulación rigurosa añade al operador diferencial clásico una
-sumatoria ponderada por las intensidades de transición de la matriz
-\(Q\) de la cadena de Markov y un operador de diferencias finitas exacto
-que absorbe las discontinuidades generadas por la medida de salto
-\(\nu(dz)\).
-
-\subsection{Teoremas de Existencia y Unicidad
-Híbrida}\label{teoremas-de-existencia-y-unicidad-huxedbrida}
-
-Para garantizar que un sistema estocástico híbrido posea viabilidad
-analítica, la existencia y unicidad de sus soluciones se construyen en
-dos fases teóricas: primero garantizando el comportamiento frente a los
-saltos de Poisson, y luego concatenando la solución a través de los
-tiempos de conmutación del régimen de la cadena de Markov.
+Las condiciones suficientes para garantizar que la
+Ecuación~\ref{eq-ede-saltos-diff} posea una solución fuerte única y
+acotada en media cuadrática fueron establecidas por R. Situ mediante el
+método de contracción en espacios de Banach y estimaciones a priori
+(\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{theorem}[Teorema de Existencia y Unicidad con Saltos de Poisson
-(Teorema 117 de R.
+(Teorema 117 y Lema 114 de
 Situ)]\protect\hypertarget{thm-situ-existencia}{}\label{thm-situ-existencia}
 
-Para un régimen estático \(\alpha(t) = i\), sea la ecuación diferencial
-estocástica
-\(dX(t) = b(t, X(t^-))dt + \sigma(t, X(t^-))dW(t) + \int_{\mathbb{R}} \gamma(t, X(t^-), z) \tilde{N}(dt, dz)\).
-Supóngase que los coeficientes satisfacen de manera estricta las
-siguientes dos condiciones para constantes \(K, L > 0\):
+Consideremos la ecuación diferencial estocástica con saltos
+(Ecuación~\ref{eq-ede-saltos-diff}) en el intervalo \([t_0, T]\), con
+dato inicial \(X(t_0) = x_0\) medible respecto a \(\mathcal{F}_{t_0}\)
+tal que \(\mathbb{E}[\vert x_0 \vert^2] < \infty\). Supóngase que
+existen constantes positivas \(L, K > 0\) tales que para todo
+\(t \in [t_0, T]\) y cualesquiera \(x, y \in \mathbb{R}\), los
+coeficientes satisfacen:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Condición de Lipschitz Global:}
-  \[\vert{}b(t, x) - b(t, y)\vert{}^2 + \vert{}\sigma(t, x) - \sigma(t, y)\vert{}^2 + \int_{\mathbb{R}} \vert{}\gamma(t, x, z) - \gamma(t, y, z)\vert{}^2 \nu(dz) \le L \vert{}x - y\vert{}^2\]
+  \textbf{Condición de Lipschitz Global:} \[
+  \vert b(t, x) - b(t, y) \vert^2 + \vert \sigma(t, x) - \sigma(t, y) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(t, x, z) - \gamma(t, y, z) \vert^2 \nu_t(dz) \le L \vert x - y \vert^2.
+  \]
 \item
-  \textbf{Condición de Crecimiento Lineal:}
-  \[\vert{}b(t, x)\vert{}^2 + \vert{}\sigma(t, x)\vert{}^2 + \int_{\mathbb{R}} \vert{}\gamma(t, x, z)\vert{}^2 \nu(dz) \le K (1 + \vert{}x\vert{}^2)\]
+  \textbf{Condición de Crecimiento Lineal:} \[
+  \vert b(t, x) \vert^2 + \vert \sigma(t, x) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(t, x, z) \vert^2 \nu_t(dz) \le K (1 + \vert x \vert^2).
+  \]
 \end{enumerate}
 
-Entonces, para cualquier condición inicial \(\mathcal{F}_0\)-medible tal
-que \(\mathbb{E}[\vert{}X(0)\vert{}^2] < \infty\), la EDE admite una
-solución fuerte global y única, con trayectorias càdlàg casi seguramente
+Entonces existe una única solución fuerte \(\{X(t)\}_{t \in [t_0, T]}\)
+adaptada a \(\{\mathcal{F}_t\}_{t \ge 0}\) con trayectorias càdlàg casi
+seguramente. Además, la solución satisface la cota de segundo momento:
+\[
+\mathbb{E}\left[ \sup_{t_0 \le t \le T} \vert X(t) \vert^2 \right] \le C \left( 1 + \mathbb{E}[\vert x_0 \vert^2] \right) < \infty,
+\] donde \(C > 0\) es una constante que depende únicamente de \(K\) y de
+la longitud del intervalo \((T - t_0)\)
 (\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \end{theorem}
 
-Una vez garantizada la solución bajo un régimen constante mediante la
-métrica de R. Situ, la validación global del sistema híbrido se obtiene
-mediante una demostración constructiva basada en la técnica de empalme
-topológico en los tiempos de parada estocásticos de la cadena de Markov.
-Demostraremos formalmente este resultado fundamental que asocia la
-teoría de difusiones con la teoría de switching de Mao y Yuan, y Yin y
-Zhu (\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}).
+Una propiedad fundamental derivada de la estructura de martingala y de
+la propiedad de Markov fuerte tanto del movimiento Browniano como de las
+medidas aleatorias de Poisson (Teoremas 100 y 101 en
+(\citeproc{ref-situ2005theory}{Situ 2005}); Observación 3.10 en
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006})) establece que en el
+Teorema~\ref{thm-situ-existencia} los extremos temporales \(t_0\) y
+\(T\) pueden sustituirse por tiempos de paro acotados \(\tau_a\) y
+\(\tau_b\) tales que \(0 \le \tau_a \le \tau_b \le T\) casi seguramente,
+siempre que la condición inicial \(X(\tau_a)\) sea
+\(\mathcal{F}_{\tau_a}\)-medible. Esta propiedad permitirá resolver
+ecuaciones con cambios de régimen tramo a tramo sobre intervalos
+estocásticos.
 
-\begin{theorem}[Teorema de Existencia y Unicidad para la EDE con Régimen
-de
-Markov]\protect\hypertarget{thm-mao-switching}{}\label{thm-mao-switching}
+\section{Herramientas Analíticas y Estocásticas
+Auxiliares}\label{herramientas-analuxedticas-y-estocuxe1sticas-auxiliares}
 
-Sea \(\alpha(t)\) una cadena de Markov en tiempo continuo con espacio de
-estados finito \(\mathcal{M} = \{1, 2, \dots, m\}\) y matriz generadora
-acotada \(Q = (q_{ij})\), cuyas tasas de transición son finitas.
-Consideremos la ecuación diferencial estocástica híbrida:
-\[ \begin{aligned} dX(t) ={}& b_{\alpha(t^-)}(t, X(t^-)) dt \\ &+ \sigma_{\alpha(t^-)}(t, X(t^-)) dW(t) \\ &+ \int_{\mathbb{R}} \gamma_{\alpha(t^-)}(t, X(t^-), z) \tilde{N}(dt, dz), \end{aligned} \]
-con condición inicial \(X(0) = X_0\), donde \(X_0\) es
-\(\mathcal{F}_0\)-medible y \(\mathbb{E}[|X_0|^2] < \infty\).
+Para demostrar formalmente la existencia, unicidad y acotamiento en
+segundo momento de las ecuaciones diferenciales estocásticas híbridas,
+así como para verificar analíticamente los coeficientes de nuestro
+modelo termodinámico, requerimos tres desigualdades clásicas del
+análisis matemático y estocástico (\citeproc{ref-mao2006stochastic}{Mao
+y Yuan 2006}; \citeproc{ref-situ2005theory}{Situ 2005}).
 
-Supongamos que se cumplen las siguientes hipótesis:
+\begin{lemma}[Desigualdad Elemental de Sumas
+Finitas]\protect\hypertarget{lem-desigualdad-algebraica}{}\label{lem-desigualdad-algebraica}
+
+Para cualquier entero \(k \ge 1\), cualesquiera números reales
+\(a_1, a_2, \dots, a_k \in \mathbb{R}\) y todo exponente \(p \ge 1\),
+una aplicación directa de la desigualdad discreta de Hölder y la
+convexidad de la función \(x \mapsto \vert x \vert^p\) implica la cota:
+\[
+\left\vert \sum_{i=1}^k a_i \right\vert^p \le k^{p-1} \sum_{i=1}^k \vert a_i \vert^p.
+\] En particular, para el análisis en media cuadrática (\(p = 2\)),
+utilizaremos esta desigualdad para \(k = 2\) y \(k = 4\): \[
+\vert a \pm b \vert^2 \le 2\vert a \vert^2 + 2\vert b \vert^2, \qquad \vert a + b + c + d \vert^2 \le 4\left( \vert a \vert^2 + \vert b \vert^2 + \vert c \vert^2 + \vert d \vert^2 \right).
+\]
+
+\end{lemma}
+
+Al acotar el supremo temporal de una solución estocástica, no es posible
+intercambiar directamente el operador de valor esperado con el supremo
+dentro de las integrales de martingala. Para controlar dichos términos
+mediante sus momentos en el tiempo final e invocar posteriormente las
+isometrías de Itô, se emplea la desigualdad maximal de Doob
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-situ2005theory}{Situ 2005}).
+
+\begin{theorem}[Desigualdad Maximal de Martingalas de
+Doob]\protect\hypertarget{thm-desigualdad-doob}{}\label{thm-desigualdad-doob}
+
+Sea \(\{M(t)\}_{t \ge 0}\) una martingala real con trayectorias càdlàg
+respecto a la filtración \(\{\mathcal{F}_t\}_{t \ge 0}\), y sea
+\([a, b] \subset [0, \infty)\) un intervalo cerrado y acotado. Si
+\(p > 1\) y \(\mathbb{E}[\vert M(b) \vert^p] < \infty\), entonces se
+cumple que: \[
+\mathbb{E}\left[ \sup_{a \le t \le b} \vert M(t) \vert^p \right] \le \left( \frac{p}{p - 1} \right)^p \mathbb{E}\left[ \vert M(b) \vert^p \right].
+\] En particular, para martingalas de cuadrado integrable (\(p = 2\)),
+la constante óptima es \(\left(\frac{2}{2-1}\right)^2 = 4\), por lo que
+para toda función integrable \(g \in \mathcal{L}^2([a, b]; \mathbb{R})\)
+e integrando predecible \(H\), combinando esta desigualdad con las
+isometrías de Itô (Teorema~\ref{thm-isometria-ito} y
+Teorema~\ref{thm-isometria-saltos}), se obtienen las cotas: \[
+\mathbb{E}\left[ \sup_{a \le t \le b} \left\vert \int_a^t g(s) dW(s) \right\vert^2 \right] \le 4 \mathbb{E}\left[ \int_a^b \vert g(s) \vert^2 ds \right],
+\] \[
+\mathbb{E}\left[ \sup_{a \le t \le b} \left\vert \int_a^t \int_{\mathcal{Z}} H(s, z) \tilde{N}(ds, dz) \right\vert^2 \right] \le 4 \mathbb{E}\left[ \int_a^b \int_{\mathcal{Z}} \vert H(s, z) \vert^2 \nu_s(dz) ds \right].
+\]
+
+\end{theorem}
+
+Finalmente, para despejar la función de estado esperada cuando esta
+aparece en ambos lados de una desigualdad integral, se recurre al Lema
+de Grönwall (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}).
+
+\begin{lemma}[Desigualdad Integral de
+Grönwall]\protect\hypertarget{lem-gronwall}{}\label{lem-gronwall}
+
+Sea \(T > t_0 \ge 0\) y sea \(u: [t_0, T] \to [0, \infty)\) una función
+medible de Borel, acotada y no negativa, y sea
+\(v: [t_0, T] \to [0, \infty)\) una función integrable no negativa. Si
+existe una constante \(C \ge 0\) tal que para todo \(t \in [t_0, T]\) se
+satisface la desigualdad integral: \[
+u(t) \le C + \int_{t_0}^t v(s) u(s) ds,
+\] entonces, para todo \(t \in [t_0, T]\), la función \(u(t)\) cumple la
+cota exponencial: \[
+u(t) \le C \exp\left( \int_{t_0}^t v(s) ds \right).
+\]
+
+\end{lemma}
+
+\section{Sistemas Estocásticos Híbridos: Discontinuidades y Conmutación
+Markoviana}\label{sistemas-estocuxe1sticos-huxedbridos-discontinuidades-y-conmutaciuxf3n-markoviana}
+
+Cuando los parámetros estructurales de un sistema físico cambian
+abruptamente debido a transiciones en el entorno (como cortes y
+restablecimientos en el suministro eléctrico) y simultáneamente el
+estado continuo sufre perturbaciones impulsivas (como aperturas de
+puerta), la dinámica conjunta se describe mediante una ecuación
+diferencial estocástica híbrida con conmutación markoviana y saltos
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}).
+
+Para formalizar el análisis sobre subintervalos cuyos extremos son
+tiempos de paro aleatorios \(\tau\) y \(\rho\) tales que
+\(0 \le \tau(\omega) \le \rho(\omega)\) para todo \(\omega \in \Omega\),
+adoptamos la notación estándar de \textbf{intervalos estocásticos} de
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}): \[
+[[\tau, \rho]] = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t \le \rho(\omega)\}, \qquad [[\tau, \rho[[ = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t < \rho(\omega)\}.
+\] Asimismo, denotamos por \(\mathcal{M}^2([[\tau, \rho]]; \mathbb{R})\)
+al espacio de los procesos estocásticos real-valuados \(\{X(t)\}\)
+adaptados a \(\{\mathcal{F}_t\}_{t \ge 0}\) y definidos en
+\([[\tau, \rho]]\) tales que
+\(\mathbb{E}\left[\int_\tau^\rho \vert X(t) \vert^2 dt\right] < \infty\),
+y por \(L^2_{\mathcal{F}_\tau}(\Omega; \mathbb{R})\) a la familia de
+variables aleatorias \(\xi\) que son \(\mathcal{F}_\tau\)-medibles y
+satisfacen \(\mathbb{E}[\vert \xi \vert^2] < \infty\)
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}).
+
+\begin{definition}[Ecuación Diferencial Estocástica Híbrida con
+Saltos]\protect\hypertarget{def-ede-hibrida}{}\label{def-ede-hibrida}
+
+Sea \(\{\alpha(t)\}_{t \ge 0}\) una cadena de Markov a tiempo continuo
+con trayectorias continuas por la derecha, adaptada a
+\(\{\mathcal{F}_t\}_{t \ge 0}\), que toma valores en un espacio de
+estados finito \(\mathcal{M} = \{1, 2, \dots, m\}\) con matriz
+generadora \(Q = (q_{ij})_{m \times m}\). Sean \(W(t)\) un movimiento
+Browniano estándar y \(\tilde{N}(dt, dz) = N(dt, dz) - \nu_t(dz)dt\) una
+medida aleatoria de Poisson compensada sobre
+\([0, \infty) \times \mathcal{Z}\). Una \textbf{ecuación diferencial
+estocástica híbrida con saltos} en el intervalo \([t_0, T]\) se expresa
+en forma diferencial como:
+
+\begin{equation}\phantomsection\label{eq-ede-hibrida-diff}{
+dX(t) = b(t, X(t^-), \alpha(t^-)) dt + \sigma(t, X(t^-), \alpha(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(t, X(t^-), \alpha(t^-), z) \tilde{N}(dt, dz),
+}\end{equation}
+
+con datos iniciales
+\(X(t_0) = x_0 \in L^2_{\mathcal{F}_{t_0}}(\Omega; \mathbb{R})\) y
+\(\alpha(t_0) = \alpha_0\), donde \(\alpha_0\) es una variable aleatoria
+\(\mathcal{F}_{t_0}\)-medible con valores en \(\mathcal{M}\), y las
+funciones de coeficientes están definidas por
+\(b: [t_0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}\),
+\(\sigma: [t_0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}\)
+y
+\(\gamma: [t_0, T] \times \mathbb{R} \times \mathcal{M} \times \mathcal{Z} \to \mathbb{R}\).
+
+Un proceso estocástico \(\{X(t)\}_{t \in [t_0, T]}\) se denomina una
+\textbf{solución fuerte} de la Ecuación~\ref{eq-ede-hibrida-diff} en
+\([t_0, T]\) si cumple las siguientes propiedades
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-situ2005theory}{Situ 2005}):
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Para cada régimen \(i \in \mathcal{M}\), los coeficientes
-  \(b_i, \sigma_i, \gamma_i\) satisfacen las condiciones de Lipschitz
-  global y de crecimiento lineal del Teorema de Existencia y Unicidad
-  con Saltos de Poisson (Teorema de Situ).
+  \(\{X(t)\}_{t \in [t_0, T]}\) es adaptado a
+  \(\{\mathcal{F}_t\}_{t \ge 0}\) y posee trayectorias càdlàg casi
+  seguramente.
 \item
-  Los procesos \(W(t)\), \(N(dt, dz)\) y \(\alpha(t)\) son mutuamente
-  independientes, y la medida compensadora de \(N\) está dada por
-  \(\nu_t(dz)dt = \lambda(t)F(dz)dt\), donde la intensidad
-  \(\lambda(t)\) es una función localmente integrable.
+  Los coeficientes evaluados cumplen
+  \(\{b(t, X(t^-), \alpha(t^-))\} \in \mathcal{L}^1([t_0, T]; \mathbb{R})\),
+  \(\{\sigma(t, X(t^-), \alpha(t^-))\} \in \mathcal{L}^2([t_0, T]; \mathbb{R})\)
+  y
+  \(\int_{t_0}^T \int_{\mathcal{Z}} \vert \gamma(t, X(t^-), \alpha(t^-), z) \vert^2 \nu_t(dz) dt < \infty\)
+  casi seguramente.
 \item
-  La cadena de Markov no presenta explosión, es decir, tiene un número
-  finito de cambios de régimen casi seguramente en cualquier intervalo
-  temporal acotado.
+  Para todo \(t \in [t_0, T]\), se satisface con probabilidad 1 la
+  ecuación integral:
 \end{enumerate}
 
-Entonces, para todo horizonte finito \(H < \infty\), la ecuación híbrida
-admite una única solución fuerte con trayectorias càdlàg en el intervalo
-\([0, H]\), casi seguramente. Además, bajo las condiciones de
-crecimiento lineal uniformes en los regímenes, la solución satisface la
-condición de integrabilidad del supremo:
-\[ \mathbb{E}\left[ \sup_{0 \le t \le H} |X(t)|^2 \right] < \infty. \]
+\begin{equation}\phantomsection\label{eq-ede-hibrida-int}{
+X(t) = x_0 + \int_{t_0}^t b(s, X(s^-), \alpha(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-), \alpha(s^-)) dW(s) + \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X(s^-), \alpha(s^-), z) \tilde{N}(ds, dz).
+}\end{equation}
+
+Se dice que la solución \(\{X(t)\}_{t \in [t_0, T]}\) es \textbf{única}
+(en el sentido de unicidad trayectoria por trayectoria) si para
+cualquier otra solución \(\{\widehat{X}(t)\}_{t \in [t_0, T]}\) ambos
+procesos son indistinguibles, es decir,
+\(\mathbb{P}\{X(t) = \widehat{X}(t) \text{ para todo } t \in [t_0, T]\} = 1\).
+
+\end{definition}
+
+Para operar sobre funciones que dependen conjuntamente de la variable de
+estado continua \(X(t)\) y del estado discreto de la cadena de Markov
+\(\alpha(t)\), la Fórmula de Itô con saltos
+(Teorema~\ref{thm-ito-saltos-fijo}) se acopla con el generador
+infinitesimal de la cadena \(Q = (q_{ij})\)
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}).
+
+\begin{theorem}[Fórmula de Itô Generalizada para Sistemas Híbridos con
+Saltos]\protect\hypertarget{thm-lema-ito-saltos}{}\label{thm-lema-ito-saltos}
+
+Sea \(\{f(t, x, i)\}_{i \in \mathcal{M}}\) una familia de funciones
+reales definidas en \([t_0, T] \times \mathbb{R} \times \mathcal{M}\)
+tales que, para cada estado \(i \in \mathcal{M}\),
+\(f(\cdot, \cdot, i)\) es continuamente diferenciable respecto a \(t\)
+(\(\mathcal{C}^1\)) y dos veces continuamente diferenciable respecto a
+\(x\) (\(\mathcal{C}^2\)). Si \((X(t), \alpha(t))\) es un proceso
+conjunto gobernado por la Ecuación~\ref{eq-ede-hibrida-diff}, entonces
+el diferencial estocástico de la función evaluada
+\(f(t, X(t), \alpha(t))\) está dado por:
+
+\[
+\begin{aligned}
+df(t, X(t), \alpha(t)) = & \ \mathcal{L}f(t, X(t), \alpha(t)) dt + \sigma(t, X(t^-), \alpha(t^-))\frac{\partial f}{\partial x}(t, X(t^-), \alpha(t^-)) dW(t) \\
+& + \int_{\mathcal{Z}} \left[ f(t, X(t^-) + \gamma(t, X(t^-), \alpha(t^-), z), \alpha(t^-)) - f(t, X(t^-), \alpha(t^-)) \right] \tilde{N}(dt, dz) + dM_\alpha(t),
+\end{aligned}
+\] donde \(M_\alpha(t)\) es una martingala de salto asociada a las
+transiciones de \(\alpha(t)\) y el operador generador acoplado
+\(\mathcal{L}f: [t_0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}\)
+se define como: \[
+\begin{aligned}
+\mathcal{L}f(t, x, i) = & \ \frac{\partial f}{\partial t}(t, x, i) + b(t, x, i)\frac{\partial f}{\partial x}(t, x, i) + \frac{1}{2}\sigma^2(t, x, i)\frac{\partial^2 f}{\partial x^2}(t, x, i) + \sum_{j=1}^m q_{ij} f(t, x, j) \\
+& + \int_{\mathcal{Z}} \left[ f(t, x + \gamma(t, x, i, z), i) - f(t, x, i) - \gamma(t, x, i, z)\frac{\partial f}{\partial x}(t, x, i) \right] \nu_t(dz).
+\end{aligned}
+\]
+
+\end{theorem}
+
+\subsection{Teorema de Existencia y Unicidad para Sistemas
+Híbridos}\label{teorema-de-existencia-y-unicidad-para-sistemas-huxedbridos}
+
+A continuación enunciamos y demostramos a detalle el teorema central que
+garantiza la existencia, unicidad fuerte y acotamiento en segundo
+momento de la solución para la ecuación diferencial estocástica híbrida
+con saltos (Ecuación~\ref{eq-ede-hibrida-diff}). La estructura de la
+demostración extiende el procedimiento constructivo sobre tiempos de
+paro del Teorema 3.13 y Lema 3.1 de
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}) al caso de
+difusiones impulsadas por medidas aleatorias de Poisson compensadas
+mediante el Teorema~\ref{thm-situ-existencia}.
+
+\begin{theorem}[Teorema de Existencia y Unicidad para la EDE Híbrida con
+Saltos y Régimen de
+Markov]\protect\hypertarget{thm-mao-switching}{}\label{thm-mao-switching}
+
+Consideremos la ecuación diferencial estocástica híbrida
+(Ecuación~\ref{eq-ede-hibrida-diff}) en el intervalo \([t_0, T]\) (para
+cualquier horizonte finito \(0 \le t_0 < T < \infty\)), con condiciones
+iniciales
+\(X(t_0) = x_0 \in L^2_{\mathcal{F}_{t_0}}(\Omega; \mathbb{R})\) y
+\(\alpha(t_0) = \alpha_0\). Supóngase que el movimiento Browniano
+\(W(t)\), la medida aleatoria de Poisson \(N(dt, dz)\) (con compensador
+\(\nu_t(dz)dt = \lambda(t)dF(z)dt\), donde
+\(\int_{t_0}^T \lambda(t)dt < \infty\)) y la cadena de Markov a tiempo
+continuo \(\alpha(t)\) (con espacio de estados finito
+\(\mathcal{M} = \{1, 2, \dots, m\}\) y matriz generadora de tasas
+finitas \(Q = (q_{ij})_{m \times m}\)) son mutuamente independientes.
+
+Si existen dos constantes positivas \(L > 0\) y \(K > 0\) tales que los
+coeficientes del sistema satisfacen uniformemente las siguientes dos
+condiciones:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Condición de Lipschitz Global:} Para todo
+  \(x, y \in \mathbb{R}\), \(t \in [t_0, T]\) y cada régimen
+  \(i \in \mathcal{M}\),
+  \begin{equation}\phantomsection\label{eq-hip-lipschitz-hibrida}{
+  \vert b(t, x, i) - b(t, y, i) \vert^2 + \vert \sigma(t, x, i) - \sigma(t, y, i) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(t, x, i, z) - \gamma(t, y, i, z) \vert^2 \nu_t(dz) \le L \vert x - y \vert^2.
+  }\end{equation}
+\item
+  \textbf{Condición de Crecimiento Lineal:} Para todo
+  \((t, x, i) \in [t_0, T] \times \mathbb{R} \times \mathcal{M}\),
+  \begin{equation}\phantomsection\label{eq-hip-crecimiento-hibrida}{
+  \vert b(t, x, i) \vert^2 + \vert \sigma(t, x, i) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(t, x, i, z) \vert^2 \nu_t(dz) \le K (1 + \vert x \vert^2).
+  }\end{equation}
+\end{enumerate}
+
+Entonces existe una única solución fuerte càdlàg
+\(\{X(t)\}_{t \in [t_0, T]}\) de la Ecuación~\ref{eq-ede-hibrida-diff}
+en \([t_0, T]\) y, además, la solución satisface la cota de segundo
+momento:
+
+\begin{equation}\phantomsection\label{eq-cota-supremo-hibrida}{
+\mathbb{E}\left[ \sup_{t_0 \le t \le T} \vert X(t) \vert^2 \right] \le \left( 1 + 4\mathbb{E}[\vert x_0 \vert^2] \right) e^{4K(T - t_0)(T - t_0 + 5)} < \infty,
+}\end{equation}
+
+por lo que \(\{X(t)\}_{t \in [t_0, T]}\) pertenece al espacio
+\(\mathcal{M}^2([t_0, T]; \mathbb{R})\).
 
 \end{theorem}
 
 \textbf{Demostración:}
 
-La prueba se construye mediante un argumento de inducción estocástica,
-concatenando las soluciones locales entre los tiempos de cambio de
-régimen.
+Puesto que la cadena de Markov a tiempo continuo
+\(\{\alpha(t)\}_{t \ge t_0}\) toma valores en un espacio de estados
+finito \(\mathcal{M} = \{1, 2, \dots, m\}\) y sus tasas de transición
+satisfacen \(0 \le q_{ij} < \infty\) para todo \(i \neq j\), todos los
+estados de la cadena son estables
+(\(\vert q_{ii} \vert = \sum_{j \neq i} q_{ij} < \infty\)) y el proceso
+no presenta explosión (\citeproc{ref-mao2006stochastic}{Mao y Yuan
+2006}). En consecuencia, casi toda trayectoria muestral de
+\(\alpha(\cdot)\) es una función escalonada continua por la derecha que
+experimenta únicamente un número finito de saltos simples en el
+intervalo acotado \([t_0, T]\). Por lo tanto, definiendo recursivamente
+la sucesión de tiempos de paro \(\{\tau_k\}_{k \ge 0}\) asociada a las
+conmutaciones de régimen mediante \(\tau_0 = t_0\) y \[
+\tau_{k+1} = T \wedge \inf\{t > \tau_k : \alpha(t) \neq \alpha(\tau_k)\}, \quad k \ge 0,
+\] se cumplen las siguientes dos propiedades estructurales:
 
-\emph{Paso 1: Tiempos de cambio de régimen.} Sean \(\tau_0 = 0\) y
-definamos recursivamente la secuencia de tiempos de parada:
-\[ \tau_{n+1} = \inf\{t > \tau_n : \alpha(t) \neq \alpha(t^-)\}, \quad n \ge 0, \]
-los cuales corresponden a los instantes sucesivos de cambio de régimen.
-Por la hipótesis 3 (no explosión), para cualquier horizonte temporal
-finito \(H < \infty\), el número de transiciones en dicho intervalo es
-finito casi seguramente:
-\[ N_\alpha(H) := \#\{n \ge 1 : \tau_n \le H\} < \infty \quad \text{casi seguramente.} \]
-En consecuencia, casi seguramente, el intervalo \([0, H]\) queda
-particionado en un número finito de subintervalos estocásticos
-semiabiertos en los que el régimen de la cadena permanece constante:
-\[ [\tau_0, \tau_1), [\tau_1, \tau_2), \dots, [\tau_{N_\alpha(H)}, H]. \]
-En el interior de cada uno de estos subintervalos, la dinámica de
-\(X(t)\) corresponde a una EDE con coeficientes fijos asociados a un
-único régimen.
+\begin{itemize}
+\tightlist
+\item
+  Para casi todo \(\omega \in \Omega\), existe un índice entero finito
+  \(\bar{k} = \bar{k}(\omega) < \infty\) tal que
+  \(t_0 = \tau_0 < \tau_1 < \dots < \tau_{\bar{k}} = T\) y
+  \(\tau_k = T\) para todo \(k > \bar{k}\).
+\item
+  El proceso \(\alpha(\cdot)\) permanece constante (como una variable
+  aleatoria fija) sobre cada intervalo estocástico semiabierto
+  \([[\tau_k, \tau_{k+1}[[\,\), es decir: \[
+  \alpha(t) = \alpha(\tau_k) \quad \text{para todo } \tau_k \le t < \tau_{k+1}, \ \forall k \ge 0.
+  \]
+\end{itemize}
 
-\emph{Paso 2: Existencia y unicidad en el primer intervalo.} En el
-intervalo inicial \([0, \tau_1)\), el régimen del sistema es constante e
-igual a \(\alpha(0)\). Por lo tanto, la ecuación híbrida colapsa a la
-siguiente EDE clásica con saltos:
-\[ \begin{aligned} dX(t) ={}& b_{\alpha(0)}(t, X(t^-)) dt \\ &+ \sigma_{\alpha(0)}(t, X(t^-)) dW(t) \\ &+ \int_{\mathbb{R}} \gamma_{\alpha(0)}(t, X(t^-), z) \tilde{N}(dt, dz). \end{aligned} \]
-Por la hipótesis 1, los coeficientes correspondientes al régimen
-\(\alpha(0)\) satisfacen estrictamente las condiciones de Lipschitz
-global y de crecimiento lineal. En consecuencia, el Teorema de
-Existencia y Unicidad con Saltos de Poisson (Teorema de Situ) garantiza
-la existencia y unicidad de una solución fuerte para esta ecuación en el
-intervalo dado.
+Consideremos en primer lugar la Ecuación~\ref{eq-ede-hibrida-diff}
+restringida al primer intervalo estocástico
+\(t \in [[\tau_0, \tau_1]]\). Dado que para
+\(t \in [[\tau_0, \tau_1[[\,\) se tiene
+\(\alpha(t^-) = \alpha(t_0) = \alpha_0\), y que el conjunto puntual
+\(\{t = \tau_1\}\) tiene medida de Lebesgue nula y probabilidad nula de
+coincidir simultáneamente con un salto de la medida independiente
+\(N(dt, dz)\), la ecuación híbrida en \(t \in [[\tau_0, \tau_1]]\) se
+reduce a la ecuación diferencial estocástica con régimen fijo:
+\begin{equation}\phantomsection\label{eq-tramo-cero}{
+dX(t) = b(t, X(t^-), \alpha_0) dt + \sigma(t, X(t^-), \alpha_0) dW(t) + \int_{\mathcal{Z}} \gamma(t, X(t^-), \alpha_0, z) \tilde{N}(dt, dz),
+}\end{equation} con datos iniciales \(x_0\) y \(\alpha_0\) en
+\(t = \tau_0\). En virtud de las condiciones
+(Ecuación~\ref{eq-hip-lipschitz-hibrida}) y
+(Ecuación~\ref{eq-hip-crecimiento-hibrida}), los coeficientes de la
+Ecuación~\ref{eq-tramo-cero} satisfacen las hipótesis del
+Teorema~\ref{thm-situ-existencia}. Aplicando dicho teorema junto con la
+propiedad de localización en tiempos de paro, se concluye que la
+Ecuación~\ref{eq-tramo-cero} admite una única solución fuerte càdlàg
+\(\{X^{(0)}(t)\}\) en \([[\tau_0, \tau_1]]\), la cual pertenece al
+espacio \(\mathcal{M}^2([[\tau_0, \tau_1]]; \mathbb{R})\). En
+particular, el estado alcanzado en el primer tiempo de paro verifica
+\(X(\tau_1) := X^{(0)}(\tau_1) \in L^2_{\mathcal{F}_{\tau_1}}(\Omega; \mathbb{R})\).
 
-Construimos la solución hasta el primer tiempo de cambio estocástico y
-definimos su valor en ese instante crítico mediante el límite por la
-izquierda: \[ X(\tau_1) = X(\tau_1^-). \] Esta igualdad matemática
-expresa que el cambio de régimen en sí mismo no induce un salto
-instantáneo en la variable de estado. Las discontinuidades de \(X(t)\)
-provienen exclusivamente de las perturbaciones integradas respecto a la
-medida aleatoria de Poisson \(\tilde{N}(dt, dz)\).
+Consideremos ahora la Ecuación~\ref{eq-ede-hibrida-diff} sobre el
+segundo intervalo estocástico \(t \in [[\tau_1, \tau_2]]\). En este
+subintervalo el régimen permanece fijo en \(\alpha(\tau_1)\), por lo que
+la ecuación adopta la forma:
+\begin{equation}\phantomsection\label{eq-tramo-uno}{
+dX(t) = b(t, X(t^-), \alpha(\tau_1)) dt + \sigma(t, X(t^-), \alpha(\tau_1)) dW(t) + \int_{\mathcal{Z}} \gamma(t, X(t^-), \alpha(\tau_1), z) \tilde{N}(dt, dz),
+}\end{equation} con datos iniciales
+\(X(\tau_1) \in L^2_{\mathcal{F}_{\tau_1}}(\Omega; \mathbb{R})\) y
+\(\alpha(\tau_1)\) en el tiempo de paro \(t = \tau_1\). Por la
+independencia mutua de \(W\), \(N\) y \(\alpha\), y por la propiedad de
+Markov fuerte del movimiento Browniano y de la medida aleatoria de
+Poisson respecto a tiempos de paro, los incrementos de los procesos
+conductores posteriores a \(\tau_1\) son independientes de
+\(\mathcal{F}_{\tau_1}\). Nuevamente, por el
+Teorema~\ref{thm-situ-existencia}, la Ecuación~\ref{eq-tramo-uno} posee
+una única solución fuerte càdlàg \(\{X^{(1)}(t)\}\) que pertenece a
+\(\mathcal{M}^2([[\tau_1, \tau_2]]; \mathbb{R})\) y satisface
+\(X(\tau_2) := X^{(1)}(\tau_2) \in L^2_{\mathcal{F}_{\tau_2}}(\Omega; \mathbb{R})\).
 
-\emph{Paso 3: Continuación después de un cambio de régimen.} Supongamos,
-como hipótesis de inducción, que la solución ha sido construida de forma
-única y fuerte hasta el tiempo de parada \(\tau_n\), y que el estado
-\(X(\tau_n)\) está bien definido y es \(\mathcal{F}_{\tau_n}\)-medible.
-En el subsecuente intervalo \([\tau_n, \tau_{n+1})\), el régimen del
-sistema permanece constante e igual a \(\alpha(\tau_n)\).
+Repitiendo este procedimiento por inducción sobre cada subintervalo
+\([[\tau_k, \tau_{k+1}]]\) con datos iniciales
+\(X(\tau_k) \in L^2_{\mathcal{F}_{\tau_k}}(\Omega; \mathbb{R})\) y
+\(\alpha(\tau_k)\), se obtiene una única solución fuerte local
+\(\{X^{(k)}(t)\} \in \mathcal{M}^2([[\tau_k, \tau_{k+1}]]; \mathbb{R})\)
+para cada \(k \ge 0\). Dado que las soluciones consecutivas coinciden en
+los tiempos de empalme (\(X^{(k)}(\tau_k) = X^{(k-1)}(\tau_k)\)) y que
+para casi todo \(\omega \in \Omega\) existe un número finito
+\(\bar{k}(\omega)\) de saltos de régimen hasta alcanzar \(T\)
+(\(\tau_{\bar{k}} = T\)), el proceso global definido en \([t_0, T]\)
+mediante \[
+X(t) = X^{(0)}(t)\mathbf{1}_{[[\tau_0, \tau_1[[}(t) + \sum_{k=1}^{\bar{k}-1} X^{(k)}(t)\mathbf{1}_{[[\tau_k, \tau_{k+1}[[}(t) + X^{(\bar{k}-1)}(T)\mathbf{1}_{\{T\}}(t)
+\] posee trayectorias càdlàg, es \(\mathcal{F}_t\)-adaptado y satisface
+la ecuación integral (Ecuación~\ref{eq-ede-hibrida-int}) en todo
+\([t_0, T]\) con probabilidad 1. Asimismo, si
+\(\{\widehat{X}(t)\}_{t \in [t_0, T]}\) es otra solución con los mismos
+datos iniciales, por la unicidad del Teorema~\ref{thm-situ-existencia}
+en \([[\tau_0, \tau_1]]\) se cumple que
+\(\mathbb{P}\{X(t) = \widehat{X}(t) \text{ para todo } t \in [[\tau_0, \tau_1]]\} = 1\);
+en particular, \(X(\tau_1) = \widehat{X}(\tau_1)\) casi seguramente, lo
+cual implica por inducción sobre los \(\bar{k}(\omega)\) subintervalos
+que
+\(\mathbb{P}\{X(t) = \widehat{X}(t) \text{ para todo } t \in [t_0, T]\} = 1\),
+demostrando la existencia y unicidad de la solución en \([t_0, T]\).
 
-La condición inicial para la evolución en este nuevo intervalo es
-precisamente \(X(\tau_n)\). Gracias a la hipótesis 2 (independencia de
-los procesos conductores \(W\), \(N\) y \(\alpha\)) y a la propiedad de
-los incrementos independientes posteriores a un tiempo de parada para el
-movimiento Browniano y los procesos de Poisson, la ecuación en este
-intervalo adopta nuevamente la forma de una EDE con régimen fijo,
-condicionada a la información en \(\tau_n\).
+Resta demostrar que la solución única \(X(t)\) satisface la estimación
+de segundo momento (Ecuación~\ref{eq-cota-supremo-hibrida}). Para todo
+entero \(n \ge 1\), definamos el tiempo de paro de truncamiento: \[
+\sigma_n = T \wedge \inf\{t \in [t_0, T] : \vert X(t) \vert \ge n\}.
+\] Claramente, \(\sigma_n\) es no decreciente y \(\sigma_n \uparrow T\)
+casi seguramente cuando \(n \to \infty\). Definiendo el proceso detenido
+\(X_n(t) = X(t \wedge \sigma_n)\) para \(t \in [t_0, T]\), por las
+propiedades de las integrales estocásticas en tiempos de paro se cumple
+que: \[
+\begin{aligned}
+X_n(t) = x_0 & + \int_{t_0}^t b(s, X_n(s^-), \alpha(s^-))\mathbf{1}_{[[t_0, \sigma_n]]}(s) ds + \int_{t_0}^t \sigma(s, X_n(s^-), \alpha(s^-))\mathbf{1}_{[[t_0, \sigma_n]]}(s) dW(s) \\
+& + \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X_n(s^-), \alpha(s^-), z)\mathbf{1}_{[[t_0, \sigma_n]]}(s) \tilde{N}(ds, dz).
+\end{aligned}
+\] Aplicando la desigualdad elemental
+(Lema~\ref{lem-desigualdad-algebraica}) para \(k = 4\) y \(p = 2\),
+junto con la desigualdad de Cauchy-Schwarz a la integral respecto al
+tiempo
+\(\left\vert \int_{t_0}^t g(s) ds \right\vert^2 \le (t - t_0)\int_{t_0}^t \vert g(s) \vert^2 ds\),
+se obtiene para todo \(s \in [t_0, t]\): \[
+\begin{aligned}
+\vert X_n(s) \vert^2 \le 4\vert x_0 \vert^2 & + 4(t - t_0) \int_{t_0}^s \vert b(r, X_n(r^-), \alpha(r^-)) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) dr \\
+& + 4\left\vert \int_{t_0}^s \sigma(r, X_n(r^-), \alpha(r^-))\mathbf{1}_{[[t_0, \sigma_n]]}(r) dW(r) \right\vert^2 \\
+& + 4\left\vert \int_{t_0}^s \int_{\mathcal{Z}} \gamma(r, X_n(r^-), \alpha(r^-), z)\mathbf{1}_{[[t_0, \sigma_n]]}(r) \tilde{N}(dr, dz) \right\vert^2.
+\end{aligned}
+\] Tomando el supremo para \(s \in [t_0, t]\), aplicando el valor
+esperado en ambos miembros y utilizando la Desigualdad Maximal de Doob
+junto con las isometrías de Itô (Teorema~\ref{thm-desigualdad-doob}) en
+las dos integrales de martingala, resulta que: \[
+\begin{aligned}
+\mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] & + 4(T - t_0) \mathbb{E}\left[ \int_{t_0}^t \vert b(r, X_n(r^-), \alpha(r^-)) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) dr \right] \\
+& + 16\mathbb{E}\left[ \int_{t_0}^t \vert \sigma(r, X_n(r^-), \alpha(r^-)) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) dr \right] \\
+& + 16\mathbb{E}\left[ \int_{t_0}^t \int_{\mathcal{Z}} \vert \gamma(r, X_n(r^-), \alpha(r^-), z) \vert^2 \nu_r(dz) \mathbf{1}_{[[t_0, \sigma_n]]}(r) dr \right].
+\end{aligned}
+\] Mayorando el factor \((T - t_0)\) y los coeficientes \(16\) mediante
+el factor común \(4(T - t_0 + 5)\) (dado que
+\(4 \cdot 4 < 4(T - t_0 + 5)\)), e invocando la condición de crecimiento
+lineal uniforme (Ecuación~\ref{eq-hip-crecimiento-hibrida}), agrupamos
+las tres integrales en una sola cota: \[
+\begin{aligned}
+\mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] & \le 4\mathbb{E}[\vert x_0 \vert^2] + 4(T - t_0 + 5)\mathbb{E}\left[ \int_{t_0}^t K\left( 1 + \vert X_n(r^-) \vert^2 \right) \mathbf{1}_{[[t_0, \sigma_n]]}(r) dr \right] \\
+& \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
+\end{aligned}
+\] Sumando \(1\) en ambos lados de la desigualdad anterior, obtenemos
+para todo \(t \in [t_0, T]\): \[
+1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 1 + 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
+\] Puesto que \(\vert X_n(s) \vert \le n \vee \vert x_0 \vert\) en
+\([[t_0, \sigma_n[[\), la función
+\(u_n(t) = 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right]\)
+es acotada y medible en \([t_0, T]\). Aplicando la Desigualdad Integral
+de Grönwall (Lema~\ref{lem-gronwall}) y evaluando en \(t = T\), se
+deduce que: \[
+\mathbb{E}\left[ \sup_{t_0 \le t \le \sigma_n} \vert X(t) \vert^2 \right] \le 1 + \mathbb{E}\left[ \sup_{t_0 \le t \le T} \vert X_n(t) \vert^2 \right] \le \left( 1 + 4\mathbb{E}[\vert x_0 \vert^2] \right) e^{4K(T - t_0)(T - t_0 + 5)}.
+\] Finalmente, tomando el límite cuando \(n \to \infty\), dado que
+\(\sigma_n \uparrow T\) casi seguramente, por el Teorema de Convergencia
+Monótona se obtiene la desigualdad
+(Ecuación~\ref{eq-cota-supremo-hibrida}), lo cual implica en particular
+que \(X(\cdot) \in \mathcal{M}^2([t_0, T]; \mathbb{R})\) y concluye la
+demostración. \(\blacksquare\)
 
-Aplicando iterativamente el teorema de Situ al régimen
-\(\alpha(\tau_n)\), se obtiene una solución fuerte y única en dicho
-subintervalo. El valor del estado en el siguiente tiempo de cambio se
-define por continuidad respecto al cambio de régimen:
-\[ X(\tau_{n+1}) = X(\tau_{n+1}^-), \] salvo, por supuesto, por los
-saltos intrínsecos que provengan de la propia medida de Poisson evaluada
-en ese instante. Bajo la suposición de independencia mutua, la
-probabilidad de que un salto generado por la medida de Poisson ocurra
-simultáneamente y coincida exactamente con un tiempo de cambio de la
-cadena de Markov es de medida cero.
-
-Aplicando este argumento por inducción matemática, se construye de
-manera rigurosa una solución única en cada subintervalo de régimen
-constante.
-
-\emph{Paso 4: Concatenación topológica de las soluciones.} Dado que en
-el horizonte acotado \([0, H]\) ocurren casi seguramente un número
-finito de cambios de régimen (\(N_\alpha(H) < \infty\)), el
-procedimiento iterativo detallado anteriormente requiere un número
-estrictamente finito de aplicaciones del teorema de Situ. Las soluciones
-locales construidas en los distintos subintervalos coinciden
-analíticamente en los tiempos de empalme \(\{\tau_n\}\), puesto que el
-valor inicial de cada nuevo tramo corresponde exactamente al valor final
-límite del tramo predecesor.
-
-Por consiguiente, podemos definir una única trayectoria global \(X(t)\)
-en todo el dominio \([0, H]\) concatenando las soluciones locales de los
-distintos regímenes. Puesto que cada tramo individual habita el espacio
-de funciones càdlàg, y los empalmes en los tiempos \(\tau_n\) no
-introducen discontinuidades adicionales en la variable de estado, se
-concluye que la trayectoria global \(X(t)\) también es globalmente
-càdlàg. Esto demuestra concluyentemente la \textbf{existencia fuerte} de
-una solución en el intervalo \([0, H]\).
-
-\emph{Paso 5: Unicidad global de la solución.} Para demostrar la
-unicidad, sean \(X(t)\) y \(\widehat{X}(t)\) dos soluciones de la
-ecuación diferencial estocástica híbrida, partiendo de la misma
-condición inicial \(\mathcal{F}_0\)-medible y gobernadas por los mismos
-procesos conductores \(W(t)\), \(N(dt, dz)\) y \(\alpha(t)\).
-
-En el primer intervalo de régimen constante \([0, \tau_1)\), ambas
-soluciones satisfacen idéntica EDE y comparten la condición inicial
-\(X(0)\). Por la unicidad dictaminada por el teorema de Situ, se cumple
-que: \[ X(t) = \widehat{X}(t) \] para todo \(t \in [0, \tau_1)\), casi
-seguramente. En particular, sus valores en el primer tiempo de cambio
-estocástico coinciden: \(X(\tau_1) = \widehat{X}(\tau_1)\). Por ende, en
-el subsecuente intervalo \([\tau_1, \tau_2)\), ambas soluciones vuelven
-a satisfacer la misma EDE con idéntica condición inicial, y la unicidad
-local de Situ vuelve a implicar que coinciden en dicho intervalo.
-
-Repitiendo el argumento lógico en cada subintervalo sucesivo, y
-amparándonos en que el número de cambios en \([0, H]\) es finito casi
-seguramente, obtenemos la igualdad global de las trayectorias:
-\[ \mathbb{P}\left( X(t) = \widehat{X}(t) \text{ para todo } t \in [0, H] \right) = 1. \]
-Por consiguiente, la solución híbrida es estrictamente única.
-
-Finalmente, las condiciones de crecimiento lineal asumidas de manera
-uniforme en todos los regímenes, en conjunción con las cotas de segundo
-momento para las integrales de Itô y de salto compensado, y sumadas a la
-propiedad de no explosión de la cadena de Markov, permiten aplicar las
-estimaciones de momento (como la desigualdad de Grönwall y las
-isometrías) tramo a tramo. De ello se deduce la integrabilidad del
-supremo de la solución en cualquier horizonte de tiempo finito \(H\). De
-manera rigurosa, se satisface la cota de estabilidad del segundo
-momento:
-\[ \mathbb{E}\left[ \sup_{0 \le t \le H} |X(t)|^2 \right] < \infty. \]
-
-Con este resultado, quedan demostradas formalmente tanto la existencia
-como la unicidad fuerte de la solución híbrida. \(\blacksquare\)
+\chapter{HASTA AQUI}\label{hasta-aqui}
 
 \section{El Modelo Estocástico Termodinámico (Ornstein-Uhlenbeck
 Híbrido)}\label{el-modelo-estocuxe1stico-termodinuxe1mico-ornstein-uhlenbeck-huxedbrido}
