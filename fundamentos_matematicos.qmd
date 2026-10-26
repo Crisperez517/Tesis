@@ -370,9 +370,7 @@ $$
 
 Esta equivalencia (@lem-equivalencia-saltos) es fundamental para nuestra investigación, ya que nos permitirá reescribir la ecuación diferencial estocástica para el refrigerador de vacunas planteada originalmente mediante incrementos del proceso de Poisson compuesto $dJ(t)$ en la forma canónica de una EDE impulsada por martingalas ($\tilde{N}(dt, dz)$ y $dW(t)$), requisito indispensable para aplicar los teoremas de existencia y unicidad de R. Situ [@situ2005theory].
 
-# HASTA AQUI
-
-## Ecuaciones Diferenciales Estocásticas Continuas
+## Ecuaciones Diferenciales Estocásticas
 
 Una vez definida la integral de Itô, es posible formular ecuaciones que combinan una dinámica determinista con perturbaciones aleatorias continuas.
 
@@ -390,22 +388,22 @@ donde $b(t, X(t))$ denota el coeficiente de deriva y $\sigma(t, X(t))$ represent
 Dado que el movimiento Browniano no es diferenciable, el término $dX(t)$ en la @eq-ede-general-diff no representa una derivada ordinaria, sino una notación abreviada de su ecuación integral equivalente:
 
 $$
-X(t) = X(0) + \int_0^t b(s, X(s)) ds + \int_0^t \sigma(s, X(s)) dW(s) \quad \text{casi seguramente.}
+X(t) = X(0) + \int_0^t b(s, X(s)) ds + \int_0^t \sigma(s, X(s)) dW(s).
 $$ {#eq-ede-general-int}
 
-En la @eq-ede-general-int, la primera integral es una integral ordinaria respecto al tiempo que captura la tendencia determinista del sistema, mientras que la segunda es una integral estocástica de Itô que modela la acumulación del ruido continuo. Para una revisión detallada del cálculo estocástico elemental, se sugiere consultar a [@karatzas1998brownian].
+En la @eq-ede-general-int, la primera integral es una integral ordinaria de Riemann respecto al tiempo que captura la tendencia determinista del sistema, mientras que la segunda es una integral de Itô que modela la acumulación del ruido continuo. Para una revisión detallada del cálculo estocástico elemental, se sugiere consultar a [@karatzas1998brownian].
 
-Para asegurar que una EDE posea una solución única y bien definida en todo su dominio temporal, los coeficientes de deriva y difusión deben satisfacer las restricciones del siguiente teorema.
+Para asegurar que una EDE tenga solución y sea única y bien definida en todo su dominio temporal, los coeficientes de deriva y difusión deben satisfacer las restricciones del siguiente teorema.
 
 ::: {#thm-existencia-unicidad}
 ### Teorema Clásico de Existencia y Unicidad
-Sea la EDE definida en la @eq-ede-general-diff con una condición inicial $X(0) = x_0$, medible respecto a $\mathcal{F}_0$ e independiente del proceso de Wiener $\{W(t)\}_{t \ge 0}$, tal que $\mathbb{E}[\vert x_0 \vert^2] < \infty$. Supóngase que para todo $t \in [0, T]$ y cualesquiera estados $x, y \in \mathbb{R}$, los coeficientes satisfacen las siguientes dos condiciones para constantes positivas $L, K > 0$:
+Sea la EDE definida en la @eq-ede-general-diff con una condición inicial $X(0) = x_0$, medible respecto a $\mathcal{F}_0$ e independiente del proceso de Wiener $\{W(t)\}_{t \ge 0}$, tal que $\mathbb{E}[\vert x_0 \vert^2] < \infty$. Supóngase que para todo $t \in [0, T]$ y cualesquiera $x, y \in \mathbb{R}$, los coeficientes satisfacen las siguientes dos condiciones:
 
-1. **Condición de Lipschitz Global:**
+1. **Condición de Lipschitz Global:** Existe una constante $L > 0$ tal que:
 $$
 \vert b(t, x) - b(t, y) \vert^2 + \vert \sigma(t, x) - \sigma(t, y) \vert^2 \le L \vert x - y \vert^2
 $$
-2. **Condición de Crecimiento Lineal:**
+2. **Condición de Crecimiento Lineal:** Existe una constante $K > 0$ tal que:
 $$
 \vert b(t, x) \vert^2 + \vert \sigma(t, x) \vert^2 \le K (1 + \vert x \vert^2)
 $$
@@ -419,22 +417,22 @@ Para evaluar funciones diferenciables que dependen de la solución de una EDE co
 
 ::: {#thm-ito-clasico}
 ### Lema de Itô para Difusiones Continuas
-Sea $\{X(t)\}_{t \ge 0}$ un proceso estocástico que satisface la @eq-ede-general-diff, y sea $V(t, x)$ una función escalar continuamente diferenciable respecto a $t$ ($\mathcal{C}^1$) y dos veces continuamente diferenciable respecto a $x$ ($\mathcal{C}^2$). El diferencial estocástico de la función compuesta $V(t, X(t))$ está dado por:
+Sea $\{X(t)\}_{t \ge 0}$ un proceso estocástico que satisface la @eq-ede-general-diff, y sea $f(t, x)$ una función escalar continuamente diferenciable respecto a $t$ ($\mathcal{C}^1$) y dos veces continuamente diferenciable respecto a $x$ ($\mathcal{C}^2$). Entonces el diferencial estocástico de la función compuesta $f(t, X(t))$ está dado por:
 
 $$
-dV(t, X(t)) = \left[ \frac{\partial V}{\partial t} + b(t, X(t))\frac{\partial V}{\partial x} + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 V}{\partial x^2} \right] dt + \sigma(t, X(t))\frac{\partial V}{\partial x} dW(t)
+df(t, X(t)) = \left[ \frac{\partial f}{\partial t} + b(t, X(t))\frac{\partial f}{\partial x} + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2} \right] dt + \sigma(t, X(t))\frac{\partial f}{\partial x} dW(t)
 $$
 :::
 
-A diferencia del cálculo clásico, aparece el término adicional de segundo orden $\frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 V}{\partial x^2} dt$. Este término proviene de que la variación cuadrática del movimiento Browniano no es nula, por lo que en una expansión de Taylor los incrementos cuadráticos aportan una contribución de primer orden temporal, cumpliendo formalmente la regla operacional $(dW(t))^2 = dt$.
+A diferencia del cálculo clásico, aparece el término adicional de segundo orden $\frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2} dt$. Este término proviene de que la variación cuadrática del movimiento Browniano no es nula, por lo que en una expansión de Taylor los incrementos cuadráticos aportan una contribución de primer orden temporal, cumpliendo la regla operacional $(dW(t))^2 = dt$.
 
 ### El Proceso de Ornstein-Uhlenbeck Clásico
 
-Como paso previo al desarrollo del modelo termodinámico híbrido, se introduce una EDE lineal que modela sistemas físicos con disipación y retorno hacia un estado de equilibrio: el proceso de Ornstein-Uhlenbeck.
+Como paso previo al desarrollo del modelo termodinámico híbrido, se introduce una EDE lineal que modela sistemas físicos con retorno hacia un estado de equilibrio: el proceso de Ornstein-Uhlenbeck.
 
 ::: {#def-ou-clasico}
 ### Proceso de Ornstein-Uhlenbeck
-Un proceso estocástico $\{X(t)\}_{t \ge 0}$ es un proceso de Ornstein-Uhlenbeck si satisface la ecuación diferencial estocástica lineal:
+Un proceso estocástico $\{X(t)\}_{t \ge 0}$ es un proceso de Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial estocástica lineal:
 
 $$
 dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t), \quad X(0) = x_0,
@@ -443,27 +441,29 @@ $$ {#eq-ou-clasica}
 donde $\kappa > 0$ representa la tasa de reversión a la media, $\theta \in \mathbb{R}$ denota el nivel de equilibrio a largo plazo y $\sigma > 0$ es el coeficiente de difusión constante.
 :::
 
-La característica principal de la @eq-ou-clasica radica en su deriva lineal $b(x) = \kappa(\theta - x)$. Cuando el estado del proceso supera el valor de equilibrio ($X(t) > \theta$), la deriva es negativa y dirige la trayectoria hacia abajo; inversamente, si el proceso se encuentra por debajo del nivel de referencia ($X(t) < \theta$), la deriva es positiva e impulsa un crecimiento hacia $\theta$. Esta propiedad de reversión a la media convierte a este proceso en el modelo base para describir la evolución térmica de sistemas regidos por la ley de enfriamiento de Newton.
+La característica principal de la @eq-ou-clasica radica en su deriva lineal $b(x) = \kappa(\theta - x)$. Cuando el estado del proceso supera el valor de equilibrio ($X(t) > \theta$), la deriva es negativa y dirige la trayectoria hacia abajo; Si el proceso se encuentra por debajo del nivel de referencia ($X(t) < \theta$), la deriva es positiva e impulsa un crecimiento hacia $\theta$. Esta propiedad de reversión a la media convierte a este proceso en el modelo base para describir la evolución térmica de sistemas regidos por la ley de enfriamiento de Newton.
 
-Aplicando el Lema de Itô (`@thm-ito-clasico`) a la función auxiliar $V(t, x) = x e^{\kappa t}$, se obtiene que $d(X(t)e^{\kappa t}) = \kappa \theta e^{\kappa t} dt + \sigma e^{\kappa t} dW(t)$. Integrando en el intervalo $[0, t]$ y despejando $X(t)$, se obtiene la solución analítica explícita del proceso:
+Aplicando el Lema de Itô (@thm-ito-clasico) a la función $f(t, x) = x e^{\kappa t}$, se obtiene que $d(X(t)e^{\kappa t}) = \kappa \theta e^{\kappa t} dt + \sigma e^{\kappa t} dW(t)$. Integrando en el intervalo $[0, t]$ y despejando $X(t)$, se obtiene la solución analítica explícita del proceso:
 
 $$
 X(t) = \theta + (x_0 - \theta)e^{-\kappa t} + \sigma \int_0^t e^{-\kappa(t-s)} dW(s).
 $$ {#eq-ou-solucion}
 
-Dado que el integrando $e^{-\kappa(t-s)}$ es una función determinista, la integral de Itô en la @eq-ou-solucion es una variable aleatoria gaussiana centrada. Asumiendo una condición inicial determinista $x_0$, la función de valor esperado y la varianza del proceso (calculada mediante la Isometría de Itô, `@thm-isometria-ito`) están dadas por:
+Dado que el integrando $e^{-\kappa(t-s)}$ es una función determinista, la integral de Itô en la @eq-ou-solucion es una variable aleatoria gaussiana centrada. Asumiendo una condición inicial determinista $x_0$, el valor esperado y la varianza del proceso (calculada mediante la Isometría de Itô, @thm-isometria-ito) están dadas por:
 
 $$
 \mathbb{E}[X(t)] = \theta + (x_0 - \theta)e^{-\kappa t}, \qquad \text{Var}(X(t)) = \sigma^2 \int_0^t e^{-2\kappa(t-s)} ds = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right).
 $$
 
-Por consiguiente, para todo instante $t > 0$, la variable de estado sigue una distribución normal exacta:
+Por consiguiente, para todo instante $t > 0$, la variable aleatoria $X(t)$ sigue una distribución normal exacta:
 
 $$
 X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right) \right),
 $$
 
-la cual converge cuando $t \to \infty$ a una distribución estacionaria gaussiana $\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)$ independiente del estado inicial $x_0$ [@karlin1998introduction].
+la cual converge cuando $t \to \infty$ a una distribución estacionaria gaussiana $\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)$ independientemente del estado inicial $x_0$ [@karlin1998introduction].
+
+# HASTA AQUI
 
 ## Herramientas Analíticas Auxiliares
 
