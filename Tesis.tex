@@ -188,11 +188,11 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -767,9 +767,8 @@ perturbadas por ruido continuo, es necesario ver la integración respecto
 al movimiento Browniano. En el cálculo determinista clásico, una
 integral de la forma \(\displaystyle \int_0^T X(t) dg(t)\) puede
 definirse trayectoria por trayectoria en el sentido de Riemann-Stieltjes
-o Lebesgue-Stieltjes siempre que la función integradora \(g(t)\) sea
-diferenciable o, al menos, posea variación finita (acotada) en el
-intervalo \([0, T]\).
+o Lebesgue-Stieltjes siempre que la función integradora \(g(t)\) sea de
+variación finita (acotada) en el intervalo \([0, T]\).
 
 Sin embargo, como se estableció previamente, las trayectorias del
 proceso de Wiener \(\{W(t)\}_{t \ge 0}\) no son diferenciables en ningún
@@ -1166,12 +1165,12 @@ respecto a medidas aleatorias de salto.
 \begin{lemma}[Lema de Equivalencia del Proceso de Poisson
 Compuesto]\protect\hypertarget{lem-equivalencia-saltos}{}\label{lem-equivalencia-saltos}
 
-Sea \(J(t) = \sum_{i=1}^{N(t)} \gamma_i\) un proceso de Poisson
-compuesto donde \(\displaystyle \{N(t)\}_{t \ge 0}\) es un proceso de
-Poisson no homogéneo con función de intensidad \(\lambda(t) \ge 0\), y
-\(\{\gamma_i\}_{i \in \mathbb{N}}\) es una sucesión de variables
-aleatorias independientes e idénticamente distribuidas con función de
-distribución \(F(z)\) y media finita
+Sea \(\displaystyle J(t) = \sum_{i=1}^{N(t)} \gamma_i\) un proceso de
+Poisson compuesto donde \(\displaystyle \{N(t)\}_{t \ge 0}\) es un
+proceso de Poisson no homogéneo con función de intensidad
+\(\lambda(t) \ge 0\), y \(\{\gamma_i\}_{i \in \mathbb{N}}\) es una
+sucesión de variables aleatorias independientes e idénticamente
+distribuidas con función de distribución \(F(z)\) y media finita
 \(\mathbb{E}[\vert \gamma_i \vert] < \infty\), independientes de
 \(N(t)\). Entonces, el proceso \(J(t)\) admite la siguiente
 representación integral respecto a la medida aleatoria de conteo

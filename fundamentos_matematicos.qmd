@@ -169,7 +169,7 @@ A través de esta formulación basada en límites, las probabilidades de transic
 
 ## Teoría de Integración Estocástica de Itô
 
-Para darle significado analítico a las ecuaciones diferenciales perturbadas por ruido continuo, es necesario ver la integración respecto al movimiento Browniano. En el cálculo determinista clásico, una integral de la forma $\displaystyle \int_0^T X(t) dg(t)$ puede definirse trayectoria por trayectoria en el sentido de Riemann-Stieltjes o Lebesgue-Stieltjes siempre que la función integradora $g(t)$ sea diferenciable o, al menos, posea variación finita (acotada) en el intervalo $[0, T]$. 
+Para darle significado analítico a las ecuaciones diferenciales perturbadas por ruido continuo, es necesario ver la integración respecto al movimiento Browniano. En el cálculo determinista clásico, una integral de la forma $\displaystyle \int_0^T X(t) dg(t)$ puede definirse trayectoria por trayectoria en el sentido de Riemann-Stieltjes o Lebesgue-Stieltjes siempre que la función integradora $g(t)$ sea de variación finita (acotada) en el intervalo $[0, T]$. 
 
 Sin embargo, como se estableció previamente, las trayectorias del proceso de Wiener $\{W(t)\}_{t \ge 0}$ no son diferenciables en ningún punto y poseen **variación total infinita (no acotada)** sobre cualquier intervalo temporal finito con probabilidad 1; esto es, para una partición $0 = t_0 < t_1 < \dots < t_n = T,$ se cumple que:
 $$
@@ -358,7 +358,7 @@ Con este marco de integración establecido, podemos enunciar el lema que vincula
 
 ::: {#lem-equivalencia-saltos}
 ### Lema de Equivalencia del Proceso de Poisson Compuesto
-Sea $J(t) = \sum_{i=1}^{N(t)} \gamma_i$ un proceso de Poisson compuesto donde $\displaystyle \{N(t)\}_{t \ge 0}$ es un proceso de Poisson no homogéneo con función de intensidad $\lambda(t) \ge 0$, y $\{\gamma_i\}_{i \in \mathbb{N}}$ es una sucesión de variables aleatorias independientes e idénticamente distribuidas con función de distribución $F(z)$ y media finita $\mathbb{E}[\vert \gamma_i \vert] < \infty$, independientes de $N(t)$. Entonces, el proceso $J(t)$ admite la siguiente representación integral respecto a la medida aleatoria de conteo $N(dt, dz)$:
+Sea $\displaystyle J(t) = \sum_{i=1}^{N(t)} \gamma_i$ un proceso de Poisson compuesto donde $\displaystyle \{N(t)\}_{t \ge 0}$ es un proceso de Poisson no homogéneo con función de intensidad $\lambda(t) \ge 0$, y $\{\gamma_i\}_{i \in \mathbb{N}}$ es una sucesión de variables aleatorias independientes e idénticamente distribuidas con función de distribución $F(z)$ y media finita $\mathbb{E}[\vert \gamma_i \vert] < \infty$, independientes de $N(t)$. Entonces, el proceso $J(t)$ admite la siguiente representación integral respecto a la medida aleatoria de conteo $N(dt, dz)$:
 $$
 J(t) = \int_0^t \int_{\mathbb{R}} z N(ds, dz), \quad \text{o en forma diferencial,} \quad dJ(t) = \int_{\mathbb{R}} z N(dt, dz).
 $$
