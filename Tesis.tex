@@ -189,10 +189,10 @@
 \usepackage{amsthm}
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -1626,24 +1626,23 @@ u(t) \le C \exp\left( \int_{t_0}^t v(s) ds \right).
 
 \end{lemma}
 
-\chapter{DE AQUI}\label{de-aqui}
-
 \section{Sistemas Estocásticos Híbridos: Discontinuidades y Conmutación
 Markoviana}\label{sistemas-estocuxe1sticos-huxedbridos-discontinuidades-y-conmutaciuxf3n-markoviana}
 
 Cuando los parámetros estructurales de un sistema físico cambian
-abruptamente debido a transiciones en el entorno (como cortes y
+drásticamente debido a transiciones en el entorno (como cortes y
 restablecimientos en el suministro eléctrico) y simultáneamente el
 estado continuo sufre perturbaciones impulsivas (como aperturas de
-puerta), la dinámica conjunta se describe mediante una ecuación
+puerta), el comportamiento conjunto se describe mediante una ecuación
 diferencial estocástica híbrida con conmutación markoviana y saltos
 (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
 \citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}).
 
 Para formalizar el análisis sobre subintervalos cuyos extremos son
-tiempos de paro aleatorios \(\tau\) y \(\rho\) tales que
-\(0 \le \tau(\omega) \le \rho(\omega)\) para todo \(\omega \in \Omega\),
-adoptamos la notación estándar de \textbf{intervalos estocásticos} de
+tiempos de paro Definición~\ref{def-tiempo-parada} \(\tau\) y \(\rho\)
+tales que \(0 \le \tau(\omega) \le \rho(\omega)\) para todo
+\(\omega \in \Omega\), adoptamos la notación estándar de
+\textbf{intervalos estocásticos} de
 (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}): \[
 [[\tau, \rho]] = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t \le \rho(\omega)\}, \qquad [[\tau, \rho[[ = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t < \rho(\omega)\}.
 \] Asimismo, denotamos por \(\mathcal{M}^2([[\tau, \rho]]; \mathbb{R})\)
@@ -1653,14 +1652,15 @@ adaptados a \(\{\mathcal{F}_t\}_{t \ge 0}\) y definidos en
 \(\mathbb{E}\left[\int_\tau^\rho \vert X(t) \vert^2 dt\right] < \infty\),
 y por \(L^2_{\mathcal{F}_\tau}(\Omega; \mathbb{R})\) a la familia de
 variables aleatorias \(\xi\) que son \(\mathcal{F}_\tau\)-medibles y
-satisfacen \(\mathbb{E}[\vert \xi \vert^2] < \infty\)
+satisfacen que \(\mathbb{E}[\vert \xi \vert^2] < \infty\)
 (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}).
 
 \begin{definition}[Ecuación Diferencial Estocástica Híbrida con
 Saltos]\protect\hypertarget{def-ede-hibrida}{}\label{def-ede-hibrida}
 
 Sea \(\{\alpha(t)\}_{t \ge 0}\) una cadena de Markov a tiempo continuo
-con trayectorias continuas por la derecha, adaptada a
+Definición~\ref{def-cadena-markov} con trayectorias càdlàg
+Definición~\ref{def-adaptabilidad-cadlag}, adaptada a
 \(\{\mathcal{F}_t\}_{t \ge 0}\), que toma valores en un espacio de
 estados finito \(\mathcal{M} = \{1, 2, \dots, m\}\) con matriz
 generadora \(Q = (q_{ij})_{m \times m}\). Sean \(W(t)\) un movimiento
@@ -1668,13 +1668,13 @@ Browniano estándar y \(\tilde{N}(dt, dz) = N(dt, dz) - \nu_t(dz)dt\) una
 medida aleatoria de Poisson compensada sobre
 \([0, \infty) \times \mathcal{Z}\). Una \textbf{ecuación diferencial
 estocástica híbrida con saltos} en el intervalo \([t_0, T]\) se expresa
-en forma diferencial como:
+en su forma diferencial como:
 
 \begin{equation}\phantomsection\label{eq-ede-hibrida-diff}{
 dX(t) = b(t, X(t^-), \alpha(t^-)) dt + \sigma(t, X(t^-), \alpha(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(t, X(t^-), \alpha(t^-), z) \tilde{N}(dt, dz),
 }\end{equation}
 
-con datos iniciales
+con condiciones iniciales
 \(X(t_0) = x_0 \in L^2_{\mathcal{F}_{t_0}}(\Omega; \mathbb{R})\) y
 \(\alpha(t_0) = \alpha_0\), donde \(\alpha_0\) es una variable aleatoria
 \(\mathcal{F}_{t_0}\)-medible con valores en \(\mathcal{M}\), y las
@@ -1721,8 +1721,8 @@ procesos son indistinguibles, es decir,
 
 \end{definition}
 
-Para operar sobre funciones que dependen conjuntamente de la variable de
-estado continua \(X(t)\) y del estado discreto de la cadena de Markov
+Para operar con funciones que dependen conjuntamente de la variable de
+estado \(X(t)\) y del estado discreto de la cadena de Markov
 \(\alpha(t)\), la Fórmula de Itô con saltos
 (Teorema~\ref{thm-ito-saltos-fijo}) se acopla con el generador
 infinitesimal de la cadena \(Q = (q_{ij})\)
@@ -1738,9 +1738,9 @@ tales que, para cada estado \(i \in \mathcal{M}\),
 \(f(\cdot, \cdot, i)\) es continuamente diferenciable respecto a \(t\)
 (\(\mathcal{C}^1\)) y dos veces continuamente diferenciable respecto a
 \(x\) (\(\mathcal{C}^2\)). Si \((X(t), \alpha(t))\) es un proceso
-conjunto gobernado por la Ecuación~\ref{eq-ede-hibrida-diff}, entonces
-el diferencial estocástico de la función evaluada
-\(f(t, X(t), \alpha(t))\) está dado por:
+conjunto que satisface la Ecuación~\ref{eq-ede-hibrida-diff}, entonces
+el proceso compuesto \(f(t, X(t), \alpha(t))\) satisface la siguiente
+ecuación diferencial estocástica híbrida con saltos:
 
 \[
 \begin{aligned}
@@ -1752,12 +1752,14 @@ transiciones de \(\alpha(t)\) y el operador generador acoplado
 \(\mathcal{L}f: [t_0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}\)
 se define como: \[
 \begin{aligned}
-\mathcal{L}f(t, x, i) = & \ \frac{\partial f}{\partial t}(t, x, i) + b(t, x, i)\frac{\partial f}{\partial x}(t, x, i) + \frac{1}{2}\sigma^2(t, x, i)\frac{\partial^2 f}{\partial x^2}(t, x, i) + \sum_{j \in \mathcal{M}} q_{ij} f(t, x, j) \\
+\mathcal{L}f(t, x, i) = & \ \frac{\partial f}{\partial t}(t, x, i) + b(t, x, i)\frac{\partial f}{\partial x}(t, x, i) + \frac{1}{2}\sigma^2(t, x, i)\frac{\partial^2 f}{\partial x^2}(t, x, i) + \sum_{j = 1}^m q_{ij} f(t, x, j) \\
 & + \int_{\mathcal{Z}} \left[ f(t, x + \gamma(t, x, i, z), i) - f(t, x, i) - \gamma(t, x, i, z)\frac{\partial f}{\partial x}(t, x, i) \right] \nu_t(dz).
 \end{aligned}
 \]
 
 \end{theorem}
+
+\chapter{DE AQUI}\label{de-aqui}
 
 \subsection{Teorema de Existencia y Unicidad para Sistemas
 Híbridos}\label{teorema-de-existencia-y-unicidad-para-sistemas-huxedbridos}
