@@ -417,10 +417,10 @@ Para evaluar funciones diferenciables que dependen de la solución de una EDE co
 
 ::: {#thm-ito-clasico}
 ### Lema de Itô para Difusiones Continuas
-Sea $\{X(t)\}_{t \ge 0}$ un proceso estocástico que satisface la @eq-ede-general-diff, y sea $f(t, x)$ una función escalar continuamente diferenciable respecto a $t$ ($\mathcal{C}^1$) y dos veces continuamente diferenciable respecto a $x$ ($\mathcal{C}^2$). Entonces el diferencial estocástico de la función compuesta $f(t, X(t))$ está dado por:
+Sea $\{X(t)\}_{t \ge 0}$ un proceso estocástico que satisface la @eq-ede-general-diff, y sea $f(t, x)$ una función escalar continuamente diferenciable respecto a $t$ ($\mathcal{C}^1$) y dos veces continuamente diferenciable respecto a $x$ ($\mathcal{C}^2$). Entonces el proceso compuesto $f(t, X(t))$ satisface la siguiente ecuación diferencial estocástica:
 
 $$
-df(t, X(t)) = \left[ \frac{\partial f}{\partial t} + b(t, X(t))\frac{\partial f}{\partial x} + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2} \right] dt + \sigma(t, X(t))\frac{\partial f}{\partial x} dW(t)
+df(t, X(t)) = \left[ \frac{\partial f}{\partial t} (t, X(t)) + b(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2} (t, X(t)) \right] dt + \sigma(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) dW(t)
 $$
 :::
 
@@ -449,29 +449,27 @@ $$
 X(t) = \theta + (x_0 - \theta)e^{-\kappa t} + \sigma \int_0^t e^{-\kappa(t-s)} dW(s).
 $$ {#eq-ou-solucion}
 
-Dado que el integrando $e^{-\kappa(t-s)}$ es una función determinista, la integral de Itô en la @eq-ou-solucion es una variable aleatoria gaussiana centrada. Asumiendo una condición inicial determinista $x_0$, el valor esperado y la varianza del proceso (calculada mediante la Isometría de Itô, @thm-isometria-ito) están dadas por:
+Dado que el integrando $e^{-\kappa(t-s)}$ es una función determinista, la integral de Itô en la @eq-ou-solucion es una variable aleatoria normal centrada. Asumiendo una condición inicial determinista $x_0$, el valor esperado y la varianza del proceso (calculada mediante la Isometría de Itô, @thm-isometria-ito) están dadas por:
 
 $$
 \mathbb{E}[X(t)] = \theta + (x_0 - \theta)e^{-\kappa t}, \qquad \text{Var}(X(t)) = \sigma^2 \int_0^t e^{-2\kappa(t-s)} ds = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right).
 $$
 
-Por consiguiente, para todo instante $t > 0$, la variable aleatoria $X(t)$ sigue una distribución normal:
+Con lo cual, para todo instante $t > 0$, la variable aleatoria $X(t)$ sigue una distribución normal:
 
 $$
 X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right) \right),
 $$
 
-la cual converge cuando $t \to \infty$ a una distribución estacionaria gaussiana $\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)$ independientemente del estado inicial $x_0$ [@karlin1998introduction].
-
-# DE AQUI
+la cual converge cuando $t \to \infty$ a una distribución normal $\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)$ independientemente del estado inicial $x_0$ [@karlin1998introduction].
 
 ## Ecuaciones Diferenciales Estocásticas con Saltos
 
-Los modelos de difusión continua basados únicamente en el movimiento Browniano resultan insuficientes cuando el sistema físico experimenta perturbaciones discretas e instantáneas. Al incorporar la medida aleatoria de Poisson compensada $\tilde{N}(dt, dz)$ dentro de la dinámica diferencial, se obtiene una ecuación diferencial estocástica con saltos [@situ2005theory].
+Los modelos de difusión continua basados únicamente en el movimiento Browniano resultan insuficientes cuando el sistema físico experimenta perturbaciones discretas e instantáneas. Al incorporar la medida aleatoria de Poisson compensada @def-medida-compensada $\tilde{N}(dt, dz)$ dentro de la EDE, se obtiene una ecuación diferencial estocástica con saltos [@situ2005theory].
 
 ::: {#def-ede-saltos}
 ### Ecuación Diferencial Estocástica con Saltos de Poisson
-Sea $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})$ un espacio de probabilidad filtrado. Sean $W(t)$ un movimiento Browniano estándar y $\tilde{N}(dt, dz) = N(dt, dz) - \nu_t(dz)dt$ una medida aleatoria de Poisson compensada sobre $[0, \infty) \times \mathcal{Z}$, ambos adaptados a $\{\mathcal{F}_t\}_{t \ge 0}$ y mutuamente independientes. Una ecuación diferencial estocástica con saltos en el intervalo $[t_0, T]$ (con $0 \le t_0 < T < \infty$) es una relación simbólica de la forma:
+Sea $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})$ un espacio de probabilidad filtrado. Sean $W(t)$ un movimiento Browniano estándar y $\tilde{N}(dt, dz) = N(dt, dz) - \nu_t(dz)dt$ una medida aleatoria de Poisson compensada sobre $[0, \infty) \times \mathcal{Z}$, ambos adaptados a $\{\mathcal{F}_t\}_{t \ge 0}$ y mutuamente independientes. Una ecuación diferencial estocástica con saltos en el intervalo $[t_0, T]$ (con $0 \leq t_0 < T < \infty$) es una relación simbólica de la forma:
 
 $$
 dX(t) = b(t, X(t^-)) dt + \sigma(t, X(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(t, X(t^-), z) \tilde{N}(dt, dz), \quad X(t_0) = x_0,
@@ -486,17 +484,17 @@ X(t) = x_0 + \int_{t_0}^t b(s, X(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-)) dW(s)
 $$ {#eq-ede-saltos-int}
 :::
 
-En la @eq-ede-saltos-diff y la @eq-ede-saltos-int, el integrando se evalúa en el límite por la izquierda $X(t^-) = \lim_{s \uparrow t} X(s)$ para asegurar que sea un proceso predecible (@def-proceso-predecible) y que la integral respecto a la medida compensada $\tilde{N}(dt, dz)$ preserve la propiedad de martingala [@situ2005theory]. Cabe notar que en las integrales respecto a $ds$ y $dW(s)$ es indistinto escribir $X(s)$ o $X(s^-)$, dado que toda trayectoria càdlàg posee a lo sumo un número numerable de discontinuidades, el cual constituye un conjunto de medida de Lebesgue nula.
+En la @eq-ede-saltos-diff y la @eq-ede-saltos-int, el integrando se evalúa en el límite por la izquierda $X(t^-) = \lim_{s \uparrow t} X(s)$ para asegurar que sea un proceso predecible (@def-proceso-predecible) y que la integral respecto a la medida compensada $\tilde{N}(dt, dz)$ preserve la propiedad de martingala [@situ2005theory]. Cabe notar que en las integrales respecto a $ds$ y $dW(s)$ es indistinto escribir $X(s)$ o $X(s^-)$, dado que toda trayectoria càdlàg posee a lo sumo un número numerable de discontinuidades, el cual es un conjunto con medida de Lebesgue cero.
 
-Para ilustrar la diferencia analítica y cualitativa entre una difusión continua y un proceso gobernado por una EDE con saltos, en la @fig-sde-comparacion se contrastan dos trayectorias simuladas de un proceso con reversión a la media.
+Para ver la diferencia entre una EDE continua y una EDE con saltos, en la @fig-sde-comparacion se muestran dos trayectorias simuladas de un proceso de Ornstein-Uhlenbeck @def-ou-clasico .
 
-![Trayectorias simuladas de una ecuación diferencial estocástica de tipo Ornstein-Uhlenbeck con y sin saltos en el contexto térmico de un refrigerador de vacunas. El eje horizontal representa el tiempo de observación en un horizonte de $T = 10.0$ horas con incrementos discretos de $dt = 0.01$. La línea horizontal punteada negra indica el nivel de equilibrio $\theta = 4^\circ\text{C}$. La trayectoria continua (azul) muestra una difusión clásica perturbada únicamente por el movimiento Browniano $dW(t)$, reflejando oscilaciones gaussianas de baja amplitud alrededor del equilibrio. Por su parte, la trayectoria discontinua (roja) incorpora perturbaciones discretas mediante un proceso de saltos de Poisson, generando incrementos instantáneos de temperatura seguidos por etapas de decaimiento exponencial controladas por la tasa de reversión $\kappa$.](trayectorias_sde.png){#fig-sde-comparacion width="90%" fig-align="center"}
+![Trayectorias simuladas de una ecuación diferencial estocástica de tipo Ornstein-Uhlenbeck con y sin saltos. El eje horizontal representa el avance del tiempo en un horizonte de $T = 10.0$ con incrementos discretos de $dt = 0.01$. La línea horizontal negra punteada indica el nivel de equilibrio $\theta = 5$. La trayectoria continua (azul) muestra una difusión clásica perturbada únicamente por el movimiento Browniano $dW(t)$. Por otro lado, la trayectoria discontinua (roja) incorpora perturbaciones discretas mediante un proceso de saltos de Poisson, generando incrementos instantáneos seguidos por etapas de decaimiento exponencial controladas por la tasa de reversión $\kappa$.](trayectorias_sde.png){#fig-sde-comparacion width="90%" fig-align="center"}
 
-Como se observa en la @fig-sde-comparacion, la presencia de discontinuidades puntuales modifica sustancialmente el comportamiento de las realizaciones del proceso. Debido a que estos saltos ocurren de forma instantánea ($\Delta X(t) = X(t) - X(t^-) \neq 0$), el Lema de Itô continuo (@thm-ito-clasico) debe extenderse incorporando un operador de diferencias finitas que contabilice el cambio exacto de cualquier función diferenciable en los instantes de discontinuidad [@situ2005theory; @platen2010numerical].
+Como se observa en la @fig-sde-comparacion, la presencia de discontinuidades modifica el comportamiento de las trayectorias del proceso. Debido a que estos saltos ocurren de forma instantánea ($\Delta X(t) = X(t) - X(t^-) \neq 0$), el Lema de Itô continuo (@thm-ito-clasico) debe extenderse incorporando un operador de diferencias finitas que contabilice el cambio exacto de cualquier función diferenciable en los instantes de discontinuidad [@situ2005theory; @platen2010numerical].
 
 ::: {#thm-ito-saltos-fijo}
 ### Fórmula de Itô para Difusiones con Saltos
-Sea $\{X(t)\}_{t \ge t_0}$ una solución de la EDE con saltos (@eq-ede-saltos-diff) cuya medida de conteo $N(dt, dz)$ posee medida de intensidad $\nu_t(dz)dt = \lambda(t)dF(z)dt$. Sea $f(t, x)$ una función real continuamente diferenciable respecto a $t$ ($\mathcal{C}^1$) y dos veces continuamente diferenciable respecto a $x$ ($\mathcal{C}^2$). Entonces el proceso compuesto $f(t, X(t))$ satisface el diferencial estocástico:
+Sea $\{X(t)\}_{t \in [t_0, T]}$ una solución de la EDE con saltos (@eq-ede-saltos-diff) cuya medida de conteo $N(dt, dz)$ posee medida de intensidad $\nu_t(dz)dt = \lambda(t)dF(z)dt$. Sea $f(t, x)$ una función real continuamente diferenciable respecto a $t$ ($\mathcal{C}^1$) y dos veces continuamente diferenciable respecto a $x$ ($\mathcal{C}^2$). Entonces el proceso compuesto $f(t, X(t))$ satisface la siguiente ecuación diferencial estocástica con saltos:
 
 $$
 \begin{aligned}
@@ -512,7 +510,7 @@ Las condiciones suficientes para garantizar que la @eq-ede-saltos-diff posea una
 
 ::: {#thm-situ-existencia}
 ### Teorema de Existencia y Unicidad con Saltos de Poisson (Teorema 117 y Lema 114 de Situ)
-Consideremos la ecuación diferencial estocástica con saltos (@eq-ede-saltos-diff) en el intervalo $[t_0, T]$, con dato inicial $X(t_0) = x_0$ medible respecto a $\mathcal{F}_{t_0}$ tal que $\mathbb{E}[\vert x_0 \vert^2] < \infty$. Supóngase que existen constantes positivas $L, K > 0$ tales que para todo $t \in [t_0, T]$ y cualesquiera $x, y \in \mathbb{R}$, los coeficientes satisfacen:
+Consideremos la ecuación diferencial estocástica con saltos (@eq-ede-saltos-diff) en el intervalo $[t_0, T]$, con condición inicial $X(t_0) = x_0$ medible respecto a $\mathcal{F}_{t_0}$ tal que $\mathbb{E}[\vert x_0 \vert^2] < \infty$. Supóngase que existen constantes positivas $L, K > 0$ tales que para todo $t \in [t_0, T]$ y cualesquiera $x, y \in \mathbb{R}$, los coeficientes satisfacen:
 
 1. **Condición de Lipschitz Global:**
 $$
@@ -523,14 +521,16 @@ $$
 \vert b(t, x) \vert^2 + \vert \sigma(t, x) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(t, x, z) \vert^2 \nu_t(dz) \le K (1 + \vert x \vert^2).
 $$
 
-Entonces existe una única solución fuerte $\{X(t)\}_{t \in [t_0, T]}$ adaptada a $\{\mathcal{F}_t\}_{t \ge 0}$ con trayectorias càdlàg casi seguramente. Además, la solución satisface la cota de segundo momento:
+Entonces existe una única solución fuerte $\{X(t)\}_{t \in [t_0, T]}$ adaptada a $\{\mathcal{F}_t\}_{t \ge t_0}$ con trayectorias càdlàg casi seguramente. Además, la solución satisface la cota de segundo momento:
 $$
 \mathbb{E}\left[ \sup_{t_0 \le t \le T} \vert X(t) \vert^2 \right] \le C \left( 1 + \mathbb{E}[\vert x_0 \vert^2] \right) < \infty,
 $$
 donde $C > 0$ es una constante que depende únicamente de $K$ y de la longitud del intervalo $(T - t_0)$ [@situ2005theory].
 :::
 
-Una propiedad fundamental derivada de la estructura de martingala y de la propiedad de Markov fuerte tanto del movimiento Browniano como de las medidas aleatorias de Poisson (Teoremas 100 y 101 en [@situ2005theory]; Observación 3.10 en [@mao2006stochastic]) establece que en el @thm-situ-existencia los extremos temporales $t_0$ y $T$ pueden sustituirse por tiempos de paro acotados $\tau_a$ y $\tau_b$ tales que $0 \le \tau_a \le \tau_b \le T$ casi seguramente, siempre que la condición inicial $X(\tau_a)$ sea $\mathcal{F}_{\tau_a}$-medible. Esta propiedad permitirá resolver ecuaciones con cambios de régimen tramo a tramo sobre intervalos estocásticos.
+Una propiedad fundamental derivada de la estructura de martingala y de la propiedad de Markov fuerte tanto del movimiento Browniano como de las medidas aleatorias de Poisson (Teoremas 100 y 101 en [@situ2005theory]; Observación 3.10 en [@mao2006stochastic]) establece que en el @thm-situ-existencia los extremos temporales $t_0$ y $T$ pueden sustituirse por tiempos de paro acotados $\tau_a$ y $\tau_b$ tales que $0 \le \tau_a \le \tau_b \le T$ casi seguramente, siempre que la condición inicial $X(\tau_a)$ sea $\mathcal{F}_{\tau_a}$-medible. Esta propiedad permitirá resolver ecuaciones con cambios de régimen tramo a tramo sobre intervalos acotados.
+
+# DE AQUI
 
 ## Herramientas Analíticas y Estocásticas Auxiliares
 
@@ -627,7 +627,7 @@ $$
 donde $M_\alpha(t)$ es una martingala de salto asociada a las transiciones de $\alpha(t)$ y el operador generador acoplado $\mathcal{L}f: [t_0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}$ se define como:
 $$
 \begin{aligned}
-\mathcal{L}f(t, x, i) = & \ \frac{\partial f}{\partial t}(t, x, i) + b(t, x, i)\frac{\partial f}{\partial x}(t, x, i) + \frac{1}{2}\sigma^2(t, x, i)\frac{\partial^2 f}{\partial x^2}(t, x, i) + \sum_{j=1}^m q_{ij} f(t, x, j) \\
+\mathcal{L}f(t, x, i) = & \ \frac{\partial f}{\partial t}(t, x, i) + b(t, x, i)\frac{\partial f}{\partial x}(t, x, i) + \frac{1}{2}\sigma^2(t, x, i)\frac{\partial^2 f}{\partial x^2}(t, x, i) + \sum_{j \in \mathcal{M}} q_{ij} f(t, x, j) \\
 & + \int_{\mathcal{Z}} \left[ f(t, x + \gamma(t, x, i, z), i) - f(t, x, i) - \gamma(t, x, i, z)\frac{\partial f}{\partial x}(t, x, i) \right] \nu_t(dz).
 \end{aligned}
 $$
