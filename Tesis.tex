@@ -1381,10 +1381,10 @@ Saltos}\label{ecuaciones-diferenciales-estocuxe1sticas-con-saltos}
 Los modelos de difusión continua basados únicamente en el movimiento
 Browniano resultan insuficientes cuando el sistema físico experimenta
 perturbaciones discretas e instantáneas. Al incorporar la medida
-aleatoria de Poisson compensada Definición~\ref{def-medida-compensada}
-\(\tilde{N}(dt, dz)\) dentro de la EDE, se obtiene una ecuación
-diferencial estocástica con saltos (\citeproc{ref-situ2005theory}{Situ
-2005}).
+aleatoria de Poisson compensada \(\tilde{N}(dt, dz)\)
+Definición~\ref{def-medida-compensada} dentro de la EDE, se obtiene una
+ecuación diferencial estocástica con saltos
+(\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{definition}[Ecuación Diferencial Estocástica con Saltos de
 Poisson]\protect\hypertarget{def-ede-saltos}{}\label{def-ede-saltos}
@@ -1545,20 +1545,19 @@ Teorema~\ref{thm-situ-existencia} los extremos temporales \(t_0\) y
 \(\tau_b\) tales que \(0 \le \tau_a \le \tau_b \le T\) casi seguramente,
 siempre que la condición inicial \(X(\tau_a)\) sea
 \(\mathcal{F}_{\tau_a}\)-medible. Esta propiedad permitirá resolver
-ecuaciones con cambios de régimen tramo a tramo sobre intervalos
-acotados.
+ecuaciones diferenciales estocásticas con cambios de régimen, tramo a
+tramo sobre intervalos acotados.
 
-\chapter{DE AQUI}\label{de-aqui}
+\section{Herramientas Analíticas
+Auxiliares}\label{herramientas-analuxedticas-auxiliares}
 
-\section{Herramientas Analíticas y Estocásticas
-Auxiliares}\label{herramientas-analuxedticas-y-estocuxe1sticas-auxiliares}
-
-Para demostrar formalmente la existencia, unicidad y acotamiento en
-segundo momento de las ecuaciones diferenciales estocásticas híbridas,
-así como para verificar analíticamente los coeficientes de nuestro
-modelo termodinámico, requerimos tres desigualdades clásicas del
-análisis matemático y estocástico (\citeproc{ref-mao2006stochastic}{Mao
-y Yuan 2006}; \citeproc{ref-situ2005theory}{Situ 2005}).
+Para demostrar la existencia, unicidad y acotamiento en segundo momento
+de las ecuaciones diferenciales estocásticas híbridas, así como para
+verificar analíticamente los coeficientes de nuestro modelo
+termodinámico, requerimos de tres desigualdades clásicas del análisis
+matemático y de los procesos estocásticos
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{lemma}[Desigualdad Elemental de Sumas
 Finitas]\protect\hypertarget{lem-desigualdad-algebraica}{}\label{lem-desigualdad-algebraica}
@@ -1576,19 +1575,19 @@ utilizaremos esta desigualdad para \(k = 2\) y \(k = 4\): \[
 
 \end{lemma}
 
-Al acotar el supremo temporal de una solución estocástica, no es posible
-intercambiar directamente el operador de valor esperado con el supremo
-dentro de las integrales de martingala. Para controlar dichos términos
-mediante sus momentos en el tiempo final e invocar posteriormente las
-isometrías de Itô, se emplea la desigualdad maximal de Doob
-(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
-\citeproc{ref-situ2005theory}{Situ 2005}).
+Al acotar el supremo de una solución, no es posible intercambiar
+directamente el operador de valor esperado con el supremo dentro de las
+integrales. Para controlar dichos términos mediante sus momentos en el
+tiempo final y usar posteriormente las isometrías de Itô, se emplea la
+desigualdad maximal de Doob (\citeproc{ref-mao2006stochastic}{Mao y Yuan
+2006}; \citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{theorem}[Desigualdad Maximal de Martingalas de
 Doob]\protect\hypertarget{thm-desigualdad-doob}{}\label{thm-desigualdad-doob}
 
-Sea \(\{M(t)\}_{t \ge 0}\) una martingala real con trayectorias càdlàg
-respecto a la filtración \(\{\mathcal{F}_t\}_{t \ge 0}\), y sea
+Sea \(\{M(t)\}_{t \ge 0}\) una martingala
+Definición~\ref{def-martingala} con trayectorias càdlàg respecto a la
+filtración \(\{\mathcal{F}_t\}_{t \ge 0}\), y sea
 \([a, b] \subset [0, \infty)\) un intervalo cerrado y acotado. Si
 \(p > 1\) y \(\mathbb{E}[\vert M(b) \vert^p] < \infty\), entonces se
 cumple que: \[
@@ -1607,10 +1606,11 @@ Teorema~\ref{thm-isometria-saltos}), se obtienen las cotas: \[
 \end{theorem}
 
 Finalmente, para despejar la función de estado esperada cuando esta
-aparece en ambos lados de una desigualdad integral, se recurre al Lema
-de Grönwall (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}).
+aparece en ambos lados de una desigualdad integral, se recurre a la
+desigualdad de Grönwall (\citeproc{ref-mao2006stochastic}{Mao y Yuan
+2006}).
 
-\begin{lemma}[Desigualdad Integral de
+\begin{lemma}[Desigualdad de
 Grönwall]\protect\hypertarget{lem-gronwall}{}\label{lem-gronwall}
 
 Sea \(T > t_0 \ge 0\) y sea \(u: [t_0, T] \to [0, \infty)\) una función
@@ -1625,6 +1625,8 @@ u(t) \le C \exp\left( \int_{t_0}^t v(s) ds \right).
 \]
 
 \end{lemma}
+
+\chapter{DE AQUI}\label{de-aqui}
 
 \section{Sistemas Estocásticos Híbridos: Discontinuidades y Conmutación
 Markoviana}\label{sistemas-estocuxe1sticos-huxedbridos-discontinuidades-y-conmutaciuxf3n-markoviana}

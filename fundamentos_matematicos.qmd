@@ -465,7 +465,7 @@ la cual converge cuando $t \to \infty$ a una distribución normal $\mathcal{N}\l
 
 ## Ecuaciones Diferenciales Estocásticas con Saltos
 
-Los modelos de difusión continua basados únicamente en el movimiento Browniano resultan insuficientes cuando el sistema físico experimenta perturbaciones discretas e instantáneas. Al incorporar la medida aleatoria de Poisson compensada @def-medida-compensada $\tilde{N}(dt, dz)$ dentro de la EDE, se obtiene una ecuación diferencial estocástica con saltos [@situ2005theory].
+Los modelos de difusión continua basados únicamente en el movimiento Browniano resultan insuficientes cuando el sistema físico experimenta perturbaciones discretas e instantáneas. Al incorporar la medida aleatoria de Poisson compensada $\tilde{N}(dt, dz)$ @def-medida-compensada dentro de la EDE, se obtiene una ecuación diferencial estocástica con saltos [@situ2005theory].
 
 ::: {#def-ede-saltos}
 ### Ecuación Diferencial Estocástica con Saltos de Poisson
@@ -528,13 +528,11 @@ $$
 donde $C > 0$ es una constante que depende únicamente de $K$ y de la longitud del intervalo $(T - t_0)$ [@situ2005theory].
 :::
 
-Una propiedad fundamental derivada de la estructura de martingala y de la propiedad de Markov fuerte tanto del movimiento Browniano como de las medidas aleatorias de Poisson (Teoremas 100 y 101 en [@situ2005theory]; Observación 3.10 en [@mao2006stochastic]) establece que en el @thm-situ-existencia los extremos temporales $t_0$ y $T$ pueden sustituirse por tiempos de paro acotados $\tau_a$ y $\tau_b$ tales que $0 \le \tau_a \le \tau_b \le T$ casi seguramente, siempre que la condición inicial $X(\tau_a)$ sea $\mathcal{F}_{\tau_a}$-medible. Esta propiedad permitirá resolver ecuaciones con cambios de régimen tramo a tramo sobre intervalos acotados.
+Una propiedad fundamental derivada de la estructura de martingala y de la propiedad de Markov fuerte tanto del movimiento Browniano como de las medidas aleatorias de Poisson (Teoremas 100 y 101 en [@situ2005theory]; Observación 3.10 en [@mao2006stochastic]) establece que en el @thm-situ-existencia los extremos temporales $t_0$ y $T$ pueden sustituirse por tiempos de paro acotados $\tau_a$ y $\tau_b$ tales que $0 \le \tau_a \le \tau_b \le T$ casi seguramente, siempre que la condición inicial $X(\tau_a)$ sea $\mathcal{F}_{\tau_a}$-medible. Esta propiedad permitirá resolver ecuaciones diferenciales estocásticas con cambios de régimen, tramo a tramo sobre intervalos acotados.
 
-# DE AQUI
+## Herramientas Analíticas Auxiliares
 
-## Herramientas Analíticas y Estocásticas Auxiliares
-
-Para demostrar formalmente la existencia, unicidad y acotamiento en segundo momento de las ecuaciones diferenciales estocásticas híbridas, así como para verificar analíticamente los coeficientes de nuestro modelo termodinámico, requerimos tres desigualdades clásicas del análisis matemático y estocástico [@mao2006stochastic; @situ2005theory].
+Para demostrar la existencia, unicidad y acotamiento en segundo momento de las ecuaciones diferenciales estocásticas híbridas, así como para verificar analíticamente los coeficientes de nuestro modelo termodinámico, requerimos de tres desigualdades clásicas del análisis matemático y de los procesos estocásticos [@mao2006stochastic; @situ2005theory].
 
 ::: {#lem-desigualdad-algebraica}
 ### Desigualdad Elemental de Sumas Finitas
@@ -548,11 +546,11 @@ $$
 $$
 :::
 
-Al acotar el supremo temporal de una solución estocástica, no es posible intercambiar directamente el operador de valor esperado con el supremo dentro de las integrales de martingala. Para controlar dichos términos mediante sus momentos en el tiempo final e invocar posteriormente las isometrías de Itô, se emplea la desigualdad maximal de Doob [@mao2006stochastic; @situ2005theory].
+Al acotar el supremo de una solución, no es posible intercambiar directamente el operador de valor esperado con el supremo dentro de las integrales. Para controlar dichos términos mediante sus momentos en el tiempo final y usar posteriormente las isometrías de Itô, se emplea la desigualdad maximal de Doob [@mao2006stochastic; @situ2005theory].
 
 ::: {#thm-desigualdad-doob}
 ### Desigualdad Maximal de Martingalas de Doob
-Sea $\{M(t)\}_{t \ge 0}$ una martingala real con trayectorias càdlàg respecto a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$, y sea $[a, b] \subset [0, \infty)$ un intervalo cerrado y acotado. Si $p > 1$ y $\mathbb{E}[\vert M(b) \vert^p] < \infty$, entonces se cumple que:
+Sea $\{M(t)\}_{t \ge 0}$ una martingala @def-martingala con trayectorias càdlàg respecto a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$, y sea $[a, b] \subset [0, \infty)$ un intervalo cerrado y acotado. Si $p > 1$ y $\mathbb{E}[\vert M(b) \vert^p] < \infty$, entonces se cumple que:
 $$
 \mathbb{E}\left[ \sup_{a \le t \le b} \vert M(t) \vert^p \right] \le \left( \frac{p}{p - 1} \right)^p \mathbb{E}\left[ \vert M(b) \vert^p \right].
 $$
@@ -565,10 +563,10 @@ $$
 $$
 :::
 
-Finalmente, para despejar la función de estado esperada cuando esta aparece en ambos lados de una desigualdad integral, se recurre al Lema de Grönwall [@mao2006stochastic].
+Finalmente, para despejar la función de estado esperada cuando esta aparece en ambos lados de una desigualdad integral, se recurre a la desigualdad de Grönwall [@mao2006stochastic].
 
 ::: {#lem-gronwall}
-### Desigualdad Integral de Grönwall
+### Desigualdad de Grönwall
 Sea $T > t_0 \ge 0$ y sea $u: [t_0, T] \to [0, \infty)$ una función medible de Borel, acotada y no negativa, y sea $v: [t_0, T] \to [0, \infty)$ una función integrable no negativa. Si existe una constante $C \ge 0$ tal que para todo $t \in [t_0, T]$ se satisface la desigualdad integral:
 $$
 u(t) \le C + \int_{t_0}^t v(s) u(s) ds,
@@ -578,6 +576,8 @@ $$
 u(t) \le C \exp\left( \int_{t_0}^t v(s) ds \right).
 $$
 :::
+
+# DE AQUI
 
 ## Sistemas Estocásticos Híbridos: Discontinuidades y Conmutación Markoviana
 
