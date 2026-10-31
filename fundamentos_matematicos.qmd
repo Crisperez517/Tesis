@@ -581,7 +581,7 @@ $$
 
 Cuando los parámetros estructurales de un sistema físico cambian drásticamente debido a transiciones en el entorno (como cortes y restablecimientos en el suministro eléctrico) y simultáneamente el estado continuo sufre perturbaciones impulsivas (como aperturas de puerta), el comportamiento conjunto se describe mediante una ecuación diferencial estocástica híbrida con conmutación markoviana y saltos [@mao2006stochastic; @yin2010hybrid].
 
-Para formalizar el análisis sobre subintervalos cuyos extremos son tiempos de paro @def-tiempo-parada $\tau$ y $\rho$ tales que $0 \le \tau(\omega) \le \rho(\omega)$ para todo $\omega \in \Omega$, adoptamos la notación estándar de **intervalos estocásticos** de [@mao2006stochastic]:
+Para formalizar el análisis sobre subintervalos cuyos extremos son tiempos de paro @def-tiempo-parada $\tau$ y $\rho$ tales que $0 \le \tau(\omega) \le \rho(\omega)$ para todo $\omega \in \Omega$, usamos la notación estándar de **intervalos estocásticos** de [@mao2006stochastic]:
 $$
 [[\tau, \rho]] = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t \le \rho(\omega)\}, \qquad [[\tau, \rho[[ = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t < \rho(\omega)\}.
 $$
@@ -589,7 +589,7 @@ Asimismo, denotamos por $\mathcal{M}^2([[\tau, \rho]]; \mathbb{R})$ al espacio d
 
 ::: {#def-ede-hibrida}
 ### Ecuación Diferencial Estocástica Híbrida con Saltos
-Sea $\{\alpha(t)\}_{t \ge 0}$ una cadena de Markov a tiempo continuo @def-cadena-markov con trayectorias càdlàg @def-adaptabilidad-cadlag, adaptada a $\{\mathcal{F}_t\}_{t \ge 0}$, que toma valores en un espacio de estados finito $\mathcal{M} = \{1, 2, \dots, m\}$ con matriz generadora $Q = (q_{ij})_{m \times m}$. Sean $W(t)$ un movimiento Browniano estándar y $\tilde{N}(dt, dz) = N(dt, dz) - \nu_t(dz)dt$ una medida aleatoria de Poisson compensada sobre $[0, \infty) \times \mathcal{Z}$. Una **ecuación diferencial estocástica híbrida con saltos** en el intervalo $[t_0, T]$ se expresa en su forma diferencial como:
+Sea $\{\alpha(t)\}_{t \ge 0}$ una cadena de Markov a tiempo continuo @def-cadena-markov con trayectorias càdlàg @def-adaptabilidad-cadlag, adaptada a $\{\mathcal{F}_t\}_{t \ge 0},$ que toma valores en un espacio de estados finito $\mathcal{M} = \{1, 2, \dots, m\}$ con matriz generadora $Q = (q_{ij})_{m \times m}.$ Sean $W(t)$ un movimiento Browniano estándar y $\tilde{N}(dt, dz) = N(dt, dz) - \nu_t(dz)dt$ una medida aleatoria de Poisson compensada sobre $[0, \infty) \times \mathcal{Z}.$ Una **ecuación diferencial estocástica híbrida con saltos** en el intervalo $[t_0, T]$ se expresa en su forma diferencial como:
 
 $$
 dX(t) = b(t, X(t^-), \alpha(t^-)) dt + \sigma(t, X(t^-), \alpha(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(t, X(t^-), \alpha(t^-), z) \tilde{N}(dt, dz),
