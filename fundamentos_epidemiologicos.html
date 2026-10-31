@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -101,35 +81,6 @@ div.csl-indent {
   });
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -425,16 +376,8 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Tabla de contenidos</h2>
-   
-  <ul>
-  <li><a href="#formulación-de-la-ecuación-diferencial-estocástica-general" id="toc-formulación-de-la-ecuación-diferencial-estocástica-general" class="nav-link active" data-scroll-target="#formulación-de-la-ecuación-diferencial-estocástica-general"><span class="header-section-number">4.1</span> Formulación de la Ecuación Diferencial Estocástica General</a></li>
-  <li><a href="#el-modelo-estocástico-de-red-de-frío-ornstein-uhlenbeck-modificado" id="toc-el-modelo-estocástico-de-red-de-frío-ornstein-uhlenbeck-modificado" class="nav-link" data-scroll-target="#el-modelo-estocástico-de-red-de-frío-ornstein-uhlenbeck-modificado"><span class="header-section-number">4.2</span> El Modelo Estocástico de Red de Frío (Ornstein-Uhlenbeck Modificado)</a></li>
-  <li><a href="#el-lema-de-itô-clásico-y-generalizado" id="toc-el-lema-de-itô-clásico-y-generalizado" class="nav-link" data-scroll-target="#el-lema-de-itô-clásico-y-generalizado"><span class="header-section-number">4.3</span> El Lema de Itô Clásico y Generalizado</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -459,83 +402,8 @@ window.Quarto = {
 </header>
 
 
-<section id="formulación-de-la-ecuación-diferencial-estocástica-general" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="formulación-de-la-ecuación-diferencial-estocástica-general"><span class="header-section-number">4.1</span> Formulación de la Ecuación Diferencial Estocástica General</h2>
-<p>Una vez definidos los elementos estocásticos elementales, es posible formular el marco matemático que une la evolución analítica continua con las perturbaciones aleatorias y los saltos discretos. De acuerdo con el marco general desarrollado por <span class="citation" data-cites="yin2010hybrid">(<a href="references.html#ref-yin2010hybrid" role="doc-biblioref">Yin y Zhu 2010</a>)</span> y <span class="citation" data-cites="platen2010numerical">(<a href="references.html#ref-platen2010numerical" role="doc-biblioref">Platen y Bruti-Liberati 2010</a>)</span>, una Difusión Híbrida con Conmutación de Régimen y Saltos se define mediante el siguiente sistema de ecuaciones diferenciales estocásticas:</p>
-<p><span id="eq-sde-hibrida-general"><span class="math display">\[
-dT(t) = \mu(T(t), \alpha(t)) dt + \sigma(T(t), \alpha(t)) dW(t) + \gamma(T(t^-), \alpha(t^-)) dN(t)
-\tag{4.1}\]</span></span></p>
-<p>En la <a href="#eq-sde-hibrida-general" class="quarto-xref">Ecuación&nbsp;<span>4.1</span></a>, el término <span class="math inline">\(T(t^-) = \lim_{s \to t^-} T(s)\)</span> preserva la propiedad de continuidad por la izquierda con límites por la derecha (càdlàg) del proceso ante la ocurrencia de un salto. Las funciones de coeficientes se definen como: <span class="math display">\[\mu: \mathbb{R} \times \mathcal{M} \to \mathbb{R} \quad \text{(Coeficiente de deriva o tendencia)}\]</span> <span class="math display">\[\sigma: \mathbb{R} \times \mathcal{M} \to \mathbb{R} \quad \text{(Coeficiente de difusión o volatilidad)}\]</span> <span class="math display">\[\gamma: \mathbb{R} \times \mathcal{M} \to \mathbb{R} \quad \text{(Magnitud o intensidad del impacto del salto)}\]</span></p>
-<p>La incorporación con la cadena de Markov <span class="math inline">\(\alpha(t)\)</span> indica que los parámetros estructurales del sistema cambian de forma aleatoria e instantánea cuando el entorno conmuta de estado.</p>
-<p>Para ilustrar el impacto de nuestra formulación matemática sobre el modelado físico de la red de frío, es fundamental contrastar el comportamiento de las trayectorias resultantes. La simulación numérica del modelo revela cómo la incorporación de discontinuidades captura fenómenos que los modelos clásicos omiten.</p>
-<div id="fig-sde-comparacion" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-sde-comparacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="trayectorias_sde.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sde-comparacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.1: Trayectorias simuladas de la Ecuación Diferencial Estocástica de Ornstein-Uhlenbeck para la temperatura interna de un refrigerador de vacunas. El eje horizontal representa el tiempo de observación en un horizonte de <span class="math inline">\(T = 10.0\)</span> horas con incrementos de <span class="math inline">\(dt = 0.01\)</span>. La línea base negra indica la temperatura óptima <span class="math inline">\(\theta = 4^\circ\text{C}\)</span>. La trayectoria continua (azul) ilustra una difusión clásica perturbada únicamente por el movimiento Browniano <span class="math inline">\(dW(t)\)</span>, simulando las microfluctuaciones gaussianas del ciclo del compresor. Por otro lado, la trayectoria híbrida (roja) añade perturbaciones mediante un proceso de Poisson <span class="math inline">\(dN(t)\)</span>, modelando impactos macroscópicos. Se observa claramente cómo los saltos térmicos positivos (simulando aperturas de la puerta por el personal) elevan bruscamente la temperatura, la cual posteriormente experimenta una reversión a la media controlada por el parámetro <span class="math inline">\(\kappa\)</span>. Las trayectorias fueron aproximadas computacionalmente mediante el método de Euler-Maruyama, que presentaremos más adelante.
-</figcaption>
-</figure>
-</div>
-<p>Como muestra la <a href="#fig-sde-comparacion" class="quarto-xref">Figura&nbsp;<span>4.1</span></a>, al modelar el sistema exclusivamente con componentes difusivos continuos se subestima el riesgo de trayectorias térmicas fuera del rango normativo de la OMS (2 °C a 8 °C). La inclusión del proceso de saltos justifica nuestra necesidad de utilizar el Lema de Itô generalizado, ya que la temperatura experimenta cambios finitos instantáneos que rompen la diferenciabilidad clásica del modelo.</p>
-</section>
-<section id="el-modelo-estocástico-de-red-de-frío-ornstein-uhlenbeck-modificado" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="el-modelo-estocástico-de-red-de-frío-ornstein-uhlenbeck-modificado"><span class="header-section-number">4.2</span> El Modelo Estocástico de Red de Frío (Ornstein-Uhlenbeck Modificado)</h2>
-<p>Pasando a la física de nuestro problema particular, adaptamos la <a href="#eq-sde-hibrida-general" class="quarto-xref">Ecuación&nbsp;<span>4.1</span></a> bajo una estructura termodinámica de reversión a la media. Trabajaremos bajo la hipótesis de que el comportamiento de la temperatura interna <span class="math inline">\(T(t)\)</span> de un refrigerador institucional de vacunas se rige por la siguiente ecuación diferencial estocástica de Ornstein-Uhlenbeck híbrida con saltos de Poisson:</p>
-<p><span id="eq-ou-temperatura"><span class="math display">\[
-dT(t) = \kappa(\alpha(t)) [\theta(\alpha(t)) - T(t)] dt + \sigma(\alpha(t)) dW(t) + \gamma dN(t)
-\tag{4.2}\]</span></span></p>
-<p>Bajo esta parametrización particular, el espacio de estados de la cadena de Markov se restringe a dos regímenes operativos fundamentales, <span class="math inline">\(\mathcal{M} = \{1, 2\}\)</span>, cuyas implicaciones físicas y estocásticas se detallan en los siguientes conceptos:</p>
-<div id="def-inercia-termica" class="theorem definition">
-<p><span class="theorem-title"><strong>Definición 4.1 (Inercia Térmica y Parámetros Estructurales)</strong></span> La inercia térmica es la capacidad de la masa interna del refrigerador (biológicos, paquetes refrigerantes y botellas de agua) para amortiguar la transferencia de calor del exterior. En la <a href="#eq-ou-temperatura" class="quarto-xref">Ecuación&nbsp;<span>4.2</span></a>, se modela mediante el coeficiente de velocidad de reversión <span class="math inline">\(\kappa(\alpha(t)) &gt; 0\)</span>. A mayor inercia térmica, menor será el valor de <span class="math inline">\(\kappa\)</span> en ausencia de energía eléctrica, retrasando el calentamiento del refrigerador. El parámetro de volatilidad <span class="math inline">\(\sigma(\alpha(t)) &gt; 0\)</span> mide el ruido continuo gaussiano inducido por el ciclo del compresor.</p>
-</div>
-<div id="def-cortes-energia" class="theorem definition">
-<p><span class="theorem-title"><strong>Definición 4.2 (Corte de Energía (Conmutación de Régimen))</strong></span> Se define como la transición de la cadena de Markov debido a fallos en el suministro eléctrico. El sistema conmuta del régimen con suministro normal (<span class="math inline">\(\alpha(t) = 1\)</span>) al régimen de falla (<span class="math inline">\(\alpha(t) = 2\)</span>). Esta conmutación altera los límites asintóticos de la deriva en la <a href="#eq-ou-temperatura" class="quarto-xref">Ecuación&nbsp;<span>4.2</span></a>:</p>
-<ol type="1">
-<li><strong>Régimen <span class="math inline">\(\alpha(t) = 1\)</span>:</strong> El sistema converge a la temperatura ideal del termostato, es decir, <span class="math inline">\(\theta(1) = 4^\circ\text{C}\)</span>.</li>
-<li><strong>Régimen <span class="math inline">\(\alpha(t) = 2\)</span>:</strong> Al apagarse el motor, el sistema interrumpe el enfriamiento y la temperatura interna comienza a subir hacia la temperatura ambiente exterior del centro de salud, parametrizada por <span class="math inline">\(\theta(2) = T_{\text{amb}}\)</span>.</li>
-</ol>
-</div>
-<div id="def-apertura-puerta" class="theorem definition">
-<p><span class="theorem-title"><strong>Definición 4.3 (Apertura de Puertas (Perturbaciones por Saltos))</strong></span> Corresponde a la entrada brusca de aire cálido exterior provocada por la manipulación operativa del personal de enfermería. Este fenómeno ocurre de forma intermitente y se modela en la <a href="#eq-ou-temperatura" class="quarto-xref">Ecuación&nbsp;<span>4.2</span></a> mediante el término de saltos <span class="math inline">\(\gamma dN(t)\)</span>, donde <span class="math inline">\(\gamma &gt; 0\)</span> representa el incremento térmico discreto e instantáneo en grados Celsius cada vez que el diferencial del proceso de Poisson registra un evento (<span class="math inline">\(dN(t) = 1\)</span>).</p>
-</div>
-</section>
-<section id="el-lema-de-itô-clásico-y-generalizado" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="el-lema-de-itô-clásico-y-generalizado"><span class="header-section-number">4.3</span> El Lema de Itô Clásico y Generalizado</h2>
-<p>Para realizar transformaciones algebraicas sobre funciones que dependen de procesos estocásticos o para desarrollar algoritmos de aproximación computacional válidos, el teorema fundamental del cálculo determinista debe sustituirse por el Lema de Itô. Introducimos inicialmente la versión elemental para difusiones continuas.</p>
-<div id="thm-ito-clasico" class="theorem">
-<p><span class="theorem-title"><strong>Teorema 4.1 (Lema de Itô para Difusiones Continuas)</strong></span> Sea <span class="math inline">\(\{X(t)\}_{t \ge 0}\)</span>, considere la EDE dada por la <a href="fundamentos_matematicos.html#eq-ede-general-diff" class="quarto-xref">Ecuación&nbsp;<span>2.1</span></a>, con condición inicial <span class="math inline">\(X(0) = x_0\)</span>,, y sea <span class="math inline">\(V(t, x)\)</span> una función escalar continuamente diferenciable en su componente temporal <span class="math inline">\(t\)</span> y dos veces continuamente diferenciable en su componente espacial <span class="math inline">\(x\)</span>. El diferencial estocástico de la función compuesta viene dado por:</p>
-<p><span class="math display">\[
-dV(t, X(t)) = \left[ \frac{\partial V}{\partial t} + b(t, X(t))\frac{\partial V}{\partial x} + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 V}{\partial x^2} \right] dt + \sigma(t, X(t))\frac{\partial V}{\partial x} dW(t)
-\]</span></p>
-</div>
-<p>El término de segundo orden respecto a la derivada espacial surge de la propiedad cuadrática del movimiento Browniano, donde <span class="math inline">\((dW(t))^2 \to dt\)</span> en un sentido probabilístico. Este desarrollo elemental se detalla conceptualmente en <span class="citation" data-cites="karatzas1998brownian">(<a href="references.html#ref-karatzas1998brownian" role="doc-biblioref">Karatzas y Shreve 1998</a>)</span>.</p>
-<p>No obstante, dado que nuestro modelo usa conmutaciones estructurales discretas y discontinuidades puntuales, la versión continua resulta insuficiente. Apoyados en los desarrollos de <span class="citation" data-cites="yin2010hybrid">(<a href="references.html#ref-yin2010hybrid" role="doc-biblioref">Yin y Zhu 2010</a>)</span> y <span class="citation" data-cites="platen2010numerical">(<a href="references.html#ref-platen2010numerical" role="doc-biblioref">Platen y Bruti-Liberati 2010</a>)</span>, establecemos el siguiente teorema analítico que rige el cálculo sobre trayectorias discontinuas con conmutación:</p>
-<div id="thm-ito-generalizado" class="theorem">
-<p><span class="theorem-title"><strong>Teorema 4.2 (Fórmula de Itô para Difusiones Híbridas con Saltos)</strong></span> Sea <span class="math inline">\(V(t, T, i)\)</span> una función continuamente diferenciable en su componente temporal <span class="math inline">\(t\)</span>, y dos veces continuamente diferenciable en su componente espacial <span class="math inline">\(T\)</span> para cada régimen operativo <span class="math inline">\(i \in \mathcal{M}\)</span>. Si <span class="math inline">\(T(t)\)</span> es un proceso que satisface la <a href="#eq-sde-hibrida-general" class="quarto-xref">Ecuación&nbsp;<span>4.1</span></a>, entonces el diferencial estocástico de la función compuesta <span class="math inline">\(V(t, T(t), \alpha(t))\)</span> viene dado por:</p>
-<p><span id="eq-ito-generalizado"><span class="math display">\[
-\begin{aligned}
-dV(t, T(t), \alpha(t)) = &amp; \left[ \frac{\partial V}{\partial t} + \frac{\partial V}{\partial T}\mu(T, \alpha) + \frac{1}{2}\frac{\partial^2 V}{\partial T^2}\sigma^2(T, \alpha) + \sum_{j \in \mathcal{M}} q_{\alpha(t)j}V(t, T, j) \right] dt \\
-&amp; + \frac{\partial V}{\partial T}\sigma(T, \alpha) dW(t) + \left[ V(t, T(t^-) + \gamma, \alpha(t^-)) - V(t, T(t^-), \alpha(t^-)) \right] dN(t)
-\end{aligned}
-\tag{4.3}\]</span></span></p>
-</div>
-<p>Como se puede apreciar en el <a href="#thm-ito-generalizado" class="quarto-xref">Teorema&nbsp;<span>4.2</span></a>, el operador diferencial de Itô se logra expandir. El primer término entre corchetes añade a la derivada temporal y al generador de difusión clásico una sumatoria ponderada por las tasas de transición <span class="math inline">\(q_{ij}\)</span> de la matriz <span class="math inline">\(Q\)</span>, lo cual captura el efecto del cambio en la deriva. Por su parte, la componente final sustituye la derivada espacial tradicional por un operador de diferencias finitas encargado de absorber la discontinuidad en los tiempos de salto del proceso de Poisson.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-karatzas1998brownian" class="csl-entry" role="listitem">
-Karatzas, Ioannis, y Steven E. Shreve. 1998. <em>Brownian Motion and Stochastic Calculus</em>. 2nd ed. Vol. 113. Graduate Texts en Mathematics. New York, NY: Springer-Verlag. <a href="https://doi.org/10.1007/978-1-4612-0949-2">https://doi.org/10.1007/978-1-4612-0949-2</a>.
-</div>
-<div id="ref-platen2010numerical" class="csl-entry" role="listitem">
-Platen, Eckhard, y Nicola Bruti-Liberati. 2010. <em>Numerical Solution of Stochastic Differential Equations with Jumps in Finance</em>. Vol. 64. Stochastic Modelling y Applied Probability. Berlin, Heidelberg: Springer-Verlag. <a href="https://doi.org/10.1007/978-3-642-13694-8">https://doi.org/10.1007/978-3-642-13694-8</a>.
-</div>
-<div id="ref-yin2010hybrid" class="csl-entry" role="listitem">
-Yin, G. George, y Chao Zhu. 2010. <em>Hybrid Switching Diffusions: Properties and Applications</em>. Vol. 63. Stochastic Modelling y Applied Probability. New York, NY: Springer. <a href="https://doi.org/10.1007/978-1-4419-1105-6">https://doi.org/10.1007/978-1-4419-1105-6</a>.
-</div>
-</div>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
