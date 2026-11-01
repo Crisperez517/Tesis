@@ -636,7 +636,7 @@ $$
 A continuación enunciamos y demostramos a detalle el teorema central que garantiza la existencia, unicidad fuerte y acotamiento en segundo momento de la solución para la ecuación diferencial estocástica híbrida con saltos (@eq-ede-hibrida-diff). La estructura de la demostración extiende el procedimiento constructivo sobre tiempos de paro del Teorema 3.13 y Lema 3.1 de [@mao2006stochastic] al caso de difusiones impulsadas por medidas aleatorias de Poisson compensadas mediante el @thm-situ-existencia [@situ2005theory].
 
 ::: {#thm-mao-switching}
-### Teorema de Existencia y Unicidad para la EDE Híbrida con Saltos y Régimen de Markov
+### Teorema de Existencia y Unicidad para EDES Híbridas con Saltos y Régimen de Markov
 Consideremos la ecuación diferencial estocástica híbrida (@eq-ede-hibrida-diff) en el intervalo $[t_0, T]$ ($0 \le t_0 < T < \infty$), con condiciones iniciales $X(t_0) = x_0 \in L^2_{\mathcal{F}_{t_0}}(\Omega; \mathbb{R})$ y $\alpha(t_0) = \alpha_0$. Supóngase que el movimiento Browniano $W(t)$, la medida aleatoria de Poisson $N(dt, dz)$ (con medida de intensidad $\nu_t(dz)dt = \lambda(t)dF(z)dt$, donde $\displaystyle \int_{t_0}^T \lambda(t)dt < \infty$) y la cadena de Markov a tiempo continuo $\alpha(t)$ (con espacio de estados finito $\mathcal{M} = \{1, 2, \dots, m\}$ y matriz generadora de tasas finitas $Q = (q_{ij})_{m \times m}$) son mutuamente independientes.
 
 Si existen constantes positivas $L, K > 0$ tales que los coeficientes de la ecuación diferencial estocástica híbrida satisfacen las siguientes condiciones:
@@ -751,99 +751,154 @@ $$
 
 Finalmente, tomando el límite cuando $n \to \infty$, dado que $\sigma_n \uparrow T$ casi seguramente, por el Teorema de la Convergencia Monótona se obtiene la desigualdad deseada (@eq-cota-supremo-hibrida), por lo que $\{X(t)\}_{t \in [t_0, T]}$ $\in$ $\mathcal{M}^2([t_0, T]; \mathbb{R})$. 
 
-De todo lo anterior se concluye la demostracion del teorema de existencia y unicidad para la ecuación diferencial estocástica híbrida con saltos y régimen de Markov (@thm-mao-switching). $\boxtimes$
+De todo lo anterior se concluye la demostracion del teorema de existencia y unicidad para las ecuaciones diferenciales estocásticas híbridas con saltos y régimen de Markov (@thm-mao-switching). $\boxtimes$
 
 # DE AQUI
 
 ## El Modelo Estocástico Termodinámico (Ornstein-Uhlenbeck Híbrido)
 
-Habiendo establecido la demostración matemática formal que avala la existencia y unicidad de las ecuaciones diferenciales estocásticas con discontinuidades y cambios de régimen, procedemos a formalizar la ecuación específica que rige la dinámica térmica de nuestro refrigerador de vacunas.
+Habiendo demostrado el teorema general de existencia y unicidad para ecuaciones diferenciales estocásticas híbridas con saltos (@thm-mao-switching), procedemos a formular la ecuación diferencial estocástica que describe la evolución de la temperatura interna $T(t)$ del refrigerador en un horizonte temporal $[0, T]$, con $T > 0$.
 
-Bajo los principios termodinámicos de la ley empírica de enfriamiento de Newton, la temperatura interna $T(t)$ del equipo se modela mediante un proceso de Ornstein-Uhlenbeck sujeto a perturbaciones gaussianas (el ruido del termostato y las fugas microscópicas), saltos discretos por aperturas de puerta, y un estado de suministro eléctrico dictado por una cadena de Markov $\alpha(t) \in \mathcal{M} = \{1, 2\}$:
+Sea $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})$ un espacio de probabilidad filtrado. Basándonos en la ley de enfriamiento de Newton y en el proceso de Ornstein-Uhlenbeck (@def-ou-clasico), modelamos la temperatura interna $T(t)$ mediante una ecuación diferencial estocástica híbrida gobernada por una cadena de Markov a tiempo continuo $\{\alpha(t)\}_{t \ge 0}$ (@def-cadena-markov) con espacio de estados $\mathcal{M} = \{1, 2\}$ y matriz generadora de tasas finitas $Q = (q_{ij})_{2 \times 2}$, cuya expresión por trímenes operativos está dada por:
 
-$$dT(t) = b(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + dJ(t)$$
-{#eq-modelo-termodinamico}
+$$
+dT(t) = 
+\begin{cases} 
+\kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
+\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
+\end{cases}, \quad 0 \leq t \leq T,
+$$ {#eq-ede-operativa}
 
-Donde los regímenes operativos se definen como $\alpha(t) = 1$ (suministro eléctrico activo de la red pública) y $\alpha(t) = 2$ (corte de energía). Los coeficientes de deriva determinista $b$ y la difusión continua $\sigma$ toman las siguientes formas paramétricas:
+con condiciones iniciales $T(0) = T_0 \in L^2_{\mathcal{F}_0}(\Omega; \mathbb{R})$ y $\alpha(0) = \alpha_0 \in \mathcal{M}$. En la @eq-ede-operativa, $\kappa_{on} > 0$ y $\kappa_{off} > 0$ representan las tasas de transferencia térmica en cada régimen, $\theta_{set} \in \mathbb{R}$ denota la temperatura de equilibrio del termostato, $\sigma_{on} > 0$ y $\sigma_{off} > 0$ son los coeficientes de difusión constantes asociados al movimiento Browniano estándar $\{W(t)\}_{t \ge 0}$, y $T_{amb}: [0, T] \to \mathbb{R}$ es una función determinista continua y acotada que representa la temperatura ambiente exterior.
 
-**Régimen 1 (Con energía):**
-$$b(t, T, 1) = \kappa_{on}(\theta_{set} - T)$$
-$$\sigma(1) = \sigma_{on}$$
+Por su parte, las perturbaciones discretas por apertura de puertas en el régimen $\alpha(t) = 1$ están dadas por el proceso de Poisson compuesto (@def-poisson-compuesto):
 
-**Régimen 2 (Falla eléctrica):**
-$$b(t, T, 2) = \kappa_{off}(T_{amb}(t) - T)$$
-$$\sigma(2) = \sigma_{off}$$
+$$
+J(t) = \sum_{i=1}^{N_{puerta}(t)} \gamma_i,
+$$
 
-El término estocástico $dJ(t)$ representa un proceso de Poisson compuesto que inyecta calor al sistema producto de las aperturas de la puerta por el personal médico. Físicamente, este proceso ocurre exclusivamente en el Régimen 1, y se encuentra dictado por un proceso de Poisson no homogéneo con una función de intensidad horaria $\lambda(t)$. La magnitud de cada salto térmico o evento convectivo $\gamma_i$ es una variable aleatoria extraída de una distribución normal latente $Z \sim \mathcal{N}(0.76, 0.20^2)$ y censurada inferiormente (con suelo) en un umbral operativo de $0.16$ °C, tal que $\gamma_i = \max(0.16, Z)$. 
+donde $\{N_{puerta}(t)\}_{t \ge 0}$ es un proceso de Poisson no homogéneo (@def-poisson-no-homogeneo) con función de intensidad localmente integrable y acotada $\lambda(t) \ge 0$, y $\{\gamma_i\}_{i \in \mathbb{N}}$ es una sucesión de variables aleatorias independientes e idénticamente distribuidas con función de distribución acumulada $F(z)$ soportada en $\mathcal{Z} \subseteq \mathbb{R}$, tales que poseen segundo momento finito $\mathbb{E}[\vert \gamma_i \vert^2] = M_\gamma < \infty$ (y por ende media finita $\mathbb{E}[\vert \gamma_i \vert] < \infty$). Se asume que el movimiento Browniano $W(t)$, el proceso de conteo $N_{puerta}(t)$, las magnitudes $\{\gamma_i\}_{i \in \mathbb{N}}$ y la cadena de Markov $\alpha(t)$ son mutuamente independientes.
 
-Para representar analíticamente la condición de que los saltos térmicos masivos (aperturas programadas de puerta) solo ocurren cuando el refrigerador está operando normalmente (Régimen 1), definimos la función espacial del salto condicionada al régimen como:
-$$\gamma(1, z) = z$$
-$$\gamma(2, z) = 0$$
+Definiendo los coeficientes de deriva $b: [0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}$ y de difusión $\sigma: \mathcal{M} \to \mathbb{R}$ para cada régimen mediante:
 
-### Transformación Analítica de la Medida de Salto
+$$
+b(t, T, 1) = \kappa_{on}(\theta_{set} - T), \qquad \sigma(1) = \sigma_{on},
+$$
+$$
+b(t, T, 2) = \kappa_{off}(T_{amb}(t) - T), \qquad \sigma(2) = \sigma_{off},
+$$
 
-Para someter nuestro modelo termodinámico a los criterios abstractos de existencia y unicidad del `@thm-situ-existencia` que forman la base del `@thm-mao-switching`, debemos reescribir el diferencial empírico del proceso de Poisson compuesto $dJ(t)$ en términos de una integral respecto a la medida de Poisson compensada $\tilde{N}(dt, dz)$. Invocando el `@lem-equivalencia-saltos`, definimos la medida de intensidad espacial como $\nu(dz) = \lambda(t) dF(z)$, donde $F(z)$ representa la función de distribución acumulada de los saltos térmicos censurados $\gamma_i$. 
+y la función de amplitud de salto $\gamma: \mathcal{M} \times \mathcal{Z} \to \mathbb{R}$ como:
 
-Transformamos el diferencial de salto sumando y restando algebraicamente el compensador de la intensidad determinista:
-$$dJ(t) = \int_{\mathbb{R}} \gamma(1, z) N(dt, dz) = \int_{\mathbb{R}} z \tilde{N}(dt, dz) + \left( \lambda(t) \int_{\mathbb{R}} z dF(z) \right) dt$$
+$$
+\gamma(1, z) = z, \qquad \gamma(2, z) = 0,
+$$
 
-Dado que la integral respecto a la medida de probabilidad empírica $dF(z)$ es, por definición en la teoría de la medida, el valor esperado incondicional de la magnitud del salto térmico $\mathbb{E}[\gamma]$, la ecuación puede reescribirse elegantemente absorbiendo este término determinista integrador en una "deriva modificada" o compensada, denotada a partir de ahora por $\tilde{b}(t, T, \alpha)$:
+la @eq-ede-operativa se escribe de forma unificada evaluada en los límites por la izquierda como:
 
-**Derivas Compensadas:**
-$$\tilde{b}(t, T, 1) = \kappa_{on}(\theta_{set} - T) + \lambda(t)\mathbb{E}[\gamma]$$
-$$\tilde{b}(t, T, 2) = \kappa_{off}(T_{amb}(t) - T)$$
+$$
+dT(t) = b(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \mathbf{1}_{\{\alpha(t^-) = 1\}} dJ(t).
+$$ {#eq-modelo-termodinamico}
 
-Nótese que para el Régimen 2, el término de salto esperado es nulo ($\gamma(2,z)=0$), preservando inalterada la dinámica difusiva de enfriamiento pasivo. La ecuación termodinámica híbrida en su forma final y estrictamente compatible con la teoría clásica de integrales de martingala para sistemas de salto queda formulada como:
+### Transformación Analítica a la Forma Compensada
 
-$$dT(t) = \tilde{b}(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \int_{\mathbb{R}} \gamma(\alpha(t^-), z) \tilde{N}(dt, dz)$$
-{#eq-modelo-compensado}
+Para analizar la existencia y unicidad de la solución de la @eq-modelo-termodinamico mediante el @thm-mao-switching, es necesario expresar el diferencial del proceso de Poisson compuesto $dJ(t)$ en términos de una integral estocástica respecto a la medida aleatoria de Poisson compensada $\tilde{N}(dt, dz)$ (@def-medida-compensada).
 
-## Verificación Analítica de Existencia y Unicidad del Modelo Termodinámico
+Sea $N(dt, dz)$ la medida aleatoria de conteo de Poisson asociada al proceso compuesto $J(t)$, cuya medida de intensidad (@def-medida-levy) está dada por $\nu_t(dz)dt = \lambda(t)dF(z)dt$. Aplicando el @lem-equivalencia-saltos y utilizando la definición de $\gamma(\alpha, z)$, el término de salto en la @eq-modelo-termodinamico admite la descomposición:
 
-Para demostrar matemáticamente que la EDE estocástica compensada en la `@eq-modelo-compensado` es una representación funcional viable de la red de frío, debemos verificar analíticamente que sus coeficientes termodinámicos satisfacen de manera estricta las condiciones del `@thm-situ-existencia` y, por extensión, las del Teorema de Concatenación de Soluciones Híbridas (`@thm-mao-switching`).
+$$
+\begin{aligned}
+\mathbf{1}_{\{\alpha(t^-) = 1\}} dJ(t) &= \int_{\mathcal{Z}} \gamma(\alpha(t^-), z) N(dt, dz) \\
+&= \int_{\mathcal{Z}} \gamma(\alpha(t^-), z) \tilde{N}(dt, dz) + \left( \lambda(t) \int_{\mathcal{Z}} \gamma(\alpha(t^-), z) dF(z) \right) dt.
+\end{aligned}
+$$
 
-**Paso 1: Localización del Intervalo Físico de Análisis**
-Consideramos un intervalo semiabierto entre dos cambios de suministro eléctrico consecutivos $[\tau_k, \tau_{k+1})$. Puesto que el sistema de suministro eléctrico se encuentra en un estado estacionario en este intervalo, evaluaremos las condiciones del sistema condicionado a un régimen fijo $\alpha(t) = i \in \{1, 2\}$.
+Cuando $\alpha(t^-) = 1$, la integral respecto a $dF(z)$ coincide con el valor esperado de las magnitudes de salto, $\int_{\mathcal{Z}} z dF(z) = \mathbb{E}[\gamma_i]$, mientras que cuando $\alpha(t^-) = 2$ dicha integral se anula idénticamente debido a que $\gamma(2, z) = 0$. Absorbiendo este término determinista dentro del coeficiente de deriva original $b(t, T, \alpha)$, definimos el coeficiente de **deriva compensada** $\tilde{b}: [0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}$ como:
 
-**Paso 2: Comprobación Rigurosa de la Condición de Lipschitz Global**
-Debemos demostrar que la tasa instantánea de cambio de la ecuación térmica está linealmente acotada por la diferencia de las variables espaciales de estado, impidiendo cruces de trayectorias. Sean $T_1$ y $T_2$ dos temperaturas internas hipotéticas de evaluación. Computamos la suma de las diferencias cuadráticas de los tres coeficientes de nuestra ecuación:
+$$
+\tilde{b}(t, T, 1) = \kappa_{on}(\theta_{set} - T) + \lambda(t)\mathbb{E}[\gamma_i],
+$$
+$$
+\tilde{b}(t, T, 2) = \kappa_{off}(T_{amb}(t) - T).
+$$
 
-1. **Coeficiente de Difusión:** Dado que $\sigma_{on}$ y $\sigma_{off}$ representan el ruido gaussiano base y son constantes reales estrictamente independientes de la temperatura actual $T$, se cumple de forma trivial que su diferencia es idénticamente nula en ambos regímenes:
-   $$\vert{}\sigma(i) - \sigma(i)\vert{}^2 = 0$$
+Sustituyendo esta expresión en la @eq-modelo-termodinamico, obtenemos la ecuación diferencial estocástica híbrida en su forma canónica compensada (@def-ede-hibrida):
 
-2. **Medida Espacial de Saltos:** La condición de Lipschitz para el operador de salto exige evaluar la integral de las diferencias espaciales. Sin embargo, en nuestro modelo fenomenológico, la magnitud del aire caliente que ingresa al abrir la puerta ($\gamma(\alpha, z)$) depende exclusivamente de la temperatura y volumen del entorno externo censurado (la marca estocástica $z$) y no depende endógenamente de la temperatura interna previa del refrigerador $T(t^-)$. Por tanto, la función espacial es estática respecto a $T$, resultando en una diferencia nula:
-   $$\int_{\mathbb{R}} \vert{}\gamma(i, z) - \gamma(i, z)\vert{}^2 \nu(dz) = \int_{\mathbb{R}} \vert{}z - z\vert{}^2 \lambda(t) dF(z) = 0$$
+$$
+dT(t) = \tilde{b}(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(\alpha(t^-), z) \tilde{N}(dt, dz).
+$$ {#eq-modelo-compensado}
 
-3. **Deriva Termodinámica Compensada:** Para el Régimen operativo 1 (con suministro de CFE), evaluamos la diferencia absoluta al cuadrado de las derivas para $T_1$ y $T_2$. Como hemos transformado la ecuación a la medida de martingala, el término de salto esperado o determinista $\lambda(t)\mathbb{E}[\gamma]$ es un sumando aditivo estricto, independiente de $T$, por lo que se anula en la sustracción algebraica de Itô:
-   $$\vert{}\tilde{b}(t, T_1, 1) - \tilde{b}(t, T_2, 1)\vert{}^2 = \left\vert{} [\kappa_{on}(\theta_{set} - T_1) + \lambda(t)\mathbb{E}[\gamma]] - [\kappa_{on}(\theta_{set} - T_2) + \lambda(t)\mathbb{E}[\gamma]] \right\vert{}^2$$
-   $$= \vert{}-\kappa_{on}(T_1 - T_2)\vert{}^2 = \kappa_{on}^2 \vert{}T_1 - T_2\vert{}^2$$
-   Siguiendo un tratamiento analítico análogo para el Régimen de fallo eléctrico 2, obtenemos la cota estricta asintótica $\kappa_{off}^2 \vert{}T_1 - T_2\vert{}^2$.
+## Verificación Analítica de Existencia y Unicidad del Modelo
 
-Definiendo la constante matemática global de Lipschitz como el cuadrado de la máxima inercia térmica disipativa del sistema, es decir, $L = \max(\kappa_{on}^2, \kappa_{off}^2)$, se satisface de manera universal e irrefutable que para el modelo propuesto:
-$$\vert{}\tilde{b}(t, T_1, i) - \tilde{b}(t, T_2, i)\vert{}^2 + \vert{}\sigma(i) - \sigma(i)\vert{}^2 + \int_{\mathbb{R}} \vert{}\gamma(i, z) - \gamma(i, z)\vert{}^2 \nu(dz) \le L \vert{}T_1 - T_2\vert{}^2$$
-Esta acotación asegura formalmente el cumplimiento de la condición para la **unicidad fuerte** del proceso estocástico térmico en estudio.
+Demostraremos a continuación que la ecuación diferencial estocástica híbrida (@eq-modelo-compensado) —y por equivalencia algebraica la @eq-ede-operativa— admite una única solución fuerte càdlàg en el intervalo $[0, T]$, verificando que sus procesos conductores y coeficientes satisfacen todas las hipótesis del @thm-mao-switching.
 
-**Paso 3: Comprobación Analítica de la Condición de Crecimiento Lineal**
-Para garantizar la viabilidad existencial global del sistema estocástico, debemos probar que el crecimiento acumulativo del sistema está termodinámicamente acotado, previniendo asintóticamente fenómenos de explosión en tiempo finito (i.e. evitar que la temperatura interna del refrigerador tienda al infinito de manera instantánea, lo cual sería un absurdo físico).
+En primer lugar, por construcción del modelo, el movimiento Browniano $W(t)$, la medida aleatoria de Poisson $N(dt, dz)$ y la cadena de Markov $\alpha(t)$ son mutuamente independientes. Asimismo, dado que el espacio de estados $\mathcal{M} = \{1, 2\}$ es finito y las tasas de transición de la matriz generadora $Q = (q_{ij})_{2 \times 2}$ son finitas, la cadena de Markov no presenta explosión en $[0, T]$. Adicionalmente, puesto que la función de intensidad es acotada en el intervalo cerrado $[0, T]$, existe una constante $\lambda_{max} = \sup_{t \in [0, T]} \lambda(t) < \infty$ tal que $\int_0^T \lambda(t)dt \le \lambda_{max}T < \infty$.
 
-Para evaluar la deriva compensada en el Régimen 1, empleamos la desigualdad algebraica demostrada en el `@lem-desigualdad-algebraica` $(\vert{}a-b\vert{}^2 \le 2\vert{}a\vert{}^2 + 2\vert{}b\vert{}^2)$ y asumimos la existencia de una cota superior natural en la modelación empírica para la intensidad máxima de apertura de puertas en el centro de salud $\lambda_{max} = \sup_{t} \lambda(t)$:
-$$\vert{}\tilde{b}(t, T, 1)\vert{}^2 = \vert{}\kappa_{on}\theta_{set} + \lambda(t)\mathbb{E}[\gamma] - \kappa_{on}T\vert{}^2 \le 2(\kappa_{on}\theta_{set} + \lambda_{max}\mathbb{E}[\gamma])^2 + 2\kappa_{on}^2 \vert{}T\vert{}^2$$
+Para comprobar el cumplimiento de la condición de Lipschitz global (@eq-hip-lipschitz-hibrida), sean $T_1, T_2 \in \mathbb{R}$ dos valores cualesquiera de la variable de estado, $t \in [0, T]$ e $i \in \{1, 2\}$. Dado que el coeficiente de difusión $\sigma(i)$ y la función de salto $\gamma(i, z)$ dependen únicamente del régimen $i$ y de la marca $z$, pero son independientes del estado $T$, sus diferencias respecto a la variable de estado se anulan idénticamente en ambos regímenes:
 
-Para el Régimen 2 de disipación de calor, definimos la constante escalar $T_{max}$ como la temperatura ambiental histórica máxima absoluta de la ubicación geográfica de estudio de Tuxtla Gutiérrez, Chiapas (i.e., $\vert{}T_{amb}(t)\vert{} \le T_{max}$ para todo $t$), obteniendo por la misma cota del lema:
-$$\vert{}\tilde{b}(t, T, 2)\vert{}^2 = \vert{}\kappa_{off}T_{amb}(t) - \kappa_{off}T\vert{}^2 \le 2\kappa_{off}^2 T_{max}^2 + 2\kappa_{off}^2 \vert{}T\vert{}^2$$
+$$
+\vert \sigma(i) - \sigma(i) \vert^2 = 0, \qquad \int_{\mathcal{Z}} \vert \gamma(i, z) - \gamma(i, z) \vert^2 \nu_t(dz) = 0.
+$$
 
-Evaluamos simultáneamente el segundo momento probabilístico incondicional de la medida de saltos (la varianza del ruido del impacto térmico), denotando el momento latente $\mathbb{E}[\gamma^2] = M_\gamma$:
-$$\int_{\mathbb{R}} \vert{}\gamma(1, z)\vert{}^2 \nu(dz) = \lambda(t) \int_{\mathbb{R}} z^2 dF(z) = \lambda(t) \mathbb{E}[\gamma^2] \le \lambda_{max} M_\gamma$$
+Por otro lado, evaluando la diferencia cuadrática de la deriva compensada para el régimen $i = 1$, observamos que el término aditivo $\lambda(t)\mathbb{E}[\gamma_i]$ se cancela algebraicamente:
 
-Agrupando iterativamente la suma de los componentes del modelo (derivas compensadas, volatilidad térmica cuadrática constante $\Sigma_{max} = \max(\sigma_{on}^2, \sigma_{off}^2)$ y la cota integral estocástica de los saltos) y factorizando algebraicamente los términos estáticos y aquellos proporcionales al cuadrado del estado $T^2$, demostramos que existe una macro-constante limitante de crecimiento sistémico $K$, definida estrictamente como:
-$$K = \max \left( \max[2(\kappa_{on}\theta_{set} + \lambda_{max}\mathbb{E}[\gamma])^2, 2\kappa_{off}^2 T_{max}^2] + \Sigma_{max} + \lambda_{max} M_\gamma, \quad \max(2\kappa_{on}^2, 2\kappa_{off}^2) \right)$$
-Tal que se cumple rigurosamente la desigualdad para la ecuación en todos sus regímenes $i \in \{1, 2\}$:
-$$\vert{}\tilde{b}(t, T, i)\vert{}^2 + \vert{}\sigma(i)\vert{}^2 + \int_{\mathbb{R}} \vert{}\gamma(i, z)\vert{}^2 \nu(dz) \le K(1 + \vert{}T\vert{}^2)$$
-Esta acotación superior estructural demuestra matemáticamente que la transferencia de calor simulada está físicamente acotada por las fronteras climáticas empíricas del entorno y los parámetros fijos del equipo electromecánico. Esta condición previene de forma segura que $\lim_{t \to \tau} \vert{}T(t)\vert{} = \infty$, garantizando la **existencia global** de la trayectoria sin rupturas o singularidades en tiempo finito. Cabe señalar que esta existencia global no implica necesariamente estabilidad operativa dentro de los rangos normativos térmicos de la vacuna ($2^\circ$C a $8^\circ$C), lo cual es competencia del análisis inferencial numérico.
+$$
+\begin{aligned}
+\vert \tilde{b}(t, T_1, 1) - \tilde{b}(t, T_2, 1) \vert^2 &= \left\vert \left[ \kappa_{on}(\theta_{set} - T_1) + \lambda(t)\mathbb{E}[\gamma_i] \right] - \left[ \kappa_{on}(\theta_{set} - T_2) + \lambda(t)\mathbb{E}[\gamma_i] \right] \right\vert^2 \\
+&= \vert -\kappa_{on}(T_1 - T_2) \vert^2 = \kappa_{on}^2 \vert T_1 - T_2 \vert^2.
+\end{aligned}
+$$
 
-**Paso 4: Conclusión Analítica Integral**
-Habiendo validado de forma deductiva el cumplimiento estricto de las condiciones de Lipschitz y de Crecimiento Lineal en los análisis previos (Paso 2 y 3), las hipótesis del `@thm-situ-existencia` se cumplen y avalan la aseveración de que, en cada intervalo de suministro constante $[\tau_k, \tau_{k+1})$, la EDE termodinámica posee una única y robusta solución estocástica en sentido fuerte.
+De manera análoga, para el régimen $i = 2$ el término $\kappa_{off}T_{amb}(t)$ se cancela al restar ambas expresiones, obteniéndose:
 
-Adicionalmente, al validar que la matriz de intensidad de fallos de la red eléctrica comercial $Q$ es dimensional y espectralmente acotada, se cumple la condición de no explosividad de la cadena de Markov descrita en el Teorema de Concatenación de Soluciones Híbridas (`@thm-mao-switching`). 
+$$
+\vert \tilde{b}(t, T_1, 2) - \tilde{b}(t, T_2, 2) \vert^2 = \left\vert \kappa_{off}(T_{amb}(t) - T_1) - \kappa_{off}(T_{amb}(t) - T_2) \right\vert^2 = \kappa_{off}^2 \vert T_1 - T_2 \vert^2.
+$$
 
-La convergencia de estos dos paradigmas analíticos certifica que el modelo matemático híbrido general de la red de frío expuesto a fallos sistémicos y perturbaciones ambientales posee una trayectoria estocástica global única, sin singularidades y adaptada a la filtración histórica generada por la evolución térmica, posibilitando, validando y blindando metodológicamente cualquier implementación posterior de estimación de densidades empíricas y pronóstico mediante metodologías de Monte Carlo o técnicas de inferencia asintótica.
+Definiendo la constante positiva $L = \max\{\kappa_{on}^2, \kappa_{off}^2\} > 0$, se cumple uniformemente para todo $t \in [0, T]$, $T_1, T_2 \in \mathbb{R}$ e $i \in \{1, 2\}$ que:
+
+$$
+\vert \tilde{b}(t, T_1, i) - \tilde{b}(t, T_2, i) \vert^2 + \vert \sigma(i) - \sigma(i) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(i, z) - \gamma(i, z) \vert^2 \nu_t(dz) \le L \vert T_1 - T_2 \vert^2,
+$$
+
+lo cual verifica la condición de Lipschitz global (@eq-hip-lipschitz-hibrida).
+
+Resta verificar que los coeficientes satisfacen la condición de crecimiento lineal (@eq-hip-crecimiento-hibrida). Sea $(t, T, i) \in [0, T] \times \mathbb{R} \times \{1, 2\}$ y denotemos por $T_{max} = \sup_{t \in [0, T]} \vert T_{amb}(t) \vert < \infty$ la cota superior de la función continua $T_{amb}(t)$ en el compacto $[0, T]$. Aplicando la desigualdad elemental $\vert a - b \vert^2 \le 2\vert a \vert^2 + 2\vert b \vert^2$ del @lem-desigualdad-algebraica al coeficiente de deriva compensada en el régimen $i = 1$, y acotando $\lambda(t) \le \lambda_{max}$, se obtiene:
+
+$$
+\vert \tilde{b}(t, T, 1) \vert^2 = \left\vert \left( \kappa_{on}\theta_{set} + \lambda(t)\mathbb{E}[\gamma_i] \right) - \kappa_{on}T \right\vert^2 \le 2\left( \kappa_{on}\vert \theta_{set} \vert + \lambda_{max}\vert \mathbb{E}[\gamma_i] \vert \right)^2 + 2\kappa_{on}^2 \vert T \vert^2.
+$$
+
+Aplicando la misma desigualdad algebraica a la deriva en el régimen $i = 2$ y utilizando que $\vert T_{amb}(t) \vert \le T_{max}$, resulta:
+
+$$
+\vert \tilde{b}(t, T, 2) \vert^2 = \vert \kappa_{off}T_{amb}(t) - \kappa_{off}T \vert^2 \le 2\kappa_{off}^2 T_{max}^2 + 2\kappa_{off}^2 \vert T \vert^2.
+$$
+
+Para el término de difusión, se tiene en ambos regímenes la cota constante $\vert \sigma(i) \vert^2 \le \Sigma_{max}$, donde $\Sigma_{max} = \max\{\sigma_{on}^2, \sigma_{off}^2\} < \infty$. Asimismo, evaluando la integral del coeficiente de salto respecto a la medida de intensidad $\nu_t(dz) = \lambda(t)dF(z)$, se observa que para $i = 2$ dicha integral es nula, mientras que para $i = 1$ se cumple que:
+
+$$
+\int_{\mathcal{Z}} \vert \gamma(1, z) \vert^2 \nu_t(dz) = \lambda(t) \int_{\mathcal{Z}} \vert z \vert^2 dF(z) = \lambda(t) \mathbb{E}[\vert \gamma_i \vert^2] \le \lambda_{max} M_\gamma < \infty.
+$$
+
+Sumando las cotas correspondientes a la deriva compensada, la difusión y la medida de saltos, y definiendo la constante positiva:
+
+$$
+K = \max\left\{ \max\left\{ 2\left( \kappa_{on}\vert \theta_{set} \vert + \lambda_{max}\vert \mathbb{E}[\gamma_i] \vert \right)^2, \, 2\kappa_{off}^2 T_{max}^2 \right\} + \Sigma_{max} + \lambda_{max} M_\gamma, \ \max\{2\kappa_{on}^2, 2\kappa_{off}^2\} \right\} > 0,
+$$
+
+se deduce que para todo $(t, T, i) \in [0, T] \times \mathbb{R} \times \{1, 2\}$ se satisface la desigualdad:
+
+$$
+\vert \tilde{b}(t, T, i) \vert^2 + \vert \sigma(i) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(i, z) \vert^2 \nu_t(dz) \le K\left( 1 + \vert T \vert^2 \right),
+$$
+
+verificando así la condición de crecimiento lineal (@eq-hip-crecimiento-hibrida).
+
+En conclusión, dado que se cumplen todas las hipótesis del @thm-mao-switching, para cualquier condición inicial $T(0) = T_0 \in L^2_{\mathcal{F}_0}(\Omega; \mathbb{R})$ y $\alpha(0) = \alpha_0 \in \{1, 2\}$, la ecuación diferencial estocástica híbrida propuesta en la @eq-ede-operativa posee una única solución fuerte $\{T(t)\}_{t \in [0, T]}$ adaptada a $\{\mathcal{F}_t\}_{t \ge 0}$, con trayectorias càdlàg casi seguramente y acotada en media cuadrática:
+
+$$
+\mathbb{E}\left[ \sup_{0 \le t \le T} \vert T(t) \vert^2 \right] < \infty,
+$$
+
+por lo que $\{T(t)\}_{t \in [0, T]} \in \mathcal{M}^2([0, T]; \mathbb{R})$.
