@@ -1840,7 +1840,7 @@ experimenta únicamente un número finito de saltos simples en el
 intervalo acotado \([t_0, T]\). Por lo tanto, definiendo recursivamente
 la sucesión de tiempos de paro \(\{\tau_k\}_{k \ge 0}\) asociada a las
 conmutaciones de régimen mediante \(\tau_0 = t_0\) y \[
-\tau_{k+1} = T \wedge \inf\{t > \tau_k : \alpha(t) \neq \alpha(\tau_k)\}, \quad k \ge 0,
+\tau_{k+1} = \min\left(T, \inf\{t > \tau_k : \alpha(t) \neq \alpha(\tau_k)\}\right), \quad k \ge 0,
 \] se cumplen las siguientes dos propiedades estructurales:
 
 \begin{itemize}
@@ -1929,10 +1929,10 @@ demostrando la existencia y unicidad de la solución en \([t_0, T]\).
 Resta demostrar que la solución única \(X(t)\) satisface la estimación
 de segundo momento (Ecuación~\ref{eq-cota-supremo-hibrida}). Para todo
 entero \(n \ge 1\), definamos el tiempo de paro de truncamiento: \[
-\sigma_n = T \wedge \inf\{t \in [t_0, T] : \vert X(t) \vert \ge n\}.
+\sigma_n = \min\left(T, \inf\{t \in [t_0, T] : \vert X(t) \vert \ge n\}\right).
 \] Claramente, \(\sigma_n\) es no decreciente y \(\sigma_n \uparrow T\)
 casi seguramente cuando \(n \to \infty\). Definiendo el proceso detenido
-\(X_n(t) = X(t \wedge \sigma_n)\) para \(t \in [t_0, T]\), por las
+\(X_n(t) = X(\min(t, \sigma_n))\) para \(t \in [t_0, T]\), por las
 propiedades de las integrales estocásticas en tiempos de paro se cumple
 que: \[
 \begin{aligned}
@@ -1968,15 +1968,25 @@ las tres integrales en una sola cota: \[
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] & \le 4\mathbb{E}[\vert x_0 \vert^2] + 4(T - t_0 + 5)\mathbb{E}\left[ \int_{t_0}^t K\left( 1 + \vert X_n(r^-) \vert^2 \right) \mathbf{1}_{[[t_0, \sigma_n]]}(r) dr \right] \\
 & \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
 \end{aligned}
-\] Sumando \(1\) en ambos lados de la desigualdad anterior, obtenemos
-para todo \(t \in [t_0, T]\): \[
-1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 1 + 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
-\] Puesto que \(\vert X_n(s) \vert \le n \vee \vert x_0 \vert\) en
-\([[t_0, \sigma_n[[\), la función
+\] Observemos que, aunque el proceso detenido \(X_n(s)\) puede superar
+el umbral \(n\) en el instante exacto \(s = \sigma_n\) debido a la
+ocurrencia de un salto, por definición de \(\sigma_n\) se cumple que
+\(\vert X(r) \vert < n\) para todo \(r \in (t_0, \sigma_n)\), por lo que
+el límite por la izquierda satisface estrictamente
+\(\vert X_n(r^-) \vert = \vert X(r^-) \vert \le \max(n, \vert x_0 \vert)\)
+para todo \(r \in [[t_0, \sigma_n]]\)
+(\citeproc{ref-situ2005theory}{Situ 2005}). Sustituyendo esta cota en la
+primera desigualdad de la estimación anterior, se verifica que para todo
+\(t \in [t_0, T]\): \[
+\mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5)(T - t_0)\left( 1 + n^2 + \mathbb{E}[\vert x_0 \vert^2] \right) < \infty.
+\] Esto garantiza que la función
 \(u_n(t) = 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right]\)
-es acotada y medible en \([t_0, T]\). Aplicando la Desigualdad Integral
-de Grönwall (Lema~\ref{lem-gronwall}) y evaluando en \(t = T\), se
-deduce que: \[
+es finita, acotada y medible en \([t_0, T]\). Sumando \(1\) en ambos
+lados de la desigualdad integral previa, obtenemos para todo
+\(t \in [t_0, T]\): \[
+1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 1 + 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
+\] Aplicando la Desigualdad Integral de Grönwall
+(Lema~\ref{lem-gronwall}) y evaluando en \(t = T\), se deduce que: \[
 \mathbb{E}\left[ \sup_{t_0 \le t \le \sigma_n} \vert X(t) \vert^2 \right] \le 1 + \mathbb{E}\left[ \sup_{t_0 \le t \le T} \vert X_n(t) \vert^2 \right] \le \left( 1 + 4\mathbb{E}[\vert x_0 \vert^2] \right) e^{4K(T - t_0)(T - t_0 + 5)}.
 \] Finalmente, tomando el límite cuando \(n \to \infty\), dado que
 \(\sigma_n \uparrow T\) casi seguramente, por el Teorema de Convergencia
