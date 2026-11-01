@@ -187,12 +187,12 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -223,7 +223,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-10-31}
+\date{2026-11-01}
 \begin{document}
 \maketitle
 
@@ -1701,7 +1701,7 @@ Un proceso estocástico \(\{X(t)\}_{t \in [t_0, T]}\) se denomina una
   \(\{b(t, X(t^-), \alpha(t^-))\} \in \mathcal{L}^1([t_0, T]; \mathbb{R})\),
   \(\{\sigma(t, X(t^-), \alpha(t^-))\} \in \mathcal{L}^2([t_0, T]; \mathbb{R})\)
   y
-  \(\int_{t_0}^T \int_{\mathcal{Z}} \vert \gamma(t, X(t^-), \alpha(t^-), z) \vert^2 \nu_t(dz) dt < \infty\)
+  \(\displaystyle \int_{t_0}^T \int_{\mathcal{Z}} \vert \gamma(t, X(t^-), \alpha(t^-), z) \vert^2 \nu_t(dz) dt < \infty\)
   casi seguramente.
 \item
   Para todo \(t \in [t_0, T]\), se satisface con probabilidad 1 la
@@ -2018,45 +2018,45 @@ Convergencia Monótona se obtiene la desigualdad deseada
 \(\mathcal{M}^2([t_0, T]; \mathbb{R})\).
 
 De todo lo anterior se concluye la demostracion del teorema de
-existencia y unicidad para las ecuaciones diferenciales estocásticas
+existencia y unicidad para ecuaciones diferenciales estocásticas
 híbridas con saltos y régimen de Markov
 (Teorema~\ref{thm-mao-switching}). \(\boxtimes\)
 
-\chapter{DE AQUI}\label{de-aqui}
+\section{Modelo Estocástico Termodinámico (Ornstein-Uhlenbeck
+Híbrido)}\label{modelo-estocuxe1stico-termodinuxe1mico-ornstein-uhlenbeck-huxedbrido}
 
-\section{El Modelo Estocástico Termodinámico (Ornstein-Uhlenbeck
-Híbrido)}\label{el-modelo-estocuxe1stico-termodinuxe1mico-ornstein-uhlenbeck-huxedbrido}
-
-Habiendo demostrado el teorema general de existencia y unicidad para
-ecuaciones diferenciales estocásticas híbridas con saltos
-(Teorema~\ref{thm-mao-switching}), procedemos a formular la ecuación
-diferencial estocástica que describe la evolución de la temperatura
-interna \(T(t)\) del refrigerador en un horizonte temporal \([0, T]\),
-con \(T > 0\).
+Una vez demostrado el teorema general de existencia y unicidad para
+ecuaciones diferenciales estocásticas híbridas con saltos y régimen de
+Markov (Teorema~\ref{thm-mao-switching}), procedemos a formular la
+ecuación diferencial estocástica híbrida que describe la evolución de la
+temperatura interna \(T(t)\) del refrigerador en un periodo temporal
+\([0, T]\), con \(T > 0\) (la justificación detallada de la elección de
+esta ecuación diferencial estocástica se encuentra en el capitulo 5:
+Estudio de Caso).
 
 Sea \((\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})\)
 un espacio de probabilidad filtrado. Basándonos en la ley de
 enfriamiento de Newton y en el proceso de Ornstein-Uhlenbeck
 (Definición~\ref{def-ou-clasico}), modelamos la temperatura interna
-\(T(t)\) mediante una ecuación diferencial estocástica híbrida gobernada
-por una cadena de Markov a tiempo continuo \(\{\alpha(t)\}_{t \ge 0}\)
-(Definición~\ref{def-cadena-markov}) con espacio de estados
-\(\mathcal{M} = \{1, 2\}\) y matriz generadora de tasas finitas
-\(Q = (q_{ij})_{2 \times 2}\), cuya expresión por trímenes operativos
-está dada por:
+\(T(t)\) mediante una ecuación diferencial estocástica híbrida
+controlada por una cadena de Markov a tiempo continuo
+\(\{\alpha(t)\}_{t \ge 0}\) (Definición~\ref{def-cadena-markov}) con
+espacio de estados \(\mathcal{M} = \{1, 2\}\) y matriz generadora de
+tasas finitas \(Q = (q_{ij})_{2 \times 2}\), cuya expresión está dada
+por:
 
-\begin{equation}\phantomsection\label{eq-ede-operativa}{
+\begin{equation}\phantomsection\label{eq-ede-operativa-teorica}{
 dT(t) = 
 \begin{cases} 
-\kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
-\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
+\kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \\ 
+\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 
 \end{cases}, \quad 0 \leq t \leq T,
 }\end{equation}
 
 con condiciones iniciales
 \(T(0) = T_0 \in L^2_{\mathcal{F}_0}(\Omega; \mathbb{R})\) y
 \(\alpha(0) = \alpha_0 \in \mathcal{M}\). En la
-Ecuación~\ref{eq-ede-operativa}, \(\kappa_{on} > 0\) y
+Ecuación~\ref{eq-ede-operativa-teorica}, \(\kappa_{on} > 0\) y
 \(\kappa_{off} > 0\) representan las tasas de transferencia térmica en
 cada régimen, \(\theta_{set} \in \mathbb{R}\) denota la temperatura de
 equilibrio del termostato, \(\sigma_{on} > 0\) y \(\sigma_{off} > 0\)
@@ -2065,9 +2065,9 @@ Browniano estándar \(\{W(t)\}_{t \ge 0}\), y
 \(T_{amb}: [0, T] \to \mathbb{R}\) es una función determinista continua
 y acotada que representa la temperatura ambiente exterior.
 
-Por su parte, las perturbaciones discretas por apertura de puertas en el
-régimen \(\alpha(t) = 1\) están dadas por el proceso de Poisson
-compuesto (Definición~\ref{def-poisson-compuesto}):
+Las perturbaciones discretas por apertura de puertas en el régimen
+\(\alpha(t) = 1\) están dadas por un proceso de Poisson compuesto
+(Definición~\ref{def-poisson-compuesto}):
 
 \[
 J(t) = \sum_{i=1}^{N_{puerta}(t)} \gamma_i,
@@ -2078,7 +2078,7 @@ homogéneo (Definición~\ref{def-poisson-no-homogeneo}) con función de
 intensidad localmente integrable y acotada \(\lambda(t) \ge 0\), y
 \(\{\gamma_i\}_{i \in \mathbb{N}}\) es una sucesión de variables
 aleatorias independientes e idénticamente distribuidas con función de
-distribución acumulada \(F(z)\) soportada en
+distribución acumulada \(F(z)\) con soporte
 \(\mathcal{Z} \subseteq \mathbb{R}\), tales que poseen segundo momento
 finito \(\mathbb{E}[\vert \gamma_i \vert^2] = M_\gamma < \infty\) (y por
 ende media finita \(\mathbb{E}[\vert \gamma_i \vert] < \infty\)). Se
@@ -2091,21 +2091,22 @@ Definiendo los coeficientes de deriva
 difusión \(\sigma: \mathcal{M} \to \mathbb{R}\) para cada régimen
 mediante:
 
-\[
+\begin{equation}\phantomsection\label{eq-coeficientes-on}{
 b(t, T, 1) = \kappa_{on}(\theta_{set} - T), \qquad \sigma(1) = \sigma_{on},
-\] \[
+}\end{equation}
+\begin{equation}\phantomsection\label{eq-coeficientes-off}{
 b(t, T, 2) = \kappa_{off}(T_{amb}(t) - T), \qquad \sigma(2) = \sigma_{off},
-\]
+}\end{equation}
 
 y la función de amplitud de salto
 \(\gamma: \mathcal{M} \times \mathcal{Z} \to \mathbb{R}\) como:
 
-\[
+\begin{equation}\phantomsection\label{eq-funcion-salto}{
 \gamma(1, z) = z, \qquad \gamma(2, z) = 0,
-\]
+}\end{equation}
 
-la Ecuación~\ref{eq-ede-operativa} se escribe de forma unificada
-evaluada en los límites por la izquierda como:
+la Ecuación~\ref{eq-ede-operativa-teorica} se puede escribir de forma
+unificada evaluada en los límites por la izquierda como:
 
 \begin{equation}\phantomsection\label{eq-modelo-termodinamico}{
 dT(t) = b(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \mathbf{1}_{\{\alpha(t^-) = 1\}} dJ(t).
@@ -2127,7 +2128,8 @@ proceso compuesto \(J(t)\), cuya medida de intensidad
 \(\nu_t(dz)dt = \lambda(t)dF(z)dt\). Aplicando el
 Lema~\ref{lem-equivalencia-saltos} y utilizando la definición de
 \(\gamma(\alpha, z)\), el término de salto en la
-Ecuación~\ref{eq-modelo-termodinamico} admite la descomposición:
+Ecuación~\ref{eq-modelo-termodinamico} admite la siguiente
+descomposición:
 
 \[
 \begin{aligned}
@@ -2138,19 +2140,20 @@ Ecuación~\ref{eq-modelo-termodinamico} admite la descomposición:
 
 Cuando \(\alpha(t^-) = 1\), la integral respecto a \(dF(z)\) coincide
 con el valor esperado de las magnitudes de salto,
-\(\int_{\mathcal{Z}} z dF(z) = \mathbb{E}[\gamma_i]\), mientras que
-cuando \(\alpha(t^-) = 2\) dicha integral se anula idénticamente debido
-a que \(\gamma(2, z) = 0\). Absorbiendo este término determinista dentro
-del coeficiente de deriva original \(b(t, T, \alpha)\), definimos el
+i.e.~\(\displaystyle \int_{\mathcal{Z}} z dF(z) = \mathbb{E}[\gamma_i]\),
+mientras que cuando \(\alpha(t^-) = 2\) dicha integral se anula debido a
+que \(\gamma(2, z) = 0\). Juntando este término determinista dentro del
+coeficiente de deriva original \(b(t, T, \alpha)\), definimos el
 coeficiente de \textbf{deriva compensada}
 \(\tilde{b}: [0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}\)
 como:
 
-\[
+\begin{equation}\phantomsection\label{eq-deriva-compensada-on}{
 \tilde{b}(t, T, 1) = \kappa_{on}(\theta_{set} - T) + \lambda(t)\mathbb{E}[\gamma_i],
-\] \[
+}\end{equation}
+\begin{equation}\phantomsection\label{eq-deriva-compensada-off}{
 \tilde{b}(t, T, 2) = \kappa_{off}(T_{amb}(t) - T).
-\]
+}\end{equation}
 
 Sustituyendo esta expresión en la
 Ecuación~\ref{eq-modelo-termodinamico}, obtenemos la ecuación
@@ -2161,43 +2164,48 @@ diferencial estocástica híbrida en su forma canónica compensada
 dT(t) = \tilde{b}(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(\alpha(t^-), z) \tilde{N}(dt, dz).
 }\end{equation}
 
-\section{Verificación Analítica de Existencia y Unicidad del
-Modelo}\label{verificaciuxf3n-analuxedtica-de-existencia-y-unicidad-del-modelo}
+\section{Verificación Analítica de la Existencia y Unicidad del
+Modelo}\label{verificaciuxf3n-analuxedtica-de-la-existencia-y-unicidad-del-modelo}
 
 Demostraremos a continuación que la ecuación diferencial estocástica
-híbrida (Ecuación~\ref{eq-modelo-compensado}) ---y por equivalencia
-algebraica la Ecuación~\ref{eq-ede-operativa}--- admite una única
-solución fuerte càdlàg en el intervalo \([0, T]\), verificando que sus
-procesos conductores y coeficientes satisfacen todas las hipótesis del
-Teorema~\ref{thm-mao-switching}.
+híbrida (Ecuación~\ref{eq-modelo-compensado}) y por la equivalencia
+algebraica antes mencionada la Ecuación~\ref{eq-ede-operativa-teorica}
+tiene una única solución fuerte càdlàg en el intervalo \([0, T]\),
+verificando que los procesos y coeficientes satisfacen todas las
+hipótesis del Teorema~\ref{thm-mao-switching}.
 
 En primer lugar, por construcción del modelo, el movimiento Browniano
 \(W(t)\), la medida aleatoria de Poisson \(N(dt, dz)\) y la cadena de
 Markov \(\alpha(t)\) son mutuamente independientes. Asimismo, dado que
 el espacio de estados \(\mathcal{M} = \{1, 2\}\) es finito y las tasas
 de transición de la matriz generadora \(Q = (q_{ij})_{2 \times 2}\) son
-finitas, la cadena de Markov no presenta explosión en \([0, T]\).
-Adicionalmente, puesto que la función de intensidad es acotada en el
-intervalo cerrado \([0, T]\), existe una constante
-\(\lambda_{max} = \sup_{t \in [0, T]} \lambda(t) < \infty\) tal que
-\(\int_0^T \lambda(t)dt \le \lambda_{max}T < \infty\).
+finitas, entonces la cadena de Markov no presenta explosión en
+\([0, T]\). Adicionalmente, dado que la función de intensidad es acotada
+en el intervalo cerrado \([0, T]\), existe una constante
+\(\displaystyle \lambda_{max} = \sup_{t \in [0, T]} \lambda(t) < \infty\),
+con lo cual
+\(\displaystyle \int_0^T \lambda(t)dt \le \lambda_{max}T < \infty\).
 
 Para comprobar el cumplimiento de la condición de Lipschitz global
 (Ecuación~\ref{eq-hip-lipschitz-hibrida}), sean
 \(T_1, T_2 \in \mathbb{R}\) dos valores cualesquiera de la variable de
 estado, \(t \in [0, T]\) e \(i \in \{1, 2\}\). Dado que el coeficiente
-de difusión \(\sigma(i)\) y la función de salto \(\gamma(i, z)\)
-dependen únicamente del régimen \(i\) y de la marca \(z\), pero son
-independientes del estado \(T\), sus diferencias respecto a la variable
-de estado se anulan idénticamente en ambos regímenes:
+de difusión \(\sigma(i)\) (Ecuación~\ref{eq-coeficientes-on},
+Ecuación~\ref{eq-coeficientes-off}) y la función de salto
+\(\gamma(i, z)\) (Ecuación~\ref{eq-funcion-salto}) dependen únicamente
+del régimen \(i\) y de la marca \(z\), y son independientes del estado
+\(T\), sus diferencias respecto a la variable de estado se anulan en
+ambos regímenes:
 
 \[
 \vert \sigma(i) - \sigma(i) \vert^2 = 0, \qquad \int_{\mathcal{Z}} \vert \gamma(i, z) - \gamma(i, z) \vert^2 \nu_t(dz) = 0.
 \]
 
 Por otro lado, evaluando la diferencia cuadrática de la deriva
-compensada para el régimen \(i = 1\), observamos que el término aditivo
-\(\lambda(t)\mathbb{E}[\gamma_i]\) se cancela algebraicamente:
+compensada para el régimen \(i = 1\)
+(Ecuación~\ref{eq-deriva-compensada-on}), los términos
+\(\kappa_{on} \theta_{set}\) y \(\lambda(t)\mathbb{E}[\gamma_i]\) se
+cancelan, obteniéndose:
 
 \[
 \begin{aligned}
@@ -2206,7 +2214,8 @@ compensada para el régimen \(i = 1\), observamos que el término aditivo
 \end{aligned}
 \]
 
-De manera análoga, para el régimen \(i = 2\) el término
+De manera análoga, para el régimen \(i = 2\)
+(Ecuación~\ref{eq-deriva-compensada-off}) el término
 \(\kappa_{off}T_{amb}(t)\) se cancela al restar ambas expresiones,
 obteniéndose:
 
@@ -2214,10 +2223,10 @@ obteniéndose:
 \vert \tilde{b}(t, T_1, 2) - \tilde{b}(t, T_2, 2) \vert^2 = \left\vert \kappa_{off}(T_{amb}(t) - T_1) - \kappa_{off}(T_{amb}(t) - T_2) \right\vert^2 = \kappa_{off}^2 \vert T_1 - T_2 \vert^2.
 \]
 
-Definiendo la constante positiva
-\(L = \max\{\kappa_{on}^2, \kappa_{off}^2\} > 0\), se cumple
-uniformemente para todo \(t \in [0, T]\), \(T_1, T_2 \in \mathbb{R}\) e
-\(i \in \{1, 2\}\) que:
+Definiendo la constante
+\(L = \max\{\kappa_{on}^2, \kappa_{off}^2\} > 0\), se cumple que para
+todo \(T_1, T_2 \in \mathbb{R},\) \(t \in [0, T]\), e \(i \in \{1, 2\}\)
+que:
 
 \[
 \vert \tilde{b}(t, T_1, i) - \tilde{b}(t, T_2, i) \vert^2 + \vert \sigma(i) - \sigma(i) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(i, z) - \gamma(i, z) \vert^2 \nu_t(dz) \le L \vert T_1 - T_2 \vert^2,
@@ -2228,34 +2237,36 @@ lo cual verifica la condición de Lipschitz global
 
 Resta verificar que los coeficientes satisfacen la condición de
 crecimiento lineal (Ecuación~\ref{eq-hip-crecimiento-hibrida}). Sea
-\((t, T, i) \in [0, T] \times \mathbb{R} \times \{1, 2\}\) y denotemos
-por \(T_{max} = \sup_{t \in [0, T]} \vert T_{amb}(t) \vert < \infty\) la
-cota superior de la función continua \(T_{amb}(t)\) en el compacto
+\((t, T_1, i) \in [0, T] \times \mathbb{R} \times \{1, 2\}\) y denotemos
+por
+\(\displaystyle T_{max} = \max_{t \in [0, T]} \vert T_{amb}(t) \vert < \infty\)
+al máximo de la función continua \(T_{amb}(t)\) en el compacto
 \([0, T]\). Aplicando la desigualdad elemental
 \(\vert a - b \vert^2 \le 2\vert a \vert^2 + 2\vert b \vert^2\) del
 Lema~\ref{lem-desigualdad-algebraica} al coeficiente de deriva
-compensada en el régimen \(i = 1\), y acotando
+compensada en el régimen \(i = 1\)
+(Ecuación~\ref{eq-deriva-compensada-on}), y acotando
 \(\lambda(t) \le \lambda_{max}\), se obtiene:
 
 \[
-\vert \tilde{b}(t, T, 1) \vert^2 = \left\vert \left( \kappa_{on}\theta_{set} + \lambda(t)\mathbb{E}[\gamma_i] \right) - \kappa_{on}T \right\vert^2 \le 2\left( \kappa_{on}\vert \theta_{set} \vert + \lambda_{max}\vert \mathbb{E}[\gamma_i] \vert \right)^2 + 2\kappa_{on}^2 \vert T \vert^2.
+\vert \tilde{b}(t, T_1, 1) \vert^2 = \left\vert \left( \kappa_{on}\theta_{set} + \lambda(t)\mathbb{E}[\gamma_i] \right) - \kappa_{on}T_1 \right\vert^2 \le 2\left( \kappa_{on}\vert \theta_{set} \vert + \lambda_{max}\vert \mathbb{E}[\gamma_i] \vert \right)^2 + 2\kappa_{on}^2 \vert T_1 \vert^2.
 \]
 
 Aplicando la misma desigualdad algebraica a la deriva en el régimen
-\(i = 2\) y utilizando que \(\vert T_{amb}(t) \vert \le T_{max}\),
-resulta:
+\(i = 2\) (Ecuación~\ref{eq-deriva-compensada-off}) y utilizando que
+\(\vert T_{amb}(t) \vert \le T_{max}\), se tiene que:
 
 \[
-\vert \tilde{b}(t, T, 2) \vert^2 = \vert \kappa_{off}T_{amb}(t) - \kappa_{off}T \vert^2 \le 2\kappa_{off}^2 T_{max}^2 + 2\kappa_{off}^2 \vert T \vert^2.
+\vert \tilde{b}(t, T_1, 2) \vert^2 = \vert \kappa_{off}T_{amb}(t) - \kappa_{off}T_1 \vert^2 \le 2\kappa_{off}^2 T_{max}^2 + 2\kappa_{off}^2 \vert T_1 \vert^2.
 \]
 
 Para el término de difusión, se tiene en ambos regímenes la cota
 constante \(\vert \sigma(i) \vert^2 \le \Sigma_{max}\), donde
 \(\Sigma_{max} = \max\{\sigma_{on}^2, \sigma_{off}^2\} < \infty\).
-Asimismo, evaluando la integral del coeficiente de salto respecto a la
-medida de intensidad \(\nu_t(dz) = \lambda(t)dF(z)\), se observa que
-para \(i = 2\) dicha integral es nula, mientras que para \(i = 1\) se
-cumple que:
+Asimismo, evaluando la integral del coeficiente de salto
+(Ecuación~\ref{eq-funcion-salto}) respecto a la medida de intensidad
+\(\nu_t(dz) = \lambda(t)dF(z)\), se tiene que para \(i = 2\) dicha
+integral es nula, mientras que para \(i = 1\) se cumple que:
 
 \[
 \int_{\mathcal{Z}} \vert \gamma(1, z) \vert^2 \nu_t(dz) = \lambda(t) \int_{\mathcal{Z}} \vert z \vert^2 dF(z) = \lambda(t) \mathbb{E}[\vert \gamma_i \vert^2] \le \lambda_{max} M_\gamma < \infty.
@@ -2269,24 +2280,24 @@ K = \max\left\{ \max\left\{ 2\left( \kappa_{on}\vert \theta_{set} \vert + \lambd
 \]
 
 se deduce que para todo
-\((t, T, i) \in [0, T] \times \mathbb{R} \times \{1, 2\}\) se satisface
-la desigualdad:
+\((t, T_1, i) \in [0, T] \times \mathbb{R} \times \{1, 2\}\) se
+satisface la desigualdad:
 
 \[
-\vert \tilde{b}(t, T, i) \vert^2 + \vert \sigma(i) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(i, z) \vert^2 \nu_t(dz) \le K\left( 1 + \vert T \vert^2 \right),
+\vert \tilde{b}(t, T_1, i) \vert^2 + \vert \sigma(i) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(i, z) \vert^2 \nu_t(dz) \le K\left( 1 + \vert T_1 \vert^2 \right),
 \]
 
 verificando así la condición de crecimiento lineal
 (Ecuación~\ref{eq-hip-crecimiento-hibrida}).
 
-En conclusión, dado que se cumplen todas las hipótesis del
+Por lo tanto, dado que se cumplen todas las hipótesis del
 Teorema~\ref{thm-mao-switching}, para cualquier condición inicial
 \(T(0) = T_0 \in L^2_{\mathcal{F}_0}(\Omega; \mathbb{R})\) y
 \(\alpha(0) = \alpha_0 \in \{1, 2\}\), la ecuación diferencial
-estocástica híbrida propuesta en la Ecuación~\ref{eq-ede-operativa}
-posee una única solución fuerte \(\{T(t)\}_{t \in [0, T]}\) adaptada a
-\(\{\mathcal{F}_t\}_{t \ge 0}\), con trayectorias càdlàg casi
-seguramente y acotada en media cuadrática:
+estocástica híbrida propuesta en la
+Ecuación~\ref{eq-ede-operativa-teorica} tiene una única solución fuerte
+\(\{T(t)\}_{t \in [0, T]}\) adaptada a \(\{\mathcal{F}_t\}_{t \ge 0}\),
+con trayectorias càdlàg casi seguramente y acotada en media cuadrática:
 
 \[
 \mathbb{E}\left[ \sup_{0 \le t \le T} \vert T(t) \vert^2 \right] < \infty,
@@ -2294,6 +2305,7 @@ seguramente y acotada en media cuadrática:
 
 por lo que
 \(\{T(t)\}_{t \in [0, T]} \in \mathcal{M}^2([0, T]; \mathbb{R})\).
+\(\boxtimes\)
 
 \chapter{Soluciones Numéricas de Ecuaciones Diferenciales
 Estocásticas}\label{soluciones-numuxe9ricas-de-ecuaciones-diferenciales-estocuxe1sticas}
