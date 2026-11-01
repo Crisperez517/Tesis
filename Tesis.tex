@@ -188,9 +188,9 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
@@ -305,13 +305,20 @@ en la resolución del problema:
 \chapter{Fundamentos Teóricos
 Matemáticos}\label{fundamentos-teuxf3ricos-matemuxe1ticos}
 
-En este capítulo se presentarán las bases conceptuales y el marco formal
-del cálculo estocástico que fundamentan el desarrollo del modelo
-matemático para la red de frío. Se definirán en primer lugar los
-procesos estocásticos esenciales para, posteriormente, formalizar la
-teoría de medidas aleatorias de salto, establecer la teoría de
-integración de Itô, demostrar el teorema general de concatenación
-híbrida y concluir con la verificación analítica del sistema propuesto.
+En este capítulo se presentan las bases conceptuales del cálculo
+estocástico que fundamentan la construcción y el análisis del modelo
+matemático propuesto para la red de frío. En primer lugar, se definen
+los espacios de probabilidad filtrados y los procesos estocásticos
+fundamentales: martingalas, movimiento Browniano, procesos de Poisson y
+cadenas de Markov a tiempo continuo. Posteriormente, se desarrolla la
+teoría de integración estocástica de Itô y la integración respecto a
+medidas aleatorias de Poisson compensadas, lo que permite formular las
+ecuaciones diferenciales estocásticas continuas, en particular el
+proceso de Ornstein-Uhlenbeck y aquellas perturbadas por saltos.
+Finalmente se demuestra el teorema general de existencia y unicidad para
+ecuaciones diferenciales estocásticas híbridas con saltos y conmutación
+markoviana, concluyendo con la verificación analítica de que el modelo
+matemático propuesto tiene una única solución fuerte.
 
 \section{Espacios de Probabilidad, Filtraciones y Procesos
 Estocásticos}\label{espacios-de-probabilidad-filtraciones-y-procesos-estocuxe1sticos}
