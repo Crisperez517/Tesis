@@ -1782,8 +1782,8 @@ Consideremos la ecuación diferencial estocástica híbrida
 \(\alpha(t_0) = \alpha_0\). Supóngase que el movimiento Browniano
 \(W(t)\), la medida aleatoria de Poisson \(N(dt, dz)\) (con medida de
 intensidad \(\nu_t(dz)dt = \lambda(t)dF(z)dt\), donde
-\(\int_{t_0}^T \lambda(t)dt < \infty\)) y la cadena de Markov a tiempo
-continuo \(\alpha(t)\) (con espacio de estados finito
+\(\displaystyle \int_{t_0}^T \lambda(t)dt < \infty\)) y la cadena de
+Markov a tiempo continuo \(\alpha(t)\) (con espacio de estados finito
 \(\mathcal{M} = \{1, 2, \dots, m\}\) y matriz generadora de tasas
 finitas \(Q = (q_{ij})_{m \times m}\)) son mutuamente independientes.
 
@@ -1968,7 +1968,7 @@ integrales en una sola cota:
 
 dado que
 \(\displaystyle \vert X_n(r^-) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) \le \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2\),
-y aplicando el teorema de Tonelli se tiene que:
+y aplicando el Teorema de Tonelli se tiene que:
 
 \begin{equation}\phantomsection\label{eq-cota-previa-gronwall}{
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
@@ -1995,7 +1995,7 @@ tiene que para todo \(t \in [t_0, T]\):
 
 Esto garantiza que la función
 \(\displaystyle u_n(t) = 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right]\)
-es finita, acotada y medible en \([t_0, T]\). Sumando \(1\) en ambos
+es finita, acotada y medible en \([t_0, T].\) Sumando \(1\) en ambos
 lados de la Ecuación~\ref{eq-cota-previa-gronwall}, obtenemos para todo
 \(t \in [t_0, T]\):
 
@@ -2020,7 +2020,7 @@ Convergencia Monótona se obtiene la desigualdad deseada
 De todo lo anterior se concluye la demostracion del teorema de
 existencia y unicidad para la ecuación diferencial estocástica híbrida
 con saltos y régimen de Markov (Teorema~\ref{thm-mao-switching}).
-\(\square\) \(\boxtimes\)
+\(\boxtimes\)
 
 \chapter{DE AQUI}\label{de-aqui}
 
