@@ -637,7 +637,7 @@ A continuación enunciamos y demostramos a detalle el teorema central que garant
 
 ::: {#thm-mao-switching}
 ### Teorema de Existencia y Unicidad para la EDE Híbrida con Saltos y Régimen de Markov
-Consideremos la ecuación diferencial estocástica híbrida (@eq-ede-hibrida-diff) en el intervalo $[t_0, T]$ ($0 \le t_0 < T < \infty$), con condiciones iniciales $X(t_0) = x_0 \in L^2_{\mathcal{F}_{t_0}}(\Omega; \mathbb{R})$ y $\alpha(t_0) = \alpha_0$. Supóngase que el movimiento Browniano $W(t)$, la medida aleatoria de Poisson $N(dt, dz)$ (con medida de intensidad $\nu_t(dz)dt = \lambda(t)dF(z)dt$, donde $\int_{t_0}^T \lambda(t)dt < \infty$) y la cadena de Markov a tiempo continuo $\alpha(t)$ (con espacio de estados finito $\mathcal{M} = \{1, 2, \dots, m\}$ y matriz generadora de tasas finitas $Q = (q_{ij})_{m \times m}$) son mutuamente independientes.
+Consideremos la ecuación diferencial estocástica híbrida (@eq-ede-hibrida-diff) en el intervalo $[t_0, T]$ ($0 \le t_0 < T < \infty$), con condiciones iniciales $X(t_0) = x_0 \in L^2_{\mathcal{F}_{t_0}}(\Omega; \mathbb{R})$ y $\alpha(t_0) = \alpha_0$. Supóngase que el movimiento Browniano $W(t)$, la medida aleatoria de Poisson $N(dt, dz)$ (con medida de intensidad $\nu_t(dz)dt = \lambda(t)dF(z)dt$, donde $\displaystyle \int_{t_0}^T \lambda(t)dt < \infty$) y la cadena de Markov a tiempo continuo $\alpha(t)$ (con espacio de estados finito $\mathcal{M} = \{1, 2, \dots, m\}$ y matriz generadora de tasas finitas $Q = (q_{ij})_{m \times m}$) son mutuamente independientes.
 
 Si existen constantes positivas $L, K > 0$ tales que los coeficientes de la ecuación diferencial estocástica híbrida satisfacen las siguientes condiciones:
 
@@ -725,7 +725,7 @@ $$
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4(T - t_0 + 5)\mathbb{E}\left[ \int_{t_0}^t K\left( 1 + \vert X_n(r^-) \vert^2 \right) \mathbf{1}_{[[t_0, \sigma_n]]}(r) dr \right],
 $$ {#eq-cota-previa-finitud}
 
-dado que $\displaystyle \vert X_n(r^-) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) \le \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2$, y aplicando el teorema de Tonelli se tiene que:
+dado que $\displaystyle \vert X_n(r^-) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) \le \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2$, y aplicando el Teorema de Tonelli se tiene que:
 
 $$
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
@@ -737,7 +737,7 @@ $$
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5)(T - t_0)\left( 1 + n^2 + \mathbb{E}[\vert x_0 \vert^2] \right) < \infty.
 $$
 
-Esto garantiza que la función $\displaystyle u_n(t) = 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right]$ es finita, acotada y medible en $[t_0, T]$. Sumando $1$ en ambos lados de la @eq-cota-previa-gronwall, obtenemos para todo $t \in [t_0, T]$:
+Esto garantiza que la función $\displaystyle u_n(t) = 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right]$ es finita, acotada y medible en $[t_0, T].$ Sumando $1$ en ambos lados de la @eq-cota-previa-gronwall, obtenemos para todo $t \in [t_0, T]$:
 
 $$
 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 1 + 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
@@ -751,7 +751,7 @@ $$
 
 Finalmente, tomando el límite cuando $n \to \infty$, dado que $\sigma_n \uparrow T$ casi seguramente, por el Teorema de la Convergencia Monótona se obtiene la desigualdad deseada (@eq-cota-supremo-hibrida), por lo que $\{X(t)\}_{t \in [t_0, T]}$ $\in$ $\mathcal{M}^2([t_0, T]; \mathbb{R})$. 
 
-De todo lo anterior se concluye la demostracion del teorema de existencia y unicidad para la ecuación diferencial estocástica híbrida con saltos y régimen de Markov (@thm-mao-switching). $\square$ $\boxtimes$
+De todo lo anterior se concluye la demostracion del teorema de existencia y unicidad para la ecuación diferencial estocástica híbrida con saltos y régimen de Markov (@thm-mao-switching). $\boxtimes$
 
 # DE AQUI
 
