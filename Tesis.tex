@@ -189,10 +189,10 @@
 \usepackage{amsthm}
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -2317,6 +2317,371 @@ por lo que
 \chapter{Soluciones Numéricas de Ecuaciones Diferenciales
 Estocásticas}\label{soluciones-numuxe9ricas-de-ecuaciones-diferenciales-estocuxe1sticas}
 
+En la práctica, la mayoría de las ecuaciones diferenciales estocásticas
+carecen de una solución analítica explícita debido a la estructura
+funcional de sus coeficientes o al acoplamiento de múltiples
+perturbaciones aleatorias{[}cite: 9, 22{]}. Por este motivo, resulta
+necesario recurrir a esquemas de aproximación numérica definidos sobre
+una discretización temporal{[}cite: 9, 22{]}. A diferencia del análisis
+numérico determinista, donde el error de aproximación se evalúa de
+manera puntual, en el cálculo estocástico la cercanía entre la solución
+exacta \(X(t)\) y la aproximación numérica \(Y\) debe cuantificarse en
+media cuadrática o en distribución sobre el espacio de probabilidad
+\((\Omega, \mathcal{F}, \mathbb{P})\)
+(\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}).
+
+Para establecer formalmente los criterios de convergencia, consideremos
+una partición uniforme del intervalo \([0, T]\) compuesta por
+\(N \in \mathbb{N}\) subintervalos de longitud constante
+\(\Delta t = \frac{T}{N}\), cuyos nodos temporales están dados por
+\(t_n = n \Delta t\) para \(n = 0, 1, \dots, N\){[}cite: 10, 23{]}.
+Denotaremos por \(Y_n\) al valor de la aproximación discreta en el nodo
+\(t_n\), y por
+\(\Delta W_n = W(t_{n+1}) - W(t_n) \sim \mathcal{N}(0, \Delta t)\) al
+incremento correspondiente del movimiento Browniano estándar{[}cite: 10,
+23, 1721{]}.
+
+\begin{definition}[Convergencia
+Fuerte]\protect\hypertarget{def-convergencia-fuerte}{}\label{def-convergencia-fuerte}
+
+Se dice que una aproximación numérica discreta
+\(\{Y_n\}_{0 \le n \le N}\), obtenida con un tamaño de paso
+\(\Delta t > 0\), converge en sentido \textbf{fuerte} con orden
+\(\gamma > 0\) hacia la solución exacta \(\{X(t)\}_{t \in [0, T]}\) en
+el tiempo terminal \(T\) si existen constantes positivas \(C > 0\) y
+\(\delta_0 > 0\), independientes de \(\Delta t\), tales que para todo
+\(\Delta t \in (0, \delta_0)\) se satisface la desigualdad{[}cite: 9,
+22{]}:
+
+\[
+\mathbb{E}\left[ \vert X(T) - Y_N \vert \right] \le C (\Delta t)^\gamma.
+\]
+
+\end{definition}
+
+Por la desigualdad de Lyapunov
+(\(\mathbb{E}[\vert X(T) - Y_N \vert] \le (\mathbb{E}[\vert X(T) - Y_N \vert^2])^{1/2}\)){[}cite:
+129{]}, el criterio de la Definición~\ref{def-convergencia-fuerte} suele
+establecerse demostrando que el error cuadrático medio cumple
+\(\left(\mathbb{E}\left[\sup_{0 \le t \le T} \vert X(t) - \bar{Y}(t) \vert^2\right]\right)^{1/2} \le C(\Delta t)^\gamma\),
+donde \(\bar{Y}(t)\) denota la extensión continua del esquema
+numérico{[}cite: 23, 24{]}. La convergencia fuerte controla el error
+promedio trayectoria por trayectoria, por lo que constituye el criterio
+adecuado cuando se requiere simular caminos muestrales individuales del
+proceso {[}Kloeden y Platen
+(\citeproc{ref-kloeden1992numerical}{1992}){]}{[}cite: 9, 24{]}.
+
+\begin{definition}[Convergencia
+Débil]\protect\hypertarget{def-convergencia-debil}{}\label{def-convergencia-debil}
+
+Se dice que una aproximación numérica discreta
+\(\{Y_n\}_{0 \le n \le N}\) converge en sentido \textbf{débil} con orden
+\(\beta > 0\) hacia la solución exacta \(\{X(t)\}_{t \in [0, T]}\) en el
+tiempo terminal \(T\) si, para toda función de prueba
+\(g \in \mathcal{C}_p^{2(\beta+1)}(\mathbb{R}; \mathbb{R})\) (funciones
+\(2(\beta+1)\) veces continuamente diferenciables cuyas derivadas
+parciales tienen crecimiento a lo sumo polinomial), existen constantes
+positivas \(C > 0\) y \(\delta_0 > 0\), independientes de \(\Delta t\),
+tales que para todo \(\Delta t \in (0, \delta_0)\) se cumple que{[}cite:
+9, 22, 23{]}:
+
+\[
+\left\vert \mathbb{E}[g(X(T))] - \mathbb{E}[g(Y_N)] \right\vert \le C (\Delta t)^\beta.
+\]
+
+\end{definition}
+
+A diferencia del criterio fuerte, la convergencia débil no exige
+cercanía trayectoria por trayectoria, sino que mide el error en la
+aproximación de los momentos estadísticos y de los valores esperados de
+funcionales de la solución {[}Kloeden y Platen
+(\citeproc{ref-kloeden1992numerical}{1992}){]}{[}cite: 9, 10, 22{]}.
+
+\subsection{Esquema Numérico de
+Euler-Maruyama}\label{sec-euler-maruyama}
+
+El método de Euler-Maruyama es la generalización directa del método
+explícito de Euler al cálculo estocástico de Itô{[}cite: 10, 23{]}.
+Consideremos la ecuación diferencial estocástica continua
+(Ecuación~\ref{eq-ede-general-diff}) expresada en forma integral sobre
+el subintervalo \([t_n, t_{n+1}]\){[}cite: 23, 231{]}:
+
+\[
+X(t_{n+1}) = X(t_n) + \int_{t_n}^{t_{n+1}} b(s, X(s)) ds + \int_{t_n}^{t_{n+1}} \sigma(s, X(s)) dW(s).
+\]
+
+Aproximando ambos integrandos mediante su evaluación constante en el
+extremo izquierdo \(s = t_n\), se obtiene la relación recursiva del
+esquema de Euler-Maruyama{[}cite: 10, 23{]}:
+
+\begin{equation}\phantomsection\label{eq-esquema-em}{
+Y_{n+1} = Y_n + b(t_n, Y_n) \Delta t + \sigma(t_n, Y_n) \Delta W_n, \quad n = 0, 1, \dots, N - 1,
+}\end{equation}
+
+con condición inicial \(Y_0 = x_0\){[}cite: 10, 23{]}.
+
+\begin{theorem}[Teorema de Convergencia de
+Euler-Maruyama]\protect\hypertarget{thm-euler-maruyama}{}\label{thm-euler-maruyama}
+
+Sea \(\{X(t)\}_{t \in [0, T]}\) la única solución fuerte de la EDE
+continua (Ecuación~\ref{eq-ede-general-diff}) con condición inicial
+\(X(0) = x_0 \in L^2_{\mathcal{F}_0}(\Omega; \mathbb{R})\), y sea
+\(\{Y_n\}_{0 \le n \le N}\) la aproximación generada por el esquema de
+Euler-Maruyama (Ecuación~\ref{eq-esquema-em}).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Si los coeficientes \(b(t, x)\) y \(\sigma(t, x)\) satisfacen las
+  condiciones de Lipschitz global y de crecimiento lineal del
+  Teorema~\ref{thm-existencia-unicidad}, además de la condición de
+  continuidad temporal
+  \(\vert b(t, x) - b(s, x) \vert + \vert \sigma(t, x) - \sigma(s, x) \vert \le K(1 + \vert x \vert)\vert t - s \vert^{1/2}\),
+  entonces el esquema de Euler-Maruyama converge en sentido
+  \textbf{fuerte} con orden \(\gamma = 0.5\){[}cite: 10, 24{]}: \[
+  \left( \mathbb{E}\left[ \sup_{0 \le n \le N} \vert X(t_n) - Y_n \vert^2 \right] \right)^{1/2} \le C (\Delta t)^{1/2}.
+  \]
+\item
+  Si adicionalmente los coeficientes
+  \(b, \sigma \in \mathcal{C}_p^{4}(\mathbb{R}; \mathbb{R})\) poseen
+  derivadas espaciales continuas hasta de cuarto orden con crecimiento
+  polinomial, entonces el esquema de Euler-Maruyama converge en sentido
+  \textbf{débil} con orden \(\beta = 1.0\) {[}Kloeden y Platen
+  (\citeproc{ref-kloeden1992numerical}{1992}){]}{[}cite: 12, 18, 25{]}.
+\end{enumerate}
+
+\end{theorem}
+
+La reducción del orden de convergencia fuerte a \(\gamma = 0.5\) (frente
+al orden \(1.0\) del método de Euler determinista) se debe a que la raíz
+de la varianza del incremento Browniano escala proporcionalmente a
+\(\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}\)
+(\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}). El
+procedimiento computacional de este método se resume en el
+\textbf{Algoritmo 1}.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Algoritmo 1} Esquema numérico de Euler-Maruyama
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1: \textbf{1)} Subdividir el dominio temporal \([0, T]\) en \(N + 1\)
+nodos equidistantes \(t_0, t_1, \dots, t_N\), donde \(\Delta t = T/N\)
+es el incremento temporal, \(t_n = n \Delta t\) y
+\(\Delta W_n \sim \sqrt{\Delta t}\,\mathcal{N}(0, 1)\) es el incremento
+Browniano correspondiente para \(n = 0, \dots, N - 1\). \\
+2: \textbf{2)} Asignar la condición inicial \(Y_0 = x_0\). \\
+3: \textbf{3)} Resolver recursivamente el sistema diferencial
+estocástico hacia adelante en el tiempo: \\
+4: \(\quad\) \textbf{for} \(n = 0, 1, \dots, N - 1\) \textbf{do} \\
+5: \(\qquad\) Generar una variable aleatoria normal estándar
+independiente \(Z_n \sim \mathcal{N}(0, 1)\). \\
+6: \(\qquad\) Calcular el incremento del proceso de Wiener:
+\(\Delta W_n = \sqrt{\Delta t}\, Z_n\). \\
+7: \(\qquad\) Evaluar los coeficientes en el nodo actual:
+\(b_n = b(t_n, Y_n)\) y \(\sigma_n = \sigma(t_n, Y_n)\). \\
+8: \(\qquad\) Actualizar el estado del proceso:
+\(Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n\). \\
+9: \(\quad\) \textbf{end for} \\
+10: \textbf{4)} Retornar la trayectoria discreta aproximada
+\(\{Y_0, Y_1, \dots, Y_N\}\). \\
+\end{longtable}
+
+\subsection{Esquema Numérico de
+Milstein}\label{esquema-numuxe9rico-de-milstein}
+
+Para alcanzar un orden de convergencia fuerte superior cuando el
+coeficiente de difusión depende explícitamente de la variable de estado
+\(X(t)\), el método de Milstein incorpora el término de orden
+\(\mathcal{O}(\Delta t)\) proveniente de la expansión de Itô-Taylor
+{[}Kloeden y Platen
+(\citeproc{ref-kloeden1992numerical}{1992}){]}{[}cite: 17{]}. Aplicando
+el Lema de Itô (Teorema~\ref{thm-ito-clasico}) al coeficiente
+\(\sigma(s, X(s))\) para \(s \in [t_n, t_{n+1}]\), se tiene que
+\(\sigma(s, X(s)) \approx \sigma(t_n, X(t_n)) + \sigma(t_n, X(t_n))\frac{\partial \sigma}{\partial x}(t_n, X(t_n))(W(s) - W(t_n))\).
+Al sustituir esta aproximación en la integral estocástica
+\(\int_{t_n}^{t_{n+1}} \sigma(s, X(s)) dW(s)\), surge la integral
+estocástica doble de Itô:
+
+\begin{equation}\phantomsection\label{eq-integral-doble-milstein}{
+I_{(1,1), n} = \int_{t_n}^{t_{n+1}} \int_{t_n}^s dW(u) dW(s) = \frac{1}{2}\left[ (\Delta W_n)^2 - \Delta t \right].
+}\end{equation}
+
+Añadiendo esta corrección al esquema de Euler-Maruyama
+(Ecuación~\ref{eq-esquema-em}), se obtiene el esquema numérico de
+Milstein:
+
+\begin{equation}\phantomsection\label{eq-esquema-milstein}{
+Y_{n+1} = Y_n + b(t_n, Y_n)\Delta t + \sigma(t_n, Y_n)\Delta W_n + \frac{1}{2}\sigma(t_n, Y_n)\frac{\partial \sigma}{\partial x}(t_n, Y_n)\left[ (\Delta W_n)^2 - \Delta t \right].
+}\end{equation}
+
+\begin{theorem}[Teorema de Convergencia de
+Milstein]\protect\hypertarget{thm-milstein}{}\label{thm-milstein}
+
+Sea \(\{X(t)\}_{t \in [0, T]}\) la única solución fuerte de la EDE
+continua (Ecuación~\ref{eq-ede-general-diff}) con condición inicial
+\(X(0) = x_0 \in L^2_{\mathcal{F}_0}(\Omega; \mathbb{R})\). Si el
+coeficiente de deriva \(b(t, x)\) es continuamente diferenciable
+respecto a \(x\), el coeficiente de difusión \(\sigma(t, x)\) es dos
+veces continuamente diferenciable respecto a \(x\), y tanto los
+coeficientes como las combinaciones \(b\frac{\partial b}{\partial x}\),
+\(\sigma\frac{\partial \sigma}{\partial x}\) y
+\(\sigma^2\frac{\partial^2 \sigma}{\partial x^2}\) satisfacen las
+condiciones de Lipschitz global y de crecimiento lineal uniformemente en
+\(t \in [0, T]\), entonces el esquema numérico de Milstein
+(Ecuación~\ref{eq-esquema-milstein}) converge en sentido \textbf{fuerte}
+con orden \(\gamma = 1.0\):
+
+\[
+\left( \mathbb{E}\left[ \sup_{0 \le n \le N} \vert X(t_n) - Y_n \vert^2 \right] \right)^{1/2} \le C \Delta t.
+\] La demostración detallada de este teorema mediante expansiones
+truncadas de Itô-Taylor se presenta en
+(\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}).
+
+\end{theorem}
+
+La implementación paso a paso del método de Milstein se detalla en el
+\textbf{Algoritmo 2}.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Algoritmo 2} Esquema numérico de Milstein
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1: \textbf{1)} Subdividir el dominio temporal \([0, T]\) en \(N + 1\)
+nodos equidistantes \(t_0, t_1, \dots, t_N\), con tamaño de paso
+\(\Delta t = T/N\) y nodos \(t_n = n \Delta t\) para
+\(n = 0, \dots, N\). \\
+2: \textbf{2)} Asignar la condición inicial \(Y_0 = x_0\). \\
+3: \textbf{3)} Resolver recursivamente el sistema diferencial
+estocástico con corrección de segundo orden hacia adelante en el
+tiempo: \\
+4: \(\quad\) \textbf{for} \(n = 0, 1, \dots, N - 1\) \textbf{do} \\
+5: \(\qquad\) Generar una variable aleatoria normal estándar
+independiente \(Z_n \sim \mathcal{N}(0, 1)\). \\
+6: \(\qquad\) Calcular el incremento Browniano:
+\(\Delta W_n = \sqrt{\Delta t}\, Z_n\). \\
+7: \(\qquad\) Evaluar \(b_n = b(t_n, Y_n)\),
+\(\sigma_n = \sigma(t_n, Y_n)\) y la derivada parcial
+\(\sigma'_n = \frac{\partial \sigma}{\partial x}(t_n, Y_n)\). \\
+8: \(\qquad\) Calcular la integral iterada de Itô:
+\(I_{(1,1), n} = \frac{1}{2}\left[(\Delta W_n)^2 - \Delta t\right]\). \\
+9: \(\qquad\) Actualizar el estado:
+\(Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n + \sigma_n \sigma'_n I_{(1,1), n}\). \\
+10: \(\quad\) \textbf{end for} \\
+11: \textbf{4)} Retornar la trayectoria discreta aproximada
+\(\{Y_0, Y_1, \dots, Y_N\}\). \\
+\end{longtable}
+
+\subsection{Análisis Comparativo de Convergencia
+Fuerte}\label{anuxe1lisis-comparativo-de-convergencia-fuerte}
+
+Para ilustrar la diferencia en el orden de convergencia fuerte entre los
+esquemas de Euler-Maruyama y de Milstein ante un término de difusión
+dependiente del estado, consideremos el Movimiento Browniano Geométrico
+(GBM), definido por la ecuación diferencial estocástica lineal homogénea
+con ruido multiplicativo{[}cite: 8, 155, 156{]}:
+
+\begin{equation}\phantomsection\label{eq-ede-gbm}{
+dX(t) = \mu X(t) dt + \sigma X(t) dW(t), \quad X(0) = X_0,
+}\end{equation}
+
+donde \(\mu \in \mathbb{R}\) es la tasa de deriva y \(\sigma > 0\) es el
+parámetro de volatilidad{[}cite: 155{]}. Aplicando el Lema de Itô
+(Teorema~\ref{thm-ito-clasico}) a la función \(f(x) = \ln(x)\) (o
+mediante la fórmula exponencial de la Sección 3.2 en {[}Situ
+(\citeproc{ref-situ2005theory}{2005}){]}{[}cite: 1227, 1228{]}), se
+obtiene que la única solución fuerte analítica de la
+Ecuación~\ref{eq-ede-gbm} está dada por:
+
+\begin{equation}\phantomsection\label{eq-gbm-solucion}{
+X(t) = X_0 \exp\left[ \left( \mu - \frac{1}{2}\sigma^2 \right)t + \sigma W(t) \right].
+}\end{equation}
+
+Dado que en la Ecuación~\ref{eq-ede-gbm} el coeficiente de difusión es
+lineal respecto al estado, \(\sigma(t, x) = \sigma x\), su derivada
+espacial es
+\(\frac{\partial \sigma}{\partial x}(t, x) = \sigma \neq 0\). Al omitir
+el término corrector
+\(\frac{1}{2}\sigma^2 Y_n [(\Delta W_n)^2 - \Delta t]\), el método de
+Euler-Maruyama aproxima la difusión como constante dentro de cada
+subintervalo \([t_n, t_{n+1}]\), acumulando un error de truncamiento de
+orden \((\Delta t)^{1/2}\). Por el contrario, el método de Milstein
+incorpora dicho término cuadrático, alcanzando un orden de convergencia
+fuerte \(\gamma = 1.0\) (\citeproc{ref-kloeden1992numerical}{Kloeden y
+Platen 1992}).
+
+En la Figura~\ref{fig-sde-metodos} se contrasta una realización exacta
+de la Ecuación~\ref{eq-gbm-solucion} frente a las aproximaciones de
+Euler-Maruyama y Milstein sobre el intervalo \([0, 2.0]\) utilizando la
+misma trayectoria Browniana subyacente, con parámetros \(\mu = 0.05\),
+\(\sigma = 1.0\), \(X_0 = 1\) y un paso de discretización
+\(\Delta t = 0.05\) (\(N = 40\)).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{comparacion_metodos.png}
+
+}
+
+\caption{\label{fig-sde-metodos}Análisis de convergencia fuerte de
+esquemas numéricos estocásticos para una trayectoria de Movimiento
+Browniano Geométrico (GBM) definida por \(dX = 0.05 X dt + X dW\) con
+\(X_0 = 1\). El eje horizontal representa el tiempo discreto y el eje
+vertical el estado del proceso \(X(t)\). La línea negra continua muestra
+la solución analítica exacta. La línea roja discontinua ilustra la
+aproximación de Euler-Maruyama (orden fuerte \(\gamma = 0.5\)),
+evidenciando desviaciones respecto a la trayectoria real. La línea azul
+de trazo y punto representa el esquema de Milstein (orden fuerte
+\(\gamma = 1.0\)), el cual sigue con mayor precisión la solución exacta
+ante ruido multiplicativo y un mallado temporal grueso.}
+
+\end{figure}%
+
+Como se observa en la Figura~\ref{fig-sde-metodos}, ante un coeficiente
+de difusión multiplicativo
+(\(\frac{\partial \sigma}{\partial x} \neq 0\)), la aproximación de
+Euler-Maruyama se desvía de la solución exacta en las regiones de mayor
+variación del proceso de Wiener, mientras que el esquema de Milstein
+reproduce fielmente la trayectoria analítica.
+
+Por último, resulta fundamental destacar una propiedad estructural que
+vincula ambos métodos cuando el ruido continuo es \textbf{aditivo}
+respecto a la variable de estado; esto es, cuando el coeficiente de
+difusión no depende de \(x\), por lo que
+\(\frac{\partial \sigma}{\partial x} \equiv 0\). En tal caso, el término
+corrector de segundo orden en la Ecuación~\ref{eq-esquema-milstein} se
+anula idénticamente: \[
+\frac{1}{2}\sigma(t_n, Y_n)\frac{\partial \sigma}{\partial x}(t_n, Y_n)\left[ (\Delta W_n)^2 - \Delta t \right] = 0,
+\] lo que implica que \textbf{el esquema de Milstein y el esquema de
+Euler-Maruyama coinciden algebraicamente}. En particular, para nuestro
+modelo termodinámico híbrido (Ecuación~\ref{eq-ede-operativa-teorica}),
+dado que dentro de cada régimen \(i \in \{1, 2\}\) la volatilidad
+\(\sigma(i) \in \{\sigma_{on}, \sigma_{off}\}\) es constante respecto a
+la temperatura \(T(t)\) (\(\frac{\partial \sigma(i)}{\partial T} = 0\)),
+el esquema de Euler-Maruyama reproduce de manera exacta la actualización
+de Milstein en la componente difusiva sin requerir el cálculo de
+derivadas espaciales adicionales.
+
+\chapter{Fundamentos Teóricos
+Epidemiológicos}\label{fundamentos-teuxf3ricos-epidemioluxf3gicos}
+
+\section{Soluciones Numéricas de Ecuaciones Diferenciales
+Estocásticas}\label{soluciones-numuxe9ricas-de-ecuaciones-diferenciales-estocuxe1sticas-1}
+
 En la práctica, la gran mayoría de las ecuaciones diferenciales
 estocásticas carecen de una solución analítica explícita debido a la no
 linealidad de sus coeficientes o al acoplamiento de sus perturbaciones.
@@ -2452,7 +2817,7 @@ intervalo \([0, T]\) con condición inicial \(X(0) = x_0\):
 \end{enumerate}
 
 \subsection{Esquema Numérico de
-Milstein}\label{esquema-numuxe9rico-de-milstein}
+Milstein}\label{esquema-numuxe9rico-de-milstein-1}
 
 El método de Milstein es un esquema numérico avanzado de orden superior
 que corrige la aproximación de la componente difusiva. Surge de aplicar
@@ -2542,7 +2907,7 @@ inicial \(X(0) = x_0\):
 \end{enumerate}
 
 \section{Análisis Comparativo de Convergencia
-Fuerte}\label{anuxe1lisis-comparativo-de-convergencia-fuerte}
+Fuerte}\label{anuxe1lisis-comparativo-de-convergencia-fuerte-1}
 
 Para mostrar la diferencia analítica que hay entre los esquemas de
 Euler-Maruyama y Milstein, y justificar la necesidad de utilizar este
@@ -2619,9 +2984,6 @@ el modelo híbrido presenta un coeficiente de ruido continuo
 \(\sigma(\alpha(t))\), lo cual genera perturbaciones multiplicativas que
 requieren un orden de convergencia estricto para no subestimar el riesgo
 de trayectorias erráticas.
-
-\chapter{Fundamentos Teóricos
-Epidemiológicos}\label{fundamentos-teuxf3ricos-epidemioluxf3gicos}
 
 \part{Modelo Matemático}
 
