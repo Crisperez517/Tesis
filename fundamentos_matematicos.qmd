@@ -725,33 +725,35 @@ $$
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4(T - t_0 + 5)\mathbb{E}\left[ \int_{t_0}^t K\left( 1 + \vert X_n(r^-) \vert^2 \right) \mathbf{1}_{[[t_0, \sigma_n]]}(r) dr \right],
 $$ {#eq-cota-previa-finitud}
 
-y dado que $\vert X_n(r^-) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) \le \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2$, aplicando el teorema de Fubini se cumple simultáneamente que:
+dado que $\displaystyle \vert X_n(r^-) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) \le \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2$, y aplicando el teorema de Tonelli se tiene que:
 
 $$
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
 $$ {#eq-cota-previa-gronwall}
 
-Note que, aunque el proceso detenido $X_n(s)$ puede superar el umbral $n$ en el instante exacto $s = \sigma_n$ debido a la ocurrencia de un salto, por definición de $\sigma_n$ se cumple que $\vert X(r) \vert < n$ para todo $r \in (t_0, \sigma_n)$, por lo que el límite por la izquierda satisface que $\vert X_n(r^-) \vert = \vert X(r^-) \vert \le \max\{n, \vert x_0 \vert\}$ para todo $r \in [[t_0, \sigma_n]]$ [@situ2005theory]. Elevando al cuadrado ambos miembros y utilizando que el máximo de dos cantidades no negativas es menor o igual que su suma, se obtiene $\vert X_n(r^-) \vert^2 \le \max\{n^2, \vert x_0 \vert^2\} \le n^2 + \vert x_0 \vert^2$. Sustituyendo esta cota en el integrando de la @eq-cota-previa-finitud e integrando respecto a $r$, se tiene que para todo $t \in [t_0, T]$:
+Note que, aunque el proceso detenido $X_n(s)$ puede superar el umbral $n$ en el instante exacto $s = \sigma_n$ debido a la ocurrencia de un salto, por definición de $\sigma_n$ se cumple que $\vert X(r) \vert < n$ para todo $r \in (t_0, \sigma_n)$, por lo que el límite por la izquierda satisface que $\vert X_n(r^-) \vert = \vert X(r^-) \vert \le \max\{n, \vert x_0 \vert\}$ para todo $r \in [[t_0, \sigma_n]]$ [@situ2005theory]. Elevando al cuadrado ambos miembros de la desigualdad y utilizando que el máximo de dos números no negativos es menor o igual que su suma, se obtiene que $\vert X_n(r^-) \vert^2 \le \max\{n^2, \vert x_0 \vert^2\} \le n^2 + \vert x_0 \vert^2$. Sustituyendo esta cota en el integrando de la @eq-cota-previa-finitud e integrando respecto a $r$, se tiene que para todo $t \in [t_0, T]$:
 
 $$
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5)(T - t_0)\left( 1 + n^2 + \mathbb{E}[\vert x_0 \vert^2] \right) < \infty.
 $$
 
-Esto garantiza que la función $u_n(t) = 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right]$ es finita, acotada y medible en $[t_0, T]$. Sumando $1$ en ambos lados de la @eq-cota-previa-gronwall, obtenemos para todo $t \in [t_0, T]$:
+Esto garantiza que la función $\displaystyle u_n(t) = 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right]$ es finita, acotada y medible en $[t_0, T]$. Sumando $1$ en ambos lados de la @eq-cota-previa-gronwall, obtenemos para todo $t \in [t_0, T]$:
 
 $$
 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 1 + 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
 $$
 
-Aplicando la Desigualdad Integral de Grönwall (@lem-gronwall) y evaluando en $t = T$, se deduce que:
+Aplicando la Desigualdad de Grönwall (@lem-gronwall) y evaluando en $t = T$, se obtiene que:
 
 $$
 \mathbb{E}\left[ \sup_{t_0 \le t \le \sigma_n} \vert X(t) \vert^2 \right] \le 1 + \mathbb{E}\left[ \sup_{t_0 \le t \le T} \vert X_n(t) \vert^2 \right] \le \left( 1 + 4\mathbb{E}[\vert x_0 \vert^2] \right) e^{4K(T - t_0)(T - t_0 + 5)}.
 $$
 
-Finalmente, tomando el límite cuando $n \to \infty$, dado que $\sigma_n \uparrow T$ casi seguramente, por el Teorema de Convergencia Monótona se obtiene la desigualdad (@eq-cota-supremo-hibrida), lo cual implica en particular que $X(\cdot) \in \mathcal{M}^2([t_0, T]; \mathbb{R})$ y concluye la demostración. $\blacksquare$
+Finalmente, tomando el límite cuando $n \to \infty$, dado que $\sigma_n \uparrow T$ casi seguramente, por el Teorema de la Convergencia Monótona se obtiene la desigualdad deseada (@eq-cota-supremo-hibrida), por lo que $\{X(t)\}_{t \in [t_0, T]}$ $\in$ $\mathcal{M}^2([t_0, T]; \mathbb{R})$. 
 
-# HASTA AQUI
+De todo lo anterior se concluye la demostracion del teorema de existencia y unicidad para la ecuación diferencial estocástica híbrida con saltos y régimen de Markov (@thm-mao-switching). $\square$ $\boxtimes$
+
+# DE AQUI
 
 ## El Modelo Estocástico Termodinámico (Ornstein-Uhlenbeck Híbrido)
 

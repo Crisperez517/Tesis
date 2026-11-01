@@ -188,9 +188,9 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
@@ -1966,9 +1966,9 @@ integrales en una sola cota:
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4(T - t_0 + 5)\mathbb{E}\left[ \int_{t_0}^t K\left( 1 + \vert X_n(r^-) \vert^2 \right) \mathbf{1}_{[[t_0, \sigma_n]]}(r) dr \right],
 }\end{equation}
 
-y dado que
-\(\vert X_n(r^-) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) \le \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2\),
-aplicando el teorema de Fubini se cumple simultáneamente que:
+dado que
+\(\displaystyle \vert X_n(r^-) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) \le \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2\),
+y aplicando el teorema de Tonelli se tiene que:
 
 \begin{equation}\phantomsection\label{eq-cota-previa-gronwall}{
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
@@ -1982,8 +1982,8 @@ el límite por la izquierda satisface que
 \(\vert X_n(r^-) \vert = \vert X(r^-) \vert \le \max\{n, \vert x_0 \vert\}\)
 para todo \(r \in [[t_0, \sigma_n]]\)
 (\citeproc{ref-situ2005theory}{Situ 2005}). Elevando al cuadrado ambos
-miembros y utilizando que el máximo de dos cantidades no negativas es
-menor o igual que su suma, se obtiene
+miembros de la desigualdad y utilizando que el máximo de dos números no
+negativos es menor o igual que su suma, se obtiene que
 \(\vert X_n(r^-) \vert^2 \le \max\{n^2, \vert x_0 \vert^2\} \le n^2 + \vert x_0 \vert^2\).
 Sustituyendo esta cota en el integrando de la
 Ecuación~\ref{eq-cota-previa-finitud} e integrando respecto a \(r\), se
@@ -1994,7 +1994,7 @@ tiene que para todo \(t \in [t_0, T]\):
 \]
 
 Esto garantiza que la función
-\(u_n(t) = 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right]\)
+\(\displaystyle u_n(t) = 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right]\)
 es finita, acotada y medible en \([t_0, T]\). Sumando \(1\) en ambos
 lados de la Ecuación~\ref{eq-cota-previa-gronwall}, obtenemos para todo
 \(t \in [t_0, T]\):
@@ -2003,21 +2003,26 @@ lados de la Ecuación~\ref{eq-cota-previa-gronwall}, obtenemos para todo
 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 1 + 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
 \]
 
-Aplicando la Desigualdad Integral de Grönwall (Lema~\ref{lem-gronwall})
-y evaluando en \(t = T\), se deduce que:
+Aplicando la Desigualdad de Grönwall (Lema~\ref{lem-gronwall}) y
+evaluando en \(t = T\), se obtiene que:
 
 \[
 \mathbb{E}\left[ \sup_{t_0 \le t \le \sigma_n} \vert X(t) \vert^2 \right] \le 1 + \mathbb{E}\left[ \sup_{t_0 \le t \le T} \vert X_n(t) \vert^2 \right] \le \left( 1 + 4\mathbb{E}[\vert x_0 \vert^2] \right) e^{4K(T - t_0)(T - t_0 + 5)}.
 \]
 
 Finalmente, tomando el límite cuando \(n \to \infty\), dado que
-\(\sigma_n \uparrow T\) casi seguramente, por el Teorema de Convergencia
-Monótona se obtiene la desigualdad
-(Ecuación~\ref{eq-cota-supremo-hibrida}), lo cual implica en particular
-que \(X(\cdot) \in \mathcal{M}^2([t_0, T]; \mathbb{R})\) y concluye la
-demostración. \(\blacksquare\)
+\(\sigma_n \uparrow T\) casi seguramente, por el Teorema de la
+Convergencia Monótona se obtiene la desigualdad deseada
+(Ecuación~\ref{eq-cota-supremo-hibrida}), por lo que
+\(\{X(t)\}_{t \in [t_0, T]}\) \(\in\)
+\(\mathcal{M}^2([t_0, T]; \mathbb{R})\).
 
-\chapter{HASTA AQUI}\label{hasta-aqui}
+De todo lo anterior se concluye la demostracion del teorema de
+existencia y unicidad para la ecuación diferencial estocástica híbrida
+con saltos y régimen de Markov (Teorema~\ref{thm-mao-switching}).
+\(\square\) \(\boxtimes\)
+
+\chapter{DE AQUI}\label{de-aqui}
 
 \section{El Modelo Estocástico Termodinámico (Ornstein-Uhlenbeck
 Híbrido)}\label{el-modelo-estocuxe1stico-termodinuxe1mico-ornstein-uhlenbeck-huxedbrido}
