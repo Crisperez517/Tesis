@@ -7,7 +7,13 @@ language:
 
 format:
   html: default
-  pdf: default
+  pdf:
+    include-in-header:
+      - text: |
+          \usepackage{etoolbox}
+          \AtBeginDocument{
+            \patchcmd{\algorithm}{Algorithm}{Algoritmo}{}{}
+          }
 ---
 
 # Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas
@@ -65,7 +71,7 @@ $$
 2. Si adicionalmente los coeficientes $b, \sigma \in \mathcal{C}_p^{4}(\mathbb{R}; \mathbb{R})$ poseen derivadas espaciales continuas hasta de cuarto orden con crecimiento polinomial, entonces el esquema de Euler-Maruyama converge en sentido **débil** con orden $\beta = 1.0$ [@kloeden1992numerical][cite: 12, 18, 25].
 :::
 
-La reducción del orden de convergencia fuerte a $\gamma = 0.5$ (frente al orden $1.0$ del método de Euler determinista) se debe a que la raíz de la varianza del incremento Browniano escala proporcionalmente a $\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}$ [@kloeden1992numerical]. El procedimiento computacional de este método se resume en el **Algoritmo 1**. @alg-euler-maruyama.
+La reducción del orden de convergencia fuerte a $\gamma = 0.5$ (frente al orden $1.0$ del método de Euler determinista) se debe a que la raíz de la varianza del incremento Browniano escala proporcionalmente a $\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}$ [@kloeden1992numerical]. El procedimiento computacional de este método se resume en el **Algoritmo 1**. @alg-euler-maruyama. @Alg-euler-maruyama.
 
 ::: {#alg-euler-maruyama}
 

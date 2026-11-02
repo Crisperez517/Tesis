@@ -187,12 +187,12 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{remark}
@@ -2462,6 +2462,7 @@ de la varianza del incremento Browniano escala proporcionalmente a
 (\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}). El
 procedimiento computacional de este método se resume en el
 \textbf{Algoritmo 1}. alg.~\ref{alg-euler-maruyama}.
+Alg.~\ref{alg-euler-maruyama}.
 
 \begin{algorithm}[Procedimiento paso a paso del esquema de
 Euler-Maruyama para aproximar la solución de una ecuación diferencial
