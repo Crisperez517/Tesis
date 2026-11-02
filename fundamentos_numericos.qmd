@@ -1,14 +1,8 @@
 ---
-format:
-  html:
-    language:
-      crossref-tbl-title: "Algoritmo"
-      crossref-tbl-prefix: "Algoritmo"
-
-  pdf:
-    language:
-      crossref-tbl-title: "Algoritmo"
-      crossref-tbl-prefix: "Algoritmo"
+lang: es
+language:
+  crossref-alg-title: "Algoritmo"
+  crossref-alg-prefix: "Algoritmo"
 ---
 
 # Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas
@@ -66,7 +60,11 @@ $$
 2. Si adicionalmente los coeficientes $b, \sigma \in \mathcal{C}_p^{4}(\mathbb{R}; \mathbb{R})$ poseen derivadas espaciales continuas hasta de cuarto orden con crecimiento polinomial, entonces el esquema de Euler-Maruyama converge en sentido **débil** con orden $\beta = 1.0$ [@kloeden1992numerical][cite: 12, 18, 25].
 :::
 
-La reducción del orden de convergencia fuerte a $\gamma = 0.5$ (frente al orden $1.0$ del método de Euler determinista) se debe a que la raíz de la varianza del incremento Browniano escala proporcionalmente a $\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}$ [@kloeden1992numerical]. El procedimiento computacional de este método se resume en el **Algoritmo 1**. @tbl-euler-maruyama.
+La reducción del orden de convergencia fuerte a $\gamma = 0.5$ (frente al orden $1.0$ del método de Euler determinista) se debe a que la raíz de la varianza del incremento Browniano escala proporcionalmente a $\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}$ [@kloeden1992numerical]. El procedimiento computacional de este método se resume en el **Algoritmo 1**. @alg-euler-maruyama.
+
+::: {#alg-euler-maruyama}
+
+## Procedimiento paso a paso del esquema de Euler-Maruyama para aproximar la solución de una ecuación diferencial estocástica.
 
 | **Esquema numérico de Euler-Maruyama** |
 |:---|
@@ -81,7 +79,7 @@ La reducción del orden de convergencia fuerte a $\gamma = 0.5$ (frente al orden
 | 9: $\quad$ **end for** |
 | 10: **4)** Retornar la trayectoria discreta aproximada $\{Y_0, Y_1, \dots, Y_N\}$. |
 
-: Procedimiento paso a paso del esquema de Euler-Maruyama para aproximar la solución de una ecuación diferencial estocástica. {#tbl-euler-maruyama}
+:::
 
 ### Esquema Numérico de Milstein
 
