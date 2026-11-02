@@ -1,8 +1,13 @@
 ---
 lang: es
+
 language:
   crossref-alg-title: "Algoritmo"
   crossref-alg-prefix: "Algoritmo"
+
+format:
+  html: default
+  pdf: default
 ---
 
 # Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas
