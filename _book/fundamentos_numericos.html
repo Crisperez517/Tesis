@@ -495,9 +495,9 @@ Y_{n+1} = Y_n + b(t_n, Y_n) \Delta t + \sigma(t_n, Y_n) \Delta W_n, \quad n = 0,
 <li>Si adicionalmente los coeficientes <span class="math inline">\(b, \sigma \in \mathcal{C}_p^{4}(\mathbb{R}; \mathbb{R})\)</span> poseen derivadas espaciales continuas hasta de cuarto orden con crecimiento polinomial, entonces el esquema de Euler-Maruyama converge en sentido <strong>débil</strong> con orden <span class="math inline">\(\beta = 1.0\)</span> [<span class="citation" data-cites="kloeden1992numerical">Kloeden y Platen (<a href="references.html#ref-kloeden1992numerical" role="doc-biblioref">1992</a>)</span>][cite: 12, 18, 25].</li>
 </ol>
 </div>
-<p>La reducción del orden de convergencia fuerte a <span class="math inline">\(\gamma = 0.5\)</span> (frente al orden <span class="math inline">\(1.0\)</span> del método de Euler determinista) se debe a que la raíz de la varianza del incremento Browniano escala proporcionalmente a <span class="math inline">\(\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}\)</span> <span class="citation" data-cites="kloeden1992numerical">(<a href="references.html#ref-kloeden1992numerical" role="doc-biblioref">Kloeden y Platen 1992</a>)</span>. El procedimiento computacional de este método se resume en el <strong>Algoritmo 1</strong>. <a href="#alg-euler-maruyama" class="quarto-xref">alg.&nbsp;<span>3.1</span></a>.</p>
+<p>La reducción del orden de convergencia fuerte a <span class="math inline">\(\gamma = 0.5\)</span> (frente al orden <span class="math inline">\(1.0\)</span> del método de Euler determinista) se debe a que la raíz de la varianza del incremento Browniano escala proporcionalmente a <span class="math inline">\(\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}\)</span> <span class="citation" data-cites="kloeden1992numerical">(<a href="references.html#ref-kloeden1992numerical" role="doc-biblioref">Kloeden y Platen 1992</a>)</span>. El procedimiento computacional de este método se resume en el <strong>Algoritmo 1</strong>. <a href="#alg-euler-maruyama" class="quarto-xref">Algoritmo&nbsp;<span>3.1</span></a>.</p>
 <div id="alg-euler-maruyama" class="theorem algorithm">
-<p><span class="theorem-title"><strong>Algorithm 3.1</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Algoritmo 3.1</strong></span> &nbsp;</p>
 <table class="caption-top table">
 <caption>Procedimiento paso a paso del esquema de Euler-Maruyama para aproximar la solución de una ecuación diferencial estocástica.</caption>
 <colgroup>
@@ -505,7 +505,7 @@ Y_{n+1} = Y_n + b(t_n, Y_n) \Delta t + \sigma(t_n, Y_n) \Delta W_n, \quad n = 0,
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;"><strong>Algoritmo 1</strong> Esquema numérico de Euler-Maruyama</th>
+<th style="text-align: left;"><strong>Esquema numérico de Euler-Maruyama</strong></th>
 </tr>
 </thead>
 <tbody>

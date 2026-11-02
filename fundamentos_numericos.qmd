@@ -1,3 +1,9 @@
+---
+language:
+  crossref-alg-title: "Algoritmo"
+  crossref-alg-prefix: "Algoritmo"
+---
+
 # Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas
 
 En la práctica, la mayoría de las ecuaciones diferenciales estocásticas carecen de una solución analítica explícita debido a la estructura funcional de sus coeficientes o al acoplamiento de múltiples perturbaciones aleatorias[cite: 9, 22]. Por este motivo, resulta necesario recurrir a esquemas de aproximación numérica definidos sobre una discretización temporal[cite: 9, 22]. A diferencia del análisis numérico determinista, donde el error de aproximación se evalúa de manera puntual, en el cálculo estocástico la cercanía entre la solución exacta $X(t)$ y la aproximación numérica $Y$ debe cuantificarse en media cuadrática o en distribución sobre el espacio de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$ [@kloeden1992numerical].
@@ -56,7 +62,7 @@ $$
 La reducción del orden de convergencia fuerte a $\gamma = 0.5$ (frente al orden $1.0$ del método de Euler determinista) se debe a que la raíz de la varianza del incremento Browniano escala proporcionalmente a $\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}$ [@kloeden1992numerical]. El procedimiento computacional de este método se resume en el **Algoritmo 1**. @alg-euler-maruyama.
 
 ::: {#alg-euler-maruyama}
-| **Algoritmo 1** Esquema numérico de Euler-Maruyama |
+| **Esquema numérico de Euler-Maruyama** |
 |:---|
 | 1: **1)** Subdividir el dominio temporal $[0, T]$ en $N + 1$ nodos equidistantes $t_0, t_1, \dots, t_N$, donde $\Delta t = T/N$ es el incremento temporal, $t_n = n \Delta t$ y $\Delta W_n \sim \sqrt{\Delta t}\,\mathcal{N}(0, 1)$ es el incremento Browniano correspondiente para $n = 0, \dots, N - 1$. |
 | 2: **2)** Asignar la condición inicial $Y_0 = x_0$. |
