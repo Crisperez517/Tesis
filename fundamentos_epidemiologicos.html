@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -101,35 +81,6 @@ div.csl-indent {
   });
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -425,19 +376,8 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Tabla de contenidos</h2>
-   
-  <ul>
-  <li><a href="#soluciones-numéricas-de-ecuaciones-diferenciales-estocásticas" id="toc-soluciones-numéricas-de-ecuaciones-diferenciales-estocásticas" class="nav-link active" data-scroll-target="#soluciones-numéricas-de-ecuaciones-diferenciales-estocásticas"><span class="header-section-number">4.1</span> Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas</a>
-  <ul class="collapse">
-  <li><a href="#sec-euler-maruyama" id="toc-sec-euler-maruyama" class="nav-link" data-scroll-target="#sec-euler-maruyama"><span class="header-section-number">4.1.1</span> Esquema Numérico de Euler-Maruyama</a></li>
-  <li><a href="#esquema-numérico-de-milstein" id="toc-esquema-numérico-de-milstein" class="nav-link" data-scroll-target="#esquema-numérico-de-milstein"><span class="header-section-number">4.1.2</span> Esquema Numérico de Milstein</a></li>
-  </ul></li>
-  <li><a href="#análisis-comparativo-de-convergencia-fuerte" id="toc-análisis-comparativo-de-convergencia-fuerte" class="nav-link" data-scroll-target="#análisis-comparativo-de-convergencia-fuerte"><span class="header-section-number">4.2</span> Análisis Comparativo de Convergencia Fuerte</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -462,118 +402,8 @@ window.Quarto = {
 </header>
 
 
-<section id="soluciones-numéricas-de-ecuaciones-diferenciales-estocásticas" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="soluciones-numéricas-de-ecuaciones-diferenciales-estocásticas"><span class="header-section-number">4.1</span> Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas</h2>
-<p>En la práctica, la gran mayoría de las ecuaciones diferenciales estocásticas carecen de una solución analítica explícita debido a la no linealidad de sus coeficientes o al acoplamiento de sus perturbaciones. Por este motivo, resulta necesario recurrir a esquemas de aproximación numérica distribuidos en un mallado temporal discreto. A diferencia del cálculo determinista, donde la convergencia se evalúa de forma puntual, en el ámbito estocástico la cercanía entre la solución real <span class="math inline">\(X(t)\)</span> y la aproximación discreta <span class="math inline">\(Y_n\)</span> requiere criterios fundamentados en la teoría de la medida.</p>
-<p>Para definir los criterios de convergencia, consideremos una partición regular del intervalo de tiempo <span class="math inline">\([0, T]\)</span> con un tamaño de paso constante <span class="math inline">\(\Delta t = \frac{T}{N}\)</span>, fijando los nodos temporales como <span class="math inline">\(t_n = n \Delta t\)</span> para cada paso <span class="math inline">\(n = 0, 1, \dots, N\)</span>. Denotaremos a la solución aproximada en el nodo <span class="math inline">\(t_n\)</span> como <span class="math inline">\(Y_n = Y(t_n)\)</span>.</p>
-<div id="def-convergencia-fuerte" class="theorem definition">
-<p><span class="theorem-title"><strong>Definición 4.1 (Convergencia Fuerte)</strong></span> Se dice que una aproximación discreta <span class="math inline">\(Y\)</span> converge fuertemente de orden <span class="math inline">\(\gamma &gt; 0\)</span> hacia la solución real <span class="math inline">\(X(T)\)</span> en el tiempo terminal <span class="math inline">\(T\)</span> si existe una constante positiva <span class="math inline">\(C\)</span>, independiente de <span class="math inline">\(\Delta t\)</span>, tal que se cumple la desigualdad:</p>
-<p><span class="math display">\[
-\mathbb{E}\left[|X(T) - Y_N|\right] \le C (\Delta t)^\gamma
-\]</span></p>
-</div>
-<p>La convergencia fuerte evalúa el error promedio directo sobre cada trayectoria individual del proceso. Es el criterio adecuado cuando interesa simular caminos muestrales específicos del sistema.</p>
-<div id="def-convergencia-debil" class="theorem definition">
-<p><span class="theorem-title"><strong>Definición 4.2 (Convergencia Débil)</strong></span> Se dice que una aproximación discreta <span class="math inline">\(Y\)</span> converge débilmente de orden <span class="math inline">\(\beta &gt; 0\)</span> hacia la solución real <span class="math inline">\(X(T)\)</span> en el tiempo terminal <span class="math inline">\(T\)</span> si, para toda función de prueba <span class="math inline">\(g: \mathbb{R} \to \mathbb{R}\)</span> continuamente diferenciable de crecimiento polinomial, existe una constante positiva <span class="math inline">\(C\)</span> tal que:</p>
-<p><span class="math display">\[
-|\mathbb{E}[g(X(T))] - \mathbb{E}[g(Y_N)]| \le C (\Delta t)^\beta
-\]</span></p>
-</div>
-<p>La convergencia débil no compara trayectoria por trayectoria, sino que evalúa la aproximación de la distribución de probabilidad global y sus momentos estadísticos (como la media y la varianza), para más detalles consultar a <span class="citation" data-cites="kloeden1992numerical">(<a href="references.html#ref-kloeden1992numerical" role="doc-biblioref">Kloeden y Platen 1992</a>)</span>.</p>
-<section id="sec-euler-maruyama" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="sec-euler-maruyama"><span class="header-section-number">4.1.1</span> Esquema Numérico de Euler-Maruyama</h3>
-<p>El método de Euler-Maruyama constituye la extensión estocástica más elemental del método de Euler para ecuaciones diferenciales ordinarias. Este esquema aproxima el cambio continuo truncando las integrales de la ecuación mediante aproximaciones de orden inferior.</p>
-<div id="thm-euler-maruyama" class="theorem">
-<p><span class="theorem-title"><strong>Teorema 4.1 (Teorema de Convergencia de Euler-Maruyama)</strong></span> Sea <span class="math inline">\(\{X(t)\}_{t \ge 0}\)</span>, considere la EDE dada por la <a href="fundamentos_matematicos.html#eq-ede-general-diff" class="quarto-xref">Ecuación&nbsp;<span>2.1</span></a>, con condición inicial <span class="math inline">\(X(0) = x_0\)</span>, si se cumplen las hipotesis del teorema de existencia y unicidad <a href="fundamentos_matematicos.html#thm-existencia-unicidad" class="quarto-xref">Teorema&nbsp;<span>2.3</span></a> y los coeficientes <span class="math inline">\(b\)</span> y de difusión <span class="math inline">\(\sigma\)</span> son continuamente diferenciables, entonces el esquema de Euler-Maruyama converge fuertemente con orden:</p>
-<p><span class="math display">\[
-\gamma = 0.5
-\]</span></p>
-<p>y converge débilmente con un orden de acotación de <span class="math inline">\(\beta = 1.0\)</span>.</p>
-</div>
-<p>Este orden de convergencia se fundamenta en que el incremento del movimiento Browniano domina algebraicamente sobre el incremento del tiempo determinista, dado que su escala de variación es proporcional a <span class="math inline">\(\sqrt{\Delta t}\)</span>, la demostración de este teorema se encuentra en <span class="citation" data-cites="kloeden1992numerical">(<a href="references.html#ref-kloeden1992numerical" role="doc-biblioref">Kloeden y Platen 1992</a>)</span>.</p>
-<p><strong>Algoritmo General de Euler-Maruyama</strong></p>
-<p>Para aproximar numéricamente las trayectorias de la ecuación en el intervalo <span class="math inline">\([0, T]\)</span> con condición inicial <span class="math inline">\(X(0) = x_0\)</span>:</p>
-<ol type="1">
-<li><strong>Inicialización:</strong>
-<ul>
-<li>Fijar el número de pasos <span class="math inline">\(N\)</span> y calcular el incremento <span class="math inline">\(\Delta t = T/N\)</span>.</li>
-<li>Construir la malla temporal <span class="math inline">\(t_n = n \Delta t\)</span> para <span class="math inline">\(n = 0, 1, \dots, N\)</span>.</li>
-<li>Asignar el valor inicial a la primera posición del vector: <span class="math inline">\(Y_0 = x_0\)</span>.</li>
-</ul></li>
-<li><strong>Bucle de Simulación:</strong> Para cada paso temporal <span class="math inline">\(n = 0, 1, \dots, N-1\)</span>:
-<ul>
-<li>Generar una variable aleatoria normal estándar independiente: <span class="math inline">\(Z_n \sim \mathcal{N}(0, 1)\)</span>.</li>
-<li>Calcular el incremento del proceso de Wiener mediante el escalamiento: <span class="math display">\[\Delta W_n = W(t_{n+1}) - W(t_n) = Z_n \sqrt{\Delta t}\]</span></li>
-<li>Actualizar el estado del proceso en el siguiente nodo evaluando la relación recursiva: <span class="math display">\[Y_{n+1} = Y_n + b(t_n, Y_n) \Delta t + \sigma(t_n, Y_n) \Delta W_n\]</span></li>
-</ul></li>
-<li><strong>Resultado:</strong> El vector de estados discreto <span class="math inline">\(\{Y_0, Y_1, \dots, Y_N\}\)</span> representa la trayectoria simulada aproximada del proceso.</li>
-</ol>
-</section>
-<section id="esquema-numérico-de-milstein" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="esquema-numérico-de-milstein"><span class="header-section-number">4.1.2</span> Esquema Numérico de Milstein</h3>
-<p>El método de Milstein es un esquema numérico avanzado de orden superior que corrige la aproximación de la componente difusiva. Surge de aplicar de manera explícita el Lema de Itô al integrando de la componente estocástica en la expansión de Taylor-Itô, rescatando los términos de segundo orden que el método de Euler-Maruyama ignora.</p>
-<div id="thm-milstein" class="theorem">
-<p><span class="theorem-title"><strong>Teorema 4.2 (Teorema de Convergencia de Milstein)</strong></span> Sea <span class="math inline">\(\{X(t)\}_{t \ge 0}\)</span>, considere la EDE dada por la <a href="fundamentos_matematicos.html#eq-ede-general-diff" class="quarto-xref">Ecuación&nbsp;<span>2.1</span></a> sujeta a las condiciones estándar de regularidad, es decir si los coeficientes <span class="math inline">\(b(t, x)\)</span> y <span class="math inline">\(\sigma(t, x)\)</span> son dos veces continuamente diferenciables respecto a sus componentes y cumplen los criterios de crecimiento acotado, entonces el esquema numérico de Milstein converge fuertemente con un orden superior dado por:</p>
-<p><span class="math display">\[
-\gamma = 1.0
-\]</span></p>
-</div>
-<p>El incremento en la velocidad de convergencia fuerte se logra al incorporar de forma analítica el término correspondiente a la integral estocástica iterada</p>
-<p><span class="math display">\[
-\int_{t_n}^{t_{n+1}} \int_{t_n}^s dW(u) dW(s) = \frac{1}{2} \left[ (\Delta W_n)^2 - \Delta t \right],
-\]</span></p>
-<p>la cual modela la curvatura interna del ruido estocástico dentro del intervalo de simulación, lo que permite una aproximación más precisa de la trayectoria. La demostración de este resultado se encuentra en <span class="citation" data-cites="kloeden1992numerical">(<a href="references.html#ref-kloeden1992numerical" role="doc-biblioref">Kloeden y Platen 1992</a>)</span>.</p>
-<p><strong>Algoritmo General de Milstein</strong></p>
-<p>Para aproximar numéricamente las trayectorias bajo el refinamiento de segundo orden estocástico en el intervalo <span class="math inline">\([0, T]\)</span> con condición inicial <span class="math inline">\(X(0) = x_0\)</span>:</p>
-<ol type="1">
-<li><strong>Inicialización:</strong>
-<ul>
-<li>Establecer el número de intervalos <span class="math inline">\(N\)</span> y calcular el paso <span class="math inline">\(\Delta t = T/N\)</span>.</li>
-<li>Definir los puntos de la malla <span class="math inline">\(t_n = n \Delta t\)</span> para <span class="math inline">\(n = 0, 1, \dots, N\)</span>.</li>
-<li>Asignar la condición de inicio del proceso: <span class="math inline">\(Y_0 = x_0\)</span>.</li>
-</ul></li>
-<li><strong>Bucle de Simulación:</strong> Para cada paso temporal <span class="math inline">\(n = 0, 1, \dots, N-1\)</span>:
-<ul>
-<li>Obtener una realización independiente de una variable normal estándar: <span class="math inline">\(Z_n \sim \mathcal{N}(0, 1)\)</span>.</li>
-<li>Establecer el incremento browniano escalar correspondientemente: <span class="math inline">\(\Delta W_n = Z_n \sqrt{\Delta t}\)</span>.</li>
-<li>Calcular analíticamente el valor de la primera derivada parcial del coeficiente de difusión respecto a la variable espacial evaluado en el punto actual: <span class="math display">\[\sigma'(t_n, Y_n) = \frac{\partial \sigma(t, x)}{\partial x} \bigg|_{(t_n, Y_n)}\]</span></li>
-<li>Realizar la actualización recursiva del estado integrando la corrección de segundo orden: <span class="math display">\[Y_{n+1} = Y_n + b(t_n, Y_n)\Delta t + \sigma(t_n, Y_n)\Delta W_n + \frac{1}{2}\sigma(t_n, Y_n)\sigma'(t_n, Y_n)\left[(\Delta W_n)^2 - \Delta t\right]\]</span></li>
-</ul></li>
-<li><strong>Resultado:</strong> El conjunto ordenado de aproximaciones numéricas <span class="math inline">\(\{Y_0, Y_1, \dots, Y_N\}\)</span> conforma la trayectoria analizada bajo estabilidad de orden superior.</li>
-</ol>
-</section>
-</section>
-<section id="análisis-comparativo-de-convergencia-fuerte" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="análisis-comparativo-de-convergencia-fuerte"><span class="header-section-number">4.2</span> Análisis Comparativo de Convergencia Fuerte</h2>
-<p>Para mostrar la diferencia analítica que hay entre los esquemas de Euler-Maruyama y Milstein, y justificar la necesidad de utilizar este último cuando se requiere precisión en trayectorias individuales, planteamos un problema de control numérico. Consideremos el Movimiento Browniano Geométrico (GBM), una EDE lineal homogénea caracterizada por un coeficiente de difusión multiplicativo, dada por la ecuación:</p>
-<p><span id="eq-ede-gbm"><span class="math display">\[
-dX(t) = \mu X(t) dt + \sigma X(t) dW(t)
-\tag{4.1}\]</span></span></p>
-<p>con condición inicial <span class="math inline">\(X(0) = X_0\)</span>, tendencia determinista <span class="math inline">\(\mu &gt; 0\)</span> y volatilidad <span class="math inline">\(\sigma &gt; 0\)</span>. Este proceso posee una solución analítica única dada por:</p>
-<p><span class="math display">\[
-X(t) = X_0 \exp\left[\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W(t)\right]
-\]</span></p>
-<p>Esta forma cerrada nos permite contrastar directamente las aproximaciones numéricas contra la realidad del proceso. La principal limitación del método de Euler-Maruyama radica en su coeficiente de difusión constante en cada paso temporal. Al truncar la integral estocástica con un orden de convergencia fuerte de 0.5, el esquema no absorbe correctamente la curvatura del ruido multiplicativo (<span class="math inline">\(\sigma X_t\)</span>), acumulando errores significativos sobre las trayectorias individuales, incluso ante mallados temporales relativamente pequeños. Por el contrario, el método de Milstein integra el término de segundo orden estocástico, logrando que el vector de estados discreto coincida con mayor precisión con la dinámica real del proceso <span class="citation" data-cites="kloeden1992numerical">(<a href="references.html#ref-kloeden1992numerical" role="doc-biblioref">Kloeden y Platen 1992</a>)</span>.</p>
-<p>En la <a href="#fig-sde-metodos" class="quarto-xref">Figura&nbsp;<span>4.1</span></a>, simulamos una trayectoria de GBM en un horizonte temporal acotado (<span class="math inline">\(T=2.0\)</span> años) con una volatilidad alta (<span class="math inline">\(\sigma = 1\)</span>) y un tamaño de paso discreto relativamente grueso (<span class="math inline">\(\Delta t = 0.05\)</span>, correspondiente a <span class="math inline">\(N=40\)</span> pasos). Esta configuración es deliberada para resaltar las fallas de los aproximadores.</p>
-<div id="fig-sde-metodos" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-sde-metodos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="comparacion_metodos.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sde-metodos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.1: Análisis de convergencia fuerte de esquemas numéricos estocásticos para una trayectoria de Movimiento Browniano Geométrico (GBM) definida por <span class="math inline">\(dX = 0.05 X dt + X dW\)</span> con <span class="math inline">\(X_0 = 1\)</span>. El eje horizontal representa el tiempo discreto y el eje vertical el estado del proceso <span class="math inline">\(X(t)\)</span>. La línea negra continua muestra la solución analítica exacta. La línea roja discontinua ilustra la aproximación de Euler-Maruyama (Orden fuerte 0.5), evidenciando desviaciones significativas respecto a la trayectoria real. La línea azul discontinua-punto representa el esquema de Milstein (Orden fuerte 1.0), el cual sigue con alta precisión la dinámica exacta, demostrando su estabilidad superior ante ruidos multiplicativos y mallados temporales gruesos. La fuente de los datos corresponde a una simulación de elaboración propia generada en Python.
-</figcaption>
-</figure>
-</div>
-<p>Como se puede apreciar en la <a href="#fig-sde-metodos" class="quarto-xref">Figura&nbsp;<span>4.1</span></a>, la trayectoria roja que correspondiente al método de Euler-Maruyama falla en aproximar la dinámica exacta (línea negra), presentando oscilaciones exageradas y alejándose del valor real a medida que el tiempo avanza. Por otro lado, la trayectoria azul del método de Milstein sigue prácticamente de forma idéntica la trayectoria real. Esta diferencia justifica nuestra decisión de utilizar el esquema numérico de Milstein para simular el comportamiento térmico del refrigerador HBC-150, ya que el modelo híbrido presenta un coeficiente de ruido continuo <span class="math inline">\(\sigma(\alpha(t))\)</span>, lo cual genera perturbaciones multiplicativas que requieren un orden de convergencia estricto para no subestimar el riesgo de trayectorias erráticas.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-kloeden1992numerical" class="csl-entry" role="listitem">
-Kloeden, Peter E., y Eckhard Platen. 1992. <em>Numerical Solution of Stochastic Differential Equations</em>. Vol. 23. Stochastic Modelling y Applied Probability. Berlin, Heidelberg: Springer-Verlag.
-</div>
-</div>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
