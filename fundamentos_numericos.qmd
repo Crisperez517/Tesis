@@ -55,6 +55,7 @@ $$
 
 La reducción del orden de convergencia fuerte a $\gamma = 0.5$ (frente al orden $1.0$ del método de Euler determinista) se debe a que la raíz de la varianza del incremento Browniano escala proporcionalmente a $\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}$ [@kloeden1992numerical]. El procedimiento computacional de este método se resume en el **Algoritmo 1**. @alg-euler-maruyama.
 
+::: {#alg-euler-maruyama}
 | **Algoritmo 1** Esquema numérico de Euler-Maruyama |
 |:---|
 | 1: **1)** Subdividir el dominio temporal $[0, T]$ en $N + 1$ nodos equidistantes $t_0, t_1, \dots, t_N$, donde $\Delta t = T/N$ es el incremento temporal, $t_n = n \Delta t$ y $\Delta W_n \sim \sqrt{\Delta t}\,\mathcal{N}(0, 1)$ es el incremento Browniano correspondiente para $n = 0, \dots, N - 1$. |
@@ -68,7 +69,8 @@ La reducción del orden de convergencia fuerte a $\gamma = 0.5$ (frente al orden
 | 9: $\quad$ **end for** |
 | 10: **4)** Retornar la trayectoria discreta aproximada $\{Y_0, Y_1, \dots, Y_N\}$. |
 
-: Algoritmo 1: Procedimiento paso a paso del esquema de Euler-Maruyama para aproximar la solución de una ecuación diferencial estocástica. {#alg-euler-maruyama}
+: Procedimiento paso a paso del esquema de Euler-Maruyama para aproximar la solución de una ecuación diferencial estocástica.
+:::
 
 ### Esquema Numérico de Milstein
 
