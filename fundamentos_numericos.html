@@ -497,7 +497,7 @@ Y_{n+1} = Y_n + b(t_n, Y_n) \Delta t + \sigma(t_n, Y_n) \Delta W_n, \quad n = 0,
 </div>
 <p>La reducción del orden de convergencia fuerte a <span class="math inline">\(\gamma = 0.5\)</span> (frente al orden <span class="math inline">\(1.0\)</span> del método de Euler determinista) se debe a que la raíz de la varianza del incremento Browniano escala proporcionalmente a <span class="math inline">\(\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}\)</span> <span class="citation" data-cites="kloeden1992numerical">(<a href="references.html#ref-kloeden1992numerical" role="doc-biblioref">Kloeden y Platen 1992</a>)</span>. El procedimiento computacional de este método se resume en el <strong>Algoritmo 1</strong>. <span class="quarto-unresolved-ref">?tbl-euler-maruyama</span>.</p>
 <table class="caption-top table">
-<caption>Procedimiento paso a paso del esquema de Euler-Maruyama para aproximar la solución de una ecuación diferencial estocástica.{#tbl-euler-maruyama}</caption>
+<caption>Procedimiento paso a paso del esquema de Euler-Maruyama para aproximar la solución de una ecuación diferencial estocástica. {#alg-euler-maruyama}</caption>
 <colgroup>
 <col style="width: 100%">
 </colgroup>
