@@ -1,4 +1,4 @@
-## Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas
+# Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas
 
 En la práctica, la mayoría de las ecuaciones diferenciales estocásticas carecen de una solución analítica explícita debido a la estructura funcional de sus coeficientes o al acoplamiento de múltiples perturbaciones aleatorias[cite: 9, 22]. Por este motivo, resulta necesario recurrir a esquemas de aproximación numérica definidos sobre una discretización temporal[cite: 9, 22]. A diferencia del análisis numérico determinista, donde el error de aproximación se evalúa de manera puntual, en el cálculo estocástico la cercanía entre la solución exacta $X(t)$ y la aproximación numérica $Y$ debe cuantificarse en media cuadrática o en distribución sobre el espacio de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$ [@kloeden1992numerical].
 
@@ -53,7 +53,7 @@ $$
 2. Si adicionalmente los coeficientes $b, \sigma \in \mathcal{C}_p^{4}(\mathbb{R}; \mathbb{R})$ poseen derivadas espaciales continuas hasta de cuarto orden con crecimiento polinomial, entonces el esquema de Euler-Maruyama converge en sentido **débil** con orden $\beta = 1.0$ [@kloeden1992numerical][cite: 12, 18, 25].
 :::
 
-La reducción del orden de convergencia fuerte a $\gamma = 0.5$ (frente al orden $1.0$ del método de Euler determinista) se debe a que la raíz de la varianza del incremento Browniano escala proporcionalmente a $\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}$ [@kloeden1992numerical]. El procedimiento computacional de este método se resume en el **Algoritmo 1**.
+La reducción del orden de convergencia fuerte a $\gamma = 0.5$ (frente al orden $1.0$ del método de Euler determinista) se debe a que la raíz de la varianza del incremento Browniano escala proporcionalmente a $\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}$ [@kloeden1992numerical]. El procedimiento computacional de este método se resume en el **Algoritmo 1**. @alg-euler-maruyama.
 
 | **Algoritmo 1** Esquema numérico de Euler-Maruyama |
 |:---|
@@ -67,6 +67,8 @@ La reducción del orden de convergencia fuerte a $\gamma = 0.5$ (frente al orden
 | 8: $\qquad$ Actualizar el estado del proceso: $Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n$. |
 | 9: $\quad$ **end for** |
 | 10: **4)** Retornar la trayectoria discreta aproximada $\{Y_0, Y_1, \dots, Y_N\}$. |
+
+: Algoritmo 1: Procedimiento paso a paso del esquema de Euler-Maruyama para aproximar la solución de una ecuación diferencial estocástica. {#alg-euler-maruyama}
 
 ### Esquema Numérico de Milstein
 
