@@ -188,13 +188,11 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
-\theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -2461,17 +2459,13 @@ de la varianza del incremento Browniano escala proporcionalmente a
 \(\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}\)
 (\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}). El
 procedimiento computacional de este método se resume en el
-\textbf{Algoritmo 1}. alg.~\ref{alg-euler-maruyama}.
-
-\begin{algorithm}[]\protect\hypertarget{alg-euler-maruyama}{}\label{alg-euler-maruyama}
-
-~
+\textbf{Algoritmo 1}. \textbf{?@tbl-euler-maruyama}.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 0\tabcolsep) * \real{1.0000}}@{}}
 \caption{Procedimiento paso a paso del esquema de Euler-Maruyama para
 aproximar la solución de una ecuación diferencial
-estocástica.}\tabularnewline
+estocástica.\{\#tbl-euler-maruyama\}}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Esquema numérico de Euler-Maruyama}
@@ -2507,8 +2501,6 @@ independiente \(Z_n \sim \mathcal{N}(0, 1)\). \\
 10: \textbf{4)} Retornar la trayectoria discreta aproximada
 \(\{Y_0, Y_1, \dots, Y_N\}\). \\
 \end{longtable}
-
-\end{algorithm}
 
 \subsection{Esquema Numérico de
 Milstein}\label{esquema-numuxe9rico-de-milstein}
