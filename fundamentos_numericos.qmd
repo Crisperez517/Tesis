@@ -68,15 +68,18 @@ La implementación paso a paso del método de Euler-Maruyama se detalla en el @a
 | **Esquema numérico de Euler-Maruyama** |
 |:---|
 | 1: **1)** Dado un entero fijo $N > 0$, dividir el dominio temporal $[0, T]$ en $N + 1$ nodos equidistantes $t_0, t_1, \dots, t_N$, donde $\Delta t = T/N$ es el incremento temporal, $t_n = n \Delta t$ y $\Delta W_n \sim \sqrt{\Delta t}\,\mathcal{N}(0, 1)$ es el incremento Browniano correspondiente para $n = 0, \dots, N - 1$. |
-| 2: **2)** Asignar la condición inicial $Y_0 = x_0$. |
-| 3: **3)** Resolver recursivamente el sistema: |
-| 4: $\quad$ **for** $n = 0, 1, \dots, N - 1$ **do** |
-| 5: $\qquad$ Generar una variable aleatoria normal estándar independiente $Z_n \sim \mathcal{N}(0, 1)$. |
-| 6: $\qquad$ Calcular el incremento del proceso de Wiener: $\Delta W_n = \sqrt{\Delta t}\, Z_n$. |
-| 7: $\qquad$ Evaluar los coeficientes en el nodo actual: $b_n = b(t_n, Y_n)$ y $\sigma_n = \sigma(t_n, Y_n)$. |
-| 8: $\qquad$ Actualizar el estado del proceso: $Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n$. |
-| 9: $\quad$ **end for** |
-| 10: **4)** Retornar la trayectoria discreta aproximada del proceso: $\{Y_0, Y_1, \dots, Y_N\}$. |
+| 2: |
+| 3: **2)** Asignar la condición inicial $Y_0 = x_0$. |
+| 4: |
+| 5: **3)** Resolver recursivamente el sistema: |
+| 6: $\quad$ **for** $n = 0, 1, \dots, N - 1$ **do** |
+| 7: $\qquad$ Generar una variable aleatoria normal estándar independiente $Z_n \sim \mathcal{N}(0, 1)$. |
+| 8: $\qquad$ Calcular el incremento del proceso de Wiener: $\Delta W_n = \sqrt{\Delta t}\, Z_n$. |
+| 9: $\qquad$ Evaluar los coeficientes en el nodo actual: $b_n = b(t_n, Y_n)$ y $\sigma_n = \sigma(t_n, Y_n)$. |
+| 10: $\qquad$ Actualizar el estado del proceso: $Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n$. |
+| 11: $\quad$ **end for** |
+| 12: |
+| 13: **4)** Retornar la trayectoria discreta aproximada del proceso: $\{Y_0, Y_1, \dots, Y_N\}$. |
 
 :::
 
@@ -111,16 +114,19 @@ La implementación paso a paso del método de Milstein se detalla en el @alg-mil
 | **Esquema numérico de Milstein** |
 |:---|
 | 1: **1)** Dado un entero fijo $N > 0$, dividir el dominio temporal $[0, T]$ en $N + 1$ nodos equidistantes $t_0, t_1, \dots, t_N$, donde $\Delta t = T/N$ es el incremento temporal, $t_n = n \Delta t$ y $\Delta W_n \sim \sqrt{\Delta t}\,\mathcal{N}(0, 1)$ es el incremento Browniano correspondiente para $n = 0, \dots, N - 1$. |
-| 2: **2)** Asignar la condición inicial $Y_0 = x_0$. |
-| 3: **3)** Resolver recursivamente el sistema con corrección de segundo orden: |
-| 4: $\quad$ **for** $n = 0, 1, \dots, N - 1$ **do** |
-| 5: $\qquad$ Generar una variable aleatoria normal estándar independiente $Z_n \sim \mathcal{N}(0, 1)$. |
-| 6: $\qquad$ Calcular el incremento Browniano: $\Delta W_n = \sqrt{\Delta t}\, Z_n$. |
-| 7: $\qquad$ Evaluar $b_n = b(t_n, Y_n)$, $\sigma_n = \sigma(t_n, Y_n)$ y la derivada parcial $\sigma'_n = \frac{\partial \sigma}{\partial x}(t_n, Y_n)$. |
-| 8: $\qquad$ Calcular la integral iterada de Itô: $I_{(1,1), n} = \frac{1}{2}\left[(\Delta W_n)^2 - \Delta t\right]$. |
-| 9: $\qquad$ Actualizar el estado del proceso: $Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n + \sigma_n \sigma'_n I_{(1,1), n}$. |
-| 10: $\quad$ **end for** |
-| 11: **4)** Retornar la trayectoria discreta aproximada del proceso: $\{Y_0, Y_1, \dots, Y_N\}$. |
+| 2: |
+| 3: **2)** Asignar la condición inicial $Y_0 = x_0$. |
+| 4: |
+| 5: **3)** Resolver recursivamente el sistema con corrección de segundo orden: |
+| 6: $\quad$ **for** $n = 0, 1, \dots, N - 1$ **do** |
+| 7: $\qquad$ Generar una variable aleatoria normal estándar independiente $Z_n \sim \mathcal{N}(0, 1)$. |
+| 8: $\qquad$ Calcular el incremento Browniano: $\Delta W_n = \sqrt{\Delta t}\, Z_n$. |
+| 9: $\qquad$ Evaluar $b_n = b(t_n, Y_n)$, $\sigma_n = \sigma(t_n, Y_n)$ y la derivada parcial $\sigma'_n = \frac{\partial \sigma}{\partial x}(t_n, Y_n)$. |
+| 10: $\qquad$ Calcular la integral iterada de Itô: $I_{(1,1), n} = \frac{1}{2}\left[(\Delta W_n)^2 - \Delta t\right]$. |
+| 11: $\qquad$ Actualizar el estado del proceso: $Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n + \sigma_n \sigma'_n I_{(1,1), n}$. |
+| 12: $\quad$ **end for** |
+| 13: |
+| 14: **4)** Retornar la trayectoria discreta aproximada del proceso: $\{Y_0, Y_1, \dots, Y_N\}$. |
 
 :::
 
@@ -144,7 +150,7 @@ En la @fig-sde-metodos se simula una trayectoria de la @eq-gbm-solucion y de las
 
 ![Análisis de convergencia fuerte de esquemas numéricos estocásticos para una trayectoria del Movimiento Browniano Geométrico (GBM) definida por $dX = 0.05 X dt + X dW$ con $X_0 = 1$. El eje horizontal representa el avance en el tiempo y el eje vertical el estado del proceso $X(t)$. La línea negra continua representa la solución analítica exacta. La línea roja discontinua representa la aproximación del método de Euler-Maruyama (orden fuerte $\gamma = 0.5$), evidenciando desviaciones respecto a la solución exacta. Por último, la línea azul discontinua representa la aproximación del método de Milstein (orden fuerte $\gamma = 1.0$), el cual sigue con mayor precisión la solución exacta ante un ruido multiplicativo.](comparacion_metodos.png){#fig-sde-metodos width="90%" fig-align="center"}
 
-Como se observa en la @fig-sde-metodos, ante un coeficiente de difusión multiplicativo ($\displaystyle \frac{\partial \sigma}{\partial x} \neq 0$), la aproximación del método de Euler-Maruyama se desvía de la solución exacta en las regiones de mayor variación del proceso de Wiener, mientras que el método de Milstein sigue prácticamente de forma idéntica la trayectoria de la solución exacta. 
+Como se observa en la @fig-sde-metodos, ante un coeficiente de difusión multiplicativo $\displaystyle \left( \frac{\partial \sigma}{\partial x} \neq 0 \right)$, la aproximación del método de Euler-Maruyama se desvía de la solución exacta en las regiones de mayor variación del proceso de Wiener, mientras que el método de Milstein sigue prácticamente de forma idéntica la trayectoria de la solución exacta. 
 
 Por último, resulta fundamental destacar una propiedad que vincula ambos métodos cuando el ruido continuo es **aditivo** respecto a la variable de estado; esto es, cuando el coeficiente de difusión no depende de $x$, por lo que $\displaystyle \frac{\partial \sigma}{\partial x} \equiv 0$. En tal caso, el término corrector de segundo orden en la @eq-esquema-milstein se anula, es decir:
 $$

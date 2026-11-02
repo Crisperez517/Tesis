@@ -2478,19 +2478,22 @@ temporal \([0, T]\) en \(N + 1\) nodos equidistantes
 temporal, \(t_n = n \Delta t\) y
 \(\Delta W_n \sim \sqrt{\Delta t}\,\mathcal{N}(0, 1)\) es el incremento
 Browniano correspondiente para \(n = 0, \dots, N - 1\). \\
-2: \textbf{2)} Asignar la condición inicial \(Y_0 = x_0\). \\
-3: \textbf{3)} Resolver recursivamente el sistema: \\
-4: \(\quad\) \textbf{for} \(n = 0, 1, \dots, N - 1\) \textbf{do} \\
-5: \(\qquad\) Generar una variable aleatoria normal estándar
+2: \\
+3: \textbf{2)} Asignar la condición inicial \(Y_0 = x_0\). \\
+4: \\
+5: \textbf{3)} Resolver recursivamente el sistema: \\
+6: \(\quad\) \textbf{for} \(n = 0, 1, \dots, N - 1\) \textbf{do} \\
+7: \(\qquad\) Generar una variable aleatoria normal estándar
 independiente \(Z_n \sim \mathcal{N}(0, 1)\). \\
-6: \(\qquad\) Calcular el incremento del proceso de Wiener:
+8: \(\qquad\) Calcular el incremento del proceso de Wiener:
 \(\Delta W_n = \sqrt{\Delta t}\, Z_n\). \\
-7: \(\qquad\) Evaluar los coeficientes en el nodo actual:
+9: \(\qquad\) Evaluar los coeficientes en el nodo actual:
 \(b_n = b(t_n, Y_n)\) y \(\sigma_n = \sigma(t_n, Y_n)\). \\
-8: \(\qquad\) Actualizar el estado del proceso:
+10: \(\qquad\) Actualizar el estado del proceso:
 \(Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n\). \\
-9: \(\quad\) \textbf{end for} \\
-10: \textbf{4)} Retornar la trayectoria discreta aproximada del proceso:
+11: \(\quad\) \textbf{end for} \\
+12: \\
+13: \textbf{4)} Retornar la trayectoria discreta aproximada del proceso:
 \(\{Y_0, Y_1, \dots, Y_N\}\). \\
 \end{longtable}
 
@@ -2572,23 +2575,26 @@ temporal \([0, T]\) en \(N + 1\) nodos equidistantes
 temporal, \(t_n = n \Delta t\) y
 \(\Delta W_n \sim \sqrt{\Delta t}\,\mathcal{N}(0, 1)\) es el incremento
 Browniano correspondiente para \(n = 0, \dots, N - 1\). \\
-2: \textbf{2)} Asignar la condición inicial \(Y_0 = x_0\). \\
-3: \textbf{3)} Resolver recursivamente el sistema con corrección de
+2: \\
+3: \textbf{2)} Asignar la condición inicial \(Y_0 = x_0\). \\
+4: \\
+5: \textbf{3)} Resolver recursivamente el sistema con corrección de
 segundo orden: \\
-4: \(\quad\) \textbf{for} \(n = 0, 1, \dots, N - 1\) \textbf{do} \\
-5: \(\qquad\) Generar una variable aleatoria normal estándar
+6: \(\quad\) \textbf{for} \(n = 0, 1, \dots, N - 1\) \textbf{do} \\
+7: \(\qquad\) Generar una variable aleatoria normal estándar
 independiente \(Z_n \sim \mathcal{N}(0, 1)\). \\
-6: \(\qquad\) Calcular el incremento Browniano:
+8: \(\qquad\) Calcular el incremento Browniano:
 \(\Delta W_n = \sqrt{\Delta t}\, Z_n\). \\
-7: \(\qquad\) Evaluar \(b_n = b(t_n, Y_n)\),
+9: \(\qquad\) Evaluar \(b_n = b(t_n, Y_n)\),
 \(\sigma_n = \sigma(t_n, Y_n)\) y la derivada parcial
 \(\sigma'_n = \frac{\partial \sigma}{\partial x}(t_n, Y_n)\). \\
-8: \(\qquad\) Calcular la integral iterada de Itô:
+10: \(\qquad\) Calcular la integral iterada de Itô:
 \(I_{(1,1), n} = \frac{1}{2}\left[(\Delta W_n)^2 - \Delta t\right]\). \\
-9: \(\qquad\) Actualizar el estado del proceso:
+11: \(\qquad\) Actualizar el estado del proceso:
 \(Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n + \sigma_n \sigma'_n I_{(1,1), n}\). \\
-10: \(\quad\) \textbf{end for} \\
-11: \textbf{4)} Retornar la trayectoria discreta aproximada del proceso:
+12: \(\quad\) \textbf{end for} \\
+13: \\
+14: \textbf{4)} Retornar la trayectoria discreta aproximada del proceso:
 \(\{Y_0, Y_1, \dots, Y_N\}\). \\
 \end{longtable}
 
@@ -2661,8 +2667,8 @@ con mayor precisión la solución exacta ante un ruido multiplicativo.}
 
 Como se observa en la Figura~\ref{fig-sde-metodos}, ante un coeficiente
 de difusión multiplicativo
-(\(\displaystyle \frac{\partial \sigma}{\partial x} \neq 0\)), la
-aproximación del método de Euler-Maruyama se desvía de la solución
+\(\displaystyle \left( \frac{\partial \sigma}{\partial x} \neq 0 \right)\),
+la aproximación del método de Euler-Maruyama se desvía de la solución
 exacta en las regiones de mayor variación del proceso de Wiener,
 mientras que el método de Milstein sigue prácticamente de forma idéntica
 la trayectoria de la solución exacta.
