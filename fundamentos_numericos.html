@@ -513,31 +513,40 @@ Y_{n+1} = Y_n + b(t_n, Y_n) \Delta t + \sigma(t_n, Y_n) \Delta W_n, \quad n = 0,
 <td style="text-align: left;">1: <strong>1)</strong> Dado un entero fijo <span class="math inline">\(N &gt; 0\)</span>, dividir el dominio temporal <span class="math inline">\([0, T]\)</span> en <span class="math inline">\(N + 1\)</span> nodos equidistantes <span class="math inline">\(t_0, t_1, \dots, t_N\)</span>, donde <span class="math inline">\(\Delta t = T/N\)</span> es el incremento temporal, <span class="math inline">\(t_n = n \Delta t\)</span> y <span class="math inline">\(\Delta W_n \sim \sqrt{\Delta t}\,\mathcal{N}(0, 1)\)</span> es el incremento Browniano correspondiente para <span class="math inline">\(n = 0, \dots, N - 1\)</span>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2: <strong>2)</strong> Asignar la condición inicial <span class="math inline">\(Y_0 = x_0\)</span>.</td>
+<td style="text-align: left;">2:</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">3: <strong>3)</strong> Resolver recursivamente el sistema:</td>
+<td style="text-align: left;">3: <strong>2)</strong> Asignar la condición inicial <span class="math inline">\(Y_0 = x_0\)</span>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">4: <span class="math inline">\(\quad\)</span> <strong>for</strong> <span class="math inline">\(n = 0, 1, \dots, N - 1\)</span> <strong>do</strong></td>
+<td style="text-align: left;">4:</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">5: <span class="math inline">\(\qquad\)</span> Generar una variable aleatoria normal estándar independiente <span class="math inline">\(Z_n \sim \mathcal{N}(0, 1)\)</span>.</td>
+<td style="text-align: left;">5: <strong>3)</strong> Resolver recursivamente el sistema:</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">6: <span class="math inline">\(\qquad\)</span> Calcular el incremento del proceso de Wiener: <span class="math inline">\(\Delta W_n = \sqrt{\Delta t}\, Z_n\)</span>.</td>
+<td style="text-align: left;">6: <span class="math inline">\(\quad\)</span> <strong>for</strong> <span class="math inline">\(n = 0, 1, \dots, N - 1\)</span> <strong>do</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">7: <span class="math inline">\(\qquad\)</span> Evaluar los coeficientes en el nodo actual: <span class="math inline">\(b_n = b(t_n, Y_n)\)</span> y <span class="math inline">\(\sigma_n = \sigma(t_n, Y_n)\)</span>.</td>
+<td style="text-align: left;">7: <span class="math inline">\(\qquad\)</span> Generar una variable aleatoria normal estándar independiente <span class="math inline">\(Z_n \sim \mathcal{N}(0, 1)\)</span>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">8: <span class="math inline">\(\qquad\)</span> Actualizar el estado del proceso: <span class="math inline">\(Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n\)</span>.</td>
+<td style="text-align: left;">8: <span class="math inline">\(\qquad\)</span> Calcular el incremento del proceso de Wiener: <span class="math inline">\(\Delta W_n = \sqrt{\Delta t}\, Z_n\)</span>.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">9: <span class="math inline">\(\quad\)</span> <strong>end for</strong></td>
+<td style="text-align: left;">9: <span class="math inline">\(\qquad\)</span> Evaluar los coeficientes en el nodo actual: <span class="math inline">\(b_n = b(t_n, Y_n)\)</span> y <span class="math inline">\(\sigma_n = \sigma(t_n, Y_n)\)</span>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">10: <strong>4)</strong> Retornar la trayectoria discreta aproximada del proceso: <span class="math inline">\(\{Y_0, Y_1, \dots, Y_N\}\)</span>.</td>
+<td style="text-align: left;">10: <span class="math inline">\(\qquad\)</span> Actualizar el estado del proceso: <span class="math inline">\(Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n\)</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11: <span class="math inline">\(\quad\)</span> <strong>end for</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12:</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">13: <strong>4)</strong> Retornar la trayectoria discreta aproximada del proceso: <span class="math inline">\(\{Y_0, Y_1, \dots, Y_N\}\)</span>.</td>
 </tr>
 </tbody>
 </table>
@@ -576,34 +585,43 @@ Y_{n+1} = Y_n + b(t_n, Y_n)\Delta t + \sigma(t_n, Y_n)\Delta W_n + \frac{1}{2}\s
 <td style="text-align: left;">1: <strong>1)</strong> Dado un entero fijo <span class="math inline">\(N &gt; 0\)</span>, dividir el dominio temporal <span class="math inline">\([0, T]\)</span> en <span class="math inline">\(N + 1\)</span> nodos equidistantes <span class="math inline">\(t_0, t_1, \dots, t_N\)</span>, donde <span class="math inline">\(\Delta t = T/N\)</span> es el incremento temporal, <span class="math inline">\(t_n = n \Delta t\)</span> y <span class="math inline">\(\Delta W_n \sim \sqrt{\Delta t}\,\mathcal{N}(0, 1)\)</span> es el incremento Browniano correspondiente para <span class="math inline">\(n = 0, \dots, N - 1\)</span>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2: <strong>2)</strong> Asignar la condición inicial <span class="math inline">\(Y_0 = x_0\)</span>.</td>
+<td style="text-align: left;">2:</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">3: <strong>3)</strong> Resolver recursivamente el sistema con corrección de segundo orden:</td>
+<td style="text-align: left;">3: <strong>2)</strong> Asignar la condición inicial <span class="math inline">\(Y_0 = x_0\)</span>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">4: <span class="math inline">\(\quad\)</span> <strong>for</strong> <span class="math inline">\(n = 0, 1, \dots, N - 1\)</span> <strong>do</strong></td>
+<td style="text-align: left;">4:</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">5: <span class="math inline">\(\qquad\)</span> Generar una variable aleatoria normal estándar independiente <span class="math inline">\(Z_n \sim \mathcal{N}(0, 1)\)</span>.</td>
+<td style="text-align: left;">5: <strong>3)</strong> Resolver recursivamente el sistema con corrección de segundo orden:</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">6: <span class="math inline">\(\qquad\)</span> Calcular el incremento Browniano: <span class="math inline">\(\Delta W_n = \sqrt{\Delta t}\, Z_n\)</span>.</td>
+<td style="text-align: left;">6: <span class="math inline">\(\quad\)</span> <strong>for</strong> <span class="math inline">\(n = 0, 1, \dots, N - 1\)</span> <strong>do</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">7: <span class="math inline">\(\qquad\)</span> Evaluar <span class="math inline">\(b_n = b(t_n, Y_n)\)</span>, <span class="math inline">\(\sigma_n = \sigma(t_n, Y_n)\)</span> y la derivada parcial <span class="math inline">\(\sigma'_n = \frac{\partial \sigma}{\partial x}(t_n, Y_n)\)</span>.</td>
+<td style="text-align: left;">7: <span class="math inline">\(\qquad\)</span> Generar una variable aleatoria normal estándar independiente <span class="math inline">\(Z_n \sim \mathcal{N}(0, 1)\)</span>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">8: <span class="math inline">\(\qquad\)</span> Calcular la integral iterada de Itô: <span class="math inline">\(I_{(1,1), n} = \frac{1}{2}\left[(\Delta W_n)^2 - \Delta t\right]\)</span>.</td>
+<td style="text-align: left;">8: <span class="math inline">\(\qquad\)</span> Calcular el incremento Browniano: <span class="math inline">\(\Delta W_n = \sqrt{\Delta t}\, Z_n\)</span>.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">9: <span class="math inline">\(\qquad\)</span> Actualizar el estado del proceso: <span class="math inline">\(Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n + \sigma_n \sigma'_n I_{(1,1), n}\)</span>.</td>
+<td style="text-align: left;">9: <span class="math inline">\(\qquad\)</span> Evaluar <span class="math inline">\(b_n = b(t_n, Y_n)\)</span>, <span class="math inline">\(\sigma_n = \sigma(t_n, Y_n)\)</span> y la derivada parcial <span class="math inline">\(\sigma'_n = \frac{\partial \sigma}{\partial x}(t_n, Y_n)\)</span>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">10: <span class="math inline">\(\quad\)</span> <strong>end for</strong></td>
+<td style="text-align: left;">10: <span class="math inline">\(\qquad\)</span> Calcular la integral iterada de Itô: <span class="math inline">\(I_{(1,1), n} = \frac{1}{2}\left[(\Delta W_n)^2 - \Delta t\right]\)</span>.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">11: <strong>4)</strong> Retornar la trayectoria discreta aproximada del proceso: <span class="math inline">\(\{Y_0, Y_1, \dots, Y_N\}\)</span>.</td>
+<td style="text-align: left;">11: <span class="math inline">\(\qquad\)</span> Actualizar el estado del proceso: <span class="math inline">\(Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n + \sigma_n \sigma'_n I_{(1,1), n}\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12: <span class="math inline">\(\quad\)</span> <strong>end for</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">13:</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">14: <strong>4)</strong> Retornar la trayectoria discreta aproximada del proceso: <span class="math inline">\(\{Y_0, Y_1, \dots, Y_N\}\)</span>.</td>
 </tr>
 </tbody>
 </table>
@@ -631,7 +649,7 @@ Figura&nbsp;3.1: Análisis de convergencia fuerte de esquemas numéricos estocá
 </figcaption>
 </figure>
 </div>
-<p>Como se observa en la <a href="#fig-sde-metodos" class="quarto-xref">Figura&nbsp;<span>3.1</span></a>, ante un coeficiente de difusión multiplicativo (<span class="math inline">\(\displaystyle \frac{\partial \sigma}{\partial x} \neq 0\)</span>), la aproximación del método de Euler-Maruyama se desvía de la solución exacta en las regiones de mayor variación del proceso de Wiener, mientras que el método de Milstein sigue prácticamente de forma idéntica la trayectoria de la solución exacta.</p>
+<p>Como se observa en la <a href="#fig-sde-metodos" class="quarto-xref">Figura&nbsp;<span>3.1</span></a>, ante un coeficiente de difusión multiplicativo <span class="math inline">\(\displaystyle \left( \frac{\partial \sigma}{\partial x} \neq 0 \right)\)</span>, la aproximación del método de Euler-Maruyama se desvía de la solución exacta en las regiones de mayor variación del proceso de Wiener, mientras que el método de Milstein sigue prácticamente de forma idéntica la trayectoria de la solución exacta.</p>
 <p>Por último, resulta fundamental destacar una propiedad que vincula ambos métodos cuando el ruido continuo es <strong>aditivo</strong> respecto a la variable de estado; esto es, cuando el coeficiente de difusión no depende de <span class="math inline">\(x\)</span>, por lo que <span class="math inline">\(\displaystyle \frac{\partial \sigma}{\partial x} \equiv 0\)</span>. En tal caso, el término corrector de segundo orden en la <a href="#eq-esquema-milstein" class="quarto-xref">Ecuación&nbsp;<span>3.3</span></a> se anula, es decir: <span class="math display">\[
 \frac{1}{2}\sigma(t_n, Y_n)\frac{\partial \sigma}{\partial x}(t_n, Y_n)\left[ (\Delta W_n)^2 - \Delta t \right] = 0,
 \]</span> lo que implica que <strong>el esquema de Milstein y el esquema de Euler-Maruyama coinciden algebraicamente</strong>. En particular, para nuestro modelo termodinámico híbrido (<a href="fundamentos_matematicos.html#eq-ede-operativa-teorica" class="quarto-xref">Ecuación&nbsp;<span>2.17</span></a>), dado que dentro de cada régimen <span class="math inline">\(i \in \{1, 2\}\)</span> la volatilidad <span class="math inline">\(\sigma(i) \in \{\sigma_{on}, \sigma_{off}\}\)</span> es constante respecto a la temperatura <span class="math inline">\(T(t)\)</span> <span class="math inline">\(\left( \frac{\partial \sigma(i)}{\partial T} = 0 \right),\)</span> el esquema de Euler-Maruyama reproduce de manera exacta la actualización del esquema de Milstein en la componente difusiva sin requerir el cálculo de derivadas parciales espaciales adicionales.</p>
