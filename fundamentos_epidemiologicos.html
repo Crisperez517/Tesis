@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -81,6 +101,35 @@ ul.task-list li input[type="checkbox"] {
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -376,8 +425,16 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#estabilidad-biológica-e-integridad-de-la-red-de-frío" id="toc-estabilidad-biológica-e-integridad-de-la-red-de-frío" class="nav-link active" data-scroll-target="#estabilidad-biológica-e-integridad-de-la-red-de-frío"><span class="header-section-number">4.1</span> Estabilidad Biológica e Integridad de la Red de Frío</a></li>
+  <li><a href="#sec-fundamento-arrhenius" id="toc-sec-fundamento-arrhenius" class="nav-link" data-scroll-target="#sec-fundamento-arrhenius"><span class="header-section-number">4.2</span> Cinética de Degradación Térmica y Ecuación de Arrhenius</a></li>
+  <li><a href="#sec-fundamento-inventario-seir" id="toc-sec-fundamento-inventario-seir" class="nav-link" data-scroll-target="#sec-fundamento-inventario-seir"><span class="header-section-number">4.3</span> Dinámica de Inventario y Demanda Epidemiológica</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -385,7 +442,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fundamentos_matematicos.html">Marco Teórico</a></li><li class="breadcrumb-item"><a href="./fundamentos_epidemiologicos.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fundamentos Teóricos Epidemiológicos</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fundamentos Teóricos Epidemiológicos</span></h1>
+<h1 class="title"><span id="sec-fundamentos-epidemiologicos" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fundamentos Teóricos Epidemiológicos</span></span></h1>
 </div>
 
 
@@ -402,8 +459,72 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>En este capítulo se establecen los fundamentos biológicos, fisicoquímicos y epidemiológicos que vinculan la dinámica estocástica de la temperatura interna del refrigerador con la pérdida de viabilidad de las vacunas y la gestión del inventario clínico. En primer lugar, se describen los mecanismos de termoestabilidad de los productos biológicos dentro de la red de frío. Posteriormente, se formula la cinética de degradación térmica mediante la ecuación de Arrhenius. Finalmente, se presenta el acoplamiento entre la degradación impulsada por la temperatura, el reabastecimiento logístico y la demanda de inmunización bajo esquemas epidemiológicos.</p>
+<section id="estabilidad-biológica-e-integridad-de-la-red-de-frío" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="estabilidad-biológica-e-integridad-de-la-red-de-frío"><span class="header-section-number">4.1</span> Estabilidad Biológica e Integridad de la Red de Frío</h2>
+<p>Las vacunas son preparaciones biológicas compuestas por antígenos (virus atenuados, inactivados, subunidades proteicas o ácidos nucleicos), adyuvantes y estabilizantes cuya estructura molecular es altamente sensible a las variaciones térmicas <span class="citation" data-cites="yoshioka2000stability">(<a href="references.html#ref-yoshioka2000stability" role="doc-biblioref">Yoshioka y Stella 2000</a>)</span>. Para preservar su capacidad inmunogénica desde el laboratorio fabricante hasta su aplicación en el paciente, los lineamientos internacionales y normativos establecen que el almacenamiento en unidades de salud debe mantenerse estrictamente dentro de la ventana térmica de seguridad de <span class="math inline">\([2^\circ\text{C}, 8^\circ\text{C}]\)</span>.</p>
+<p>Cuando la temperatura interna <span class="math inline">\(T(t)\)</span> del equipo de refrigeración abandona este rango normativo, el biológico se expone a dos mecanismos de daño fisicoquímico distintos[cite: 2270]:</p>
+<ol type="1">
+<li><strong>Degradación térmica por calor (<span class="math inline">\(T(t) &gt; 8^\circ\text{C}\)</span>):</strong> El incremento de la energía cinética molecular acelera la ruptura de enlaces débiles y provoca la desnaturalización progresiva de las proteínas antigénicas <span class="citation" data-cites="yoshioka2000stability">(<a href="references.html#ref-yoshioka2000stability" role="doc-biblioref">Yoshioka y Stella 2000</a>)</span>. A diferencia de otros fallos mecánicos, el daño por calor es <strong>acumulativo e irreversible</strong>: cada excursión térmica por encima de los <span class="math inline">\(8^\circ\text{C}\)</span> reduce de manera permanente una fracción de la potencia biológica del lote almacenado.</li>
+<li><strong>Inactivación por congelación (<span class="math inline">\(T(t) &lt; 0^\circ\text{C}\)</span>):</strong> En vacunas que contienen adyuvantes de sales de aluminio, la formación de cristales de hielo rompe las fuerzas de adsorción entre el antígeno y el adyuvante, provocando la aglomeración irreversible de las partículas y la pérdida inmediata de eficacia inmunológica, además del riesgo físico de fractura en los viales de vidrio <span class="citation" data-cites="yoshioka2000stability">(<a href="references.html#ref-yoshioka2000stability" role="doc-biblioref">Yoshioka y Stella 2000</a>)</span>.</li>
+</ol>
+<p>Asimismo, desde una perspectiva termodinámica, existe un desfase temporal entre la temperatura del aire dentro de la cámara de refrigeración y la temperatura real de la suspensión líquida contenida en los frascos de vidrio. Debido a la capacidad calorífica del vidrio y del líquido biológico, el vial presenta <strong>inercia térmica</strong>, lo que amortigua fluctuaciones aéreas instantáneas y exige que una excursión de calor se sostenga durante un intervalo crítico (típicamente del orden de <span class="math inline">\(30\text{ minutos}\)</span>) antes de desencadenar la degradación efectiva del antígeno.</p>
+</section>
+<section id="sec-fundamento-arrhenius" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-fundamento-arrhenius"><span class="header-section-number">4.2</span> Cinética de Degradación Térmica y Ecuación de Arrhenius</h2>
+<p>En la estabilidad farmacéutica, la pérdida de potencia de un biológico inducida por el calor se modela mediante leyes de cinética química <span class="citation" data-cites="yoshioka2000stability">(<a href="references.html#ref-yoshioka2000stability" role="doc-biblioref">Yoshioka y Stella 2000</a>)</span>. Sea <span class="math inline">\(P(t) \in [0, 100]\)</span> el porcentaje de potencia o viabilidad biológica remanente de un lote de vacunas en el instante <span class="math inline">\(t\)</span>. Bajo una cinética de degradación de primer orden, la tasa instantánea de pérdida de viabilidad es proporcional a la potencia presente en ese instante <span class="citation" data-cites="atkins2018physical yoshioka2000stability">(<a href="references.html#ref-atkins2018physical" role="doc-biblioref">Atkins, Paula, y Keeler 2018</a>; <a href="references.html#ref-yoshioka2000stability" role="doc-biblioref">Yoshioka y Stella 2000</a>)</span>:</p>
+<p><span id="eq-cinetica-primer-orden"><span class="math display">\[
+\frac{dP(t)}{dt} = -k(T(t)) P(t),
+\tag{4.1}\]</span></span></p>
+<p>donde <span class="math inline">\(k(T) &gt; 0\)</span> denota la constante de velocidad de reacción (o tasa de degradación térmica), la cual depende de manera no lineal de la temperatura a través de la relación formulada por Svante Arrhenius <span class="citation" data-cites="atkins2018physical">(<a href="references.html#ref-atkins2018physical" role="doc-biblioref">Atkins, Paula, y Keeler 2018</a>)</span>.</p>
+<div id="def-ecuacion-arrhenius" class="theorem definition">
+<p><span class="theorem-title"><strong>Definición 4.1 (Ecuación de Arrhenius)</strong></span> Sea un sistema químico o biológico sujeto a una temperatura absoluta <span class="math inline">\(T_K &gt; 0\)</span> (expresada en Kelvin, <span class="math inline">\(T_K = T + 273.15\)</span> para <span class="math inline">\(T\)</span> en grados Celsius). La tasa de degradación térmica <span class="math inline">\(k(T_K)\)</span> está determinada por la relación exponencial <span class="citation" data-cites="atkins2018physical yoshioka2000stability">(<a href="references.html#ref-atkins2018physical" role="doc-biblioref">Atkins, Paula, y Keeler 2018</a>; <a href="references.html#ref-yoshioka2000stability" role="doc-biblioref">Yoshioka y Stella 2000</a>)</span>:</p>
+<p><span id="eq-arrhenius-teorica"><span class="math display">\[
+k(T_K) = A \exp\left( -\frac{E_a}{R T_K} \right),
+\tag{4.2}\]</span></span></p>
+<p>donde:</p>
+<ul>
+<li><span class="math inline">\(A &gt; 0\)</span> es el <strong>factor preexponencial</strong> (o factor de frecuencia, en <span class="math inline">\(\text{s}^{-1}\)</span> o <span class="math inline">\(\text{h}^{-1}\)</span>), que cuantifica la frecuencia de colisiones moleculares con la orientación adecuada para la reacción.</li>
+<li><span class="math inline">\(E_a &gt; 0\)</span> es la <strong>energía de activación</strong> (<span class="math inline">\(\text{J}\cdot\text{mol}^{-1}\)</span>), que representa la barrera energética mínima necesaria para romper la estabilidad conformacional del antígeno[cite: 2270].</li>
+<li><span class="math inline">\(R = 8.314\,\text{J}\cdot\text{mol}^{-1}\cdot\text{K}^{-1}\)</span> es la <strong>constante universal de los gases ideales</strong>.</li>
+</ul>
+</div>
+<p>En los modelos deterministas clásicos de estabilidad acelerada, la temperatura se asume constante, lo que reduce la <a href="#eq-cinetica-primer-orden" class="quarto-xref">Ecuación&nbsp;<span>4.1</span></a> a un decaimiento exponencial simple <span class="math inline">\(P(t) = P(0)e^{-k(T_K)t}\)</span> <span class="citation" data-cites="yoshioka2000stability">(<a href="references.html#ref-yoshioka2000stability" role="doc-biblioref">Yoshioka y Stella 2000</a>)</span>. Sin embargo, en una unidad de salud real, la temperatura interna <span class="math inline">\(T(t)\)</span> es un proceso estocástico gobernado por la ecuación diferencial estocástica híbrida (<a href="fundamentos_matematicos.html#eq-ede-operativa-teorica" class="quarto-xref">Ecuación&nbsp;<span>2.17</span></a>).</p>
+<p>Al acoplar la trayectoria estocástica <span class="math inline">\(T(t)\)</span> dentro de la <a href="#eq-arrhenius-teorica" class="quarto-xref">Ecuación&nbsp;<span>4.2</span></a>, la tasa de degradación <span class="math inline">\(k(T(t))\)</span> se convierte en un proceso estocástico adaptado a la filtración <span class="math inline">\(\{\mathcal{F}_t\}_{t \ge 0}\)</span> [<span class="citation" data-cites="control2026vaccine">Y. H. García (<a href="references.html#ref-control2026vaccine" role="doc-biblioref">2026</a>)</span>][cite: 2271]. Considerando que el daño farmacológico se activa únicamente cuando la temperatura supera el umbral normativo superior (<span class="math inline">\(T(t) &gt; 8^\circ\text{C}\)</span>) tras superar el periodo de inercia térmica del vial, la fracción de biológico degradada en un subintervalo temporal <span class="math inline">\([t_n, t_{n+1}]\)</span> de longitud <span class="math inline">\(\Delta t\)</span> se determina mediante:</p>
+<p><span id="eq-fraccion-dano-paso"><span class="math display">\[
+\Delta D_n = \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) &gt; 8^\circ\text{C}\}},
+\tag{4.3}\]</span></span></p>
+<p>donde <span class="math inline">\(\mathbf{1}_{\{T(t_n) &gt; 8^\circ\text{C}\}}\)</span> es la función indicadora de excursión térmica.</p>
+</section>
+<section id="sec-fundamento-inventario-seir" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-fundamento-inventario-seir"><span class="header-section-number">4.3</span> Dinámica de Inventario y Demanda Epidemiológica</h2>
+<p>La evaluación del riesgo en la red de frío no puede limitarse a cuantificar la pérdida porcentual teórica de un vial aislado, sino que debe traducirse en el número real de dosis destruidas (mermas físicas) durante la operación de una clínica de vacunación <span class="citation" data-cites="control2026vaccine">(<a href="references.html#ref-control2026vaccine" role="doc-biblioref">Y. H. García 2026</a>)</span>. Recientemente, en la literatura de investigación de operaciones aplicada a la salud pública <span class="citation" data-cites="control2026vaccine">(<a href="references.html#ref-control2026vaccine" role="doc-biblioref">Y. H. García 2026</a>)</span>, se ha demostrado la importancia de integrar la degradación térmica de Arrhenius con la dinámica estocástica del inventario de vacunas y la demanda generada por brotes epidémicos.</p>
+<p>En el marco epidemiológico clásico, la propagación de una enfermedad infecciosa en una población se modela mediante sistemas compartimentales de tipo <strong>SEIR</strong> (<em>Susceptibles <span class="math inline">\(S\)</span>, Expuestos <span class="math inline">\(E\)</span>, Infectados <span class="math inline">\(I_{inf}\)</span> y Recuperados <span class="math inline">\(R_{rec}\)</span></em>), donde la campaña de vacunación busca transferir individuos del compartimento susceptible <span class="math inline">\(S(t)\)</span> hacia el compartimento inmunizado <span class="math inline">\(R_{rec}(t)\)</span> a una tasa de vacunación <span class="math inline">\(u(t)\)</span> <span class="citation" data-cites="control2026vaccine">(<a href="references.html#ref-control2026vaccine" role="doc-biblioref">Y. H. García 2026</a>)</span>. Como se establece en <span class="citation" data-cites="control2026vaccine">(<a href="references.html#ref-control2026vaccine" role="doc-biblioref">Y. H. García 2026</a>)</span>, el despliegue efectivo de dicha tasa de inmunización <span class="math inline">\(u(t)\)</span> está restringido físicamente por el nivel de inventario de vacunas viables <span class="math inline">\(I(t) \ge 0\)</span> disponible en el centro de salud en cada instante <span class="math inline">\(t\)</span>.</p>
+<p>De acuerdo con la formulación de <span class="citation" data-cites="control2026vaccine">(<a href="references.html#ref-control2026vaccine" role="doc-biblioref">Y. H. García 2026</a>)</span>, la evolución temporal del inventario de biológicos <span class="math inline">\(I(t)\)</span> en un centro de almacenamiento está regida por la interacción simultánea de tres flujos operativos:</p>
+<ol type="1">
+<li><strong>Demanda clínica y epidemiológica (<span class="math inline">\(u(t)\)</span>):</strong> Representa la extracción de dosis para su aplicación en la población. En condiciones operativas regulares (apego normativo), esta demanda responde a los esquemas de vacunación programados y campañas estacionales; en cambio, durante una contingencia epidemiológica o brote infeccioso, la urgencia por inmunizar a la población susceptible incrementa drásticamente la frecuencia de extracción y rotación del biológico <span class="citation" data-cites="control2026vaccine">(<a href="references.html#ref-control2026vaccine" role="doc-biblioref">Y. H. García 2026</a>)</span>.</li>
+<li><strong>Merma por degradación impulsada por la temperatura:</strong> Cuando ocurre una ruptura de la cadena de frío (<span class="math inline">\(T(t) &gt; 8^\circ\text{C}\)</span>), la tasa cinética de Arrhenius <span class="math inline">\(k(T(t))\)</span> actúa directamente sobre el volumen total de dosis almacenadas en ese instante <span class="citation" data-cites="control2026vaccine">(<a href="references.html#ref-control2026vaccine" role="doc-biblioref">Y. H. García 2026</a>)</span>. En consecuencia, el número de dosis destruidas en el intervalo <span class="math inline">\(\Delta t\)</span> es proporcional al inventario activo, esto es, <span class="math inline">\(M_n = \Delta D_n \cdot I(t_n)\)</span>. Esta relación explica por qué una excursión térmica que coincide con un refrigerador lleno a su máxima capacidad produce pérdidas materiales severas, mientras que una rotación oportuna del inventario mitiga la exposición al riesgo eléctrico.</li>
+<li><strong>Reabastecimiento logístico bajo incertidumbre (<span class="math inline">\(R_{rep}(t)\)</span>):</strong> Conforme el consumo clínico y las mermas reducen las existencias hasta alcanzar un umbral crítico o punto de reorden <span class="math inline">\(I_{reorden}\)</span>, se activa el suministro de nuevos lotes hasta restablecer la capacidad máxima del equipo <span class="math inline">\(I_{max}\)</span>, proceso que en escenarios de alta demanda o contingencia involucra arribos y aperturas aleatorias modeladas mediante procesos de Poisson <span class="citation" data-cites="control2026vaccine">(<a href="references.html#ref-control2026vaccine" role="doc-biblioref">Y. H. García 2026</a>)</span>.</li>
+</ol>
+<p>Expresado en tiempo discreto sobre la malla de simulación <span class="math inline">\(t_n = n\Delta t\)</span>, el balance acoplado del inventario físico <span class="math inline">\(I_n = I(t_n)\)</span> y la merma acumulada obedece la relación recursiva <span class="citation" data-cites="control2026vaccine">(<a href="references.html#ref-control2026vaccine" role="doc-biblioref">Y. H. García 2026</a>)</span>:</p>
+<p><span id="eq-balance-inventario-general"><span class="math display">\[
+I_{n+1} = I_n - C_n - \Delta D_n (I_n - C_n) + R_n,
+\tag{4.4}\]</span></span></p>
+<p>donde <span class="math inline">\(C_n\)</span> denota las dosis extraídas para vacunación en el paso <span class="math inline">\(n\)</span>, <span class="math inline">\(\Delta D_n (I_n - C_n)\)</span> cuantifica las dosis inutilizadas por degradación térmica de Arrhenius (<a href="#eq-fraccion-dano-paso" class="quarto-xref">Ecuación&nbsp;<span>4.3</span></a>), y <span class="math inline">\(R_n = (I_{max} - I_n)\mathbf{1}_{\{I_n \le I_{reorden}\}}\)</span> representa la orden de reabastecimiento jurisdiccional. Con este acoplamiento teórico queda formalizado el vínculo completo entre el modelo termodinámico estocástico (<a href="fundamentos_matematicos.html#eq-ede-operativa-teorica" class="quarto-xref">Ecuación&nbsp;<span>2.17</span></a>) y las métricas de impacto logístico y epidemiológico que se calibrarán y simularán en los capítulos siguientes.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-atkins2018physical" class="csl-entry" role="listitem">
+Atkins, Peter, Julio de Paula, y James Keeler. 2018. <em>Atkins’ Physical Chemistry</em>. 11.ª ed. Oxford: Oxford University Press.
+</div>
+<div id="ref-control2026vaccine" class="csl-entry" role="listitem">
+Y. H. García, J. A. Minjárez-Sosa, S. Díaz-Infante. 2026. <span>«Stochastic optimal control of vaccine inventory during epidemics: integrating <span>SEIR</span> dynamics with temperature-driven degradation and uncertain replenishment»</span>. <em>Computational and Applied Mathematics</em>. <a href="https://doi.org/10.1007/s40314-025-03498-z">https://doi.org/10.1007/s40314-025-03498-z</a>.
+</div>
+<div id="ref-yoshioka2000stability" class="csl-entry" role="listitem">
+Yoshioka, Sumie, y Valentino J. Stella. 2000. <em>Stability of Drugs and Dosage Forms</em>. Boston, MA: Springer. <a href="https://doi.org/10.1007/b114222">https://doi.org/10.1007/b114222</a>.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
