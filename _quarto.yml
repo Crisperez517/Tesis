@@ -32,6 +32,8 @@ book:
   page-navigation: true
   chapters:
     - index.qmd
+    - introduccion.qmd
+    - Objetivos.qmd
     
     - part: "Marco Teórico"
       chapters: 
