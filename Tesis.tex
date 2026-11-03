@@ -187,14 +187,14 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -5166,13 +5166,14 @@ del refrigerador Haier HBC-150}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-1: \textbf{1)} Definir el horizonte anual \(T_{max} = 8784\text{ h}\) y
+1: \textbf{1)} Definir el periodo anual \(T_{max} = 8784\text{ h}\) y
 dividir el dominio temporal \([0, T_{max}]\) en \(N + 1\) nodos
 equidistantes \(t_0, t_1, \dots, t_N\) con tamaño de paso
-\(\Delta t = 5/60\text{ h}\) (\(N = 105,408\)) y \(t_n = n \Delta t\).
-Evaluar en la malla la temperatura ambiente exterior \(T_{amb}(t_n)\),
-la tasa de fallas eléctricas \(\lambda_{cfe}(t_n)\) y la función de
-intensidad de aperturas \(\lambda_{puerta}(t_n)\){[}cite: 2270{]}. \\
+\(\Delta t = 5/60\text{ h}\) (\(N = 105,408\)) y
+\(t_n = n \Delta t, \ n = 0, 1, \dots, N\). Evaluar en los extremos de
+la partición la temperatura ambiente exterior \(T_{amb}(t_n)\), la tasa
+de fallas eléctricas \(\lambda_{cfe}(t_n)\) y la función de intensidad
+de aperturas \(\lambda_{puerta}(t_n)\). \\
 2: \\
 3: \textbf{2)} Asignar la condición inicial \(T_0 = 5.0^\circ\text{C}\),
 la temperatura del termostato \(\theta = 5.0^\circ\text{C}\), los
@@ -5180,17 +5181,16 @@ parámetros de operación activa (\(\kappa_{on} = 0.1154\text{ h}^{-1}\),
 \(\sigma_{on} = 0.4804\)), los parámetros de operación pasiva
 (\(\kappa_{off} = 0.00232\text{ h}^{-1}\), \(\sigma_{off} = 0.048\)) y
 la distribución Normal truncada de salto térmico
-\(\gamma \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\){[}cite:
-2270{]}. \\
+\(\gamma \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\). \\
 4: \\
 5: \textbf{3)} Generar la trayectoria discreta del estado eléctrico
 \(\{S_n\}_{0 \le n \le N} \in \{0, 1\}\) simulando los inicios de falla
-mediante el Proceso de Poisson No Homogéneo con tasa
+mediante un Proceso de Poisson No Homogéneo con tasa
 \(\lambda_{cfe}(t_n)\) y sus duraciones mediante la distribución
-Log-Normal estacional correspondiente{[}cite: 2270{]}. \\
+Log-Normal correspondiente a la estación climática. \\
 6: \\
-7: \textbf{4)} Resolver recursivamente la ecuación diferencial
-estocástica en cada subintervalo temporal: \\
+7: \textbf{4)} Resolver recursivamente el sistema en cada subintervalo
+temporal: \\
 8: \(\quad\) \textbf{Para} \(n = 0, 1, \dots, N - 1\) \textbf{Hacer} \\
 9: \(\qquad\) Generar una variable aleatoria normal estándar
 independiente \(Z_n \sim \mathcal{N}(0, 1)\) y calcular el incremento
@@ -5198,12 +5198,10 @@ Browniano: \(\Delta W_n = \sqrt{\Delta t}\, Z_n\). \\
 10: \(\qquad\) \textbf{Si} \(S_n = 1\) (suministro eléctrico activo,
 régimen \(\alpha_n = 1\)) \textbf{Entonces} \\
 11: \(\qquad\quad\) Evaluar los coeficientes de enfriamiento activo:
-\(b_n = -\kappa_{on}(T_n - \theta)\) y
-\(\sigma_n = \sigma_{on}\){[}cite: 2270{]}. \\
+\(b_n = \kappa_{on}(\theta - T_n)\) y \(\sigma_n = \sigma_{on}\). \\
 12: \(\qquad\quad\) Generar el número de aperturas de puerta en el paso
 actual:
-\(\Delta N_n \sim \text{Poisson}(\lambda_{puerta}(t_n)\Delta t)\){[}cite:
-2270{]}. \\
+\(\Delta N_n \sim \text{Poisson}(\lambda_{puerta}(t_n)\Delta t)\). \\
 13: \(\qquad\quad\) \textbf{Si} \(\Delta N_n > 0\) \textbf{Entonces} \\
 14: \(\qquad\qquad\) Generar \(\Delta N_n\) magnitudes de salto térmico
 independientes
@@ -5213,21 +5211,20 @@ y calcular el salto térmico acumulado:
 15: \(\qquad\quad\) \textbf{En Caso Contrario} \\
 16: \(\qquad\qquad\) Asignar \(\Delta J_n = 0\). \\
 17: \(\qquad\quad\) \textbf{Fin Si} \\
-18: \(\qquad\) \textbf{En Caso Contrario} (\(S_n = 0\), falla eléctrica
-de la CFE, régimen \(\alpha_n = 2\)) \\
+18: \(\qquad\) \textbf{En Caso Contrario} (\(S_n = 0\), falla eléctrica,
+régimen \(\alpha_n = 2\)) \\
 19: \(\qquad\quad\) Evaluar los coeficientes de calentamiento pasivo:
-\(b_n = -\kappa_{off}(T_n - T_{amb}(t_n))\) y
-\(\sigma_n = \sigma_{off}\){[}cite: 2270{]}. \\
-20: \(\qquad\quad\) Anular las aperturas de puerta por protocolo de
-contingencia: \(\Delta J_n = 0\){[}cite: 2270{]}. \\
+\(b_n = \kappa_{off}(T_{amb}(t_n) - T_n)\) y
+\(\sigma_n = \sigma_{off}\). \\
+20: \(\qquad\quad\) Anular las aperturas de puerta por protocolo:
+\(\Delta J_n = 0\). \\
 21: \(\qquad\) \textbf{Fin Si} \\
 22: \(\qquad\) Actualizar la temperatura interna del equipo:
-\(T_{n+1} = T_n + b_n \Delta t + \sigma_n \Delta W_n + \Delta J_n\){[}cite:
-2270{]}. \\
+\(T_{n+1} = T_n + b_n \Delta t + \sigma_n \Delta W_n + \Delta J_n\). \\
 23: \(\quad\) \textbf{Fin Para} \\
 24: \\
-25: \textbf{5)} Retornar la trayectoria anual aproximada de la
-temperatura interna: \(\{T_0, T_1, \dots, T_N\}\){[}cite: 2270{]}. \\
+25: \textbf{5)} Retornar la trayectoria discreta anual aproximada de la
+temperatura interna: \(\{T_0, T_1, \dots, T_N\}\). \\
 \end{longtable}
 
 \end{algorithm}
@@ -5616,11 +5613,9 @@ promedio muestral
 De acuerdo con la teoría de convergencia débil
 (Definición~\ref{def-convergencia-debil}) y la descomposición del Error
 Cuadrático Medio en simulaciones de ecuaciones diferenciales
-estocásticas (\citeproc{ref-wang2016numerical}{Wang 2016};
-\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}), la
-precisión de este estimador depende tanto del sesgo numérico de
-discretización temporal como de la varianza estadística de muestreo. Por
-un lado, el tamaño de paso de \(5\text{ minutos}\)
+estocásticas, la precisión de este estimador depende tanto del sesgo
+numérico de discretización temporal como de la varianza estadística de
+muestreo. Por un lado, el tamaño de paso de \(5\text{ minutos}\)
 (\(\Delta t = 5/60\text{ h}\)) en el esquema de Euler-Maruyama (cuyo
 orden débil es \(\beta = 1.0\)) mantiene acotado el sesgo numérico
 sistemático; por otro lado, al simular \(M = 5000\) años independientes,

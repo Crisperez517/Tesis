@@ -579,15 +579,15 @@ Figura&nbsp;6.2: Acercamiento a un periodo de 5 días de simulación climática 
 <p>Una vez definidos los procesos externos en la malla temporal, se procede a aproximar numéricamente la evolución de la temperatura interna del equipo <span class="math inline">\(T(t)\)</span> determinada por la ecuación diferencial estocástica híbrida de nuestro modelo termodinámico (<a href="Estudio_de_caso.html#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>5.17</span></a>).</p>
 <section id="integración-numérica-por-cambios-de-régimen-y-saltos" class="level3" data-number="6.4.1">
 <h3 data-number="6.4.1" class="anchored" data-anchor-id="integración-numérica-por-cambios-de-régimen-y-saltos"><span class="header-section-number">6.4.1</span> Integración Numérica por Cambios de Régimen y Saltos</h3>
-<p>Para calcular la trayectoria discreta <span class="math inline">\(\{T_n\}_{0 \le n \le N}\)</span> a partir de la condición inicial <span class="math inline">\(T_0 = 5.0^\circ\text{C}\)</span>, se aplica directamente el esquema numérico híbrido de Euler-Maruyama con cambios de régimen y saltos desarrollado en el <a href="fundamentos_numericos.html#alg-em-hibrido-general" class="quarto-xref">alg.&nbsp;<span>3.3</span></a> (<a href="fundamentos_numericos.html#sec-numerico-saltos" class="quarto-xref"><span>Sección 3.0.5</span></a>). En cada paso temporal <span class="math inline">\(n = 0, 1, \dots, N - 1\)</span>, el algoritmo evalúa el estado del suministro eléctrico <span class="math inline">\(S_n\)</span> y cambia dinámicamente los coeficientes de la ecuación (<a href="fundamentos_numericos.html#sec-numerico-switching" class="quarto-xref"><span>Sección 3.0.4</span></a>):</p>
+<p>Para calcular la trayectoria discreta <span class="math inline">\(\{T_n\}_{0 \le n \le N}\)</span> a partir de la condición inicial <span class="math inline">\(T_0 = 5.0^\circ\text{C}\)</span>, se aplica directamente el esquema numérico híbrido de Euler-Maruyama con cambios de régimen y saltos desarrollado en el <a href="fundamentos_numericos.html#alg-em-hibrido-general" class="quarto-xref">Algoritmo&nbsp;<span>3.3</span></a> (<a href="fundamentos_numericos.html#sec-numerico-saltos" class="quarto-xref"><span>Sección 3.0.5</span></a>). En cada paso temporal <span class="math inline">\(n = 0, 1, \dots, N - 1\)</span>, el algoritmo evalúa el estado del suministro eléctrico <span class="math inline">\(S_n\)</span> y cambia dinámicamente los coeficientes de la ecuación (<a href="fundamentos_numericos.html#sec-numerico-switching" class="quarto-xref"><span>Sección 3.0.4</span></a>):</p>
 <ul>
 <li><strong>Con suministro eléctrico (<span class="math inline">\(S_n = 1\)</span>, régimen <span class="math inline">\(\alpha_n = 1\)</span>):</strong> Se activan los parámetros de enfriamiento por convección forzada (<span class="math inline">\(\kappa_{on} = 0.1154\,\text{h}^{-1}\)</span> y <span class="math inline">\(\sigma_{on} = 0.4804\)</span>), llevando la temperatura interna hacia el objetivo del termostato (<span class="math inline">\(\theta = 5.0^\circ\text{C}\)</span>) e incorporando el salto térmico acumulado <span class="math inline">\(\Delta J_n\)</span> producido por las aperturas de puerta en ese intervalo.</li>
 <li><strong>Sin suministro eléctrico (<span class="math inline">\(S_n = 0\)</span>, régimen <span class="math inline">\(\alpha_n = 2\)</span>):</strong> Se activan los parámetros de inercia térmica pasiva (<span class="math inline">\(\kappa_{off} = 0.00232\,\text{h}^{-1}\)</span> y <span class="math inline">\(\sigma_{off} = 0.048\)</span>), haciendo que la temperatura interna sea atraída lentamente hacia la temperatura ambiente exterior <span class="math inline">\(T_{amb}(t_n)\)</span>, sin saltos por apertura (<span class="math inline">\(\Delta J_n = 0\)</span>).</li>
 </ul>
 <p>Como se demostró en la <a href="fundamentos_numericos.html" class="quarto-xref"><span>Capítulo 3</span></a> y en la <a href="fundamentos_numericos.html#sec-numerico-saltos" class="quarto-xref"><span>Sección 3.0.5</span></a>, dado que los coeficientes de difusión <span class="math inline">\(\sigma_{on}\)</span> y <span class="math inline">\(\sigma_{off}\)</span> representan ruido aditivo constante respecto al estado <span class="math inline">\(T(t)\)</span>, sus derivadas parciales espaciales son nulas (<span class="math inline">\(\frac{\partial \sigma}{\partial T} = 0\)</span>). En consecuencia, el término corrector de segundo orden del esquema de Milstein (<a href="fundamentos_numericos.html#eq-esquema-milstein" class="quarto-xref">Ecuación&nbsp;<span>3.3</span></a>) se anula, por lo que el esquema híbrido de Euler-Maruyama empleado alcanza la misma precisión en la componente difusiva y tiene garantizada su convergencia fuerte de orden <span class="math inline">\(\gamma = 0.5\)</span> por el <a href="fundamentos_numericos.html#thm-em-switching" class="quarto-xref">Teorema&nbsp;<span>3.3</span></a>.</p>
-<p>El procedimiento detallado para simular una trayectoria anual de la temperatura interna del refrigerador se presenta en el <a href="#alg-simulacion-ede-termodinamica" class="quarto-xref">alg.&nbsp;<span>6.1</span></a>.</p>
+<p>El procedimiento detallado para simular una trayectoria anual de la temperatura interna del refrigerador se presenta en el <a href="#alg-simulacion-ede-termodinamica" class="quarto-xref">Algoritmo&nbsp;<span>6.1</span></a>.</p>
 <div id="alg-simulacion-ede-termodinamica" class="theorem algorithm">
-<p><span class="theorem-title"><strong>Algorithm 6.1</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Algoritmo 6.1</strong></span> &nbsp;</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 100%">
@@ -599,25 +599,25 @@ Figura&nbsp;6.2: Acercamiento a un periodo de 5 días de simulación climática 
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">1: <strong>1)</strong> Definir el horizonte anual <span class="math inline">\(T_{max} = 8784\text{ h}\)</span> y dividir el dominio temporal <span class="math inline">\([0, T_{max}]\)</span> en <span class="math inline">\(N + 1\)</span> nodos equidistantes <span class="math inline">\(t_0, t_1, \dots, t_N\)</span> con tamaño de paso <span class="math inline">\(\Delta t = 5/60\text{ h}\)</span> (<span class="math inline">\(N = 105,408\)</span>) y <span class="math inline">\(t_n = n \Delta t\)</span>. Evaluar en la malla la temperatura ambiente exterior <span class="math inline">\(T_{amb}(t_n)\)</span>, la tasa de fallas eléctricas <span class="math inline">\(\lambda_{cfe}(t_n)\)</span> y la función de intensidad de aperturas <span class="math inline">\(\lambda_{puerta}(t_n)\)</span>[cite: 2270].</td>
+<td style="text-align: left;">1: <strong>1)</strong> Definir el periodo anual <span class="math inline">\(T_{max} = 8784\text{ h}\)</span> y dividir el dominio temporal <span class="math inline">\([0, T_{max}]\)</span> en <span class="math inline">\(N + 1\)</span> nodos equidistantes <span class="math inline">\(t_0, t_1, \dots, t_N\)</span> con tamaño de paso <span class="math inline">\(\Delta t = 5/60\text{ h}\)</span> (<span class="math inline">\(N = 105,408\)</span>) y <span class="math inline">\(t_n = n \Delta t, \ n = 0, 1, \dots, N\)</span>. Evaluar en los extremos de la partición la temperatura ambiente exterior <span class="math inline">\(T_{amb}(t_n)\)</span>, la tasa de fallas eléctricas <span class="math inline">\(\lambda_{cfe}(t_n)\)</span> y la función de intensidad de aperturas <span class="math inline">\(\lambda_{puerta}(t_n)\)</span>.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2:</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">3: <strong>2)</strong> Asignar la condición inicial <span class="math inline">\(T_0 = 5.0^\circ\text{C}\)</span>, la temperatura del termostato <span class="math inline">\(\theta = 5.0^\circ\text{C}\)</span>, los parámetros de operación activa (<span class="math inline">\(\kappa_{on} = 0.1154\text{ h}^{-1}\)</span>, <span class="math inline">\(\sigma_{on} = 0.4804\)</span>), los parámetros de operación pasiva (<span class="math inline">\(\kappa_{off} = 0.00232\text{ h}^{-1}\)</span>, <span class="math inline">\(\sigma_{off} = 0.048\)</span>) y la distribución Normal truncada de salto térmico <span class="math inline">\(\gamma \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\)</span>[cite: 2270].</td>
+<td style="text-align: left;">3: <strong>2)</strong> Asignar la condición inicial <span class="math inline">\(T_0 = 5.0^\circ\text{C}\)</span>, la temperatura del termostato <span class="math inline">\(\theta = 5.0^\circ\text{C}\)</span>, los parámetros de operación activa (<span class="math inline">\(\kappa_{on} = 0.1154\text{ h}^{-1}\)</span>, <span class="math inline">\(\sigma_{on} = 0.4804\)</span>), los parámetros de operación pasiva (<span class="math inline">\(\kappa_{off} = 0.00232\text{ h}^{-1}\)</span>, <span class="math inline">\(\sigma_{off} = 0.048\)</span>) y la distribución Normal truncada de salto térmico <span class="math inline">\(\gamma \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\)</span>.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">4:</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">5: <strong>3)</strong> Generar la trayectoria discreta del estado eléctrico <span class="math inline">\(\{S_n\}_{0 \le n \le N} \in \{0, 1\}\)</span> simulando los inicios de falla mediante el Proceso de Poisson No Homogéneo con tasa <span class="math inline">\(\lambda_{cfe}(t_n)\)</span> y sus duraciones mediante la distribución Log-Normal estacional correspondiente[cite: 2270].</td>
+<td style="text-align: left;">5: <strong>3)</strong> Generar la trayectoria discreta del estado eléctrico <span class="math inline">\(\{S_n\}_{0 \le n \le N} \in \{0, 1\}\)</span> simulando los inicios de falla mediante un Proceso de Poisson No Homogéneo con tasa <span class="math inline">\(\lambda_{cfe}(t_n)\)</span> y sus duraciones mediante la distribución Log-Normal correspondiente a la estación climática.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">6:</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">7: <strong>4)</strong> Resolver recursivamente la ecuación diferencial estocástica en cada subintervalo temporal:</td>
+<td style="text-align: left;">7: <strong>4)</strong> Resolver recursivamente el sistema en cada subintervalo temporal:</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">8: <span class="math inline">\(\quad\)</span> <strong>Para</strong> <span class="math inline">\(n = 0, 1, \dots, N - 1\)</span> <strong>Hacer</strong></td>
@@ -629,10 +629,10 @@ Figura&nbsp;6.2: Acercamiento a un periodo de 5 días de simulación climática 
 <td style="text-align: left;">10: <span class="math inline">\(\qquad\)</span> <strong>Si</strong> <span class="math inline">\(S_n = 1\)</span> (suministro eléctrico activo, régimen <span class="math inline">\(\alpha_n = 1\)</span>) <strong>Entonces</strong></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">11: <span class="math inline">\(\qquad\quad\)</span> Evaluar los coeficientes de enfriamiento activo: <span class="math inline">\(b_n = -\kappa_{on}(T_n - \theta)\)</span> y <span class="math inline">\(\sigma_n = \sigma_{on}\)</span>[cite: 2270].</td>
+<td style="text-align: left;">11: <span class="math inline">\(\qquad\quad\)</span> Evaluar los coeficientes de enfriamiento activo: <span class="math inline">\(b_n = \kappa_{on}(\theta - T_n)\)</span> y <span class="math inline">\(\sigma_n = \sigma_{on}\)</span>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">12: <span class="math inline">\(\qquad\quad\)</span> Generar el número de aperturas de puerta en el paso actual: <span class="math inline">\(\Delta N_n \sim \text{Poisson}(\lambda_{puerta}(t_n)\Delta t)\)</span>[cite: 2270].</td>
+<td style="text-align: left;">12: <span class="math inline">\(\qquad\quad\)</span> Generar el número de aperturas de puerta en el paso actual: <span class="math inline">\(\Delta N_n \sim \text{Poisson}(\lambda_{puerta}(t_n)\Delta t)\)</span>.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">13: <span class="math inline">\(\qquad\quad\)</span> <strong>Si</strong> <span class="math inline">\(\Delta N_n &gt; 0\)</span> <strong>Entonces</strong></td>
@@ -650,19 +650,19 @@ Figura&nbsp;6.2: Acercamiento a un periodo de 5 días de simulación climática 
 <td style="text-align: left;">17: <span class="math inline">\(\qquad\quad\)</span> <strong>Fin Si</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">18: <span class="math inline">\(\qquad\)</span> <strong>En Caso Contrario</strong> (<span class="math inline">\(S_n = 0\)</span>, falla eléctrica de la CFE, régimen <span class="math inline">\(\alpha_n = 2\)</span>)</td>
+<td style="text-align: left;">18: <span class="math inline">\(\qquad\)</span> <strong>En Caso Contrario</strong> (<span class="math inline">\(S_n = 0\)</span>, falla eléctrica, régimen <span class="math inline">\(\alpha_n = 2\)</span>)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">19: <span class="math inline">\(\qquad\quad\)</span> Evaluar los coeficientes de calentamiento pasivo: <span class="math inline">\(b_n = -\kappa_{off}(T_n - T_{amb}(t_n))\)</span> y <span class="math inline">\(\sigma_n = \sigma_{off}\)</span>[cite: 2270].</td>
+<td style="text-align: left;">19: <span class="math inline">\(\qquad\quad\)</span> Evaluar los coeficientes de calentamiento pasivo: <span class="math inline">\(b_n = \kappa_{off}(T_{amb}(t_n) - T_n)\)</span> y <span class="math inline">\(\sigma_n = \sigma_{off}\)</span>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">20: <span class="math inline">\(\qquad\quad\)</span> Anular las aperturas de puerta por protocolo de contingencia: <span class="math inline">\(\Delta J_n = 0\)</span>[cite: 2270].</td>
+<td style="text-align: left;">20: <span class="math inline">\(\qquad\quad\)</span> Anular las aperturas de puerta por protocolo: <span class="math inline">\(\Delta J_n = 0\)</span>.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">21: <span class="math inline">\(\qquad\)</span> <strong>Fin Si</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">22: <span class="math inline">\(\qquad\)</span> Actualizar la temperatura interna del equipo: <span class="math inline">\(T_{n+1} = T_n + b_n \Delta t + \sigma_n \Delta W_n + \Delta J_n\)</span>[cite: 2270].</td>
+<td style="text-align: left;">22: <span class="math inline">\(\qquad\)</span> Actualizar la temperatura interna del equipo: <span class="math inline">\(T_{n+1} = T_n + b_n \Delta t + \sigma_n \Delta W_n + \Delta J_n\)</span>.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">23: <span class="math inline">\(\quad\)</span> <strong>Fin Para</strong></td>
@@ -671,7 +671,7 @@ Figura&nbsp;6.2: Acercamiento a un periodo de 5 días de simulación climática 
 <td style="text-align: left;">24:</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">25: <strong>5)</strong> Retornar la trayectoria anual aproximada de la temperatura interna: <span class="math inline">\(\{T_0, T_1, \dots, T_N\}\)</span>[cite: 2270].</td>
+<td style="text-align: left;">25: <strong>5)</strong> Retornar la trayectoria discreta anual aproximada de la temperatura interna: <span class="math inline">\(\{T_0, T_1, \dots, T_N\}\)</span>.</td>
 </tr>
 </tbody>
 </table>
@@ -825,14 +825,14 @@ Figura&nbsp;6.11: Dinámica logística anual (Escenario C). La trayectoria azul 
 </section>
 <section id="estructura-de-la-simulación-de-montecarlo" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="estructura-de-la-simulación-de-montecarlo"><span class="header-section-number">6.6</span> Estructura de la Simulación de Montecarlo</h2>
-<p>Dado que el <a href="#alg-simulacion-ede-termodinamica" class="quarto-xref">alg.&nbsp;<span>6.1</span></a> junto con el modelo de inventario producen únicamente una realización anual aleatoria, no es posible evaluar la confiabilidad del sistema a partir de una sola trayectoria. Para medir rigurosamente el riesgo operativo y estimar el valor esperado <span class="math inline">\(\mathbb{E}[g(T(t))]\)</span> de los estadísticos de interés cuya distribución analítica es desconocida, el modelo completo se integró dentro de un esquema de simulación de Montecarlo <span class="citation" data-cites="wang2016numerical platen2010numerical">(<a href="references.html#ref-wang2016numerical" role="doc-biblioref">Wang 2016</a>; <a href="references.html#ref-platen2010numerical" role="doc-biblioref">Platen y Bruti-Liberati 2010</a>)</span>.</p>
+<p>Dado que el <a href="#alg-simulacion-ede-termodinamica" class="quarto-xref">Algoritmo&nbsp;<span>6.1</span></a> junto con el modelo de inventario producen únicamente una realización anual aleatoria, no es posible evaluar la confiabilidad del sistema a partir de una sola trayectoria. Para medir rigurosamente el riesgo operativo y estimar el valor esperado <span class="math inline">\(\mathbb{E}[g(T(t))]\)</span> de los estadísticos de interés cuya distribución analítica es desconocida, el modelo completo se integró dentro de un esquema de simulación de Montecarlo <span class="citation" data-cites="wang2016numerical platen2010numerical">(<a href="references.html#ref-wang2016numerical" role="doc-biblioref">Wang 2016</a>; <a href="references.html#ref-platen2010numerical" role="doc-biblioref">Platen y Bruti-Liberati 2010</a>)</span>.</p>
 <p>En cada realización anual <span class="math inline">\(k\)</span>, el algoritmo evalúa la trayectoria simulada y extrae las siguientes métricas estadísticas:</p>
 <ul>
 <li><strong>Termodinámica:</strong> Horas acumuladas y conteo de las rupturas de la cadena de frío (<span class="math inline">\(T(t)&gt;8^\circ\text{C}\)</span> y <span class="math inline">\(T(t)&lt;2^\circ\text{C}\)</span>), así como la vigilancia del riesgo crítico de congelación (<span class="math inline">\(T(t)&lt;0^\circ\text{C}\)</span>).</li>
 <li><strong>Logística y Riesgo:</strong> El día exacto en que ocurrió la primera falla crítica, el total de dosis perdidas, el porcentaje anual de pérdida y la merma por mes para evaluar la estacionalidad del riesgo.</li>
 </ul>
 <p>Este procedimiento se ejecuta de forma iterativa generando <span class="math inline">\(M = 5000\)</span> trayectorias anuales independientes (asignando en cada una semillas de aleatoriedad indexadas para garantizar la reproducibilidad de la simulación), aproximando el valor esperado de cada métrica mediante el promedio muestral <span class="math inline">\(\displaystyle \hat{\mu}_M = \frac{1}{M}\sum_{k=1}^{M} g\left(T^{(k)}\right)\)</span> <span class="citation" data-cites="wang2016numerical">(<a href="references.html#ref-wang2016numerical" role="doc-biblioref">Wang 2016</a>)</span>.</p>
-<p>De acuerdo con la teoría de convergencia débil (<a href="fundamentos_numericos.html#def-convergencia-debil" class="quarto-xref">Definición&nbsp;<span>3.2</span></a>) y la descomposición del Error Cuadrático Medio en simulaciones de ecuaciones diferenciales estocásticas <span class="citation" data-cites="wang2016numerical platen2010numerical">(<a href="references.html#ref-wang2016numerical" role="doc-biblioref">Wang 2016</a>; <a href="references.html#ref-platen2010numerical" role="doc-biblioref">Platen y Bruti-Liberati 2010</a>)</span>, la precisión de este estimador depende tanto del sesgo numérico de discretización temporal como de la varianza estadística de muestreo. Por un lado, el tamaño de paso de <span class="math inline">\(5\text{ minutos}\)</span> (<span class="math inline">\(\Delta t = 5/60\text{ h}\)</span>) en el esquema de Euler-Maruyama (cuyo orden débil es <span class="math inline">\(\beta = 1.0\)</span>) mantiene acotado el sesgo numérico sistemático; por otro lado, al simular <span class="math inline">\(M = 5000\)</span> años independientes, la <strong>Ley de los Grandes Números</strong> <span class="citation" data-cites="ross2018first">(<a href="references.html#ref-ross2018first" role="doc-biblioref">Ross 2018</a>)</span> asegura que el error estándar de muestreo decaiga a razón de <span class="math inline">\(M^{-1/2} \approx 0.0141\)</span> (por debajo del <span class="math inline">\(1.5\%\)</span> de la desviación estándar de cada métrica). Esto elimina el efecto de fluctuaciones atípicas individuales y estabiliza los promedios poblacionales bajo cada uno de los tres escenarios operativos evaluados.</p>
+<p>De acuerdo con la teoría de convergencia débil (<a href="fundamentos_numericos.html#def-convergencia-debil" class="quarto-xref">Definición&nbsp;<span>3.2</span></a>) y la descomposición del Error Cuadrático Medio en simulaciones de ecuaciones diferenciales estocásticas, la precisión de este estimador depende tanto del sesgo numérico de discretización temporal como de la varianza estadística de muestreo. Por un lado, el tamaño de paso de <span class="math inline">\(5\text{ minutos}\)</span> (<span class="math inline">\(\Delta t = 5/60\text{ h}\)</span>) en el esquema de Euler-Maruyama (cuyo orden débil es <span class="math inline">\(\beta = 1.0\)</span>) mantiene acotado el sesgo numérico sistemático; por otro lado, al simular <span class="math inline">\(M = 5000\)</span> años independientes, la <strong>Ley de los Grandes Números</strong> <span class="citation" data-cites="ross2018first">(<a href="references.html#ref-ross2018first" role="doc-biblioref">Ross 2018</a>)</span> asegura que el error estándar de muestreo decaiga a razón de <span class="math inline">\(M^{-1/2} \approx 0.0141\)</span> (por debajo del <span class="math inline">\(1.5\%\)</span> de la desviación estándar de cada métrica). Esto elimina el efecto de fluctuaciones atípicas individuales y estabiliza los promedios poblacionales bajo cada uno de los tres escenarios operativos evaluados.</p>
 </section>
 <section id="resultados-estadísticos-y-análisis-de-riesgo" class="level2" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="resultados-estadísticos-y-análisis-de-riesgo"><span class="header-section-number">6.7</span> Resultados Estadísticos y Análisis de Riesgo</h2>
