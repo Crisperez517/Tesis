@@ -19,7 +19,7 @@ $$
 $$
 :::
 
-Por la desigualdad de Lyapunov ($\mathbb{E}[\vert X(T) - Y_N \vert] \le (\mathbb{E}[\vert X(T) - Y_N \vert^2])^{1/2}$), el criterio de la @def-convergencia-fuerte suele establecerse demostrando que el error cuadrático medio cumple $\displaystyle \left(\mathbb{E}\left[\sup_{0 \le t \le T} \vert X(t) - \bar{Y}(t) \vert^2\right]\right)^{1/2} \le C(\Delta t)^\gamma$, donde $\bar{Y}(t)$ denota la extensión continua del esquema numérico. La convergencia fuerte controla el error promedio trayectoria por trayectoria, por lo que lo hace el criterio adecuado cuando se requiere simular trayectorias individuales del proceso [@kloeden1992numerical].
+Por la desigualdad de Lyapunov ($\mathbb{E}[\vert X(T) - Y_N \vert] \le (\mathbb{E}[\vert X(T) - Y_N \vert^2])^{1/2}$), el criterio de la @def-convergencia-fuerte suele establecerse demostrando que el error cuadrático medio cumple $\displaystyle \left(\mathbb{E}\left[\sup_{0 \le t \le T} \vert X(t) - \bar{Y}(t) \vert^2\right]\right)^{1/2} \le C(\Delta t)^\gamma$, donde $\bar{Y}(t)$ denota la extensión continua del esquema numérico. La convergencia fuerte controla el error promedio trayectoria por trayectoria, por lo que lo hace el criterio adecuado cuando se requiere simular trayectorias individuales del proceso [@wang2016numerical].
 
 ::: {#def-convergencia-debil}
 ### Convergencia Débil
@@ -30,7 +30,7 @@ $$
 $$
 :::
 
-A diferencia del criterio fuerte, la convergencia débil no exige cercanía trayectoria por trayectoria, sino que mide el error en la aproximación de los momentos estadísticos y de los valores esperados de funcionales de la solución [@kloeden1992numerical].
+A diferencia del criterio fuerte, la convergencia débil no exige cercanía trayectoria por trayectoria, sino que mide el error en la aproximación de los momentos estadísticos y de los valores esperados de funcionales de la solución [@wang2016numerical].
 
 ### Esquema Numérico de Euler-Maruyama {#sec-euler-maruyama}
 
@@ -72,12 +72,12 @@ La implementación paso a paso del método de Euler-Maruyama se detalla en el @a
 | 3: **2)** Asignar la condición inicial $Y_0 = x_0$. |
 | 4: |
 | 5: **3)** Resolver recursivamente el sistema: |
-| 6: $\quad$ **for** $n = 0, 1, \dots, N - 1$ **do** |
+| 6: $\quad$ **Para** $n = 0, 1, \dots, N - 1$ **Hacer** |
 | 7: $\qquad$ Generar una variable aleatoria normal estándar independiente $Z_n \sim \mathcal{N}(0, 1)$. |
 | 8: $\qquad$ Calcular el incremento del proceso de Wiener: $\Delta W_n = \sqrt{\Delta t}\, Z_n$. |
 | 9: $\qquad$ Evaluar los coeficientes en el nodo actual: $b_n = b(t_n, Y_n)$ y $\sigma_n = \sigma(t_n, Y_n)$. |
 | 10: $\qquad$ Actualizar el estado del proceso: $Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n$. |
-| 11: $\quad$ **end for** |
+| 11: $\quad$ **Fin Para** |
 | 12: |
 | 13: **4)** Retornar la trayectoria discreta aproximada del proceso: $\{Y_0, Y_1, \dots, Y_N\}$. |
 
@@ -118,13 +118,13 @@ La implementación paso a paso del método de Milstein se detalla en el @alg-mil
 | 3: **2)** Asignar la condición inicial $Y_0 = x_0$. |
 | 4: |
 | 5: **3)** Resolver recursivamente el sistema con corrección de segundo orden: |
-| 6: $\quad$ **for** $n = 0, 1, \dots, N - 1$ **do** |
+| 6: $\quad$ **Para** $n = 0, 1, \dots, N - 1$ **Hacer** |
 | 7: $\qquad$ Generar una variable aleatoria normal estándar independiente $Z_n \sim \mathcal{N}(0, 1)$. |
 | 8: $\qquad$ Calcular el incremento Browniano: $\Delta W_n = \sqrt{\Delta t}\, Z_n$. |
 | 9: $\qquad$ Evaluar $b_n = b(t_n, Y_n)$, $\sigma_n = \sigma(t_n, Y_n)$ y la derivada parcial $\sigma'_n = \frac{\partial \sigma}{\partial x}(t_n, Y_n)$. |
 | 10: $\qquad$ Calcular la integral iterada de Itô: $I_{(1,1), n} = \frac{1}{2}\left[(\Delta W_n)^2 - \Delta t\right]$. |
 | 11: $\qquad$ Actualizar el estado del proceso: $Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n + \sigma_n \sigma'_n I_{(1,1), n}$. |
-| 12: $\quad$ **end for** |
+| 12: $\quad$ **Fin Para** |
 | 13: |
 | 14: **4)** Retornar la trayectoria discreta aproximada del proceso: $\{Y_0, Y_1, \dots, Y_N\}$. |
 
@@ -158,25 +158,23 @@ $$
 $$
 lo que implica que **el esquema de Milstein y el esquema de Euler-Maruyama coinciden algebraicamente**. En particular, para nuestro modelo termodinámico híbrido (@eq-ede-operativa-teorica), dado que dentro de cada régimen $i \in \{1, 2\}$ la volatilidad $\sigma(i) \in \{\sigma_{on}, \sigma_{off}\}$ es constante respecto a la temperatura $T(t)$ $\left( \frac{\partial \sigma(i)}{\partial T} = 0 \right),$ el esquema de Euler-Maruyama reproduce de manera exacta la actualización del esquema de Milstein en la componente difusiva sin requerir el cálculo de derivadas parciales espaciales adicionales.
 
-# DE AQUI:
+### Esquemas Numéricos para EDES con Cambio de Régimen Markoviano {#sec-numerico-switching}
 
-### Esquemas Numéricos para EDEs con Cambio de Régimen Markoviano {#sec-numerico-switching}
+Los métodos de Euler-Maruyama (@eq-esquema-em) y de Milstein (@eq-esquema-milstein) presentados previamente consideran coeficientes que dependen únicamente de difusiónes continuas. Sin embargo, para aproximar numéricamente ecuaciones diferenciales estocásticas híbridas cuyos parámetros cambian de acuerdo a una cadena de Markov a tiempo continuo $\{\alpha(t)\}_{t \in [0, T]}$ sobre un espacio de estados finito $\mathcal{M} = \{1, 2, \dots, m_0\}$, es necesario juntar la discretización temporal de la variable de estado continua con la simulación discreta de las transiciones de régimen [@yin2010hybrid; @mao2006stochastic].
 
-Los métodos de Euler-Maruyama (@eq-esquema-em) y de Milstein (@eq-esquema-milstein) presentados previamente consideran coeficientes gobernados únicamente por difusión continua. Sin embargo, para aproximar numéricamente ecuaciones diferenciales estocásticas híbridas cuyos parámetros conmutan de acuerdo con una cadena de Markov a tiempo continuo $\{\alpha(t)\}_{t \in [0, T]}$ sobre un espacio de estados finito $\mathcal{M} = \{1, 2, \dots, m_0\}$, es indispensable acoplar la discretización temporal de la variable de estado continua con la simulación discreta de las transiciones de régimen [@yin2010hybrid; @mao2006stochastic][cite: 2097, 2201, 2203].
-
-Consideremos el sistema de difusión con cambio de régimen markoviano estudiado en el Capítulo 2 (Sección 2.2, p. 28) y Capítulo 5 (Sección 5.2, Ec. 5.1–5.2, p. 138) de [@yin2010hybrid][cite: 2097, 2202]:
+Consideremos el sistema de difusión con cambio de régimen markoviano estudiado en el Capítulo 2 (Sección 2.2) y Capítulo 5 (Sección 5.2) de [@yin2010hybrid]:
 
 $$
 dX(t) = b(t, X(t), \alpha(t))dt + \sigma(t, X(t), \alpha(t))dW(t), \quad (X(0), \alpha(0)) = (x_0, i_0),
 $$ {#eq-ede-switching-num}
 
-donde $\alpha(t) \in \mathcal{M}$ posee una matriz generadora infinitesimal $Q = (q_{ij})_{m_0 \times m_0}$ que satisface la propiedad-$q$: $q_{ij} \ge 0$ para todo $i \neq j$ y $q_{ii} = -\sum_{j \neq i} q_{ij}$ (Sección 2.2, p. 30 en [@yin2010hybrid])[cite: 2099]. Sobre la partición regular $t_n = n\Delta t$ con paso $\Delta t = T/N$, la restricción de la cadena de Markov a los nodos de la malla, denotada por $\alpha_n = \alpha(t_n)$, define una cadena de Markov homogénea a tiempo discreto (Lema 4.1, Sección 4.2, p. 112 en [@mao2006stochastic]; Sección 5.3, p. 139 en [@yin2010hybrid])[cite: 2201, 2203]. La matriz de probabilidades de transición en un paso $P(\Delta t) = (P_{ij}(\Delta t))_{m_0 \times m_0}$, donde $P_{ij}(\Delta t) = \mathbb{P}(\alpha_{n+1} = j \mid \alpha_n = i)$, está dada exactamente por la exponencial matricial y admite un desarrollo de Taylor de primer orden para tamaños de paso $\Delta t > 0$ suficientemente pequeños (Sección 5.3, Supuesto A5.3 y Observación 5.1, p. 139, y Sección 6.4, p. 177 en [@yin2010hybrid])[cite: 2203, 2240]:
+donde $\alpha(t) \in \mathcal{M}$ tiene una matriz generadora infinitesimal $Q = (q_{ij})_{m_0 \times m_0}$ que satisface la propiedad-$q$: $q_{ij} \ge 0$ para todo $i \neq j$ y $q_{ii} = -\sum_{j \neq i} q_{ij}$ (Sección 2.2 de [@yin2010hybrid]). Sobre la partición regular $t_n = n\Delta t$ con paso $\Delta t = T/N$, la restricción de la cadena de Markov a los nodos de la malla, denotada por $\alpha_n = \alpha(t_n)$, define una cadena de Markov homogénea a tiempo discreto (Lema 4.1, Sección 4.2, p. de [@mao2006stochastic]; Sección 5.3 de [@yin2010hybrid]). La matriz de probabilidades de transición en un paso $P(\Delta t) = (P_{ij}(\Delta t))_{m_0 \times m_0}$, donde $P_{ij}(\Delta t) = \mathbb{P}(\alpha_{n+1} = j \mid \alpha_n = i)$, está dada exactamente por la exponencial matricial y admite un desarrollo de Taylor de primer orden para tamaños de paso $\Delta t > 0$ suficientemente pequeños (Sección 5.3 y 6.4 de [@yin2010hybrid]):
 
 $$
 P(\Delta t) = \exp(\Delta t \, Q) = I + \Delta t \, Q + \mathcal{O}\left((\Delta t)^2\right),
 $$ {#eq-matriz-transicion-discreta}
 
-cuyas entradas explícitas de transición en un paso cumplen (Sección 2.2, Ec. 2.3, p. 28 y Sección 5.4.1, p. 142 en [@yin2010hybrid])[cite: 2097, 2206]:
+cuyas entradas de transición en un paso cumplen que:
 
 $$
 P_{ij}(\Delta t) = \delta_{ij} + q_{ij}\Delta t + o(\Delta t) = 
@@ -186,30 +184,30 @@ q_{ij}\Delta t + o(\Delta t), & \text{si } i \neq j, \\
 \end{cases}
 $$ {#eq-prob-transicion-paso}
 
-donde $\delta_{ij}$ denota la delta de Kronecker[cite: 2206]. De manera equivalente, aprovechando las propiedades de las cadenas de Markov a tiempo continuo (Apéndice A.2 en [@yin2010hybrid]), la trayectoria de $\alpha(t)$ puede construirse de manera exacta en el dominio continuo muestreando tiempos de permanencia exponenciales con tasa $\lambda_i = -q_{ii} = \sum_{j \neq i} q_{ij}$ en el estado actual $i$, o bien mediante un Proceso de Poisson No Homogéneo cuando las tasas de transición dependen del tiempo $Q(t)$ (Sección 1.4, Ec. 1.30–1.32, p. 15–16 y Sección 2.8, p. 66 en [@yin2010hybrid]; Sección 1.1, Ec. 1.1.24, p. 9 en [@platen2010numerical]), y posteriormente proyectando el estado activo sobre los nodos $t_n$[cite: 1759, 2064, 2086, 2135].
+donde $\delta_{ij}$ denota la delta de Kronecker. De manera equivalente, usando las propiedades de las cadenas de Markov a tiempo continuo, se tiene que la trayectoria de $\alpha(t)$ puede construirse de manera exacta en el dominio continuo muestreando tiempos de permanencia exponenciales con tasa $\lambda_i = -q_{ii} = \sum_{j \neq i} q_{ij}$ en el estado actual $i$, o bien mediante un Proceso de Poisson No Homogéneo cuando las tasas de transición dependen del tiempo $Q(t)$ (Sección 1.4 y 2.8 de [@yin2010hybrid]; Sección 1.1 de [@platen2010numerical]), y posteriormente proyectando el estado activo sobre los nodos $t_n$.
 
-Una vez determinado el estado del régimen discreto $\alpha_n$ en el nodo $t_n$, el esquema numérico de Euler-Maruyama con cambio de régimen se formula como (Sección 5.3, Ec. 5.4, p. 139 y Sección 5.6.1, Ec. 5.30, p. 153 en [@yin2010hybrid])[cite: 2203, 2217]:
+Una vez determinado el estado del régimen discreto $\alpha_n$ en el nodo $t_n$, el esquema numérico de Euler-Maruyama con cambio de régimen se formula como:
 
 $$
 Y_{n+1} = Y_n + b(t_n, Y_n, \alpha_n)\Delta t + \sigma(t_n, Y_n, \alpha_n)\Delta W_n, \quad n = 0, 1, \dots, N - 1,
 $$ {#eq-esquema-em-switching}
 
-donde $\Delta W_n = W(t_{n+1}) - W(t_n) = \sqrt{\Delta t}\, Z_n$ con $\{Z_n\}$ una sucesión de variables aleatorias normales estándar independientes $\mathcal{N}(0, 1)$ independientes de la filtración generada por $\{Y_k, \alpha_k : k \le n\}$ (Supuesto A5.3, p. 139 en [@yin2010hybrid])[cite: 2203, 2217].
+donde $\Delta W_n = W(t_{n+1}) - W(t_n) = \sqrt{\Delta t}\, Z_n$ con $\{Z_n\}$ una sucesión de variables aleatorias normales estándar independientes $\mathcal{N}(0, 1)$ independientes de la filtración generada por $\{Y_k, \alpha_k : k \le n\}$.
 
-Defining la interpolación constante a trozos $(Y^{\Delta t}(t), \alpha^{\Delta t}(t)) = (Y_n, \alpha_n)$ para $t \in [t_n, t_{n+1})$ (Sección 5.4.1, Ec. 5.7, p. 141 en [@yin2010hybrid]) y su extensión continua de tipo Itô (Sección 5.6.1, Ec. 5.30, p. 153 en [@yin2010hybrid])[cite: 2205, 2217], la convergencia fuerte del esquema queda garantizada por el siguiente resultado fundamental demostrado mediante la desigualdad maximal de martingalas de Doob, acotamiento de momentos (Lema 5.2, p. 140 en [@yin2010hybrid]) y el lema de Gronwall en el Teorema 5.13 (Sección 5.6.1, pp. 153–155) de [@yin2010hybrid] y en el Teorema 4.1 (Sección 4.2, p. 115) de [@mao2006stochastic][cite: 2204, 2217, 2218, 2219]:
+Definiendo la interpolación constante a trozos $(Y^{\Delta t}(t), \alpha^{\Delta t}(t)) = (Y_n, \alpha_n)$ para $t \in [t_n, t_{n+1})$ y su extensión continua de tipo Itô, la convergencia fuerte del esquema queda garantizada gracias al siguiente teorema: [@mao2006stochastic]:
 
 ::: {#thm-em-switching}
 ### Teorema de Convergencia Fuerte de Euler-Maruyama con Cambio de Régimen
-Supongamos que el generador $Q$ es acotado (Supuesto A5.1, p. 138 en [@yin2010hybrid]) y que para todo régimen $i \in \mathcal{M}$ los coeficientes de deriva $b(t, x, i)$ y de difusión $\sigma(t, x, i)$ satisfacen la condición de crecimiento lineal $|b(t, x, i)| + |\sigma(t, x, i)| \le K(1 + |x|)$ y la condición de Lipschitz global $|b(t, x, i) - b(t, z, i)| + |\sigma(t, x, i) - \sigma(t, z, i)| \le K_0|x - z|$ uniformemente para todo $x, z \in \mathbb{R}$ (Supuesto A5.2, p. 138 en [@yin2010hybrid])[cite: 2202]. Entonces, la aproximación numérica generada por el esquema (@eq-esquema-em-switching) posee momentos finitos de orden $p \ge 2$, $\sup_{0 \le n \le N} \mathbb{E}[|Y_n|^p] \le (|x_0|^p + KT)\exp(KT) < \infty$ (Lema 5.2, Ec. 5.5, p. 140 en [@yin2010hybrid]), y converge en sentido **fuerte** en media cuadrática hacia la solución exacta $X(t)$ de la @eq-ede-switching-num satisfaciendo la cota uniforme (Teorema 5.13, Ec. 5.36–5.37, p. 155 en [@yin2010hybrid]; Teorema 4.1, p. 115 en [@mao2006stochastic])[cite: 2204, 2217, 2219]:
+Supongamos que el generador $Q$ es acotado y que para todo régimen $i \in \mathcal{M}$ los coeficientes de deriva $b(t, x, i)$ y de difusión $\sigma(t, x, i)$ satisfacen la condición de crecimiento lineal $\left( |b(t, x, i)|^2 + |\sigma(t, x, i)|^2 \le K(1 + |x|^2)\right)$ y la condición de Lipschitz global $\left( |b(t, x, i) - b(t, z, i)|^2 + |\sigma(t, x, i) - \sigma(t, z, i)|^2 \le K_0|x - z|^2 \right)$ para todo $x, z \in \mathbb{R}$. Entonces, la aproximación numérica generada por el esquema (@eq-esquema-em-switching) tiene momentos finitos de orden $p \ge 2$, $\sup_{0 \le n \le N} \mathbb{E}[|Y_n|^p] \le (|x_0|^p + KT)\exp(KT) < \infty$, y converge en sentido **fuerte** en media cuadrática hacia la solución exacta $X(t)$ de la @eq-ede-switching-num satisfaciendo la cota uniforme:
 
 $$
 \mathbb{E}\left[ \sup_{0 \le t \le T} \vert X(t) - Y^{\Delta t}(t) \vert^2 \right] = \mathcal{O}(\Delta t),
 $$ {#eq-cota-fuerte-switching}
 
-lo cual establece un orden de convergencia fuerte $\gamma = 0.5$ en norma $L^2(\Omega)$: $\left(\mathbb{E}[\sup_{0 \le t \le T} |X(t) - Y^{\Delta t}(t)|^2]\right)^{1/2} \le C(\Delta t)^{1/2}$[cite: 2217, 2219].
+lo cual establece un orden de convergencia fuerte $\gamma = 0.5$ en la norma $L^2(\Omega)$: $\left(\mathbb{E}[\sup_{0 \le t \le T} |X(t) - Y^{\Delta t}(t)|^2]\right)^{1/2} \le C(\Delta t)^{1/2}$.
 :::
 
----
+# DE AQUI
 
 ### Esquemas Numéricos para EDEs Híbridas con Saltos de Poisson Compuestos {#sec-numerico-saltos}
 
