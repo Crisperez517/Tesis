@@ -1,1 +1,69 @@
-# Fundamentos Teóricos Epidemiológicos
+# Fundamentos Teóricos Epidemiológicos {#sec-fundamentos-epidemiologicos}
+
+En este capítulo se establecen los fundamentos biológicos, fisicoquímicos y epidemiológicos que vinculan la dinámica estocástica de la temperatura interna del refrigerador con la pérdida de viabilidad de las vacunas y la gestión del inventario clínico. En primer lugar, se describen los mecanismos de termoestabilidad de los productos biológicos dentro de la red de frío. Posteriormente, se formula la cinética de degradación térmica mediante la ecuación de Arrhenius. Finalmente, se presenta el acoplamiento entre la degradación impulsada por la temperatura, el reabastecimiento logístico y la demanda de inmunización bajo esquemas epidemiológicos.
+
+## Estabilidad Biológica e Integridad de la Red de Frío
+
+Las vacunas son preparaciones biológicas compuestas por antígenos (virus atenuados, inactivados, subunidades proteicas o ácidos nucleicos), adyuvantes y estabilizantes cuya estructura molecular es altamente sensible a las variaciones térmicas [@yoshioka2000stability]. Para preservar su capacidad inmunogénica desde el laboratorio fabricante hasta su aplicación en el paciente, los lineamientos internacionales y normativos establecen que el almacenamiento en unidades de salud debe mantenerse estrictamente dentro de la ventana térmica de seguridad de $[2^\circ\text{C}, 8^\circ\text{C}]$.
+
+Cuando la temperatura interna $T(t)$ del equipo de refrigeración abandona este rango normativo, el biológico se expone a dos mecanismos de daño fisicoquímico distintos[cite: 2270]:
+
+1. **Degradación térmica por calor ($T(t) > 8^\circ\text{C}$):** El incremento de la energía cinética molecular acelera la ruptura de enlaces débiles y provoca la desnaturalización progresiva de las proteínas antigénicas [@yoshioka2000stability]. A diferencia de otros fallos mecánicos, el daño por calor es **acumulativo e irreversible**: cada excursión térmica por encima de los $8^\circ\text{C}$ reduce de manera permanente una fracción de la potencia biológica del lote almacenado.
+2. **Inactivación por congelación ($T(t) < 0^\circ\text{C}$):** En vacunas que contienen adyuvantes de sales de aluminio, la formación de cristales de hielo rompe las fuerzas de adsorción entre el antígeno y el adyuvante, provocando la aglomeración irreversible de las partículas y la pérdida inmediata de eficacia inmunológica, además del riesgo físico de fractura en los viales de vidrio [@yoshioka2000stability].
+
+Asimismo, desde una perspectiva termodinámica, existe un desfase temporal entre la temperatura del aire dentro de la cámara de refrigeración y la temperatura real de la suspensión líquida contenida en los frascos de vidrio. Debido a la capacidad calorífica del vidrio y del líquido biológico, el vial presenta **inercia térmica**, lo que amortigua fluctuaciones aéreas instantáneas y exige que una excursión de calor se sostenga durante un intervalo crítico (típicamente del orden de $30\text{ minutos}$) antes de desencadenar la degradación efectiva del antígeno.
+
+## Cinética de Degradación Térmica y Ecuación de Arrhenius {#sec-fundamento-arrhenius}
+
+En la estabilidad farmacéutica, la pérdida de potencia de un biológico inducida por el calor se modela mediante leyes de cinética química [@yoshioka2000stability]. Sea $P(t) \in [0, 100]$ el porcentaje de potencia o viabilidad biológica remanente de un lote de vacunas en el instante $t$. Bajo una cinética de degradación de primer orden, la tasa instantánea de pérdida de viabilidad es proporcional a la potencia presente en ese instante [@atkins2018physical; @yoshioka2000stability]:
+
+$$
+\frac{dP(t)}{dt} = -k(T(t)) P(t),
+$$ {#eq-cinetica-primer-orden}
+
+donde $k(T) > 0$ denota la constante de velocidad de reacción (o tasa de degradación térmica), la cual depende de manera no lineal de la temperatura a través de la relación formulada por Svante Arrhenius [@atkins2018physical].
+
+::: {#def-ecuacion-arrhenius}
+### Ecuación de Arrhenius
+Sea un sistema químico o biológico sujeto a una temperatura absoluta $T_K > 0$ (expresada en Kelvin, $T_K = T + 273.15$ para $T$ en grados Celsius). La tasa de degradación térmica $k(T_K)$ está determinada por la relación exponencial [@atkins2018physical; @yoshioka2000stability]:
+
+$$
+k(T_K) = A \exp\left( -\frac{E_a}{R T_K} \right),
+$$ {#eq-arrhenius-teorica}
+
+donde:
+
+- $A > 0$ es el **factor preexponencial** (o factor de frecuencia, en $\text{s}^{-1}$ o $\text{h}^{-1}$), que cuantifica la frecuencia de colisiones moleculares con la orientación adecuada para la reacción.
+- $E_a > 0$ es la **energía de activación** ($\text{J}\cdot\text{mol}^{-1}$), que representa la barrera energética mínima necesaria para romper la estabilidad conformacional del antígeno[cite: 2270].
+- $R = 8.314\,\text{J}\cdot\text{mol}^{-1}\cdot\text{K}^{-1}$ es la **constante universal de los gases ideales**.
+:::
+
+En los modelos deterministas clásicos de estabilidad acelerada, la temperatura se asume constante, lo que reduce la @eq-cinetica-primer-orden a un decaimiento exponencial simple $P(t) = P(0)e^{-k(T_K)t}$ [@yoshioka2000stability]. Sin embargo, en una unidad de salud real, la temperatura interna $T(t)$ es un proceso estocástico gobernado por la ecuación diferencial estocástica híbrida (@eq-ede-operativa-teorica). 
+
+Al acoplar la trayectoria estocástica $T(t)$ dentro de la @eq-arrhenius-teorica, la tasa de degradación $k(T(t))$ se convierte en un proceso estocástico adaptado a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$ [@control2026vaccine][cite: 2271]. Considerando que el daño farmacológico se activa únicamente cuando la temperatura supera el umbral normativo superior ($T(t) > 8^\circ\text{C}$) tras superar el periodo de inercia térmica del vial, la fracción de biológico degradada en un subintervalo temporal $[t_n, t_{n+1}]$ de longitud $\Delta t$ se determina mediante:
+
+$$
+\Delta D_n = \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}},
+$$ {#eq-fraccion-dano-paso}
+
+donde $\mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}}$ es la función indicadora de excursión térmica.
+
+## Dinámica de Inventario y Demanda Epidemiológica {#sec-fundamento-inventario-seir}
+
+La evaluación del riesgo en la red de frío no puede limitarse a cuantificar la pérdida porcentual teórica de un vial aislado, sino que debe traducirse en el número real de dosis destruidas (mermas físicas) durante la operación de una clínica de vacunación [@control2026vaccine]. Recientemente, en la literatura de investigación de operaciones aplicada a la salud pública [@control2026vaccine], se ha demostrado la importancia de integrar la degradación térmica de Arrhenius con la dinámica estocástica del inventario de vacunas y la demanda generada por brotes epidémicos.
+
+En el marco epidemiológico clásico, la propagación de una enfermedad infecciosa en una población se modela mediante sistemas compartimentales de tipo **SEIR** (*Susceptibles $S$, Expuestos $E$, Infectados $I_{inf}$ y Recuperados $R_{rec}$*), donde la campaña de vacunación busca transferir individuos del compartimento susceptible $S(t)$ hacia el compartimento inmunizado $R_{rec}(t)$ a una tasa de vacunación $u(t)$ [@control2026vaccine]. Como se establece en [@control2026vaccine], el despliegue efectivo de dicha tasa de inmunización $u(t)$ está restringido físicamente por el nivel de inventario de vacunas viables $I(t) \ge 0$ disponible en el centro de salud en cada instante $t$.
+
+De acuerdo con la formulación de [@control2026vaccine], la evolución temporal del inventario de biológicos $I(t)$ en un centro de almacenamiento está regida por la interacción simultánea de tres flujos operativos:
+
+1. **Demanda clínica y epidemiológica ($u(t)$):** Representa la extracción de dosis para su aplicación en la población. En condiciones operativas regulares (apego normativo), esta demanda responde a los esquemas de vacunación programados y campañas estacionales; en cambio, durante una contingencia epidemiológica o brote infeccioso, la urgencia por inmunizar a la población susceptible incrementa drásticamente la frecuencia de extracción y rotación del biológico [@control2026vaccine].
+2. **Merma por degradación impulsada por la temperatura:** Cuando ocurre una ruptura de la cadena de frío ($T(t) > 8^\circ\text{C}$), la tasa cinética de Arrhenius $k(T(t))$ actúa directamente sobre el volumen total de dosis almacenadas en ese instante [@control2026vaccine]. En consecuencia, el número de dosis destruidas en el intervalo $\Delta t$ es proporcional al inventario activo, esto es, $M_n = \Delta D_n \cdot I(t_n)$. Esta relación explica por qué una excursión térmica que coincide con un refrigerador lleno a su máxima capacidad produce pérdidas materiales severas, mientras que una rotación oportuna del inventario mitiga la exposición al riesgo eléctrico.
+3. **Reabastecimiento logístico bajo incertidumbre ($R_{rep}(t)$):** Conforme el consumo clínico y las mermas reducen las existencias hasta alcanzar un umbral crítico o punto de reorden $I_{reorden}$, se activa el suministro de nuevos lotes hasta restablecer la capacidad máxima del equipo $I_{max}$, proceso que en escenarios de alta demanda o contingencia involucra arribos y aperturas aleatorias modeladas mediante procesos de Poisson [@control2026vaccine].
+
+Expresado en tiempo discreto sobre la malla de simulación $t_n = n\Delta t$, el balance acoplado del inventario físico $I_n = I(t_n)$ y la merma acumulada obedece la relación recursiva [@control2026vaccine]:
+
+$$
+I_{n+1} = I_n - C_n - \Delta D_n (I_n - C_n) + R_n,
+$$ {#eq-balance-inventario-general}
+
+donde $C_n$ denota las dosis extraídas para vacunación en el paso $n$, $\Delta D_n (I_n - C_n)$ cuantifica las dosis inutilizadas por degradación térmica de Arrhenius (@eq-fraccion-dano-paso), y $R_n = (I_{max} - I_n)\mathbf{1}_{\{I_n \le I_{reorden}\}}$ representa la orden de reabastecimiento jurisdiccional. Con este acoplamiento teórico queda formalizado el vínculo completo entre el modelo termodinámico estocástico (@eq-ede-operativa-teorica) y las métricas de impacto logístico y epidemiológico que se calibrarán y simularán en los capítulos siguientes.

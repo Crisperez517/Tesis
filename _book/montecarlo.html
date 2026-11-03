@@ -825,7 +825,7 @@ Figura&nbsp;6.11: Dinámica logística anual (Escenario C). La trayectoria azul 
 </section>
 <section id="estructura-de-la-simulación-de-montecarlo" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="estructura-de-la-simulación-de-montecarlo"><span class="header-section-number">6.6</span> Estructura de la Simulación de Montecarlo</h2>
-<p>Dado que el <a href="#alg-simulacion-ede-termodinamica" class="quarto-xref">Algoritmo&nbsp;<span>6.1</span></a> junto con el modelo de inventario producen únicamente una realización anual aleatoria, no es posible evaluar la confiabilidad del sistema a partir de una sola trayectoria. Para medir rigurosamente el riesgo operativo y estimar el valor esperado <span class="math inline">\(\mathbb{E}[g(T(t))]\)</span> de los estadísticos de interés cuya distribución analítica es desconocida, el modelo completo se integró dentro de un esquema de simulación de Montecarlo <span class="citation" data-cites="wang2016numerical platen2010numerical">(<a href="references.html#ref-wang2016numerical" role="doc-biblioref">Wang 2016</a>; <a href="references.html#ref-platen2010numerical" role="doc-biblioref">Platen y Bruti-Liberati 2010</a>)</span>.</p>
+<p>Dado que el <a href="#alg-simulacion-ede-termodinamica" class="quarto-xref">Algoritmo&nbsp;<span>6.1</span></a> junto con el modelo de inventario producen únicamente una realización anual aleatoria, no es posible evaluar la confiabilidad del sistema a partir de una sola trayectoria. Para medir rigurosamente el riesgo operativo y estimar el valor esperado <span class="math inline">\(\mathbb{E}[g(T(t))]\)</span> de los estadísticos de interés cuya distribución analítica es desconocida, el modelo completo se integró dentro de un esquema de simulación de Montecarlo <span class="citation" data-cites="giles2008multilevel platen2010numerical">(<a href="references.html#ref-giles2008multilevel" role="doc-biblioref">Giles 2008</a>; <a href="references.html#ref-platen2010numerical" role="doc-biblioref">Platen y Bruti-Liberati 2010</a>)</span>.</p>
 <p>En cada realización anual <span class="math inline">\(k\)</span>, el algoritmo evalúa la trayectoria simulada y extrae las siguientes métricas estadísticas:</p>
 <ul>
 <li><strong>Termodinámica:</strong> Horas acumuladas y conteo de las rupturas de la cadena de frío (<span class="math inline">\(T(t)&gt;8^\circ\text{C}\)</span> y <span class="math inline">\(T(t)&lt;2^\circ\text{C}\)</span>), así como la vigilancia del riesgo crítico de congelación (<span class="math inline">\(T(t)&lt;0^\circ\text{C}\)</span>).</li>
@@ -1457,6 +1457,9 @@ Figura&nbsp;6.32: Diagrama de caja de la media poblacional (Escenario C). A pesa
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-efron1993introduction" class="csl-entry" role="listitem">
 Efron, Bradley, y Robert J. Tibshirani. 1993. <em>An Introduction to the Bootstrap</em>. Boca Raton, FL: Chapman; Hall/CRC.
+</div>
+<div id="ref-giles2008multilevel" class="csl-entry" role="listitem">
+Giles, Michael B. 2008. <span>«Multilevel <span>Monte Carlo</span> Path Simulation»</span>. <em>Operations Research</em> 56 (3): 607-17. <a href="https://doi.org/10.1287/opre.1070.0496">https://doi.org/10.1287/opre.1070.0496</a>.
 </div>
 <div id="ref-montgomery2014applied" class="csl-entry" role="listitem">
 Montgomery, Douglas C., y George C. Runger. 2014. <em>Applied Statistics and Probability for Engineers</em>. 6th ed. Hoboken, NJ: John Wiley &amp; Sons.

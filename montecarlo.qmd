@@ -218,7 +218,7 @@ No obstante, cuando el ritmo logístico sale de control (Escenario C), esta prot
 
 ## Estructura de la Simulación de Montecarlo
 
-Dado que el @alg-simulacion-ede-termodinamica junto con el modelo de inventario producen únicamente una realización anual aleatoria, no es posible evaluar la confiabilidad del sistema a partir de una sola trayectoria. Para medir rigurosamente el riesgo operativo y estimar el valor esperado $\mathbb{E}[g(T(t))]$ de los estadísticos de interés cuya distribución analítica es desconocida, el modelo completo se integró dentro de un esquema de simulación de Montecarlo [@wang2016numerical; @platen2010numerical].
+Dado que el @alg-simulacion-ede-termodinamica junto con el modelo de inventario producen únicamente una realización anual aleatoria, no es posible evaluar la confiabilidad del sistema a partir de una sola trayectoria. Para medir rigurosamente el riesgo operativo y estimar el valor esperado $\mathbb{E}[g(T(t))]$ de los estadísticos de interés cuya distribución analítica es desconocida, el modelo completo se integró dentro de un esquema de simulación de Montecarlo [@giles2008multilevel; @platen2010numerical].
 
 En cada realización anual $k$, el algoritmo evalúa la trayectoria simulada y extrae las siguientes métricas estadísticas:
 

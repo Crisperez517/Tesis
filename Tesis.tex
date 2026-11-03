@@ -188,11 +188,11 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
@@ -225,7 +225,7 @@
 
 \title{Tesis}
 \author{Cristóbal Pérez González \and Dr.~Yofre Hernán García Gómez}
-\date{2026-11-02}
+\date{2026-11-03}
 \begin{document}
 \maketitle
 
@@ -2942,241 +2942,241 @@ los capítulos siguientes para aproximar las trayectorias del modelo
 termodinámico de la cadena de frío y evaluar el riesgo operativo de
 almacenamiento.
 
-\chapter{DE AQUI}\label{de-aqui}
+\chapter{Fundamentos Teóricos
+Epidemiológicos}\label{sec-fundamentos-epidemiologicos}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+En este capítulo se establecen los fundamentos biológicos,
+fisicoquímicos y epidemiológicos que vinculan la dinámica estocástica de
+la temperatura interna del refrigerador con la pérdida de viabilidad de
+las vacunas y la gestión del inventario clínico. En primer lugar, se
+describen los mecanismos de termoestabilidad de los productos biológicos
+dentro de la red de frío. Posteriormente, se formula la cinética de
+degradación térmica mediante la ecuación de Arrhenius. Finalmente, se
+presenta el acoplamiento entre la degradación impulsada por la
+temperatura, el reabastecimiento logístico y la demanda de inmunización
+bajo esquemas epidemiológicos.
 
-\subsection{Estimación mediante el Método de Monte Carlo y
-Descomposición del Error}\label{sec-monte-carlo-ede}
+\section{Estabilidad Biológica e Integridad de la Red de
+Frío}\label{estabilidad-bioluxf3gica-e-integridad-de-la-red-de-fruxedo}
 
-La integración del alg.~\ref{alg-em-hibrido-general} genera una sola
-trayectoria muestral \(\{Y_n(\omega_k)\}_{0 \le n \le N}\). Sin embargo,
-para evaluar el riesgo termodinámico y la viabilidad biológica de las
-vacunas se requiere estimar funcionales esperados
-\(\mu = \mathbb{E}[g(X(T))]\) ---como la temperatura media, la pérdida
-de potencia o la probabilidad de excursión térmica fuera de
-\([2^\circ\text{C}, 8^\circ\text{C}]\)---, cuya distribución analítica
-es desconocida.
+Las vacunas son preparaciones biológicas compuestas por antígenos (virus
+atenuados, inactivados, subunidades proteicas o ácidos nucleicos),
+adyuvantes y estabilizantes cuya estructura molecular es altamente
+sensible a las variaciones térmicas
+(\citeproc{ref-yoshioka2000stability}{Yoshioka y Stella 2000}). Para
+preservar su capacidad inmunogénica desde el laboratorio fabricante
+hasta su aplicación en el paciente, los lineamientos internacionales y
+normativos establecen que el almacenamiento en unidades de salud debe
+mantenerse estrictamente dentro de la ventana térmica de seguridad de
+\([2^\circ\text{C}, 8^\circ\text{C}]\).
 
-El \textbf{Método de Monte Carlo (MC)} aproxima esta esperanza simulando
-\(M \in \mathbb{N}\) trayectorias independientes
-\(\{Y_n^{(k)}\}_{0 \le n \le N}\) (\(k = 1, \dots, M\)) con paso
-\(\Delta t = T/N\), definiendo el estimador muestral (Capítulo 5 de
-(\citeproc{ref-wang2016numerical}{Wang 2016})):
-
-\begin{equation}\phantomsection\label{eq-estimador-mc}{
-\hat{\mu}_M = \frac{1}{M}\sum_{k=1}^{M} g\left(Y_N^{(k)}\right).
-}\end{equation}
-
-La precisión global del estimador \(\hat{\mu}_M\) respecto al valor
-exacto \(\mathbb{E}[g(X(T))]\) se mide a través del \textbf{Error
-Cuadrático Medio} (\emph{Mean Square Error}, MSE), el cual se descompone
-de acuerdo con el siguiente resultado (Sección 5.2 de
-(\citeproc{ref-wang2016numerical}{Wang 2016})):
-
-\begin{theorem}[Descomposición del Error Cuadrático Medio en Simulación
-de Monte
-Carlo]\protect\hypertarget{thm-mse-montecarlo}{}\label{thm-mse-montecarlo}
-
-Sea \(\{X(t)\}_{t \in [0, T]}\) la solución exacta de una EDE y sea
-\(\{Y_N^{(k)}\}_{k=1}^M\) un conjunto de \(M\) realizaciones
-independientes en el tiempo terminal \(T\) generadas por un esquema
-numérico con orden de convergencia débil \(\beta > 0\)
-(Definición~\ref{def-convergencia-debil}) y paso \(\Delta t = T/N\).
-Para todo funcional \(g\) con varianza finita
-\(\text{Var}(g(Y_N)) < \infty\), el Error Cuadrático Medio del estimador
-(Ecuación~\ref{eq-estimador-mc}) satisface:
-
-\begin{equation}\phantomsection\label{eq-descomposicion-mse-exacta}{
-\text{MSE}(\hat{\mu}_M) \equiv \mathbb{E}\left[ \left( \hat{\mu}_M - \mathbb{E}[g(X(T))] \right)^2 \right] = \frac{\text{Var}(g(Y_N))}{M} + \left( \mathbb{E}[g(Y_N)] - \mathbb{E}[g(X(T))] \right)^2,
-}\end{equation}
-
-cuyo orden asintótico está dado por:
-
-\begin{equation}\phantomsection\label{eq-mse-asintotico}{
-\text{MSE}(\hat{\mu}_M) = \mathcal{O}\left(M^{-1}\right) + \mathcal{O}\left((\Delta t)^{2\beta}\right).
-}\end{equation}
-
-\end{theorem}
-
-Esta descomposición muestra que el error total depende de dos fuentes
-independientes (\citeproc{ref-wang2016numerical}{Wang 2016};
-\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}):
+Cuando la temperatura interna \(T(t)\) del equipo de refrigeración
+abandona este rango normativo, el biológico se expone a dos mecanismos
+de daño fisicoquímico distintos{[}cite: 2270{]}:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Error estadístico de muestreo (\(\mathcal{O}(M^{-1})\)):}
-  Gobernado por el Teorema del Límite Central, donde el error estándar
-  decae a razón de \(\mathcal{O}(M^{-1/2})\). En nuestras simulaciones,
-  el uso de \(M = 5,000\) trayectorias anuales asegura un factor
-  \(M^{-1/2} \approx 0.0141\), manteniendo el error muestral por debajo
-  del \(1.5\%\) de la desviación estándar del funcional.
+  \textbf{Degradación térmica por calor (\(T(t) > 8^\circ\text{C}\)):}
+  El incremento de la energía cinética molecular acelera la ruptura de
+  enlaces débiles y provoca la desnaturalización progresiva de las
+  proteínas antigénicas (\citeproc{ref-yoshioka2000stability}{Yoshioka y
+  Stella 2000}). A diferencia de otros fallos mecánicos, el daño por
+  calor es \textbf{acumulativo e irreversible}: cada excursión térmica
+  por encima de los \(8^\circ\text{C}\) reduce de manera permanente una
+  fracción de la potencia biológica del lote almacenado.
 \item
-  \textbf{Sesgo numérico de discretización
-  (\(\mathcal{O}((\Delta t)^{2\beta})\)):} Mide la discrepancia entre la
-  distribución discreta y la continua. Para el esquema de Euler-Maruyama
-  (\(\beta = 1.0\)) con paso de \(5\text{ minutos}\)
-  (\(\Delta t = 5/60\text{ h} \approx 0.0833\text{ h}\)), el cuadrado
-  del sesgo es del orden de
-  \(\mathcal{O}((\Delta t)^2) \approx 6.9 \times 10^{-3}\).
+  \textbf{Inactivación por congelación (\(T(t) < 0^\circ\text{C}\)):} En
+  vacunas que contienen adyuvantes de sales de aluminio, la formación de
+  cristales de hielo rompe las fuerzas de adsorción entre el antígeno y
+  el adyuvante, provocando la aglomeración irreversible de las
+  partículas y la pérdida inmediata de eficacia inmunológica, además del
+  riesgo físico de fractura en los viales de vidrio
+  (\citeproc{ref-yoshioka2000stability}{Yoshioka y Stella 2000}).
 \end{enumerate}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+Asimismo, desde una perspectiva termodinámica, existe un desfase
+temporal entre la temperatura del aire dentro de la cámara de
+refrigeración y la temperatura real de la suspensión líquida contenida
+en los frascos de vidrio. Debido a la capacidad calorífica del vidrio y
+del líquido biológico, el vial presenta \textbf{inercia térmica}, lo que
+amortigua fluctuaciones aéreas instantáneas y exige que una excursión de
+calor se sostenga durante un intervalo crítico (típicamente del orden de
+\(30\text{ minutos}\)) antes de desencadenar la degradación efectiva del
+antígeno.
 
-\subsection{Algoritmo Computacional Específico para el Modelo
-Termodinámico de la Red de Frío}\label{sec-algoritmo-especifico-tesis}
+\section{Cinética de Degradación Térmica y Ecuación de
+Arrhenius}\label{sec-fundamento-arrhenius}
 
-Integrando los métodos anteriores, formulamos el algoritmo empleado para
-simular la operación anual del refrigerador Haier HBC-150 en Tuxtla
-Gutiérrez, Chiapas (Escenarios A, B y C). Sobre el horizonte de un año
-bisiesto (\(T_{max} = 8784\text{ h}\), discretizado en \(N = 105,408\)
-pasos de longitud \(\Delta t = 5/60\text{ h}\)), el sistema acopla
-cuatro componentes:
+En la estabilidad farmacéutica, la pérdida de potencia de un biológico
+inducida por el calor se modela mediante leyes de cinética química
+(\citeproc{ref-yoshioka2000stability}{Yoshioka y Stella 2000}). Sea
+\(P(t) \in [0, 100]\) el porcentaje de potencia o viabilidad biológica
+remanente de un lote de vacunas en el instante \(t\). Bajo una cinética
+de degradación de primer orden, la tasa instantánea de pérdida de
+viabilidad es proporcional a la potencia presente en ese instante
+(\citeproc{ref-atkins2018physical}{Atkins, Paula, y Keeler 2018};
+\citeproc{ref-yoshioka2000stability}{Yoshioka y Stella 2000}):
+
+\begin{equation}\phantomsection\label{eq-cinetica-primer-orden}{
+\frac{dP(t)}{dt} = -k(T(t)) P(t),
+}\end{equation}
+
+donde \(k(T) > 0\) denota la constante de velocidad de reacción (o tasa
+de degradación térmica), la cual depende de manera no lineal de la
+temperatura a través de la relación formulada por Svante Arrhenius
+(\citeproc{ref-atkins2018physical}{Atkins, Paula, y Keeler 2018}).
+
+\begin{definition}[Ecuación de
+Arrhenius]\protect\hypertarget{def-ecuacion-arrhenius}{}\label{def-ecuacion-arrhenius}
+
+Sea un sistema químico o biológico sujeto a una temperatura absoluta
+\(T_K > 0\) (expresada en Kelvin, \(T_K = T + 273.15\) para \(T\) en
+grados Celsius). La tasa de degradación térmica \(k(T_K)\) está
+determinada por la relación exponencial
+(\citeproc{ref-atkins2018physical}{Atkins, Paula, y Keeler 2018};
+\citeproc{ref-yoshioka2000stability}{Yoshioka y Stella 2000}):
+
+\begin{equation}\phantomsection\label{eq-arrhenius-teorica}{
+k(T_K) = A \exp\left( -\frac{E_a}{R T_K} \right),
+}\end{equation}
+
+donde:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Temperatura ambiente externa \(T_{amb}(t_n)\):} Interpola la
-  temperatura media diaria histórica \(T_{media}(d_n)\) del día
-  \(d_n = \lfloor t_n / 24 \rfloor\) mediante una onda senoidal diurna
-  con amplitud de \(7.0^\circ\text{C}\) y máximo a las
-  \(15\text{:}00\text{ h}\):
-  \[T_{amb}(t_n) = T_{media}(d_n) + 7.0 \cos\left( \frac{2\pi(t_n - 15)}{24} \right).\]
+  \(A > 0\) es el \textbf{factor preexponencial} (o factor de
+  frecuencia, en \(\text{s}^{-1}\) o \(\text{h}^{-1}\)), que cuantifica
+  la frecuencia de colisiones moleculares con la orientación adecuada
+  para la reacción.
 \item
-  \textbf{Régimen de suministro eléctrico \(\alpha_n \in \{1, 2\}\):}
-  Conmuta entre operación normal (\(\alpha_n = 1\), con atractor
-  \(\theta_{set} = 5.0^\circ\text{C}\), enfriamiento \(k_{on}\) y
-  volatilidad \(\sigma_{on}\)) y corte eléctrico de la CFE
-  (\(\alpha_n = 2\), simulado mediante un Proceso de Poisson No
-  Homogéneo con tasa estacional \(\lambda_{CFE}(t_n)\) y duraciones
-  Log-Normales, calentándose hacia \(T_{amb}(t_n)\) con tasa \(k_{off}\)
-  y volatilidad \(\sigma_{off}\)).
+  \(E_a > 0\) es la \textbf{energía de activación}
+  (\(\text{J}\cdot\text{mol}^{-1}\)), que representa la barrera
+  energética mínima necesaria para romper la estabilidad conformacional
+  del antígeno{[}cite: 2270{]}.
 \item
-  \textbf{Saltos por aperturas de puerta \(\Delta J_n\):} Activos en
-  días hábiles con suministro eléctrico (\(\alpha_n = 1\)) según la tasa
-  \(\lambda_{puerta}(t_n)\) de cada escenario (nula en A; vespertina en
-  B; matutina y vespertina en C) y choques térmicos normales truncados
-  \(\gamma_{n,j} \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\).
-\item
-  \textbf{Degradación de Arrhenius e inventario:} Acumula el daño
-  térmico cuando \(Y_n > 8^\circ\text{C}\) (\(E_a = 85\text{ kJ/mol}\))
-  y actualiza el inventario físico de vacunas (capacidad máxima
-  \(I_{max} = 5,000\) dosis y punto de reorden \(I_{reorden} = 1,000\)
-  dosis).
+  \(R = 8.314\,\text{J}\cdot\text{mol}^{-1}\cdot\text{K}^{-1}\) es la
+  \textbf{constante universal de los gases ideales}.
 \end{itemize}
 
-La estructura completa para simular las \(M = 5,000\) trayectorias
-anuales se detalla en el alg.~\ref{alg-simulacion-termodinamica-mc}.
+\end{definition}
 
-\begin{algorithm}[]\protect\hypertarget{alg-simulacion-termodinamica-mc}{}\label{alg-simulacion-termodinamica-mc}
+En los modelos deterministas clásicos de estabilidad acelerada, la
+temperatura se asume constante, lo que reduce la
+Ecuación~\ref{eq-cinetica-primer-orden} a un decaimiento exponencial
+simple \(P(t) = P(0)e^{-k(T_K)t}\)
+(\citeproc{ref-yoshioka2000stability}{Yoshioka y Stella 2000}). Sin
+embargo, en una unidad de salud real, la temperatura interna \(T(t)\) es
+un proceso estocástico gobernado por la ecuación diferencial estocástica
+híbrida (Ecuación~\ref{eq-ede-operativa-teorica}).
 
-~
+Al acoplar la trayectoria estocástica \(T(t)\) dentro de la
+Ecuación~\ref{eq-arrhenius-teorica}, la tasa de degradación \(k(T(t))\)
+se convierte en un proceso estocástico adaptado a la filtración
+\(\{\mathcal{F}_t\}_{t \ge 0}\) {[}Y. H. García
+(\citeproc{ref-control2026vaccine}{2026}){]}{[}cite: 2271{]}.
+Considerando que el daño farmacológico se activa únicamente cuando la
+temperatura supera el umbral normativo superior
+(\(T(t) > 8^\circ\text{C}\)) tras superar el periodo de inercia térmica
+del vial, la fracción de biológico degradada en un subintervalo temporal
+\([t_n, t_{n+1}]\) de longitud \(\Delta t\) se determina mediante:
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 0\tabcolsep) * \real{1.0000}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-\textbf{Simulación de Monte Carlo mediante Euler-Maruyama híbrido para
-el modelo termodinámico de vacunas}
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-1: \textbf{1)} Definir el horizonte anual \(T_{max} = 8784\text{ h}\),
-el paso de discretización \(\Delta t = 5/60\text{ h}\), el número de
-nodos \(N = T_{max}/\Delta t = 105,408\) y el número de realizaciones de
-Monte Carlo \(M = 5,000\). Cargar la serie climática diaria
-\(T_{media}\) y construir el vector determinista \(T_{amb}(t_n)\) y el
-calendario de días inhábiles para todo \(n = 0, 1, \dots, N\). \\
-2: \\
-3: \textbf{2)} Fijar los parámetros termodinámicos
-(\(\theta_{set} = 5.0^\circ\text{C}\), \(k_{on}\), \(k_{off}\),
-\(\sigma_{on}\), \(\sigma_{off}\)), los parámetros de salto
-(\(\lambda_{puerta}(t)\), \(\mu_\gamma = 0.76^\circ\text{C}\),
-\(\sigma_\gamma = 0.20^\circ\text{C}\),
-\(\gamma_{min} = 0.16^\circ\text{C}\)), la energía de activación de
-Arrhenius (\(E_a = 85\text{ kJ/mol}\)) y los parámetros de inventario
-(\(I_{max} = 5,000\), \(I_{reorden} = 1,000\)). \\
-4: \\
-5: \textbf{3)} Ejecutar el bucle externo de simulación de Monte Carlo
-sobre las \(M\) trayectorias independientes: \\
-6: \(\quad\) \textbf{para} \(k = 1, 2, \dots, M\) \textbf{hacer} \\
-7: \(\qquad\) Inicializar la temperatura interna
-\(Y_0^{(k)} = \theta_{set} = 5.0^\circ\text{C}\), el inventario
-\(I_0^{(k)} = I_{max}\), la vida útil remanente del lote
-\(V_0^{(k)} = 100\%\) y las mermas acumuladas
-\(M_{merma}^{(k)} = 0\). \\
-8: \(\qquad\) Generar la trayectoria anual del régimen eléctrico
-\(\left\{\alpha_n^{(k)}\right\}_{0 \le n \le N} \in \{1, 2\}\) simulando
-los tiempos de ocurrencia de fallas de la CFE mediante el Proceso de
-Poisson No Homogéneo con intensidad \(\lambda_{CFE}(t_n)\) y duraciones
-de apagón Log-Normales estacionales. \\
-9: \(\qquad\) Resolver recursivamente la trayectoria termodinámica y
-logística en la malla temporal: \\
-10: \(\qquad\) \textbf{para} \(n = 0, 1, \dots, N - 1\)
-\textbf{hacer} \\
-11: \(\qquad\quad\) Generar \(Z_n^{(k)} \sim \mathcal{N}(0, 1)\)
-independiente y calcular el incremento Browniano:
-\(\Delta W_n^{(k)} = \sqrt{\Delta t}\, Z_n^{(k)}\). \\
-12: \(\qquad\quad\) \textbf{si} \(\alpha_n^{(k)} = 1\) (suministro
-eléctrico activo) \textbf{entonces} \\
-13: \(\qquad\qquad\) Evaluar la deriva activa
-\(b_n^{(k)} = -k_{on}\left(Y_n^{(k)} - \theta_{set}\right)\) y la
-difusión \(\sigma_n^{(k)} = \sigma_{on}\). \\
-14: \(\qquad\qquad\) Evaluar la tasa de apertura
-\(\lambda_n = \lambda_{puerta}(t_n)\) según el escenario operativo (A, B
-o C) y el calendario hábil. \\
-15: \(\qquad\qquad\) Simular el número de aperturas
-\(\Delta N_n^{(k)} \sim \text{Poisson}(\lambda_n \Delta t)\). \\
-16: \(\qquad\qquad\) \textbf{si} \(\Delta N_n^{(k)} > 0\)
-\textbf{entonces} \\
-17: \(\qquad\qquad\quad\) Generar \(\Delta N_n^{(k)}\) variables
-normales independientes
-\(\xi_j \sim \mathcal{N}(\mu_\gamma, \sigma_\gamma^2)\), truncar
-\(\gamma_{n, j} = \max(\gamma_{min}, \xi_j)\) y sumar el choque térmico:
-\(\Delta J_n^{(k)} = \sum_{j=1}^{\Delta N_n^{(k)}} \gamma_{n, j}\). \\
-18: \(\qquad\qquad\) \textbf{en caso contrario} \\
-19: \(\qquad\qquad\quad\) Asignar \(\Delta J_n^{(k)} = 0\). \\
-20: \(\qquad\qquad\) \textbf{fin si} \\
-21: \(\qquad\quad\) \textbf{en caso contrario} (\(\alpha_n^{(k)} = 2\),
-corte de energía eléctrica) \\
-22: \(\qquad\qquad\) Evaluar la deriva pasiva
-\(b_n^{(k)} = -k_{off}\left(Y_n^{(k)} - T_{amb}(t_n)\right)\), la
-difusión \(\sigma_n^{(k)} = \sigma_{off}\) y anular los saltos por
-apertura: \(\Delta J_n^{(k)} = 0\). \\
-23: \(\qquad\quad\) \textbf{fin si} \\
-24: \(\qquad\quad\) Actualizar la temperatura interna:
-\(Y_{n+1}^{(k)} = Y_n^{(k)} + b_n^{(k)} \Delta t + \sigma_n^{(k)} \Delta W_n^{(k)} + \Delta J_n^{(k)}\). \\
-25: \(\qquad\quad\) \textbf{si} \(Y_{n+1}^{(k)} > 8.0^\circ\text{C}\)
-\textbf{entonces} \\
-26: \(\qquad\qquad\) Calcular el desgaste cinético de Arrhenius en el
-paso \(\Delta t\) y descontar la viabilidad biológica remanente
-\(V_{n+1}^{(k)}\) del lote almacenado. \\
-27: \(\qquad\quad\) \textbf{fin si} \\
-28: \(\qquad\quad\) Actualizar el inventario \(I_{n+1}^{(k)}\)
-descontando la demanda clínica de dosis, registrando mermas si
-\(V_{n+1}^{(k)} \le 0\) y ejecutando el reabastecimiento a \(I_{max}\)
-al cruzar el umbral \(I_{reorden}\). \\
-29: \(\qquad\) \textbf{fin para} \\
-30: \(\qquad\) Almacenar las métricas anuales de la trayectoria
-\(k\)-ésima: funcional terminal \(g\left(Y^{(k)}\right)\), horas de
-excursión térmica y dosis totales mermadas \(M_{merma}^{(k)}\). \\
-31: \(\quad\) \textbf{fin para} \\
-32: \\
-33: \textbf{4)} Calcular los estimadores de Monte Carlo
-\(\hat{\mu}_M = \frac{1}{M}\sum_{k=1}^M g\left(Y^{(k)}\right)\), sus
-intervalos de predicción y el Valor en Riesgo (\(\text{VaR}_\alpha\)), y
-retornar las distribuciones empíricas de riesgo térmico y pérdida de
-biológicos. \\
-\end{longtable}
+\begin{equation}\phantomsection\label{eq-fraccion-dano-paso}{
+\Delta D_n = \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}},
+}\end{equation}
 
-\end{algorithm}
+donde \(\mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}}\) es la función
+indicadora de excursión térmica.
 
-\chapter{Fundamentos Teóricos
-Epidemiológicos}\label{fundamentos-teuxf3ricos-epidemioluxf3gicos}
+\section{Dinámica de Inventario y Demanda
+Epidemiológica}\label{sec-fundamento-inventario-seir}
+
+La evaluación del riesgo en la red de frío no puede limitarse a
+cuantificar la pérdida porcentual teórica de un vial aislado, sino que
+debe traducirse en el número real de dosis destruidas (mermas físicas)
+durante la operación de una clínica de vacunación
+(\citeproc{ref-control2026vaccine}{Y. H. García 2026}). Recientemente,
+en la literatura de investigación de operaciones aplicada a la salud
+pública (\citeproc{ref-control2026vaccine}{Y. H. García 2026}), se ha
+demostrado la importancia de integrar la degradación térmica de
+Arrhenius con la dinámica estocástica del inventario de vacunas y la
+demanda generada por brotes epidémicos.
+
+En el marco epidemiológico clásico, la propagación de una enfermedad
+infecciosa en una población se modela mediante sistemas compartimentales
+de tipo \textbf{SEIR} (\emph{Susceptibles \(S\), Expuestos \(E\),
+Infectados \(I_{inf}\) y Recuperados \(R_{rec}\)}), donde la campaña de
+vacunación busca transferir individuos del compartimento susceptible
+\(S(t)\) hacia el compartimento inmunizado \(R_{rec}(t)\) a una tasa de
+vacunación \(u(t)\) (\citeproc{ref-control2026vaccine}{Y. H. García
+2026}). Como se establece en (\citeproc{ref-control2026vaccine}{Y. H.
+García 2026}), el despliegue efectivo de dicha tasa de inmunización
+\(u(t)\) está restringido físicamente por el nivel de inventario de
+vacunas viables \(I(t) \ge 0\) disponible en el centro de salud en cada
+instante \(t\).
+
+De acuerdo con la formulación de (\citeproc{ref-control2026vaccine}{Y.
+H. García 2026}), la evolución temporal del inventario de biológicos
+\(I(t)\) en un centro de almacenamiento está regida por la interacción
+simultánea de tres flujos operativos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Demanda clínica y epidemiológica (\(u(t)\)):} Representa la
+  extracción de dosis para su aplicación en la población. En condiciones
+  operativas regulares (apego normativo), esta demanda responde a los
+  esquemas de vacunación programados y campañas estacionales; en cambio,
+  durante una contingencia epidemiológica o brote infeccioso, la
+  urgencia por inmunizar a la población susceptible incrementa
+  drásticamente la frecuencia de extracción y rotación del biológico
+  (\citeproc{ref-control2026vaccine}{Y. H. García 2026}).
+\item
+  \textbf{Merma por degradación impulsada por la temperatura:} Cuando
+  ocurre una ruptura de la cadena de frío (\(T(t) > 8^\circ\text{C}\)),
+  la tasa cinética de Arrhenius \(k(T(t))\) actúa directamente sobre el
+  volumen total de dosis almacenadas en ese instante
+  (\citeproc{ref-control2026vaccine}{Y. H. García 2026}). En
+  consecuencia, el número de dosis destruidas en el intervalo
+  \(\Delta t\) es proporcional al inventario activo, esto es,
+  \(M_n = \Delta D_n \cdot I(t_n)\). Esta relación explica por qué una
+  excursión térmica que coincide con un refrigerador lleno a su máxima
+  capacidad produce pérdidas materiales severas, mientras que una
+  rotación oportuna del inventario mitiga la exposición al riesgo
+  eléctrico.
+\item
+  \textbf{Reabastecimiento logístico bajo incertidumbre
+  (\(R_{rep}(t)\)):} Conforme el consumo clínico y las mermas reducen
+  las existencias hasta alcanzar un umbral crítico o punto de reorden
+  \(I_{reorden}\), se activa el suministro de nuevos lotes hasta
+  restablecer la capacidad máxima del equipo \(I_{max}\), proceso que en
+  escenarios de alta demanda o contingencia involucra arribos y
+  aperturas aleatorias modeladas mediante procesos de Poisson
+  (\citeproc{ref-control2026vaccine}{Y. H. García 2026}).
+\end{enumerate}
+
+Expresado en tiempo discreto sobre la malla de simulación
+\(t_n = n\Delta t\), el balance acoplado del inventario físico
+\(I_n = I(t_n)\) y la merma acumulada obedece la relación recursiva
+(\citeproc{ref-control2026vaccine}{Y. H. García 2026}):
+
+\begin{equation}\phantomsection\label{eq-balance-inventario-general}{
+I_{n+1} = I_n - C_n - \Delta D_n (I_n - C_n) + R_n,
+}\end{equation}
+
+donde \(C_n\) denota las dosis extraídas para vacunación en el paso
+\(n\), \(\Delta D_n (I_n - C_n)\) cuantifica las dosis inutilizadas por
+degradación térmica de Arrhenius (Ecuación~\ref{eq-fraccion-dano-paso}),
+y \(R_n = (I_{max} - I_n)\mathbf{1}_{\{I_n \le I_{reorden}\}}\)
+representa la orden de reabastecimiento jurisdiccional. Con este
+acoplamiento teórico queda formalizado el vínculo completo entre el
+modelo termodinámico estocástico
+(Ecuación~\ref{eq-ede-operativa-teorica}) y las métricas de impacto
+logístico y epidemiológico que se calibrarán y simularán en los
+capítulos siguientes.
 
 \part{Modelo Matemático}
 
@@ -5583,7 +5583,7 @@ de una sola trayectoria. Para medir rigurosamente el riesgo operativo y
 estimar el valor esperado \(\mathbb{E}[g(T(t))]\) de los estadísticos de
 interés cuya distribución analítica es desconocida, el modelo completo
 se integró dentro de un esquema de simulación de Montecarlo
-(\citeproc{ref-wang2016numerical}{Wang 2016};
+(\citeproc{ref-giles2008multilevel}{Giles 2008};
 \citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}).
 
 En cada realización anual \(k\), el algoritmo evalúa la trayectoria
@@ -6796,6 +6796,10 @@ Asmussen, Søren. 2003. {«Applied Probability and Queues»}. En, 2nd ed.,
 51:39-59. Stochastic Modelling y Applied Probability. New York, NY:
 Springer-Verlag. \url{https://doi.org/10.1007/0-387-21525-5_2}.
 
+\bibitem[\citeproctext]{ref-atkins2018physical}
+Atkins, Peter, Julio de Paula, y James Keeler. 2018. \emph{Atkins'
+Physical Chemistry}. 11.ª ed. Oxford: Oxford University Press.
+
 \bibitem[\citeproctext]{ref-nist2015thermal}
 Chojnacky, Michal, Wyatt Miller, Dean Ripple, y Gregory Strouse. 2010.
 {«Thermal Analysis of Refrigeration Systems Used for Vaccine Storage»}.
@@ -6815,6 +6819,11 @@ appliances»}. En \emph{2013 4th International Youth Conference on Energy
 \bibitem[\citeproctext]{ref-efron1993introduction}
 Efron, Bradley, y Robert J. Tibshirani. 1993. \emph{An Introduction to
 the Bootstrap}. Boca Raton, FL: Chapman; Hall/CRC.
+
+\bibitem[\citeproctext]{ref-giles2008multilevel}
+Giles, Michael B. 2008. {«Multilevel {Monte Carlo} Path Simulation»}.
+\emph{Operations Research} 56 (3): 607-17.
+\url{https://doi.org/10.1287/opre.1070.0496}.
 
 \bibitem[\citeproctext]{ref-karatzas1998brownian}
 Karatzas, Ioannis, y Steven E. Shreve. 1998. \emph{Brownian Motion and
@@ -6901,11 +6910,23 @@ Wang, Liguo. 2016. {«Numerical Solutions of Stochastic Differential
 Equations»}. PhD Dissertation, The University of Tennessee, Knoxville.
 \url{https://trace.tennessee.edu/utk_graddiss/3974}.
 
+\bibitem[\citeproctext]{ref-control2026vaccine}
+Y. H. García, J. A. Minjárez-Sosa, S. Díaz-Infante. 2026. {«Stochastic
+optimal control of vaccine inventory during epidemics: integrating
+{SEIR} dynamics with temperature-driven degradation and uncertain
+replenishment»}. \emph{Computational and Applied Mathematics}.
+\url{https://doi.org/10.1007/s40314-025-03498-z}.
+
 \bibitem[\citeproctext]{ref-yin2010hybrid}
 Yin, G. George, y Chao Zhu. 2010. \emph{Hybrid Switching Diffusions:
 Properties and Applications}. Vol. 63. Stochastic Modelling y Applied
 Probability. New York, NY: Springer.
 \url{https://doi.org/10.1007/978-1-4419-1105-6}.
+
+\bibitem[\citeproctext]{ref-yoshioka2000stability}
+Yoshioka, Sumie, y Valentino J. Stella. 2000. \emph{Stability of Drugs
+and Dosage Forms}. Boston, MA: Springer.
+\url{https://doi.org/10.1007/b114222}.
 
 \end{CSLReferences}
 
