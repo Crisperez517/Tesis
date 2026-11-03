@@ -1,24 +1,35 @@
 project:
   type: book
+  output-dir: _book
 
 execute: 
   freeze: auto
 
+website:
+  favicon: FCFMLOGO.png
+  reader-mode: true
+  search:
+    location: sidebar
+    type: overlay
+  comments:
+    hypothesis: true
+
 book:
-  title: "Tesis"
-  author: 
-      - name: "Cristóbal Pérez González"
-        email: "cristobal.perez70@unach.mx"
-      - name: "Dr. Yofre Hernán García Gómez"
-        email: "yofre.garcia@unach.mx"
+  title: "EDES"
+  reader-mode: true
   language: es
-  date: "today"
+  date: today
+  image: FCFMLOGO.png
   downloads: [pdf]
-  search: true
-  repo-url: https://github.com/Crisperez517/Tesis.git
-  page-navigation: true 
+  favicon: FCFMLOGO.png
   sidebar:
-    logo: LOGOunach.jpeg
+    logo: LOGO.png
+    style: floating
+    collapse-level: 2
+    border: true
+    search: true
+  repo-url: https://github.com/Crisperez517/Tesis.git
+  page-navigation: true
   chapters:
     - index.qmd
     
@@ -44,6 +55,8 @@ comments:
 
 bibliography: referencias.bib
 
+number-sections: true
+
 format:
   html:
     theme:
@@ -59,12 +72,22 @@ format:
 
   pdf:
     lang: es
+    include-in-header:
+      - packa.tex
+      - text: |
+          \usepackage{graphicx}
+          \usepackage{float}
+          \usepackage{amsmath}
+    template-partials:
+      - before-body.tex 
     documentclass: scrreprt
-    papersize: letter
-    institution: Benemerita Universidad Autónoma de Chiapas
+    papersize: us-letter
+    titlegraphic: FCFMLOGO.png
+    institution: Universidad Autónoma de Chiapas
+    email: cristobal.perez70@unach.mx
     keep-tex: true
     pdf-engine: lualatex
-    link-citations: true
-    number-sections: true
-    colorlinks: true
-    titlegraphic: LOGOunach.jpeg
+    toc: true
+    code-fold: true
+    fig-align: center
+    fig-cap-location: bottom
