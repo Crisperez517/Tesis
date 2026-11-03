@@ -66,32 +66,64 @@ Para la duración de estos cortes, utilizamos una distribución Log-Normal calib
 * **Temporada de Calor:** $\mu = 0.9627, \ \sigma = 0.5106$ 
 * **Temporada de Lluvias:** $\mu = 0.4668, \ \sigma = 0.3372$ 
 
-## Precalibración Vectorizada de Eventos Externos
+## Precalibración de Eventos Externos
 
-Antes de resolver numéricamente la Ecuación Diferencial Estocástica para la temperatura, el algoritmo ejecuta un módulo de precalculo vectorizado para optimizar los tiempos de ejecución. En esta fase, el programa simula de manera independiente las variables externas que afectarán al equipo institucional a lo largo del año.
+Antes de resolver numéricamente la ecuación diferencial estocástica para la temperatura interna del equipo, primero se simulan las trayectorias discretas de las perturbaciones externas que actúan sobre el equipo a lo largo de la malla temporal $t_n = n\Delta t, \ n = 0, 1, \dots, N$, con $\Delta t = 5/60\text{ horas}$ y $N = 105,408$ pasos para cubrir las $T_{max} = 8784\text{ horas}$ del año.
 
-Para el suministro eléctrico, el algoritmo recorre secuencialmente los 366 días del año. En cada jornada, consulta la intensidad estacional de la CFE y realiza un muestreo aleatorio de Poisson para determinar cuántas fallas eléctricas ocurrirán. Si el resultado es mayor a cero, selecciona una hora de inicio distribuida de manera uniforme entre las 0 y las 24 horas del día, y realiza un muestreo Log-Normal condicionado a la época del año para determinar la duración del corte. Con estos datos, el algoritmo modifica el vector de estado eléctrico $S(t)$, cambiando su valor de 1 (con energía) a 0 (falla eléctrica) durante el intervalo afectado.
+Siguiendo el esquema de discretización para cadenas de Markov en tiempo continuo (@sec-numerico-switching), el algoritmo recorre secuencialmente los 366 días del año evaluando la intensidad estacional $\lambda_{cfe}(t)$ para determinar el número de fallas eléctricas diarias mediante el proceso de Poisson. Cuando ocurre un evento (apagón), se asigna su hora de inicio de manera uniforme en el día y se calcula su duración a partir de la distribución Log-Normal correspondiente a la estación climática @tbl-parametros-lognormal. Con ello se construye el vector de estado eléctrico discreto $S_n = S(t_n) \in \{0, 1\}$, el cual toma el valor $S_n = 1$ cuando hay suministro eléctrico (régimen $\alpha_n = 1$) y $S_n = 0$ durante un corte de energía (régimen $\alpha_n = 2$).
 
-Por otro lado, para modelar las aperturas de la puerta del equipo, se genera un vector binario de eventos evaluado en el dominio de tiempo discreto $t \in \{0, \Delta t, 2\Delta t, \dots, 8784\}$ horas. Dado que el paso de integración se fijó en $\Delta t = 5/60$ horas (5 minutos), este conjunto se particiona exactamente en 105,408 iteraciones para cubrir la totalidad del año. Este vector se construye de manera dinámica dependiendo del modelo evaluado: se mantiene nulo para el Escenario A, combina las aperturas matutinas fijas con la probabilidad vespertina ($\lambda_{tarde} \cdot \Delta t$) para el Escenario B, y adiciona la perturbación logística de resurtidos ($\lambda_{resurtido} \cdot \Delta t$) para el Escenario C.
+De forma análoga, la ocurrencia de aperturas de puerta se discretiza sobre los nodos $t_n$ de acuerdo con el esquema regular para procesos de Poisson compuestos (@sec-numerico-saltos), generando en cada subintervalo $[t_n, t_{n+1})$ el conteo de eventos $\Delta N_n \sim \text{Poisson}(\lambda_{puerta}(t_n)\Delta t)$ según la función de intensidad $\lambda_{puerta}(t)$ definida para cada escenario operativo @sec-perturbaciones-discretas.
 
-Posteriormente, el algoritmo aplica una regla estricta de control operativo: multiplica el vector de aperturas por la función de estado eléctrico $S(t)$, evaluada en el mismo dominio de $[0, 8784]$ horas. Esto garantiza que si el centro de almacenamiento de vacunas se encuentra bajo un apagón en un instante específico ($S(t)=0$), la probabilidad de apertura en ese mismo instante de tiempo $t$ se reduce a cero de forma absoluta. Esto refleja el protocolo normativo real que prohíbe abrir el equipo sin energía eléctrica para evitar la pérdida acelerada de frío.
+Posteriormente, el algoritmo aplica una regla estricta de control operativo: multiplica los eventos de apertura por el estado eléctrico $S_n$. Esto garantiza que, si la clínica se encuentra bajo un corte de suministro eléctrico ($S_n = 0$), el término de salto se anule por completo ($\Delta J_n = 0$), reflejando el protocolo normativo que prohíbe abrir el refrigerador durante un apagón para evitar la pérdida acelerada de frío. En los instantes válidos con energía ($S_n = 1$), a cada apertura $j = 1, \dots, \Delta N_n$ se le asocia una magnitud de salto térmico independiente $\gamma_{n, j}$ extraída de una distribución Normal truncada (@eq-salto-termico), conformando asi el incremento de salto acumulado $\Delta J_n$ (@eq-incremento-poisson-compuesto).
 
-Finalmente, los eventos validos de apertura de la puerta del equipo se sustituyen por su respectiva magnitud de impacto térmico ($\gamma_i$), el cual es extraído de una distribución Normal truncada (@eq-salto-termico), finalizando así el vector discreto de saltos térmicos ($Saltos\_Termicos(t)$).
-
-Para validar la correcta precalibración del entorno, ejecutamos una trayectoria anual de prueba fijando una semilla de control (`np.random.seed(42)`). La simulación generó una trayectoria eléctrica idéntica para los tres casos con un total de **68 apagones** en el año, en dónde hubo una notoria diferencia fue en el vector de saltos térmicos: el personal registró **0 aperturas** para el Escenario A (Línea Base), **493 aperturas** para el Escenario B (Apego Normativo), y **995 aperturas** debido a la saturación logística en el Escenario C (Contingencia).
+Para verificar la generación de estas perturbaciones externas, se ejecutó una trayectoria anual de control fijando una semilla de aleatoriedad (`np.random.seed(42)`). La simulación generó una trayectoria eléctrica idéntica para los tres escenarios operativos con un total de **68 apagones** en el año, mientras que en el proceso de aperturas de puerta se registraron **0 aperturas** en el Escenario A (Línea Base), **493 aperturas** en el Escenario B (Apego Normativo) y **995 aperturas** en el Escenario C (Contingencia).
 
 ## Resolución Numérica de la Ecuación Diferencial Estocástica (EDE)
 
-Con los vectores de perturbaciones externas precalculados, el algoritmo ejecuta la resolución de la evolución de la temperatura interna del equipo y extrae las métricas de seguridad termodinámica para el equipo institucional.
+Una vez definidos los procesos externos en la malla temporal, se procede a aproximar numéricamente la evolución de la temperatura interna del equipo $T(t)$ determinada por la ecuación diferencial estocástica híbrida de nuestro modelo termodinámico (@eq-ede-operativa).
 
-### Integración Numérica por Cambios de Régimen
+### Integración Numérica por Cambios de Régimen y Saltos
 
-Para avanzar en el tiempo, el algoritmo recorre cada iteración $i \in [1, 105407]$. El índice arranca en 1 porque el primer valor corresponde a la condición inicial térmica del equipo ($T_0 = 5.0^\circ\text{C}$). En cada paso, se evalúa el estado del suministro eléctrico previo ($S_{t}[i-1]$), activando un cambio de régimen dinámico (*regime-switching*):
+Para calcular la trayectoria discreta $\{T_n\}_{0 \le n \le N}$ a partir de la condición inicial $T_0 = 5.0^\circ\text{C}$, se aplica directamente el esquema numérico híbrido de Euler-Maruyama con cambios de régimen y saltos desarrollado en el @alg-em-hibrido-general (@sec-numerico-saltos). En cada paso temporal $n = 0, 1, \dots, N - 1$, el algoritmo evalúa el estado del suministro eléctrico $S_n$ y cambia dinámicamente los coeficientes de la ecuación (@sec-numerico-switching):
 
-* Si el suministro está activo ($S=1$), se aplican los parámetros de convección forzada ($\kappa_{on}, \sigma_{on}$), llevando la temperatura hacia el objetivo del termostato ($\theta = 5.0^\circ\text{C}$) y sumando el salto térmico $\gamma_i$ si la puerta fue manipulada.
-* Si el suministro presenta una falla ($S=0$), se aplican los parámetros de inercia térmica pasiva ($\kappa_{off}, \sigma_{off}$), provocando que la temperatura interna sea atraída lentamente hacia la temperatura ambiente exterior de Tuxtla Gutiérrez ($T_{amb}[i-1]$).
+* **Con suministro eléctrico ($S_n = 1$, régimen $\alpha_n = 1$):** Se activan los parámetros de enfriamiento por convección forzada ($\kappa_{on} = 0.1154\,\text{h}^{-1}$ y $\sigma_{on} = 0.4804$), llevando la temperatura interna hacia el objetivo del termostato ($\theta = 5.0^\circ\text{C}$) e incorporando el salto térmico acumulado $\Delta J_n$ producido por las aperturas de puerta en ese intervalo.
+* **Sin suministro eléctrico ($S_n = 0$, régimen $\alpha_n = 2$):** Se activan los parámetros de inercia térmica pasiva ($\kappa_{off} = 0.00232\,\text{h}^{-1}$ y $\sigma_{off} = 0.048$), haciendo que la temperatura interna sea atraída lentamente hacia la temperatura ambiente exterior $T_{amb}(t_n)$, sin saltos por apertura ($\Delta J_n = 0$).
 
-La solución numérica se ejecuta mediante el esquema de Euler-Maruyama desarrollado en la @sec-euler-maruyama. Es importante destacar que, dado que las volatilidades térmicas ($\sigma_{on}$ y $\sigma_{off}$) actúan como ruidos aditivos constantes (independientes del estado de la temperatura $T(t)$), sus derivadas parciales respecto al estado son nulas ($\frac{\partial \sigma}{\partial x} = 0$), con lo cual por propiedades del cálculo estocástico, el término de corrección de segundo orden del método de Milstein se multiplica por cero y desaparece, reduciéndose de forma exacta al esquema de Euler-Maruyama empleado en esta simulación.
+Como se demostró en la @sec-numerico y en la @sec-numerico-saltos, dado que los coeficientes de difusión $\sigma_{on}$ y $\sigma_{off}$ representan ruido aditivo constante respecto al estado $T(t)$, sus derivadas parciales espaciales son nulas ($\frac{\partial \sigma}{\partial T} = 0$). En consecuencia, el término corrector de segundo orden del esquema de Milstein (@eq-esquema-milstein) se anula, por lo que el esquema híbrido de Euler-Maruyama empleado alcanza la misma precisión en la componente difusiva y tiene garantizada su convergencia fuerte de orden $\gamma = 0.5$ por el @thm-em-switching. 
+
+El procedimiento detallado para simular una trayectoria anual de la temperatura interna del refrigerador se presenta en el @alg-simulacion-ede-termodinamica.
+
+::: {#alg-simulacion-ede-termodinamica}
+
+| **Simulación de una trayectoria anual para la EDE termodinámica del refrigerador Haier HBC-150** |
+|:---|
+| 1: **1)** Definir el horizonte anual $T_{max} = 8784\text{ h}$ y dividir el dominio temporal $[0, T_{max}]$ en $N + 1$ nodos equidistantes $t_0, t_1, \dots, t_N$ con tamaño de paso $\Delta t = 5/60\text{ h}$ ($N = 105,408$) y $t_n = n \Delta t$. Evaluar en la malla la temperatura ambiente exterior $T_{amb}(t_n)$, la tasa de fallas eléctricas $\lambda_{cfe}(t_n)$ y la función de intensidad de aperturas $\lambda_{puerta}(t_n)$[cite: 2270]. |
+| 2: |
+| 3: **2)** Asignar la condición inicial $T_0 = 5.0^\circ\text{C}$, la temperatura del termostato $\theta = 5.0^\circ\text{C}$, los parámetros de operación activa ($\kappa_{on} = 0.1154\text{ h}^{-1}$, $\sigma_{on} = 0.4804$), los parámetros de operación pasiva ($\kappa_{off} = 0.00232\text{ h}^{-1}$, $\sigma_{off} = 0.048$) y la distribución Normal truncada de salto térmico $\gamma \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))$[cite: 2270]. |
+| 4: |
+| 5: **3)** Generar la trayectoria discreta del estado eléctrico $\{S_n\}_{0 \le n \le N} \in \{0, 1\}$ simulando los inicios de falla mediante el Proceso de Poisson No Homogéneo con tasa $\lambda_{cfe}(t_n)$ y sus duraciones mediante la distribución Log-Normal estacional correspondiente[cite: 2270]. |
+| 6: |
+| 7: **4)** Resolver recursivamente la ecuación diferencial estocástica en cada subintervalo temporal: |
+| 8: $\quad$ **Para** $n = 0, 1, \dots, N - 1$ **Hacer** |
+| 9: $\qquad$ Generar una variable aleatoria normal estándar independiente $Z_n \sim \mathcal{N}(0, 1)$ y calcular el incremento Browniano: $\Delta W_n = \sqrt{\Delta t}\, Z_n$. |
+| 10: $\qquad$ **Si** $S_n = 1$ (suministro eléctrico activo, régimen $\alpha_n = 1$) **Entonces** |
+| 11: $\qquad\quad$ Evaluar los coeficientes de enfriamiento activo: $b_n = -\kappa_{on}(T_n - \theta)$ y $\sigma_n = \sigma_{on}$[cite: 2270]. |
+| 12: $\qquad\quad$ Generar el número de aperturas de puerta en el paso actual: $\Delta N_n \sim \text{Poisson}(\lambda_{puerta}(t_n)\Delta t)$[cite: 2270]. |
+| 13: $\qquad\quad$ **Si** $\Delta N_n > 0$ **Entonces** |
+| 14: $\qquad\qquad$ Generar $\Delta N_n$ magnitudes de salto térmico independientes $\gamma_{n, 1}, \dots, \gamma_{n, \Delta N_n} \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))$ y calcular el salto térmico acumulado: $\displaystyle \Delta J_n = \sum_{j=1}^{\Delta N_n} \gamma_{n, j}$. |
+| 15: $\qquad\quad$ **En Caso Contrario** |
+| 16: $\qquad\qquad$ Asignar $\Delta J_n = 0$. |
+| 17: $\qquad\quad$ **Fin Si** |
+| 18: $\qquad$ **En Caso Contrario** ($S_n = 0$, falla eléctrica de la CFE, régimen $\alpha_n = 2$) |
+| 19: $\qquad\quad$ Evaluar los coeficientes de calentamiento pasivo: $b_n = -\kappa_{off}(T_n - T_{amb}(t_n))$ y $\sigma_n = \sigma_{off}$[cite: 2270]. |
+| 20: $\qquad\quad$ Anular las aperturas de puerta por protocolo de contingencia: $\Delta J_n = 0$[cite: 2270]. |
+| 21: $\qquad$ **Fin Si** |
+| 22: $\qquad$ Actualizar la temperatura interna del equipo: $T_{n+1} = T_n + b_n \Delta t + \sigma_n \Delta W_n + \Delta J_n$[cite: 2270]. |
+| 23: $\quad$ **Fin Para** |
+| 24: |
+| 25: **5)** Retornar la trayectoria anual aproximada de la temperatura interna: $\{T_0, T_1, \dots, T_N\}$[cite: 2270]. |
+
+:::
 
 ### Resultados de Seguridad Termodinámica {#sec-resultados-seguridad}
 
@@ -180,14 +212,16 @@ No obstante, cuando el ritmo logístico sale de control (Escenario C), esta prot
 
 ## Estructura de la Simulación de Montecarlo
 
-Con el fin de obtener validez científica y no depender del resultado de un solo escenario al azar, el algoritmo completo se incluyo dentro de una función para simular años completos de manera repetitiva. Para optimizar drásticamente la velocidad de ejecución y evitar el desbordamiento de la memoria RAM del sistema durante el análisis masivo, el programa se diseñó para extraer y almacenar únicamente métricas estadísticas clave en cada iteración, omitiendo la conservación de los arreglos gigantes de datos por cada año evaluado. 
+Dado que el @alg-simulacion-ede-termodinamica junto con el modelo de inventario producen únicamente una realización anual aleatoria, no es posible evaluar la confiabilidad del sistema a partir de una sola trayectoria. Para medir rigurosamente el riesgo operativo y estimar el valor esperado $\mathbb{E}[g(T(t))]$ de los estadísticos de interés cuya distribución analítica es desconocida, el modelo completo se integró dentro de un esquema de simulación de Montecarlo [@wang2016numerical; @platen2010numerical].
 
-Entre las métricas extraídas de esta función se incluyen:
+En cada realización anual $k$, el algoritmo evalúa la trayectoria simulada y extrae las siguientes métricas estadísticas:
 
-* **Termodinámica:** Horas acumuladas y conteo de las rupturas de la cadena de frío ($T(t)>8^\circ\text{C}$ y $T(t)<2^\circ\text{C}$), así como la vigilancia del riesgo crítico de congelación ($T(t)<0^\circ\text{C}$).
-* **Logística y Riesgo:** El día exacto en que ocurrió la primera falla crítica, el total de dosis perdidas, el porcentaje anual de pérdida y la merma por mes para evaluar la estacionalidad del riesgo.
+- **Termodinámica:** Horas acumuladas y conteo de las rupturas de la cadena de frío ($T(t)>8^\circ\text{C}$ y $T(t)<2^\circ\text{C}$), así como la vigilancia del riesgo crítico de congelación ($T(t)<0^\circ\text{C}$).
+- **Logística y Riesgo:** El día exacto en que ocurrió la primera falla crítica, el total de dosis perdidas, el porcentaje anual de pérdida y la merma por mes para evaluar la estacionalidad del riesgo.
 
-Esta función se ejecuta dentro de un bucle de Montecarlo con **5000 simulaciones independientes**, asignando en cada paso una semilla de aleatoriedad indexada para garantizar la reproducibilidad del experimento. Al correr los 5,000 años simulados, el algoritmo elimina las variaciones extremas de los casos individuales y permite que actúe la **Ley de los Grandes Números** [@ross2018first]. Esto provoca que las métricas de control se estabilicen, permitiendo extraer promedios poblacionales realistas sobre el comportamiento del equipo institucional bajo cada uno de los tres escenarios operativos evaluados.
+Este procedimiento se ejecuta de forma iterativa generando $M = 5000$ trayectorias anuales independientes (asignando en cada una semillas de aleatoriedad indexadas para garantizar la reproducibilidad de la simulación), aproximando el valor esperado de cada métrica mediante el promedio muestral $\displaystyle \hat{\mu}_M = \frac{1}{M}\sum_{k=1}^{M} g\left(T^{(k)}\right)$ [@wang2016numerical]. 
+
+De acuerdo con la teoría de convergencia débil (@def-convergencia-debil) y la descomposición del Error Cuadrático Medio en simulaciones de ecuaciones diferenciales estocásticas [@wang2016numerical; @platen2010numerical], la precisión de este estimador depende tanto del sesgo numérico de discretización temporal como de la varianza estadística de muestreo. Por un lado, el tamaño de paso de $5\text{ minutos}$ ($\Delta t = 5/60\text{ h}$) en el esquema de Euler-Maruyama (cuyo orden débil es $\beta = 1.0$) mantiene acotado el sesgo numérico sistemático; por otro lado, al simular $M = 5000$ años independientes, la **Ley de los Grandes Números** [@ross2018first] asegura que el error estándar de muestreo decaiga a razón de $M^{-1/2} \approx 0.0141$ (por debajo del $1.5\%$ de la desviación estándar de cada métrica). Esto elimina el efecto de fluctuaciones atípicas individuales y estabiliza los promedios poblacionales bajo cada uno de los tres escenarios operativos evaluados.
 
 ## Resultados Estadísticos y Análisis de Riesgo
 

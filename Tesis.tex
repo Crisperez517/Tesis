@@ -187,14 +187,14 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -2317,7 +2317,7 @@ por lo que
 \(\boxtimes\)
 
 \chapter{Soluciones Numéricas de Ecuaciones Diferenciales
-Estocásticas}\label{soluciones-numuxe9ricas-de-ecuaciones-diferenciales-estocuxe1sticas}
+Estocásticas}\label{sec-numerico}
 
 En la práctica, la gran mayoría de las ecuaciones diferenciales
 estocásticas carecen de una solución analítica explícita debido a la
@@ -2692,9 +2692,7 @@ de Euler-Maruyama reproduce de manera exacta la actualización del
 esquema de Milstein en la componente difusiva sin requerir el cálculo de
 derivadas parciales espaciales adicionales.
 
-\chapter{DE AQUI}\label{de-aqui}
-
-\subsection{Esquemas Numéricos para EDEs con Cambio de Régimen
+\subsection{Esquemas Numéricos para EDES con Cambio de Régimen
 Markoviano}\label{sec-numerico-switching}
 
 Los métodos de Euler-Maruyama (Ecuación~\ref{eq-esquema-em}) y de
@@ -2720,11 +2718,12 @@ dX(t) = b(t, X(t), \alpha(t))dt + \sigma(t, X(t), \alpha(t))dW(t), \quad (X(0), 
 donde \(\alpha(t) \in \mathcal{M}\) tiene una matriz generadora
 infinitesimal \(Q = (q_{ij})_{m_0 \times m_0}\) que satisface la
 propiedad-\(q\): \(q_{ij} \ge 0\) para todo \(i \neq j\) y
-\(q_{ii} = -\sum_{j \neq i} q_{ij}\). Sobre la partición regular
-\(t_n = n\Delta t\) con paso \(\Delta t = T/N\), la restricción de la
-cadena de Markov a los nodos de la malla, denotada por
-\(\alpha_n = \alpha(t_n)\), define una cadena de Markov homogénea a
-tiempo discreto. La matriz de probabilidades de transición en un paso
+\(\displaystyle q_{ii} = -\sum_{j \neq i} q_{ij}\). Sobre la partición
+regular \(P = (t_0, t_1, \dots, t_N)\), \(t_n = n\Delta t\) con tamaño
+de paso \(\Delta t = T/N\), la restricción de la cadena de Markov a los
+nodos de la malla, denotada por \(\alpha_n = \alpha(t_n)\), define una
+cadena de Markov homogénea a tiempo discreto. La matriz de
+probabilidades de transición en un paso
 \(P(\Delta t) = (P_{ij}(\Delta t))_{m_0 \times m_0}\), donde
 \(P_{ij}(\Delta t) = \mathbb{P}(\alpha_{n+1} = j \mid \alpha_n = i)\),
 está dada exactamente por la exponencial matricial y admite un
@@ -2752,9 +2751,10 @@ equivalente, usando las propiedades de las cadenas de Markov a tiempo
 continuo, se tiene que la trayectoria de \(\alpha(t)\) puede construirse
 de manera exacta en el dominio continuo muestreando tiempos de
 permanencia exponenciales con tasa
-\(\lambda_i = -q_{ii} = \sum_{j \neq i} q_{ij}\) en el estado actual
-\(i\), o bien mediante un Proceso de Poisson No Homogéneo cuando las
-tasas de transición dependen del tiempo \(Q(t)\) (Sección 1.4 y 2.8 de
+\(\displaystyle \lambda_i = -q_{ii} = \sum_{j \neq i} q_{ij}\) en el
+estado actual \(i\), o bien mediante un Proceso de Poisson No Homogéneo
+Definición~\ref{def-poisson-no-homogeneo} cuando las tasas de transición
+dependen del tiempo \(Q(t)\) (Sección 1.4 y 2.8 de
 (\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}); Sección 1.1 de
 (\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010})), y
 posteriormente proyectando el estado activo sobre los nodos \(t_n\).
@@ -2793,38 +2793,35 @@ y la condición de Lipschitz global
 para todo \(x, z \in \mathbb{R}\). Entonces, la aproximación numérica
 generada por el esquema (Ecuación~\ref{eq-esquema-em-switching}) tiene
 momentos finitos de orden \(p \ge 2\),
-\(\sup_{0 \le n \le N} \mathbb{E}[|Y_n|^p] \le (|x_0|^p + KT)\exp(KT) < \infty\),
+\(\displaystyle \sup_{0 \le n \le N} \mathbb{E}[|Y_n|^p] \le (|x_0|^p + KT)\exp(KT) < \infty\),
 y converge en sentido \textbf{fuerte} en media cuadrática hacia la
 solución exacta \(X(t)\) de la Ecuación~\ref{eq-ede-switching-num}
-satisfaciendo la cota uniforme:
+satisfaciendo la cota:
 
 \begin{equation}\phantomsection\label{eq-cota-fuerte-switching}{
 \mathbb{E}\left[ \sup_{0 \le t \le T} \vert X(t) - Y^{\Delta t}(t) \vert^2 \right] = \mathcal{O}(\Delta t),
 }\end{equation}
 
 lo cual establece un orden de convergencia fuerte \(\gamma = 0.5\) en la
-norma \(L^2(\Omega)\):
-\(\left(\mathbb{E}[\sup_{0 \le t \le T} |X(t) - Y^{\Delta t}(t)|^2]\right)^{1/2} \le C(\Delta t)^{1/2}\).
+norma \(\displaystyle L^2(\Omega)\):
+\(\displaystyle \left(\mathbb{E}[\sup_{0 \le t \le T} |X(t) - Y^{\Delta t}(t)|^2]\right)^{1/2} \le C(\Delta t)^{1/2}\).
 
 \end{theorem}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\subsection{Esquemas Numéricos para EDES Híbridas con Saltos y Régimen
+de Markov}\label{sec-numerico-saltos}
 
-\subsection{Esquemas Numéricos para EDEs Híbridas con Saltos de Poisson
-Compuestos}\label{sec-numerico-saltos}
-
-Para completar la estructura numérica de nuestro modelo termodinámico
+Para completar la estructura numérica de nuestro modelo
 (Ecuación~\ref{eq-ede-operativa-teorica}), debemos incorporar las
-discontinuidades de salto generadas por las aperturas de puerta junto
-con la difusión Browniana y el cambio de régimen eléctrico. De acuerdo
-con (\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}),
-mientras que los esquemas adaptados a saltos insertan cada tiempo
-aleatorio de ocurrencia dentro de la malla, los \textbf{esquemas
-regulares} emplean una partición fija \(t_n = n\Delta t\) y acumulan el
-impacto de los saltos ocurridos en cada subintervalo \([t_n, t_{n+1})\).
-Este enfoque regular resulta óptimo para simulaciones de Monte Carlo
-acopladas a series meteorológicas en mallas temporales fijas
-(\(\Delta t = 5/60\text{ h}\)).
+discontinuidades de salto junto con la difusión Browniana y el cambio de
+régimen. De acuerdo con (\citeproc{ref-platen2010numerical}{Platen y
+Bruti-Liberati 2010}), mientras que los esquemas adaptados a saltos
+insertan cada tiempo aleatorio de ocurrencia dentro de la malla, los
+\textbf{esquemas regulares} emplean una partición fija
+\(t_n = n\Delta t\) y acumulan el impacto de los saltos ocurridos en
+cada subintervalo \([t_n, t_{n+1})\). Este ultimo enfoque resulta el
+adecuado para simulaciones de Monte Carlo acopladas a series
+meteorológicas en mallas temporales fijas (\(\Delta t\)).
 
 Consideremos la EDE híbrida con saltos impulsada por una medida
 aleatoria de Poisson \(p_\varphi(dv, dt)\) con intensidad finita
@@ -2838,39 +2835,40 @@ X(t) = X(0) + \int_0^t b(s, X(s), \alpha(s))ds + \int_0^t \sigma(s, X(s), \alpha
 
 Cuando las amplitudes de salto provienen de variables aleatorias
 independientes e idénticamente distribuidas \(\{\gamma_j\}_{j \ge 1}\) y
-el conteo de eventos sigue una intensidad \(\lambda_{puerta}(t)\), la
-integral de salto en \([t_n, t_{n+1})\) se reduce al incremento de un
-\textbf{Proceso de Poisson Compuesto}
-(\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010};
-\citeproc{ref-wang2016numerical}{Wang 2016}):
+si los instantes de ocurrencia de los eventos siguen un proceso de
+Poisson no homogéneo con función de intensidad \(\lambda(t) \geq 0\)
+localmente integrable, entonces la integral de salto sobre
+\([t_n, t_{n+1})\) se reduce al incremento de un \textbf{Proceso de
+Poisson Compuesto} (\citeproc{ref-platen2010numerical}{Platen y
+Bruti-Liberati 2010}; \citeproc{ref-wang2016numerical}{Wang 2016}):
 
 \begin{equation}\phantomsection\label{eq-incremento-poisson-compuesto}{
 \Delta J_n = \int_{t_n}^{t_{n+1}} \int_{\mathcal{E}} c(s-, X(s-), \alpha(s-), v) p_\varphi(dv, ds) \approx \mathbb{I}_{\{\alpha_n = 1\}} \sum_{j=1}^{\Delta N_n} \gamma_{n, j},
 }\end{equation}
 
-donde el número de saltos \(\Delta N_n\) ocurridos en el paso
-\(\Delta t\) se aproxima mediante:
+donde el número de saltos \(\Delta N_n\) ocurridos en \(\Delta t\) se
+aproxima mediante:
 
 \begin{equation}\phantomsection\label{eq-conteo-poisson-paso}{
-\Delta N_n \sim \text{Poisson}\left( \int_{t_n}^{t_{n+1}} \lambda_{puerta}(s)ds \right) \approx \text{Poisson}\left( \lambda_{puerta}(t_n)\Delta t \right),
+\Delta N_n \sim \text{Poisson}\left( \int_{t_n}^{t_{n+1}} \lambda(s)ds \right) \approx \text{Poisson}\left( \lambda(t_n)\Delta t \right),
 }\end{equation}
 
 adoptando la convención de que si \(\Delta N_n = 0\), la suma vacía es
 cero (\(\Delta J_n = 0\)).
 
-En nuestro modelo termodinámico
-(Ecuación~\ref{eq-ede-operativa-teorica}), la deriva \(b(t, T, i)\) es
-afín respecto a \(T\), mientras que la difusión \(\sigma(i)\) y la
-amplitud de salto no dependen del estado \(T\)
-(\(\partial_T \sigma = \partial_T c = 0\)), con marcas de choque térmico
-de varianza finita (\(\mathbb{E}[\gamma^2] < \infty\)). Por lo tanto, se
-satisfacen automáticamente las condiciones de Lipschitz global y
-crecimiento lineal, garantizando que el esquema híbrido de
-Euler-Maruyama converge fuertemente con orden \(\gamma = 0.5\) y
-coincide en su parte continua con el método de Milstein (Sección 1.9 y
-7.5 de (\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati
-2010}); Sección 5.6 de (\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010})).
-El procedimiento general de integración se resume en el
+En nuestro modelo (Ecuación~\ref{eq-ede-operativa-teorica}), la deriva
+\(b(t, T, i)\) depende del estado \(T\), mientras que la difusión
+\(\sigma(i)\) y la amplitud de salto no dependen del estado \(T\)
+(\(\partial_T \sigma = \partial_T c = 0\)), con magnitudes de salto de
+varianza finita (\(\mathbb{E}[\gamma^2] < \infty\)). Por lo tanto, se
+satisfacen las condiciones de Lipschitz global y de crecimiento lineal,
+garantizando que el esquema híbrido de Euler-Maruyama converge
+fuertemente con orden \(\gamma = 0.5\) y coincide en su parte continua
+con el método de Milstein (Sección 1.9 y 7.5 de
+(\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010});
+Sección 5.6 de (\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010})).
+
+La implementación paso a paso del método se resume en el
 alg.~\ref{alg-em-hibrido-general}.
 
 \begin{algorithm}[]\protect\hypertarget{alg-em-hibrido-general}{}\label{alg-em-hibrido-general}
@@ -2881,27 +2879,28 @@ alg.~\ref{alg-em-hibrido-general}.
   >{\raggedright\arraybackslash}p{(\linewidth - 0\tabcolsep) * \real{1.0000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-\textbf{Esquema numérico híbrido de Euler-Maruyama con cambio de régimen
-y saltos}
+\textbf{Esquema numérico híbrido de Euler-Maruyama con cambios de
+régimen y saltos}
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-1: \textbf{1)} Dado un entero fijo \(N > 0\), dividir el horizonte
+1: \textbf{1)} Dado un entero fijo \(N > 0\), dividir el dominio
 temporal \([0, T]\) en \(N + 1\) nodos equidistantes
-\(t_0, t_1, \dots, t_N\) con paso de integración \(\Delta t = T/N\) y
+\(t_0, t_1, \dots, t_N\) con tamaño de paso \(\Delta t = T/N\) y
 \(t_n = n \Delta t\). Definir la matriz generadora
 \(Q = (q_{ij})_{m_0 \times m_0}\), la intensidad de saltos
-\(\lambda(t)\) y la distribución de marcas \(F_\gamma\). \\
+\(\lambda(t)\) y la distribución de las magnitudes de salto
+\(F_\gamma\). \\
 2: \\
 3: \textbf{2)} Asignar las condiciones iniciales del estado continuo
 \(Y_0 = x_0\) y del régimen discreto
 \(\alpha_0 = i_0 \in \mathcal{M}\). \\
 4: \\
-5: \textbf{3)} Resolver recursivamente la dinámica acoplada en cada
-subintervalo temporal: \\
-6: \(\quad\) \textbf{para} \(n = 0, 1, \dots, N - 1\) \textbf{hacer} \\
+5: \textbf{3)} Resolver recursivamente el sistema en cada subintervalo
+temporal: \\
+6: \(\quad\) \textbf{Para} \(n = 0, 1, \dots, N - 1\) \textbf{Hacer} \\
 7: \(\qquad\) Determinar el estado del régimen actual
 \(\alpha_n \in \mathcal{M}\) (actualizando la cadena de Markov según las
 probabilidades de transición
@@ -2910,29 +2909,40 @@ permanencia del régimen). \\
 8: \(\qquad\) Generar una variable aleatoria normal estándar
 independiente \(Z_n \sim \mathcal{N}(0, 1)\) y calcular el incremento
 Browniano: \(\Delta W_n = \sqrt{\Delta t}\, Z_n\). \\
-9: \(\qquad\) Generar el número de eventos de salto en el paso actual:
+9: \(\qquad\) Generar el número de de saltos en el paso actual:
 \(\Delta N_n \sim \text{Poisson}(\lambda(t_n)\Delta t)\). \\
-10: \(\qquad\) \textbf{si} \(\Delta N_n > 0\) y el régimen permite
-saltos \textbf{entonces} \\
-11: \(\qquad\quad\) Muestrear \(\Delta N_n\) marcas independientes
+10: \(\qquad\) \textbf{Si} \(\Delta N_n > 0\) y el régimen permite
+saltos \textbf{Entonces} \\
+11: \(\qquad\quad\) Generar \(\Delta N_n\) magnitudes de salto
+independientes
 \(\gamma_{n, 1}, \dots, \gamma_{n, \Delta N_n} \sim F_\gamma\) y
-calcular el salto acumulado:
-\(\Delta J_n = \sum_{j=1}^{\Delta N_n} c(t_n, Y_n, \alpha_n, \gamma_{n, j})\). \\
-12: \(\qquad\) \textbf{en caso contrario} \\
+calcular la magnitud de salto acumulada:
+\(\displaystyle \Delta J_n = \sum_{j=1}^{\Delta N_n} c(t_n, Y_n, \alpha_n, \gamma_{n, j})\). \\
+12: \(\qquad\) \textbf{En Caso Contrario} \\
 13: \(\qquad\quad\) Asignar \(\Delta J_n = 0\). \\
-14: \(\qquad\) \textbf{fin si} \\
+14: \(\qquad\) \textbf{Fin Si} \\
 15: \(\qquad\) Evaluar los coeficientes del régimen activo:
 \(b_n = b(t_n, Y_n, \alpha_n)\) y
 \(\sigma_n = \sigma(t_n, Y_n, \alpha_n)\). \\
 16: \(\qquad\) Actualizar el estado del proceso:
 \(Y_{n+1} = Y_n + b_n \Delta t + \sigma_n \Delta W_n + \Delta J_n\). \\
-17: \(\quad\) \textbf{fin para} \\
+17: \(\quad\) \textbf{Fin Para} \\
 18: \\
-19: \textbf{4)} Retornar la trayectoria híbrida aproximada:
+19: \textbf{4)} Retornar la trayectoria discreta aproximada del proceso:
 \(\{(Y_0, \alpha_0), (Y_1, \alpha_1), \dots, (Y_N, \alpha_N)\}\). \\
 \end{longtable}
 
 \end{algorithm}
+
+Con el alg.~\ref{alg-em-hibrido-general} queda establecido el marco
+numérico necesario para integrar simultáneamente la difusión continua,
+los cambios de régimen de Markov y las perturbaciones por saltos de
+Poisson compuestos. Este esquema numérico será la base computacional en
+los capítulos siguientes para aproximar las trayectorias del modelo
+termodinámico de la cadena de frío y evaluar el riesgo operativo de
+almacenamiento.
+
+\chapter{DE AQUI}\label{de-aqui}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -5031,107 +5041,196 @@ Sección~\ref{sec-lognormal-duracion} para las distintas épocas del año:
   \textbf{Temporada de Lluvias:} \(\mu = 0.4668, \ \sigma = 0.3372\)
 \end{itemize}
 
-\section{Precalibración Vectorizada de Eventos
-Externos}\label{precalibraciuxf3n-vectorizada-de-eventos-externos}
+\section{Precalibración de Eventos
+Externos}\label{precalibraciuxf3n-de-eventos-externos}
 
-Antes de resolver numéricamente la Ecuación Diferencial Estocástica para
-la temperatura, el algoritmo ejecuta un módulo de precalculo vectorizado
-para optimizar los tiempos de ejecución. En esta fase, el programa
-simula de manera independiente las variables externas que afectarán al
-equipo institucional a lo largo del año.
+Antes de resolver numéricamente la ecuación diferencial estocástica para
+la temperatura interna del equipo, primero se simulan las trayectorias
+discretas de las perturbaciones externas que actúan sobre el equipo a lo
+largo de la malla temporal \(t_n = n\Delta t, \ n = 0, 1, \dots, N\),
+con \(\Delta t = 5/60\text{ horas}\) y \(N = 105,408\) pasos para cubrir
+las \(T_{max} = 8784\text{ horas}\) del año.
 
-Para el suministro eléctrico, el algoritmo recorre secuencialmente los
-366 días del año. En cada jornada, consulta la intensidad estacional de
-la CFE y realiza un muestreo aleatorio de Poisson para determinar
-cuántas fallas eléctricas ocurrirán. Si el resultado es mayor a cero,
-selecciona una hora de inicio distribuida de manera uniforme entre las 0
-y las 24 horas del día, y realiza un muestreo Log-Normal condicionado a
-la época del año para determinar la duración del corte. Con estos datos,
-el algoritmo modifica el vector de estado eléctrico \(S(t)\), cambiando
-su valor de 1 (con energía) a 0 (falla eléctrica) durante el intervalo
-afectado.
+Siguiendo el esquema de discretización para cadenas de Markov en tiempo
+continuo (Sección~\ref{sec-numerico-switching}), el algoritmo recorre
+secuencialmente los 366 días del año evaluando la intensidad estacional
+\(\lambda_{cfe}(t)\) para determinar el número de fallas eléctricas
+diarias mediante el proceso de Poisson. Cuando ocurre un evento
+(apagón), se asigna su hora de inicio de manera uniforme en el día y se
+calcula su duración a partir de la distribución Log-Normal
+correspondiente a la estación climática
+Tabla~\ref{tbl-parametros-lognormal}. Con ello se construye el vector de
+estado eléctrico discreto \(S_n = S(t_n) \in \{0, 1\}\), el cual toma el
+valor \(S_n = 1\) cuando hay suministro eléctrico (régimen
+\(\alpha_n = 1\)) y \(S_n = 0\) durante un corte de energía (régimen
+\(\alpha_n = 2\)).
 
-Por otro lado, para modelar las aperturas de la puerta del equipo, se
-genera un vector binario de eventos evaluado en el dominio de tiempo
-discreto \(t \in \{0, \Delta t, 2\Delta t, \dots, 8784\}\) horas. Dado
-que el paso de integración se fijó en \(\Delta t = 5/60\) horas (5
-minutos), este conjunto se particiona exactamente en 105,408 iteraciones
-para cubrir la totalidad del año. Este vector se construye de manera
-dinámica dependiendo del modelo evaluado: se mantiene nulo para el
-Escenario A, combina las aperturas matutinas fijas con la probabilidad
-vespertina (\(\lambda_{tarde} \cdot \Delta t\)) para el Escenario B, y
-adiciona la perturbación logística de resurtidos
-(\(\lambda_{resurtido} \cdot \Delta t\)) para el Escenario C.
+De forma análoga, la ocurrencia de aperturas de puerta se discretiza
+sobre los nodos \(t_n\) de acuerdo con el esquema regular para procesos
+de Poisson compuestos (Sección~\ref{sec-numerico-saltos}), generando en
+cada subintervalo \([t_n, t_{n+1})\) el conteo de eventos
+\(\Delta N_n \sim \text{Poisson}(\lambda_{puerta}(t_n)\Delta t)\) según
+la función de intensidad \(\lambda_{puerta}(t)\) definida para cada
+escenario operativo Sección~\ref{sec-perturbaciones-discretas}.
 
 Posteriormente, el algoritmo aplica una regla estricta de control
-operativo: multiplica el vector de aperturas por la función de estado
-eléctrico \(S(t)\), evaluada en el mismo dominio de \([0, 8784]\) horas.
-Esto garantiza que si el centro de almacenamiento de vacunas se
-encuentra bajo un apagón en un instante específico (\(S(t)=0\)), la
-probabilidad de apertura en ese mismo instante de tiempo \(t\) se reduce
-a cero de forma absoluta. Esto refleja el protocolo normativo real que
-prohíbe abrir el equipo sin energía eléctrica para evitar la pérdida
-acelerada de frío.
+operativo: multiplica los eventos de apertura por el estado eléctrico
+\(S_n\). Esto garantiza que, si la clínica se encuentra bajo un corte de
+suministro eléctrico (\(S_n = 0\)), el término de salto se anule por
+completo (\(\Delta J_n = 0\)), reflejando el protocolo normativo que
+prohíbe abrir el refrigerador durante un apagón para evitar la pérdida
+acelerada de frío. En los instantes válidos con energía (\(S_n = 1\)), a
+cada apertura \(j = 1, \dots, \Delta N_n\) se le asocia una magnitud de
+salto térmico independiente \(\gamma_{n, j}\) extraída de una
+distribución Normal truncada (Ecuación~\ref{eq-salto-termico}),
+conformando asi el incremento de salto acumulado \(\Delta J_n\)
+(Ecuación~\ref{eq-incremento-poisson-compuesto}).
 
-Finalmente, los eventos validos de apertura de la puerta del equipo se
-sustituyen por su respectiva magnitud de impacto térmico (\(\gamma_i\)),
-el cual es extraído de una distribución Normal truncada
-(Ecuación~\ref{eq-salto-termico}), finalizando así el vector discreto de
-saltos térmicos (\(Saltos\_Termicos(t)\)).
-
-Para validar la correcta precalibración del entorno, ejecutamos una
-trayectoria anual de prueba fijando una semilla de control
-(\texttt{np.random.seed(42)}). La simulación generó una trayectoria
-eléctrica idéntica para los tres casos con un total de \textbf{68
-apagones} en el año, en dónde hubo una notoria diferencia fue en el
-vector de saltos térmicos: el personal registró \textbf{0 aperturas}
-para el Escenario A (Línea Base), \textbf{493 aperturas} para el
-Escenario B (Apego Normativo), y \textbf{995 aperturas} debido a la
-saturación logística en el Escenario C (Contingencia).
+Para verificar la generación de estas perturbaciones externas, se
+ejecutó una trayectoria anual de control fijando una semilla de
+aleatoriedad (\texttt{np.random.seed(42)}). La simulación generó una
+trayectoria eléctrica idéntica para los tres escenarios operativos con
+un total de \textbf{68 apagones} en el año, mientras que en el proceso
+de aperturas de puerta se registraron \textbf{0 aperturas} en el
+Escenario A (Línea Base), \textbf{493 aperturas} en el Escenario B
+(Apego Normativo) y \textbf{995 aperturas} en el Escenario C
+(Contingencia).
 
 \section{Resolución Numérica de la Ecuación Diferencial Estocástica
 (EDE)}\label{resoluciuxf3n-numuxe9rica-de-la-ecuaciuxf3n-diferencial-estocuxe1stica-ede}
 
-Con los vectores de perturbaciones externas precalculados, el algoritmo
-ejecuta la resolución de la evolución de la temperatura interna del
-equipo y extrae las métricas de seguridad termodinámica para el equipo
-institucional.
+Una vez definidos los procesos externos en la malla temporal, se procede
+a aproximar numéricamente la evolución de la temperatura interna del
+equipo \(T(t)\) determinada por la ecuación diferencial estocástica
+híbrida de nuestro modelo termodinámico
+(Ecuación~\ref{eq-ede-operativa}).
 
-\subsection{Integración Numérica por Cambios de
-Régimen}\label{integraciuxf3n-numuxe9rica-por-cambios-de-ruxe9gimen}
+\subsection{Integración Numérica por Cambios de Régimen y
+Saltos}\label{integraciuxf3n-numuxe9rica-por-cambios-de-ruxe9gimen-y-saltos}
 
-Para avanzar en el tiempo, el algoritmo recorre cada iteración
-\(i \in [1, 105407]\). El índice arranca en 1 porque el primer valor
-corresponde a la condición inicial térmica del equipo
-(\(T_0 = 5.0^\circ\text{C}\)). En cada paso, se evalúa el estado del
-suministro eléctrico previo (\(S_{t}[i-1]\)), activando un cambio de
-régimen dinámico (\emph{regime-switching}):
+Para calcular la trayectoria discreta \(\{T_n\}_{0 \le n \le N}\) a
+partir de la condición inicial \(T_0 = 5.0^\circ\text{C}\), se aplica
+directamente el esquema numérico híbrido de Euler-Maruyama con cambios
+de régimen y saltos desarrollado en el alg.~\ref{alg-em-hibrido-general}
+(Sección~\ref{sec-numerico-saltos}). En cada paso temporal
+\(n = 0, 1, \dots, N - 1\), el algoritmo evalúa el estado del suministro
+eléctrico \(S_n\) y cambia dinámicamente los coeficientes de la ecuación
+(Sección~\ref{sec-numerico-switching}):
 
 \begin{itemize}
 \tightlist
 \item
-  Si el suministro está activo (\(S=1\)), se aplican los parámetros de
-  convección forzada (\(\kappa_{on}, \sigma_{on}\)), llevando la
-  temperatura hacia el objetivo del termostato
-  (\(\theta = 5.0^\circ\text{C}\)) y sumando el salto térmico
-  \(\gamma_i\) si la puerta fue manipulada.
+  \textbf{Con suministro eléctrico (\(S_n = 1\), régimen
+  \(\alpha_n = 1\)):} Se activan los parámetros de enfriamiento por
+  convección forzada (\(\kappa_{on} = 0.1154\,\text{h}^{-1}\) y
+  \(\sigma_{on} = 0.4804\)), llevando la temperatura interna hacia el
+  objetivo del termostato (\(\theta = 5.0^\circ\text{C}\)) e
+  incorporando el salto térmico acumulado \(\Delta J_n\) producido por
+  las aperturas de puerta en ese intervalo.
 \item
-  Si el suministro presenta una falla (\(S=0\)), se aplican los
-  parámetros de inercia térmica pasiva (\(\kappa_{off}, \sigma_{off}\)),
-  provocando que la temperatura interna sea atraída lentamente hacia la
-  temperatura ambiente exterior de Tuxtla Gutiérrez (\(T_{amb}[i-1]\)).
+  \textbf{Sin suministro eléctrico (\(S_n = 0\), régimen
+  \(\alpha_n = 2\)):} Se activan los parámetros de inercia térmica
+  pasiva (\(\kappa_{off} = 0.00232\,\text{h}^{-1}\) y
+  \(\sigma_{off} = 0.048\)), haciendo que la temperatura interna sea
+  atraída lentamente hacia la temperatura ambiente exterior
+  \(T_{amb}(t_n)\), sin saltos por apertura (\(\Delta J_n = 0\)).
 \end{itemize}
 
-La solución numérica se ejecuta mediante el esquema de Euler-Maruyama
-desarrollado en la Sección~\ref{sec-euler-maruyama}. Es importante
-destacar que, dado que las volatilidades térmicas (\(\sigma_{on}\) y
-\(\sigma_{off}\)) actúan como ruidos aditivos constantes (independientes
-del estado de la temperatura \(T(t)\)), sus derivadas parciales respecto
-al estado son nulas (\(\frac{\partial \sigma}{\partial x} = 0\)), con lo
-cual por propiedades del cálculo estocástico, el término de corrección
-de segundo orden del método de Milstein se multiplica por cero y
-desaparece, reduciéndose de forma exacta al esquema de Euler-Maruyama
-empleado en esta simulación.
+Como se demostró en la Capítulo~\ref{sec-numerico} y en la
+Sección~\ref{sec-numerico-saltos}, dado que los coeficientes de difusión
+\(\sigma_{on}\) y \(\sigma_{off}\) representan ruido aditivo constante
+respecto al estado \(T(t)\), sus derivadas parciales espaciales son
+nulas (\(\frac{\partial \sigma}{\partial T} = 0\)). En consecuencia, el
+término corrector de segundo orden del esquema de Milstein
+(Ecuación~\ref{eq-esquema-milstein}) se anula, por lo que el esquema
+híbrido de Euler-Maruyama empleado alcanza la misma precisión en la
+componente difusiva y tiene garantizada su convergencia fuerte de orden
+\(\gamma = 0.5\) por el Teorema~\ref{thm-em-switching}.
+
+El procedimiento detallado para simular una trayectoria anual de la
+temperatura interna del refrigerador se presenta en el
+alg.~\ref{alg-simulacion-ede-termodinamica}.
+
+\begin{algorithm}[]\protect\hypertarget{alg-simulacion-ede-termodinamica}{}\label{alg-simulacion-ede-termodinamica}
+
+~
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Simulación de una trayectoria anual para la EDE termodinámica
+del refrigerador Haier HBC-150}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1: \textbf{1)} Definir el horizonte anual \(T_{max} = 8784\text{ h}\) y
+dividir el dominio temporal \([0, T_{max}]\) en \(N + 1\) nodos
+equidistantes \(t_0, t_1, \dots, t_N\) con tamaño de paso
+\(\Delta t = 5/60\text{ h}\) (\(N = 105,408\)) y \(t_n = n \Delta t\).
+Evaluar en la malla la temperatura ambiente exterior \(T_{amb}(t_n)\),
+la tasa de fallas eléctricas \(\lambda_{cfe}(t_n)\) y la función de
+intensidad de aperturas \(\lambda_{puerta}(t_n)\){[}cite: 2270{]}. \\
+2: \\
+3: \textbf{2)} Asignar la condición inicial \(T_0 = 5.0^\circ\text{C}\),
+la temperatura del termostato \(\theta = 5.0^\circ\text{C}\), los
+parámetros de operación activa (\(\kappa_{on} = 0.1154\text{ h}^{-1}\),
+\(\sigma_{on} = 0.4804\)), los parámetros de operación pasiva
+(\(\kappa_{off} = 0.00232\text{ h}^{-1}\), \(\sigma_{off} = 0.048\)) y
+la distribución Normal truncada de salto térmico
+\(\gamma \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\){[}cite:
+2270{]}. \\
+4: \\
+5: \textbf{3)} Generar la trayectoria discreta del estado eléctrico
+\(\{S_n\}_{0 \le n \le N} \in \{0, 1\}\) simulando los inicios de falla
+mediante el Proceso de Poisson No Homogéneo con tasa
+\(\lambda_{cfe}(t_n)\) y sus duraciones mediante la distribución
+Log-Normal estacional correspondiente{[}cite: 2270{]}. \\
+6: \\
+7: \textbf{4)} Resolver recursivamente la ecuación diferencial
+estocástica en cada subintervalo temporal: \\
+8: \(\quad\) \textbf{Para} \(n = 0, 1, \dots, N - 1\) \textbf{Hacer} \\
+9: \(\qquad\) Generar una variable aleatoria normal estándar
+independiente \(Z_n \sim \mathcal{N}(0, 1)\) y calcular el incremento
+Browniano: \(\Delta W_n = \sqrt{\Delta t}\, Z_n\). \\
+10: \(\qquad\) \textbf{Si} \(S_n = 1\) (suministro eléctrico activo,
+régimen \(\alpha_n = 1\)) \textbf{Entonces} \\
+11: \(\qquad\quad\) Evaluar los coeficientes de enfriamiento activo:
+\(b_n = -\kappa_{on}(T_n - \theta)\) y
+\(\sigma_n = \sigma_{on}\){[}cite: 2270{]}. \\
+12: \(\qquad\quad\) Generar el número de aperturas de puerta en el paso
+actual:
+\(\Delta N_n \sim \text{Poisson}(\lambda_{puerta}(t_n)\Delta t)\){[}cite:
+2270{]}. \\
+13: \(\qquad\quad\) \textbf{Si} \(\Delta N_n > 0\) \textbf{Entonces} \\
+14: \(\qquad\qquad\) Generar \(\Delta N_n\) magnitudes de salto térmico
+independientes
+\(\gamma_{n, 1}, \dots, \gamma_{n, \Delta N_n} \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\)
+y calcular el salto térmico acumulado:
+\(\displaystyle \Delta J_n = \sum_{j=1}^{\Delta N_n} \gamma_{n, j}\). \\
+15: \(\qquad\quad\) \textbf{En Caso Contrario} \\
+16: \(\qquad\qquad\) Asignar \(\Delta J_n = 0\). \\
+17: \(\qquad\quad\) \textbf{Fin Si} \\
+18: \(\qquad\) \textbf{En Caso Contrario} (\(S_n = 0\), falla eléctrica
+de la CFE, régimen \(\alpha_n = 2\)) \\
+19: \(\qquad\quad\) Evaluar los coeficientes de calentamiento pasivo:
+\(b_n = -\kappa_{off}(T_n - T_{amb}(t_n))\) y
+\(\sigma_n = \sigma_{off}\){[}cite: 2270{]}. \\
+20: \(\qquad\quad\) Anular las aperturas de puerta por protocolo de
+contingencia: \(\Delta J_n = 0\){[}cite: 2270{]}. \\
+21: \(\qquad\) \textbf{Fin Si} \\
+22: \(\qquad\) Actualizar la temperatura interna del equipo:
+\(T_{n+1} = T_n + b_n \Delta t + \sigma_n \Delta W_n + \Delta J_n\){[}cite:
+2270{]}. \\
+23: \(\quad\) \textbf{Fin Para} \\
+24: \\
+25: \textbf{5)} Retornar la trayectoria anual aproximada de la
+temperatura interna: \(\{T_0, T_1, \dots, T_N\}\){[}cite: 2270{]}. \\
+\end{longtable}
+
+\end{algorithm}
 
 \subsection{Resultados de Seguridad
 Termodinámica}\label{sec-resultados-seguridad}
@@ -5480,16 +5579,18 @@ de pérdida anual.
 \section{Estructura de la Simulación de
 Montecarlo}\label{estructura-de-la-simulaciuxf3n-de-montecarlo}
 
-Con el fin de obtener validez científica y no depender del resultado de
-un solo escenario al azar, el algoritmo completo se incluyo dentro de
-una función para simular años completos de manera repetitiva. Para
-optimizar drásticamente la velocidad de ejecución y evitar el
-desbordamiento de la memoria RAM del sistema durante el análisis masivo,
-el programa se diseñó para extraer y almacenar únicamente métricas
-estadísticas clave en cada iteración, omitiendo la conservación de los
-arreglos gigantes de datos por cada año evaluado.
+Dado que el alg.~\ref{alg-simulacion-ede-termodinamica} junto con el
+modelo de inventario producen únicamente una realización anual
+aleatoria, no es posible evaluar la confiabilidad del sistema a partir
+de una sola trayectoria. Para medir rigurosamente el riesgo operativo y
+estimar el valor esperado \(\mathbb{E}[g(T(t))]\) de los estadísticos de
+interés cuya distribución analítica es desconocida, el modelo completo
+se integró dentro de un esquema de simulación de Montecarlo
+(\citeproc{ref-wang2016numerical}{Wang 2016};
+\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}).
 
-Entre las métricas extraídas de esta función se incluyen:
+En cada realización anual \(k\), el algoritmo evalúa la trayectoria
+simulada y extrae las siguientes métricas estadísticas:
 
 \begin{itemize}
 \tightlist
@@ -5504,16 +5605,32 @@ Entre las métricas extraídas de esta función se incluyen:
   pérdida y la merma por mes para evaluar la estacionalidad del riesgo.
 \end{itemize}
 
-Esta función se ejecuta dentro de un bucle de Montecarlo con
-\textbf{5000 simulaciones independientes}, asignando en cada paso una
-semilla de aleatoriedad indexada para garantizar la reproducibilidad del
-experimento. Al correr los 5,000 años simulados, el algoritmo elimina
-las variaciones extremas de los casos individuales y permite que actúe
+Este procedimiento se ejecuta de forma iterativa generando \(M = 5000\)
+trayectorias anuales independientes (asignando en cada una semillas de
+aleatoriedad indexadas para garantizar la reproducibilidad de la
+simulación), aproximando el valor esperado de cada métrica mediante el
+promedio muestral
+\(\displaystyle \hat{\mu}_M = \frac{1}{M}\sum_{k=1}^{M} g\left(T^{(k)}\right)\)
+(\citeproc{ref-wang2016numerical}{Wang 2016}).
+
+De acuerdo con la teoría de convergencia débil
+(Definición~\ref{def-convergencia-debil}) y la descomposición del Error
+Cuadrático Medio en simulaciones de ecuaciones diferenciales
+estocásticas (\citeproc{ref-wang2016numerical}{Wang 2016};
+\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}), la
+precisión de este estimador depende tanto del sesgo numérico de
+discretización temporal como de la varianza estadística de muestreo. Por
+un lado, el tamaño de paso de \(5\text{ minutos}\)
+(\(\Delta t = 5/60\text{ h}\)) en el esquema de Euler-Maruyama (cuyo
+orden débil es \(\beta = 1.0\)) mantiene acotado el sesgo numérico
+sistemático; por otro lado, al simular \(M = 5000\) años independientes,
 la \textbf{Ley de los Grandes Números}
-(\citeproc{ref-ross2018first}{Ross 2018}). Esto provoca que las métricas
-de control se estabilicen, permitiendo extraer promedios poblacionales
-realistas sobre el comportamiento del equipo institucional bajo cada uno
-de los tres escenarios operativos evaluados.
+(\citeproc{ref-ross2018first}{Ross 2018}) asegura que el error estándar
+de muestreo decaiga a razón de \(M^{-1/2} \approx 0.0141\) (por debajo
+del \(1.5\%\) de la desviación estándar de cada métrica). Esto elimina
+el efecto de fluctuaciones atípicas individuales y estabiliza los
+promedios poblacionales bajo cada uno de los tres escenarios operativos
+evaluados.
 
 \section{Resultados Estadísticos y Análisis de
 Riesgo}\label{resultados-estaduxedsticos-y-anuxe1lisis-de-riesgo}
