@@ -468,7 +468,7 @@ $$3\sigma = 1.36 - 0.76 = 0.60 \implies \sigma = 0.20^\circ\text{C}$$
 **Restricción Termodinámica (Filtro de Truncamiento):**
 Las colas de una distribución Normal estándar se extienden hasta menos infinito. En el contexto físico, un valor de $\gamma_i < 0$ implicaría que al abrir la puerta el refrigerador absorbe frío del exterior cálido, lo cual viola la Segunda Ley de la Termodinámica. Asimismo, el estudio del NIST establece que el ingreso mínimo absoluto de calor es de $0.16^\circ\text{C}$.
 
-Para garantizar la viabilidad física del proceso estocástico durante las simulaciones de Montecarlo, la variable aleatoria $\gamma_i$ se define como una distribución truncada inferiormente, aplicando un filtro de maximización:
+Para garantizar la viabilidad física del proceso estocástico durante las simulaciones de Monte Carlo, la variable aleatoria $\gamma_i$ se define como una distribución truncada inferiormente, aplicando un filtro de maximización:
 $$\gamma_i = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)$${#eq-salto-termico}
 De esta forma, la Ecuación Diferencial Estocástica absorbe la variabilidad operativa del personal médico sin riesgo de arrojar perturbaciones termodinámicamente imposibles.
 
@@ -512,7 +512,7 @@ $$
 DA(t) = \int_{0}^{t} k(T(s)) \cdot \mathbb{I}_{\{T(s) > 8\}} \, ds
 $$
 
-Esta formulación integral permite contabilizar analíticamente el estrés térmico exacto de cada trayectoria. Computacionalmente, para actualizar el estado del sistema en pasos discretos de tiempo $\Delta t$ dentro de la simulación de Montecarlo, la solución analítica de la EDO estipula que la fracción de inventario perdido (merma instantánea) durante ese diferencial de tiempo se calcula extrayendo el complemento del factor de supervivencia:
+Esta formulación integral permite contabilizar analíticamente el estrés térmico exacto de cada trayectoria. Computacionalmente, para actualizar el estado del sistema en pasos discretos de tiempo $\Delta t$ dentro de la Simulación de Monte Carlo, la solución analítica de la EDO estipula que la fracción de inventario perdido (merma instantánea) durante ese diferencial de tiempo se calcula extrayendo el complemento del factor de supervivencia:
 
 $$
 \text{Merma}(t) = I(t) \left( 1 - e^{-k(T(t)) \Delta t} \right)
@@ -574,4 +574,4 @@ La regla de consumo se define a partir de los tres escenarios de simulación:
    Matemáticamente, por cada evento de resurtido generado, se extrae un bloque adicional de vacunas equivalente a la demanda base. Así, la demanda diaria total se convierte en una variable aleatoria dependiente del proceso de Poisson, definida por:
    $$D_C(t) = D_{base} + \left( N_{resurtido}(t) \times D_{base} \right)$$
 
-Este acoplamiento garantiza que las trayectorias de Montecarlo con mayor cantidad de aperturas de puerta y por ende, mayor ingreso de calor y daño térmico correspondan exactamente a los días con mayor rotación de inventario, reflejando con precisión la saturación logística de una crisis sanitaria.
+Este acoplamiento garantiza que las trayectorias en la Simulación de Monte Carlo con mayor cantidad de aperturas de puerta y por ende, mayor ingreso de calor y daño térmico correspondan exactamente a los días con mayor rotación de inventario, reflejando con precisión la saturación logística de una crisis sanitaria.

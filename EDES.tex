@@ -218,9 +218,9 @@
 \theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
@@ -4628,9 +4628,9 @@ NIST establece que el ingreso mínimo absoluto de calor es de
 \(0.16^\circ\text{C}\).
 
 Para garantizar la viabilidad física del proceso estocástico durante las
-simulaciones de Montecarlo, la variable aleatoria \(\gamma_i\) se define
-como una distribución truncada inferiormente, aplicando un filtro de
-maximización:
+simulaciones de Monte Carlo, la variable aleatoria \(\gamma_i\) se
+define como una distribución truncada inferiormente, aplicando un filtro
+de maximización:
 \begin{equation}\phantomsection\label{eq-salto-termico}{\gamma_i = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)}\end{equation}
 De esta forma, la Ecuación Diferencial Estocástica absorbe la
 variabilidad operativa del personal médico sin riesgo de arrojar
@@ -4726,10 +4726,10 @@ DA(t) = \int_{0}^{t} k(T(s)) \cdot \mathbb{I}_{\{T(s) > 8\}} \, ds
 Esta formulación integral permite contabilizar analíticamente el estrés
 térmico exacto de cada trayectoria. Computacionalmente, para actualizar
 el estado del sistema en pasos discretos de tiempo \(\Delta t\) dentro
-de la simulación de Montecarlo, la solución analítica de la EDO estipula
-que la fracción de inventario perdido (merma instantánea) durante ese
-diferencial de tiempo se calcula extrayendo el complemento del factor de
-supervivencia:
+de la Simulación de Monte Carlo, la solución analítica de la EDO
+estipula que la fracción de inventario perdido (merma instantánea)
+durante ese diferencial de tiempo se calcula extrayendo el complemento
+del factor de supervivencia:
 
 \[
 \text{Merma}(t) = I(t) \left( 1 - e^{-k(T(t)) \Delta t} \right)
@@ -4888,11 +4888,11 @@ simulación:
   \[D_C(t) = D_{base} + \left( N_{resurtido}(t) \times D_{base} \right)\]
 \end{enumerate}
 
-Este acoplamiento garantiza que las trayectorias de Montecarlo con mayor
-cantidad de aperturas de puerta y por ende, mayor ingreso de calor y
-daño térmico correspondan exactamente a los días con mayor rotación de
-inventario, reflejando con precisión la saturación logística de una
-crisis sanitaria.
+Este acoplamiento garantiza que las trayectorias en la Simulación de
+Monte Carlo con mayor cantidad de aperturas de puerta y por ende, mayor
+ingreso de calor y daño térmico correspondan exactamente a los días con
+mayor rotación de inventario, reflejando con precisión la saturación
+logística de una crisis sanitaria.
 
 \part{Simulación de Equipos (Haier HBC-150)}
 
@@ -4905,9 +4905,9 @@ Gutiérrez, Chiapas, desarrollamos una simulación en Python enfocado en
 el equipo institucional Haier HBC-150 presentado en la sección anterior.
 Debido a la interacción simultánea de múltiples procesos aleatorios
 (cortes de energía, aperturas de puerta, inercia térmica y consumo
-logístico), el sistema no posee una solución analítica cerrada. En
-consecuencia, recurrimos a la integración numérica de trayectorias
-acoplada al método de Montecarlo.
+logístico), el sistema propuesto no posee una solución analítica
+cerrada. En consecuencia, recurrimos a los esquemas numéricos para
+Ecuaciones Diferenciales Estocásticas y al método de Monte Carlo.
 
 A diferencia de modelos estáticos tradicionales, esta investigación
 evalúa el riesgo bajo tres contextos operativos distintos para medir el
@@ -5127,7 +5127,7 @@ largo de la malla temporal \(t_n = n\Delta t, \ n = 0, 1, \dots, N\),
 con \(\Delta t = 5/60\text{ horas}\) y \(N = 105,408\) pasos para cubrir
 las \(T_{max} = 8784\text{ horas}\) del año.
 
-Siguiendo el esquema de discretización para cadenas de Markov en tiempo
+Siguiendo el esquema de discretización para cadenas de Markov a tiempo
 continuo (Sección~\ref{sec-numerico-switching}), el algoritmo recorre
 secuencialmente los 366 días del año evaluando la intensidad estacional
 \(\lambda_{cfe}(t)\) para determinar el número de fallas eléctricas
@@ -5212,11 +5212,11 @@ eléctrico \(S_n\) y cambia dinámicamente los coeficientes de la ecuación
   \(T_{amb}(t_n)\), sin saltos por apertura (\(\Delta J_n = 0\)).
 \end{itemize}
 
-Como se demostró en la Capítulo~\ref{sec-numerico} y en la
-Sección~\ref{sec-numerico-saltos}, dado que los coeficientes de difusión
-\(\sigma_{on}\) y \(\sigma_{off}\) representan ruido aditivo constante
-respecto al estado \(T(t)\), sus derivadas parciales espaciales son
-nulas (\(\frac{\partial \sigma}{\partial T} = 0\)). En consecuencia, el
+Como se demostró en la Sección~\ref{sec-numerico-saltos}, dado que los
+coeficientes de difusión \(\sigma_{on}\) y \(\sigma_{off}\) representan
+ruido aditivo constante respecto al estado \(T(t)\), sus derivadas
+parciales espaciales son nulas
+(\(\frac{\partial \sigma}{\partial T} = 0\)). En consecuencia, el
 término corrector de segundo orden del esquema de Milstein
 (Ecuación~\ref{eq-esquema-milstein}) se anula, por lo que el esquema
 híbrido de Euler-Maruyama empleado alcanza la misma precisión en la
@@ -5250,56 +5250,52 @@ equidistantes \(t_0, t_1, \dots, t_N\) con tamaño de paso
 la partición la temperatura ambiente exterior \(T_{amb}(t_n)\), la tasa
 de fallas eléctricas \(\lambda_{cfe}(t_n)\) y la función de intensidad
 de aperturas \(\lambda_{puerta}(t_n)\). \\
-2: \\
-3: \textbf{2)} Asignar la condición inicial \(T_0 = 5.0^\circ\text{C}\),
+2: \textbf{2)} Asignar la condición inicial \(T_0 = 5.0^\circ\text{C}\),
 la temperatura del termostato \(\theta = 5.0^\circ\text{C}\), los
 parámetros de operación activa (\(\kappa_{on} = 0.1154\text{ h}^{-1}\),
 \(\sigma_{on} = 0.4804\)), los parámetros de operación pasiva
 (\(\kappa_{off} = 0.00232\text{ h}^{-1}\), \(\sigma_{off} = 0.048\)) y
 la distribución Normal truncada de salto térmico
 \(\gamma \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\). \\
-4: \\
-5: \textbf{3)} Generar la trayectoria discreta del estado eléctrico
+3: \textbf{3)} Generar la trayectoria discreta del estado eléctrico
 \(\{S_n\}_{0 \le n \le N} \in \{0, 1\}\) simulando los inicios de falla
 mediante un Proceso de Poisson No Homogéneo con tasa
 \(\lambda_{cfe}(t_n)\) y sus duraciones mediante la distribución
 Log-Normal correspondiente a la estación climática. \\
-6: \\
-7: \textbf{4)} Resolver recursivamente el sistema en cada subintervalo
+4: \textbf{4)} Resolver recursivamente el sistema en cada subintervalo
 temporal: \\
-8: \(\quad\) \textbf{Para} \(n = 0, 1, \dots, N - 1\) \textbf{Hacer} \\
-9: \(\qquad\) Generar una variable aleatoria normal estándar
+5: \(\quad\) \textbf{Para} \(n = 0, 1, \dots, N - 1\) \textbf{Hacer} \\
+6: \(\qquad\) Generar una variable aleatoria normal estándar
 independiente \(Z_n \sim \mathcal{N}(0, 1)\) y calcular el incremento
 Browniano: \(\Delta W_n = \sqrt{\Delta t}\, Z_n\). \\
-10: \(\qquad\) \textbf{Si} \(S_n = 1\) (suministro eléctrico activo,
+7: \(\qquad\) \textbf{Si} \(S_n = 1\) (suministro eléctrico activo,
 régimen \(\alpha_n = 1\)) \textbf{Entonces} \\
-11: \(\qquad\quad\) Evaluar los coeficientes de enfriamiento activo:
+8: \(\qquad\quad\) Evaluar los coeficientes de enfriamiento activo:
 \(b_n = \kappa_{on}(\theta - T_n)\) y \(\sigma_n = \sigma_{on}\). \\
-12: \(\qquad\quad\) Generar el número de aperturas de puerta en el paso
+9: \(\qquad\quad\) Generar el número de aperturas de puerta en el paso
 actual:
 \(\Delta N_n \sim \text{Poisson}(\lambda_{puerta}(t_n)\Delta t)\). \\
-13: \(\qquad\quad\) \textbf{Si} \(\Delta N_n > 0\) \textbf{Entonces} \\
-14: \(\qquad\qquad\) Generar \(\Delta N_n\) magnitudes de salto térmico
+10: \(\qquad\quad\) \textbf{Si} \(\Delta N_n > 0\) \textbf{Entonces} \\
+11: \(\qquad\qquad\) Generar \(\Delta N_n\) magnitudes de salto térmico
 independientes
 \(\gamma_{n, 1}, \dots, \gamma_{n, \Delta N_n} \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\)
 y calcular el salto térmico acumulado:
 \(\displaystyle \Delta J_n = \sum_{j=1}^{\Delta N_n} \gamma_{n, j}\). \\
-15: \(\qquad\quad\) \textbf{En Caso Contrario} \\
-16: \(\qquad\qquad\) Asignar \(\Delta J_n = 0\). \\
-17: \(\qquad\quad\) \textbf{Fin Si} \\
-18: \(\qquad\) \textbf{En Caso Contrario} (\(S_n = 0\), falla eléctrica,
+12: \(\qquad\quad\) \textbf{En Caso Contrario} \\
+13: \(\qquad\qquad\) Asignar \(\Delta J_n = 0\). \\
+14: \(\qquad\quad\) \textbf{Fin Si} \\
+15: \(\qquad\) \textbf{En Caso Contrario} (\(S_n = 0\), falla eléctrica,
 régimen \(\alpha_n = 2\)) \\
-19: \(\qquad\quad\) Evaluar los coeficientes de calentamiento pasivo:
+16: \(\qquad\quad\) Evaluar los coeficientes de calentamiento pasivo:
 \(b_n = \kappa_{off}(T_{amb}(t_n) - T_n)\) y
 \(\sigma_n = \sigma_{off}\). \\
-20: \(\qquad\quad\) Anular las aperturas de puerta por protocolo:
+17: \(\qquad\quad\) Anular las aperturas de puerta por protocolo:
 \(\Delta J_n = 0\). \\
-21: \(\qquad\) \textbf{Fin Si} \\
-22: \(\qquad\) Actualizar la temperatura interna del equipo:
+18: \(\qquad\) \textbf{Fin Si} \\
+19: \(\qquad\) Actualizar la temperatura interna del equipo:
 \(T_{n+1} = T_n + b_n \Delta t + \sigma_n \Delta W_n + \Delta J_n\). \\
-23: \(\quad\) \textbf{Fin Para} \\
-24: \\
-25: \textbf{5)} Retornar la trayectoria discreta anual aproximada de la
+20: \(\quad\) \textbf{Fin Para} \\
+21: \textbf{5)} Retornar la trayectoria discreta anual aproximada de la
 temperatura interna: \(\{T_0, T_1, \dots, T_N\}\). \\
 \end{longtable}
 
@@ -5649,8 +5645,8 @@ excursión térmica encuentra miles de vacunas vulnerables al mismo
 tiempo, multiplicando el daño absoluto a 2395 dosis, es decir, un 3.08\%
 de pérdida anual.
 
-\section{Estructura de la Simulación de
-Montecarlo}\label{estructura-de-la-simulaciuxf3n-de-montecarlo}
+\section{Estructura de la Simulación de Monte
+Carlo}\label{estructura-de-la-simulaciuxf3n-de-monte-carlo}
 
 Dado que el alg.~\ref{alg-simulacion-ede-termodinamica} junto con el
 modelo de inventario producen únicamente una realización anual
@@ -5658,8 +5654,8 @@ aleatoria, no es posible evaluar la confiabilidad del sistema a partir
 de una sola trayectoria. Para medir rigurosamente el riesgo operativo y
 estimar el valor esperado \(\mathbb{E}[g(T(t))]\) de los estadísticos de
 interés cuya distribución analítica es desconocida, el modelo completo
-se integró dentro de un esquema de simulación de Montecarlo (Giles 2008;
-Platen y Bruti-Liberati 2010).
+se integró dentro de un esquema de simulación de Monte Carlo (Giles
+2008; Platen y Bruti-Liberati 2010).
 
 En cada realización anual \(k\), el algoritmo evalúa la trayectoria
 simulada y extrae las siguientes métricas estadísticas:
@@ -5704,7 +5700,7 @@ operativos evaluados.
 \section{Resultados Estadísticos y Análisis de
 Riesgo}\label{resultados-estaduxedsticos-y-anuxe1lisis-de-riesgo}
 
-Una vez completadas las 5000 simulaciones de Montecarlo, procedemos a
+Una vez completadas las 5000 simulaciones de Monte Carlo, procedemos a
 extraer las métricas operativas y termodinámicas de todos los años
 simulados. La simulación masiva de trayectorias revela el verdadero
 comportamiento del sistema a largo plazo, eliminando las variaciones
@@ -5768,7 +5764,7 @@ Empírico}\label{riesgo-operativo-y-termodinuxe1mico-empuxedrico}
 
 \textbf{Escenario A (Línea Base):}
 
-La simulación de Montecarlo estabilizó el riesgo externo en un promedio
+La simulación de Monte Carlo estabilizó el riesgo externo en un promedio
 de 64.3 apagones anuales. Al no existir interacción humana (cero
 aperturas), el riesgo recae puramente en la termodinámica pasiva del
 equipo. Se registró un promedio de 26.4 rupturas de la cadena de frío
@@ -5928,8 +5924,8 @@ Inicialmente, desde un punto de vista puramente climático, se podría
 suponer que los meses de calor extremo en Tuxtla Gutiérrez (abril y
 mayo) presentarían la mayor cantidad de vacunas perdidas debido al
 estrés térmico ambiental sobre el equipo. No obstante, las 5000
-simulaciones de Montecarlo demuestran que la interacción humana modifica
-por completo este patrón natural.
+simulaciones de Monte Carlo demuestran que la interacción humana
+modifica por completo este patrón natural.
 
 \textbf{Escenario A (Línea Base):}
 
@@ -6089,7 +6085,7 @@ Para estandarizar el nivel de riesgo sin importar la escala de la unidad
 médica, las dosis perdidas se transformaron en porcentajes de pérdida
 relativa respecto al volumen total de vacunas manejadas por el equipo en
 cada año simulado. La visualización de la frecuencia de estas pérdidas a
-lo largo de las 5000 simulaciones de Montecarlo permite analizar la
+lo largo de las 5000 simulaciones de Monte Carlo permite analizar la
 forma de la distribución del riesgo para cada escenario operativo.
 
 \begin{figure}
@@ -6274,12 +6270,12 @@ estadística, la forma visual debe comprobarse mediante una prueba de
 bondad de ajuste paramétrica.
 
 Para ello, se aplicó la \textbf{Prueba de Normalidad de Shapiro-Wilk} a
-las métricas operativas obtenidas de las 5000 simulaciones de
-Montecarlo. Este test evalúa estadísticamente la hipótesis nula
-(\(H_0\)) de que los datos provienen de una distribución Normal.
-Siguiendo la metodología estándar para pruebas de bondad de ajuste
-(Montgomery y Runger 2014), la regla de decisión se basa en comparar el
-nivel de significancia (\(\alpha = 0.05\)) contra el valor-p obtenido:
+las métricas operativas obtenidas de las 5000 simulaciones de Monte
+Carlo. Este test evalúa estadísticamente la hipótesis nula (\(H_0\)) de
+que los datos provienen de una distribución Normal. Siguiendo la
+metodología estándar para pruebas de bondad de ajuste (Montgomery y
+Runger 2014), la regla de decisión se basa en comparar el nivel de
+significancia (\(\alpha = 0.05\)) contra el valor-p obtenido:
 
 \begin{itemize}
 \tightlist
@@ -6402,7 +6398,7 @@ inferencial no paramétrico de \textbf{Bootstrap} (Efron y Tibshirani
 1993). El funcionamiento de este algoritmo consiste en realizar un
 remuestreo masivo: se extraen aleatoriamente (con reemplazo) 10000
 nuevas muestras de tamaño \(n = 5000\) a partir de los 5000 años
-originales generados en la Simulación de Montecarlo. Al calcular el
+originales generados en la Simulación de Monte Carlo. Al calcular el
 promedio de cada una de estas 10000 nuevas muestras, la interacción de
 dos propiedades estadísticas fundamentales estabiliza el sistema: por un
 lado, la \textbf{Ley de los Grandes Números} garantiza que, dado el
@@ -6627,12 +6623,11 @@ generada por los apagones extremos o la saturación clínica, el método
 logró converger el estimador hacia una distribución Normal.
 
 Este nivel de estabilización permite concluir que los Intervalos de
-Confianza al 95\% calculados son precisos. Gracias al remuestreo masivo
-de Montecarlo y Bootstrap, la aleatoriedad climática y eléctrica del
-estado de Chiapas ha sido controlada, logrando transformar la
-incertidumbre de la red de frío institucional en una predicción de
-riesgo determinista, precisa y lista para sustentar la toma de
-decisiones normativas.
+Confianza al 95\% calculados son confiables. Gracias a la Simulación de
+Monte Carlo y al remuestreo masivo de Bootstrap, la aleatoriedad
+climática y eléctrica del estado de Chiapas ha sido controlada, logrando
+transformar la incertidumbre de la red de frío institucional en una
+predicción de riesgo determinista.
 
 \subsection{Precisión del Estimador (Dispersión de Medias
 Bootstrap)}\label{precisiuxf3n-del-estimador-dispersiuxf3n-de-medias-bootstrap}
@@ -6726,10 +6721,10 @@ unas cuantas dosis.
 Riesgo}\label{conclusiuxf3n-de-la-simulaciuxf3n-y-anuxe1lisis-de-riesgo}
 
 La integración del modelado estocástico (Ecuaciones Diferenciales
-Estocásticas) con el análisis inferencial masivo (Montecarlo y
-Bootstrap) ha permitido cuantificar, de manera rigurosa el verdadero
-nivel de riesgo operativo que enfrenta la red de frío en Tuxtla
-Gutiérrez, Chiapas.
+Estocásticas) con el análisis inferencial masivo (Monte Carlo y
+Bootstrap) ha permitido medir de manera rigurosa el verdadero nivel de
+riesgo operativo que enfrenta la red de frío en Tuxtla Gutiérrez,
+Chiapas.
 
 El análisis demuestra que el aislamiento térmico del equipo Haier
 HBC-150 y las fallas eléctricas, por sí solos, no representan una
