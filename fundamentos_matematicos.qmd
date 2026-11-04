@@ -314,7 +314,7 @@ Sea $H(t, z, \omega)$ un integrando predecible tal que $\displaystyle \int_0^T \
 $$
 \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) = \sum_{0 < T_k \le T} H(T_k, \gamma_k).
 $$
-Si además el integrando satisface la condición de integrabilidad $\mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] < \infty$, el valor esperado de la integral de conteo coincide con la esperanza de la integral respecto a la medida de intensidad:
+Si además el integrando satisface la condición de integrabilidad $\mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] < \infty$, entonces el valor esperado de la integral de conteo coincide con la esperanza de la integral respecto a la medida de intensidad:
 $$
 \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) \right] = \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) \nu_t(dz) dt \right] = \mathbb{E}\left[ \int_0^T \lambda(t) \left( \int_{\mathcal{Z}} H(t, z) dF(z) \right) dt \right].
 $$
@@ -490,7 +490,7 @@ Para ver la diferencia entre una EDE continua y una EDE con saltos, en la @fig-s
 
 ![Trayectorias simuladas de una ecuación diferencial estocástica de tipo Ornstein-Uhlenbeck con y sin saltos. El eje horizontal representa el avance del tiempo en un horizonte de $T = 10.0$ con incrementos discretos de $dt = 0.01$. La línea horizontal negra punteada indica el nivel de equilibrio $\theta = 5$. La trayectoria continua (azul) muestra una difusión clásica perturbada únicamente por el movimiento Browniano $dW(t)$. Por otro lado, la trayectoria discontinua (roja) incorpora perturbaciones discretas mediante un proceso de saltos de Poisson, generando incrementos instantáneos seguidos por etapas de decaimiento exponencial controladas por la tasa de reversión $\kappa$.](trayectorias_sde.png){#fig-sde-comparacion width="90%" fig-align="center"}
 
-Como se observa en la @fig-sde-comparacion, la presencia de discontinuidades modifica el comportamiento de las trayectorias del proceso. Debido a que estos saltos ocurren de forma instantánea ($\Delta X(t) = X(t) - X(t^-) \neq 0$), el Lema de Itô continuo (@thm-ito-clasico) debe extenderse incorporando un operador de diferencias finitas que contabilice el cambio exacto de cualquier función diferenciable en los instantes de discontinuidad [@situ2005theory; @platen2010numerical].
+Como se observa en la @fig-sde-comparacion, la presencia de discontinuidades modifica el comportamiento de las trayectorias del proceso. Debido a que estos saltos ocurren de forma instantánea $(\Delta X(t) = X(t) - X(t^-) \neq 0)$, el Lema de Itô continuo (@thm-ito-clasico) debe extenderse incorporando un operador de diferencias finitas que contabilice el cambio exacto de cualquier función diferenciable en los instantes de discontinuidad [@situ2005theory; @platen2010numerical].
 
 ::: {#thm-ito-saltos-fijo}
 ### Fórmula de Itô para Difusiones con Saltos
@@ -755,15 +755,15 @@ De todo lo anterior se concluye la demostracion del teorema de existencia y unic
 
 ## Modelo Estocástico Termodinámico (Ornstein-Uhlenbeck Híbrido)
 
-Una vez demostrado el teorema general de existencia y unicidad para ecuaciones diferenciales estocásticas híbridas con saltos y régimen de Markov (@thm-mao-switching), procedemos a formular la ecuación diferencial estocástica híbrida que describe la evolución de la temperatura interna $T(t)$ del refrigerador en un periodo temporal $[0, T]$, con $T > 0$ (la justificación detallada de la elección de esta ecuación diferencial estocástica se encuentra en el capitulo 5: Estudio de Caso).
+Una vez demostrado el teorema general de existencia y unicidad para ecuaciones diferenciales estocásticas híbridas con saltos y régimen de Markov (@thm-mao-switching), procedemos a formular la ecuación diferencial estocástica híbrida que describe la evolución de la temperatura interna $T(t)$ del refrigerador en un periodo temporal $[0, T]$, con $T > 0$ (la justificación detallada de la elección de esta ecuación diferencial estocástica se encuentra en el capitulo 7: Estudio de Caso).
 
 Sea $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})$ un espacio de probabilidad filtrado. Basándonos en la ley de enfriamiento de Newton y en el proceso de Ornstein-Uhlenbeck (@def-ou-clasico), modelamos la temperatura interna $T(t)$ mediante una ecuación diferencial estocástica híbrida controlada por una cadena de Markov a tiempo continuo $\{\alpha(t)\}_{t \ge 0}$ (@def-cadena-markov) con espacio de estados $\mathcal{M} = \{1, 2\}$ y matriz generadora de tasas finitas $Q = (q_{ij})_{2 \times 2}$, cuya expresión está dada por:
 
 $$
 dT(t) = 
 \begin{cases} 
-\kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \\ 
-\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 
+\kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
+\kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
 \end{cases}, \quad 0 \leq t \leq T,
 $$ {#eq-ede-operativa-teorica}
 
