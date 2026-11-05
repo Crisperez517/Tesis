@@ -496,7 +496,7 @@ $$
 DA(t) = \int_{0}^{t} k(T_K(s)) \cdot \mathbf{1}_{\{T(s) > 8^\circ\text{C}\}} \, ds.
 $$
 
-De acuerdo con la discretización temporal deducida en la @eq-fraccion-dano-paso junto con el balance de la @eq-balance-inventario-general, para actualizar el estado del sistema en pasos discretos $\Delta t$ dentro de la Simulación de Monte Carlo, el número de dosis destruidas (merma instantánea) en cada subintervalo se calcula multiplicando el inventario activo $I(t)$ por la fracción de biológico degradada $\Delta D_n$:
+De acuerdo con la discretización temporal deducida en la @eq-fraccion-dano-paso junto con la @eq-balance-inventario-general, para actualizar el estado del sistema en pasos discretos $\Delta t$ dentro de la Simulación de Monte Carlo, el número de dosis destruidas (merma instantánea) en cada subintervalo se calcula multiplicando el inventario activo $I(t)$ por la fracción de biológico degradada $\Delta D_n$:
 
 $$
 \text{Merma}(t_n) = I(t_n) \Delta D_n = I(t_n) \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}}.
