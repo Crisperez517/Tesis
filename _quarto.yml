@@ -88,8 +88,8 @@ format:
     institution: Universidad Autónoma de Chiapas
     email: cristobal.perez70@unach.mx
     keep-tex: true
-    pdf-engine: lualatex
     toc: true
+    link-citations: true
     code-fold: true
     fig-align: center
     fig-cap-location: bottom

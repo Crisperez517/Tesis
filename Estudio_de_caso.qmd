@@ -470,55 +470,39 @@ Las colas de una distribución Normal estándar se extienden hasta menos infinit
 
 Para garantizar la viabilidad física del proceso estocástico durante las simulaciones de Monte Carlo, la variable aleatoria $\gamma_i$ se define como una distribución truncada inferiormente, aplicando un filtro de maximización:
 $$\gamma_i = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)$${#eq-salto-termico}
-De esta forma, la Ecuación Diferencial Estocástica absorbe la variabilidad operativa del personal médico sin riesgo de arrojar perturbaciones termodinámicamente imposibles.
+De esta forma, la Ecuación Diferencial Estocástica absorbe la variabilidad operativa del personal médico sin riesgo a arrojar perturbaciones termodinámicamente imposibles.
 
 ## Cinética de Degradación Térmica (Ecuación de Arrhenius) {#sec-Arrhenius}
 
-La Ecuación Diferencial Estocástica calibrada anteriormente permite simular con alta precisión la trayectoria térmica interna del refrigerador, $T(t)$. Sin embargo, para evaluar el impacto logístico y en la salud pública, es necesario traducir estas variaciones térmicas en pérdida de viabilidad del biológico.
-
-La degradación de las vacunas (particularmente las vivas atenuadas, como el biológico contra el Sarampión o la Poliomielitis) es un proceso de desnaturalización proteica que se acelera exponencialmente con el incremento de temperatura. Desde una perspectiva fisicoquímica, la concentración de ingrediente activo decae siguiendo una cinética de primer orden, cuya velocidad de reacción $k(T)$ se modela mediante la **Ecuación de Arrhenius** [@sinko2011martin]:
+La Ecuación Diferencial Estocástica calibrada anteriormente permite simular la trayectoria térmica interna del refrigerador, $T(t)$. Para traducir estas variaciones térmicas en pérdida de viabilidad del biológico (particularmente en vacunas vivas atenuadas como Sarampión o Poliomielitis), retomamos el modelo cinético de primer orden (@eq-cinetica-primer-orden) y la **Ecuación de Arrhenius** (@def-ecuacion-arrhenius y @eq-arrhenius-teorica) establecidos en la @sec-fundamento-arrhenius [@sinko2011martin; @yoshioka2000stability]:
 
 $$
-k(T(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right)
+k(T_K(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right).
 $$ {#eq-Arrhenius}
 
-Cada parámetro de la ecuación representa lo siguiente:
+Para nuestro estudio de caso, los parámetros fisicoquímicos de la @eq-Arrhenius se calibran de la siguiente manera:
 
-* **$k(T(t))$**: La constante de velocidad de degradación térmica en el instante $t$, expresada en $\text{s}^{-1}$.
-* **$T_K(t)$**: La temperatura interna del fluido convertida a escala absoluta (grados Kelvin), calculada como $T(t) + 273.15$.
-* **$R$**: La Constante Universal de los Gases, con un valor fijo de $8.314 \, \text{J/(mol} \cdot \text{K)}$.
-* **$E_a$**: La Energía de Activación, calibrada en **$85,000 \, \text{J/mol}$** ($85 \text{ kJ/mol}$). Representa la barrera energética mínima que las moléculas del antígeno deben superar para iniciar el proceso irreversible de ruptura estructural.
-* **$A$**: El Factor Pre-exponencial (o factor de frecuencia), ajustado a un valor empírico de **$1.2 \times 10^{13} \, \text{s}^{-1}$**. Este parámetro asegura que la tasa de degradación sea prácticamente nula cuando el equipo opera correctamente dentro de la red de frío (2°C a 8°C), pero que escale de forma logarítmica severa ante una excursión térmica crítica.
+- **$k(T_K(t))$**: La constante de velocidad de degradación térmica en el instante $t$, expresada en $\text{s}^{-1}$.
+- **$T_K(t)$**: La temperatura interna del fluido convertida a escala absoluta (grados Kelvin), calculada como $T(t) + 273.15$.
+- **$R$**: La Constante Universal de los Gases, con un valor fijo de $8.314 \, \text{J/(mol} \cdot \text{K)}$.
+- **$E_a$**: La Energía de Activación, calibrada en **$85,000 \, \text{J/mol}$** ($85 \text{ kJ/mol}$). Representa la barrera energética mínima que las moléculas del antígeno deben superar para iniciar el proceso irreversible de ruptura estructural.
+- **$A$**: El Factor Preexponencial (o factor de frecuencia), ajustado a un valor empírico de **$1.2 \times 10^{13} \, \text{s}^{-1}$**. Este parámetro asegura que la tasa de degradación sea prácticamente nula cuando el equipo opera correctamente dentro de la red de frío ($2^\circ\text{C}$ a $8^\circ\text{C}$), pero que escale de forma severa ante una excursión térmica crítica.
 
 ### Modelo de Daño Térmico Acumulado y Merma de Inventario
 
-En la práctica clínica normativa, las variaciones térmicas que oscilan dentro del rango seguro (2°C a 8°C) se consideran tolerables, y su impacto en la caducidad a corto plazo es ignorado. El daño logístico ocurre exclusivamente cuando la red de frío se rompe. Para incorporar este protocolo operativo al modelo matemático, la degradación se condiciona mediante una función indicadora $\mathbb{I}_{\{T(t) > 8^\circ\text{C}\}}$, la cual activa el proceso de pérdida térmica únicamente cuando la temperatura cruza el límite superior de seguridad.
-
-Bajo este esquema, la cantidad de vacunas viables en el inventario, $I(t)$, se rige por una Ecuación Diferencial Ordinaria (EDO) de primer orden, donde la tasa de pérdida es proporcional al inventario actual [@sinko2011martin]:
+En la práctica clínica normativa, las variaciones térmicas que oscilan dentro del rango normativo ($2^\circ\text{C}$ a $8^\circ\text{C}$) se consideran tolerables y el daño logístico ocurre exclusivamente cuando se rompe la cadena de frío ($T(t) > 8^\circ\text{C}$). Como se fundamentó en la @sec-fundamento-arrhenius y en la @sec-fundamento-inventario-seir [@control2026vaccine; @sinko2011martin], integrando la tasa cinética condicionada por la función indicadora $\mathbf{1}_{\{T(t) > 8^\circ\text{C}\}}$ se define el **Daño Acumulado ($DA$)** hasta el instante $t$ como:
 
 $$
-\frac{dI(t)}{dt} = -k(T(t)) \cdot I(t) \cdot \mathbb{I}_{\{T(t) > 8\}}
+DA(t) = \int_{0}^{t} k(T_K(s)) \cdot \mathbf{1}_{\{T(s) > 8^\circ\text{C}\}} \, ds.
 $$
 
-Al resolver esta ecuación diferencial mediante variables separables e integrando desde el inicio de la simulación ($t=0$) hasta un tiempo $t$, se obtiene la cantidad exacta de inventario sobreviviente:
+De acuerdo con la discretización temporal deducida en la @eq-fraccion-dano-paso junto con el balance de la @eq-balance-inventario-general, para actualizar el estado del sistema en pasos discretos $\Delta t$ dentro de la Simulación de Monte Carlo, el número de dosis destruidas (merma instantánea) en cada subintervalo se calcula multiplicando el inventario activo $I(t)$ por la fracción de biológico degradada $\Delta D_n$:
 
 $$
-\int_{I(0)}^{I(t)} \frac{dI}{I} = - \int_{0}^{t} k(T(s)) \cdot \mathbb{I}_{\{T(s) > 8\}} \, ds \implies I(t) = I(0) \exp\left( - \int_{0}^{t} k(T(s)) \cdot \mathbb{I}_{\{T(s) > 8\}} \, ds \right)
+\text{Merma}(t_n) = I(t_n) \Delta D_n = I(t_n) \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}}.
 $$
 
-El término integral dentro de la función exponencial define formalmente el **Daño Acumulado ($DA$)**:
-
-$$
-DA(t) = \int_{0}^{t} k(T(s)) \cdot \mathbb{I}_{\{T(s) > 8\}} \, ds
-$$
-
-Esta formulación integral permite contabilizar analíticamente el estrés térmico exacto de cada trayectoria. Computacionalmente, para actualizar el estado del sistema en pasos discretos de tiempo $\Delta t$ dentro de la Simulación de Monte Carlo, la solución analítica de la EDO estipula que la fracción de inventario perdido (merma instantánea) durante ese diferencial de tiempo se calcula extrayendo el complemento del factor de supervivencia:
-
-$$
-\text{Merma}(t) = I(t) \left( 1 - e^{-k(T(t)) \Delta t} \right)
-$$
-
-Esta discretización asegura que el modelo numérico refleje con precisión la cinética fisicoquímica. En cada iteración, el algoritmo descuenta las dosis destruidas por la exposición al calor durante los apagones, permitiendo la activación automatizada de los protocolos logísticos de reabastecimiento si el inventario cae por debajo de los umbrales críticos de operación.
+De esta forma, en cada iteración donde la temperatura rebasa los $8^\circ\text{C}$ (tras superar el periodo de inercia térmica del vial), el algoritmo descuenta las dosis inutilizables por exposición al calor, activando los protocolos de reabastecimiento cuando el inventario cae por debajo del umbral crítico de operación.
 
 ### Exclusión del Riesgo por Congelamiento ($T < 2^\circ\text{C}$)
 

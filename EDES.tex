@@ -215,14 +215,14 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -352,18 +352,21 @@ Y finalmente, a las comunidades chiapanecas que enfrentan las inundaciones tempo
 La preservación de vacunas en condiciones termodinámicas óptimas
 constituye uno de los pilares críticos para la eficacia de los programas
 de inmunización y el control de brotes epidémicos en salud pública
-(García, Díaz-Infante, y Minjárez-Sosa 2026). Debido a la naturaleza
-termosensible de sus componentes antigénicos y adyuvantes, los productos
-biológicos deben resguardarse estrictamente dentro del rango normativo
-de \([2^\circ\text{C}, 8^\circ\text{C}]\) desde su fabricación hasta su
-administración clínica (Yoshioka y Stella 2000). Cualquier excursión
-térmica fuera de estos límites compromete la integridad del biológico:
-la exposición a temperaturas inferiores a \(0^\circ\text{C}\) provoca la
-aglomeración irreversible de adyuvantes por congelación, mientras que
-las excursiones por encima de los \(8^\circ\text{C}\) aceleran
-exponencialmente la desnaturalización proteica siguiendo una cinética
-química de primer orden gobernada por la ecuación de Arrhenius (Atkins,
-Paula, y Keeler 2018; Yoshioka y Stella 2000).
+(\citeproc{ref-control2026vaccine}{García, Díaz-Infante, y Minjárez-Sosa
+2026}). Debido a la naturaleza termosensible de sus componentes
+antigénicos y adyuvantes, los productos biológicos deben resguardarse
+estrictamente dentro del rango normativo de
+\([2^\circ\text{C}, 8^\circ\text{C}]\) desde su fabricación hasta su
+administración clínica (\citeproc{ref-yoshioka2000stability}{Yoshioka y
+Stella 2000}). Cualquier excursión térmica fuera de estos límites
+compromete la integridad del biológico: la exposición a temperaturas
+inferiores a \(0^\circ\text{C}\) provoca la aglomeración irreversible de
+adyuvantes por congelación, mientras que las excursiones por encima de
+los \(8^\circ\text{C}\) aceleran exponencialmente la desnaturalización
+proteica siguiendo una cinética química de primer orden gobernada por la
+ecuación de Arrhenius (\citeproc{ref-atkins2018physical}{Atkins, Paula,
+y Keeler 2018}; \citeproc{ref-yoshioka2000stability}{Yoshioka y Stella
+2000}).
 
 La vulnerabilidad de la red de frío se intensifica en regiones con
 climas cálidos extremos, como la ciudad de Tuxtla Gutiérrez, Chiapas,
@@ -393,19 +396,20 @@ régimen de operación o inyecciones instantáneas de calor.
 Para superar estas limitaciones, la presente tesis desarrolla y analiza
 un modelo termodinámico basado en una \textbf{ecuación diferencial
 estocástica (EDE) híbrida con conmutación markoviana y saltos de Poisson
-compuestos} (Mao y Yuan 2006; Situ 2005; Yin y Zhu 2010). En esta
-formulación, una cadena de Markov a tiempo continuo alterna la dinámica
-del sistema entre un régimen de enfriamiento activo por convección
-forzada (con suministro eléctrico) y un régimen de calentamiento
-inercial pasivo hacia la temperatura ambiente exterior (durante un
-apagón), mientras que un proceso de Poisson compuesto modela los choques
-térmicos instantáneos inducidos por las aperturas de puerta en horario
-clínico. A partir de la teoría de integración estocástica de Itô y de
-medidas aleatorias de Poisson compensadas, se demuestra analíticamente
-que el modelo propuesto satisface las condiciones de Lipschitz global y
-de crecimiento lineal, garantizando la existencia y unicidad de una
-solución fuerte con trayectorias \emph{càdlàg} acotada en media
-cuadrática.
+compuestos} (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-situ2005theory}{Situ 2005};
+\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}). En esta formulación, una
+cadena de Markov a tiempo continuo alterna la dinámica del sistema entre
+un régimen de enfriamiento activo por convección forzada (con suministro
+eléctrico) y un régimen de calentamiento inercial pasivo hacia la
+temperatura ambiente exterior (durante un apagón), mientras que un
+proceso de Poisson compuesto modela los choques térmicos instantáneos
+inducidos por las aperturas de puerta en horario clínico. A partir de la
+teoría de integración estocástica de Itô y de medidas aleatorias de
+Poisson compensadas, se demuestra analíticamente que el modelo propuesto
+satisface las condiciones de Lipschitz global y de crecimiento lineal,
+garantizando la existencia y unicidad de una solución fuerte con
+trayectorias \emph{càdlàg} acotada en media cuadrática.
 
 Con el propósito de trasladar este marco matemático a un entorno
 operativo real, la ecuación diferencial estocástica se calibra para un
@@ -414,8 +418,9 @@ Salud (OMS), el modelo institucional \textbf{Haier HBC-150}, integrando
 series meteorológicas locales, registros históricos de confiabilidad
 eléctrica de la CFE (índices SAIFI y SAIDI) y parámetros experimentales
 de transferencia térmica. Asimismo, siguiendo enfoques recientes sobre
-gestión estocástica de biológicos (García, Díaz-Infante, y Minjárez-Sosa
-2026), las trayectorias térmicas se acoplan con la cinética de
+gestión estocástica de biológicos
+(\citeproc{ref-control2026vaccine}{García, Díaz-Infante, y Minjárez-Sosa
+2026}), las trayectorias térmicas se acoplan con la cinética de
 degradación de Arrhenius incorporando un filtro físico de inercia
 térmica de \(30\text{ minutos}\) para los viales y con un modelo
 dinámico de inventario y reabastecimiento evaluado bajo tres escenarios:
@@ -425,16 +430,18 @@ contingencia epidemiológica (Escenario C).
 
 Finalmente, ante la ausencia de soluciones analíticas cerradas para el
 sistema acoplado, se implementa un esquema numérico regular de
-Euler-Maruyama para sistemas híbridos con saltos (Kloeden y Platen 1992;
-Platen y Bruti-Liberati 2010) sobre una malla temporal de alta
-resolución (\(\Delta t = 5\text{ minutos}\)). Mediante la simulación de
-Montecarlo de \(M = 5,000\) trayectorias anuales independientes por
-escenario y la aplicación de inferencia estadística no paramétrica vía
-remuestreo Bootstrap (Efron y Tibshirani 1993), este trabajo cuantifica
-con precisión las horas esperadas de ruptura de la cadena de frío y los
-intervalos de confianza al \(95\%\) para la merma anual de vacunas,
-proporcionando un criterio matemático riguroso para el diseño de
-protocolos logísticos en unidades de salud pública.
+Euler-Maruyama para sistemas híbridos con saltos
+(\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992};
+\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}) sobre
+una malla temporal de alta resolución (\(\Delta t = 5\text{ minutos}\)).
+Mediante la simulación de Montecarlo de \(M = 5,000\) trayectorias
+anuales independientes por escenario y la aplicación de inferencia
+estadística no paramétrica vía remuestreo Bootstrap
+(\citeproc{ref-efron1993introduction}{Efron y Tibshirani 1993}), este
+trabajo cuantifica con precisión las horas esperadas de ruptura de la
+cadena de frío y los intervalos de confianza al \(95\%\) para la merma
+anual de vacunas, proporcionando un criterio matemático riguroso para el
+diseño de protocolos logísticos en unidades de salud pública.
 
 \bookmarksetup{startatroot}
 
@@ -608,7 +615,8 @@ Fundamentales}\label{componentes-estocuxe1sticos-fundamentales}
 Las propiedades analíticas de un proceso estocástico, tales como la
 continuidad, la diferenciabilidad y la presencia de discontinuidades
 finitas, se definen estrictamente a partir del comportamiento de sus
-trayectorias, para más detalles consultar (Karlin y Taylor 1998). Los
+trayectorias, para más detalles consultar
+(\citeproc{ref-karlin1998introduction}{Karlin y Taylor 1998}). Los
 componentes aleatorios de nuestro sistema se sustentan en una clase
 específica de procesos estocásticos a tiempo continuo.
 
@@ -669,7 +677,8 @@ trayectorias son continuas, \textbf{no son diferenciables en ningún
 punto} con probabilidad 1. Esta restricción analítica invalida el uso
 del cálculo tradicional de Newton-Leibniz e impone la necesidad del
 cálculo de Itô. Para una revisión detallada de estas construcciones
-analíticas, se sugiere consultar a (Karatzas y Shreve 1998).
+analíticas, se sugiere consultar a
+(\citeproc{ref-karatzas1998brownian}{Karatzas y Shreve 1998}).
 
 \begin{figure}
 
@@ -695,7 +704,8 @@ constituyen eventos que, por su naturaleza física temporal, no son
 continuos. Representan inyecciones discretas, repentinas y finitas de
 aire cálido al sistema, alterando la temperatura instantáneamente. El
 modelo matemático de tales eventos discretos recae en la familia de los
-procesos de conteo y saltos puros (Ross 1996).
+procesos de conteo y saltos puros
+(\citeproc{ref-ross1996stochastic}{Ross 1996}).
 
 \begin{definition}[Proceso de Poisson
 Homogéneo]\protect\hypertarget{def-proceso-poisson}{}\label{def-proceso-poisson}
@@ -901,7 +911,7 @@ transición de primer orden quedan descritas mediante las expresiones
 conmutaciones macroscópicas de la dinámica del refrigerador sin
 necesidad de introducir variables temporales discretas ni heurísticas.
 Las propiedades asintóticas y de estabilidad de estos procesos híbridos
-se encuentran en (Asmussen 2003).
+se encuentran en (\citeproc{ref-asmussen2003markov}{Asmussen 2003}).
 
 \section{Teoría de Integración Estocástica de
 Itô}\label{teoruxeda-de-integraciuxf3n-estocuxe1stica-de-ituxf4}
@@ -930,7 +940,8 @@ temporal, es decir: \[
 los incrementos, K. Itô construyó la integral estocástica no como un
 límite puntual para cada trayectoria individual, sino como un límite en
 media cuadrática dentro de un espacio de funciones cuadrado-integrables
-(Mao y Yuan 2006; Situ 2005).
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \subsection{Construcción de la Integral de Itô e
 Isometría}\label{construcciuxf3n-de-la-integral-de-ituxf4-e-isometruxeda}
@@ -991,7 +1002,8 @@ de media nula: \[
 Asimismo, la independencia entre incrementos sobre subintervalos
 disjuntos anula las covarianzas cruzadas al elevar la suma al cuadrado,
 dando lugar a una identidad fundamental para calcular la varianza de la
-integral estocástica (Karatzas y Shreve 1998; Mao y Yuan 2006).
+integral estocástica (\citeproc{ref-karatzas1998brownian}{Karatzas y
+Shreve 1998}; \citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}).
 
 \begin{theorem}[Isometría de Itô para el Movimiento
 Browniano]\protect\hypertarget{thm-isometria-ito}{}\label{thm-isometria-ito}
@@ -1033,7 +1045,7 @@ representar analíticamente perturbaciones cuyos efectos dependen tanto
 del tiempo como de la magnitud del salto, y poder aplicar la teoría de
 martingalas en ecuaciones diferenciales estocásticas, es necesario
 formular los procesos de salto mediante \textbf{medidas aleatorias de
-Poisson} (Situ 2005).
+Poisson} (\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \subsection{Medida Aleatoria de Conteo, Intensidad y Medida
 Compensada}\label{medida-aleatoria-de-conteo-intensidad-y-medida-compensada}
@@ -1159,7 +1171,7 @@ arrastre determinista en el sistema. Para separar la fluctuación
 puramente aleatoria de su tendencia media y obtener un integrador con la
 propiedad de martingala de forma análoga al diferencial Browniano
 \(dW(t)\), se centra la medida aleatoria restándole su valor esperado
-(Situ 2005).
+(\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{definition}[Medida Aleatoria de Poisson
 Compensada]\protect\hypertarget{def-medida-compensada}{}\label{def-medida-compensada}
@@ -1192,8 +1204,9 @@ estocásticos respecto a ellas. En la teoría de integración con saltos,
 es fundamental exigir que el integrando no dependa del valor exacto del
 salto en el mismo instante en que este ocurre, sino únicamente de la
 información disponible inmediatamente antes del salto. Esta propiedad de
-causalidad se formaliza mediante el concepto de predecibilidad (Mao y
-Yuan 2006; Situ 2005).
+causalidad se formaliza mediante el concepto de predecibilidad
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{definition}[Proceso e Integrando
 Predecible]\protect\hypertarget{def-proceso-predecible}{}\label{def-proceso-predecible}
@@ -1259,7 +1272,7 @@ saltos observados su integral de compensación determinista: \[
 \] Al igual que en la integral de Itô clásica, esta definición se
 extiende por densidad en media cuadrática a la clase general de
 integrandos predecibles de cuadrado integrable respecto a la medida de
-intensidad (Situ 2005).
+intensidad (\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{definition}[Integral Estocástica respecto a la Medida de Poisson
 Compensada]\protect\hypertarget{def-integral-saltos}{}\label{def-integral-saltos}
@@ -1283,8 +1296,8 @@ idénticamente nula: \[
 De forma analoga al Movimiento Browniano, la integral respecto a la
 medida aleatoria de Poisson compensada posee una propiedad de isometría
 en \(L^2(\Omega, \mathbb{P})\) que relaciona su varianza con una
-integral determinista respecto al compensador \(\nu_t(dz)dt\) (Situ
-2005).
+integral determinista respecto al compensador \(\nu_t(dz)dt\)
+(\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{theorem}[Isometría de Itô para la Medida
 Compensada]\protect\hypertarget{thm-isometria-saltos}{}\label{thm-isometria-saltos}
@@ -1333,7 +1346,8 @@ diferencial estocástica para el refrigerador de vacunas planteada
 originalmente mediante incrementos del proceso de Poisson compuesto
 \(dJ(t)\) en la forma canónica de una EDE impulsada por martingalas
 (\(\tilde{N}(dt, dz)\) y \(dW(t)\)), requisito indispensable para
-aplicar los teoremas de existencia y unicidad de R. Situ (Situ 2005).
+aplicar los teoremas de existencia y unicidad de R. Situ
+(\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \section{Ecuaciones Diferenciales Estocásticas
 Continuas}\label{ecuaciones-diferenciales-estocuxe1sticas-continuas}
@@ -1372,7 +1386,8 @@ integral ordinaria de Riemann respecto al tiempo que captura la
 tendencia determinista del sistema, mientras que la segunda es una
 integral de Itô que modela la acumulación del ruido continuo. Para una
 revisión detallada del cálculo estocástico elemental, se sugiere
-consultar a (Karatzas y Shreve 1998).
+consultar a (\citeproc{ref-karatzas1998brownian}{Karatzas y Shreve
+1998}).
 
 Para asegurar que una EDE tenga solución y sea única y bien definida en
 todo su dominio temporal, los coeficientes de deriva y difusión deben
@@ -1409,7 +1424,8 @@ fuerte \(\{X(t)\}_{t \in [0, T]}\) adaptada a la filtración
 probabilidad 1 y tal que
 \(\mathbb{E}\left[\sup_{0 \le t \le T} \vert X(t) \vert^2\right] < \infty\).
 Una demostración detallada de este teorema, basada en el método de
-iteraciones sucesivas de Picard, se encuentra en (Arnold 1974).
+iteraciones sucesivas de Picard, se encuentra en
+(\citeproc{ref-arnold1974stochastic}{Arnold 1974}).
 
 \end{theorem}
 
@@ -1510,7 +1526,8 @@ X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigm
 
 la cual converge cuando \(t \to \infty\) a una distribución normal
 \(\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)\)
-independientemente del estado inicial \(x_0\) (Karlin y Taylor 1998).
+independientemente del estado inicial \(x_0\)
+(\citeproc{ref-karlin1998introduction}{Karlin y Taylor 1998}).
 
 \section{Ecuaciones Diferenciales Estocásticas con
 Saltos}\label{ecuaciones-diferenciales-estocuxe1sticas-con-saltos}
@@ -1520,7 +1537,8 @@ Browniano resultan insuficientes cuando el sistema físico experimenta
 perturbaciones discretas e instantáneas. Al incorporar la medida
 aleatoria de Poisson compensada \(\tilde{N}(dt, dz)\)
 Definición~\ref{def-medida-compensada} dentro de la EDE, se obtiene una
-ecuación diferencial estocástica con saltos (Situ 2005).
+ecuación diferencial estocástica con saltos
+(\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{definition}[Ecuación Diferencial Estocástica con Saltos de
 Poisson]\protect\hypertarget{def-ede-saltos}{}\label{def-ede-saltos}
@@ -1563,11 +1581,11 @@ Ecuación~\ref{eq-ede-saltos-int}, el integrando se evalúa en el límite
 por la izquierda \(X(t^-) = \lim_{s \uparrow t} X(s)\) para asegurar que
 sea un proceso predecible (Definición~\ref{def-proceso-predecible}) y
 que la integral respecto a la medida compensada \(\tilde{N}(dt, dz)\)
-preserve la propiedad de martingala (Situ 2005). Cabe notar que en las
-integrales respecto a \(ds\) y \(dW(s)\) es indistinto escribir \(X(s)\)
-o \(X(s^-)\), dado que toda trayectoria càdlàg posee a lo sumo un número
-numerable de discontinuidades, el cual es un conjunto con medida de
-Lebesgue cero.
+preserve la propiedad de martingala (\citeproc{ref-situ2005theory}{Situ
+2005}). Cabe notar que en las integrales respecto a \(ds\) y \(dW(s)\)
+es indistinto escribir \(X(s)\) o \(X(s^-)\), dado que toda trayectoria
+càdlàg posee a lo sumo un número numerable de discontinuidades, el cual
+es un conjunto con medida de Lebesgue cero.
 
 Para ver la diferencia entre una EDE continua y una EDE con saltos, en
 la Figura~\ref{fig-sde-comparacion} se muestran dos trayectorias
@@ -1602,8 +1620,9 @@ proceso. Debido a que estos saltos ocurren de forma instantánea
 \((\Delta X(t) = X(t) - X(t^-) \neq 0)\), el Lema de Itô continuo
 (Teorema~\ref{thm-ito-clasico}) debe extenderse incorporando un operador
 de diferencias finitas que contabilice el cambio exacto de cualquier
-función diferenciable en los instantes de discontinuidad (Situ 2005;
-Platen y Bruti-Liberati 2010).
+función diferenciable en los instantes de discontinuidad
+(\citeproc{ref-situ2005theory}{Situ 2005};
+\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}).
 
 \begin{theorem}[Fórmula de Itô para Difusiones con
 Saltos]\protect\hypertarget{thm-ito-saltos-fijo}{}\label{thm-ito-saltos-fijo}
@@ -1632,7 +1651,7 @@ Las condiciones suficientes para garantizar que la
 Ecuación~\ref{eq-ede-saltos-diff} posea una solución fuerte única y
 acotada en media cuadrática fueron establecidas por R. Situ mediante el
 método de contracción en espacios de Banach y estimaciones a priori
-(Situ 2005).
+(\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{theorem}[Teorema de Existencia y Unicidad con Saltos de Poisson
 (Teorema 117 y Lema 114 de
@@ -1665,14 +1684,16 @@ casi seguramente. Además, la solución satisface la cota de segundo
 momento: \[
 \mathbb{E}\left[ \sup_{t_0 \le t \le T} \vert X(t) \vert^2 \right] \le C \left( 1 + \mathbb{E}[\vert x_0 \vert^2] \right) < \infty,
 \] donde \(C > 0\) es una constante que depende únicamente de \(K\) y de
-la longitud del intervalo \((T - t_0)\) (Situ 2005).
+la longitud del intervalo \((T - t_0)\)
+(\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \end{theorem}
 
 Una propiedad fundamental derivada de la estructura de martingala y de
 la propiedad de Markov fuerte tanto del movimiento Browniano como de las
-medidas aleatorias de Poisson (Teoremas 100 y 101 en (Situ 2005);
-Observación 3.10 en (Mao y Yuan 2006)) establece que en el
+medidas aleatorias de Poisson (Teoremas 100 y 101 en
+(\citeproc{ref-situ2005theory}{Situ 2005}); Observación 3.10 en
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006})) establece que en el
 Teorema~\ref{thm-situ-existencia} los extremos temporales \(t_0\) y
 \(T\) pueden sustituirse por tiempos de paro acotados \(\tau_a\) y
 \(\tau_b\) tales que \(0 \le \tau_a \le \tau_b \le T\) casi seguramente,
@@ -1688,7 +1709,9 @@ Para demostrar la existencia, unicidad y acotamiento en segundo momento
 de las ecuaciones diferenciales estocásticas híbridas, así como para
 verificar analíticamente los coeficientes de nuestro modelo
 termodinámico, requerimos de tres desigualdades clásicas del análisis
-matemático y de los procesos estocásticos (Mao y Yuan 2006; Situ 2005).
+matemático y de los procesos estocásticos
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{lemma}[Desigualdad Elemental de Sumas
 Finitas]\protect\hypertarget{lem-desigualdad-algebraica}{}\label{lem-desigualdad-algebraica}
@@ -1710,7 +1733,8 @@ Al acotar el supremo de una solución, no es posible intercambiar
 directamente el operador de valor esperado con el supremo dentro de las
 integrales. Para controlar dichos términos mediante sus momentos en el
 tiempo final y usar posteriormente las isometrías de Itô, se emplea la
-desigualdad maximal de Doob (Mao y Yuan 2006; Situ 2005).
+desigualdad maximal de Doob (\citeproc{ref-mao2006stochastic}{Mao y Yuan
+2006}; \citeproc{ref-situ2005theory}{Situ 2005}).
 
 \begin{theorem}[Desigualdad Maximal de Martingalas de
 Doob]\protect\hypertarget{thm-desigualdad-doob}{}\label{thm-desigualdad-doob}
@@ -1737,7 +1761,8 @@ Teorema~\ref{thm-isometria-saltos}), se obtienen las cotas: \[
 
 Finalmente, para despejar la función de estado esperada cuando esta
 aparece en ambos lados de una desigualdad integral, se recurre a la
-desigualdad de Grönwall (Mao y Yuan 2006).
+desigualdad de Grönwall (\citeproc{ref-mao2006stochastic}{Mao y Yuan
+2006}).
 
 \begin{lemma}[Desigualdad de
 Grönwall]\protect\hypertarget{lem-gronwall}{}\label{lem-gronwall}
@@ -1763,14 +1788,15 @@ drásticamente debido a transiciones en el entorno (como cortes y
 restablecimientos en el suministro eléctrico) y simultáneamente el
 estado continuo sufre perturbaciones impulsivas (como aperturas de
 puerta), el comportamiento conjunto se describe mediante una ecuación
-diferencial estocástica híbrida con conmutación markoviana y saltos (Mao
-y Yuan 2006; Yin y Zhu 2010).
+diferencial estocástica híbrida con conmutación markoviana y saltos
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}).
 
 Para formalizar el análisis sobre subintervalos cuyos extremos son
 tiempos de paro Definición~\ref{def-tiempo-parada} \(\tau\) y \(\rho\)
 tales que \(0 \le \tau(\omega) \le \rho(\omega)\) para todo
 \(\omega \in \Omega\), usamos la notación estándar de \textbf{intervalos
-estocásticos} de (Mao y Yuan 2006): \[
+estocásticos} de (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}): \[
 [[\tau, \rho]] = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t \le \rho(\omega)\}, \qquad [[\tau, \rho[[ = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t < \rho(\omega)\}.
 \] Asimismo, denotamos por \(\mathcal{M}^2([[\tau, \rho]]; \mathbb{R})\)
 al espacio de los procesos estocásticos real-valuados \(\{X(t)\}\)
@@ -1779,8 +1805,8 @@ adaptados a \(\{\mathcal{F}_t\}_{t \ge 0}\) y definidos en
 \(\mathbb{E}\left[\int_\tau^\rho \vert X(t) \vert^2 dt\right] < \infty\),
 y por \(L^2_{\mathcal{F}_\tau}(\Omega; \mathbb{R})\) a la familia de
 variables aleatorias \(\xi\) que son \(\mathcal{F}_\tau\)-medibles y
-satisfacen que \(\mathbb{E}[\vert \xi \vert^2] < \infty\) (Mao y Yuan
-2006).
+satisfacen que \(\mathbb{E}[\vert \xi \vert^2] < \infty\)
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}).
 
 \begin{definition}[Ecuación Diferencial Estocástica Híbrida con
 Saltos]\protect\hypertarget{def-ede-hibrida}{}\label{def-ede-hibrida}
@@ -1813,8 +1839,9 @@ y
 
 Un proceso estocástico \(\{X(t)\}_{t \in [t_0, T]}\) se denomina una
 \textbf{solución fuerte} de la Ecuación~\ref{eq-ede-hibrida-diff} en
-\([t_0, T]\) si cumple las siguientes propiedades (Mao y Yuan 2006; Situ
-2005):
+\([t_0, T]\) si cumple las siguientes propiedades
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-situ2005theory}{Situ 2005}):
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1851,8 +1878,9 @@ Para operar con funciones que dependen conjuntamente de la variable de
 estado \(X(t)\) y del estado discreto de la cadena de Markov
 \(\alpha(t)\), la Fórmula de Itô con saltos
 (Teorema~\ref{thm-ito-saltos-fijo}) se acopla con el generador
-infinitesimal de la cadena \(Q = (q_{ij})\) (Mao y Yuan 2006; Yin y Zhu
-2010).
+infinitesimal de la cadena \(Q = (q_{ij})\)
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}).
 
 \begin{theorem}[Fórmula de Itô Generalizada para Sistemas Híbridos con
 Saltos]\protect\hypertarget{thm-lema-ito-saltos}{}\label{thm-lema-ito-saltos}
@@ -1892,7 +1920,8 @@ garantiza la existencia, unicidad fuerte y acotamiento en segundo
 momento de la solución para la ecuación diferencial estocástica híbrida
 con saltos (Ecuación~\ref{eq-ede-hibrida-diff}). La estructura de la
 demostración extiende el procedimiento constructivo sobre tiempos de
-paro del Teorema 3.13 y Lema 3.1 de (Mao y Yuan 2006) al caso de
+paro del Teorema 3.13 y Lema 3.1 de
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}) al caso de
 difusiones impulsadas por medidas aleatorias de Poisson compensadas
 mediante el Teorema~\ref{thm-situ-existencia}.
 
@@ -1955,12 +1984,13 @@ finito \(\mathcal{M} = \{1, 2, \dots, m\}\) y sus tasas de transición
 satisfacen \(0 \le q_{ij} < \infty\) para todo \(i \neq j\), todos los
 estados de la cadena son estables
 \(\left( \displaystyle \vert q_{ii} \vert = \sum_{j \neq i} q_{ij} < \infty \right)\)
-y el proceso no presenta explosión (Mao y Yuan 2006). En consecuencia,
-casi toda trayectoria de \(\alpha(\cdot)\) es una función escalonada
-continua por la derecha que experimenta únicamente un número finito de
-cambios en el intervalo \([t_0, T]\). Asi, definiendo recursivamente la
-sucesión de tiempos de paro \(\{\tau_k\}_{k \in \mathbb{N}_0}\) asociada
-a las conmutaciones de régimen mediante \(\tau_0 = t_0\) y \[
+y el proceso no presenta explosión (\citeproc{ref-mao2006stochastic}{Mao
+y Yuan 2006}). En consecuencia, casi toda trayectoria de
+\(\alpha(\cdot)\) es una función escalonada continua por la derecha que
+experimenta únicamente un número finito de cambios en el intervalo
+\([t_0, T]\). Asi, definiendo recursivamente la sucesión de tiempos de
+paro \(\{\tau_k\}_{k \in \mathbb{N}_0}\) asociada a las conmutaciones de
+régimen mediante \(\tau_0 = t_0\) y \[
 \tau_{k+1} = \min\left\{T, \inf\{t > \tau_k : \alpha(t) \neq \alpha(\tau_k)\}\right\}, \quad k \ge 0,
 \] se cumplen las siguientes dos propiedades:
 
@@ -2104,9 +2134,10 @@ un salto, por definición de \(\sigma_n\) se cumple que
 \(\vert X(r) \vert < n\) para todo \(r \in (t_0, \sigma_n)\), por lo que
 el límite por la izquierda satisface que
 \(\vert X_n(r^-) \vert = \vert X(r^-) \vert \le \max\{n, \vert x_0 \vert\}\)
-para todo \(r \in [[t_0, \sigma_n]]\) (Situ 2005). Elevando al cuadrado
-ambos miembros de la desigualdad y utilizando que el máximo de dos
-números no negativos es menor o igual que su suma, se obtiene que
+para todo \(r \in [[t_0, \sigma_n]]\)
+(\citeproc{ref-situ2005theory}{Situ 2005}). Elevando al cuadrado ambos
+miembros de la desigualdad y utilizando que el máximo de dos números no
+negativos es menor o igual que su suma, se obtiene que
 \(\vert X_n(r^-) \vert^2 \le \max\{n^2, \vert x_0 \vert^2\} \le n^2 + \vert x_0 \vert^2\).
 Sustituyendo esta cota en el integrando de la
 Ecuación~\ref{eq-cota-previa-finitud} e integrando respecto a \(r\), se
@@ -2442,8 +2473,8 @@ diferencia del análisis numérico determinista, donde el error de
 aproximación se evalúa de manera puntual, en el cálculo estocástico la
 cercanía entre la solución exacta \(X(t)\) y la aproximación numérica
 \(Y\) debe medirse en media cuadrática o en distribución sobre el
-espacio de probabilidad \((\Omega, \mathcal{F}, \mathbb{P})\) (Kloeden y
-Platen 1992).
+espacio de probabilidad \((\Omega, \mathcal{F}, \mathbb{P})\)
+(\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}).
 
 \section{Tipos de Convergencia}\label{tipos-de-convergencia}
 
@@ -2482,7 +2513,8 @@ establecerse demostrando que el error cuadrático medio cumple
 donde \(\bar{Y}(t)\) denota la extensión continua del esquema numérico.
 La convergencia fuerte controla el error promedio trayectoria por
 trayectoria, por lo que lo hace el criterio adecuado cuando se requiere
-simular trayectorias individuales del proceso (Wang 2016).
+simular trayectorias individuales del proceso
+(\citeproc{ref-wang2016numerical}{Wang 2016}).
 
 \begin{definition}[Convergencia
 Débil]\protect\hypertarget{def-convergencia-debil}{}\label{def-convergencia-debil}
@@ -2506,7 +2538,8 @@ tales que para todo \(\Delta t \in (0, \delta_0)\) se cumple que:
 A diferencia del criterio fuerte, la convergencia débil no exige
 cercanía trayectoria por trayectoria, sino que mide el error en la
 aproximación de los momentos estadísticos y de los valores esperados de
-funcionales de la solución (Wang 2016).
+funcionales de la solución (\citeproc{ref-wang2016numerical}{Wang
+2016}).
 
 \section{Esquema Numérico de Euler-Maruyama}\label{sec-euler-maruyama}
 
@@ -2564,8 +2597,8 @@ Euler-Maruyama (Ecuación~\ref{eq-esquema-em}).
 La reducción del orden de convergencia fuerte a \(\gamma = 0.5\) (frente
 al orden \(1.0\) del método de Euler clásico determinista) se debe a que
 la raíz de la varianza del incremento Browniano escala proporcionalmente
-a \(\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}\) (Kloeden y
-Platen 1992).
+a \(\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}\)
+(\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}).
 
 La implementación paso a paso del método de Euler-Maruyama se detalla en
 el alg.~\ref{alg-euler-maruyama}.
@@ -2615,9 +2648,9 @@ Para alcanzar un orden de convergencia fuerte superior cuando el
 coeficiente de difusión \(\sigma(t, x)\) depende de la variable de
 estado \(X(t)\), el método de Milstein incorpora el término de orden
 \(\mathcal{O}(\Delta t)\) que viene de la expansión de Itô-Taylor
-(Kloeden y Platen 1992). Aplicando el Lema de Itô
-(Teorema~\ref{thm-ito-clasico}) al coeficiente \(\sigma(s, X(s))\) para
-\(s \in [t_n, t_{n+1}]\), se tiene que
+(\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}). Aplicando
+el Lema de Itô (Teorema~\ref{thm-ito-clasico}) al coeficiente
+\(\sigma(s, X(s))\) para \(s \in [t_n, t_{n+1}]\), se tiene que
 \(\displaystyle \sigma(s, X(s)) \approx \sigma(t_n, X(t_n)) + \sigma(t_n, X(t_n))\frac{\partial \sigma}{\partial x}(t_n, X(t_n))(W(s) - W(t_n))\).
 Al sustituir esta aproximación en la integral estocástica
 \(\displaystyle \int_{t_n}^{t_{n+1}} \sigma(s, X(s)) dW(s)\), se obiene
@@ -2656,7 +2689,8 @@ Milstein (Ecuación~\ref{eq-esquema-milstein}) converge en sentido
 \[
 \left( \mathbb{E}\left[ \sup_{0 \le n \le N} \vert X(t_n) - Y_n \vert^2 \right] \right)^{1/2} \le C \Delta t.
 \] La demostración detallada de este teorema mediante expansiones
-truncadas de Itô-Taylor se presenta en (Kloeden y Platen 1992).
+truncadas de Itô-Taylor se presenta en
+(\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}).
 
 \end{theorem}
 
@@ -2721,8 +2755,9 @@ dX(t) = \mu X(t) dt + \sigma X(t) dW(t), \quad X(0) = X_0,
 donde \(\mu \in \mathbb{R}\) es la tasa de deriva y \(\sigma > 0\) es el
 parámetro de volatilidad. Aplicando el Lema de Itô
 (Teorema~\ref{thm-ito-clasico}) a la función \(f(x) = \ln(x)\) (o
-mediante la fórmula exponencial de la Sección 3.2 en (Situ 2005)), se
-obtiene que la solución de la Ecuación~\ref{eq-ede-gbm} está dada por:
+mediante la fórmula exponencial de la Sección 3.2 en
+(\citeproc{ref-situ2005theory}{Situ 2005})), se obtiene que la solución
+de la Ecuación~\ref{eq-ede-gbm} está dada por:
 
 \begin{equation}\phantomsection\label{eq-gbm-solucion}{
 X(t) = X_0 \exp\left[ \left( \mu - \frac{1}{2}\sigma^2 \right)t + \sigma W(t) \right].
@@ -2738,7 +2773,8 @@ Euler-Maruyama aproxima la difusión como constante dentro de cada
 subintervalo \([t_n, t_{n+1}]\), acumulando un error de truncamiento de
 orden \((\Delta t)^{1/2}\). Por el contrario, el método de Milstein
 incorpora dicho término cuadrático, alcanzando un orden de convergencia
-fuerte \(\gamma = 1.0\) (Kloeden y Platen 1992).
+fuerte \(\gamma = 1.0\) (\citeproc{ref-kloeden1992numerical}{Kloeden y
+Platen 1992}).
 
 En la Figura~\ref{fig-sde-metodos} se simula una trayectoria de la
 Ecuación~\ref{eq-gbm-solucion} y de las aproximaciones de Euler-Maruyama
@@ -2806,12 +2842,13 @@ estocásticas híbridas cuyos parámetros cambian de acuerdo a una cadena
 de Markov a tiempo continuo \(\{\alpha(t)\}_{t \in [0, T]}\) sobre un
 espacio de estados finito \(\mathcal{M} = \{1, 2, \dots, m_0\}\), es
 necesario juntar la discretización temporal de la variable de estado
-continua con la simulación discreta de las transiciones de régimen (Yin
-y Zhu 2010; Mao y Yuan 2006).
+continua con la simulación discreta de las transiciones de régimen
+(\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010};
+\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}).
 
 Consideremos el sistema de difusión con cambio de régimen markoviano
 estudiado en el Capítulo 2 (Sección 2.2) y Capítulo 5 (Sección 5.2) de
-(Yin y Zhu 2010):
+(\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}):
 
 \begin{equation}\phantomsection\label{eq-ede-switching-num}{
 dX(t) = b(t, X(t), \alpha(t))dt + \sigma(t, X(t), \alpha(t))dW(t), \quad (X(0), \alpha(0)) = (x_0, i_0),
@@ -2830,8 +2867,9 @@ probabilidades de transición en un paso
 \(P_{ij}(\Delta t) = \mathbb{P}(\alpha_{n+1} = j \mid \alpha_n = i)\),
 está dada exactamente por la exponencial matricial y admite un
 desarrollo de Taylor de primer orden para tamaños de paso
-\(\Delta t > 0\) suficientemente pequeños (Sección 5.3 y 6.4 de (Yin y
-Zhu 2010) y Sección 4.2 de (Mao y Yuan 2006)):
+\(\Delta t > 0\) suficientemente pequeños (Sección 5.3 y 6.4 de
+(\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}) y Sección 4.2 de
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006})):
 
 \begin{equation}\phantomsection\label{eq-matriz-transicion-discreta}{
 P(\Delta t) = \exp(\Delta t \, Q) = I + \Delta t \, Q + \mathcal{O}\left((\Delta t)^2\right),
@@ -2855,9 +2893,10 @@ permanencia exponenciales con tasa
 \(\displaystyle \lambda_i = -q_{ii} = \sum_{j \neq i} q_{ij}\) en el
 estado actual \(i\), o bien mediante un Proceso de Poisson No Homogéneo
 Definición~\ref{def-poisson-no-homogeneo} cuando las tasas de transición
-dependen del tiempo \(Q(t)\) (Sección 1.4 y 2.8 de (Yin y Zhu 2010);
-Sección 1.1 de (Platen y Bruti-Liberati 2010)), y posteriormente
-proyectando el estado activo sobre los nodos \(t_n\).
+dependen del tiempo \(Q(t)\) (Sección 1.4 y 2.8 de
+(\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}); Sección 1.1 de
+(\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010})), y
+posteriormente proyectando el estado activo sobre los nodos \(t_n\).
 
 Una vez determinado el estado del régimen discreto \(\alpha_n\) en el
 nodo \(t_n\), el esquema numérico de Euler-Maruyama con cambio de
@@ -2876,7 +2915,8 @@ Definiendo la interpolación constante a trozos
 \((Y^{\Delta t}(t), \alpha^{\Delta t}(t)) = (Y_n, \alpha_n)\) para
 \(t \in [t_n, t_{n+1})\) y su extensión continua de tipo Itô, la
 convergencia fuerte del esquema queda garantizada gracias al siguiente
-teorema (Yin y Zhu 2010; Mao y Yuan 2006):
+teorema (\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010};
+\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}):
 
 \begin{theorem}[Teorema de Convergencia Fuerte de Euler-Maruyama con
 Cambio de
@@ -2913,19 +2953,20 @@ Markov}\label{sec-numerico-saltos}
 Para completar la estructura numérica de nuestro modelo
 (Ecuación~\ref{eq-ede-operativa-teorica}), debemos incorporar las
 discontinuidades de salto junto con la difusión Browniana y el cambio de
-régimen. De acuerdo con (Platen y Bruti-Liberati 2010), mientras que los
-esquemas adaptados a saltos insertan cada tiempo aleatorio de ocurrencia
-dentro de la malla, los \textbf{esquemas regulares} emplean una
-partición fija \(t_n = n\Delta t\) y acumulan el impacto de los saltos
-ocurridos en cada subintervalo \([t_n, t_{n+1})\). Este ultimo enfoque
-resulta el adecuado para simulaciones de Monte Carlo acopladas a series
+régimen. De acuerdo con (\citeproc{ref-platen2010numerical}{Platen y
+Bruti-Liberati 2010}), mientras que los esquemas adaptados a saltos
+insertan cada tiempo aleatorio de ocurrencia dentro de la malla, los
+\textbf{esquemas regulares} emplean una partición fija
+\(t_n = n\Delta t\) y acumulan el impacto de los saltos ocurridos en
+cada subintervalo \([t_n, t_{n+1})\). Este ultimo enfoque resulta el
+adecuado para simulaciones de Monte Carlo acopladas a series
 meteorológicas en mallas temporales fijas (\(\Delta t\)).
 
 Consideremos la EDE híbrida con saltos impulsada por una medida
 aleatoria de Poisson \(p_\varphi(dv, dt)\) con intensidad finita
 \(\lambda(t)\) sobre el espacio de marcas
-\(\mathcal{E} = \mathbb{R}\setminus\{0\}\) (Sección 1.8 de (Platen y
-Bruti-Liberati 2010)):
+\(\mathcal{E} = \mathbb{R}\setminus\{0\}\) (Sección 1.8 de
+(\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010})):
 
 \begin{equation}\phantomsection\label{eq-ede-hibrida-saltos-num}{
 X(t) = X(0) + \int_0^t b(s, X(s), \alpha(s))ds + \int_0^t \sigma(s, X(s), \alpha(s))dW(s) + \int_0^t \int_{\mathcal{E}} c(s-, X(s-), \alpha(s-), v) p_\varphi(dv, ds).
@@ -2961,8 +3002,9 @@ varianza finita (\(\mathbb{E}[\gamma^2] < \infty\)). Por lo tanto, se
 satisfacen las condiciones de Lipschitz global y de crecimiento lineal,
 garantizando que el esquema híbrido de Euler-Maruyama converge
 fuertemente con orden \(\gamma = 0.5\) y coincide en su parte continua
-con el método de Milstein (Sección 1.9 y 7.5 de (Platen y Bruti-Liberati
-2010); Sección 5.6 de (Yin y Zhu 2010)).
+con el método de Milstein (Sección 1.9 y 7.5 de
+(\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010});
+Sección 5.6 de (\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010})).
 
 La implementación paso a paso del método se resume en el
 alg.~\ref{alg-em-hibrido-general}.
@@ -3055,13 +3097,15 @@ Frío}\label{estabilidad-bioluxf3gica-e-integridad-de-la-red-de-fruxedo}
 Las vacunas son preparaciones biológicas compuestas por antígenos (virus
 atenuados, inactivados, subunidades proteicas o ácidos nucleicos),
 adyuvantes y estabilizantes cuya estructura molecular es altamente
-sensible a las variaciones térmicas (Yoshioka y Stella 2000). Para
+sensible a las variaciones térmicas
+(\citeproc{ref-yoshioka2000stability}{Yoshioka y Stella 2000}). Para
 preservar su capacidad inmunogénica desde el laboratorio fabricante
 hasta su aplicación en el paciente, los lineamientos internacionales y
 normativos establecen que el almacenamiento en unidades de salud debe
 mantenerse estrictamente dentro del rango normativo de
-\([2^\circ\text{C}, 8^\circ\text{C}]\) (Organización Mundial de la Salud
-2015).
+\([2^\circ\text{C}, 8^\circ\text{C}]\)
+(\citeproc{ref-oms2015cadenafrio}{Organización Mundial de la Salud
+2015}).
 
 Cuando la temperatura interna \(T(t)\) del equipo de refrigeración está
 por fuera de este rango normativo, el biológico se expone a dos
@@ -3106,7 +3150,8 @@ producida por el calor se modela mediante leyes de cinética química. Sea
 remanente de un lote de vacunas en el tiempo \(t\). Bajo una cinética de
 degradación de primer orden, la tasa instantánea de pérdida de
 viabilidad es proporcional a la potencia presente en ese instante
-(Atkins, Paula, y Keeler 2018; Yoshioka y Stella 2000):
+(\citeproc{ref-atkins2018physical}{Atkins, Paula, y Keeler 2018};
+\citeproc{ref-yoshioka2000stability}{Yoshioka y Stella 2000}):
 
 \begin{equation}\phantomsection\label{eq-cinetica-primer-orden}{
 \frac{dP(t)}{dt} = -k(T(t)) P(t),
@@ -3115,7 +3160,7 @@ viabilidad es proporcional a la potencia presente en ese instante
 donde \(k(T) > 0\) denota la constante de velocidad de reacción (o tasa
 de degradación térmica), la cual depende de manera no lineal de la
 temperatura a través de la relación formulada por Svante Arrhenius
-(Atkins, Paula, y Keeler 2018).
+(\citeproc{ref-atkins2018physical}{Atkins, Paula, y Keeler 2018}).
 
 \begin{definition}[Ecuación de
 Arrhenius]\protect\hypertarget{def-ecuacion-arrhenius}{}\label{def-ecuacion-arrhenius}
@@ -3126,7 +3171,7 @@ con \(T\) en grados Celsius). La tasa de degradación térmica \(k(T_K)\)
 está determinada por la siguiente relación exponencial:
 
 \begin{equation}\phantomsection\label{eq-arrhenius-teorica}{
-k(T_K) = A \exp\left( -\frac{E_a}{R T_K} \right),
+k(T_K) = A \exp\left( -\frac{E_a}{R \cdot T_K} \right),
 }\end{equation}
 
 donde:
@@ -3153,7 +3198,8 @@ donde:
 En los modelos deterministas clásicos de estabilidad acelerada, la
 temperatura se asume constante, lo que reduce a la
 Ecuación~\ref{eq-cinetica-primer-orden} a un decaimiento exponencial
-simple \(P(t) = P(0)e^{-k(T_K)t}\) (Yoshioka y Stella 2000). Sin
+simple \(P(t) = P(0)e^{-k(T_K)t}\)
+(\citeproc{ref-yoshioka2000stability}{Yoshioka y Stella 2000}). Sin
 embargo, en una unidad de salud real, la temperatura interna \(T(t)\) es
 un proceso estocástico determinado por la ecuación diferencial
 estocástica híbrida (Ecuación~\ref{eq-ede-operativa-teorica}).
@@ -3161,13 +3207,13 @@ estocástica híbrida (Ecuación~\ref{eq-ede-operativa-teorica}).
 Al introducir la trayectoria del proceso estocástico \(T(t)\) dentro de
 la Ecuación~\ref{eq-arrhenius-teorica}, la tasa de degradación
 \(k(T(t))\) se convierte en un proceso estocástico adaptado a la
-filtración \(\{\mathcal{F}_t\}_{t \ge 0}\) (García, Díaz-Infante, y
-Minjárez-Sosa 2026). Considerando que el daño farmacológico se activa
-únicamente cuando la temperatura supera el extremo superior del rango
-normativo (\(T(t) > 8^\circ\text{C}\)), tras superar el periodo de
-inercia térmica del vial, la fracción de biológico degradada en un
-subintervalo temporal \([t_n, t_{n+1}]\) de longitud \(\Delta t\) se
-determina mediante:
+filtración \(\{\mathcal{F}_t\}_{t \ge 0}\)
+(\citeproc{ref-control2026vaccine}{García, Díaz-Infante, y Minjárez-Sosa
+2026}). Considerando que el daño farmacológico se activa únicamente
+cuando la temperatura supera el extremo superior del rango normativo
+(\(T(t) > 8^\circ\text{C}\)), tras superar el periodo de inercia térmica
+del vial, la fracción de biológico degradada en un subintervalo temporal
+\([t_n, t_{n+1}]\) de longitud \(\Delta t\) se determina mediante:
 
 \begin{equation}\phantomsection\label{eq-fraccion-dano-paso}{
 \Delta D_n = \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}},
@@ -3184,22 +3230,26 @@ medir la pérdida porcentual teórica de un vial aislado, sino que debe
 traducirse en el número real de dosis destruidas (mermas físicas)
 durante la operación de una clínica de vacunación. Recientemente, en la
 literatura de modelado epidemiológico e investigación de operaciones
-(García, Díaz-Infante, y Minjárez-Sosa 2026), se ha establecido la
-necesidad de juntar la dinámica estocástica del inventario de vacunas y
-la incertidumbre en el reabastecimiento con la degradación térmica de
-los biológicos durante campañas de mitigación de epidemias.
+(\citeproc{ref-control2026vaccine}{García, Díaz-Infante, y Minjárez-Sosa
+2026}), se ha establecido la necesidad de juntar la dinámica estocástica
+del inventario de vacunas y la incertidumbre en el reabastecimiento con
+la degradación térmica de los biológicos durante campañas de mitigación
+de epidemias.
 
 En el marco epidemiológico clásico, la propagación de una enfermedad
 infecciosa en una población se describe mediante modelos de tipo
 \textbf{SEIR} (\emph{Susceptibles, Expuestos, Infectados y Recuperados})
-y sus extensiones con conteo de vacunación (García, Díaz-Infante, y
-Minjárez-Sosa 2025), donde la campaña de inmunización busca transferir
+y sus extensiones con conteo de vacunación
+(\citeproc{ref-garcia2025integrated}{García, Díaz-Infante, y
+Minjárez-Sosa 2025}), donde la campaña de inmunización busca transferir
 individuos susceptibles hacia el compartimento protegido a una tasa de
-vacunación determinada. Como se demuestra en (García, Díaz-Infante, y
-Minjárez-Sosa 2025, 2026), la factibilidad de sostener dicha tasa de
-vacunación en el tiempo depende directamente de la integridad del
-inventario de dosis disponibles \(I(t) \ge 0\) y de la preservación de
-un umbral mínimo de reserva de seguridad (\emph{reserve level}).
+vacunación determinada. Como se demuestra en
+(\citeproc{ref-garcia2025integrated}{García, Díaz-Infante, y
+Minjárez-Sosa 2025}, \citeproc{ref-control2026vaccine}{2026}), la
+factibilidad de sostener dicha tasa de vacunación en el tiempo depende
+directamente de la integridad del inventario de dosis disponibles
+\(I(t) \ge 0\) y de la preservación de un umbral mínimo de reserva de
+seguridad (\emph{reserve level}).
 
 Tomando como base estos modelos de gestión de biológicos bajo
 incertidumbre, la evolución temporal del inventario \(I(t)\) en un
@@ -3240,10 +3290,11 @@ flujos operativos:
   mediante procesos de Poisson.
 \end{enumerate}
 
-Adaptando estos principios (García, Díaz-Infante, y Minjárez-Sosa 2025,
-2026) a nuestra malla temporal de simulación \(t_n = n\Delta t\), el
-balance del inventario físico \(I_n = I(t_n)\) sigue la siguiente
-relación recursiva:
+Adaptando estos principios (\citeproc{ref-garcia2025integrated}{García,
+Díaz-Infante, y Minjárez-Sosa 2025},
+\citeproc{ref-control2026vaccine}{2026}) a nuestra malla temporal de
+simulación \(t_n = n\Delta t\), el balance del inventario físico
+\(I_n = I(t_n)\) sigue la siguiente relación recursiva:
 
 \begin{equation}\phantomsection\label{eq-balance-inventario-general}{
 I_{n+1} = I_n - C_n - \Delta D_n (I_n - C_n) + R_n,
@@ -3408,7 +3459,8 @@ nodo de la red, no a todos simultáneamente.
 Para solucionar esto, introducimos un factor de escala espacial. De
 acuerdo con el Programa para el Desarrollo del Sistema Eléctrico
 Nacional (PRODESEN) y los diagramas de infraestructura del Centro
-Nacional de Control de Energía (CENACE) (Secretaría de Energía 2024), la
+Nacional de Control de Energía (CENACE)
+(\citeproc{ref-sener2024prodesen}{Secretaría de Energía 2024}), la
 mancha urbana de Tuxtla Gutiérrez está alimentada de manera sectorizada
 por exactamente \textbf{8 subestaciones principales} de distribución
 (Tuxtla Céntrica, Oriente, Poniente, Terán, Tuxtla Norte, Tuxtla Dos,
@@ -3443,9 +3495,10 @@ decir, no ocurren exactamente 5.33 cortes cada mes). La variabilidad
 mensual depende directamente de los factores climáticos estacionales de
 la región. Para no asignar los apagones de cada mes de manera aleatoria,
 utilizamos el comportamiento documentado en el \emph{Informe Anual de la
-CFE 2024} (Comisión Federal de Electricidad 2024), específicamente en su
-página 82, donde se registra la evolución de los indicadores de
-continuidad del servicio a lo largo de los meses.
+CFE 2024} (\citeproc{ref-cfe2024informe}{Comisión Federal de
+Electricidad 2024}), específicamente en su página 82, donde se registra
+la evolución de los indicadores de continuidad del servicio a lo largo
+de los meses.
 
 Para comprender la estructura de estos datos oficiales, la CFE evalúa la
 continuidad del suministro a través de dos indicadores internacionales
@@ -4236,7 +4289,7 @@ la incertidumbre de las fluctuaciones no medidas, la ecuación
 diferencial resultante tiene la forma de un proceso de
 Ornstein-Uhlenbeck. Este enfoque ha sido validado exitosamente en la
 estimación predictiva de unidades de refrigeración en trabajos como el
-de (Costanzo et~al. 2013).
+de (\citeproc{ref-costanzo2013grey}{Costanzo et~al. 2013}).
 
 Sin embargo, para el problema logístico de la red de frío en Tuxtla
 Gutiérrez, el modelo clásico resulta limitado. Si bien el proceso de
@@ -4351,9 +4404,10 @@ Cada término de la ecuación representa lo siguiente:
 Para garantizar el rigor de la simulación, los coeficientes térmicos se
 dedujeron utilizando las especificaciones técnicas del refrigerador
 institucional Haier HBC-150. De acuerdo con el catálogo oficial PQS de
-la Organización Mundial de la Salud (OMS) (Organización Mundial de la
-Salud 2024, 89-90), este equipo cuenta con certificación de protección
-Grado A y está diseñado específicamente para mantener la red de frío en
+la Organización Mundial de la Salud (OMS)
+(\citeproc{ref-oms_pqs_e003}{Organización Mundial de la Salud 2024,
+89-90}), este equipo cuenta con certificación de protección Grado A y
+está diseñado específicamente para mantener la red de frío en
 condiciones climáticas severas.
 
 \begin{figure}
@@ -4401,8 +4455,9 @@ temperatura interna hacia su nivel ideal.
   \textbf{Velocidad de Enfriamiento (\(\kappa_{on}\))}: Este parámetro
   mide la rapidez con la que el motor abate el calor. Sus unidades son
   \(\text{hr}^{-1}\) (tasas de cambio por hora). Para calcularlo,
-  recurrimos a la Ley de Enfriamiento de Newton (Vollmer 2009), la cual
-  establece que la temperatura en el tiempo \(t\) sigue una trayectoria
+  recurrimos a la Ley de Enfriamiento de Newton
+  (\citeproc{ref-vollmer2009newton}{Vollmer 2009}), la cual establece
+  que la temperatura en el tiempo \(t\) sigue una trayectoria
   exponencial:
   \(T(t) = \theta_{set} + (T_0 - \theta_{set}) e^{-\kappa t}\). El
   protocolo de la OMS dicta un \emph{Pull-down time} (tiempo de
@@ -4458,18 +4513,19 @@ exterior.
 \item
   \textbf{Velocidad de Pérdida Térmica (\(\kappa_{off}\))}: Representa
   la lentitud con la que el calor exterior logra penetrar el equipo. Se
-  mide en \(\text{hr}^{-1}\). En el manual de la OMS (Organización
-  Mundial de la Salud 2024, 89-90), el equipo Haier HBC-150 reporta un
-  \emph{Hold-over time} (tiempo de autonomía) de 60 horas con 50 minutos
-  (\(60.833\) horas). Físicamente, esto significa que gracias a la
-  enorme masa de hielo y agua en su interior, el equipo puede resistir
-  rodeado de un calor de 43°C durante casi 61 horas antes de que su
-  temperatura suba desde los \(5^\circ \text{C}\) ideales hasta el
-  umbral de fallo normativo (\(10^\circ \text{C}\) en las pruebas de
-  autonomía de la OMS). Usando nuevamente la Ley de Enfriamiento de
-  Newton (Vollmer 2009) hacia el atractor externo:
-  \[10 = 43 + (5 - 43) e^{-\kappa_{off} (60.833)}\] Al despejar la
-  ecuación
+  mide en \(\text{hr}^{-1}\). En el manual de la OMS
+  (\citeproc{ref-oms_pqs_e003}{Organización Mundial de la Salud 2024,
+  89-90}), el equipo Haier HBC-150 reporta un \emph{Hold-over time}
+  (tiempo de autonomía) de 60 horas con 50 minutos (\(60.833\) horas).
+  Físicamente, esto significa que gracias a la enorme masa de hielo y
+  agua en su interior, el equipo puede resistir rodeado de un calor de
+  43°C durante casi 61 horas antes de que su temperatura suba desde los
+  \(5^\circ \text{C}\) ideales hasta el umbral de fallo normativo
+  (\(10^\circ \text{C}\) en las pruebas de autonomía de la OMS). Usando
+  nuevamente la Ley de Enfriamiento de Newton
+  (\citeproc{ref-vollmer2009newton}{Vollmer 2009}) hacia el atractor
+  externo: \[10 = 43 + (5 - 43) e^{-\kappa_{off} (60.833)}\] Al despejar
+  la ecuación
   \(\left(\ln\left(\frac{33}{38}\right) = -60.833 \kappa_{off}\right)\),
   el resultado es
   \textbf{\(\kappa_{off} \approx 0.00232 \text{ hr}^{-1}\)}.
@@ -4584,8 +4640,8 @@ permanezca abierta y de la correcta disposición del balasto térmico
 
 Para modelar rigurosamente este choque térmico, nos basamos en los
 estudios experimentales del \emph{National Institute of Standards and
-Technology (NIST)} (Chojnacky et~al. 2010). En sus pruebas de uso
-clínico, el NIST demostró que:
+Technology (NIST)} (\citeproc{ref-nist2015thermal}{Chojnacky et~al.
+2010}). En sus pruebas de uso clínico, el NIST demostró que:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -4630,37 +4686,34 @@ define como una distribución truncada inferiormente, aplicando un filtro
 de maximización:
 \begin{equation}\phantomsection\label{eq-salto-termico}{\gamma_i = \max(0.16, X) \quad \text{donde } X \sim \mathcal{N}(0.76, 0.20^2)}\end{equation}
 De esta forma, la Ecuación Diferencial Estocástica absorbe la
-variabilidad operativa del personal médico sin riesgo de arrojar
+variabilidad operativa del personal médico sin riesgo a arrojar
 perturbaciones termodinámicamente imposibles.
 
 \section{Cinética de Degradación Térmica (Ecuación de
 Arrhenius)}\label{sec-Arrhenius}
 
 La Ecuación Diferencial Estocástica calibrada anteriormente permite
-simular con alta precisión la trayectoria térmica interna del
-refrigerador, \(T(t)\). Sin embargo, para evaluar el impacto logístico y
-en la salud pública, es necesario traducir estas variaciones térmicas en
-pérdida de viabilidad del biológico.
-
-La degradación de las vacunas (particularmente las vivas atenuadas, como
-el biológico contra el Sarampión o la Poliomielitis) es un proceso de
-desnaturalización proteica que se acelera exponencialmente con el
-incremento de temperatura. Desde una perspectiva fisicoquímica, la
-concentración de ingrediente activo decae siguiendo una cinética de
-primer orden, cuya velocidad de reacción \(k(T)\) se modela mediante la
-\textbf{Ecuación de Arrhenius} (Sinko 2011):
+simular la trayectoria térmica interna del refrigerador, \(T(t)\). Para
+traducir estas variaciones térmicas en pérdida de viabilidad del
+biológico (particularmente en vacunas vivas atenuadas como Sarampión o
+Poliomielitis), retomamos el modelo cinético de primer orden
+(Ecuación~\ref{eq-cinetica-primer-orden}) y la \textbf{Ecuación de
+Arrhenius} (Definición~\ref{def-ecuacion-arrhenius} y
+Ecuación~\ref{eq-arrhenius-teorica}) establecidos en la
+Sección~\ref{sec-fundamento-arrhenius}:
 
 \begin{equation}\phantomsection\label{eq-Arrhenius}{
-k(T(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right)
+k(T_K(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right).
 }\end{equation}
 
-Cada parámetro de la ecuación representa lo siguiente:
+Para nuestro estudio de caso, los parámetros fisicoquímicos de la
+Ecuación~\ref{eq-Arrhenius} se calibran de la siguiente manera:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{\(k(T(t))\)}: La constante de velocidad de degradación térmica
-  en el instante \(t\), expresada en \(\text{s}^{-1}\).
+  \textbf{\(k(T_K(t))\)}: La constante de velocidad de degradación
+  térmica en el instante \(t\), expresada en \(\text{s}^{-1}\).
 \item
   \textbf{\(T_K(t)\)}: La temperatura interna del fluido convertida a
   escala absoluta (grados Kelvin), calculada como \(T(t) + 273.15\).
@@ -4674,70 +4727,49 @@ Cada parámetro de la ecuación representa lo siguiente:
   deben superar para iniciar el proceso irreversible de ruptura
   estructural.
 \item
-  \textbf{\(A\)}: El Factor Pre-exponencial (o factor de frecuencia),
+  \textbf{\(A\)}: El Factor Preexponencial (o factor de frecuencia),
   ajustado a un valor empírico de
   \textbf{\(1.2 \times 10^{13} \, \text{s}^{-1}\)}. Este parámetro
   asegura que la tasa de degradación sea prácticamente nula cuando el
-  equipo opera correctamente dentro de la red de frío (2°C a 8°C), pero
-  que escale de forma logarítmica severa ante una excursión térmica
-  crítica.
+  equipo opera correctamente dentro de la red de frío
+  (\(2^\circ\text{C}\) a \(8^\circ\text{C}\)), pero que escale de forma
+  severa ante una excursión térmica crítica.
 \end{itemize}
 
 \subsection{Modelo de Daño Térmico Acumulado y Merma de
 Inventario}\label{modelo-de-dauxf1o-tuxe9rmico-acumulado-y-merma-de-inventario}
 
 En la práctica clínica normativa, las variaciones térmicas que oscilan
-dentro del rango seguro (2°C a 8°C) se consideran tolerables, y su
-impacto en la caducidad a corto plazo es ignorado. El daño logístico
-ocurre exclusivamente cuando la red de frío se rompe. Para incorporar
-este protocolo operativo al modelo matemático, la degradación se
-condiciona mediante una función indicadora
-\(\mathbb{I}_{\{T(t) > 8^\circ\text{C}\}}\), la cual activa el proceso
-de pérdida térmica únicamente cuando la temperatura cruza el límite
-superior de seguridad.
-
-Bajo este esquema, la cantidad de vacunas viables en el inventario,
-\(I(t)\), se rige por una Ecuación Diferencial Ordinaria (EDO) de primer
-orden, donde la tasa de pérdida es proporcional al inventario actual
-(Sinko 2011):
+dentro del rango normativo (\(2^\circ\text{C}\) a \(8^\circ\text{C}\))
+se consideran tolerables y el daño logístico ocurre exclusivamente
+cuando se rompe la cadena de frío (\(T(t) > 8^\circ\text{C}\)). Como se
+fundamentó en la Sección~\ref{sec-fundamento-arrhenius} y en la
+Sección~\ref{sec-fundamento-inventario-seir}, integrando la tasa
+cinética condicionada por la función indicadora
+\(\mathbf{1}_{\{T(t) > 8^\circ\text{C}\}}\) se define el \textbf{Daño
+Acumulado (\(DA\))} hasta el instante \(t\) como:
 
 \[
-\frac{dI(t)}{dt} = -k(T(t)) \cdot I(t) \cdot \mathbb{I}_{\{T(t) > 8\}}
+DA(t) = \int_{0}^{t} k(T_K(s)) \cdot \mathbf{1}_{\{T(s) > 8^\circ\text{C}\}} \, ds.
 \]
 
-Al resolver esta ecuación diferencial mediante variables separables e
-integrando desde el inicio de la simulación (\(t=0\)) hasta un tiempo
-\(t\), se obtiene la cantidad exacta de inventario sobreviviente:
+De acuerdo con la discretización temporal deducida en la
+Ecuación~\ref{eq-fraccion-dano-paso} junto con el balance de la
+Ecuación~\ref{eq-balance-inventario-general}, para actualizar el estado
+del sistema en pasos discretos \(\Delta t\) dentro de la Simulación de
+Monte Carlo, el número de dosis destruidas (merma instantánea) en cada
+subintervalo se calcula multiplicando el inventario activo \(I(t)\) por
+la fracción de biológico degradada \(\Delta D_n\):
 
 \[
-\int_{I(0)}^{I(t)} \frac{dI}{I} = - \int_{0}^{t} k(T(s)) \cdot \mathbb{I}_{\{T(s) > 8\}} \, ds \implies I(t) = I(0) \exp\left( - \int_{0}^{t} k(T(s)) \cdot \mathbb{I}_{\{T(s) > 8\}} \, ds \right)
+\text{Merma}(t_n) = I(t_n) \Delta D_n = I(t_n) \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}}.
 \]
 
-El término integral dentro de la función exponencial define formalmente
-el \textbf{Daño Acumulado (\(DA\))}:
-
-\[
-DA(t) = \int_{0}^{t} k(T(s)) \cdot \mathbb{I}_{\{T(s) > 8\}} \, ds
-\]
-
-Esta formulación integral permite contabilizar analíticamente el estrés
-térmico exacto de cada trayectoria. Computacionalmente, para actualizar
-el estado del sistema en pasos discretos de tiempo \(\Delta t\) dentro
-de la Simulación de Monte Carlo, la solución analítica de la EDO
-estipula que la fracción de inventario perdido (merma instantánea)
-durante ese diferencial de tiempo se calcula extrayendo el complemento
-del factor de supervivencia:
-
-\[
-\text{Merma}(t) = I(t) \left( 1 - e^{-k(T(t)) \Delta t} \right)
-\]
-
-Esta discretización asegura que el modelo numérico refleje con precisión
-la cinética fisicoquímica. En cada iteración, el algoritmo descuenta las
-dosis destruidas por la exposición al calor durante los apagones,
-permitiendo la activación automatizada de los protocolos logísticos de
-reabastecimiento si el inventario cae por debajo de los umbrales
-críticos de operación.
+De esta forma, en cada iteración donde la temperatura rebasa los
+\(8^\circ\text{C}\) (tras superar el periodo de inercia térmica del
+vial), el algoritmo descuenta las dosis inutilizables por exposición al
+calor, activando los protocolos de reabastecimiento cuando el inventario
+cae por debajo del umbral crítico de operación.
 
 \subsection{\texorpdfstring{Exclusión del Riesgo por Congelamiento
 (\(T < 2^\circ\text{C}\))}{Exclusión del Riesgo por Congelamiento (T \textless{} 2\^{}\textbackslash circ\textbackslash text\{C\})}}\label{exclusiuxf3n-del-riesgo-por-congelamiento-t-2circtextc}
@@ -4930,7 +4962,10 @@ impacto de la interacción humana:
 documento con un formato limpio y legible, hemos omitido el código
 fuente de programación en el texto. Los algoritmos completos para cada
 escenario se encuentran documentados detalladamente en el repositorio
-público de GitHub de este proyecto (Pérez, C. 2026a, 2026b, 2026c).
+público de GitHub de este proyecto
+(\citeproc{ref-Perez2026EscenarioA}{Pérez, C. 2026a},
+\citeproc{ref-Perez2026EscenarioB}{2026b},
+\citeproc{ref-Perez2026EscenarioC}{2026c}).
 \end{quote}
 
 A continuación, explicamos la metodología de la simulación, la
@@ -5651,8 +5686,9 @@ aleatoria, no es posible evaluar la confiabilidad del sistema a partir
 de una sola trayectoria. Para medir rigurosamente el riesgo operativo y
 estimar el valor esperado \(\mathbb{E}[g(T(t))]\) de los estadísticos de
 interés cuya distribución analítica es desconocida, el modelo completo
-se integró dentro de un esquema de simulación de Monte Carlo (Giles
-2008; Platen y Bruti-Liberati 2010).
+se integró dentro de un esquema de simulación de Monte Carlo
+(\citeproc{ref-giles2008multilevel}{Giles 2008};
+\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}).
 
 En cada realización anual \(k\), el algoritmo evalúa la trayectoria
 simulada y extrae las siguientes métricas estadísticas:
@@ -5676,7 +5712,7 @@ aleatoriedad indexadas para garantizar la reproducibilidad de la
 simulación), aproximando el valor esperado de cada métrica mediante el
 promedio muestral
 \(\displaystyle \hat{\mu}_M = \frac{1}{M}\sum_{k=1}^{M} g\left(T^{(k)}\right)\)
-(Wang 2016).
+(\citeproc{ref-wang2016numerical}{Wang 2016}).
 
 De acuerdo con la teoría de convergencia débil
 (Definición~\ref{def-convergencia-debil}) y la descomposición del Error
@@ -5687,12 +5723,13 @@ muestreo. Por un lado, el tamaño de paso de \(5\text{ minutos}\)
 (\(\Delta t = 5/60\text{ h}\)) en el esquema de Euler-Maruyama (cuyo
 orden débil es \(\beta = 1.0\)) mantiene acotado el sesgo numérico
 sistemático; por otro lado, al simular \(M = 5000\) años independientes,
-la \textbf{Ley de los Grandes Números} (Ross 2018) asegura que el error
-estándar de muestreo decaiga a razón de \(M^{-1/2} \approx 0.0141\) (por
-debajo del \(1.5\%\) de la desviación estándar de cada métrica). Esto
-elimina el efecto de fluctuaciones atípicas individuales y estabiliza
-los promedios poblacionales bajo cada uno de los tres escenarios
-operativos evaluados.
+la \textbf{Ley de los Grandes Números}
+(\citeproc{ref-ross2018first}{Ross 2018}) asegura que el error estándar
+de muestreo decaiga a razón de \(M^{-1/2} \approx 0.0141\) (por debajo
+del \(1.5\%\) de la desviación estándar de cada métrica). Esto elimina
+el efecto de fluctuaciones atípicas individuales y estabiliza los
+promedios poblacionales bajo cada uno de los tres escenarios operativos
+evaluados.
 
 \section{Resultados Estadísticos y Análisis de
 Riesgo}\label{resultados-estaduxedsticos-y-anuxe1lisis-de-riesgo}
@@ -6270,9 +6307,10 @@ Para ello, se aplicó la \textbf{Prueba de Normalidad de Shapiro-Wilk} a
 las métricas operativas obtenidas de las 5000 simulaciones de Monte
 Carlo. Este test evalúa estadísticamente la hipótesis nula (\(H_0\)) de
 que los datos provienen de una distribución Normal. Siguiendo la
-metodología estándar para pruebas de bondad de ajuste (Montgomery y
-Runger 2014), la regla de decisión se basa en comparar el nivel de
-significancia (\(\alpha = 0.05\)) contra el valor-p obtenido:
+metodología estándar para pruebas de bondad de ajuste
+(\citeproc{ref-montgomery2014applied}{Montgomery y Runger 2014}), la
+regla de decisión se basa en comparar el nivel de significancia
+(\(\alpha = 0.05\)) contra el valor-p obtenido:
 
 \begin{itemize}
 \tightlist
@@ -6391,15 +6429,16 @@ estadística inferencial clásica resulta incorrecto y sesgaría los
 resultados.
 
 Para resolver este problema de forma rigurosa, se implementó el método
-inferencial no paramétrico de \textbf{Bootstrap} (Efron y Tibshirani
-1993). El funcionamiento de este algoritmo consiste en realizar un
-remuestreo masivo: se extraen aleatoriamente (con reemplazo) 10000
-nuevas muestras de tamaño \(n = 5000\) a partir de los 5000 años
-originales generados en la Simulación de Monte Carlo. Al calcular el
-promedio de cada una de estas 10000 nuevas muestras, la interacción de
-dos propiedades estadísticas fundamentales estabiliza el sistema: por un
-lado, la \textbf{Ley de los Grandes Números} garantiza que, dado el
-tamaño sustancial de la muestra, la varianza del estimador colapse
+inferencial no paramétrico de \textbf{Bootstrap}
+(\citeproc{ref-efron1993introduction}{Efron y Tibshirani 1993}). El
+funcionamiento de este algoritmo consiste en realizar un remuestreo
+masivo: se extraen aleatoriamente (con reemplazo) 10000 nuevas muestras
+de tamaño \(n = 5000\) a partir de los 5000 años originales generados en
+la Simulación de Monte Carlo. Al calcular el promedio de cada una de
+estas 10000 nuevas muestras, la interacción de dos propiedades
+estadísticas fundamentales estabiliza el sistema: por un lado, la
+\textbf{Ley de los Grandes Números} garantiza que, dado el tamaño
+sustancial de la muestra, la varianza del estimador colapse
 drásticamente, asegurando que las medias se agrupen con extrema
 precisión alrededor de la verdadera media poblacional; por otro lado, el
 \textbf{Teorema del Límite Central} asegura que, sobre esta varianza
@@ -6768,10 +6807,12 @@ ambientales, cortes de energía eléctrica y aperturas de puerta no puede
 representarse adecuadamente mediante una difusión continua clásica, sino
 que exige la formulación de una ecuación diferencial estocástica híbrida
 en el espacio de trayectorias \emph{càdlàg}
-(Definición~\ref{def-adaptabilidad-cadlag}) (Mao y Yuan 2006; Situ
-2005). Al acoplar el proceso de reversión a la media de
-Ornstein-Uhlenbeck (Definición~\ref{def-ou-clasico}) con una cadena de
-Markov a tiempo continuo \(\{\alpha(t)\}_{t \ge 0}\)
+(Definición~\ref{def-adaptabilidad-cadlag})
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-situ2005theory}{Situ 2005}). Al acoplar el proceso de
+reversión a la media de Ornstein-Uhlenbeck
+(Definición~\ref{def-ou-clasico}) con una cadena de Markov a tiempo
+continuo \(\{\alpha(t)\}_{t \ge 0}\)
 (Definición~\ref{def-cadena-markov}) que gobierna el estado del
 suministro eléctrico y un proceso de Poisson compuesto \(J(t)\)
 (Definición~\ref{def-poisson-compuesto} y Figura~\ref{fig-poisson}) que
@@ -6794,8 +6835,9 @@ estocásticos delimitados por tiempos de paro
 (Definición~\ref{def-tiempo-parada}), se demostró el Teorema de
 Existencia y Unicidad para EDEs Híbridas con Saltos y Régimen de Markov
 (Teorema~\ref{thm-mao-switching}, el cual extiende los resultados de
-(Mao y Yuan 2006) y el Teorema~\ref{thm-situ-existencia} de (Situ
-2005)). La verificación analítica de que los coeficientes del modelo
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}) y el
+Teorema~\ref{thm-situ-existencia} de (\citeproc{ref-situ2005theory}{Situ
+2005})). La verificación analítica de que los coeficientes del modelo
 satisfacen las condiciones de Lipschitz global y de crecimiento lineal
 garantizó matemáticamente que la temperatura interna \(T(t)\) posee una
 única solución fuerte global acotada en media cuadrática
@@ -6808,17 +6850,18 @@ analítica en forma cerrada para la
 Ecuación~\ref{eq-ede-operativa-teorica} condujo al diseño de esquemas de
 discretización temporal bajo los criterios de convergencia fuerte
 (Definición~\ref{def-convergencia-fuerte}) y convergencia débil
-(Definición~\ref{def-convergencia-debil}) (Kloeden y Platen 1992; Wang
-2016). El análisis comparativo sobre el Movimiento Browniano Geométrico
-(Ecuación~\ref{eq-ede-gbm} y Figura~\ref{fig-sde-metodos}) permitió
-contrastar el orden de convergencia fuerte del método de Euler-Maruyama
-(\(\gamma = 0.5\), Teorema~\ref{thm-euler-maruyama} y
-alg.~\ref{alg-euler-maruyama}) frente a la corrección de segundo orden
-de Itô-Taylor del método de Milstein (\(\gamma = 1.0\),
-Teorema~\ref{thm-milstein} y alg.~\ref{alg-milstein}). Una conclusión
-numérica clave para nuestra investigación radica en la estructura
-aditiva del ruido térmico: dado que dentro de cada régimen eléctrico
-\(i \in \{1, 2\}\) la volatilidad
+(Definición~\ref{def-convergencia-debil})
+(\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992};
+\citeproc{ref-wang2016numerical}{Wang 2016}). El análisis comparativo
+sobre el Movimiento Browniano Geométrico (Ecuación~\ref{eq-ede-gbm} y
+Figura~\ref{fig-sde-metodos}) permitió contrastar el orden de
+convergencia fuerte del método de Euler-Maruyama (\(\gamma = 0.5\),
+Teorema~\ref{thm-euler-maruyama} y alg.~\ref{alg-euler-maruyama}) frente
+a la corrección de segundo orden de Itô-Taylor del método de Milstein
+(\(\gamma = 1.0\), Teorema~\ref{thm-milstein} y
+alg.~\ref{alg-milstein}). Una conclusión numérica clave para nuestra
+investigación radica en la estructura aditiva del ruido térmico: dado
+que dentro de cada régimen eléctrico \(i \in \{1, 2\}\) la volatilidad
 \(\sigma(i) \in \{\sigma_{on}, \sigma_{off}\}\) es independiente del
 estado de la temperatura \(T(t)\), su derivada parcial espacial se anula
 idénticamente (\(\partial_T \sigma = 0\)), provocando que el término
@@ -6826,22 +6869,23 @@ integral doble de Milstein (Ecuación~\ref{eq-integral-doble-milstein})
 desaparezca y que ambos esquemas coincidan algebraicamente en su
 componente difusiva. Al integrar las probabilidades de transición
 discretas de la cadena de Markov (Sección~\ref{sec-numerico-switching} y
-Teorema~\ref{thm-em-switching}) (Yin y Zhu 2010) con un esquema regular
-de acumulación de saltos de Poisson en malla fija
-(Sección~\ref{sec-numerico-saltos} y
-Ecuación~\ref{eq-incremento-poisson-compuesto}) (Platen y Bruti-Liberati
-2010), se estructuró el alg.~\ref{alg-em-hibrido-general}, el cual
-preserva el orden de convergencia fuerte \(\gamma = 0.5\) y permite
-sincronizar la integración estocástica con series de tiempo
-meteorológicas a intervalos constantes de cinco minutos
-(\(\Delta t = 5/60\text{ h}\)).
+Teorema~\ref{thm-em-switching}) (\citeproc{ref-yin2010hybrid}{Yin y Zhu
+2010}) con un esquema regular de acumulación de saltos de Poisson en
+malla fija (Sección~\ref{sec-numerico-saltos} y
+Ecuación~\ref{eq-incremento-poisson-compuesto})
+(\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}), se
+estructuró el alg.~\ref{alg-em-hibrido-general}, el cual preserva el
+orden de convergencia fuerte \(\gamma = 0.5\) y permite sincronizar la
+integración estocástica con series de tiempo meteorológicas a intervalos
+constantes de cinco minutos (\(\Delta t = 5/60\text{ h}\)).
 
 Por su parte, los fundamentos epidemiológicos y biofísicos desarrollados
 en la Capítulo~\ref{sec-fundamentos-epidemiologicos} permitieron
 traducir las trayectorias térmicas del aire interno en métricas
 tangibles de impacto en salud pública. Con base en la teoría de
-estabilidad farmacéutica (Yoshioka y Stella 2000; Atkins, Paula, y
-Keeler 2018), se estableció que las excursiones térmicas por encima del
+estabilidad farmacéutica (\citeproc{ref-yoshioka2000stability}{Yoshioka
+y Stella 2000}; \citeproc{ref-atkins2018physical}{Atkins, Paula, y
+Keeler 2018}), se estableció que las excursiones térmicas por encima del
 límite normativo superior (\(T(t) > 8^\circ\text{C}\)) inducen una
 desnaturalización proteica acumulativa e irreversible gobernada por la
 cinética de primer orden (Ecuación~\ref{eq-cinetica-primer-orden}) y la
@@ -6852,7 +6896,8 @@ de \(30\text{ minutos}\)) resultó esencial para distinguir entre
 fluctuaciones aéreas pasajeras y el calentamiento efectivo del líquido
 biológico. Asimismo, retomando los planteamientos recientes de control
 estocástico de inventarios de vacunas acoplados a dinámicas
-epidemiológicas SEIR (García, Díaz-Infante, y Minjárez-Sosa 2026) en la
+epidemiológicas SEIR (\citeproc{ref-control2026vaccine}{García,
+Díaz-Infante, y Minjárez-Sosa 2026}) en la
 Sección~\ref{sec-fundamento-inventario-seir}, se demostró que el daño
 materializado no depende de forma aislada de la fracción de degradación
 térmica \(\Delta D_n\) (Ecuación~\ref{eq-fraccion-dano-paso}), sino de
@@ -6869,28 +6914,30 @@ datos institucionales y físicos reales en lugar de supuestos
 arbitrarios. A partir de los registros históricos de la CFE
 (Sección~\ref{sec-datos-cfe} y Tabla~\ref{tbl-interrupciones-cfe}) y la
 sectorización de las ocho subestaciones del CENACE en Tuxtla Gutiérrez
-(Secretaría de Energía 2024) (Sección~\ref{sec-escala-espacial}), se
-dedujo una esperanza local de \(64\) apagones anuales
-(Ecuación~\ref{eq-esperanza-local}). La desagregación marginal de los
-indicadores oficiales SAIFI y SAIDI (Comisión Federal de Electricidad
-2024) (Sección~\ref{sec-distribucion-temporal},
-Tabla~\ref{tbl-saidi-saifi} y Tabla~\ref{tbl-cortes-mensuales}) permitió
-calibrar analíticamente la función de intensidad bimodal
-\(\lambda_{cfe}(t)\) del Proceso de Poisson No Homogéneo
-(Sección~\ref{sec-ppnh}, Ecuación~\ref{eq-lambda-final} y
-Figura~\ref{fig-lambda-t}), cuya validación integral arrojó \(65.90\)
-cortes esperados (Tabla~\ref{tbl-validacion-integral}), capturando con
-fidelidad el pico de estiaje primaveral y la temporada de tormentas de
-verano. De igual modo, la estimación de momentos ponderados por estación
-climática (Sección~\ref{sec-lognormal-duracion},
-Tabla~\ref{tbl-duracion-cortes} y Tabla~\ref{tbl-parametros-lognormal})
-confirmó que las duraciones de los apagones siguen distribuciones
-Log-Normales de cola pesada (Figura~\ref{fig-lognormal-invierno},
-Figura~\ref{fig-lognormal-calor} y Figura~\ref{fig-lognormal-lluvias}),
-siendo la temporada de calor la de mayor duración media por falla
-(\(2.983\text{ h}\)). Acoplando estas perturbaciones con la calibración
-termodinámica del refrigerador precalificado Haier HBC-150 (Organización
-Mundial de la Salud 2024; Vollmer 2009; Costanzo et~al. 2013)
+(\citeproc{ref-sener2024prodesen}{Secretaría de Energía 2024})
+(Sección~\ref{sec-escala-espacial}), se dedujo una esperanza local de
+\(64\) apagones anuales (Ecuación~\ref{eq-esperanza-local}). La
+desagregación marginal de los indicadores oficiales SAIFI y SAIDI
+(\citeproc{ref-cfe2024informe}{Comisión Federal de Electricidad 2024})
+(Sección~\ref{sec-distribucion-temporal}, Tabla~\ref{tbl-saidi-saifi} y
+Tabla~\ref{tbl-cortes-mensuales}) permitió calibrar analíticamente la
+función de intensidad bimodal \(\lambda_{cfe}(t)\) del Proceso de
+Poisson No Homogéneo (Sección~\ref{sec-ppnh},
+Ecuación~\ref{eq-lambda-final} y Figura~\ref{fig-lambda-t}), cuya
+validación integral arrojó \(65.90\) cortes esperados
+(Tabla~\ref{tbl-validacion-integral}), capturando con fidelidad el pico
+de estiaje primaveral y la temporada de tormentas de verano. De igual
+modo, la estimación de momentos ponderados por estación climática
+(Sección~\ref{sec-lognormal-duracion}, Tabla~\ref{tbl-duracion-cortes} y
+Tabla~\ref{tbl-parametros-lognormal}) confirmó que las duraciones de los
+apagones siguen distribuciones Log-Normales de cola pesada
+(Figura~\ref{fig-lognormal-invierno}, Figura~\ref{fig-lognormal-calor} y
+Figura~\ref{fig-lognormal-lluvias}), siendo la temporada de calor la de
+mayor duración media por falla (\(2.983\text{ h}\)). Acoplando estas
+perturbaciones con la calibración termodinámica del refrigerador
+precalificado Haier HBC-150 (\citeproc{ref-oms_pqs_e003}{Organización
+Mundial de la Salud 2024}; \citeproc{ref-vollmer2009newton}{Vollmer
+2009}; \citeproc{ref-costanzo2013grey}{Costanzo et~al. 2013})
 (Figura~\ref{fig-haier-hbc150} y Ecuación~\ref{eq-ede-operativa}), se
 determinó un contraste físico determinante entre la velocidad de
 enfriamiento activo (\(\kappa_{on} \approx 0.1154\text{ h}^{-1}\),
@@ -6899,24 +6946,27 @@ lentitud de la pérdida pasiva provista por el revestimiento de paquetes
 fríos (\(\kappa_{off} \approx 0.00232\text{ h}^{-1}\),
 \(\sigma_{off} \approx 0.048\) en la Sección~\ref{sec-regimen-2}). Al
 integrar los choques térmicos normales truncados reportados por el NIST
-(Chojnacky et~al. 2010)
+(\citeproc{ref-nist2015thermal}{Chojnacky et~al. 2010})
 (\(\gamma_i \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\) en la
 Sección~\ref{sec-salto-termico} y Ecuación~\ref{eq-salto-termico}), los
 parámetros cinéticos de Arrhenius (\(E_a = 85\text{ kJ/mol}\),
 \(A = 1.2 \times 10^{13}\text{ s}^{-1}\) en la
-Sección~\ref{sec-Arrhenius} y Ecuación~\ref{eq-Arrhenius}) (Sinko 2011)
-y la demanda estacional mexicana (Sección~\ref{sec-dinamica-inventario}
-y Tabla~\ref{tbl-demanda-base}), se consolidó un simulador fiel a la
+Sección~\ref{sec-Arrhenius} y Ecuación~\ref{eq-Arrhenius})
+(\citeproc{ref-sinko2011martin}{Sinko 2011}) y la demanda estacional
+mexicana (Sección~\ref{sec-dinamica-inventario} y
+Tabla~\ref{tbl-demanda-base}), se consolidó un simulador fiel a la
 operación de un centro de salud urbano en Chiapas.
 
 Finalmente, la simulación computacional implementada mediante el
 alg.~\ref{alg-simulacion-ede-termodinamica} sobre el ciclo climático
 diurno de Tuxtla Gutiérrez (Figura~\ref{fig-clima-anual} y
 Figura~\ref{fig-clima-zoom}), evaluada a través de \(M = 5,000\)
-realizaciones anuales de Montecarlo (Giles 2008; Ross 2018) y
-estabilizada mediante \(10,000\) remuestreos no paramétricos de
-Bootstrap (Efron y Tibshirani 1993), arrojó hallazgos contundentes sobre
-la naturaleza del riesgo en la red de frío:
+realizaciones anuales de Montecarlo
+(\citeproc{ref-giles2008multilevel}{Giles 2008};
+\citeproc{ref-ross2018first}{Ross 2018}) y estabilizada mediante
+\(10,000\) remuestreos no paramétricos de Bootstrap
+(\citeproc{ref-efron1993introduction}{Efron y Tibshirani 1993}), arrojó
+hallazgos contundentes sobre la naturaleza del riesgo en la red de frío:
 
 \begin{itemize}
 \tightlist
@@ -6984,10 +7034,11 @@ la naturaleza del riesgo en la red de frío:
   de aperturas domina por completo al factor climático y eléctrico.
 \item
   \textbf{No normalidad estructural del riesgo operativo:} La aplicación
-  de la prueba de bondad de ajuste de Shapiro-Wilk (Montgomery y Runger
-  2014) (Tabla~\ref{tbl-shapiro-wilk}) rechazó la hipótesis nula de
-  normalidad (\(p < 0.05\)) en todas las métricas de pérdida para los
-  tres escenarios, evidenciando que el riesgo en la cadena de frío posee
+  de la prueba de bondad de ajuste de Shapiro-Wilk
+  (\citeproc{ref-montgomery2014applied}{Montgomery y Runger 2014})
+  (Tabla~\ref{tbl-shapiro-wilk}) rechazó la hipótesis nula de normalidad
+  (\(p < 0.05\)) en todas las métricas de pérdida para los tres
+  escenarios, evidenciando que el riesgo en la cadena de frío posee
   colas pesadas y fuerte asimetría positiva cuando predominan las fallas
   eléctricas pasivas (Escenarios A y B), y que tiende gradualmente hacia
   una campana gaussiana por efecto del Teorema del Límite Central
@@ -7091,16 +7142,17 @@ En la presente investigación, los parámetros termodinámicos
 (\(\kappa_{on}, \kappa_{off}, \sigma_{on}, \sigma_{off}\)) y las
 distribuciones de salto térmico (\(\gamma_i\)) se calibraron de forma
 analítica a partir de las fichas técnicas de precalificación de la OMS
-(Organización Mundial de la Salud 2024) y de los reportes experimentales
-del NIST (Chojnacky et~al. 2010). Como la línea de trabajo futuro más
-inmediata y de mayor impacto práctico, se propone \textbf{adquirir e
-instalar instrumentación de monitoreo continuo de alta precisión
----específicamente termómetros digitales con registro automatizado
-(\emph{data loggers}) situados tanto en el aire de la cámara como
-sumergidos en viales testigo con glicerol, acoplados a sensores
-magnéticos de apertura de puerta y medidores de voltaje en tiempo
-real--- dentro de un refrigerador institucional operativo en un centro
-de salud de Tuxtla Gutiérrez}. Contar con estas series de tiempo
+(\citeproc{ref-oms_pqs_e003}{Organización Mundial de la Salud 2024}) y
+de los reportes experimentales del NIST
+(\citeproc{ref-nist2015thermal}{Chojnacky et~al. 2010}). Como la línea
+de trabajo futuro más inmediata y de mayor impacto práctico, se propone
+\textbf{adquirir e instalar instrumentación de monitoreo continuo de
+alta precisión ---específicamente termómetros digitales con registro
+automatizado (\emph{data loggers}) situados tanto en el aire de la
+cámara como sumergidos en viales testigo con glicerol, acoplados a
+sensores magnéticos de apertura de puerta y medidores de voltaje en
+tiempo real--- dentro de un refrigerador institucional operativo en un
+centro de salud de Tuxtla Gutiérrez}. Contar con estas series de tiempo
 empíricas de alta frecuencia (con muestreo cada minuto) permitirá:
 
 \begin{itemize}
@@ -7155,11 +7207,12 @@ subsecuente, permitiría capturar con mayor realismo los cuellos de
 botella clínicos. Asimismo, integrando nuestro modelo termodinámico
 híbrido (Ecuación~\ref{eq-ede-operativa-teorica}) directamente dentro de
 un problema de \textbf{control óptimo estocástico con dinámica
-epidemiológica SEIR} como el planteado en (García, Díaz-Infante, y
-Minjárez-Sosa 2026), será posible determinar políticas óptimas de pedido
-y umbrales dinámicos de reorden \(I_{reorden}^*(t)\) que minimicen
-simultáneamente el costo económico de las mermas por calor y el costo
-social de desabasto durante un brote epidémico activo.
+epidemiológica SEIR} como el planteado en
+(\citeproc{ref-control2026vaccine}{García, Díaz-Infante, y Minjárez-Sosa
+2026}), será posible determinar políticas óptimas de pedido y umbrales
+dinámicos de reorden \(I_{reorden}^*(t)\) que minimicen simultáneamente
+el costo económico de las mermas por calor y el costo social de
+desabasto durante un brote epidémico activo.
 
 \bookmarksetup{startatroot}
 

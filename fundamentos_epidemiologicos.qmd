@@ -28,7 +28,7 @@ donde $k(T) > 0$ denota la constante de velocidad de reacción (o tasa de degrad
 Considere un sistema químico o biológico sujeto a una temperatura absoluta $T_K > 0$ (expresada en grados Kelvin, $T_K = T + 273.15$ con $T$ en grados Celsius). La tasa de degradación térmica $k(T_K)$ está determinada por la siguiente relación exponencial:
 
 $$
-k(T_K) = A \exp\left( -\frac{E_a}{R T_K} \right),
+k(T_K) = A \exp\left( -\frac{E_a}{R \cdot T_K} \right),
 $$ {#eq-arrhenius-teorica}
 
 donde:
