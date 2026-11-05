@@ -577,9 +577,9 @@ u(t) \le C \exp\left( \int_{t_0}^t v(s) ds \right).
 $$
 :::
 
-## Sistemas Estocásticos Híbridos: Discontinuidades y Conmutación Markoviana
+## Sistemas Estocásticos Híbridos: Discontinuidades y Cambios de Régimen de Markov
 
-Cuando los parámetros estructurales de un sistema físico cambian drásticamente debido a transiciones en el entorno (como cortes y restablecimientos en el suministro eléctrico) y simultáneamente el estado continuo sufre perturbaciones impulsivas (como aperturas de puerta), el comportamiento conjunto se describe mediante una ecuación diferencial estocástica híbrida con conmutación markoviana y saltos [@mao2006stochastic; @yin2010hybrid].
+Cuando los parámetros estructurales de un sistema físico cambian drásticamente debido a transiciones en el entorno (como cortes y restablecimientos en el suministro eléctrico) y simultáneamente el estado continuo sufre perturbaciones impulsivas (como aperturas de puerta), el comportamiento conjunto se describe mediante una ecuación diferencial estocástica híbrida con cambios de régimen de Markov y saltos [@mao2006stochastic; @yin2010hybrid].
 
 Para formalizar el análisis sobre subintervalos cuyos extremos son tiempos de paro @def-tiempo-parada $\tau$ y $\rho$ tales que $0 \le \tau(\omega) \le \rho(\omega)$ para todo $\omega \in \Omega$, usamos la notación estándar de **intervalos estocásticos** de [@mao2006stochastic]:
 $$
@@ -636,7 +636,7 @@ $$
 A continuación enunciamos y demostramos a detalle el teorema central que garantiza la existencia, unicidad fuerte y acotamiento en segundo momento de la solución para la ecuación diferencial estocástica híbrida con saltos (@eq-ede-hibrida-diff). La estructura de la demostración extiende el procedimiento constructivo sobre tiempos de paro del Teorema 3.13 y Lema 3.1 de [@mao2006stochastic] al caso de difusiones impulsadas por medidas aleatorias de Poisson compensadas mediante el @thm-situ-existencia [@situ2005theory].
 
 ::: {#thm-mao-switching}
-### Teorema de Existencia y Unicidad para EDES Híbridas con Saltos y Régimen de Markov
+### Teorema de Existencia y Unicidad para EDES Híbridas con Cambios de Régimen de Markov y Saltos de Poisson
 Consideremos la ecuación diferencial estocástica híbrida (@eq-ede-hibrida-diff) en el intervalo $[t_0, T]$ ($0 \le t_0 < T < \infty$), con condiciones iniciales $X(t_0) = x_0 \in L^2_{\mathcal{F}_{t_0}}(\Omega; \mathbb{R})$ y $\alpha(t_0) = \alpha_0$. Supóngase que el movimiento Browniano $W(t)$, la medida aleatoria de Poisson $N(dt, dz)$ (con medida de intensidad $\nu_t(dz)dt = \lambda(t)dF(z)dt$, donde $\displaystyle \int_{t_0}^T \lambda(t)dt < \infty$) y la cadena de Markov a tiempo continuo $\alpha(t)$ (con espacio de estados finito $\mathcal{M} = \{1, 2, \dots, m\}$ y matriz generadora de tasas finitas $Q = (q_{ij})_{m \times m}$) son mutuamente independientes.
 
 Si existen constantes positivas $L, K > 0$ tales que los coeficientes de la ecuación diferencial estocástica híbrida satisfacen las siguientes condiciones:

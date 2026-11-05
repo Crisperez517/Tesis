@@ -83,6 +83,35 @@ ul.task-list li input[type="checkbox"] {
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -442,6 +471,8 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="resumen" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Resumen</h1>
+<p>La preservación de vacunas en la red de frío exige mantener los biológicos dentro del rango normativo de <span class="math inline">\(2^\circ\text{C}\)</span> a <span class="math inline">\(8^\circ\text{C}\)</span>, un desafío crítico ante climas cálidos extremos e interrupciones eléctricas frecuentes[cite: 1161, 1208]. En este trabajo se formula, calibra y simula un modelo termodinámico basado en una ecuación diferencial estocástica (EDE) híbrida para cuantificar el riesgo operativo y la merma anual de vacunas en el refrigerador precalificado Haier HBC-150 en Tuxtla Gutiérrez, Chiapas[cite: 1161, 1193, 1230]. El modelo extiende el proceso clásico de Ornstein-Uhlenbeck al incorporar conmutación markoviana para alternar entre el enfriamiento activo y el calentamiento pasivo durante apagones de la red eléctrica —calibrados mediante procesos de Poisson no homogéneos y duraciones Log-Normales—, así como un proceso de Poisson compuesto para los choques térmicos por aperturas de puerta[cite: 1193, 1218, 1222, 1228]. Tras demostrar analíticamente la existencia y unicidad de la solución fuerte, la dinámica térmica se acopla con la cinética de degradación de Arrhenius y un sistema de control de inventario con reabastecimiento[cite: 1188, 1195, 1209, 1210]. Para su resolución, se implementa un esquema numérico híbrido de Euler-Maruyama dentro de una simulación de Montecarlo de 5,000 trayectorias anuales e inferencia no paramétrica Bootstrap bajo tres escenarios operativos[cite: 1206, 1242, 1257, 1271]. Los resultados demuestran que el aislamiento pasivo del equipo soporta eficazmente las fallas eléctricas, pero que la saturación de aperturas de puerta durante contingencias epidemiológicas colapsa la recuperación térmica y multiplica exponencialmente la destrucción de dosis[cite: 1259, 1273, 1279].</p>
+<p><strong>Palabras clave:</strong> ecuaciones diferenciales estocásticas híbridas, red de frío, ecuación de Arrhenius, simulación de Montecarlo, inventario de vacunas[cite: 1161, 1193, 1209, 1210, 1257, 1285].</p>
 
 
 </section>

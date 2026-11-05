@@ -154,7 +154,7 @@ $$
 $$
 lo que implica que **el esquema de Milstein y el esquema de Euler-Maruyama coinciden algebraicamente**. En particular, para nuestro modelo termodinámico híbrido (@eq-ede-operativa-teorica), dado que dentro de cada régimen $i \in \{1, 2\}$ la volatilidad $\sigma(i) \in \{\sigma_{on}, \sigma_{off}\}$ es constante respecto a la temperatura $T(t)$ $\left( \frac{\partial \sigma(i)}{\partial T} = 0 \right),$ el esquema de Euler-Maruyama reproduce de manera exacta la actualización del esquema de Milstein en la componente difusiva sin requerir el cálculo de derivadas parciales espaciales adicionales.
 
-## Esquemas Numéricos para EDES con Cambio de Régimen Markoviano {#sec-numerico-switching}
+## Esquemas Numéricos para EDES con Cambios de Régimen de Markov {#sec-numerico-switching}
 
 Los métodos de Euler-Maruyama (@eq-esquema-em) y de Milstein (@eq-esquema-milstein) presentados previamente consideran coeficientes que dependen únicamente de difusiones continuas. Sin embargo, para aproximar numéricamente ecuaciones diferenciales estocásticas híbridas cuyos parámetros cambian de acuerdo a una cadena de Markov a tiempo continuo $\{\alpha(t)\}_{t \in [0, T]}$ sobre un espacio de estados finito $\mathcal{M} = \{1, 2, \dots, m_0\}$, es necesario juntar la discretización temporal de la variable de estado continua con la simulación discreta de las transiciones de régimen [@yin2010hybrid; @mao2006stochastic].
 
@@ -203,7 +203,7 @@ $$ {#eq-cota-fuerte-switching}
 lo cual establece un orden de convergencia fuerte $\gamma = 0.5$ en la norma $\displaystyle L^2(\Omega)$: $\displaystyle \left(\mathbb{E}[\sup_{0 \le t \le T} |X(t) - Y^{\Delta t}(t)|^2]\right)^{1/2} \le C(\Delta t)^{1/2}$.
 :::
 
-## Esquemas Numéricos para EDES Híbridas con Saltos y Régimen de Markov {#sec-numerico-saltos}
+## Esquemas Numéricos para EDES Híbridas con Cambios de Régimen de Markov y Saltos {#sec-numerico-saltos}
 
 Para completar la estructura numérica de nuestro modelo (@eq-ede-operativa-teorica), debemos incorporar las discontinuidades de salto junto con la difusión Browniana y el cambio de régimen. De acuerdo con [@platen2010numerical], mientras que los esquemas adaptados a saltos insertan cada tiempo aleatorio de ocurrencia dentro de la malla, los **esquemas regulares** emplean una partición fija $t_n = n\Delta t$ y acumulan el impacto de los saltos ocurridos en cada subintervalo $[t_n, t_{n+1})$. Este ultimo enfoque resulta el adecuado para simulaciones de Monte Carlo acopladas a series meteorológicas en mallas temporales fijas ($\Delta t$).
 

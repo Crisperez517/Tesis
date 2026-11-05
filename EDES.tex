@@ -216,13 +216,13 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
-\theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -345,6 +345,38 @@ Y finalmente, a las comunidades chiapanecas que enfrentan las inundaciones tempo
 
 \chapter{Resumen}\label{resumen}
 
+La preservación de vacunas en la red de frío exige mantener los
+biológicos dentro del rango normativo de \(2^\circ\text{C}\) a
+\(8^\circ\text{C}\), un desafío crítico ante climas cálidos extremos e
+interrupciones eléctricas frecuentes{[}cite: 1161, 1208{]}. En este
+trabajo se formula, calibra y simula un modelo termodinámico basado en
+una ecuación diferencial estocástica (EDE) híbrida para cuantificar el
+riesgo operativo y la merma anual de vacunas en el refrigerador
+precalificado Haier HBC-150 en Tuxtla Gutiérrez, Chiapas{[}cite: 1161,
+1193, 1230{]}. El modelo extiende el proceso clásico de
+Ornstein-Uhlenbeck al incorporar conmutación markoviana para alternar
+entre el enfriamiento activo y el calentamiento pasivo durante apagones
+de la red eléctrica ---calibrados mediante procesos de Poisson no
+homogéneos y duraciones Log-Normales---, así como un proceso de Poisson
+compuesto para los choques térmicos por aperturas de puerta{[}cite:
+1193, 1218, 1222, 1228{]}. Tras demostrar analíticamente la existencia y
+unicidad de la solución fuerte, la dinámica térmica se acopla con la
+cinética de degradación de Arrhenius y un sistema de control de
+inventario con reabastecimiento{[}cite: 1188, 1195, 1209, 1210{]}. Para
+su resolución, se implementa un esquema numérico híbrido de
+Euler-Maruyama dentro de una simulación de Montecarlo de 5,000
+trayectorias anuales e inferencia no paramétrica Bootstrap bajo tres
+escenarios operativos{[}cite: 1206, 1242, 1257, 1271{]}. Los resultados
+demuestran que el aislamiento pasivo del equipo soporta eficazmente las
+fallas eléctricas, pero que la saturación de aperturas de puerta durante
+contingencias epidemiológicas colapsa la recuperación térmica y
+multiplica exponencialmente la destrucción de dosis{[}cite: 1259, 1273,
+1279{]}.
+
+\textbf{Palabras clave:} ecuaciones diferenciales estocásticas híbridas,
+red de frío, ecuación de Arrhenius, simulación de Montecarlo, inventario
+de vacunas{[}cite: 1161, 1193, 1209, 1210, 1257, 1285{]}.
+
 \bookmarksetup{startatroot}
 
 \chapter{Introducción}\label{introducciuxf3n}
@@ -461,11 +493,11 @@ Tuxtla Gutiérrez, Chiapas.
 \def\labelenumi{\arabic{enumi}.}
 \item
   \textbf{Formular y demostrar la existencia y unicidad de una solución
-  fuerte de un modelo termodinámico de Ornstein-Uhlenbeck híbrido}, que
-  incorpore conmutación markoviana para el estado del suministro
-  eléctrico y un proceso de Poisson compuesto para las aperturas de
-  puerta, acoplándolo con la cinética térmica de Arrhenius y el balance
-  dinámico de inventario.
+  fuerte de un modelo termodinámico de Ornstein-Uhlenbeck híbrido, con
+  cambios de régimen de Markov} para el estado del suministro eléctrico
+  y un proceso de Poisson compuesto para las aperturas de puerta,
+  acoplándolo con la cinética térmica de Arrhenius y el balance dinámico
+  de inventario.
 \item
   \textbf{Calibrar los parámetros físicos, eléctricos, cinéticos y
   logísticos del modelo sobre un escenario operativo real}, utilizando
@@ -1823,16 +1855,17 @@ u(t) \le C \exp\left( \int_{t_0}^t v(s) ds \right).
 
 \end{lemma}
 
-\section{Sistemas Estocásticos Híbridos: Discontinuidades y Conmutación
-Markoviana}\label{sistemas-estocuxe1sticos-huxedbridos-discontinuidades-y-conmutaciuxf3n-markoviana}
+\section{Sistemas Estocásticos Híbridos: Discontinuidades y Cambios de
+Régimen de
+Markov}\label{sistemas-estocuxe1sticos-huxedbridos-discontinuidades-y-cambios-de-ruxe9gimen-de-markov}
 
 Cuando los parámetros estructurales de un sistema físico cambian
 drásticamente debido a transiciones en el entorno (como cortes y
 restablecimientos en el suministro eléctrico) y simultáneamente el
 estado continuo sufre perturbaciones impulsivas (como aperturas de
 puerta), el comportamiento conjunto se describe mediante una ecuación
-diferencial estocástica híbrida con conmutación markoviana y saltos
-(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+diferencial estocástica híbrida con cambios de régimen de Markov y
+saltos (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
 \citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}).
 
 Para formalizar el análisis sobre subintervalos cuyos extremos son
@@ -1969,8 +2002,8 @@ difusiones impulsadas por medidas aleatorias de Poisson compensadas
 mediante el Teorema~\ref{thm-situ-existencia}.
 
 \begin{theorem}[Teorema de Existencia y Unicidad para EDES Híbridas con
-Saltos y Régimen de
-Markov]\protect\hypertarget{thm-mao-switching}{}\label{thm-mao-switching}
+Cambios de Régimen de Markov y Saltos de
+Poisson]\protect\hypertarget{thm-mao-switching}{}\label{thm-mao-switching}
 
 Consideremos la ecuación diferencial estocástica híbrida
 (Ecuación~\ref{eq-ede-hibrida-diff}) en el intervalo \([t_0, T]\)
@@ -2874,8 +2907,8 @@ de Euler-Maruyama reproduce de manera exacta la actualización del
 esquema de Milstein en la componente difusiva sin requerir el cálculo de
 derivadas parciales espaciales adicionales.
 
-\section{Esquemas Numéricos para EDES con Cambio de Régimen
-Markoviano}\label{sec-numerico-switching}
+\section{Esquemas Numéricos para EDES con Cambios de Régimen de
+Markov}\label{sec-numerico-switching}
 
 Los métodos de Euler-Maruyama (Ecuación~\ref{eq-esquema-em}) y de
 Milstein (Ecuación~\ref{eq-esquema-milstein}) presentados previamente
@@ -2990,8 +3023,8 @@ norma \(\displaystyle L^2(\Omega)\):
 
 \end{theorem}
 
-\section{Esquemas Numéricos para EDES Híbridas con Saltos y Régimen de
-Markov}\label{sec-numerico-saltos}
+\section{Esquemas Numéricos para EDES Híbridas con Cambios de Régimen de
+Markov y Saltos}\label{sec-numerico-saltos}
 
 Para completar la estructura numérica de nuestro modelo
 (Ecuación~\ref{eq-ede-operativa-teorica}), debemos incorporar las
