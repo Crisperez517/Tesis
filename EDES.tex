@@ -216,13 +216,13 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
-\theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{plain}
+\newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -253,7 +253,7 @@
 
 \title{EDES}
 \author{Cristóbal Pérez González \and Yofre Hernán García Gómez}
-\date{2026-11-03}
+\date{2026-11-05}
 \begin{document}
 \begin{titlepage}
 \hspace{-1.7cm} %Este comando es para mandar a la izquierda :)
@@ -351,11 +351,11 @@ Y finalmente, a las comunidades chiapanecas que enfrentan las inundaciones tempo
 
 La preservación de vacunas en condiciones termodinámicas óptimas
 constituye uno de los pilares críticos para la eficacia de los programas
-de inmunización y el control de brotes epidémicos en salud pública (Y.
-H. García 2026). Debido a la naturaleza termosensible de sus componentes
-antigénicos y adyuvantes, los productos biológicos deben resguardarse
-estrictamente dentro del rango normativo de
-\([2^\circ\text{C}, 8^\circ\text{C}]\) desde su fabricación hasta su
+de inmunización y el control de brotes epidémicos en salud pública
+(García, Díaz-Infante, y Minjárez-Sosa 2026). Debido a la naturaleza
+termosensible de sus componentes antigénicos y adyuvantes, los productos
+biológicos deben resguardarse estrictamente dentro del rango normativo
+de \([2^\circ\text{C}, 8^\circ\text{C}]\) desde su fabricación hasta su
 administración clínica (Yoshioka y Stella 2000). Cualquier excursión
 térmica fuera de estos límites compromete la integridad del biológico:
 la exposición a temperaturas inferiores a \(0^\circ\text{C}\) provoca la
@@ -414,14 +414,14 @@ Salud (OMS), el modelo institucional \textbf{Haier HBC-150}, integrando
 series meteorológicas locales, registros históricos de confiabilidad
 eléctrica de la CFE (índices SAIFI y SAIDI) y parámetros experimentales
 de transferencia térmica. Asimismo, siguiendo enfoques recientes sobre
-gestión estocástica de biológicos (Y. H. García 2026), las trayectorias
-térmicas se acoplan con la cinética de degradación de Arrhenius
-incorporando un filtro físico de inercia térmica de
-\(30\text{ minutos}\) para los viales y con un modelo dinámico de
-inventario y reabastecimiento evaluado bajo tres escenarios: control
-absoluto sin intervención humana (Escenario A), operación clínica con
-apego normativo (Escenario B) y estrés operativo por contingencia
-epidemiológica (Escenario C).
+gestión estocástica de biológicos (García, Díaz-Infante, y Minjárez-Sosa
+2026), las trayectorias térmicas se acoplan con la cinética de
+degradación de Arrhenius incorporando un filtro físico de inercia
+térmica de \(30\text{ minutos}\) para los viales y con un modelo
+dinámico de inventario y reabastecimiento evaluado bajo tres escenarios:
+control absoluto sin intervención humana (Escenario A), operación
+clínica con apego normativo (Escenario B) y estrés operativo por
+contingencia epidemiológica (Escenario C).
 
 Finalmente, ante la ausencia de soluciones analíticas cerradas para el
 sistema acoplado, se implementa un esquema numérico regular de
@@ -3046,8 +3046,8 @@ describen los mecanismos de termoestabilidad de los productos biológicos
 dentro de la red de frío. Posteriormente, se formula la cinética de
 degradación térmica mediante la ecuación de Arrhenius. Finalmente, se
 presenta el acoplamiento entre la degradación impulsada por la
-temperatura, el reabastecimiento logístico y la demanda de inmunización
-bajo esquemas epidemiológicos.
+temperatura, el reabastecimiento logístico bajo incertidumbre y la
+demanda de inmunización bajo esquemas epidemiológicos.
 
 \section{Estabilidad Biológica e Integridad de la Red de
 Frío}\label{estabilidad-bioluxf3gica-e-integridad-de-la-red-de-fruxedo}
@@ -3064,7 +3064,7 @@ mantenerse estrictamente dentro de la ventana térmica de seguridad de
 
 Cuando la temperatura interna \(T(t)\) del equipo de refrigeración
 abandona este rango normativo, el biológico se expone a dos mecanismos
-de daño fisicoquímico distintos{[}cite: 2270{]}:
+de daño fisicoquímico distintos:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3145,7 +3145,7 @@ donde:
   \(E_a > 0\) es la \textbf{energía de activación}
   (\(\text{J}\cdot\text{mol}^{-1}\)), que representa la barrera
   energética mínima necesaria para romper la estabilidad conformacional
-  del antígeno{[}cite: 2270{]}.
+  del antígeno.
 \item
   \(R = 8.314\,\text{J}\cdot\text{mol}^{-1}\cdot\text{K}^{-1}\) es la
   \textbf{constante universal de los gases ideales}.
@@ -3164,8 +3164,8 @@ híbrida (Ecuación~\ref{eq-ede-operativa-teorica}).
 Al acoplar la trayectoria estocástica \(T(t)\) dentro de la
 Ecuación~\ref{eq-arrhenius-teorica}, la tasa de degradación \(k(T(t))\)
 se convierte en un proceso estocástico adaptado a la filtración
-\(\{\mathcal{F}_t\}_{t \ge 0}\) {[}Y. H. García (2026){]}{[}cite:
-2271{]}. Considerando que el daño farmacológico se activa únicamente
+\(\{\mathcal{F}_t\}_{t \ge 0}\) (García, Díaz-Infante, y Minjárez-Sosa
+2026). Considerando que el daño farmacológico se activa únicamente
 cuando la temperatura supera el umbral normativo superior
 (\(T(t) > 8^\circ\text{C}\)) tras superar el periodo de inercia térmica
 del vial, la fracción de biológico degradada en un subintervalo temporal
@@ -3184,27 +3184,30 @@ Epidemiológica}\label{sec-fundamento-inventario-seir}
 La evaluación del riesgo en la red de frío no puede limitarse a
 cuantificar la pérdida porcentual teórica de un vial aislado, sino que
 debe traducirse en el número real de dosis destruidas (mermas físicas)
-durante la operación de una clínica de vacunación (Y. H. García 2026).
-Recientemente, en la literatura de investigación de operaciones aplicada
-a la salud pública (Y. H. García 2026), se ha demostrado la importancia
-de integrar la degradación térmica de Arrhenius con la dinámica
-estocástica del inventario de vacunas y la demanda generada por brotes
-epidémicos.
+durante la operación de una clínica de vacunación (García, Díaz-Infante,
+y Minjárez-Sosa 2025, 2026). Recientemente, en la literatura de modelado
+epidemiológico e investigación de operaciones (García, Díaz-Infante, y
+Minjárez-Sosa 2025, 2026), se ha establecido la necesidad de acoplar la
+dinámica estocástica del inventario de vacunas y la incertidumbre en el
+reabastecimiento con la degradación térmica de los biológicos durante
+campañas de mitigación de epidemias.
 
 En el marco epidemiológico clásico, la propagación de una enfermedad
-infecciosa en una población se modela mediante sistemas compartimentales
-de tipo \textbf{SEIR} (\emph{Susceptibles \(S\), Expuestos \(E\),
-Infectados \(I_{inf}\) y Recuperados \(R_{rec}\)}), donde la campaña de
-vacunación busca transferir individuos del compartimento susceptible
-\(S(t)\) hacia el compartimento inmunizado \(R_{rec}(t)\) a una tasa de
-vacunación \(u(t)\) (Y. H. García 2026). Como se establece en (Y. H.
-García 2026), el despliegue efectivo de dicha tasa de inmunización
-\(u(t)\) está restringido físicamente por el nivel de inventario de
-vacunas viables \(I(t) \ge 0\) disponible en el centro de salud en cada
-instante \(t\).
+infecciosa en una población se describe mediante modelos
+compartimentales de tipo \textbf{SEIR} (\emph{Susceptibles, Expuestos,
+Infectados y Recuperados}) y sus extensiones con conteo de vacunación
+(García, Díaz-Infante, y Minjárez-Sosa 2025, 2026), donde la campaña de
+inmunización busca transferir individuos susceptibles hacia el
+compartimento protegido a una tasa de vacunación determinada. Como se
+demuestra en (García, Díaz-Infante, y Minjárez-Sosa 2025, 2026), la
+factibilidad de sostener dicha tasa de vacunación en el tiempo depende
+directamente de la integridad del inventario de dosis disponibles
+\(I(t) \ge 0\) y de la preservación de un umbral mínimo de reserva de
+seguridad (\emph{reserve level}).
 
-De acuerdo con la formulación de (Y. H. García 2026), la evolución
-temporal del inventario de biológicos \(I(t)\) en un centro de
+Tomando como base estos modelos de gestión de biológicos bajo
+incertidumbre (García, Díaz-Infante, y Minjárez-Sosa 2025, 2026), la
+evolución temporal del inventario \(I(t)\) en un centro de
 almacenamiento está regida por la interacción simultánea de tres flujos
 operativos:
 
@@ -3212,41 +3215,43 @@ operativos:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{Demanda clínica y epidemiológica (\(u(t)\)):} Representa la
-  extracción de dosis para su aplicación en la población. En condiciones
-  operativas regulares (apego normativo), esta demanda responde a los
-  esquemas de vacunación programados y campañas estacionales; en cambio,
-  durante una contingencia epidemiológica o brote infeccioso, la
-  urgencia por inmunizar a la población susceptible incrementa
-  drásticamente la frecuencia de extracción y rotación del biológico (Y.
-  H. García 2026).
+  \textbf{Demanda clínica y epidemiológica:} Representa la extracción de
+  dosis para su aplicación en la población. En condiciones operativas
+  regulares (apego normativo), esta demanda responde a los esquemas de
+  vacunación programados y campañas estacionales; en cambio, durante una
+  contingencia epidemiológica o brote infeccioso, la urgencia por
+  inmunizar a la población susceptible incrementa drásticamente la
+  frecuencia de extracción y rotación del inventario (García,
+  Díaz-Infante, y Minjárez-Sosa 2025, 2026).
 \item
   \textbf{Merma por degradación impulsada por la temperatura:} Cuando
   ocurre una ruptura de la cadena de frío (\(T(t) > 8^\circ\text{C}\)),
   la tasa cinética de Arrhenius \(k(T(t))\) actúa directamente sobre el
-  volumen total de dosis almacenadas en ese instante (Y. H. García
-  2026). En consecuencia, el número de dosis destruidas en el intervalo
-  \(\Delta t\) es proporcional al inventario activo, esto es,
-  \(M_n = \Delta D_n \cdot I(t_n)\). Esta relación explica por qué una
-  excursión térmica que coincide con un refrigerador lleno a su máxima
-  capacidad produce pérdidas materiales severas, mientras que una
-  rotación oportuna del inventario mitiga la exposición al riesgo
-  eléctrico.
+  volumen total de dosis almacenadas en ese instante (García,
+  Díaz-Infante, y Minjárez-Sosa 2026). En consecuencia, el número de
+  dosis destruidas en el intervalo \(\Delta t\) es proporcional al
+  inventario activo, esto es, \(M_n = \Delta D_n \cdot I(t_n)\). Esta
+  relación explica por qué una excursión térmica que coincide con un
+  refrigerador lleno a su máxima capacidad produce pérdidas materiales
+  severas, mientras que una rotación oportuna del inventario mitiga la
+  exposición al riesgo eléctrico.
 \item
-  \textbf{Reabastecimiento logístico bajo incertidumbre
-  (\(R_{rep}(t)\)):} Conforme el consumo clínico y las mermas reducen
-  las existencias hasta alcanzar un umbral crítico o punto de reorden
-  \(I_{reorden}\), se activa el suministro de nuevos lotes hasta
-  restablecer la capacidad máxima del equipo \(I_{max}\), proceso que en
-  escenarios de alta demanda o contingencia involucra arribos y
-  aperturas aleatorias modeladas mediante procesos de Poisson (Y. H.
-  García 2026).
+  \textbf{Reabastecimiento logístico y umbral de reserva:} Para evitar
+  el desabasto clínico ante fluctuaciones en el suministro, el sistema
+  mantiene un umbral mínimo de reserva o punto de reorden
+  \(I_{reorden}\) (García, Díaz-Infante, y Minjárez-Sosa 2025). Conforme
+  el consumo clínico y las mermas reducen las existencias hasta cruzar
+  este umbral crítico, se activa el reabastecimiento de nuevos lotes
+  hasta restablecer la capacidad máxima del equipo \(I_{max}\), proceso
+  que en escenarios de contingencia involucra resurtidos y aperturas
+  aleatorias modeladas mediante procesos de Poisson (García,
+  Díaz-Infante, y Minjárez-Sosa 2025, 2026).
 \end{enumerate}
 
-Expresado en tiempo discreto sobre la malla de simulación
-\(t_n = n\Delta t\), el balance acoplado del inventario físico
-\(I_n = I(t_n)\) y la merma acumulada obedece la relación recursiva (Y.
-H. García 2026):
+Adaptando estos principios (García, Díaz-Infante, y Minjárez-Sosa 2025,
+2026) a nuestra malla temporal de simulación \(t_n = n\Delta t\), el
+balance acoplado del inventario físico \(I_n = I(t_n)\) obedece la
+relación recursiva:
 
 \begin{equation}\phantomsection\label{eq-balance-inventario-general}{
 I_{n+1} = I_n - C_n - \Delta D_n (I_n - C_n) + R_n,
@@ -6855,7 +6860,7 @@ de \(30\text{ minutos}\)) resultó esencial para distinguir entre
 fluctuaciones aéreas pasajeras y el calentamiento efectivo del líquido
 biológico. Asimismo, retomando los planteamientos recientes de control
 estocástico de inventarios de vacunas acoplados a dinámicas
-epidemiológicas SEIR (Y. H. García 2026) en la
+epidemiológicas SEIR (García, Díaz-Infante, y Minjárez-Sosa 2026) en la
 Sección~\ref{sec-fundamento-inventario-seir}, se demostró que el daño
 materializado no depende de forma aislada de la fracción de degradación
 térmica \(\Delta D_n\) (Ecuación~\ref{eq-fraccion-dano-paso}), sino de
@@ -7158,11 +7163,11 @@ subsecuente, permitiría capturar con mayor realismo los cuellos de
 botella clínicos. Asimismo, integrando nuestro modelo termodinámico
 híbrido (Ecuación~\ref{eq-ede-operativa-teorica}) directamente dentro de
 un problema de \textbf{control óptimo estocástico con dinámica
-epidemiológica SEIR} como el planteado en (Y. H. García 2026), será
-posible determinar políticas óptimas de pedido y umbrales dinámicos de
-reorden \(I_{reorden}^*(t)\) que minimicen simultáneamente el costo
-económico de las mermas por calor y el costo social de desabasto durante
-un brote epidémico activo.
+epidemiológica SEIR} como el planteado en (García, Díaz-Infante, y
+Minjárez-Sosa 2026), será posible determinar políticas óptimas de pedido
+y umbrales dinámicos de reorden \(I_{reorden}^*(t)\) que minimicen
+simultáneamente el costo económico de las mermas por calor y el costo
+social de desabasto durante un brote epidémico activo.
 
 \bookmarksetup{startatroot}
 
@@ -7205,6 +7210,19 @@ appliances»}. En \emph{2013 4th International Youth Conference on Energy
 \bibitem[\citeproctext]{ref-efron1993introduction}
 Efron, Bradley, y Robert J. Tibshirani. 1993. \emph{An Introduction to
 the Bootstrap}. Boca Raton, FL: Chapman; Hall/CRC.
+
+\bibitem[\citeproctext]{ref-garcia2025integrated}
+García, Yofre H., Saúl Díaz-Infante, y Jesús A. Minjárez-Sosa. 2025.
+{«An integrated mathematical epidemiology and inventory model for high
+demand and limited supplies under uncertainty»}. \emph{Decision
+Analytics Journal} 14: 100543.
+\url{https://doi.org/10.1016/j.dajour.2024.100543}.
+
+\bibitem[\citeproctext]{ref-control2026vaccine}
+---------. 2026. {«Stochastic optimal control of vaccine inventory
+during epidemics: integrating {SEIR} dynamics with temperature-driven
+degradation and uncertain replenishment»}. \emph{Computational and
+Applied Mathematics}. \url{https://doi.org/10.1007/s40314-025-03498-z}.
 
 \bibitem[\citeproctext]{ref-giles2008multilevel}
 Giles, Michael B. 2008. {«Multilevel {Monte Carlo} Path Simulation»}.
@@ -7295,13 +7313,6 @@ Vollmer, Michael. 2009. {«Newton's law of cooling revisited»}.
 Wang, Liguo. 2016. {«Numerical Solutions of Stochastic Differential
 Equations»}. PhD Dissertation, The University of Tennessee, Knoxville.
 \url{https://trace.tennessee.edu/utk_graddiss/3974}.
-
-\bibitem[\citeproctext]{ref-control2026vaccine}
-Y. H. García, J. A. Minjárez-Sosa, S. Díaz-Infante. 2026. {«Stochastic
-optimal control of vaccine inventory during epidemics: integrating
-{SEIR} dynamics with temperature-driven degradation and uncertain
-replenishment»}. \emph{Computational and Applied Mathematics}.
-\url{https://doi.org/10.1007/s40314-025-03498-z}.
 
 \bibitem[\citeproctext]{ref-yin2010hybrid}
 Yin, G. George, y Chao Zhu. 2010. \emph{Hybrid Switching Diffusions:
