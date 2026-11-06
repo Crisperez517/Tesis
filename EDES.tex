@@ -217,10 +217,10 @@
 \usepackage{amsthm}
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{remark}
@@ -383,97 +383,137 @@ de vacunas{[}cite: 1161, 1193, 1209, 1210, 1257, 1285{]}.
 
 La preservación de vacunas en condiciones termodinámicas óptimas
 constituye uno de los pilares críticos para la eficacia de los programas
-de inmunización y el control de brotes epidémicos en salud pública
-(\citeproc{ref-control2026vaccine}{García, Díaz-Infante, y Minjárez-Sosa
-2026}). Debido a la naturaleza termosensible de sus componentes
-antigénicos y adyuvantes, los productos biológicos deben resguardarse
-estrictamente dentro del rango normativo de
+de inmunización y la mitigación de brotes epidémicos en salud pública
+(\citeproc{ref-oms2015cadenafrio}{Organización Mundial de la Salud
+2015}; \citeproc{ref-garcia2025integrated}{García, Díaz-Infante, y
+Minjárez-Sosa 2025}). Debido a la naturaleza termosensible de sus
+componentes antigénicos y adyuvantes, los productos biológicos deben
+resguardarse estrictamente dentro del rango normativo de
 \([2^\circ\text{C}, 8^\circ\text{C}]\) desde su fabricación hasta su
-administración clínica (\citeproc{ref-yoshioka2000stability}{Yoshioka y
-Stella 2000}). Cualquier excursión térmica fuera de estos límites
+administración clínica (\citeproc{ref-oms2015cadenafrio}{Organización
+Mundial de la Salud 2015}; \citeproc{ref-yoshioka2000stability}{Yoshioka
+y Stella 2000}). Cualquier excursión térmica fuera de estos límites
 compromete la integridad del biológico: la exposición a temperaturas
 inferiores a \(0^\circ\text{C}\) provoca la aglomeración irreversible de
 adyuvantes por congelación, mientras que las excursiones por encima de
 los \(8^\circ\text{C}\) aceleran exponencialmente la desnaturalización
 proteica siguiendo una cinética química de primer orden gobernada por la
 ecuación de Arrhenius (\citeproc{ref-atkins2018physical}{Atkins, Paula,
-y Keeler 2018}; \citeproc{ref-yoshioka2000stability}{Yoshioka y Stella
-2000}).
+y Keeler 2018}; \citeproc{ref-sinko2011martin}{Sinko 2011};
+\citeproc{ref-yoshioka2000stability}{Yoshioka y Stella 2000}).
 
-La vulnerabilidad de la red de frío se intensifica en regiones con
-climas cálidos extremos, como la ciudad de Tuxtla Gutiérrez, Chiapas,
-donde las elevadas temperaturas ambientales aceleran la transferencia de
-calor hacia el interior de las cámaras de refrigeración y reducen su
-tiempo de autonomía pasiva{[}cite: 1014, 1066{]}. En las unidades
-médicas locales, este estrés climático interactúa de manera simultánea
-con dos perturbaciones operativas críticas: las interrupciones
-recurrentes en el suministro de energía eléctrica de la Comisión Federal
-de Electricidad (CFE) acentuadas durante las olas de calor primaverales
-por saturación de transformadores y en la temporada estival de tormentas
-y la infiltración repentina de aire cálido exterior cada vez que el
-personal de salud abre la puerta del refrigerador para extraer o
-resguardar dosis.
-
-Dado que tanto las fallas del suministro eléctrico como las aperturas de
-puerta ocurren en instantes aleatorios y poseen duraciones y magnitudes
-variables, los modelos deterministas clásicos basados en la ley de
-enfriamiento de Newton resultan insuficientes para caracterizar el
-riesgo real de almacenamiento. Si bien en la literatura de ingeniería
-térmica se han empleado ecuaciones diferenciales estocásticas continuas
-de tipo Ornstein-Uhlenbeck para modelar la acción estabilizadora del
-termostato y las fluctuaciones difusivas internas, una difusión continua
-por sí sola es incapaz de capturar cambios estructurales abruptos en el
-régimen de operación o inyecciones instantáneas de calor.
-
-Para superar estas limitaciones, la presente tesis desarrolla y analiza
-un modelo termodinámico basado en una \textbf{ecuación diferencial
-estocástica (EDE) híbrida con conmutación markoviana y saltos de Poisson
-compuestos} (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
-\citeproc{ref-situ2005theory}{Situ 2005};
-\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}). En esta formulación, una
-cadena de Markov a tiempo continuo alterna la dinámica del sistema entre
-un régimen de enfriamiento activo por convección forzada (con suministro
-eléctrico) y un régimen de calentamiento inercial pasivo hacia la
-temperatura ambiente exterior (durante un apagón), mientras que un
-proceso de Poisson compuesto modela los choques térmicos instantáneos
-inducidos por las aperturas de puerta en horario clínico. A partir de la
-teoría de integración estocástica de Itô y de medidas aleatorias de
-Poisson compensadas, se demuestra analíticamente que el modelo propuesto
-satisface las condiciones de Lipschitz global y de crecimiento lineal,
-garantizando la existencia y unicidad de una solución fuerte con
-trayectorias \emph{càdlàg} acotada en media cuadrática.
-
-Con el propósito de trasladar este marco matemático a un entorno
-operativo real, la ecuación diferencial estocástica se calibra para un
-refrigerador tipo cofre precalificado por la Organización Mundial de la
-Salud (OMS), el modelo institucional \textbf{Haier HBC-150}, integrando
-series meteorológicas locales, registros históricos de confiabilidad
-eléctrica de la CFE (índices SAIFI y SAIDI) y parámetros experimentales
-de transferencia térmica. Asimismo, siguiendo enfoques recientes sobre
-gestión estocástica de biológicos
+En la literatura científica reciente, el modelado matemático de cadenas
+de suministro médico ha cobrado una relevancia fundamental para
+anticipar riesgos operativos bajo incertidumbre. En esa línea,
+(\citeproc{ref-garcia2025integrated}{García, Díaz-Infante, y
+Minjárez-Sosa 2025}) desarrollaron un modelo integrado de epidemiología
+matemática y gestión de inventarios que acopla una estructura
+compartimental de vacunación con fluctuaciones aleatorias en los tiempos
+de entrega y tamaños de pedido, demostrando que la eficacia en la
+contención de un brote infeccioso depende directamente de la
+disponibilidad física del biológico y del mantenimiento de un umbral de
+reserva. De forma complementaria,
 (\citeproc{ref-control2026vaccine}{García, Díaz-Infante, y Minjárez-Sosa
-2026}), las trayectorias térmicas se acoplan con la cinética de
-degradación de Arrhenius incorporando un filtro físico de inercia
-térmica de \(30\text{ minutos}\) para los viales y con un modelo
-dinámico de inventario y reabastecimiento evaluado bajo tres escenarios:
-control absoluto sin intervención humana (Escenario A), operación
-clínica con apego normativo (Escenario B) y estrés operativo por
-contingencia epidemiológica (Escenario C).
+2026}) extendieron este enfoque mediante un problema de control óptimo
+estocástico durante epidemias, integrando la dinámica compartimental
+SEIR con la degradación de vacunas impulsada por la temperatura a través
+de la cinética de Arrhenius y el reabastecimiento bajo incertidumbre.
 
-Finalmente, ante la ausencia de soluciones analíticas cerradas para el
-sistema acoplado, se implementa un esquema numérico regular de
-Euler-Maruyama para sistemas híbridos con saltos
+Por su parte, el estudio del comportamiento térmico interno de los
+equipos de refrigeración requiere modelos físicos capaces de capturar
+tanto la transferencia de calor como las perturbaciones aleatorias del
+entorno. Si bien la ley de enfriamiento de Newton describe de manera
+determinista la transferencia térmica hacia un estado de equilibrio
+(\citeproc{ref-vollmer2009newton}{Vollmer 2009}), en el ámbito de la
+ingeniería térmica (\citeproc{ref-costanzo2013grey}{Costanzo et~al.
+2013}) demostraron la eficacia de emplear ecuaciones diferenciales
+estocásticas continuas basadas en el proceso de Ornstein-Uhlenbeck
+(\citeproc{ref-karlin1998introduction}{Karlin y Taylor 1998};
+\citeproc{ref-arnold1974stochastic}{Arnold 1974}) para modelar la
+reversión a la media del termostato y absorber las fluctuaciones
+difusivas internas mediante el movimiento Browniano
+(\citeproc{ref-karatzas1998brownian}{Karatzas y Shreve 1998}). Asimismo,
+desde una perspectiva experimental, los análisis termodinámicos del
+\emph{National Institute of Standards and Technology} (NIST) realizados
+por (\citeproc{ref-nist2015thermal}{Chojnacky et~al. 2010}) evidenciaron
+que la apertura rutinaria de puertas por parte del personal clínico y la
+disposición del balasto térmico inducen choques instantáneos de calor
+que alteran abruptamente la estabilidad de los gabinetes de
+almacenamiento.
+
+No obstante, dado que en la operación real de una unidad de salud las
+interrupciones del suministro eléctrico y las aperturas de puerta
+ocurren en instantes aleatorios con duraciones y magnitudes variables,
+una difusión continua por sí sola resulta insuficiente para caracterizar
+la dinámica completa del sistema (\citeproc{ref-ross1996stochastic}{Ross
+1996}; \citeproc{ref-situ2005theory}{Situ 2005}). Para modelar sistemas
+sujetos simultáneamente a cambios estructurales en su régimen de
+operación y a perturbaciones discontinuas, la teoría moderna de procesos
+estocásticos recurre a ecuaciones diferenciales estocásticas híbridas
+impulsadas por cadenas de Markov a tiempo continuo
+(\citeproc{ref-asmussen2003markov}{Asmussen 2003};
+\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}) y medidas aleatorias de
+salto de Poisson (\citeproc{ref-situ2005theory}{Situ 2005};
+\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}). Ante
+la ausencia de soluciones analíticas cerradas para este tipo de
+ecuaciones acopladas, la literatura numérica establece el uso de
+esquemas de discretización temporal de tipo Euler-Maruyama y Milstein
+combinados con métodos de simulación de Montecarlo
 (\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992};
-\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}) sobre
-una malla temporal de alta resolución (\(\Delta t = 5\text{ minutos}\)).
-Mediante la simulación de Montecarlo de \(M = 5,000\) trayectorias
-anuales independientes por escenario y la aplicación de inferencia
-estadística no paramétrica vía remuestreo Bootstrap
-(\citeproc{ref-efron1993introduction}{Efron y Tibshirani 1993}), este
-trabajo cuantifica con precisión las horas esperadas de ruptura de la
-cadena de frío y los intervalos de confianza al \(95\%\) para la merma
-anual de vacunas, proporcionando un criterio matemático riguroso para el
-diseño de protocolos logísticos en unidades de salud pública.
+\citeproc{ref-giles2008multilevel}{Giles 2008};
+\citeproc{ref-wang2016numerical}{Wang 2016}).
+
+La necesidad de implementar estos modelos matemáticos se intensifica en
+regiones con climas cálidos extremos y alta vulnerabilidad en su
+infraestructura eléctrica, como la ciudad de Tuxtla Gutiérrez, Chiapas.
+En las unidades médicas locales, las elevadas temperaturas ambientales
+aceleran la transferencia de calor hacia el interior de los equipos de
+refrigeración y reducen su autonomía pasiva, interactuando de manera
+crítica con las fallas recurrentes en la red de distribución de la
+Comisión Federal de Electricidad (CFE)
+(\citeproc{ref-sener2024prodesen}{Secretaría de Energía 2024};
+\citeproc{ref-cfe2024informe}{Comisión Federal de Electricidad 2024})
+---acentuadas durante las olas de calor primaverales por saturación de
+transformadores y en la temporada estival de tormentas--- y con la
+infiltración continua de aire cálido exterior cada vez que el personal
+clínico extrae o resguarda dosis durante las campañas de vacunación.
+
+Por todo lo anterior, el presente trabajo tiene como objetivo formular,
+calibrar y simular un modelo termodinámico basado en una
+\textbf{ecuación diferencial estocástica (EDE) híbrida con conmutación
+markoviana y saltos de Poisson compuestos}
+(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
+\citeproc{ref-situ2005theory}{Situ 2005};
+\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}), acoplado a la cinética de
+degradación de Arrhenius (\citeproc{ref-atkins2018physical}{Atkins,
+Paula, y Keeler 2018}; \citeproc{ref-sinko2011martin}{Sinko 2011}) y a
+un sistema dinámico de inventario
+(\citeproc{ref-garcia2025integrated}{García, Díaz-Infante, y
+Minjárez-Sosa 2025}, \citeproc{ref-control2026vaccine}{2026}), con el
+fin de cuantificar el riesgo operativo en la red de frío de Tuxtla
+Gutiérrez, Chiapas. Tras demostrar analíticamente la existencia y
+unicidad de la solución fuerte en el espacio de trayectorias
+\emph{càdlàg}, el modelo se calibra para el refrigerador institucional
+precalificado \textbf{Haier HBC-150}
+(\citeproc{ref-oms_pqs_e003}{Organización Mundial de la Salud 2024})
+considerando un filtro físico de inercia térmica para los viales y tres
+escenarios operativos: control absoluto (Escenario A), apego normativo
+(Escenario B) y contingencia epidemiológica (Escenario C). Finalmente,
+mediante un esquema numérico híbrido de Euler-Maruyama sobre una malla
+temporal de alta resolución (\citeproc{ref-kloeden1992numerical}{Kloeden
+y Platen 1992}; \citeproc{ref-platen2010numerical}{Platen y
+Bruti-Liberati 2010}; \citeproc{ref-Perez2026EscenarioA}{Pérez, C.
+2026a}, \citeproc{ref-Perez2026EscenarioB}{2026b},
+\citeproc{ref-Perez2026EscenarioC}{2026c}), simulaciones masivas de
+Montecarlo (\citeproc{ref-ross2018first}{Ross 2018};
+\citeproc{ref-wang2016numerical}{Wang 2016}), pruebas de bondad de
+ajuste (\citeproc{ref-montgomery2014applied}{Montgomery y Runger 2014})
+e inferencia no paramétrica Bootstrap
+(\citeproc{ref-efron1993introduction}{Efron y Tibshirani 1993}), se
+estiman con intervalos de confianza al \(95\%\) las rupturas de la
+cadena de frío y la merma anual de biológicos para sustentar el diseño
+de protocolos logísticos en salud pública.
 
 \bookmarksetup{startatroot}
 
