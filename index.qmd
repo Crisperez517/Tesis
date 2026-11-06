@@ -1,17 +1,25 @@
 ---
 author:
-  - name: Cristóbal Pérez González
+  - name: "Cristóbal Pérez González"
     email: cristobal.perez70@unach.mx
+    affiliations:
+      - ref: unach
     corresponding: true
-  - name: Yofre Hernán García Gómez
-    degrees: PhD
+
+  - name: "Asesor: Dr. Yofre Hernán García Gómez"
+    role: "Director de Tesis"
     email: yofre.garcia@unach.mx
-    roles: supervisor
+    affiliations:
+      - ref: unach
     corresponding: true
+
+affiliations:
+  - id: unach
+    name: "Benemérita Universidad Autónoma de Chiapas"
 ---
 
 # Resumen
 
-La preservación de vacunas en la red de frío exige mantener los biológicos dentro del rango normativo de $2^\circ\text{C}$ a $8^\circ\text{C}$, un desafío crítico ante climas cálidos extremos e interrupciones eléctricas frecuentes[cite: 1161, 1208]. En este trabajo se formula, calibra y simula un modelo termodinámico basado en una ecuación diferencial estocástica (EDE) híbrida para cuantificar el riesgo operativo y la merma anual de vacunas en el refrigerador precalificado Haier HBC-150 en Tuxtla Gutiérrez, Chiapas[cite: 1161, 1193, 1230]. El modelo extiende el proceso clásico de Ornstein-Uhlenbeck al incorporar conmutación markoviana para alternar entre el enfriamiento activo y el calentamiento pasivo durante apagones de la red eléctrica —calibrados mediante procesos de Poisson no homogéneos y duraciones Log-Normales—, así como un proceso de Poisson compuesto para los choques térmicos por aperturas de puerta[cite: 1193, 1218, 1222, 1228]. Tras demostrar analíticamente la existencia y unicidad de la solución fuerte, la dinámica térmica se acopla con la cinética de degradación de Arrhenius y un sistema de control de inventario con reabastecimiento[cite: 1188, 1195, 1209, 1210]. Para su resolución, se implementa un esquema numérico híbrido de Euler-Maruyama dentro de una simulación de Montecarlo de 5,000 trayectorias anuales e inferencia no paramétrica Bootstrap bajo tres escenarios operativos[cite: 1206, 1242, 1257, 1271]. Los resultados demuestran que el aislamiento pasivo del equipo soporta eficazmente las fallas eléctricas, pero que la saturación de aperturas de puerta durante contingencias epidemiológicas colapsa la recuperación térmica y multiplica exponencialmente la destrucción de dosis[cite: 1259, 1273, 1279].
+La preservación de vacunas en la red de frío requiere estrategias matemáticas rigurosas que anticipen la incertidumbre climática, eléctrica y operativa para mantener los productos biológicos dentro del rango normativo de $[2^\circ\text{C}, 8^\circ\text{C}]$. En este trabajo se formula, calibra y simula un modelo termodinámico basado en una ecuación diferencial estocástica (EDE) híbrida para cuantificar el riesgo operativo y la merma anual de biológicos en el refrigerador institucional precalificado Haier HBC-150 en Tuxtla Gutiérrez, Chiapas. El modelo extiende el proceso clásico de Ornstein-Uhlenbeck al incorporar cambios de régimen de Markov para alternar entre el enfriamiento activo y el calentamiento pasivo durante interrupciones del suministro eléctrico —modeladas mediante procesos de Poisson no homogéneos y duraciones Log-Normales estacionales—, así como un proceso de Poisson compuesto para los choques térmicos inducidos por las aperturas de puerta. Tras demostrar analíticamente la existencia y unicidad de la solución fuerte, la dinámica térmica se acopla con la cinética de degradación de Arrhenius y un sistema dinámico de inventario con umbral de reabastecimiento. Para su resolución, se implementa un esquema numérico híbrido de Euler-Maruyama integrado con simulaciones masivas de Monte Carlo e inferencia estadística no paramétrica Bootstrap bajo tres escenarios operativos: control absoluto, apego normativo y contingencia epidemiológica. Los resultados demuestran que el aislamiento pasivo del equipo amortigua eficazmente las fallas de la red eléctrica, pero que la saturación de aperturas de puerta durante contingencias clínicas colapsa la recuperación térmica y multiplica exponencialmente la destrucción de dosis.
 
-**Palabras clave:** ecuaciones diferenciales estocásticas híbridas, red de frío, ecuación de Arrhenius, simulación de Montecarlo, inventario de vacunas[cite: 1161, 1193, 1209, 1210, 1257, 1285].
+**Palabras clave:** ecuaciones diferenciales estocásticas híbridas, red de frío, ecuación de Arrhenius, simulación de Monte Carlo, inventario de vacunas.

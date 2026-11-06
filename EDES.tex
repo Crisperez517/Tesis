@@ -218,11 +218,11 @@
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -241,7 +241,7 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={EDES},
-  pdfauthor={Cristóbal Pérez González; Yofre Hernán García Gómez},
+  pdfauthor={Cristóbal Pérez González; Asesor: Dr.~Yofre Hernán García Gómez},
   pdflang={es},
   colorlinks=true,
   linkcolor={blue},
@@ -252,7 +252,8 @@
 
 
 \title{EDES}
-\author{Cristóbal Pérez González \and Yofre Hernán García Gómez}
+\author{Cristóbal Pérez González \and Asesor: Dr.~Yofre Hernán García
+Gómez}
 \date{2026-11-06}
 \begin{document}
 \begin{titlepage}
@@ -345,37 +346,36 @@ Y finalmente, a las comunidades chiapanecas que enfrentan las inundaciones tempo
 
 \chapter{Resumen}\label{resumen}
 
-La preservación de vacunas en la red de frío exige mantener los
-biológicos dentro del rango normativo de \(2^\circ\text{C}\) a
-\(8^\circ\text{C}\), un desafío crítico ante climas cálidos extremos e
-interrupciones eléctricas frecuentes{[}cite: 1161, 1208{]}. En este
+La preservación de vacunas en la red de frío requiere estrategias
+matemáticas rigurosas que anticipen la incertidumbre climática,
+eléctrica y operativa para mantener los productos biológicos dentro del
+rango normativo de \([2^\circ\text{C}, 8^\circ\text{C}]\). En este
 trabajo se formula, calibra y simula un modelo termodinámico basado en
 una ecuación diferencial estocástica (EDE) híbrida para cuantificar el
-riesgo operativo y la merma anual de vacunas en el refrigerador
-precalificado Haier HBC-150 en Tuxtla Gutiérrez, Chiapas{[}cite: 1161,
-1193, 1230{]}. El modelo extiende el proceso clásico de
-Ornstein-Uhlenbeck al incorporar conmutación markoviana para alternar
-entre el enfriamiento activo y el calentamiento pasivo durante apagones
-de la red eléctrica ---calibrados mediante procesos de Poisson no
-homogéneos y duraciones Log-Normales---, así como un proceso de Poisson
-compuesto para los choques térmicos por aperturas de puerta{[}cite:
-1193, 1218, 1222, 1228{]}. Tras demostrar analíticamente la existencia y
+riesgo operativo y la merma anual de biológicos en el refrigerador
+institucional precalificado Haier HBC-150 en Tuxtla Gutiérrez, Chiapas.
+El modelo extiende el proceso clásico de Ornstein-Uhlenbeck al
+incorporar cambios de régimen de Markov para alternar entre el
+enfriamiento activo y el calentamiento pasivo durante interrupciones del
+suministro eléctrico ---modeladas mediante procesos de Poisson no
+homogéneos y duraciones Log-Normales estacionales---, así como un
+proceso de Poisson compuesto para los choques térmicos inducidos por las
+aperturas de puerta. Tras demostrar analíticamente la existencia y
 unicidad de la solución fuerte, la dinámica térmica se acopla con la
-cinética de degradación de Arrhenius y un sistema de control de
-inventario con reabastecimiento{[}cite: 1188, 1195, 1209, 1210{]}. Para
-su resolución, se implementa un esquema numérico híbrido de
-Euler-Maruyama dentro de una simulación de Montecarlo de 5,000
-trayectorias anuales e inferencia no paramétrica Bootstrap bajo tres
-escenarios operativos{[}cite: 1206, 1242, 1257, 1271{]}. Los resultados
-demuestran que el aislamiento pasivo del equipo soporta eficazmente las
-fallas eléctricas, pero que la saturación de aperturas de puerta durante
-contingencias epidemiológicas colapsa la recuperación térmica y
-multiplica exponencialmente la destrucción de dosis{[}cite: 1259, 1273,
-1279{]}.
+cinética de degradación de Arrhenius y un sistema dinámico de inventario
+con umbral de reabastecimiento. Para su resolución, se implementa un
+esquema numérico híbrido de Euler-Maruyama integrado con simulaciones
+masivas de Monte Carlo e inferencia estadística no paramétrica Bootstrap
+bajo tres escenarios operativos: control absoluto, apego normativo y
+contingencia epidemiológica. Los resultados demuestran que el
+aislamiento pasivo del equipo amortigua eficazmente las fallas de la red
+eléctrica, pero que la saturación de aperturas de puerta durante
+contingencias clínicas colapsa la recuperación térmica y multiplica
+exponencialmente la destrucción de dosis.
 
 \textbf{Palabras clave:} ecuaciones diferenciales estocásticas híbridas,
-red de frío, ecuación de Arrhenius, simulación de Montecarlo, inventario
-de vacunas{[}cite: 1161, 1193, 1209, 1210, 1257, 1285{]}.
+red de frío, ecuación de Arrhenius, simulación de Monte Carlo,
+inventario de vacunas.
 
 \bookmarksetup{startatroot}
 
@@ -476,19 +476,12 @@ o resguarda dosis durante las campañas de vacunación.
 Por todo lo anterior, el presente trabajo tiene como objetivo formular,
 calibrar y simular un modelo termodinámico basado en una
 \textbf{Ecuación Diferencial Estocástica (EDE) Híbrida con Cambios de
-Régimen de Markov y saltos de Poisson compuestos}
-(\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006};
-\citeproc{ref-situ2005theory}{Situ 2005};
-\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}), acoplado a la cinética de
-degradación de Arrhenius (\citeproc{ref-atkins2018physical}{Atkins,
-Paula, y Keeler 2018}; \citeproc{ref-sinko2011martin}{Sinko 2011}) y a
-un sistema dinámico de inventario
-(\citeproc{ref-garcia2025integrated}{García, Díaz-Infante, y
-Minjárez-Sosa 2025}, \citeproc{ref-control2026vaccine}{2026}), con el
-fin de cuantificar el riesgo operativo en la red de frío de Tuxtla
-Gutiérrez, Chiapas. Tras demostrar analíticamente la existencia y
-unicidad de la solución, el modelo se calibra para el refrigerador
-institucional precalificado \textbf{Haier HBC-150}
+Régimen de Markov y saltos de Poisson compuestos}, acoplado a la
+cinética de degradación de Arrhenius y a un sistema dinámico de
+inventario, con el fin de cuantificar el riesgo operativo en la red de
+frío de Tuxtla Gutiérrez, Chiapas. Tras demostrar analíticamente la
+existencia y unicidad de la solución, el modelo se calibra para el
+refrigerador institucional precalificado \textbf{Haier HBC-150}
 (\citeproc{ref-oms_pqs_e003}{Organización Mundial de la Salud 2024})
 considerando un filtro físico de inercia térmica para los viales y tres
 escenarios operativos: control absoluto (Escenario A), apego normativo
@@ -511,8 +504,8 @@ de protocolos logísticos en salud pública.
 Formular, calibrar y simular un modelo termodinámico basado en
 \textbf{ecuaciones diferenciales estocásticas híbridas} acoplado a la
 cinética de degradación de Arrhenius y a la dinámica de inventario, para
-medir el riesgo operativo y la pérdida de vacunas en la red de frío de
-Tuxtla Gutiérrez, Chiapas.
+cuantificar el riesgo operativo y la pérdida de vacunas en la red de
+frío de Tuxtla Gutiérrez, Chiapas.
 
 \section{Objetivos específicos}\label{objetivos-especuxedficos}
 
@@ -520,19 +513,19 @@ Tuxtla Gutiérrez, Chiapas.
 \def\labelenumi{\arabic{enumi}.}
 \item
   \textbf{Formular y demostrar la existencia y unicidad de una solución
-  fuerte de un modelo termodinámico de Ornstein-Uhlenbeck híbrido, con
-  cambios de régimen de Markov} para el estado del suministro eléctrico
-  y un proceso de Poisson compuesto para las aperturas de puerta,
-  acoplándolo con la cinética térmica de Arrhenius y el balance dinámico
-  de inventario.
+  fuerte de un modelo termodinámico de Ornstein-Uhlenbeck híbrido}, con
+  cambios de régimen de Markov para el estado del suministro eléctrico y
+  un proceso de Poisson compuesto para las aperturas de puerta,
+  acoplándolo con la cinética de degradación de Arrhenius y el balance
+  dinámico del inventario.
 \item
   \textbf{Calibrar los parámetros físicos, eléctricos, cinéticos y
   logísticos del modelo sobre un escenario operativo real}, utilizando
   las especificaciones técnicas del refrigerador precalificado
   \textbf{Haier HBC-150}, series meteorológicas locales y los índices
   oficiales de confiabilidad de la CFE (SAIFI y SAIDI) mediante procesos
-  de Poisson no homogéneos y distribuciones Log-Normales por temporada
-  climática.
+  de Poisson no homogéneos y distribuciones Log-Normales estacionales
+  por temporada climática.
 \item
   \textbf{Implementar un esquema numérico híbrido de Euler-Maruyama con
   cambios de régimen y saltos en Python}, que integre recursivamente las
@@ -542,7 +535,7 @@ Tuxtla Gutiérrez, Chiapas.
   contingencia epidemiológica.
 \item
   \textbf{Cuantificar el riesgo termodinámico y la merma anual de
-  biológicos mediante Simulación de Monte Carlo e inferencia no
+  biológicos mediante la Simulación de Monte Carlo e inferencia no
   paramétrica Bootstrap}, analizando la estacionalidad del daño, la
   asimetría de las distribuciones con la prueba de Shapiro-Wilk y los
   intervalos de confianza al 95\% para sustentar recomendaciones

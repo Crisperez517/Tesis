@@ -2,14 +2,14 @@
 
 ## Objetivo general
 
-Formular, calibrar y simular un modelo termodinámico basado en **ecuaciones diferenciales estocásticas híbridas** acoplado a la cinética de degradación de Arrhenius y a la dinámica de inventario, para medir el riesgo operativo y la pérdida de vacunas en la red de frío de Tuxtla Gutiérrez, Chiapas.
+Formular, calibrar y simular un modelo termodinámico basado en **ecuaciones diferenciales estocásticas híbridas** acoplado a la cinética de degradación de Arrhenius y a la dinámica de inventario, para cuantificar el riesgo operativo y la pérdida de vacunas en la red de frío de Tuxtla Gutiérrez, Chiapas.
 
 ## Objetivos específicos
 
-1. **Formular y demostrar la existencia y unicidad de una solución fuerte de un modelo termodinámico de Ornstein-Uhlenbeck híbrido, con cambios de régimen de Markov** para el estado del suministro eléctrico y un proceso de Poisson compuesto para las aperturas de puerta, acoplándolo con la cinética térmica de Arrhenius y el balance dinámico de inventario.
+1. **Formular y demostrar la existencia y unicidad de una solución fuerte de un modelo termodinámico de Ornstein-Uhlenbeck híbrido**, con cambios de régimen de Markov para el estado del suministro eléctrico y un proceso de Poisson compuesto para las aperturas de puerta, acoplándolo con la cinética de degradación de Arrhenius y el balance dinámico del inventario.
 
-2. **Calibrar los parámetros físicos, eléctricos, cinéticos y logísticos del modelo sobre un escenario operativo real**, utilizando las especificaciones técnicas del refrigerador precalificado **Haier HBC-150**, series meteorológicas locales y los índices oficiales de confiabilidad de la CFE (SAIFI y SAIDI) mediante procesos de Poisson no homogéneos y distribuciones Log-Normales por temporada climática.
+2. **Calibrar los parámetros físicos, eléctricos, cinéticos y logísticos del modelo sobre un escenario operativo real**, utilizando las especificaciones técnicas del refrigerador precalificado **Haier HBC-150**, series meteorológicas locales y los índices oficiales de confiabilidad de la CFE (SAIFI y SAIDI) mediante procesos de Poisson no homogéneos y distribuciones Log-Normales estacionales por temporada climática.
 
 3. **Implementar un esquema numérico híbrido de Euler-Maruyama con cambios de régimen y saltos en Python**, que integre recursivamente las trayectorias de la temperatura interna del refrigerador, el filtro de inercia térmica de los viales y las reglas de reabastecimiento bajo tres contextos operativos: control absoluto, apego normativo y contingencia epidemiológica.
 
-4. **Cuantificar el riesgo termodinámico y la merma anual de biológicos mediante Simulación de Monte Carlo e inferencia no paramétrica Bootstrap**, analizando la estacionalidad del daño, la asimetría de las distribuciones con la prueba de Shapiro-Wilk y los intervalos de confianza al 95% para sustentar recomendaciones operativas para las unidades de salud públicas.
+4. **Cuantificar el riesgo termodinámico y la merma anual de biológicos mediante la Simulación de Monte Carlo e inferencia no paramétrica Bootstrap**, analizando la estacionalidad del daño, la asimetría de las distribuciones con la prueba de Shapiro-Wilk y los intervalos de confianza al 95% para sustentar recomendaciones operativas para las unidades de salud públicas.
