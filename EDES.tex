@@ -216,13 +216,13 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{plain}
+\newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -254,7 +254,7 @@
 \title{EDES}
 \author{Cristóbal Pérez González \and Asesor: Dr.~Yofre Hernán García
 Gómez}
-\date{2026-11-07}
+\date{2026-11-08}
 \begin{document}
 \begin{titlepage}
 \hspace{-1.7cm} %Este comando es para mandar a la izquierda :)
@@ -6883,7 +6883,7 @@ inventario en las unidades de salud.
 \chapter{Conclusiones y Trabajo
 Futuro}\label{conclusiones-y-trabajo-futuro}
 
-El desarrollo de esta tesis permitió construir, fundamentar
+El desarrollo de este trabajo de tesis permitió construir, fundamentar
 analíticamente y simular computacionalmente un modelo matemático
 estocástico capaz de cuantificar el riesgo termodinámico y logístico en
 la red de frío para la conservación de vacunas en Tuxtla Gutiérrez,
@@ -6894,9 +6894,6 @@ paramétrica, fue posible superar las limitaciones de los modelos
 deterministas estáticos y evaluar con rigor el impacto real que ejercen
 el clima extremo, la red eléctrica y la interacción humana sobre la
 viabilidad de los productos biológicos.
-
-\section{Síntesis y Conclusiones Generales de la
-Investigación}\label{suxedntesis-y-conclusiones-generales-de-la-investigaciuxf3n}
 
 Desde la perspectiva de los fundamentos matemáticos establecidos en el
 primer bloque teórico, se concluye que la dinámica térmica de un
@@ -6994,8 +6991,9 @@ de \(30\text{ minutos}\)) resultó esencial para distinguir entre
 fluctuaciones aéreas pasajeras y el calentamiento efectivo del líquido
 biológico. Asimismo, retomando los planteamientos recientes de control
 estocástico de inventarios de vacunas acoplados a dinámicas
-epidemiológicas SEIR (\citeproc{ref-control2026vaccine}{García,
-Díaz-Infante, y Minjárez-Sosa 2026}) en la
+epidemiológicas SEIR (\citeproc{ref-garcia2025integrated}{García,
+Díaz-Infante, y Minjárez-Sosa 2025},
+\citeproc{ref-control2026vaccine}{2026}) en la
 Sección~\ref{sec-fundamento-inventario-seir}, se demostró que el daño
 materializado no depende de forma aislada de la fracción de degradación
 térmica \(\Delta D_n\) (Ecuación~\ref{eq-fraccion-dano-paso}), sino de
@@ -7146,20 +7144,18 @@ hallazgos contundentes sobre la naturaleza del riesgo en la red de frío:
   valida la necesidad del método Bootstrap empleado en esta tesis.
 \end{itemize}
 
-\section{Recomendaciones Operativas para la Secretaría de
-Salud}\label{recomendaciones-operativas-para-la-secretaruxeda-de-salud}
-
-El hallazgo más relevante de esta investigación para la toma de
-decisiones en salud pública es que \textbf{la principal causa de
-destrucción de vacunas en climas cálidos como el de Tuxtla Gutiérrez no
-es la deficiencia del suministro eléctrico de la CFE ni la falta de
-aislamiento de los refrigeradores precalificados, sino el estrés térmico
-inducido por la frecuencia de aperturas de puerta durante la jornada
-clínica}. En consecuencia, las políticas públicas orientadas únicamente
-a instalar plantas de emergencia o adquirir equipos con mayor retención
-pasiva resultarán insuficientes si no se reforman simultáneamente los
+A partir de estos resultados cuantitativos, la conclusión práctica más
+relevante de esta investigación para la toma de decisiones en salud
+pública es que \textbf{la principal causa de destrucción de vacunas en
+climas cálidos como el de Tuxtla Gutiérrez no es la deficiencia del
+suministro eléctrico de la CFE ni la falta de aislamiento de los
+refrigeradores precalificados, sino el estrés térmico inducido por la
+frecuencia de aperturas de puerta durante la jornada clínica}. En
+consecuencia, las políticas públicas orientadas únicamente a instalar
+plantas de emergencia o adquirir equipos con mayor retención pasiva
+resultarán insuficientes si no se reforman simultáneamente los
 protocolos logísticos de manejo de inventario. Con base en la evidencia
-matemática obtenida, se proponen las siguientes recomendaciones
+matemática obtenida, se desprenden cuatro recomendaciones operativas
 dirigidas a la Secretaría de Salud y a las jurisdicciones sanitarias
 estatales:
 
@@ -7230,13 +7226,10 @@ Futuro}\label{limitaciones-del-estudio-y-luxedneas-de-trabajo-futuro}
 Si bien el modelo híbrido desarrollado constituye una herramienta
 robusta y reproducible para el análisis de riesgo en la cadena de frío,
 su formulación se sujetó a ciertos supuestos simplificadores que abren
-líneas prometedoras para investigaciones futuras:
+líneas prometedoras para investigaciones futuras.
 
-\subsection{\texorpdfstring{Instrumentación con Sensores Digitales
-(\emph{Data Loggers}) y Validación Empírica en
-Campo}{Instrumentación con Sensores Digitales (Data Loggers) y Validación Empírica en Campo}}\label{instrumentaciuxf3n-con-sensores-digitales-data-loggers-y-validaciuxf3n-empuxedrica-en-campo}
-
-En la presente investigación, los parámetros termodinámicos
+En primer lugar, respecto a la validación empírica en campo, en la
+presente investigación los parámetros termodinámicos
 (\(\kappa_{on}, \kappa_{off}, \sigma_{on}, \sigma_{off}\)) y las
 distribuciones de salto térmico (\(\gamma_i\)) se calibraron de forma
 analítica a partir de las fichas técnicas de precalificación de la OMS
@@ -7258,7 +7251,7 @@ empíricas de alta frecuencia (con muestreo cada minuto) permitirá:
 \item
   Aplicar técnicas de inferencia estadística para procesos estocásticos
   (como estimación por máxima verosimilitud para difusiones con saltos o
-  filtrado Bayesiano) para estimar in situ las tasas reales de
+  filtrado Bayesiano) para estimar \emph{in situ} las tasas reales de
   transferencia térmica y volatilidad del equipo bajo el desgaste
   cotidiano.
 \item
@@ -7273,44 +7266,42 @@ empíricas de alta frecuencia (con muestreo cada minuto) permitirá:
   \(T_{vial}(t)\).
 \end{itemize}
 
-\subsection{Coeficientes Termodinámicos Dependientes de la Fracción de
-Llenado}\label{coeficientes-termodinuxe1micos-dependientes-de-la-fracciuxf3n-de-llenado}
+Por otra parte, en relación con la dependencia de los coeficientes
+termodinámicos respecto a la fracción de llenado, en nuestro modelo
+(Ecuación~\ref{eq-ede-operativa}) las tasas de enfriamiento activo
+(\(\kappa_{on}\)) y de calentamiento pasivo (\(\kappa_{off}\)) se
+asumieron constantes a lo largo del año. Sin embargo, desde el punto de
+vista de la termodinámica de medios continuos, la capacidad calorífica
+total dentro del gabinete varía conforme fluctúa el inventario \(I(t)\)
+entre las \(1,000\) y las \(5,000\text{ dosis}\). Un trabajo futuro
+natural consiste en formular coeficientes funcionales
+\(\kappa_{on}(I(t))\) y \(\kappa_{off}(I(t))\) dependientes del estado
+del inventario, incorporando además el calor latente de fusión del
+revestimiento de hielo (\emph{ice-lining}) durante apagones
+extremadamente largos, lo que transformaría la deriva del sistema en una
+ecuación diferencial estocástica no lineal acoplada en ambos sentidos
+con el inventario.
 
-En nuestro modelo (Ecuación~\ref{eq-ede-operativa}), las tasas de
-enfriamiento activo (\(\kappa_{on}\)) y de calentamiento pasivo
-(\(\kappa_{off}\)) se asumieron constantes a lo largo del año. Sin
-embargo, desde el punto de vista de la termodinámica de medios
-continuos, la capacidad calorífica total dentro del gabinete varía
-conforme fluctúa el inventario \(I(t)\) entre las \(1,000\) y las
-\(5,000\text{ dosis}\). Un trabajo futuro natural consiste en formular
-coeficientes funcionales \(\kappa_{on}(I(t))\) y \(\kappa_{off}(I(t))\)
-dependientes del estado del inventario, incorporando además el calor
-latente de fusión del revestimiento de hielo (\emph{ice-lining}) durante
-apagones extremadamente largos, lo que transformaría la deriva del
-sistema en una ecuación diferencial estocástica no lineal acoplada en
-ambos sentidos con el inventario.
-
-\subsection{Procesos de Conteo Autoexcitados (Procesos de Hawkes) y
-Control Estocástico
-Óptimo}\label{procesos-de-conteo-autoexcitados-procesos-de-hawkes-y-control-estocuxe1stico-uxf3ptimo}
-
-Finalmente, mientras que en este estudio las aperturas de puerta se
-modelaron mediante Procesos de Poisson No Homogéneos cuya intensidad
-\(\lambda_{puerta}(t)\) depende únicamente de la hora del día, en una
-emergencia sanitaria real los eventos de apertura suelen agruparse en
-ráfagas correlacionadas temporalmente. Reemplazar el proceso de Poisson
-por un \textbf{proceso puntual autoexcitado de Hawkes}, donde cada
-apertura incremente momentáneamente la probabilidad de una apertura
-subsecuente, permitiría capturar con mayor realismo los cuellos de
-botella clínicos. Asimismo, integrando nuestro modelo termodinámico
-híbrido (Ecuación~\ref{eq-ede-operativa-teorica}) directamente dentro de
-un problema de \textbf{control óptimo estocástico con dinámica
+Finalmente, en cuanto al modelado del proceso de conteo de aperturas y
+la optimización dinámica del sistema, mientras que en este estudio las
+aperturas de puerta se modelaron mediante Procesos de Poisson No
+Homogéneos cuya intensidad \(\lambda_{puerta}(t)\) depende únicamente de
+la hora del día, en una emergencia sanitaria real los eventos de
+apertura suelen agruparse en ráfagas correlacionadas temporalmente.
+Reemplazar el proceso de Poisson por un \textbf{proceso puntual
+autoexcitado de Hawkes}, donde cada apertura incremente momentáneamente
+la probabilidad de una apertura subsecuente, permitiría capturar con
+mayor realismo los cuellos de botella clínicos. Asimismo, integrando
+nuestro modelo termodinámico híbrido
+(Ecuación~\ref{eq-ede-operativa-teorica}) directamente dentro de un
+problema de \textbf{control óptimo estocástico con dinámica
 epidemiológica SEIR} como el planteado en
-(\citeproc{ref-control2026vaccine}{García, Díaz-Infante, y Minjárez-Sosa
-2026}), será posible determinar políticas óptimas de pedido y umbrales
-dinámicos de reorden \(I_{reorden}^*(t)\) que minimicen simultáneamente
-el costo económico de las mermas por calor y el costo social de
-desabasto durante un brote epidémico activo.
+(\citeproc{ref-garcia2025integrated}{García, Díaz-Infante, y
+Minjárez-Sosa 2025}, \citeproc{ref-control2026vaccine}{2026}), será
+posible determinar políticas óptimas de pedido y umbrales dinámicos de
+reorden \(I_{reorden}^*(t)\) que minimicen simultáneamente el costo
+económico de las mermas por calor y el costo social de desabasto durante
+un brote epidémico activo.
 
 \bookmarksetup{startatroot}
 
