@@ -215,14 +215,14 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -6883,22 +6883,25 @@ inventario en las unidades de salud.
 \chapter{Conclusiones y Trabajo
 Futuro}\label{conclusiones-y-trabajo-futuro}
 
-El desarrollo de esta tesis permitió construir, fundamentar
-analíticamente y simular un modelo matemático estocástico capaz de
-cuantificar el riesgo termodinámico y logístico en la red de frío para
-la conservación de vacunas en Tuxtla Gutiérrez, Chiapas. A través de la
-integración del cálculo estocástico, los métodos numéricos en tiempo
-discreto, la cinética de degradación química y la inferencia estadística
-no paramétrica, fue posible evaluar con rigor el impacto real que
-ejercen el clima extremo, las fallas eléctricas y la interacción humana
-sobre la viabilidad de los productos biológicos.
+En cumplimiento del \textbf{objetivo general} planteado en esta tesis,
+el desarrollo de este trabajo permitió formular, calibrar y simular un
+modelo termodinámico basado en ecuaciones diferenciales estocásticas
+híbridas, acoplado a la cinética de degradación de Arrhenius y a la
+dinámica de inventario, para cuantificar el riesgo operativo y la
+pérdida de vacunas en la red de frío de Tuxtla Gutiérrez, Chiapas. A
+través de la integración del cálculo estocástico, los métodos numéricos
+en tiempo discreto, la cinética de degradación química y la inferencia
+estadística no paramétrica, fue posible evaluar con rigor el impacto
+real que ejercen el clima extremo, las fallas eléctricas y la
+interacción humana sobre la viabilidad de los productos biológicos.
 
-En cuanto a los fundamentos teóricos matemáticos, se demostró que la
-evolución térmica de un refrigerador clínico sujeto a perturbaciones
-continuas y discretas queda rigurosamente descrita en el espacio de
-trayectorias \emph{càdlàg} (Definición~\ref{def-adaptabilidad-cadlag})
-mediante la ecuación diferencial estocástica híbrida de
-Ornstein-Uhlenbeck propuesta (Definición~\ref{def-ou-clasico} y
+En cuanto a los fundamentos teóricos matemáticos, y dando cumplimiento
+al \textbf{primer objetivo específico}, se demostró que la evolución
+térmica de un refrigerador clínico sujeto a perturbaciones continuas y
+discretas queda rigurosamente descrita en el espacio de trayectorias
+\emph{càdlàg} (Definición~\ref{def-adaptabilidad-cadlag}) mediante la
+ecuación diferencial estocástica híbrida de Ornstein-Uhlenbeck propuesta
+(Definición~\ref{def-ou-clasico} y
 Ecuación~\ref{eq-ede-operativa-teorica}), la cual acopla una cadena de
 Markov a tiempo continuo \(\{\alpha(t)\}_{t \ge 0}\)
 (Definición~\ref{def-cadena-markov}) para el suministro eléctrico con un
@@ -6958,12 +6961,16 @@ Ecuación~\ref{eq-balance-inventario-general})
 (\citeproc{ref-garcia2025integrated}{García, Díaz-Infante, y
 Minjárez-Sosa 2025}, \citeproc{ref-control2026vaccine}{2026}) que la
 pérdida física de dosis es directamente proporcional al volumen de
-vacunas almacenado en el instante de la excursión térmica.
+vacunas almacenado en el instante de la excursión térmica, completando
+así el acoplamiento teórico planteado en el \textbf{primer objetivo
+específico}.
 
-Por su parte, la calibración del estudio de caso
-(Sección~\ref{sec-motivacion-contexto}) demostró cómo parametrizar el
-sistema a partir de registros oficiales y leyes físicas. Combinando los
-datos históricos de la CFE (Sección~\ref{sec-datos-cfe} y
+Por su parte, cumpliendo con el \textbf{segundo objetivo específico}, la
+calibración del estudio de caso (Sección~\ref{sec-motivacion-contexto})
+permitió parametrizar los componentes físicos, eléctricos, cinéticos y
+logísticos del modelo sobre un escenario operativo real a partir de
+registros oficiales y leyes físicas. Combinando los datos históricos de
+la CFE (Sección~\ref{sec-datos-cfe} y
 Tabla~\ref{tbl-interrupciones-cfe}) con la sectorización de
 subestaciones del CENACE (\citeproc{ref-sener2024prodesen}{Secretaría de
 Energía 2024}) (Sección~\ref{sec-escala-espacial}), se estimó una
@@ -7001,15 +7008,24 @@ Ecuación~\ref{eq-Arrhenius}) (\citeproc{ref-sinko2011martin}{Sinko
 2011}) y la demanda estacional clínica
 (Sección~\ref{sec-dinamica-inventario} y Tabla~\ref{tbl-demanda-base}).
 
-Finalmente, la simulación computacional ejecutada mediante el
-alg.~\ref{alg-simulacion-ede-termodinamica} bajo el ciclo climático de
-Tuxtla Gutiérrez (Figura~\ref{fig-clima-anual} y
-Figura~\ref{fig-clima-zoom}), evaluada con \(M = 5,000\) realizaciones
-anuales de Monte Carlo (\citeproc{ref-giles2008multilevel}{Giles 2008};
-\citeproc{ref-ross2018first}{Ross 2018}) y \(10,000\) remuestreos
-Bootstrap (\citeproc{ref-efron1993introduction}{Efron y Tibshirani
-1993}), arrojó las siguientes conclusiones principales sobre la red de
-frío:
+Finalmente, en cumplimiento del \textbf{tercer objetivo específico}, se
+implementó en Python el esquema numérico híbrido de Euler-Maruyama
+(alg.~\ref{alg-simulacion-ede-termodinamica})
+(\citeproc{ref-Perez2026EscenarioA}{Pérez, C. 2026a},
+\citeproc{ref-Perez2026EscenarioB}{2026b},
+\citeproc{ref-Perez2026EscenarioC}{2026c}) integrando recursivamente la
+temperatura interna bajo el ciclo climático de Tuxtla Gutiérrez
+(Figura~\ref{fig-clima-anual} y Figura~\ref{fig-clima-zoom}), el filtro
+de inercia térmica de \(30\text{ minutos}\) de los viales y las reglas
+de reabastecimiento en los tres contextos operativos. De manera
+conjunta, cumpliendo con el \textbf{cuarto objetivo específico}, se
+cuantificó el riesgo termodinámico y la merma anual de biológicos
+mediante \(M = 5,000\) realizaciones anuales de Monte Carlo
+(\citeproc{ref-giles2008multilevel}{Giles 2008};
+\citeproc{ref-ross2018first}{Ross 2018}) y \(10,000\) remuestreos no
+paramétricos de Bootstrap (\citeproc{ref-efron1993introduction}{Efron y
+Tibshirani 1993}), arrojando las siguientes conclusiones principales
+sobre la red de frío:
 
 \begin{itemize}
 \tightlist
@@ -7079,8 +7095,10 @@ destructor principal de las vacunas en Tuxtla Gutiérrez no es el
 suministro eléctrico de la CFE ni el aislamiento del equipo, sino el
 estrés térmico inducido por la frecuencia de aperturas de puerta}. Por
 ello, adquirir plantas eléctricas será insuficiente si no se modifican
-los protocolos logísticos clínicos. Con base en estos resultados, se
-emiten cuatro recomendaciones directas para la Secretaría de Salud:
+los protocolos logísticos clínicos. Con base en estos resultados y
+completando la parte final del \textbf{cuarto objetivo específico}, se
+emiten cuatro recomendaciones operativas directas para las unidades de
+salud pública y la Secretaría de Salud:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
