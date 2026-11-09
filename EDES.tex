@@ -216,13 +216,13 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -254,7 +254,7 @@
 \title{EDES}
 \author{Cristóbal Pérez González \and Asesor: Dr.~Yofre Hernán García
 Gómez}
-\date{2026-11-08}
+\date{2026-11-09}
 \begin{document}
 \begin{titlepage}
 \hspace{-1.7cm} %Este comando es para mandar a la izquierda :)
@@ -1610,16 +1610,16 @@ aleatoria normal centrada. Asumiendo una condición inicial determinista
 \(x_0\), el valor esperado y la varianza del proceso (calculada mediante
 la Isometría de Itô, Teorema~\ref{thm-isometria-ito}) están dadas por:
 
-\[
+\begin{equation}\phantomsection\label{eq-ou-moments}{
 \mathbb{E}[X(t)] = \theta + (x_0 - \theta)e^{-\kappa t}, \qquad \text{Var}(X(t)) = \sigma^2 \int_0^t e^{-2\kappa(t-s)} ds = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right).
-\]
+}\end{equation}
 
 Con lo cual, para todo instante \(t > 0\), la variable aleatoria
 \(X(t)\) sigue una distribución normal:
 
-\[
+\begin{equation}\phantomsection\label{eq-ou-distribucion}{
 X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right) \right),
-\]
+}\end{equation}
 
 la cual converge cuando \(t \to \infty\) a una distribución normal
 \(\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)\)
@@ -4392,134 +4392,185 @@ gran mayoría de los casos.}
 
 \section{Planteamiento del Modelo}\label{planteamiento-del-modelo}
 
-En la literatura de ingeniería térmica y control, el comportamiento de
-la temperatura de una cámara frigorífica suele modelarse utilizando el
-enfoque de Ecuaciones Diferenciales Estocásticas de ``caja gris''
-(\emph{Grey-box SDEs}). Al representar el circuito térmico equivalente
-del refrigerador y añadir un término de ruido estocástico para absorber
-la incertidumbre de las fluctuaciones no medidas, la ecuación
-diferencial resultante tiene la forma de un proceso de
-Ornstein-Uhlenbeck. Este enfoque ha sido validado exitosamente en la
-estimación predictiva de unidades de refrigeración en trabajos como el
-de (\citeproc{ref-costanzo2013grey}{Costanzo et~al. 2013}).
+En la literatura de ingeniería térmica y control automático, la
+evolución de la temperatura dentro de una cámara frigorífica suele
+modelarse mediante Ecuaciones Diferenciales Estocásticas de ``caja
+gris'' (\emph{Grey-box SDEs}). Al formular el balance termodinámico del
+gabinete a partir de la ley de enfriamiento de Newton
+(\citeproc{ref-vollmer2009newton}{Vollmer 2009}) e incorporar un término
+de difusión continua para absorber las fluctuaciones térmicas no
+medidas, se obtiene de manera natural el proceso clásico de
+Ornstein-Uhlenbeck (Definición~\ref{def-ou-clasico};
+Ecuación~\ref{eq-ou-clasica})
+(\citeproc{ref-karlin1998introduction}{Karlin y Taylor 1998};
+\citeproc{ref-arnold1974stochastic}{Arnold 1974}). Este enfoque continuo
+ha sido validado exitosamente para la identificación y el control
+predictivo de unidades de refrigeración domésticas y comerciales en
+trabajos como el de (\citeproc{ref-costanzo2013grey}{Costanzo et~al.
+2013}).
 
-Sin embargo, para el problema logístico de la red de frío en Tuxtla
-Gutiérrez, el modelo clásico resulta limitado. Si bien el proceso de
-Ornstein-Uhlenbeck describe a la perfección la reversión a la media (la
-acción estabilizadora del termostato) y el ruido térmico interno de
-fondo, es insuficiente para modelar alteraciones drásticas en las
-condiciones de frontera.
+Sin embargo, para caracterizar el riesgo operativo de la cadena de frío
+en Tuxtla Gutiérrez, Chiapas, una difusión continua clásica resulta
+insuficiente. Si bien el proceso de Ornstein-Uhlenbeck
+(Ecuación~\ref{eq-ou-clasica}) describe con precisión la fuerza de
+reversión lineal hacia la temperatura del termostato y el ruido térmico
+interno mediante el movimiento Browniano estándar \(W(t)\)
+(Definición~\ref{def-movimiento-browniano}), la continuidad de sus
+trayectorias impide representar dos fenómenos físicos que dominan la
+operación real de una clínica de vacunación
+(Capítulo~\ref{sec-fundamentos-epidemiologicos}): los cambios
+estructurales abruptos en el régimen de transferencia de calor cuando se
+interrumpe la energía eléctrica y las inyecciones instantáneas de aire
+caliente cada vez que se abre la puerta del refrigerador.
 
-Por este motivo, en la presente investigación se añadió a la ecuación
-diferencial estocástica clásica una arquitectura híbrida que incluye
-\textbf{conmutación de régimen (\emph{regime-switching}) y procesos de
-salto discreto}:
+Por este motivo, en la presente investigación se extiende la ecuación
+diferencial estocástica de Ornstein-Uhlenbeck hacia la arquitectura de
+una \textbf{Ecuación Diferencial Estocástica Híbrida con Cambios de
+Régimen de Markov y Saltos de Poisson}
+(Definición~\ref{def-ede-hibrida}), acoplando dos mecanismos
+estocásticos adicionales:
 
-En primer lugar, el estado del suministro eléctrico actúa como un
-interruptor determinado por un Proceso de Poisson No Homogéneo. Esta
-conmutación permite vincular el clima exterior con el riesgo operativo
-de la red; cuando el proceso de Poisson registra un apagón, el modelo
-simula un cambio radical en la termodinámica del equipo, pasando de un
-régimen de convección forzada (enfriamiento activo) a un régimen de
-convección natural pasiva (calentamiento inercial).
-
-En segundo lugar, se incorpora un Proceso de Poisson Compuesto, denotado
-como \(J(t)\), para simular las perturbaciones del sistema ocasionadas
-por la operación clínica diaria. Matemáticamente, este término de salto
-se define como \(J(t) = \sum_{i=1}^{N_{puerta}(t)} \gamma_i\), donde la
-magnitud del choque térmico \(\gamma_i\) posee una distribución de
-probabilidad preestablecida (en este modelo, una distribución normal
-truncada) y \(N_{puerta}(t)\) es un Proceso de Poisson No Homogéneo, el
-cual es estrictamente independiente del movimiento browniano \(W(t)\).
-Cada apertura de la puerta del refrigerador por parte del personal
-médico inyecta estos choques instantáneos al equipo. Modelar estos
-eventos mediante la adición de \(dJ(t)\) a la ecuación diferencial
-permite simular cómo el calor externo entra de golpe y desplaza
-momentáneamente la temperatura interna antes de que la inercia térmica
-logre estabilizarla nuevamente.
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Cambio de Régimen de Markov (\emph{regime-switching}):} El
+  estado del suministro eléctrico se modela mediante una cadena de
+  Markov a tiempo continuo \(\{\alpha(t)\}_{t \ge 0}\)
+  (Definición~\ref{def-cadena-markov}) con espacio de estados
+  \(\mathcal{M} = \{1, 2\}\), cuyas transiciones están determinadas por
+  el Proceso de Poisson No Homogéneo de fallas de la CFE \(\lambda(t)\)
+  calibrado en la Sección~\ref{sec-ppnh}
+  (Ecuación~\ref{eq-lambda-final}) y las duraciones Log-Normales
+  estacionales de la Sección~\ref{sec-lognormal-duracion}
+  (Tabla~\ref{tbl-parametros-lognormal}). Este cambio de régimen actúa
+  como un interruptor físico en la ecuación diferencial estocástica:
+  cuando ocurren fallas en la red eléctrica, el sistema pasa de un
+  régimen de convección forzada impulsado por el compresor
+  (\(\alpha(t) = 1\), enfriamiento activo) hacia un régimen de
+  convección natural pasiva (\(\alpha(t) = 2\), calentamiento inercial),
+  donde la temperatura ambiente exterior \(T_{amb}(t)\) pasa a ser el
+  nuevo atractor térmico del sistema.
+\item
+  \textbf{Perturbaciones discretas mediante un Proceso de Poisson
+  Compuesto:} Para capturar la interacción del personal médico durante
+  la jornada laboral, se incorpora un proceso de Poisson compuesto
+  \(\displaystyle J(t) = \sum_{i=1}^{N_{puerta}(t)} \gamma_i\)
+  Definición~\ref{def-poisson-compuesto}. En esta formulación,
+  \(\{N_{puerta}(t)\}_{t \ge 0}\) es un Proceso de Poisson No Homogéneo
+  (Definición~\ref{def-poisson-no-homogeneo}) que contabiliza las
+  aperturas de la puerta del equipo por parte del personal médico de
+  forma independiente al movimiento Browniano \(W(t)\), mientras que las
+  variables aleatorias \(\{\gamma_i\}_{i \in \mathbb{N}}\) cuantifican
+  la magnitud de cada choque térmico. Añadir el diferencial \(dJ(t)\) a
+  la dinámica continua permite modelar cómo el ingreso repentino de
+  calor exterior desplaza instantáneamente la temperatura interna (como
+  se ilustró en la Figura~\ref{fig-sde-comparacion}) antes de que la
+  acción del termostato logre restablecer el equilibrio.
+\end{enumerate}
 
 \section{Calibración de la Ecuación Diferencial Estocástica
 (EDE)}\label{calibraciuxf3n-de-la-ecuaciuxf3n-diferencial-estocuxe1stica-ede}
 
-Para conectar el comportamiento aleatorio de la red eléctrica con la
-termodinámica del sistema, recordamos que la temperatura interna
-\(T(t)\) del equipo de refrigeración se describe mediante un proceso de
-Ornstein-Uhlenbeck, y que el modelo a usar incorpora perturbaciones por
-saltos y conmutación de régimen. Para facilitar la transición hacia la
-simulación computacional, desglosamos la ecuación diferencial en su
-forma operativa. Esta se presenta como un sistema de ecuaciones
-acopladas, cuyos términos de deriva y difusión dependen estrictamente
-del estado del suministro eléctrico \(\alpha(t)\):
+Retomando la formulación teórica del modelo termodinámico híbrido
+(Ecuación~\ref{eq-ede-operativa-teorica}) cuya existencia, unicidad de
+la solución fuerte y acotamiento en segundo momento quedaron demostrados
+mediante el Teorema~\ref{thm-mao-switching} y
+Sección~\ref{sec-verificacion-existencia-unicidad}, procedemos a
+expresar la ecuación diferencial estocástica en su forma operativa sobre
+un horizonte anual \([0, T]\):
 
 \begin{equation}\phantomsection\label{eq-ede-operativa}{
 dT(t) = 
 \begin{cases} 
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
-\end{cases}, \quad 0 \leq t \leq T
+\end{cases}, \quad 0 \leq t \leq T.
 }\end{equation}
 
-Como se observa en el segundo escenario de la
+Como se observa en el segundo régimen (\(\alpha(t) = 2\)) de la
 Ecuación~\ref{eq-ede-operativa}, el término de saltos discretos
-(\(+ dJ(t)\)) se elimina por completo durante un corte de luz, esto
-debido a los protocolos operativos normativos: ante una falla eléctrica,
-el personal médico tiene estrictamente prohibido abrir el refrigerador.
-Al mantener la puerta sellada, se protege la inercia térmica provista
-por las botellas de agua y los paquetes refrigerantes, garantizando que
-la dinámica de la temperatura dependa exclusivamente de la pérdida
-pasiva hacia el ambiente exterior.
+\(dJ(t)\) se anula durante un corte de suministro eléctrico. Esto
+responde a los protocolos normativos de operación en las clínicas de
+salud (\citeproc{ref-oms2015cadenafrio}{Organización Mundial de la Salud
+2015}): ante un apagón, el personal médico tiene prohibido abrir el
+refrigerador con el fin de preservar la inercia térmica de los paquetes
+fríos y botellas de agua, haciendo que la evolución térmica dependa
+exclusivamente de la transferencia pasiva de calor hacia el ambiente
+exterior.
 
-Cada término de la ecuación representa lo siguiente:
+Vinculando los elementos de la Ecuación~\ref{eq-ede-operativa} con las
+definiciones matemáticas del marco teórico, cada componente del sistema
+representa física y matemáticamente lo siguiente:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{\(T(t)\):} La temperatura interna del equipo en el tiempo
-  \(t\).
+  \textbf{\(T(t)\):} El proceso estocástico continuo por la derecha con
+  límites por la izquierda (\emph{càdlàg},
+  Definición~\ref{def-adaptabilidad-cadlag}) que describe la temperatura
+  interna del refrigerador en el instante \(t\) (\(^\circ\text{C}\)).
 \item
-  \textbf{\(\theta_{set}\):} La temperatura ideal u objetivo configurada
-  en el termostato.
+  \textbf{\(\alpha(t) \in \{1, 2\}\):} El estado de la cadena de Markov
+  a tiempo continuo (Definición~\ref{def-cadena-markov}) que indica la
+  presencia (\(\alpha(t)=1\)) o ausencia (\(\alpha(t)=2\)) de suministro
+  eléctrico en la unidad médica.
 \item
-  \textbf{\(T_{amb}(t)\):} La temperatura ambiente exterior de la ciudad
-  de Tuxtla Gutiérrez.
+  \textbf{\(\theta_{set}\):} El nivel de equilibrio termostático o
+  temperatura de consigna configurada en el equipo (\(^\circ\text{C}\)).
 \item
-  \textbf{\(\kappa_{on}\):} La velocidad de enfriamiento del equipo, la
-  cual refleja la potencia del compresor cuando hay suministro
-  eléctrico.
+  \textbf{\(T_{amb}(t)\):} La función determinista continua y acotada
+  que describe la temperatura ambiente exterior en la ciudad de Tuxtla
+  Gutiérrez (\(^\circ\text{C}\)).
 \item
-  \textbf{\(\kappa_{off}\):} La velocidad de pérdida térmica hacia el
-  exterior durante un apagón, la cual depende de la calidad del
-  aislamiento del equipo.
+  \textbf{\(\kappa_{on}\):} La tasa de reversión a la media o velocidad
+  de enfriamiento activo (\(\text{hr}^{-1}\)), determinada por la
+  potencia de abatimiento térmico del compresor cuando hay energía
+  eléctrica.
 \item
-  \textbf{\(\sigma_{on}\):} La volatilidad térmica originada por la
-  turbulencia y mezcla del aire interno cuando los ventiladores están
-  encendidos.
+  \textbf{\(\kappa_{off}\):} La tasa de pérdida térmica pasiva hacia el
+  exterior durante un apagón (\(\text{hr}^{-1}\)), determinada por el
+  coeficiente global de aislamiento y el revestimiento térmico del
+  gabinete.
 \item
-  \textbf{\(\sigma_{off}\):} La volatilidad térmica presente durante un
-  corte de luz, cuando el fluido interno transita a un estado de
+  \textbf{\(\sigma_{on}\):} El coeficiente de difusión o volatilidad
+  térmica activa (\(^\circ\text{C}\cdot\text{hr}^{-1/2}\)), originado
+  por los ciclos del compresor y la turbulencia del aire interno cuando
+  los ventiladores operan en convección forzada.
+\item
+  \textbf{\(\sigma_{off}\):} El coeficiente de difusión o volatilidad
+  térmica pasiva (\(^\circ\text{C}\cdot\text{hr}^{-1/2}\)) durante un
+  corte eléctrico, cuando el aire interno transita a un estado de
   convección natural estática.
 \item
-  \textbf{\(dW(t)\):} El incremento del movimiento browniano estándar,
-  el cual captura las fluctuaciones aleatorias continuas.
+  \textbf{\(dW(t)\):} El incremento infinitesimal del movimiento
+  Browniano estándar (Definición~\ref{def-movimiento-browniano}), el
+  cual modela las fluctuaciones térmicas continuas con media nula y
+  varianza \(dt\).
 \item
-  \textbf{\(dJ(t)\):} El incremento del Proceso de Poisson Compuesto que
-  inyecta los choques térmicos al sistema.
+  \textbf{\(dJ(t)\):} El incremento infinitesimal del Proceso de Poisson
+  Compuesto (Definición~\ref{def-poisson-compuesto}) que introduce las
+  discontinuidades de calor al sistema durante el horario laboral.
 \item
-  \textbf{\(\gamma_i\):} La magnitud aleatoria del choque térmico
-  instantáneo provocado por la entrada de calor exterior en la
-  \(i\)-ésima apertura del equipo.
+  \textbf{\(N_{puerta}(t)\):} El Proceso de Poisson No Homogéneo
+  (Definición~\ref{def-poisson-no-homogeneo}) que contabiliza el número
+  de aperturas de puerta realizadas por el personal clínico hasta el
+  tiempo \(t\).
 \item
-  \textbf{\(N_{puerta}(t)\):} El Proceso de Poisson que modela el número
-  de veces que el personal médico abre la puerta del refrigerador.
+  \textbf{\(\gamma_i\):} La variable aleatoria que cuantifica la
+  magnitud del salto térmico instantáneo (\(^\circ\text{C}\)) provocado
+  por la infiltración de aire cálido en la \(i\)-ésima apertura de
+  puerta.
 \end{itemize}
 
-Para garantizar el rigor de la simulación, los coeficientes térmicos se
-dedujeron utilizando las especificaciones técnicas del refrigerador
-institucional Haier HBC-150. De acuerdo con el catálogo oficial PQS de
-la Organización Mundial de la Salud (OMS)
+Para garantizar el rigor físico de la simulación, los coeficientes
+termodinámicos se dedujeron a partir de las especificaciones técnicas
+del refrigerador institucional \textbf{Haier HBC-150}. De acuerdo con el
+catálogo oficial \emph{Performance, Quality and Safety} (PQS) de la
+Organización Mundial de la Salud (OMS)
 (\citeproc{ref-oms_pqs_e003}{Organización Mundial de la Salud 2024,
 89-90}), este equipo cuenta con certificación de protección Grado A y
-está diseñado específicamente para mantener la red de frío en
+está diseñado específicamente para preservar la red de frío en zonas con
 condiciones climáticas severas.
 
 \begin{figure}
@@ -4584,21 +4635,21 @@ temperatura interna hacia su nivel ideal.
   \textbf{Volatilidad y Ruido del Compresor (\(\sigma_{on}\))}: El motor
   del refrigerador no enfría de manera perfecta; se enciende y se apaga
   constantemente, generando turbulencias. Dado que la solución analítica
-  de un Proceso de Ornstein-Uhlenbeck sigue una distribución de
-  probabilidad Normal (Gaussiana), podemos usar la ``regla empírica'' de
-  la estadística para acotar este ruido. Para asegurar con un 99.7\% de
-  confianza que estas fluctuaciones naturales no rompan nuestro margen
-  de seguridad de \(\pm 3^\circ \text{C}\), requerimos que tres
-  desviaciones estándar abarquen exactamente esos tres grados
+  de un Proceso de Ornstein-Uhlenbeck sigue una distribución Normal
+  (Ecuación~\ref{eq-ou-distribucion}), podemos usar la ``regla
+  empírica'' de la estadística para acotar este ruido. Para asegurar con
+  un 99.7\% de confianza que estas fluctuaciones naturales no rompan
+  nuestro margen de seguridad de \(\pm 3^\circ \text{C}\), requerimos
+  que tres desviaciones estándar abarquen exactamente esos tres grados
   (\(3 \times SD = 3^\circ \text{C}\)), lo que implica una desviación
   estándar de \(SD = 1^\circ \text{C}\).
 
   La varianza de un proceso de Ornstein-Uhlenbeck clásico depende del
-  tiempo \(t\). Sin embargo, dado que el refrigerador opera de manera
-  continua durante bastante tiempo, la inercia inicial se desvanece y el
-  sistema alcanza un estado estacionario (el límite cuando
-  \(t \to \infty\)). Sustituyendo en la fórmula asintótica de la
-  desviación estándar
+  tiempo \(t\) (Ecuación~\ref{eq-ou-moments}). Sin embargo, dado que el
+  refrigerador opera de manera continua durante bastante tiempo, la
+  inercia inicial se desvanece y el sistema alcanza un estado
+  estacionario (el límite cuando \(t \to \infty\)). Sustituyendo en la
+  fórmula asintótica de la desviación estándar
   \(\left(SD = \frac{\sigma_{on}}{\sqrt{2\kappa_{on}}}\right)\):
   \[1 = \frac{\sigma_{on}}{\sqrt{2(0.1154)}} \implies \sigma_{on} = \sqrt{0.2308} \approx 0.4804\]
 \end{itemize}
@@ -4670,14 +4721,15 @@ vespertina destinada a resguardar los sobrantes. Por el contrario,
 durante los fines de semana y días festivos, la unidad debe permanecer
 completamente sellada para maximizar la preservación de la inercia
 térmica, anulando por completo la inyección de calor exterior generada
-por el factor humano.
+por el personal médico.
 
 Dado que la apertura de las 8:00 hrs es un evento operativo determinista
 y predecible, la aleatoriedad del sistema recae en el resto de la
 jornada, condicionada por la variabilidad de la demanda clínica. Para
 aproximar el modelo matemático a la realidad, aislar el factor humano y
-evaluar sistemáticamente la resiliencia termodinámica del equipo frente
-a fallas eléctricas, el Proceso de Poisson se segmenta en tres
+evaluar la resiliencia termodinámica del equipo frente a fallas
+eléctricas, el Proceso de Poisson (Definición~\ref{def-proceso-poisson}
+; Definición~\ref{def-poisson-no-homogeneo}) se segmenta en tres
 escenarios de simulación. Cada escenario persigue un objetivo analítico
 particular, definiendo tasas de intensidad (\(\lambda\)) dependientes
 del tiempo:
@@ -4743,12 +4795,12 @@ del tiempo:
 (\(\gamma_i\))}{Impacto de la Apertura y Salto Térmico (\textbackslash gamma\_i)}}\label{sec-salto-termico}
 
 Al tratarse de un equipo tipo cofre (\emph{Icelined Refrigerator}), la
-pérdida térmica por convección es físicamente menor que en equipos
-verticales, ya que el aire frío es más denso y tiende a permanecer en el
-fondo. Sin embargo, el ingreso de aire caliente es inevitable y su
-magnitud no es una constante; depende del tiempo que la puerta
-permanezca abierta y de la correcta disposición del balasto térmico
-(botellas de agua).
+pérdida térmica por convección forzada es físicamente menor que en
+equipos verticales, ya que el aire frío es más denso y tiende a
+permanecer en el fondo. Sin embargo, el ingreso de aire caliente es
+inevitable y su magnitud no es una constante; depende del tiempo que la
+puerta permanezca abierta y de la correcta disposición del balasto
+térmico (botellas de agua).
 
 Para modelar rigurosamente este choque térmico, nos basamos en los
 estudios experimentales del \emph{National Institute of Standards and
@@ -4868,10 +4920,10 @@ DA(t) = \int_{0}^{t} k(T_K(s)) \cdot \mathbf{1}_{\{T(s) > 8^\circ\text{C}\}} \, 
 De acuerdo con la discretización temporal deducida en la
 Ecuación~\ref{eq-fraccion-dano-paso} junto con la
 Ecuación~\ref{eq-balance-inventario-general}, para actualizar el estado
-del sistema en pasos discretos \(\Delta t\) dentro de la Simulación de
-Monte Carlo, el número de dosis destruidas (merma instantánea) en cada
-subintervalo se calcula multiplicando el inventario activo \(I(t)\) por
-la fracción de biológico degradada \(\Delta D_n\):
+del sistema en pasos discretos \(\Delta t\) dentro de la Simulación, el
+número de dosis destruidas (merma instantánea) en cada subintervalo se
+calcula multiplicando el inventario activo \(I(t)\) por la fracción de
+biológico degradada \(\Delta D_n\):
 
 \[
 \text{Merma}(t_n) = I(t_n) \Delta D_n = I(t_n) \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}}.

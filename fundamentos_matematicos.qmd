@@ -453,13 +453,13 @@ Dado que el integrando $e^{-\kappa(t-s)}$ es una función determinista, la integ
 
 $$
 \mathbb{E}[X(t)] = \theta + (x_0 - \theta)e^{-\kappa t}, \qquad \text{Var}(X(t)) = \sigma^2 \int_0^t e^{-2\kappa(t-s)} ds = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right).
-$$
+$$ {#eq-ou-moments}
 
 Con lo cual, para todo instante $t > 0$, la variable aleatoria $X(t)$ sigue una distribución normal:
 
 $$
 X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right) \right),
-$$
+$$ {#eq-ou-distribucion}
 
 la cual converge cuando $t \to \infty$ a una distribución normal $\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)$ independientemente del estado inicial $x_0$ [@karlin1998introduction].
 
