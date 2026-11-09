@@ -215,14 +215,14 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{plain}
+\newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
-\theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -6943,53 +6943,44 @@ el instante en el que se rompe la cadena de frío, completando así el
 acoplamiento teórico planteado en el \textbf{primer objetivo
 específico}.
 
-\bookmarksetup{startatroot}
-
-\chapter{DE AQUI}\label{de-aqui}
-
 Por su parte, el estudio de caso y la calibración de los parámetros
 (Capítulo~\ref{sec-estudio-caso}) permitió parametrizar los componentes
 físicos, eléctricos, cinéticos y logísticos del modelo sobre un
-escenario operativo real a partir de registros oficiales y leyes
+escenario operativo real a partir de registros oficiales y de las leyes
 físicas. Combinando los datos históricos de la CFE
-(Sección~\ref{sec-datos-cfe} y Tabla~\ref{tbl-interrupciones-cfe}) con
-la sectorización de subestaciones del CENACE
-(\citeproc{ref-sener2024prodesen}{Secretaría de Energía 2024})
-(Sección~\ref{sec-escala-espacial}), se estimó una frecuencia local de
-\(64\) apagones anuales (Ecuación~\ref{eq-esperanza-local}). El desglose
-marginal de los índices SAIFI y SAIDI
-(\citeproc{ref-cfe2024informe}{Comisión Federal de Electricidad 2024})
-(Sección~\ref{sec-distribucion-temporal}, Tabla~\ref{tbl-saidi-saifi} y
-Tabla~\ref{tbl-cortes-mensuales}) permitió calibrar la intensidad
-bimodal \(\lambda_{cfe}(t)\) del Proceso de Poisson No Homogéneo
-(Sección~\ref{sec-ppnh}, Ecuación~\ref{eq-lambda-final},
-Figura~\ref{fig-lambda-t} y Tabla~\ref{tbl-validacion-integral}) y las
-distribuciones Log-Normales estacionales de duración
-(Sección~\ref{sec-lognormal-duracion}, Tabla~\ref{tbl-duracion-cortes} y
-Tabla~\ref{tbl-parametros-lognormal}), identificando a la temporada de
+(Tabla~\ref{tbl-interrupciones-cfe}) con la sectorización de
+subestaciones del CENACE (\citeproc{ref-sener2024prodesen}{Secretaría de
+Energía 2024}) (Sección~\ref{sec-escala-espacial}), se estimó una
+frecuencia local de \(64\) apagones anuales
+(Ecuación~\ref{eq-esperanza-local}). El desglose marginal de los índices
+SAIFI y SAIDI (Tabla~\ref{tbl-saidi-saifi} y
+Tabla~\ref{tbl-cortes-mensuales}) permitió calibrar la función de
+intensidad \(\lambda_{cfe}(t)\) del Proceso de Poisson No Homogéneo
+(Sección~\ref{sec-ppnh}, Ecuación~\ref{eq-lambda-final} y
+Figura~\ref{fig-lambda-t}) y las distribuciones Log-Normales
+estacionales de la duración de los cortes de energía eléctrica
+(Tabla~\ref{tbl-parametros-lognormal}), identificando a la temporada de
 calor como la de mayor duración promedio por apagón (\(2.983\text{ h}\),
 Figura~\ref{fig-lognormal-calor}) frente al invierno y las lluvias
 (Figura~\ref{fig-lognormal-invierno} y
-Figura~\ref{fig-lognormal-lluvias}). A su vez, la caracterización física
-del refrigerador Haier HBC-150 (\citeproc{ref-oms_pqs_e003}{Organización
-Mundial de la Salud 2024}; \citeproc{ref-vollmer2009newton}{Vollmer
-2009}; \citeproc{ref-costanzo2013grey}{Costanzo et~al. 2013})
+Figura~\ref{fig-lognormal-lluvias}). A su vez, las características
+físicas del refrigerador Haier HBC-150
+(\citeproc{ref-oms_pqs_e003}{Organización Mundial de la Salud 2024})
 (Figura~\ref{fig-haier-hbc150} y Ecuación~\ref{eq-ede-operativa}) reveló
 una marcada asimetría entre la rápida tasa de enfriamiento activo
 (\(\kappa_{on} \approx 0.1154\text{ h}^{-1}\),
-\(\sigma_{on} \approx 0.4804\) en la Sección~\ref{sec-regimen-1}) y la
-lenta pérdida pasiva provista por su revestimiento de hielo
+\(\sigma_{on} \approx 0.4804\)) y la lenta pérdida pasiva provista por
+su revestimiento de hielo
 (\(\kappa_{off} \approx 0.00232\text{ h}^{-1}\),
-\(\sigma_{off} \approx 0.048\) en la Sección~\ref{sec-regimen-2}), la
-cual se integró con los saltos térmicos normales truncados del NIST
+\(\sigma_{off} \approx 0.048\)), la cual se integró con los saltos
+térmicos normales truncados basados del NIST
 (\citeproc{ref-nist2015thermal}{Chojnacky et~al. 2010})
-(\(\gamma_i \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\) en la
-Sección~\ref{sec-salto-termico} y Ecuación~\ref{eq-salto-termico}), los
-parámetros cinéticos de Arrhenius (Sección~\ref{sec-Arrhenius} y
-Ecuación~\ref{eq-Arrhenius}) (\citeproc{ref-sinko2011martin}{Sinko
-2011}) y la demanda estacional clínica
-(Sección~\ref{sec-dinamica-inventario} y Tabla~\ref{tbl-demanda-base}),
-cumpliendo así con el \textbf{segundo objetivo específico}.
+(\(\gamma_i \sim \max(0.16, \mathcal{N}(0.76, 0.20^2))\)
+Ecuación~\ref{eq-salto-termico}), los parámetros cinéticos de Arrhenius
+(Sección~\ref{sec-Arrhenius} y Ecuación~\ref{eq-Arrhenius}) y la demanda
+estacional clínica (Sección~\ref{sec-dinamica-inventario} y
+Tabla~\ref{tbl-demanda-base}), cumpliendo así con el \textbf{segundo
+objetivo específico}.
 
 Finalmente, respecto a la simulación computacional
 (Capítulo~\ref{sec-simulacion-computacional}), se implementó en Python
@@ -7004,13 +6995,9 @@ de inercia térmica de \(30\text{ minutos}\) de los viales y las reglas
 de reabastecimiento en los tres contextos operativos, cumpliendo así con
 el \textbf{tercer objetivo específico}. De manera conjunta, cumpliendo
 con el \textbf{cuarto objetivo específico}, se cuantificó el riesgo
-termodinámico y la merma anual de biológicos mediante \(M = 5,000\)
-realizaciones anuales de Monte Carlo
-(\citeproc{ref-giles2008multilevel}{Giles 2008};
-\citeproc{ref-ross2018first}{Ross 2018}) y \(10,000\) remuestreos no
-paramétricos de Bootstrap (\citeproc{ref-efron1993introduction}{Efron y
-Tibshirani 1993}), arrojando las siguientes conclusiones principales
-sobre la red de frío:
+termodinámico y la merma anual de biológicos mediante \(M = 5000\)
+simulaciones de Monte Carlo y \(10000\) remuestreos Bootstrap, arrojando
+las siguientes conclusiones principales sobre la cadena de frío:
 
 \begin{itemize}
 \tightlist
@@ -7021,42 +7008,43 @@ sobre la red de frío:
   soporta eficazmente los \(64.3\) apagones anuales y el clima cálido
   exterior, manteniendo una mediana de pérdida mensual igual a cero
   durante todo el año (Figura~\ref{fig-mediana-a}) y nulo riesgo de
-  congelación. La inferencia Bootstrap
+  congelación. El método de Bootstrap
   (Tabla~\ref{tbl-riesgo-operativo-bootstrap}, Figura~\ref{fig-boot-a} y
   Figura~\ref{fig-box-boot-a}) demostró que la merma poblacional
   esperada es de apenas \textbf{61 dosis anuales (1.21\%)} con un
   intervalo de confianza al \(95\%\) de \([59, 62]\text{ dosis}\)
-  (\([1.18\%, 1.24\%]\)), originada únicamente por apagones extremos
-  aislados (Figura~\ref{fig-logistica-a}, Figura~\ref{fig-abanico-a},
-  Figura~\ref{fig-hist-a} y Figura~\ref{fig-boxplot-a}).
+  \(\left( [1.18\%, 1.24\%] \right)\), originada únicamente por apagones
+  extremos aislados (Figura~\ref{fig-logistica-a},
+  Figura~\ref{fig-abanico-a}, Figura~\ref{fig-hist-a} y
+  Figura~\ref{fig-boxplot-a}).
 \item
   \textbf{Incremento del riesgo por operación estándar (Escenario B):}
   La introducción de \(499\) aperturas anuales normadas
   (Figura~\ref{fig-anual-b}, Figura~\ref{fig-zoom-b} y
   Figura~\ref{fig-logistica-b}) quintuplica las rupturas de la cadena de
   frío superiores a \(8^\circ\text{C}\) (alcanzando
-  \(134.6\text{ eventos}\) y \(95.6\text{ horas}\) fuera de rango al
-  año, Tabla~\ref{tbl-riesgo-operativo}). Aunque en años particulares la
-  rotación del inventario mitiga el daño al consumir dosis antes de los
-  apagones (Sección~\ref{sec-resultados-seguridad}), a largo plazo el
-  ingreso de calor por aperturas domina el sistema, elevando la pérdida
-  poblacional esperada a \textbf{343 dosis anuales (1.36\%)} con un IC
-  al \(95\%\) de \([340, 346]\text{ dosis}\) (\([1.34\%, 1.37\%]\),
-  Figura~\ref{fig-abanico-b}, Figura~\ref{fig-hist-b},
-  Figura~\ref{fig-boot-b} y Figura~\ref{fig-box-boot-b}), concentrando
-  la vulnerabilidad en enero y agosto (Figura~\ref{fig-promedio-b} y
-  Figura~\ref{fig-mediana-b}).
+  \(134.6\text{ eventos}\) y \(95.6\text{ horas}\) fuera de rango
+  normativo al año, Tabla~\ref{tbl-riesgo-operativo}). Aunque en años
+  particulares la rotación del inventario elimina el daño al consumir
+  dosis antes de los apagones (Sección~\ref{sec-resultados-seguridad}),
+  a largo plazo el ingreso de calor por aperturas domina el sistema,
+  elevando la pérdida poblacional esperada a \textbf{343 dosis anuales
+  (1.36\%)} con un IC al \(95\%\) de \([340, 346]\text{ dosis}\)
+  (\([1.34\%, 1.37\%]\), Figura~\ref{fig-abanico-b},
+  Figura~\ref{fig-hist-b}, Figura~\ref{fig-boot-b} y
+  Figura~\ref{fig-box-boot-b}), concentrando la vulnerabilidad en enero
+  y agosto (Figura~\ref{fig-promedio-b} y Figura~\ref{fig-mediana-b}).
 \item
   \textbf{Colapso exponencial por contingencia epidemiológica (Escenario
   C):} Al duplicar la actividad a \(998\) aperturas anuales por viajes
   matutinos de resurtido (Figura~\ref{fig-anual-c},
   Figura~\ref{fig-zoom-c} y Figura~\ref{fig-logistica-c}), el equipo
   pierde su capacidad de recuperación térmica, acumulando
-  \(420.6\text{ horas}\) anuales fuera de rango y adelantando la primera
-  falla crítica al Día 3. Las pérdidas no crecen de forma lineal sino
-  exponencial, multiplicándose por más de cinco veces hasta alcanzar
-  \textbf{1,905 dosis destruidas por año (2.57\%)} con un IC al \(95\%\)
-  de \([1896, 1913]\text{ dosis}\) (\([2.56\%, 2.58\%]\),
+  \(420.6\text{ horas}\) anuales fuera del rango normativo y adelantando
+  la primera falla crítica al Día 3. Las pérdidas no crecen de forma
+  lineal sino exponencial, multiplicándose por más de cinco veces hasta
+  alcanzar \textbf{1,905 dosis destruidas por año (2.57\%)} con un IC al
+  \(95\%\) de \([1896, 1913]\text{ dosis}\) (\([2.56\%, 2.58\%]\),
   Tabla~\ref{tbl-riesgo-operativo-bootstrap}, Figura~\ref{fig-boot-c} y
   Figura~\ref{fig-box-boot-c}), produciendo un daño continuo durante
   todo el año sin importar la estación climática
@@ -7065,42 +7053,41 @@ sobre la red de frío:
   Figura~\ref{fig-boxplot-c}).
 \item
   \textbf{Falta de normalidad y validación del método Bootstrap:} La
-  prueba de Shapiro-Wilk
-  (\citeproc{ref-montgomery2014applied}{Montgomery y Runger 2014})
-  (Tabla~\ref{tbl-shapiro-wilk}) rechazó la normalidad (\(p < 0.05\)) en
-  todas las métricas evaluadas, confirmando distribuciones fuertemente
-  asimétricas y de colas pesadas en los escenarios A y B, y una
-  transición hacia la simetría en el Escenario C explicada por el
-  Teorema del Límite Central ante la alta frecuencia de aperturas, lo
-  cual justifica plenamente el uso de inferencia no paramétrica.
+  prueba de Shapiro-Wilk (Tabla~\ref{tbl-shapiro-wilk}) rechazó la
+  normalidad (\(p < 0.05\)) en todas las métricas evaluadas, confirmando
+  distribuciones fuertemente asimétricas y de colas pesadas a la derecha
+  en los escenarios A y B (Figura~\ref{fig-hist-a} y
+  Figura~\ref{fig-hist-b}), y una transición hacia la simetría en el
+  Escenario C (Figura~\ref{fig-hist-c}) ante la alta frecuencia de
+  aperturas, lo cual justifica el uso de la estadística no paramétrica.
 \end{itemize}
 
-En síntesis, el hallazgo central para la salud pública es que \textbf{el
-destructor principal de las vacunas en Tuxtla Gutiérrez no es el
-suministro eléctrico de la CFE ni el aislamiento del equipo, sino el
-estrés térmico inducido por la frecuencia de aperturas de puerta}. Por
+En resumen, el hallazgo principal para la salud pública es que
+\textbf{el destructor principal de las vacunas en Tuxtla Gutiérrez no es
+el suministro eléctrico de la CFE ni el aislamiento del equipo, sino el
+estrés térmico producido por la frecuencia de aperturas de puerta}. Por
 ello, adquirir plantas eléctricas será insuficiente si no se modifican
 los protocolos logísticos clínicos. Con base en estos resultados y
 completando la parte final del \textbf{cuarto objetivo específico}, se
-emiten cuatro recomendaciones operativas directas para las unidades de
-salud pública y la Secretaría de Salud:
+emiten cuatro recomendaciones operativas para las unidades de salud
+pública y la Secretaría de Salud:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
   \textbf{Ampliación de la capacidad de termos auxiliares para eliminar
-  resurtidos:} Dado que el salto de pérdidas de \(343\) a
+  resurtidos:} Dado que el aumentio de pérdidas de \(343\) a
   \(1,905\text{ dosis}\) proviene de los viajes matutinos de resurtido
-  (\(\lambda_{resurtido} = 0.4\text{ h}^{-1}\)), se recomienda dotar a
-  las clínicas de termos auxiliares de mayor volumen (de \(9\) a
-  \(45\text{ litros}\)) para extraer todas las dosis del turno en
-  \textbf{una sola apertura a las 08:00 horas}, manteniendo al equipo
-  principal siempre bajo el régimen seguro del Escenario B.
+  \(\left( \lambda_{resurtido} = 0.4\text{ h}^{-1} \right)\), se
+  recomienda proveer a las clínicas termos auxiliares de mayor volumen
+  (de \(9\) a \(45\text{ litros}\)) para extraer todas las dosis del
+  turno en \textbf{una sola apertura a las 08:00 horas}, manteniendo al
+  equipo principal siempre bajo el régimen seguro del Escenario B.
 \item
   \textbf{Separación entre almacenamiento de reserva y dispensado
-  diario:} Para evitar exponer simultáneamente las
-  \(5,000\text{ dosis}\) a los choques térmicos de apertura
+  diario:} Para evitar exponer simultáneamente todas las dosis a los
+  choques térmicos de apertura
   (Ecuación~\ref{eq-balance-inventario-general}), se sugiere mantener el
   refrigerador tipo cofre como \textbf{reserva pasiva sellada} (operando
   como en el Escenario A, abriéndose solo una vez por semana) y utilizar
@@ -7119,7 +7106,7 @@ salud pública y la Secretaría de Salud:
   Debido a que en operación normativa el mayor riesgo ocurre en enero y
   agosto por la coincidencia de inventario lleno con fallas eléctricas
   (Figura~\ref{fig-promedio-b} y Figura~\ref{fig-mediana-b}), se sugiere
-  fraccionar los envíos jurisdiccionales en lotes menores durante la
+  dividir los envíos jurisdiccionales en lotes menores durante la
   temporada de calor y tormentas para reducir el volumen de dosis
   expuestas.
 \end{enumerate}
@@ -7298,12 +7285,6 @@ NY: Wiley.
 Secretaría de Energía. 2024. {«Programa para el Desarrollo del Sistema
 Eléctrico Nacional (PRODESEN) 2024-2038»}. Ciudad de México: Gobierno de
 México.
-
-\bibitem[\citeproctext]{ref-sinko2011martin}
-Sinko, Patrick J. 2011. \emph{Martin's Physical Pharmacy and
-Pharmaceutical Sciences: Physical Chemical and Biopharmaceutical
-Principles in the Pharmaceutical Sciences}. 6th ed. Baltimore, MD:
-Lippincott Williams \& Wilkins.
 
 \bibitem[\citeproctext]{ref-situ2005theory}
 Situ, Rong. 2005. \emph{Theory of Stochastic Differential Equations with
