@@ -202,7 +202,7 @@ $$
 $$
 :::
 
-El hecho de evaluar el integrando $X(t_i)$ estrictamente en el instante inicial $t_i$ de cada incremento $\Delta W(t_i) = W(t_{i+1}) - W(t_i)$ garantiza que el integrando no anticipe información futura. Dado que $X(t_i)$ es $\mathcal{F}_{t_i}$-medible y el incremento $W(t_{i+1}) - W(t_i)$ es independiente de $\mathcal{F}_{t_i}$, el valor esperado de cada término de la suma se factoriza como $\mathbb{E}[X(t_i)]\mathbb{E}[W(t_{i+1}) - W(t_i)] = 0$. En consecuencia, la integral definida $I(t) = \int_0^t X(s) dW(s)$ hereda la estructura de una **martingala continua de cuadrado integrable** respecto a $\{\mathcal{F}_t\}_{t \ge 0}$, satisfaciendo la propiedad de media nula:
+El hecho de evaluar el integrando $X(t_i)$ estrictamente en el instante inicial $t_i$ de cada incremento $\Delta W(t_i) = W(t_{i+1}) - W(t_i)$ garantiza que el integrando no anticipe información futura. Dado que $X(t_i)$ es $\mathcal{F}_{t_i}$-medible y el incremento $W(t_{i+1}) - W(t_i)$ es independiente de $\mathcal{F}_{t_i}$, el valor esperado de cada término de la suma se factoriza como $\mathbb{E}[X(t_i)]\mathbb{E}[W(t_{i+1}) - W(t_i)] = 0$. En consecuencia, la integral definida $I(t) = \displaystyle \int_0^t X(s) dW(s)$ hereda la estructura de una **martingala continua de cuadrado integrable** respecto a $\{\mathcal{F}_t\}_{t \ge 0}$, satisfaciendo la propiedad de media nula:
 $$
 \mathbb{E}\left[ \int_0^T X(t) dW(t) \right] = 0.
 $$

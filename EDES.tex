@@ -215,12 +215,12 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{algorithm}{Algorithm}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{remark}
@@ -326,7 +326,7 @@ En primer lugar, quiero agradecer a Dios por toda la sabiduría que me ha brinda
 
 Quiero expresar mi más sincero agradecimiento al Dr. Yofre Hernán García Gómez, mi director de tesis, por todo el apoyo y la confianza que ha tenido en mí. Aunque esta investigación tuvo varios momentos difíciles en los que creíamos que algo no nos saldría, gracias a su guía y a su gran paciencia conmigo nunca me di por vencido. Finalmente, le agradezco por enseñarme que las Matemáticas Aplicadas tienen la capacidad de ayudar y mejorar la vida de las personas.
 
-Asimismo, agradezco a todos mis profesores y profesoras que tuve a lo largo de la licenciatura. Al Dr. Aarón, al Dr. Sergio, al Dr. Javier y al Dr. Saúl, gracias por enseñarme de la mejor forma y con el mayor rigor toda la matemática que hoy sé. Al Dr. Boris, por ser mi tutor durante toda la carrera; gracias por creer en mí desde el primer momento y por animarme siempre a seguir adelante en el hermoso camino de las Ciencias Exactas. Al Mtro. Elesban, por su forma tan especial de enseñar y por hacer que amara la programación. A la Mtra. Marda, por ser más que una maestra, una amiga; gracias por sus regaños que me ayudaron a mejorar como persona y por ser quien me introdujo al mundo de las ecuaciones diferenciales. De igual manera, quiero agradecer al Dr. Yofre y al Dr. Armando por su forma tan pacífica de enseñar y por haberme introducido al hermoso mundo de la probabilidad y de los procesos estocásticos.
+Asimismo, agradezco a todos mis profesores y profesoras que tuve a lo largo de la licenciatura. Al Dr. Aarón, al Dr. Sergio, al Dr. Javier y al Dr. Saúl, gracias por enseñarme de la mejor forma y con el mayor rigor posible la matemática que hoy sé. Al Dr. Boris, por ser mi tutor durante toda la carrera; gracias por creer en mí desde el primer momento y por animarme siempre a seguir adelante en el hermoso camino de las Ciencias Exactas. Al Mtro. Elesban, por su forma tan especial de enseñar y por hacer que amara la programación. A la Mtra. Marda, por ser más que una maestra, una amiga; gracias por sus regaños que me ayudaron a mejorar como persona y por ser quien me introdujo al mundo de las ecuaciones diferenciales. De igual manera, quiero agradecer al Dr. Yofre y al Dr. Armando por su forma tan pacífica de enseñar y por haberme introducido al hermoso mundo de la probabilidad y de los procesos estocásticos.
 
 De manera muy especial, agradezco a mis padres, María Teresa y Sebastián, por todo el apoyo que me han brindado a lo largo de mi vida, tanto en lo económico como en lo emocional. Gracias por impulsarme siempre a seguir adelante, por nunca dudar de mí y por motivarme en todo momento a estudiar esta carrera. También agradezco a mis hermanos, Saraí, Cristian y Cristóbal, por estar conmigo, motivarme y hacerme compañía cada vez que estoy en casa con ellos.
 
@@ -1116,10 +1116,11 @@ anticipe información futura. Dado que \(X(t_i)\) es
 independiente de \(\mathcal{F}_{t_i}\), el valor esperado de cada
 término de la suma se factoriza como
 \(\mathbb{E}[X(t_i)]\mathbb{E}[W(t_{i+1}) - W(t_i)] = 0\). En
-consecuencia, la integral definida \(I(t) = \int_0^t X(s) dW(s)\) hereda
-la estructura de una \textbf{martingala continua de cuadrado integrable}
-respecto a \(\{\mathcal{F}_t\}_{t \ge 0}\), satisfaciendo la propiedad
-de media nula: \[
+consecuencia, la integral definida
+\(I(t) = \displaystyle \int_0^t X(s) dW(s)\) hereda la estructura de una
+\textbf{martingala continua de cuadrado integrable} respecto a
+\(\{\mathcal{F}_t\}_{t \ge 0}\), satisfaciendo la propiedad de media
+nula: \[
 \mathbb{E}\left[ \int_0^T X(t) dW(t) \right] = 0.
 \]
 
