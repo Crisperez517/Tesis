@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Estudio de Caso: Calibración Termodinámica, Eléctrica y Cinética de Degradación – EDES</title>
+<title>7&nbsp; Estudio de Caso: Parametrización y Calibración del Modelo Matemático – EDES</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -306,7 +306,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Estudio_de_caso.html">Modelo Matemático</a></li><li class="breadcrumb-item"><a href="./Estudio_de_caso.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Estudio de Caso: Calibración Termodinámica, Eléctrica y Cinética de Degradación</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Estudio_de_caso.html">Modelo Matemático</a></li><li class="breadcrumb-item"><a href="./Estudio_de_caso.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Estudio de Caso: Parametrización y Calibración del Modelo Matemático</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -404,7 +404,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Estudio_de_caso.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Estudio de Caso: Calibración Termodinámica, Eléctrica y Cinética de Degradación</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Estudio de Caso: Parametrización y Calibración del Modelo Matemático</span></span></a>
   </div>
 </li>
       </ul>
@@ -412,7 +412,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Simulación de Equipos (Haier HBC-150)</span></a>
+ <span class="menu-text">Simulación del Equipo (Haier HBC-150)</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -499,9 +499,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Estudio_de_caso.html">Modelo Matemático</a></li><li class="breadcrumb-item"><a href="./Estudio_de_caso.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Estudio de Caso: Calibración Termodinámica, Eléctrica y Cinética de Degradación</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Estudio_de_caso.html">Modelo Matemático</a></li><li class="breadcrumb-item"><a href="./Estudio_de_caso.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Estudio de Caso: Parametrización y Calibración del Modelo Matemático</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-estudio-caso" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Estudio de Caso: Calibración Termodinámica, Eléctrica y Cinética de Degradación</span></span></h1>
+<h1 class="title"><span id="sec-estudio-caso" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Estudio de Caso: Parametrización y Calibración del Modelo Matemático</span></span></h1>
 </div>
 
 
@@ -520,13 +520,14 @@ window.Quarto = {
 
 <section id="sec-motivacion-contexto" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="sec-motivacion-contexto"><span class="header-section-number">7.1</span> Motivación y Contexto del Estudio</h2>
-<p>El presente capítulo consolida el marco teórico desarrollado previamente, trasladándolo de una formulación matemática abstracta a un escenario de aplicación altamente crítico: la red de frío para la preservación de vacunas en Tuxtla Gutiérrez, Chiapas. La elección de esta región geográfica como caso de estudio se debe a la combinación de condiciones climatológicas de calor extremo y a la vulnerabilidad de la infraestructura eléctrica local ante fenómenos meteorológicos. Bajo este entorno, los refrigeradores institucionales que resguardan los biológicos de alto valor inmunológico operan bajo condiciones de estrés continuo.</p>
-<p>Para garantizar la validez y la utilidad del modelo computacional, se evitará la parametrización arbitraria de la Ecuación Diferencial Estocástica (EDE). Un modelo probabilístico con tasas de intensidad o volatilidades carentes de fundamento físico produciría trayectorias desconectadas de la realidad operativa. Por consiguiente, el objetivo central de este capítulo es la calibración rigurosa de las variables del sistema.</p>
-<p>El proceso de estimación y asignación de parámetros se desarrollará en las siguientes tres fases analíticas:</p>
+<p>El presente capítulo traslada el marco teórico desarrollado previamente hacia un escenario de aplicación crítico para la salud pública: la cadena de frío para la preservación de vacunas en Tuxtla Gutiérrez, Chiapas. La elección de esta región geográfica como caso de estudio responde a la combinación de condiciones climatológicas de calor extremo y a la vulnerabilidad de la infraestructura eléctrica local frente a fenómenos meteorológicos estacionales, entorno bajo el cual los equipos de refrigeración institucionales operan sujetos a un estrés térmico continuo.</p>
+<p>Con el propósito de garantizar la validez física y operativa del modelo matemático, se evita el uso de parámetros arbitrarios en la Ecuación Diferencial Estocástica (EDE) híbrida, dado que asignar tasas de intensidad o volatilidades sin sustento empírico produciría trayectorias desconectadas de la realidad clínica. En consecuencia, el objetivo central de este capítulo consiste en calibrar rigurosamente todas las variables del sistema a partir de registros oficiales, leyes físicas y especificaciones técnicas internacionales.</p>
+<p>El proceso de estimación y asignación de parámetros se estructura en las siguientes cuatro fases analíticas:</p>
 <ol type="1">
-<li><strong>Caracterización Estocástica del Suministro Eléctrico:</strong> Mediante el análisis de datos oficiales de la Comisión Federal de Electricidad (CFE), se modelará la frecuencia y la duración de las interrupciones del servicio eléctrico. Estas estimaciones permitirán estructurar la conmutación de la cadena de Markov y los Procesos de Poisson No Homogéneos acoplados a la ecuación.</li>
-<li><strong>Calibración Termodinámica del Equipo Operativo:</strong> A partir de las especificaciones técnicas y requerimientos normados por la Organización Mundial de la Salud (OMS), se deducirán analíticamente los coeficientes de reversión a la media (<span class="math inline">\(\kappa\)</span>) y las volatilidades térmicas (<span class="math inline">\(\sigma\)</span>) que dictan el enfriamiento activo y la inercia pasiva del refrigerador de estudio.</li>
-<li><strong>Cinética de Degradación Biológica:</strong> Finalmente, se vinculará el comportamiento térmico dada por la EDE con la Ecuación de Arrhenius, estableciendo el marco cuantitativo necesario para evaluar la pérdida de viabilidad farmacológica que sufren las vacunas durante algún fallo.</li>
+<li><strong>Caracterización Estocástica del Suministro Eléctrico:</strong> A partir de registros históricos e indicadores oficiales de continuidad (SAIFI y SAIDI) de la Comisión Federal de Electricidad (CFE), junto con un factor de reducción de escala espacial, se modela la frecuencia anual de los apagones mediante un Proceso de Poisson No Homogéneo y la duración de las fallas por temporada climática mediante distribuciones Log-Normales estacionales.</li>
+<li><strong>Calibración Termodinámica y de Perturbaciones por Apertura:</strong> Utilizando las especificaciones de precalificación de la Organización Mundial de la Salud (OMS) para el refrigerador <strong>Haier HBC-150</strong> y la ley de enfriamiento de Newton, se deducen las tasas de transferencia térmica (<span class="math inline">\(\kappa_{on}, \kappa_{off}\)</span>) y las volatilidades (<span class="math inline">\(\sigma_{on}, \sigma_{off}\)</span>) en ambos regímenes de operación, así como la frecuencia y magnitud de los saltos térmicos (<span class="math inline">\(\gamma_i\)</span>) inducidos por las aperturas de puerta con base en estudios experimentales del NIST.</li>
+<li><strong>Cinética de Degradación Térmica:</strong> Se parametriza la Ecuación de Arrhenius para cuantificar la tasa de desnaturalización proteica y el daño térmico acumulado que sufren los biológicos cuando la temperatura interna rebasa el umbral normativo superior (<span class="math inline">\(T(t) &gt; 8^\circ\text{C}\)</span>).</li>
+<li><strong>Dinámica de Inventario y Demanda Clínica Estacional:</strong> Finalmente, se establecen la capacidad máxima de almacenamiento, el punto de reorden jurisdiccional y la demanda mensual de vacunación en México, acoplando el consumo de dosis con el proceso de aperturas de puerta bajo tres escenarios operativos: control absoluto (Escenario A), apego normativo (Escenario B) y contingencia epidemiológica (Escenario C).</li>
 </ol>
 </section>
 <section id="sec-datos-cfe" class="level2" data-number="7.2">
@@ -624,14 +625,14 @@ N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/a�
 <h3 data-number="7.4.1" class="anchored" data-anchor-id="índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi"><span class="header-section-number">7.4.1</span> 1. Índice de la Frecuencia de Interrupción Promedio, en número (SAIFI)</h3>
 <p>El indicador SAIFI (<em>System Average Interruption Frequency Index</em>) contabiliza el número promedio de interrupciones sostenidas que experimenta un usuario durante un periodo determinado (generalmente un año o un mes), es decir si se tiene una red eléctrica con un total de <span class="math inline">\(N_T\)</span> usuarios atendidos. Si en un intervalo de observación ocurren <span class="math inline">\(M\)</span> eventos de interrupción, donde cada evento <span class="math inline">\(i \in \{1, 2, \dots, M\}\)</span> afecta a una cantidad de <span class="math inline">\(N_i\)</span> usuarios, el índice SAIFI se expresa formalmente como:</p>
 <p><span id="eq-saifi"><span class="math display">\[
-\displaystyle \text{SAIFI} = \frac{\sum_{i=1}^{M} N_i}{N_T}
+\displaystyle \text{SAIFI} = \displaystyle \dfrac{\sum_{i=1}^{M} N_i}{N_T}
 \tag{7.3}\]</span></span></p>
 </section>
 <section id="índice-de-duración-promedio-de-interrupción-en-minutos-saidi" class="level3" data-number="7.4.2">
 <h3 data-number="7.4.2" class="anchored" data-anchor-id="índice-de-duración-promedio-de-interrupción-en-minutos-saidi"><span class="header-section-number">7.4.2</span> 2. Índice de Duración Promedio de Interrupción, en minutos (SAIDI)</h3>
 <p>El indicador SAIDI (<em>System Average Interruption Duration Index</em>) mide la duración total acumulada de las interrupciones sostenidas que experimenta el usuario promedio dentro del periodo de evaluación. Si cada evento de falla <span class="math inline">\(i\)</span> tiene una duración temporal de <span class="math inline">\(r_i\)</span> horas, el índice SAIDI se define analíticamente mediante:</p>
 <p><span id="eq-saidi"><span class="math display">\[
-\displaystyle \text{SAIDI} = \frac{\sum_{i=1}^{M} N_i r_i}{N_T}
+\displaystyle \text{SAIDI} = \displaystyle \dfrac{\sum_{i=1}^{M} N_i r_i}{N_T}
 \tag{7.4}\]</span></span></p>
 <p>A partir de estas definiciones, la <a href="#tbl-saidi-saifi" class="quarto-xref">Tabla&nbsp;<span>7.2</span></a> presenta la evolución mensual acumulada de los indicadores SAIDI y SAIFI reportada en la página 82 del informe anual de la CFE.</p>
 <div id="tbl-saidi-saifi" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -831,7 +832,7 @@ Tabla&nbsp;7.3: Distribución estacional de los 64 cortes calculada mediante pro
 </section>
 <section id="sec-ppnh" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="sec-ppnh"><span class="header-section-number">7.5</span> Modelado del Proceso de Poisson No Homogéneo (PPNH)</h2>
-<p>Para integrar las interrupciones eléctricas dentro de la Ecuación Diferencial Estocástica (EDE) en tiempo continuo <span class="math inline">\(t\)</span>, donde <span class="math inline">\(t \in [0, 365]\)</span> representa los días del año, utilizamos un <strong>Proceso de Poisson No Homogéneo</strong>, cuya intensidad <span class="math inline">\(\lambda(t)\)</span> varía en función del tiempo para tener en cuenta la estacionalidad climática de la región.</p>
+<p>Para integrar las interrupciones eléctricas dentro de la Ecuación Diferencial Estocástica (EDE) en tiempo continuo <span class="math inline">\(t\)</span>, donde <span class="math inline">\(t \in [0, 365]\)</span> representa los días del año, utilizamos un <strong>Proceso de Poisson No Homogéneo</strong> (<a href="fundamentos_matematicos.html#def-poisson-no-homogeneo" class="quarto-xref">Definición&nbsp;<span>4.9</span></a>), cuya función de intensidad <span class="math inline">\(\lambda(t)\)</span> varía en función del tiempo para tener en cuenta la estacionalidad climática de la región.</p>
 <p>El modelo se construye mediante la suma de una tasa base de fondo y dos funciones de perturbación gaussianas no normalizadas. La elección de núcleos gaussianos permite modelar la transición gradual de las estaciones meteorológicas sin introducir discontinuidades de salto, concentrando el riesgo exactamente en los días donde el clima somete a la red a mayor estrés.</p>
 <p>La función analítica propuesta para la intensidad diaria de fallas es:</p>
 <p><span id="eq-lambda-teorica"><span class="math display">\[
@@ -1002,7 +1003,7 @@ Tabla&nbsp;7.4: Validación de los Valores Esperados Teóricos vs.&nbsp;Datos Em
 <li><strong>Dominio estrictamente positivo:</strong> El tiempo de interrupción no puede tomar valores negativos (<span class="math inline">\(D &gt; 0\)</span>).</li>
 <li><strong>Asimetría positiva (Cola pesada hacia la derecha):</strong> La inmensa mayoría de las fallas locales se resuelven en pocas horas (e.g., restablecimiento de fusibles o reconexiones de subestación), pero existe una probabilidad baja de eventos atípicos severos cuya reparación demora días enteros (e.g., explosión de transformadores o colapso de torres por huracanes).</li>
 </ol>
-<p>Debido a que una distribución Normal clásica asignaría probabilidad a tiempos negativos y subestimaría el riesgo de cortes prolongados, la literatura establece que las duraciones de las interrupciones eléctricas se modelan mediante una <strong>Distribución Log-normal</strong>:</p>
+<p>Debido a que una distribución Normal clásica asignaría probabilidad a tiempos negativos y subestimaría el riesgo de cortes prolongados, la literatura establece que las duraciones de las interrupciones eléctricas se modelan mediante una <strong>Distribución Log-normal</strong> <span class="citation" data-cites="brown2009electric billinton1996reliability">(<a href="references.html#ref-brown2009electric" role="doc-biblioref">Brown 2009</a>; <a href="references.html#ref-billinton1996reliability" role="doc-biblioref">Billinton y Allan 1996</a>)</span>:</p>
 <p><span id="eq-lognormal-def"><span class="math display">\[
 D \sim \text{LogNormal}(\mu, \sigma^2)
 \tag{7.11}\]</span></span></p>
@@ -1162,10 +1163,10 @@ Tabla&nbsp;7.5: Estimación de la duración promedio mensual por corte a partir 
 <p>Realizar un promedio aritmético simple de las duraciones <span class="math inline">\(E_i\)</span> entre los meses de cada temporada introduciría un sesgo grave, ya que asignaría el mismo peso a un mes con 9 cortes que a uno con solo 2 cortes. Para garantizar la rigurosidad estadística, se calcula la media empírica (<span class="math inline">\(\mathbb{E}[D]\)</span>) y la varianza empírica (<span class="math inline">\(\mathbb{V}[D]\)</span>) mediante un modelo de <strong>estadística descriptiva ponderada</strong>, donde el peso de cada mes (<span class="math inline">\(\omega_i\)</span>) está dado por su frecuencia de cortes (<span class="math inline">\(\omega_i = \text{Cortes}_i\)</span>).</p>
 <p>Asi, las formulaciones para la esperanza y la varianza ponderada están dadas por:</p>
 <p><span id="eq-media-ponderada"><span class="math display">\[
-\mathbb{E}[D] = \frac{\sum_{i=1}^{n} \omega_i E_i}{\sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
+\displaystyle \mathbb{E}[D] = \displaystyle \dfrac{\sum_{i=1}^{n} \omega_i E_i}{\sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
 \tag{7.12}\]</span></span></p>
 <p><span id="eq-varianza-ponderada"><span class="math display">\[
-\mathbb{V}[D] = \frac{\sum_{i=1}^{n} \omega_i (E_i - \mathbb{E}[D])^2}{\sum_{i=1}^{n} \omega_i}
+\displaystyle \mathbb{V}[D] = \displaystyle \frac{\sum_{i=1}^{n} \omega_i (E_i - \mathbb{E}[D])^2}{\sum_{i=1}^{n} \omega_i}
 \tag{7.13}\]</span></span></p>
 <p>Al sustituir los valores de los meses correspondientes en las <a href="#eq-media-ponderada" class="quarto-xref">Ecuación&nbsp;<span>7.12</span></a> y <a href="#eq-varianza-ponderada" class="quarto-xref">Ecuación&nbsp;<span>7.13</span></a>, se obtienen los siguientes resultados para cada temporada:</p>
 <ul>
@@ -1516,6 +1517,12 @@ Tabla&nbsp;7.7: Demanda base diaria de vacunas por mes, ajustada a la estacional
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-billinton1996reliability" class="csl-entry" role="listitem">
+Billinton, Roy, y Ronald N. Allan. 1996. <em>Reliability Evaluation of Power Systems</em>. 2.ª ed. Boston, MA: Springer. <a href="https://doi.org/10.1007/978-1-4899-1860-4">https://doi.org/10.1007/978-1-4899-1860-4</a>.
+</div>
+<div id="ref-brown2009electric" class="csl-entry" role="listitem">
+Brown, Richard E. 2009. <em>Electric Power Distribution Reliability</em>. 2.ª ed. Boca Raton, FL: CRC Press. <a href="https://doi.org/10.1201/9781420007312">https://doi.org/10.1201/9781420007312</a>.
+</div>
 <div id="ref-nist2015thermal" class="csl-entry" role="listitem">
 Chojnacky, Michal, Wyatt Miller, Dean Ripple, y Gregory Strouse. 2010. <span>«Thermal Analysis of Refrigeration Systems Used for Vaccine Storage»</span>. NIST Interagency/Internal Report (NISTIR), n.º 8128.
 </div>
