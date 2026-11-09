@@ -67,14 +67,14 @@ Para comprender la estructura de estos datos oficiales, la CFE evalúa la contin
 El indicador SAIFI (*System Average Interruption Frequency Index*) contabiliza el número promedio de interrupciones sostenidas que experimenta un usuario durante un periodo determinado (generalmente un año o un mes), es decir si se tiene una red eléctrica con un total de $N_T$ usuarios atendidos. Si en un intervalo de observación ocurren $M$ eventos de interrupción, donde cada evento $i \in \{1, 2, \dots, M\}$ afecta a una cantidad de $N_i$ usuarios, el índice SAIFI se expresa formalmente como:
 
 $$
-\displaystyle \text{SAIFI} = \displaystyle \dfrac{\sum_{i=1}^{M} N_i}{N_T}
+\displaystyle \text{SAIFI} = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{M} N_i}{N_T}
 $$ {#eq-saifi}
 
 ### 2. Índice de Duración Promedio de Interrupción, en minutos (SAIDI)
 El indicador SAIDI (*System Average Interruption Duration Index*) mide la duración total acumulada de las interrupciones sostenidas que experimenta el usuario promedio dentro del periodo de evaluación. Si cada evento de falla $i$ tiene una duración temporal de $r_i$ horas, el índice SAIDI se define analíticamente mediante:
 
 $$
-\displaystyle \text{SAIDI} = \displaystyle \dfrac{\sum_{i=1}^{M} N_i r_i}{N_T}
+\displaystyle \text{SAIDI} = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{M} N_i r_i}{N_T}
 $$ {#eq-saidi}
 
 A partir de estas definiciones, la @tbl-saidi-saifi presenta la evolución mensual acumulada de los indicadores SAIDI y SAIFI reportada en la página 82 del informe anual de la CFE.
@@ -291,11 +291,11 @@ Realizar un promedio aritmético simple de las duraciones $E_i$ entre los meses 
 Asi, las formulaciones para la esperanza y la varianza ponderada están dadas por:
 
 $$
-\displaystyle \mathbb{E}[D] = \displaystyle \dfrac{\sum_{i=1}^{n} \omega_i E_i}{\sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
+\displaystyle \mathbb{E}[D] = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{n} \omega_i E_i}{\displaystyle \sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
 $$ {#eq-media-ponderada}
 
 $$
-\displaystyle \mathbb{V}[D] = \displaystyle \frac{\sum_{i=1}^{n} \omega_i (E_i - \mathbb{E}[D])^2}{\sum_{i=1}^{n} \omega_i}
+\displaystyle \mathbb{V}[D] = \displaystyle \frac{\displaystyle \sum_{i=1}^{n} \omega_i (E_i - \mathbb{E}[D])^2}{\displaystyle \sum_{i=1}^{n} \omega_i}
 $$ {#eq-varianza-ponderada}
 
 Al sustituir los valores de los meses correspondientes en las @eq-media-ponderada y @eq-varianza-ponderada, se obtienen los siguientes resultados para cada temporada:
@@ -413,7 +413,7 @@ Este estado ocurre cuando hay suministro eléctrico. El compresor y los ventilad
   $$8 = 5 + (43 - 5) e^{-\kappa_{on} (22)}$$
   Al despejar la ecuación $\left(\ln\left(\frac{3}{38}\right) = -22 \kappa_{on}\right)$, el resultado es **$\kappa_{on} \approx 0.1154 \text{ hr}^{-1}$**.
 * **Volatilidad y Ruido del Compresor ($\sigma_{on}$)**: El motor del refrigerador no enfría de manera perfecta; se enciende y se apaga constantemente, generando turbulencias. Dado que la solución analítica de un Proceso de Ornstein-Uhlenbeck sigue una distribución Normal (@eq-ou-distribucion), podemos usar la "regla empírica" de la estadística para acotar este ruido.
-  Para asegurar con un 99.7% de confianza que estas fluctuaciones naturales no rompan nuestro margen de seguridad de $\pm 3^\circ \text{C}$, requerimos que tres desviaciones estándar abarquen exactamente esos tres grados ($3 \times SD = 3^\circ \text{C}$), lo que implica una desviación estándar de $SD = 1^\circ \text{C}$.
+  Para asegurar con un 99.7% de confianza que estas fluctuaciones naturales no rompan nuestro margen de seguridad de $\pm 3^\circ \text{C}$, requerimos que tres desviaciones estándar abarquen exactamente esos tres grados $\left( 3 \times SD = 3^\circ \text{C}\right)$, lo que implica una desviación estándar de $SD = 1^\circ \text{C}$.
   
   La varianza de un proceso de Ornstein-Uhlenbeck clásico depende del tiempo $t$ (@eq-ou-moments). Sin embargo, dado que el refrigerador opera de manera continua durante bastante tiempo, la inercia inicial se desvanece y el sistema alcanza un estado estacionario (el límite cuando $t \to \infty$). Sustituyendo en la fórmula asintótica de la desviación estándar $\left(SD = \frac{\sigma_{on}}{\sqrt{2\kappa_{on}}}\right)$:
   $$1 = \frac{\sigma_{on}}{\sqrt{2(0.1154)}} \implies \sigma_{on} = \sqrt{0.2308} \approx 0.4804$$

@@ -152,7 +152,7 @@ Por último, resulta fundamental destacar una propiedad que vincula ambos métod
 $$
 \frac{1}{2}\sigma(t_n, Y_n)\frac{\partial \sigma}{\partial x}(t_n, Y_n)\left[ (\Delta W_n)^2 - \Delta t \right] = 0,
 $$
-lo que implica que **el esquema de Milstein y el esquema de Euler-Maruyama coinciden algebraicamente**. En particular, para nuestro modelo termodinámico híbrido (@eq-ede-operativa-teorica), dado que dentro de cada régimen $i \in \{1, 2\}$ la volatilidad $\sigma(i) \in \{\sigma_{on}, \sigma_{off}\}$ es constante respecto a la temperatura $T(t)$ $\left( \frac{\partial \sigma(i)}{\partial T} = 0 \right),$ el esquema de Euler-Maruyama reproduce de manera exacta la actualización del esquema de Milstein en la componente difusiva sin requerir el cálculo de derivadas parciales espaciales adicionales.
+lo que implica que **el esquema de Milstein y el esquema de Euler-Maruyama coinciden algebraicamente**. En particular, para nuestro modelo termodinámico híbrido (@eq-ede-operativa-teorica), dado que dentro de cada régimen $i \in \{1, 2\}$ la volatilidad $\displaystyle \sigma(i) \in \{\sigma_{on}, \sigma_{off}\}$ es constante respecto a la temperatura $T(t)$ $\left( \displaystyle \dfrac{\partial \sigma(i)}{\partial T} = 0 \right),$ el esquema de Euler-Maruyama reproduce de manera exacta la actualización del esquema de Milstein en la componente difusiva sin requerir el cálculo de derivadas parciales espaciales adicionales.
 
 ## Esquemas Numéricos para EDES con Cambios de Régimen de Markov {#sec-numerico-switching}
 

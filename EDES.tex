@@ -216,13 +216,13 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -295,7 +295,7 @@ Gómez}
                 \textsc{\large QUE PARA OBTENER EL TÍTULO DE:}\\[0.3cm]
                 \textbf{\textsc{LICENCIADO EN MATEMÁTICAS APLICADAS}}\\[1.5cm]
                 \textsc{\large PRESENTA:}\\[0.3cm]
-                \textbf{\textsc{\large {CRISTÓBAL PÉREZ GONZÁLEZ}}}\\[2cm]
+                \textbf{\textsc{\large {CRISTÓBAL PÉREZ GONZÁLEZ 100003223}}}\\[2cm]
                 {\large\scshape Director:\\[0.3cm]
                 {\textbf{\large Dr. Yofre Hernán García Gómez }}}\\[2.0cm]
                 \large{Tuxtla Gutiérrez, Chiapas a \today.}
@@ -312,15 +312,11 @@ Gómez}
 \setlength{\parindent}{0pt} % Elimina sangría para mayor elegancia
 \setlength{\parskip}{1.2\baselineskip} % Espacio generoso entre párrafos
 
-A Dios, por guiar mis pasos y darme la fortaleza para transformar la distancia en propósito.
+A Dios, por toda la fuerza y la sabiduría que me ha dado a lo largo de toda mi vida.
 
-A mis padres, Nelva y Alfonso, por sostenerme desde lejos con llamadas al amanecer, por su apoyo incondicional, sus sacrificios silenciosos y por creer en mí incluso cuando yo misma dudaba.
+A mis padres, María Teresa y Sebastián, por estar siempre a mi lado, confiar en mí en todo momento y brindarme su respaldo incondicional para que pudiera alcanzar este sueño.
 
-A mi hermanita Esmeralda, por recordarme con su sonrisa que existía un mundo más allá de las ecuaciones y por ser mi puente a casa en cada audio y cada foto.
-
-Y a toda mi familia Vázquez, por convertir cada visita en refugio y cada despedida en promesa.
-
-Este título no solo lleva mi nombre: lleva el peso amoroso de quienes me esperaron al otro lado del camino.
+Esta tesis es para ustedes; es mi manera de agradecerles todo su amor, paciencia, confianza y cada sacrificio que han hecho por mí.
 \end{flushright}
 
 
@@ -348,36 +344,67 @@ A todos ustedes, muchas gracias, ya que sin su apoyo incondicional, sus consejos
 
 \chapter{Resumen}\label{resumen}
 
-La preservación de vacunas en la red de frío requiere estrategias
-matemáticas rigurosas que anticipen la incertidumbre climática,
-eléctrica y operativa para mantener los productos biológicos dentro del
-rango normativo de \([2^\circ\text{C}, 8^\circ\text{C}]\). En este
-trabajo se formula, calibra y simula un modelo termodinámico basado en
-una Ecuación Diferencial Estocástica (EDE) híbrida para cuantificar el
-riesgo operativo y la merma anual de biológicos en el refrigerador
+La preservación de vacunas en la cadena o red de frío requiere
+estrategias matemáticas rigurosas que anticipen la incertidumbre
+climática, eléctrica y operativa para mantener los productos biológicos
+dentro del rango normativo de \([2^\circ\text{C}, 8^\circ\text{C}]\). En
+este trabajo se formula, calibra y simula un modelo termodinámico basado
+en una Ecuación Diferencial Estocástica (EDE) híbrida para cuantificar
+el riesgo operativo y la merma anual de biológicos en el refrigerador
 institucional precalificado Haier HBC-150 en Tuxtla Gutiérrez, Chiapas.
 El modelo extiende el proceso clásico de Ornstein-Uhlenbeck al
 incorporar cambios de régimen de Markov para alternar entre el
 enfriamiento activo y el calentamiento pasivo durante interrupciones del
-suministro eléctrico modeladas mediante procesos de Poisson no
+suministro eléctrico, modeladas mediante procesos de Poisson no
 homogéneos y duraciones con distribuciones Log-Normales estacionales por
 temporada climática, así como un proceso de Poisson compuesto para los
 choques térmicos producidos por las aperturas de puerta. Tras demostrar
-analíticamente la existencia y unicidad de la solución, la dinámica
-térmica se acopla con la cinética de degradación de Arrhenius y un
-sistema dinámico de inventario con umbral de reabastecimiento. Para su
-resolución, se implementa un esquema numérico híbrido de Euler-Maruyama
-integrado con simulaciones masivas de Monte Carlo e inferencia
-estadística no paramétrica Bootstrap bajo tres escenarios operativos:
-control absoluto, apego normativo y contingencia epidemiológica. Los
-resultados demuestran que el aislamiento pasivo del equipo amortigua
-eficazmente las fallas de la red eléctrica, pero que la saturación de
-aperturas de puerta durante contingencias clínicas colapsa la
-recuperación térmica y multiplica exponencialmente la pérdida de dosis.
+la existencia y unicidad de la solución, el comportamiento térmico se
+acopla con la cinética de degradación de Arrhenius y un sistema dinámico
+de inventario con un umbral de reabastecimiento. Para su resolución, se
+implementa un esquema numérico híbrido de Euler-Maruyama integrado con
+simulaciones masivas de Monte Carlo e inferencia estadística no
+paramétrica Bootstrap bajo tres escenarios operativos: control absoluto,
+apego normativo y contingencia epidemiológica. Los resultados demuestran
+que el aislamiento pasivo del equipo amortigua eficazmente las fallas de
+la red eléctrica, pero que la saturación de aperturas de puerta durante
+contingencias clínicas colapsa la recuperación térmica y multiplica
+exponencialmente la pérdida de dosis.
 
 \textbf{Palabras clave:} ecuaciones diferenciales estocásticas híbridas,
-red de frío, ecuación de Arrhenius, simulación de Monte Carlo,
+cadena de frío, ecuación de Arrhenius, simulación de Monte Carlo,
 inventario de vacunas.
+
+\section{Abstract}\label{abstract}
+
+Vaccine preservation in the cold chain requires rigorous mathematical
+strategies that anticipate climatic, electrical, and operational
+uncertainty to maintain biological products within the regulatory range
+of \([2^\circ\text{C}, 8^\circ\text{C}]\). In this work, a thermodynamic
+model based on a hybrid Stochastic Differential Equation (SDE) is
+formulated, calibrated, and simulated to quantify operational risk and
+annual biological wastage in the prequalified institutional refrigerator
+Haier HBC-150 in Tuxtla Gutiérrez, Chiapas. The model extends the
+classical Ornstein-Uhlenbeck process by incorporating Markov
+regime-switching to alternate between active cooling and passive warming
+during power supply interruptions modeled through non-homogeneous
+Poisson processes and seasonal Log-Normal duration distributions by
+climatic season, as well as a compound Poisson process for thermal
+shocks produced by door openings. After proving the existence and
+uniqueness of the solution, the thermal behavior is coupled with
+Arrhenius degradation kinetics and a dynamic inventory system with a
+replenishment threshold. For its resolution, a hybrid Euler-Maruyama
+numerical scheme is implemented, integrated with massive Monte Carlo
+simulations and non-parametric Bootstrap statistical inference under
+three operational scenarios: absolute control, regulatory compliance,
+and epidemiological contingency. The results demonstrate that the
+passive insulation of the equipment effectively buffers power grid
+failures, but the saturation of door openings during clinical
+contingencies collapses thermal recovery and exponentially multiplies
+dose loss.
+
+\textbf{Keywords:} hybrid stochastic differential equations, cold chain,
+Arrhenius equation, Monte Carlo simulation, vaccine inventory.
 
 \bookmarksetup{startatroot}
 
@@ -871,7 +898,7 @@ satisface las siguientes condiciones:
   Posee incrementos independientes y la variable aleatoria de incremento
   \(N(t) - N(s)\) (con \(0 \le s < t\)) sigue a una distribución de
   Poisson con parámetro integral acumulado
-  \(\Lambda(s, t) = \int_s^t \lambda(u) du\).
+  \(\Lambda(s, t) = \displaystyle \int_s^t \lambda(u) du\).
 \item
   Para todo \(t \ge 0\) y \(h > 0\), la probabilidad de que ocurra
   exactamente un evento en el intervalo \((t, t+h]\) está dada por la
@@ -1347,7 +1374,7 @@ evaluadas en los pares de tiempo y magnitud de salto \((T_k, \gamma_k)\)
 observados hasta el instante \(T\): \[
 \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) = \sum_{0 < T_k \le T} H(T_k, \gamma_k).
 \] Si además el integrando satisface la condición de integrabilidad
-\(\mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] < \infty\),
+\(\mathbb{E}\left[ \displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] < \infty\),
 entonces el valor esperado de la integral de conteo coincide con la
 esperanza de la integral respecto a la medida de intensidad: \[
 \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) \right] = \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) \nu_t(dz) dt \right] = \mathbb{E}\left[ \int_0^T \lambda(t) \left( \int_{\mathcal{Z}} H(t, z) dF(z) \right) dt \right].
@@ -1400,7 +1427,7 @@ integral determinista respecto al compensador \(\nu_t(dz)dt\)
 Compensada]\protect\hypertarget{thm-isometria-saltos}{}\label{thm-isometria-saltos}
 
 Para todo integrando predecible \(H(t, z, \omega)\) tal que
-\(\mathbb{E} \left[ \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert^2 \nu_t(dz) dt \right] < \infty\),
+\(\mathbb{E} \left[ \displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert^2 \nu_t(dz) dt \right] < \infty\),
 el segundo momento de la integral estocástica respecto a la medida
 compensada \(\tilde{N}(dt, dz)\) satisface la identidad: \[
 \mathbb{E}\left[ \left\vert \int_0^T \int_{\mathcal{Z}} H(t, z) \tilde{N}(dt, dz) \right\vert^2 \right] = \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert^2 \nu_t(dz) dt \right] = \mathbb{E}\left[ \int_0^T \lambda(t) \left( \int_{\mathcal{Z}} \vert H(t, z) \vert^2 dF(z) \right) dt \right].
@@ -1900,7 +1927,7 @@ estocásticos} de (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}): \[
 al espacio de los procesos estocásticos real-valuados \(\{X(t)\}\)
 adaptados a \(\{\mathcal{F}_t\}_{t \ge 0}\) y definidos en
 \([[\tau, \rho]]\) tales que
-\(\mathbb{E}\left[\int_\tau^\rho \vert X(t) \vert^2 dt\right] < \infty\),
+\(\mathbb{E}\left[ \displaystyle \int_\tau^\rho \vert X(t) \vert^2 dt\right] < \infty\),
 y por \(L^2_{\mathcal{F}_\tau}(\Omega; \mathbb{R})\) a la familia de
 variables aleatorias \(\xi\) que son \(\mathcal{F}_\tau\)-medibles y
 satisfacen que \(\mathbb{E}[\vert \xi \vert^2] < \infty\)
@@ -2922,12 +2949,12 @@ Ecuación~\ref{eq-esquema-milstein} se anula, es decir: \[
 Euler-Maruyama coinciden algebraicamente}. En particular, para nuestro
 modelo termodinámico híbrido (Ecuación~\ref{eq-ede-operativa-teorica}),
 dado que dentro de cada régimen \(i \in \{1, 2\}\) la volatilidad
-\(\sigma(i) \in \{\sigma_{on}, \sigma_{off}\}\) es constante respecto a
-la temperatura \(T(t)\)
-\(\left( \frac{\partial \sigma(i)}{\partial T} = 0 \right),\) el esquema
-de Euler-Maruyama reproduce de manera exacta la actualización del
-esquema de Milstein en la componente difusiva sin requerir el cálculo de
-derivadas parciales espaciales adicionales.
+\(\displaystyle \sigma(i) \in \{\sigma_{on}, \sigma_{off}\}\) es
+constante respecto a la temperatura \(T(t)\)
+\(\left( \displaystyle \dfrac{\partial \sigma(i)}{\partial T} = 0 \right),\)
+el esquema de Euler-Maruyama reproduce de manera exacta la actualización
+del esquema de Milstein en la componente difusiva sin requerir el
+cálculo de derivadas parciales espaciales adicionales.
 
 \section{Esquemas Numéricos para EDES con Cambios de Régimen de
 Markov}\label{sec-numerico-switching}
@@ -3627,7 +3654,7 @@ año o un mes), es decir si se tiene una red eléctrica con un total de
 el índice SAIFI se expresa formalmente como:
 
 \begin{equation}\phantomsection\label{eq-saifi}{
-\displaystyle \text{SAIFI} = \displaystyle \dfrac{\sum_{i=1}^{M} N_i}{N_T}
+\displaystyle \text{SAIFI} = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{M} N_i}{N_T}
 }\end{equation}
 
 \subsection{2. Índice de Duración Promedio de Interrupción, en minutos
@@ -3640,7 +3667,7 @@ cada evento de falla \(i\) tiene una duración temporal de \(r_i\) horas,
 el índice SAIDI se define analíticamente mediante:
 
 \begin{equation}\phantomsection\label{eq-saidi}{
-\displaystyle \text{SAIDI} = \displaystyle \dfrac{\sum_{i=1}^{M} N_i r_i}{N_T}
+\displaystyle \text{SAIDI} = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{M} N_i r_i}{N_T}
 }\end{equation}
 
 A partir de estas definiciones, la Tabla~\ref{tbl-saidi-saifi} presenta
@@ -4034,7 +4061,7 @@ Debido a que una distribución Normal clásica asignaría probabilidad a
 tiempos negativos y subestimaría el riesgo de cortes prolongados, la
 literatura establece que las duraciones de las interrupciones eléctricas
 se modelan mediante una \textbf{Distribución Log-normal}
-(\citeproc{ref-brown2009electric}{Brown 2009};
+(\citeproc{ref-brown2009electric}{Brown y McDonald 2007};
 \citeproc{ref-billinton1996reliability}{Billinton y Allan 1996}):
 
 \begin{equation}\phantomsection\label{eq-lognormal-def}{
@@ -4193,11 +4220,11 @@ Asi, las formulaciones para la esperanza y la varianza ponderada están
 dadas por:
 
 \begin{equation}\phantomsection\label{eq-media-ponderada}{
-\displaystyle \mathbb{E}[D] = \displaystyle \dfrac{\sum_{i=1}^{n} \omega_i E_i}{\sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
+\displaystyle \mathbb{E}[D] = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{n} \omega_i E_i}{\displaystyle \sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
 }\end{equation}
 
 \begin{equation}\phantomsection\label{eq-varianza-ponderada}{
-\displaystyle \mathbb{V}[D] = \displaystyle \frac{\sum_{i=1}^{n} \omega_i (E_i - \mathbb{E}[D])^2}{\sum_{i=1}^{n} \omega_i}
+\displaystyle \mathbb{V}[D] = \displaystyle \frac{\displaystyle \sum_{i=1}^{n} \omega_i (E_i - \mathbb{E}[D])^2}{\displaystyle \sum_{i=1}^{n} \omega_i}
 }\end{equation}
 
 Al sustituir los valores de los meses correspondientes en las
@@ -4641,8 +4668,8 @@ temperatura interna hacia su nivel ideal.
   un 99.7\% de confianza que estas fluctuaciones naturales no rompan
   nuestro margen de seguridad de \(\pm 3^\circ \text{C}\), requerimos
   que tres desviaciones estándar abarquen exactamente esos tres grados
-  (\(3 \times SD = 3^\circ \text{C}\)), lo que implica una desviación
-  estándar de \(SD = 1^\circ \text{C}\).
+  \(\left( 3 \times SD = 3^\circ \text{C}\right)\), lo que implica una
+  desviación estándar de \(SD = 1^\circ \text{C}\).
 
   La varianza de un proceso de Ornstein-Uhlenbeck clásico depende del
   tiempo \(t\) (Ecuación~\ref{eq-ou-moments}). Sin embargo, dado que el
@@ -7254,8 +7281,8 @@ Power Systems}. 2.ª ed. Boston, MA: Springer.
 \url{https://doi.org/10.1007/978-1-4899-1860-4}.
 
 \bibitem[\citeproctext]{ref-brown2009electric}
-Brown, Richard E. 2009. \emph{Electric Power Distribution Reliability}.
-2.ª ed. Boca Raton, FL: CRC Press.
+Brown, Richard E., y John McDonald. 2007. \emph{Electric Power
+Substations Engineering}. 2.ª ed. Boca Raton, FL: CRC Press.
 \url{https://doi.org/10.1201/9781420007312}.
 
 \bibitem[\citeproctext]{ref-nist2015thermal}

@@ -118,7 +118,7 @@ Sin embargo, en la dinámica real de un centro de salud, la tasa de aperturas de
 Un proceso estocástico a tiempo continuo $\{N(t)\}_{t \ge 0}$ es un proceso de Poisson no homogéneo con función de intensidad $\lambda(t) \ge 0$ localmente integrable para todo $t \ge 0$ si satisface las siguientes condiciones:
 
 1. $N(0) = 0$ con probabilidad 1.
-2. Posee incrementos independientes y la variable aleatoria de incremento $N(t) - N(s)$ (con $0 \le s < t$) sigue a una distribución de Poisson con parámetro integral acumulado $\Lambda(s, t) = \int_s^t \lambda(u) du$.
+2. Posee incrementos independientes y la variable aleatoria de incremento $N(t) - N(s)$ (con $0 \le s < t$) sigue a una distribución de Poisson con parámetro integral acumulado $\Lambda(s, t) = \displaystyle \int_s^t \lambda(u) du$.
 3. Para todo $t \ge 0$ y $h > 0$, la probabilidad de que ocurra exactamente un evento en el intervalo $(t, t+h]$ está dada por la tasa instantánea en el tiempo $t$:
 $$
 \mathbb{P}(N(t+h) - N(t) = 1) = \lambda(t) h + o(h)
@@ -314,7 +314,7 @@ Sea $H(t, z, \omega)$ un integrando predecible tal que $\displaystyle \int_0^T \
 $$
 \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) = \sum_{0 < T_k \le T} H(T_k, \gamma_k).
 $$
-Si además el integrando satisface la condición de integrabilidad $\mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] < \infty$, entonces el valor esperado de la integral de conteo coincide con la esperanza de la integral respecto a la medida de intensidad:
+Si además el integrando satisface la condición de integrabilidad $\mathbb{E}\left[ \displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] < \infty$, entonces el valor esperado de la integral de conteo coincide con la esperanza de la integral respecto a la medida de intensidad:
 $$
 \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) \right] = \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) \nu_t(dz) dt \right] = \mathbb{E}\left[ \int_0^T \lambda(t) \left( \int_{\mathcal{Z}} H(t, z) dF(z) \right) dt \right].
 $$
@@ -348,7 +348,7 @@ De forma analoga al Movimiento Browniano, la integral respecto a la medida aleat
 
 ::: {#thm-isometria-saltos}
 ### Isometría de Itô para la Medida Compensada
-Para todo integrando predecible $H(t, z, \omega)$ tal que $\mathbb{E} \left[ \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert^2 \nu_t(dz) dt \right] < \infty$, el segundo momento de la integral estocástica respecto a la medida compensada $\tilde{N}(dt, dz)$ satisface la identidad:
+Para todo integrando predecible $H(t, z, \omega)$ tal que $\mathbb{E} \left[ \displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert^2 \nu_t(dz) dt \right] < \infty$, el segundo momento de la integral estocástica respecto a la medida compensada $\tilde{N}(dt, dz)$ satisface la identidad:
 $$
 \mathbb{E}\left[ \left\vert \int_0^T \int_{\mathcal{Z}} H(t, z) \tilde{N}(dt, dz) \right\vert^2 \right] = \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert^2 \nu_t(dz) dt \right] = \mathbb{E}\left[ \int_0^T \lambda(t) \left( \int_{\mathcal{Z}} \vert H(t, z) \vert^2 dF(z) \right) dt \right].
 $$
@@ -585,7 +585,7 @@ Para formalizar el análisis sobre subintervalos cuyos extremos son tiempos de p
 $$
 [[\tau, \rho]] = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t \le \rho(\omega)\}, \qquad [[\tau, \rho[[ = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t < \rho(\omega)\}.
 $$
-Asimismo, denotamos por $\mathcal{M}^2([[\tau, \rho]]; \mathbb{R})$ al espacio de los procesos estocásticos real-valuados $\{X(t)\}$ adaptados a $\{\mathcal{F}_t\}_{t \ge 0}$ y definidos en $[[\tau, \rho]]$ tales que $\mathbb{E}\left[\int_\tau^\rho \vert X(t) \vert^2 dt\right] < \infty$, y por $L^2_{\mathcal{F}_\tau}(\Omega; \mathbb{R})$ a la familia de variables aleatorias $\xi$ que son $\mathcal{F}_\tau$-medibles y satisfacen que $\mathbb{E}[\vert \xi \vert^2] < \infty$ [@mao2006stochastic].
+Asimismo, denotamos por $\mathcal{M}^2([[\tau, \rho]]; \mathbb{R})$ al espacio de los procesos estocásticos real-valuados $\{X(t)\}$ adaptados a $\{\mathcal{F}_t\}_{t \ge 0}$ y definidos en $[[\tau, \rho]]$ tales que $\mathbb{E}\left[ \displaystyle \int_\tau^\rho \vert X(t) \vert^2 dt\right] < \infty$, y por $L^2_{\mathcal{F}_\tau}(\Omega; \mathbb{R})$ a la familia de variables aleatorias $\xi$ que son $\mathcal{F}_\tau$-medibles y satisfacen que $\mathbb{E}[\vert \xi \vert^2] < \infty$ [@mao2006stochastic].
 
 ::: {#def-ede-hibrida}
 ### Ecuación Diferencial Estocástica Híbrida con Saltos
