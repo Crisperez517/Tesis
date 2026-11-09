@@ -478,7 +478,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#transformación-analítica-a-la-forma-compensada" id="toc-transformación-analítica-a-la-forma-compensada" class="nav-link" data-scroll-target="#transformación-analítica-a-la-forma-compensada"><span class="header-section-number">4.9.1</span> Transformación Analítica a la Forma Compensada</a></li>
   </ul></li>
-  <li><a href="#verificación-analítica-de-la-existencia-y-unicidad-del-modelo" id="toc-verificación-analítica-de-la-existencia-y-unicidad-del-modelo" class="nav-link" data-scroll-target="#verificación-analítica-de-la-existencia-y-unicidad-del-modelo"><span class="header-section-number">4.10</span> Verificación Analítica de la Existencia y Unicidad del Modelo</a></li>
+  <li><a href="#sec-verificacion-existencia-unicidad" id="toc-sec-verificacion-existencia-unicidad" class="nav-link" data-scroll-target="#sec-verificacion-existencia-unicidad"><span class="header-section-number">4.10</span> Verificación Analítica de la Existencia y Unicidad del Modelo</a></li>
   </ul>
 </nav>
     </div>
@@ -488,7 +488,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fundamentos_matematicos.html">Marco Teórico</a></li><li class="breadcrumb-item"><a href="./fundamentos_matematicos.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fundamentos Teóricos Matemáticos</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fundamentos Teóricos Matemáticos</span></h1>
+<h1 class="title"><span id="sec-fundamentos-matematicos" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fundamentos Teóricos Matemáticos</span></span></h1>
 </div>
 
 
@@ -1092,8 +1092,8 @@ dT(t) = \tilde{b}(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \int_
 \tag{4.24}\]</span></span></p>
 </section>
 </section>
-<section id="verificación-analítica-de-la-existencia-y-unicidad-del-modelo" class="level2" data-number="4.10">
-<h2 data-number="4.10" class="anchored" data-anchor-id="verificación-analítica-de-la-existencia-y-unicidad-del-modelo"><span class="header-section-number">4.10</span> Verificación Analítica de la Existencia y Unicidad del Modelo</h2>
+<section id="sec-verificacion-existencia-unicidad" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="sec-verificacion-existencia-unicidad"><span class="header-section-number">4.10</span> Verificación Analítica de la Existencia y Unicidad del Modelo</h2>
 <p>Demostraremos a continuación que la ecuación diferencial estocástica híbrida (<a href="#eq-modelo-compensado" class="quarto-xref">Ecuación&nbsp;<span>4.24</span></a>) y por la equivalencia algebraica antes mencionada la <a href="#eq-ede-operativa-teorica" class="quarto-xref">Ecuación&nbsp;<span>4.17</span></a> tiene una única solución fuerte càdlàg en el intervalo <span class="math inline">\([0, T]\)</span>, verificando que los procesos y coeficientes satisfacen todas las hipótesis del <a href="#thm-mao-switching" class="quarto-xref">Teorema&nbsp;<span>4.9</span></a>.</p>
 <p>En primer lugar, por construcción del modelo, el movimiento Browniano <span class="math inline">\(W(t)\)</span>, la medida aleatoria de Poisson <span class="math inline">\(N(dt, dz)\)</span> y la cadena de Markov <span class="math inline">\(\alpha(t)\)</span> son mutuamente independientes. Asimismo, dado que el espacio de estados <span class="math inline">\(\mathcal{M} = \{1, 2\}\)</span> es finito y las tasas de transición de la matriz generadora <span class="math inline">\(Q = (q_{ij})_{2 \times 2}\)</span> son finitas, entonces la cadena de Markov no presenta explosión en <span class="math inline">\([0, T]\)</span>. Adicionalmente, dado que la función de intensidad es acotada en el intervalo cerrado <span class="math inline">\([0, T]\)</span>, existe una constante <span class="math inline">\(\displaystyle \lambda_{max} = \sup_{t \in [0, T]} \lambda(t) &lt; \infty\)</span>, con lo cual <span class="math inline">\(\displaystyle \int_0^T \lambda(t)dt \le \lambda_{max}T &lt; \infty\)</span>.</p>
 <p>Para comprobar el cumplimiento de la condición de Lipschitz global (<a href="#eq-hip-lipschitz-hibrida" class="quarto-xref">Ecuación&nbsp;<span>4.10</span></a>), sean <span class="math inline">\(T_1, T_2 \in \mathbb{R}\)</span> dos valores cualesquiera de la variable de estado, <span class="math inline">\(t \in [0, T]\)</span> e <span class="math inline">\(i \in \{1, 2\}\)</span>. Dado que el coeficiente de difusión <span class="math inline">\(\sigma(i)\)</span> (<a href="#eq-coeficientes-on" class="quarto-xref">Ecuación&nbsp;<span>4.18</span></a>, <a href="#eq-coeficientes-off" class="quarto-xref">Ecuación&nbsp;<span>4.19</span></a>) y la función de salto <span class="math inline">\(\gamma(i, z)\)</span> (<a href="#eq-funcion-salto" class="quarto-xref">Ecuación&nbsp;<span>4.20</span></a>) dependen únicamente del régimen <span class="math inline">\(i\)</span> y de la marca <span class="math inline">\(z\)</span>, y son independientes del estado <span class="math inline">\(T\)</span>, sus diferencias respecto a la variable de estado se anulan en ambos regímenes:</p>

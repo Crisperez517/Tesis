@@ -1,4 +1,4 @@
-# Fundamentos Teóricos Matemáticos
+# Fundamentos Teóricos Matemáticos {#sec-fundamentos-matematicos}
 
 En este capítulo se presentan las bases conceptuales del cálculo estocástico que fundamentan la construcción y el análisis del modelo matemático propuesto para la red de frío. En primer lugar, se definen los espacios de probabilidad filtrados y los procesos estocásticos fundamentales: martingalas, movimiento Browniano, procesos de Poisson y cadenas de Markov a tiempo continuo. Posteriormente, se desarrolla la teoría de integración estocástica de Itô y la integración respecto a medidas aleatorias de Poisson compensadas, lo que permite formular las ecuaciones diferenciales estocásticas continuas, en particular el proceso de Ornstein-Uhlenbeck y aquellas perturbadas por saltos. Finalmente se demuestra el teorema general de existencia y unicidad para ecuaciones diferenciales estocásticas híbridas con saltos y conmutación markoviana, concluyendo con la verificación analítica de que el modelo matemático propuesto tiene una única solución fuerte.
 
@@ -826,7 +826,7 @@ $$
 dT(t) = \tilde{b}(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(\alpha(t^-), z) \tilde{N}(dt, dz).
 $$ {#eq-modelo-compensado}
 
-## Verificación Analítica de la Existencia y Unicidad del Modelo
+## Verificación Analítica de la Existencia y Unicidad del Modelo {#sec-verificacion-existencia-unicidad}
 
 Demostraremos a continuación que la ecuación diferencial estocástica híbrida (@eq-modelo-compensado) y por la equivalencia algebraica antes mencionada la @eq-ede-operativa-teorica tiene una única solución fuerte càdlàg en el intervalo $[0, T]$, verificando que los procesos y coeficientes satisfacen todas las hipótesis del @thm-mao-switching.
 

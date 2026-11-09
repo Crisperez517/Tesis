@@ -218,11 +218,11 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -547,7 +547,7 @@ frío de Tuxtla Gutiérrez, Chiapas.
 \part{Marco Teórico}
 
 \chapter{Fundamentos Teóricos
-Matemáticos}\label{fundamentos-teuxf3ricos-matemuxe1ticos}
+Matemáticos}\label{sec-fundamentos-matematicos}
 
 En este capítulo se presentan las bases conceptuales del cálculo
 estocástico que fundamentan la construcción y el análisis del modelo
@@ -2417,7 +2417,7 @@ dT(t) = \tilde{b}(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \int_
 }\end{equation}
 
 \section{Verificación Analítica de la Existencia y Unicidad del
-Modelo}\label{verificaciuxf3n-analuxedtica-de-la-existencia-y-unicidad-del-modelo}
+Modelo}\label{sec-verificacion-existencia-unicidad}
 
 Demostraremos a continuación que la ecuación diferencial estocástica
 híbrida (Ecuación~\ref{eq-modelo-compensado}) y por la equivalencia
@@ -6883,43 +6883,33 @@ inventario en las unidades de salud.
 \chapter{Conclusiones y Trabajo
 Futuro}\label{conclusiones-y-trabajo-futuro}
 
-En cumplimiento del \textbf{objetivo general} planteado en esta tesis,
-el desarrollo de este trabajo permitió formular, calibrar y simular un
-modelo termodinámico basado en ecuaciones diferenciales estocásticas
-híbridas, acoplado a la cinética de degradación de Arrhenius y a la
-dinámica de inventario, para cuantificar el riesgo operativo y la
-pérdida de vacunas en la red de frío de Tuxtla Gutiérrez, Chiapas. A
-través de la integración del cálculo estocástico, los métodos numéricos
-en tiempo discreto, la cinética de degradación química y la inferencia
+El desarrollo de este trabajo de tesis permitió formular, calibrar y
+simular un modelo termodinámico basado en ecuaciones diferenciales
+estocásticas híbridas, acoplado a la cinética de degradación de
+Arrhenius y a la dinámica de inventario, para cuantificar el riesgo
+operativo y la pérdida de vacunas en la red de frío de Tuxtla Gutiérrez,
+Chiapas, cumpliendo con el \textbf{objetivo general} planteado en esta
+tesis. A través de la integración del cálculo estocástico, los métodos
+numéricos para EDES, la cinética de degradación química y la inferencia
 estadística no paramétrica, fue posible evaluar con rigor el impacto
-real que ejercen el clima extremo, las fallas eléctricas y la
-interacción humana sobre la viabilidad de los productos biológicos.
+real que tienen el clima extremo, las fallas eléctricas y la interacción
+humana sobre la viabilidad de los productos biológicos.
 
-En cuanto a los fundamentos teóricos matemáticos, y dando cumplimiento
-al \textbf{primer objetivo específico}, se demostró que la evolución
-térmica de un refrigerador clínico sujeto a perturbaciones continuas y
-discretas queda rigurosamente descrita en el espacio de trayectorias
-\emph{càdlàg} (Definición~\ref{def-adaptabilidad-cadlag}) mediante la
-ecuación diferencial estocástica híbrida de Ornstein-Uhlenbeck propuesta
+En cuanto a los fundamentos teóricos matemáticos
+(Capítulo~\ref{sec-fundamentos-matematicos}), y dando cumplimiento al
+\textbf{primer objetivo específico}, se demostró que la evolución de la
+temperatura interna de un refrigerador clínico sujeto a perturbaciones
+continuas y discretas descrita mediante la ecuación diferencial
+estocástica híbrida de Ornstein-Uhlenbeck propuesta
 (Definición~\ref{def-ou-clasico} y
 Ecuación~\ref{eq-ede-operativa-teorica}), la cual acopla una cadena de
 Markov a tiempo continuo \(\{\alpha(t)\}_{t \ge 0}\)
 (Definición~\ref{def-cadena-markov}) para el suministro eléctrico con un
 proceso de Poisson compuesto \(J(t)\)
 (Definición~\ref{def-poisson-compuesto} y Figura~\ref{fig-poisson}) para
-las aperturas de puerta. Mediante el Lema~\ref{lem-equivalencia-saltos}
-y la medida aleatoria de Poisson compensada \(\tilde{N}(dt, dz)\)
-(Definición~\ref{def-medida-compensada} y
-Ecuación~\ref{eq-modelo-compensado}), se demostró el Teorema de
-Existencia y Unicidad para EDEs Híbridas
-(Teorema~\ref{thm-mao-switching}) (\citeproc{ref-mao2006stochastic}{Mao
-y Yuan 2006}; \citeproc{ref-situ2005theory}{Situ 2005}) apoyado en las
-isometrías de Itô (Teorema~\ref{thm-isometria-ito} y
-Teorema~\ref{thm-isometria-saltos}), la Desigualdad Maximal de Doob
-(Teorema~\ref{thm-desigualdad-doob}) y el Lema de Grönwall
-(Lema~\ref{lem-gronwall}), verificando analíticamente que nuestro modelo
-posee una única solución fuerte global acotada en media cuadrática
-(Ecuación~\ref{eq-cota-supremo-hibrida}).
+las aperturas de puerta tiene una única solución fuerte global acotada
+en media cuadrática (Teorema~\ref{thm-mao-switching} y
+Sección~\ref{sec-verificacion-existencia-unicidad}).
 
 Respecto a los métodos numéricos analizados en la
 Capítulo~\ref{sec-numerico} bajo los criterios de convergencia fuerte
@@ -6944,8 +6934,9 @@ Ecuación~\ref{eq-incremento-poisson-compuesto})
 (\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010}), el
 alg.~\ref{alg-em-hibrido-general} garantizó un orden de convergencia
 fuerte \(\gamma = 0.5\) ideal para acoplarse con series climáticas en
-pasos constantes (\(\Delta t = 5/60\text{ h}\)). Asimismo, los
-fundamentos epidemiológicos
+pasos constantes (\(\Delta t = 5/60\text{ h}\)).
+
+Asimismo, los fundamentos epidemiológicos
 (Capítulo~\ref{sec-fundamentos-epidemiologicos}) permitieron vincular
 esta dinámica térmica con la cinética de degradación de primer orden
 (Ecuación~\ref{eq-cinetica-primer-orden}) y la Ecuación de Arrhenius
