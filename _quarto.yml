@@ -45,7 +45,7 @@ book:
       chapters: 
         - Estudio_de_caso.qmd
 
-    - part: "Simulación de Equipos (Haier HBC-150)"
+    - part: "Simulación del Equipo (Haier HBC-150)"
       chapters: 
         - montecarlo.qmd
         

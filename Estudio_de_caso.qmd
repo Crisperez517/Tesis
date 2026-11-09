@@ -1,16 +1,17 @@
-# Estudio de Caso: Calibración Termodinámica, Eléctrica y Cinética de Degradación {#sec-estudio-caso}
+# Estudio de Caso: Parametrización y Calibración del Modelo Matemático {#sec-estudio-caso}
 
 ## Motivación y Contexto del Estudio {#sec-motivacion-contexto}
 
-El presente capítulo consolida el marco teórico desarrollado previamente, trasladándolo de una formulación matemática abstracta a un escenario de aplicación altamente crítico: la red de frío para la preservación de vacunas en Tuxtla Gutiérrez, Chiapas. La elección de esta región geográfica como caso de estudio se debe a la combinación de condiciones climatológicas de calor extremo y a la vulnerabilidad de la infraestructura eléctrica local ante fenómenos meteorológicos. Bajo este entorno, los refrigeradores institucionales que resguardan los biológicos de alto valor inmunológico operan bajo condiciones de estrés continuo.
+El presente capítulo traslada el marco teórico desarrollado previamente hacia un escenario de aplicación crítico para la salud pública: la cadena de frío para la preservación de vacunas en Tuxtla Gutiérrez, Chiapas. La elección de esta región geográfica como caso de estudio responde a la combinación de condiciones climatológicas de calor extremo y a la vulnerabilidad de la infraestructura eléctrica local frente a fenómenos meteorológicos estacionales, entorno bajo el cual los equipos de refrigeración institucionales operan sujetos a un estrés térmico continuo.
 
-Para garantizar la validez y la utilidad del modelo computacional, se evitará la parametrización arbitraria de la Ecuación Diferencial Estocástica (EDE). Un modelo probabilístico con tasas de intensidad o volatilidades carentes de fundamento físico produciría trayectorias desconectadas de la realidad operativa. Por consiguiente, el objetivo central de este capítulo es la calibración rigurosa de las variables del sistema. 
+Con el propósito de garantizar la validez física y operativa del modelo matemático, se evita el uso de parámetros arbitrarios en la Ecuación Diferencial Estocástica (EDE) híbrida, dado que asignar tasas de intensidad o volatilidades sin sustento empírico produciría trayectorias desconectadas de la realidad clínica. En consecuencia, el objetivo central de este capítulo consiste en calibrar rigurosamente todas las variables del sistema a partir de registros oficiales, leyes físicas y especificaciones técnicas internacionales.
 
-El proceso de estimación y asignación de parámetros se desarrollará en las siguientes tres fases analíticas:
+El proceso de estimación y asignación de parámetros se estructura en las siguientes cuatro fases analíticas:
 
-1. **Caracterización Estocástica del Suministro Eléctrico:** Mediante el análisis de datos oficiales de la Comisión Federal de Electricidad (CFE), se modelará la frecuencia y la duración de las interrupciones del servicio eléctrico. Estas estimaciones permitirán estructurar la conmutación de la cadena de Markov y los Procesos de Poisson No Homogéneos acoplados a la ecuación.
-2. **Calibración Termodinámica del Equipo Operativo:** A partir de las especificaciones técnicas y requerimientos normados por la Organización Mundial de la Salud (OMS), se deducirán analíticamente los coeficientes de reversión a la media ($\kappa$) y las volatilidades térmicas ($\sigma$) que dictan el enfriamiento activo y la inercia pasiva del refrigerador de estudio.
-3. **Cinética de Degradación Biológica:** Finalmente, se vinculará el comportamiento térmico dada por la EDE con la Ecuación de Arrhenius, estableciendo el marco cuantitativo necesario para evaluar la pérdida de viabilidad farmacológica que sufren las vacunas durante algún fallo.
+1. **Caracterización Estocástica del Suministro Eléctrico:** A partir de registros históricos e indicadores oficiales de continuidad (SAIFI y SAIDI) de la Comisión Federal de Electricidad (CFE), junto con un factor de reducción de escala espacial, se modela la frecuencia anual de los apagones mediante un Proceso de Poisson No Homogéneo y la duración de las fallas por temporada climática mediante distribuciones Log-Normales estacionales.
+2. **Calibración Termodinámica y de Perturbaciones por Apertura:** Utilizando las especificaciones de precalificación de la Organización Mundial de la Salud (OMS) para el refrigerador **Haier HBC-150** y la ley de enfriamiento de Newton, se deducen las tasas de transferencia térmica ($\kappa_{on}, \kappa_{off}$) y las volatilidades ($\sigma_{on}, \sigma_{off}$) en ambos regímenes de operación, así como la frecuencia y magnitud de los saltos térmicos ($\gamma_i$) inducidos por las aperturas de puerta con base en estudios experimentales del NIST.
+3. **Cinética de Degradación Térmica:** Se parametriza la Ecuación de Arrhenius para cuantificar la tasa de desnaturalización proteica y el daño térmico acumulado que sufren los biológicos cuando la temperatura interna rebasa el umbral normativo superior ($T(t) > 8^\circ\text{C}$).
+4. **Dinámica de Inventario y Demanda Clínica Estacional:** Finalmente, se establecen la capacidad máxima de almacenamiento, el punto de reorden jurisdiccional y la demanda mensual de vacunación en México, acoplando el consumo de dosis con el proceso de aperturas de puerta bajo tres escenarios operativos: control absoluto (Escenario A), apego normativo (Escenario B) y contingencia epidemiológica (Escenario C).
 
 ## Datos Base e Histórico de Interrupciones Eléctricas {#sec-datos-cfe}
 
@@ -66,14 +67,14 @@ Para comprender la estructura de estos datos oficiales, la CFE evalúa la contin
 El indicador SAIFI (*System Average Interruption Frequency Index*) contabiliza el número promedio de interrupciones sostenidas que experimenta un usuario durante un periodo determinado (generalmente un año o un mes), es decir si se tiene una red eléctrica con un total de $N_T$ usuarios atendidos. Si en un intervalo de observación ocurren $M$ eventos de interrupción, donde cada evento $i \in \{1, 2, \dots, M\}$ afecta a una cantidad de $N_i$ usuarios, el índice SAIFI se expresa formalmente como:
 
 $$
-\displaystyle \text{SAIFI} = \frac{\sum_{i=1}^{M} N_i}{N_T}
+\displaystyle \text{SAIFI} = \displaystyle \dfrac{\sum_{i=1}^{M} N_i}{N_T}
 $$ {#eq-saifi}
 
 ### 2. Índice de Duración Promedio de Interrupción, en minutos (SAIDI)
 El indicador SAIDI (*System Average Interruption Duration Index*) mide la duración total acumulada de las interrupciones sostenidas que experimenta el usuario promedio dentro del periodo de evaluación. Si cada evento de falla $i$ tiene una duración temporal de $r_i$ horas, el índice SAIDI se define analíticamente mediante:
 
 $$
-\displaystyle \text{SAIDI} = \frac{\sum_{i=1}^{M} N_i r_i}{N_T}
+\displaystyle \text{SAIDI} = \displaystyle \dfrac{\sum_{i=1}^{M} N_i r_i}{N_T}
 $$ {#eq-saidi}
 
 A partir de estas definiciones, la @tbl-saidi-saifi presenta la evolución mensual acumulada de los indicadores SAIDI y SAIFI reportada en la página 82 del informe anual de la CFE.
@@ -136,7 +137,7 @@ El análisis de la @tbl-cortes-mensuales revela con claridad los dos momentos es
 
 ## Modelado del Proceso de Poisson No Homogéneo (PPNH) {#sec-ppnh}
 
-Para integrar las interrupciones eléctricas dentro de la Ecuación Diferencial Estocástica (EDE) en tiempo continuo $t$, donde $t \in [0, 365]$ representa los días del año, utilizamos un **Proceso de Poisson No Homogéneo**, cuya intensidad $\lambda(t)$ varía en función del tiempo para tener en cuenta la estacionalidad climática de la región.
+Para integrar las interrupciones eléctricas dentro de la Ecuación Diferencial Estocástica (EDE) en tiempo continuo $t$, donde $t \in [0, 365]$ representa los días del año, utilizamos un **Proceso de Poisson No Homogéneo** (@def-poisson-no-homogeneo), cuya función de intensidad $\lambda(t)$ varía en función del tiempo para tener en cuenta la estacionalidad climática de la región.
 
 El modelo se construye mediante la suma de una tasa base de fondo y dos funciones de perturbación gaussianas no normalizadas. La elección de núcleos gaussianos permite modelar la transición gradual de las estaciones meteorológicas sin introducir discontinuidades de salto, concentrando el riesgo exactamente en los días donde el clima somete a la red a mayor estrés.
 
@@ -228,7 +229,7 @@ La duración de una falla eléctrica es una variable aleatoria continua que pres
 1. **Dominio estrictamente positivo:** El tiempo de interrupción no puede tomar valores negativos ($D > 0$).
 2. **Asimetría positiva (Cola pesada hacia la derecha):** La inmensa mayoría de las fallas locales se resuelven en pocas horas (e.g., restablecimiento de fusibles o reconexiones de subestación), pero existe una probabilidad baja de eventos atípicos severos cuya reparación demora días enteros (e.g., explosión de transformadores o colapso de torres por huracanes). 
 
-Debido a que una distribución Normal clásica asignaría probabilidad a tiempos negativos y subestimaría el riesgo de cortes prolongados, la literatura establece que las duraciones de las interrupciones eléctricas se modelan mediante una **Distribución Log-normal**:
+Debido a que una distribución Normal clásica asignaría probabilidad a tiempos negativos y subestimaría el riesgo de cortes prolongados, la literatura establece que las duraciones de las interrupciones eléctricas se modelan mediante una **Distribución Log-normal** [@brown2009electric; @billinton1996reliability]:
 
 $$
 D \sim \text{LogNormal}(\mu, \sigma^2)
@@ -290,11 +291,11 @@ Realizar un promedio aritmético simple de las duraciones $E_i$ entre los meses 
 Asi, las formulaciones para la esperanza y la varianza ponderada están dadas por:
 
 $$
-\mathbb{E}[D] = \frac{\sum_{i=1}^{n} \omega_i E_i}{\sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
+\displaystyle \mathbb{E}[D] = \displaystyle \dfrac{\sum_{i=1}^{n} \omega_i E_i}{\sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
 $$ {#eq-media-ponderada}
 
 $$
-\mathbb{V}[D] = \frac{\sum_{i=1}^{n} \omega_i (E_i - \mathbb{E}[D])^2}{\sum_{i=1}^{n} \omega_i}
+\displaystyle \mathbb{V}[D] = \displaystyle \frac{\sum_{i=1}^{n} \omega_i (E_i - \mathbb{E}[D])^2}{\sum_{i=1}^{n} \omega_i}
 $$ {#eq-varianza-ponderada}
 
 Al sustituir los valores de los meses correspondientes en las @eq-media-ponderada y @eq-varianza-ponderada, se obtienen los siguientes resultados para cada temporada:
