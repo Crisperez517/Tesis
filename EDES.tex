@@ -217,10 +217,10 @@
 \usepackage{amsthm}
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
+\theoremstyle{plain}
+\newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{remark}
@@ -7111,27 +7111,28 @@ pública y la Secretaría de Salud:
   expuestas.
 \end{enumerate}
 
-\section{Limitaciones del Estudio y Líneas de Trabajo
-Futuro}\label{limitaciones-del-estudio-y-luxedneas-de-trabajo-futuro}
+\section{Limitaciones del Estudio y Futuros trabajos de
+investigación}\label{limitaciones-del-estudio-y-futuros-trabajos-de-investigaciuxf3n}
 
 Aunque el modelo desarrollado ofrece una metodología sólida y
 reproducible, sus supuestos abren tres líneas claras de investigación
-futura.
+futura:
 
 En primer lugar, dado que los parámetros físicos
-(\(\kappa_{on}, \kappa_{off}, \sigma_{on}, \sigma_{off}\)) y los choques
-térmicos (\(\gamma_i\)) se calibraron a partir de reportes técnicos de
-la OMS (\citeproc{ref-oms_pqs_e003}{Organización Mundial de la Salud
-2024}) y del NIST (\citeproc{ref-nist2015thermal}{Chojnacky et~al.
-2010}), el paso inmediato consiste en \textbf{instrumentar un
-refrigerador institucional en una clínica de Tuxtla Gutiérrez mediante
-termómetros digitales con registro continuo (\emph{data loggers}) en
-aire y en viales con glicerol, sensores magnéticos de apertura y
-medidores de voltaje}. Obtener estas series de tiempo reales minuto a
-minuto permitirá estimar \emph{in situ} los parámetros de la EDE
-mediante máxima verosimilitud o inferencia Bayesiana, medir la
-distribución empírica de aperturas del personal médico y acoplar una
-segunda ecuación diferencial para la temperatura interna del vial
+(\(\kappa_{on}, \kappa_{off}, \sigma_{on}, \sigma_{off}\)) y las
+magnitudes de los choques térmicos (\(\gamma_i\)) se calibraron a partir
+de reportes técnicos de la OMS (\citeproc{ref-oms_pqs_e003}{Organización
+Mundial de la Salud 2024}) y del NIST
+(\citeproc{ref-nist2015thermal}{Chojnacky et~al. 2010}), el paso
+inmediato consiste en \textbf{instrumentar un refrigerador institucional
+en una clínica de Tuxtla Gutiérrez mediante termómetros digitales con
+registro continuo (\emph{data loggers}) en aire y en viales con
+glicerol, sensores magnéticos de apertura y medidores de voltaje}.
+Obtener estas series de tiempo reales minuto a minuto permitirá estimar
+con mayor precisión los parámetros de la EDE mediante máxima
+verosimilitud o inferencia Bayesiana, medir la distribución empírica de
+las aperturas del personal médico y acoplar una segunda ecuación
+diferencial estocástica para la temperatura interna del vial
 \(T_{vial}(t)\) que reemplace el filtro discreto de inercia térmica de
 \(30\text{ minutos}\).
 
@@ -7139,11 +7140,11 @@ En segundo lugar, mientras que en este trabajo las tasas de
 transferencia térmica se asumieron constantes, en la realidad la masa
 térmica interna varía conforme el inventario \(I(t)\) fluctúa entre
 \(1,000\) y \(5,000\text{ dosis}\). Como trabajo futuro se propone
-formular tasas dinámicas \(\kappa_{on}(I(t))\) y \(\kappa_{off}(I(t))\)
+formular tasas variables \(\kappa_{on}(I(t))\) y \(\kappa_{off}(I(t))\)
 dependientes de la fracción de llenado e incorporar el calor latente de
 fusión del revestimiento de hielo durante apagones extremos, generando
-una ecuación diferencial estocástica no lineal acoplada
-bidireccionalmente con el inventario.
+una ecuación diferencial estocástica no lineal acoplada con el
+inventario.
 
 Finalmente, dado que en contingencias sanitarias las aperturas de puerta
 suelen agruparse en ráfagas correlacionadas, se plantea sustituir el
