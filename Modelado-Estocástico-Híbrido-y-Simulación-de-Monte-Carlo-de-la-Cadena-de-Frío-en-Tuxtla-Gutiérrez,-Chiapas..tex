@@ -215,14 +215,14 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -795,14 +795,13 @@ siguientes propiedades:
 
 El diferencial del proceso de Wiener, denotado como
 \(dW(t) = W(t+dt) - W(t)\), representa una perturbación en un intervalo
-infinitesimal \(dt\), caracterizada por una media
-\(\mathbb{E}[dW(t)] = 0\) y una varianza \(\mathbb{E}[(dW(t))^2] = dt\).
-Un rasgo crítico del movimiento Browniano, es que, aunque sus
-trayectorias son continuas, \textbf{no son diferenciables en ningún
-punto} con probabilidad 1. Esta restricción analítica invalida el uso
-del cálculo tradicional de Newton-Leibniz e impone la necesidad del
-cálculo de Itô. Para una revisión detallada de estas construcciones
-analíticas, se sugiere consultar a
+infinitesimal \(dt\), con una media \(\mathbb{E}[dW(t)] = 0\) y una
+varianza \(\mathbb{E}[(dW(t))^2] = dt\). Un rasgo crítico del movimiento
+Browniano, es que, aunque sus trayectorias son continuas, \textbf{no son
+diferenciables en ningún punto} con probabilidad 1. Esta restricción
+analítica invalida el uso del cálculo tradicional de Newton-Leibniz e
+impone la necesidad del cálculo de Itô. Para una revisión detallada de
+estas construcciones analíticas, se sugiere consultar a
 (\citeproc{ref-karatzas1998brownian}{Karatzas y Shreve 1998}).
 
 \begin{figure}
