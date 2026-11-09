@@ -4,7 +4,7 @@ language:
   crossref-alg-prefix: "Algoritmo"
 ---
 
-# Conclusiones y Trabajo Futuro
+# Conclusiones
 
 El desarrollo de este trabajo de tesis permitió formular, calibrar y simular un modelo termodinámico basado en ecuaciones diferenciales estocásticas híbridas, acoplado a la cinética de degradación de Arrhenius y a la dinámica de inventario, para cuantificar el riesgo operativo y la pérdida de vacunas en la cadena de frío de Tuxtla Gutiérrez, Chiapas, cumpliendo con el **objetivo general** planteado en esta tesis. A través de la integración del cálculo estocástico, los métodos numéricos para EDES, la cinética de degradación química y la inferencia estadística no paramétrica, fue posible evaluar con rigor el impacto real que tienen el clima extremo, las fallas eléctricas y la interacción humana sobre la viabilidad de los productos biológicos.
 

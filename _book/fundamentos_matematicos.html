@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Fundamentos Teóricos Matemáticos – EDES</title>
+<title>4&nbsp; Fundamentos Teóricos Matemáticos – Modelado Estocástico Híbrido y Simulación de Monte Carlo de la Cadena de Frío en Tuxtla Gutiérrez, Chiapas.</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -325,10 +325,10 @@ window.Quarto = {
       <img src="./LOGO.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">EDES</a> 
+      <a href="./">Modelado Estocástico Híbrido y Simulación de Monte Carlo de la Cadena de Frío en Tuxtla Gutiérrez, Chiapas.</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/Crisperez517/Tesis.git" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./EDES.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Modelado-Estocástico-Híbrido-y-Simulación-de-Monte-Carlo-de-la-Cadena-de-Frío-en-Tuxtla-Gutiérrez,-Chiapas..pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo lector">
   <div class="quarto-reader-toggle-btn">
@@ -429,7 +429,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusiones.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conclusiones y Trabajo Futuro</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conclusiones</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -738,8 +738,11 @@ N((s, t] \times A) = \int_s^t \int_A N(du, dz).
 <div id="def-integral-conteo" class="theorem definition">
 <p><span class="theorem-title"><strong>Definición 4.17 (Integral Estocástica respecto a la Medida de Conteo de Poisson)</strong></span> Sea <span class="math inline">\(H(t, z, \omega)\)</span> un integrando predecible tal que <span class="math inline">\(\displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert N(dt, dz) &lt; \infty\)</span> casi seguramente. La integral estocástica de <span class="math inline">\(H\)</span> respecto a la medida aleatoria de conteo <span class="math inline">\(N(dt, dz)\)</span> en el intervalo <span class="math inline">\([0, T]\)</span> se define trayectoria por trayectoria como la suma finita de las contribuciones evaluadas en los pares de tiempo y magnitud de salto <span class="math inline">\((T_k, \gamma_k)\)</span> observados hasta el instante <span class="math inline">\(T\)</span>: <span class="math display">\[
 \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) = \sum_{0 &lt; T_k \le T} H(T_k, \gamma_k).
-\]</span> Si además el integrando satisface la condición de integrabilidad <span class="math inline">\(\mathbb{E}\left[ \displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] &lt; \infty\)</span>, entonces el valor esperado de la integral de conteo coincide con la esperanza de la integral respecto a la medida de intensidad: <span class="math display">\[
-\mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) \right] = \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) \nu_t(dz) dt \right] = \mathbb{E}\left[ \int_0^T \lambda(t) \left( \int_{\mathcal{Z}} H(t, z) dF(z) \right) dt \right].
+\]</span> Si además el integrando satisface la condición de integrabilidad: <span class="math display">\[\mathbb{E}\left[ \displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] &lt; \infty,\]</span> entonces el valor esperado de la integral de conteo coincide con la esperanza de la integral respecto a la medida de intensidad: <span class="math display">\[
+\begin{aligned}
+\mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) \right] &amp;= \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) \nu_t(dz) dt \right] \\
+&amp;= \mathbb{E}\left[ \int_0^T \lambda(t) \left( \int_{\mathcal{Z}} H(t, z) dF(z) \right) dt \right].
+\end{aligned}
 \]</span></p>
 </div>
 <p>Nótese que si se elige la función constante <span class="math inline">\(H(t, z) = \mathbf{1}_A(z)\)</span>, la definición anterior recupera exactamente el conteo de eventos <span class="math inline">\(N((0, T] \times A)\)</span>; en cambio, si <span class="math inline">\(H(t, z)\)</span> depende de <span class="math inline">\(z\)</span>, la integral acumula el impacto ponderado de cada salto ocurrido en <span class="math inline">\([0, T]\)</span>.</p>

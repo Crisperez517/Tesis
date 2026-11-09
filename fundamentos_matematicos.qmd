@@ -85,7 +85,7 @@ $$
 $$
 :::
 
-El diferencial del proceso de Wiener, denotado como $dW(t) = W(t+dt) - W(t)$, representa una perturbación en un intervalo infinitesimal $dt$, caracterizada por una media $\mathbb{E}[dW(t)] = 0$ y una varianza $\mathbb{E}[(dW(t))^2] = dt$. Un rasgo crítico del movimiento Browniano, es que, aunque sus trayectorias son continuas, **no son diferenciables en ningún punto** con probabilidad 1. Esta restricción analítica invalida el uso del cálculo tradicional de Newton-Leibniz e impone la necesidad del cálculo de Itô. Para una revisión detallada de estas construcciones analíticas, se sugiere consultar a [@karatzas1998brownian].
+El diferencial del proceso de Wiener, denotado como $dW(t) = W(t+dt) - W(t)$, representa una perturbación en un intervalo infinitesimal $dt$, con una media $\mathbb{E}[dW(t)] = 0$ y una varianza $\mathbb{E}[(dW(t))^2] = dt$. Un rasgo crítico del movimiento Browniano, es que, aunque sus trayectorias son continuas, **no son diferenciables en ningún punto** con probabilidad 1. Esta restricción analítica invalida el uso del cálculo tradicional de Newton-Leibniz e impone la necesidad del cálculo de Itô. Para una revisión detallada de estas construcciones analíticas, se sugiere consultar a [@karatzas1998brownian].
 
 ![Trayectoria simulada del proceso de Wiener. El eje horizontal representa el avance del tiempo en un horizonte parametrizado de $T = 1.0$ con incrementos de $dt = 0.001$. El eje vertical denota la posición de las fluctuaciones aleatorias $W(t)$, iniciando en el origen $W(0) = 0$.](proceso_wiener.png){#fig-wiener width="80%" fig-align="center"}
 
@@ -269,7 +269,8 @@ Si los instantes de ocurrencia de los eventos siguen un proceso de Poisson no ho
 $$
 \nu_t(dz) dt = \mathbb{E}\left[ N(dt, dz) \right] = \lambda(t) dF(z) dt,
 $$
-donde $dF(z)$ representa la medida de probabilidad inducida por la distribución de las magnitudes de salto (si las marcas poseen función de densidad $f(z)$, entonces $dF(z) = f(z)dz$). De este modo, el número esperado de saltos en $(s, t]$ con magnitud en $A$ viene dado por:
+donde $dF(z)$ representa la medida de probabilidad inducida por la distribución de las magnitudes de salto (si las marcas poseen función de densidad $f(z)$, entonces 
+$dF(z) = f(z)dz$). De este modo, el número esperado de saltos en $(s, t]$ con magnitud en $A$ viene dado por:
 $$
 \mathbb{E}\left[ N((s, t] \times A) \right] = \int_s^t \int_A \nu_u(dz) du = \left( \int_s^t \lambda(u) du \right) \left( \int_A dF(z) \right).
 $$
@@ -314,9 +315,14 @@ Sea $H(t, z, \omega)$ un integrando predecible tal que $\displaystyle \int_0^T \
 $$
 \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) = \sum_{0 < T_k \le T} H(T_k, \gamma_k).
 $$
-Si además el integrando satisface la condición de integrabilidad $\mathbb{E}\left[ \displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] < \infty$, entonces el valor esperado de la integral de conteo coincide con la esperanza de la integral respecto a la medida de intensidad:
+Si además el integrando satisface la condición de integrabilidad:
+$$\mathbb{E}\left[ \displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] < \infty,$$ 
+entonces el valor esperado de la integral de conteo coincide con la esperanza de la integral respecto a la medida de intensidad:
 $$
-\mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) \right] = \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) \nu_t(dz) dt \right] = \mathbb{E}\left[ \int_0^T \lambda(t) \left( \int_{\mathcal{Z}} H(t, z) dF(z) \right) dt \right].
+\begin{aligned}
+\mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) \right] &= \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) \nu_t(dz) dt \right] \\
+&= \mathbb{E}\left[ \int_0^T \lambda(t) \left( \int_{\mathcal{Z}} H(t, z) dF(z) \right) dt \right].
+\end{aligned}
 $$
 :::
 

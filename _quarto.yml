@@ -15,7 +15,7 @@ website:
     hypothesis: true
 
 book:
-  title: "EDES"
+  title: "Modelado Estocástico Híbrido y Simulación de Monte Carlo de la Cadena de Frío en Tuxtla Gutiérrez, Chiapas."
   reader-mode: true
   language: es
   date: today
