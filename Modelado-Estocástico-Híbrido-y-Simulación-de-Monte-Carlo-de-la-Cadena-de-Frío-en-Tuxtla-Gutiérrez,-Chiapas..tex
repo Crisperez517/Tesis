@@ -216,11 +216,11 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
+\newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
-\theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
+\newtheorem{algorithm}{Algoritmo}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
@@ -2680,7 +2680,7 @@ a \(\sqrt{\mathbb{E}[(\Delta W_n)^2]} = (\Delta t)^{1/2}\)
 (\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}).
 
 La implementación paso a paso del método de Euler-Maruyama se detalla en
-el alg.~\ref{alg-euler-maruyama}.
+el Algoritmo~\ref{alg-euler-maruyama}.
 
 \begin{algorithm}[]\protect\hypertarget{alg-euler-maruyama}{}\label{alg-euler-maruyama}
 
@@ -2772,7 +2772,7 @@ de Itô-Taylor se presenta en
 \end{theorem}
 
 La implementación paso a paso del método de Milstein se detalla en el
-alg.~\ref{alg-milstein}.
+Algoritmo~\ref{alg-milstein}.
 
 \begin{algorithm}[]\protect\hypertarget{alg-milstein}{}\label{alg-milstein}
 
@@ -3081,7 +3081,7 @@ con el método de Milstein (Sección 1.9 y 7.5 de
 Sección 5.6 de (\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010})).
 
 La implementación paso a paso del método se resume en el
-alg.~\ref{alg-em-hibrido-general}.
+Algoritmo~\ref{alg-em-hibrido-general}.
 
 \begin{algorithm}[]\protect\hypertarget{alg-em-hibrido-general}{}\label{alg-em-hibrido-general}
 
@@ -3143,7 +3143,7 @@ calcular la magnitud de salto acumulada:
 
 \end{algorithm}
 
-Con el alg.~\ref{alg-em-hibrido-general} queda establecido el marco
+Con el Algoritmo~\ref{alg-em-hibrido-general} queda establecido el marco
 numérico necesario para integrar simultáneamente la difusión continua,
 los cambios de régimen de Markov y las perturbaciones por saltos de
 Poisson compuestos. Este esquema numérico será la base computacional en
@@ -5338,7 +5338,8 @@ Saltos}\label{integraciuxf3n-numuxe9rica-por-cambios-de-ruxe9gimen-y-saltos}
 Para calcular la trayectoria discreta \(\{T_n\}_{0 \le n \le N}\) a
 partir de la condición inicial \(T_0 = 5.0^\circ\text{C}\), se aplica
 directamente el esquema numérico híbrido de Euler-Maruyama con cambios
-de régimen y saltos desarrollado en el alg.~\ref{alg-em-hibrido-general}
+de régimen y saltos desarrollado en el
+Algoritmo~\ref{alg-em-hibrido-general}
 (Sección~\ref{sec-numerico-saltos}). En cada paso temporal
 \(n = 0, 1, \dots, N - 1\), el algoritmo evalúa el estado del suministro
 eléctrico \(S_n\) y cambia dinámicamente los coeficientes de la ecuación
@@ -5376,7 +5377,7 @@ orden \(\gamma = 0.5\) por el Teorema~\ref{thm-em-switching}.
 
 El procedimiento detallado para simular una trayectoria anual de la
 temperatura interna del refrigerador se presenta en el
-alg.~\ref{alg-simulacion-ede-termodinamica}.
+Algoritmo~\ref{alg-simulacion-ede-termodinamica}.
 
 \begin{algorithm}[]\protect\hypertarget{alg-simulacion-ede-termodinamica}{}\label{alg-simulacion-ede-termodinamica}
 
@@ -5799,8 +5800,8 @@ de pérdida anual.
 \section{Estructura de la Simulación de Monte
 Carlo}\label{estructura-de-la-simulaciuxf3n-de-monte-carlo}
 
-Dado que el alg.~\ref{alg-simulacion-ede-termodinamica} junto con el
-modelo de inventario producen únicamente una realización anual
+Dado que el Algoritmo~\ref{alg-simulacion-ede-termodinamica} junto con
+el modelo de inventario producen únicamente una realización anual
 aleatoria, no es posible evaluar la confiabilidad del sistema a partir
 de una sola trayectoria. Para medir rigurosamente el riesgo operativo y
 estimar el valor esperado \(\mathbb{E}[g(T(t))]\) de los estadísticos de
@@ -6935,10 +6936,10 @@ Respecto a los métodos numéricos (Capítulo~\ref{sec-numerico}) bajo los
 criterios de convergencia fuerte
 (Definición~\ref{def-convergencia-fuerte}) y débil
 (Definición~\ref{def-convergencia-debil}), la diferencia entre los
-esquemas de Euler-Maruyama (alg.~\ref{alg-euler-maruyama}) y de Milstein
-(alg.~\ref{alg-milstein} y Figura~\ref{fig-sde-metodos}) permitió
-concluir una propiedad estructural clave para nuestro modelo: al ser la
-volatilidad térmica constante dentro de cada régimen
+esquemas de Euler-Maruyama (Algoritmo~\ref{alg-euler-maruyama}) y de
+Milstein (Algoritmo~\ref{alg-milstein} y Figura~\ref{fig-sde-metodos})
+permitió concluir una propiedad estructural clave para nuestro modelo:
+al ser la volatilidad térmica constante dentro de cada régimen
 (\(\partial_T \sigma = 0\)), el término integral doble de Milstein
 (Ecuación~\ref{eq-integral-doble-milstein}) se anula, haciendo que ambos
 métodos coincidan en su parte difusiva. Integrando la discretización de
@@ -6946,9 +6947,10 @@ la cadena de Markov (Sección~\ref{sec-numerico-switching}) con el
 esquema regular de saltos en malla fija
 (Sección~\ref{sec-numerico-saltos} y
 Ecuación~\ref{eq-incremento-poisson-compuesto}), el
-alg.~\ref{alg-em-hibrido-general} garantizó un orden de convergencia
-fuerte \(\gamma = 0.5\) ideal para acoplarse con series climáticas en
-pasos constantes \(\left( \Delta t = 5/60\text{ h} \right)\).
+Algoritmo~\ref{alg-em-hibrido-general} garantizó un orden de
+convergencia fuerte \(\gamma = 0.5\) ideal para acoplarse con series
+climáticas en pasos constantes
+\(\left( \Delta t = 5/60\text{ h} \right)\).
 
 Asimismo, los fundamentos epidemiológicos
 (Capítulo~\ref{sec-fundamentos-epidemiologicos}) permitieron vincular
@@ -7006,7 +7008,7 @@ objetivo específico}.
 Finalmente, respecto a la simulación computacional
 (Capítulo~\ref{sec-simulacion-computacional}), se implementó en Python
 el esquema numérico híbrido de Euler-Maruyama
-(alg.~\ref{alg-simulacion-ede-termodinamica})
+(Algoritmo~\ref{alg-simulacion-ede-termodinamica})
 (\citeproc{ref-Perez2026EscenarioA}{Pérez, C. 2026a},
 \citeproc{ref-Perez2026EscenarioB}{2026b},
 \citeproc{ref-Perez2026EscenarioC}{2026c}) integrando recursivamente la
