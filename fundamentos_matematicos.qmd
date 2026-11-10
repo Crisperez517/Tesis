@@ -582,7 +582,7 @@ Cuando los parámetros estructurales de un sistema físico cambian drásticament
 Para formalizar el análisis sobre subintervalos cuyos extremos son tiempos de paro @def-tiempo-parada $\tau$ y $\rho$ tales que $0 \le \tau(\omega) \le \rho(\omega)$ para todo $\omega \in \Omega$, usamos la notación estándar de **intervalos estocásticos** de [@mao2006stochastic]:
 $$
 \begin{aligned}
-[[\tau,\rho]] &= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t\le\rho(\omega)\}, \\
+\left[[\tau,\rho]\right] &= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t\le\rho(\omega)\}, \\
 [[\tau,\rho[[ &= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t<\rho(\omega)\}.
 \end{aligned}
 $$
@@ -608,7 +608,7 @@ Un proceso estocástico $\{X(t)\}_{t \in [t_0, T]}$ se denomina una **solución 
 3. Para todo $t \in [t_0, T]$, se satisface con probabilidad 1 la ecuación integral:
 $$
 \begin{aligned}
-X(t) &= x_0 + \int_{t_0}^t b(s, X(s^-), \alpha(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-), \alpha(s^-)) dW(s) \\
+X(t) = x_0 &+ \int_{t_0}^t b(s, X(s^-), \alpha(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-), \alpha(s^-)) dW(s) \\
 &+ \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X(s^-), \alpha(s^-), z) \tilde{N}(ds, dz).
 \end{aligned}
 $$ {#eq-ede-hibrida-int}
@@ -768,7 +768,7 @@ dT(t) =
 \begin{cases} 
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
-\end{cases}, \ 0 \leq t \leq T,
+\end{cases} \ 0 \leq t \leq T,
 $$ {#eq-ede-operativa-teorica}
 
 con condiciones iniciales $T(0) = T_0 \in L^2_{\mathcal{F}_0}(\Omega; \mathbb{R})$ y $\alpha(0) = \alpha_0 \in \mathcal{M}$. En la @eq-ede-operativa-teorica, $\kappa_{on} > 0$ y $\kappa_{off} > 0$ representan las tasas de transferencia térmica en cada régimen, $\theta_{set} \in \mathbb{R}$ denota la temperatura de equilibrio del termostato, $\sigma_{on} > 0$ y $\sigma_{off} > 0$ son los coeficientes de difusión constantes asociados al movimiento Browniano estándar $\{W(t)\}_{t \ge 0}$, y $T_{amb}: [0, T] \to \mathbb{R}$ es una función determinista continua y acotada que representa la temperatura ambiente exterior.

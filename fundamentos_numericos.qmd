@@ -204,7 +204,7 @@ Para completar la estructura numérica de nuestro modelo (@eq-ede-operativa-teor
 Consideremos la EDE híbrida con saltos impulsada por una medida aleatoria de Poisson $p_\varphi(dv, dt)$ con intensidad finita $\lambda(t)$ sobre el espacio de marcas $\mathcal{E} = \mathbb{R}\setminus\{0\}$ (Sección 1.8 de [@platen2010numerical]):
 $$
 \begin{aligned}
-X(t) &= X(0) + \int_0^t b(s, X(s), \alpha(s))ds + \int_0^t \sigma(s, X(s), \alpha(s))dW(s) \\
+X(t) = X(0) &+ \int_0^t b(s, X(s), \alpha(s))ds + \int_0^t \sigma(s, X(s), \alpha(s))dW(s) \\
 &+ \int_0^t \int_{\mathcal{E}} c(s-, X(s-), \alpha(s-), v) p_\varphi(dv, ds).
 \end{aligned}
 $$ {#eq-ede-hibrida-saltos-num}

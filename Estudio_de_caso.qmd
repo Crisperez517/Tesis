@@ -363,7 +363,7 @@ dT(t) =
 \begin{cases} 
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
-\end{cases}, \ 0 \leq t \leq T.
+\end{cases} \ 0 \leq t \leq T.
 $$ {#eq-ede-operativa}
 
 Como se observa en el segundo régimen ($\alpha(t) = 2$) de la @eq-ede-operativa, el término de saltos discretos $dJ(t)$ se anula durante un corte de suministro eléctrico. Esto responde a los protocolos normativos de operación en las clínicas de salud [@oms2015cadenafrio]: ante un apagón, el personal médico tiene prohibido abrir el refrigerador con el fin de preservar la inercia térmica de los paquetes fríos y botellas de agua, haciendo que la evolución térmica dependa exclusivamente de la transferencia pasiva de calor hacia el ambiente exterior.
@@ -515,7 +515,7 @@ Para gestionar el riesgo de desabasto provocado por la merma térmica, se define
 
 Ante la variabilidad de las aplicaciones diarias, el consumo se modela mediante una demanda sintética representativa, calibrada para reflejar la afluencia de un Centro de Salud Urbano de primer nivel. Esta demanda base no es constante, sino que obedece al comportamiento estacional del sistema de salud en México, tal como se detalla en la siguiente tabla:
 
-| Mes |Demanda Base Diaria| Justificación Epidemiológica |
+| Mes | Demanda Diaria | Justificación Epidemiológica |
 | :--- | :--- | :--- |
 | Enero | 65 | Consumo regular de esquema básico. |
 | Febrero | 110 | 1ª Jornada Nacional de Salud Pública. |

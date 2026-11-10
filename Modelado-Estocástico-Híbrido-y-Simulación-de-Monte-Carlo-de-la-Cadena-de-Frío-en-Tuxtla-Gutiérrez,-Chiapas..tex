@@ -216,13 +216,13 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
-\newtheorem{algorithm}{Algorithm}[chapter]
-\theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -255,7 +255,7 @@
 Cadena de Frío en Tuxtla Gutiérrez, Chiapas.}
 \author{Cristóbal Pérez González \and Asesor: Dr.~Yofre Hernán García
 Gómez}
-\date{2026-11-09}
+\date{2026-11-10}
 \begin{document}
 \begin{titlepage}
 \hspace{-1.7cm} %Este comando es para mandar a la izquierda :)
@@ -1904,7 +1904,7 @@ tales que \(0 \le \tau(\omega) \le \rho(\omega)\) para todo
 \(\omega \in \Omega\), usamos la notación estándar de \textbf{intervalos
 estocásticos} de (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}): \[
 \begin{aligned}
-[[\tau,\rho]] &= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t\le\rho(\omega)\}, \\
+\left[[\tau,\rho]\right] &= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t\le\rho(\omega)\}, \\
 [[\tau,\rho[[ &= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t<\rho(\omega)\}.
 \end{aligned}
 \] Asimismo, denotamos por \(\mathcal{M}^2([[\tau, \rho]]; \mathbb{R})\)
@@ -1970,7 +1970,7 @@ Un proceso estocástico \(\{X(t)\}_{t \in [t_0, T]}\) se denomina una
   ecuación integral:
   \begin{equation}\phantomsection\label{eq-ede-hibrida-int}{
   \begin{aligned}
-  X(t) &= x_0 + \int_{t_0}^t b(s, X(s^-), \alpha(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-), \alpha(s^-)) dW(s) \\
+  X(t) = x_0 &+ \int_{t_0}^t b(s, X(s^-), \alpha(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-), \alpha(s^-)) dW(s) \\
   &+ \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X(s^-), \alpha(s^-), z) \tilde{N}(ds, dz).
   \end{aligned}
   }\end{equation}
@@ -2307,7 +2307,7 @@ dT(t) =
 \begin{cases} 
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
-\end{cases}, \ 0 \leq t \leq T,
+\end{cases} \ 0 \leq t \leq T,
 }\end{equation}
 
 con condiciones iniciales
@@ -3043,7 +3043,7 @@ aleatoria de Poisson \(p_\varphi(dv, dt)\) con intensidad finita
 (\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010})):
 \begin{equation}\phantomsection\label{eq-ede-hibrida-saltos-num}{
 \begin{aligned}
-X(t) &= X(0) + \int_0^t b(s, X(s), \alpha(s))ds + \int_0^t \sigma(s, X(s), \alpha(s))dW(s) \\
+X(t) = X(0) &+ \int_0^t b(s, X(s), \alpha(s))ds + \int_0^t \sigma(s, X(s), \alpha(s))dW(s) \\
 &+ \int_0^t \int_{\mathcal{E}} c(s-, X(s-), \alpha(s-), v) p_\varphi(dv, ds).
 \end{aligned}
 }\end{equation}
@@ -4442,7 +4442,7 @@ dT(t) =
 \begin{cases} 
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
-\end{cases}, \ 0 \leq t \leq T.
+\end{cases} \ 0 \leq t \leq T.
 }\end{equation}
 
 Como se observa en el segundo régimen (\(\alpha(t) = 2\)) de la
@@ -4973,11 +4973,11 @@ sistema de salud en México, tal como se detalla en la siguiente tabla:
 estacionalidad epidemiológica y a las campañas nacionales de salud
 pública en México.}\label{tbl-demanda-base}\tabularnewline
 \toprule\noalign{}
-Mes & Demanda Base Diaria & Justificación Epidemiológica \\
+Mes & Demanda Diaria & Justificación Epidemiológica \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
-Mes & Demanda Base Diaria & Justificación Epidemiológica \\
+Mes & Demanda Diaria & Justificación Epidemiológica \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
