@@ -448,7 +448,6 @@ donde $\kappa > 0$ representa la tasa de reversión a la media, $\theta \in \mat
 La característica principal de la @eq-ou-clasica radica en su deriva lineal $b(x) = \kappa(\theta - x)$. Cuando el estado del proceso supera el valor de equilibrio ($X(t) > \theta$), la deriva es negativa y dirige la trayectoria hacia abajo; Si el proceso se encuentra por debajo del nivel de referencia ($X(t) < \theta$), la deriva es positiva e impulsa un crecimiento hacia $\theta$. Esta propiedad de reversión a la media convierte a este proceso en el modelo base para describir la evolución térmica de sistemas regidos por la ley de enfriamiento de Newton.
 
 Aplicando el Lema de Itô (@thm-ito-clasico) a la función $f(t, x) = x e^{\kappa t}$, se obtiene que $d(X(t)e^{\kappa t}) = \kappa \theta e^{\kappa t} dt + \sigma e^{\kappa t} dW(t)$. Integrando en el intervalo $[0, t]$ y despejando $X(t)$, se obtiene la solución analítica del proceso:
-
 $$
 X(t) = \theta + (x_0 - \theta)e^{-\kappa t} + \sigma \int_0^t e^{-\kappa(t-s)} dW(s).
 $$ {#eq-ou-solucion}
@@ -459,7 +458,6 @@ $$
 $$ {#eq-ou-moments}
 
 Con lo cual, para todo instante $t > 0$, la variable aleatoria $X(t)$ sigue una distribución normal:
-
 $$
 X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right) \right),
 $$ {#eq-ou-distribucion}
@@ -487,7 +485,7 @@ $$ {#eq-ede-saltos-int}
 
 En la @eq-ede-saltos-diff y la @eq-ede-saltos-int, el integrando se evalúa en el límite por la izquierda $X(t^-) = \lim_{s \uparrow t} X(s)$ para asegurar que sea un proceso predecible (@def-proceso-predecible) y que la integral respecto a la medida compensada $\tilde{N}(dt, dz)$ preserve la propiedad de martingala [@situ2005theory]. Cabe notar que en las integrales respecto a $ds$ y $dW(s)$ es indistinto escribir $X(s)$ o $X(s^-)$, dado que toda trayectoria càdlàg posee a lo sumo un número numerable de discontinuidades, el cual es un conjunto con medida de Lebesgue cero.
 
-Para ver la diferencia entre una EDE continua y una EDE con saltos, en la @fig-sde-comparacion se muestran dos trayectorias simuladas de un proceso de Ornstein-Uhlenbeck @def-ou-clasico .
+Para ver la diferencia entre una EDE continua y una EDE con saltos, en la @fig-sde-comparacion se muestran dos trayectorias simuladas de un proceso de Ornstein-Uhlenbeck @def-ou-clasico.
 
 ![Trayectorias simuladas de una ecuación diferencial estocástica de tipo Ornstein-Uhlenbeck con y sin saltos. El eje horizontal representa el avance del tiempo en un horizonte de $T = 10.0$ con incrementos discretos de $dt = 0.01$. La línea horizontal negra punteada indica el nivel de equilibrio $\theta = 5$. La trayectoria continua (azul) muestra una difusión clásica perturbada únicamente por el movimiento Browniano $dW(t)$. Por otro lado, la trayectoria discontinua (roja) incorpora perturbaciones discretas mediante un proceso de saltos de Poisson, generando incrementos instantáneos seguidos por etapas de decaimiento exponencial controladas por la tasa de reversión $\kappa$.](trayectorias_sde.png){#fig-sde-comparacion width="90%" fig-align="center"}
 
