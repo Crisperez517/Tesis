@@ -216,13 +216,13 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{algorithm}{Algoritmo}[chapter]
+\newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{plain}
-\newtheorem{lemma}{Lema}[chapter]
+\newtheorem{algorithm}{Algoritmo}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -6797,29 +6797,17 @@ mediante el método Bootstrap para la métrica de dosis perdidas.
 
 \begin{minipage}{0.33\linewidth}
 
-\begin{figure}[H]
-
 \centering{
 
 \pandocbounded{\includegraphics[keepaspectratio]{boxplot_bootstrap_escenario_A.png}}
 
 }
 
-\caption{\label{fig-box-boot-a}Diagrama de caja de la media poblacional
-(Escenario A). La caja naranja representa el 50\% central del estimador,
-con la línea verde indicando la verdadera media poblacional. A
-diferencia del diagrama de caja empírico Figura~\ref{fig-boxplot-a} (que
-mostraba datos atípicos de hasta mas de 300 dosis), la varianza del
-estimador se ha reducido significativamente; el rango total de las
-medias fluctúa solamente entre 58 y 63 dosis.}
-
-\end{figure}%
+\subcaption{\label{fig-box-boot-a}Escenario A}
 
 \end{minipage}%
 %
 \begin{minipage}{0.33\linewidth}
-
-\begin{figure}[H]
 
 \centering{
 
@@ -6827,19 +6815,11 @@ medias fluctúa solamente entre 58 y 63 dosis.}
 
 }
 
-\caption{\label{fig-box-boot-b}Diagrama de caja de la media poblacional
-(Escenario B). El estimador se estabiliza con una precisión milimétrica.
-La media poblacional esperada se concentra alrededor de las 343 dosis,
-con una fluctuación máxima contenida en un rango absoluto de apenas 10
-dosis (de 338 a 348).}
-
-\end{figure}%
+\subcaption{\label{fig-box-boot-b}Escenario B}
 
 \end{minipage}%
 %
 \begin{minipage}{0.33\linewidth}
-
-\begin{figure}[H]
 
 \centering{
 
@@ -6847,16 +6827,21 @@ dosis (de 338 a 348).}
 
 }
 
-\caption{\label{fig-box-boot-c}Diagrama de caja de la media poblacional
-(Escenario C). A pesar del colapso logístico del sistema, el Teorema del
-Límite Central y la Ley de los Grandes Números garantizan la precisión
-del estimador. La media poblacional se aísla de las trayectorias
-catastróficas individuales y se fija en 1905 dosis, con un margen de
-dispersión de 1890 a 1920 dosis.}
-
-\end{figure}%
+\subcaption{\label{fig-box-boot-c}Escenario C}
 
 \end{minipage}%
+
+\caption{\label{fig-boxplots-boot}Diagramas de caja de la media
+poblacional. \textbf{(A)} La caja naranja representa el 50\% central del
+estimador, con la línea verde indicando la verdadera media poblacional.
+A diferencia del diagrama empírico Figura~\ref{fig-boxplot-a} (que
+mostraba datos atípicos de hasta mas de 300 dosis), la varianza se
+reduce significativamente fluctuando entre 58 y 63 dosis. \textbf{(B)}
+El estimador se estabiliza con precisión milimétrica, concentrándose
+alrededor de 343 dosis (fluctuación de 338 a 348). \textbf{(C)} A pesar
+del colapso logístico, el Teorema del Límite Central garantiza la
+precisión del estimador, fijando la media en 1905 dosis, con un margen
+de dispersión de 1890 a 1920 dosis.}
 
 \end{figure}%
 

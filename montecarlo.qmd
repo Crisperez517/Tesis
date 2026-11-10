@@ -444,12 +444,15 @@ Este nivel de estabilización permite concluir que los Intervalos de Confianza a
 
 Para ilustrar la reducción de la incertidumbre lograda por la inferencia no paramétrica, se construyeron diagramas de caja (*boxplots*) aplicados exclusivamente a las 10000 medias muestrales obtenidas mediante el método Bootstrap para la métrica de dosis perdidas.
 
-::: {#layout-boxplots-boot layout-ncol=3}
-![Diagrama de caja de la media poblacional (Escenario A). La caja naranja representa el 50% central del estimador, con la línea verde indicando la verdadera media poblacional. A diferencia del diagrama de caja empírico @fig-boxplot-a (que mostraba datos atípicos de hasta mas de 300 dosis), la varianza del estimador se ha reducido significativamente; el rango total de las medias fluctúa solamente entre 58 y 63 dosis.](boxplot_bootstrap_escenario_A.png){#fig-box-boot-a}
+::: {#fig-boxplots-boot layout-ncol=3}
 
-![Diagrama de caja de la media poblacional (Escenario B). El estimador se estabiliza con una precisión milimétrica. La media poblacional esperada se concentra alrededor de las 343 dosis, con una fluctuación máxima contenida en un rango absoluto de apenas 10 dosis (de 338 a 348).](boxplot_bootstrap_escenario_B.png){#fig-box-boot-b}
+![Escenario A](boxplot_bootstrap_escenario_A.png){#fig-box-boot-a}
 
-![Diagrama de caja de la media poblacional (Escenario C). A pesar del colapso logístico del sistema, el Teorema del Límite Central y la Ley de los Grandes Números garantizan la precisión del estimador. La media poblacional se aísla de las trayectorias catastróficas individuales y se fija en 1905 dosis, con un margen de dispersión de 1890 a 1920 dosis.](boxplot_bootstrap_escenario_C.png){#fig-box-boot-c}
+![Escenario B](boxplot_bootstrap_escenario_B.png){#fig-box-boot-b}
+
+![Escenario C](boxplot_bootstrap_escenario_C.png){#fig-box-boot-c}
+
+Diagramas de caja de la media poblacional. **(A)** La caja naranja representa el 50% central del estimador, con la línea verde indicando la verdadera media poblacional. A diferencia del diagrama empírico @fig-boxplot-a (que mostraba datos atípicos de hasta mas de 300 dosis), la varianza se reduce significativamente fluctuando entre 58 y 63 dosis. **(B)** El estimador se estabiliza con precisión milimétrica, concentrándose alrededor de 343 dosis (fluctuación de 338 a 348). **(C)** A pesar del colapso logístico, el Teorema del Límite Central garantiza la precisión del estimador, fijando la media en 1905 dosis, con un margen de dispersión de 1890 a 1920 dosis.
 :::
 
 **Interpretación de la Dispersión:**
