@@ -631,17 +631,13 @@ Figura&nbsp;4.2: Trayectorias simuladas de las tres variantes del proceso de Poi
 </div>
 <p>Las leyes de transición y la evolución temporal de las probabilidades de estado de la cadena <span class="math inline">\(\{\alpha(t)\}_{t \ge 0}\)</span> se encuentran completamente caracterizadas por la matriz de intensidades de transición <span class="math inline">\(Q = (q_{ij}) \in \mathbb{R}^{m \times m}\)</span>. Si definimos las funciones de probabilidad de transición condicional mediante <span class="math inline">\(p_{ij}(h) = \mathbb{P}(\alpha(t+h) = j \mid \alpha(t) = i)\)</span> para un incremento temporal positivo <span class="math inline">\(h &gt; 0\)</span>, las componentes de la matriz <span class="math inline">\(Q\)</span> se determinan evaluando el límite analítico en el origen:</p>
 <ol type="1">
-<li>Para transiciones entre estados distintos (<span class="math inline">\(i \neq j\)</span>), la componente <span class="math inline">\(q_{ij}\)</span> representa la tasa instantánea o intensidad de conmutación desde el régimen <span class="math inline">\(i\)</span> hacia el régimen <span class="math inline">\(j\)</span>, definida como:</li>
-</ol>
-<p><span class="math display">\[
+<li>Para transiciones entre estados distintos (<span class="math inline">\(i \neq j\)</span>), la componente <span class="math inline">\(q_{ij}\)</span> representa la tasa instantánea o intensidad de conmutación desde el régimen <span class="math inline">\(i\)</span> hacia el régimen <span class="math inline">\(j\)</span>, definida como: <span class="math display">\[
 q_{ij} = \lim_{h \to 0^+} \frac{p_{ij}(h)}{h} \ge 0
-\]</span></p>
-<ol start="2" type="1">
-<li>Para los elementos que se encuentran en la diagonal principal (<span class="math inline">\(i = j\)</span>), la componente <span class="math inline">\(q_{ii}\)</span> representa la tasa neta de salida del estado <span class="math inline">\(i\)</span>, cumpliendo por conservación de la probabilidad que la suma por filas de la matriz <span class="math inline">\(Q\)</span> sea idénticamente nula se tiene que:</li>
-</ol>
-<p><span class="math display">\[
+\]</span></li>
+<li>Para los elementos que se encuentran en la diagonal principal (<span class="math inline">\(i = j\)</span>), la componente <span class="math inline">\(q_{ii}\)</span> representa la tasa neta de salida del estado <span class="math inline">\(i\)</span>, cumpliendo por conservación de la probabilidad que la suma por filas de la matriz <span class="math inline">\(Q\)</span> sea idénticamente nula se tiene que: <span class="math display">\[
 q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i} q_{ij}
-\]</span></p>
+\]</span></li>
+</ol>
 <p>A través de esta formulación basada en límites, las probabilidades de transición de primer orden quedan descritas mediante las expresiones <span class="math inline">\(p_{ij}(h) = q_{ij}h + o(h)\)</span> para <span class="math inline">\(i \neq j\)</span>, y <span class="math inline">\(p_{ii}(h) = 1 + q_{ii}h + o(h)\)</span>. Esto permite modelar las conmutaciones macroscópicas de la dinámica del refrigerador sin necesidad de introducir variables temporales discretas ni heurísticas. Las propiedades asintóticas y de estabilidad de estos procesos híbridos se encuentran en <span class="citation" data-cites="asmussen2003markov">(<a href="references.html#ref-asmussen2003markov" role="doc-biblioref">Asmussen 2003</a>)</span>.</p>
 </section>
 </section>
@@ -800,9 +796,8 @@ X(t) = X(0) + \int_0^t b(s, X(s)) ds + \int_0^t \sigma(s, X(s)) dW(s).
 \]</span></li>
 <li><strong>Condición de Crecimiento Lineal:</strong> Existe una constante <span class="math inline">\(K &gt; 0\)</span> tal que: <span class="math display">\[
 \vert b(t, x) \vert^2 + \vert \sigma(t, x) \vert^2 \le K (1 + \vert x \vert^2)
-\]</span></li>
+\]</span> Bajo el cumplimiento de ambas condiciones, existe una única solución fuerte <span class="math inline">\(\{X(t)\}_{t \in [0, T]}\)</span> adaptada a la filtración <span class="math inline">\(\{\mathcal{F}_t\}_{t \ge 0}\)</span>, con trayectorias continuas con probabilidad 1 y tal que <span class="math inline">\(\mathbb{E}\left[\sup_{0 \le t \le T} \vert X(t) \vert^2\right] &lt; \infty\)</span>. Una demostración detallada de este teorema, basada en el método de iteraciones sucesivas de Picard, se encuentra en <span class="citation" data-cites="arnold1974stochastic">(<a href="references.html#ref-arnold1974stochastic" role="doc-biblioref">Arnold 1974</a>)</span>.</li>
 </ol>
-<p>Bajo el cumplimiento de ambas condiciones, existe una única solución fuerte <span class="math inline">\(\{X(t)\}_{t \in [0, T]}\)</span> adaptada a la filtración <span class="math inline">\(\{\mathcal{F}_t\}_{t \ge 0}\)</span>, con trayectorias continuas con probabilidad 1 y tal que <span class="math inline">\(\mathbb{E}\left[\sup_{0 \le t \le T} \vert X(t) \vert^2\right] &lt; \infty\)</span>. Una demostración detallada de este teorema, basada en el método de iteraciones sucesivas de Picard, se encuentra en <span class="citation" data-cites="arnold1974stochastic">(<a href="references.html#ref-arnold1974stochastic" role="doc-biblioref">Arnold 1974</a>)</span>.</p>
 </div>
 <p>En este resultado, la condición de Lipschitz garantiza que dos trayectorias con la misma condición inicial sean indistinguibles (unicidad fuerte), mientras que la condición de crecimiento lineal acota la tasa de cambio de los coeficientes para evitar que la solución diverja a infinito en un tiempo finito (existencia global).</p>
 <p>Para evaluar funciones diferenciables que dependen de la solución de una EDE continua, la regla de la cadena del cálculo ordinario se sustituye por el Lema de Itô.</p>
@@ -814,31 +809,23 @@ df(t, X(t)) &amp;= \left[ \frac{\partial f}{\partial t} (t, X(t)) + b(t, X(t))\f
 \end{aligned}
 \]</span></p>
 </div>
-<p>A diferencia del cálculo clásico, aparece el término adicional de segundo orden <span class="math inline">\(\frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2} dt\)</span>. Este término proviene de que la variación cuadrática del movimiento Browniano no es nula, por lo que en una expansión de Taylor los incrementos cuadráticos aportan una contribución de primer orden temporal, cumpliendo la regla operacional <span class="math inline">\((dW(t))^2 = dt\)</span>.</p>
+<p>A diferencia del cálculo clásico, aparece el término adicional de segundo orden <span class="math inline">\(\displaystyle \dfrac{1}{2}\sigma^2(t, X(t))\dfrac{\partial^2 f}{\partial x^2} dt\)</span>. Este término proviene de que la variación cuadrática del movimiento Browniano no es nula, por lo que en una expansión de Taylor los incrementos cuadráticos aportan una contribución de primer orden temporal, cumpliendo la regla operacional <span class="math inline">\((dW(t))^2 = dt\)</span>.</p>
 <section id="el-proceso-de-ornstein-uhlenbeck-clásico" class="level3" data-number="4.5.1">
 <h3 data-number="4.5.1" class="anchored" data-anchor-id="el-proceso-de-ornstein-uhlenbeck-clásico"><span class="header-section-number">4.5.1</span> El Proceso de Ornstein-Uhlenbeck Clásico</h3>
 <p>Como paso previo al desarrollo del modelo termodinámico híbrido, se introduce una EDE lineal que modela sistemas físicos con retorno hacia un estado de equilibrio: el proceso de Ornstein-Uhlenbeck.</p>
 <div id="def-ou-clasico" class="theorem definition">
-<p><span class="theorem-title"><strong>Definición 4.20 (Proceso de Ornstein-Uhlenbeck)</strong></span> Un proceso estocástico <span class="math inline">\(\{X(t)\}_{t \ge 0}\)</span> es un proceso de Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial estocástica lineal:</p>
-<p><span id="eq-ou-clasica"><span class="math display">\[
+<p><span class="theorem-title"><strong>Definición 4.20 (Proceso de Ornstein-Uhlenbeck)</strong></span> Un proceso estocástico <span class="math inline">\(\{X(t)\}_{t \ge 0}\)</span> es un proceso de Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial estocástica lineal: <span id="eq-ou-clasica"><span class="math display">\[
 dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t), \quad X(0) = x_0,
-\tag{4.3}\]</span></span></p>
-<p>donde <span class="math inline">\(\kappa &gt; 0\)</span> representa la tasa de reversión a la media, <span class="math inline">\(\theta \in \mathbb{R}\)</span> denota el nivel de equilibrio a largo plazo y <span class="math inline">\(\sigma &gt; 0\)</span> es el coeficiente de difusión constante.</p>
+\tag{4.3}\]</span></span> donde <span class="math inline">\(\kappa &gt; 0\)</span> representa la tasa de reversión a la media, <span class="math inline">\(\theta \in \mathbb{R}\)</span> denota el nivel de equilibrio a largo plazo y <span class="math inline">\(\sigma &gt; 0\)</span> es el coeficiente de difusión constante.</p>
 </div>
 <p>La característica principal de la <a href="#eq-ou-clasica" class="quarto-xref">Ecuación&nbsp;<span>4.3</span></a> radica en su deriva lineal <span class="math inline">\(b(x) = \kappa(\theta - x)\)</span>. Cuando el estado del proceso supera el valor de equilibrio (<span class="math inline">\(X(t) &gt; \theta\)</span>), la deriva es negativa y dirige la trayectoria hacia abajo; Si el proceso se encuentra por debajo del nivel de referencia (<span class="math inline">\(X(t) &lt; \theta\)</span>), la deriva es positiva e impulsa un crecimiento hacia <span class="math inline">\(\theta\)</span>. Esta propiedad de reversión a la media convierte a este proceso en el modelo base para describir la evolución térmica de sistemas regidos por la ley de enfriamiento de Newton.</p>
-<p>Aplicando el Lema de Itô (<a href="#thm-ito-clasico" class="quarto-xref">Teorema&nbsp;<span>4.4</span></a>) a la función <span class="math inline">\(f(t, x) = x e^{\kappa t}\)</span>, se obtiene que <span class="math inline">\(d(X(t)e^{\kappa t}) = \kappa \theta e^{\kappa t} dt + \sigma e^{\kappa t} dW(t)\)</span>. Integrando en el intervalo <span class="math inline">\([0, t]\)</span> y despejando <span class="math inline">\(X(t)\)</span>, se obtiene la solución analítica explícita del proceso:</p>
-<p><span id="eq-ou-solucion"><span class="math display">\[
+<p>Aplicando el Lema de Itô (<a href="#thm-ito-clasico" class="quarto-xref">Teorema&nbsp;<span>4.4</span></a>) a la función <span class="math inline">\(f(t, x) = x e^{\kappa t}\)</span>, se obtiene que <span class="math inline">\(d(X(t)e^{\kappa t}) = \kappa \theta e^{\kappa t} dt + \sigma e^{\kappa t} dW(t)\)</span>. Integrando en el intervalo <span class="math inline">\([0, t]\)</span> y despejando <span class="math inline">\(X(t)\)</span>, se obtiene la solución analítica del proceso: <span id="eq-ou-solucion"><span class="math display">\[
 X(t) = \theta + (x_0 - \theta)e^{-\kappa t} + \sigma \int_0^t e^{-\kappa(t-s)} dW(s).
-\tag{4.4}\]</span></span></p>
-<p>Dado que el integrando <span class="math inline">\(e^{-\kappa(t-s)}\)</span> es una función determinista, la integral de Itô en la <a href="#eq-ou-solucion" class="quarto-xref">Ecuación&nbsp;<span>4.4</span></a> es una variable aleatoria normal centrada. Asumiendo una condición inicial determinista <span class="math inline">\(x_0\)</span>, el valor esperado y la varianza del proceso (calculada mediante la Isometría de Itô, <a href="#thm-isometria-ito" class="quarto-xref">Teorema&nbsp;<span>4.1</span></a>) están dadas por:</p>
-<p><span id="eq-ou-moments"><span class="math display">\[
+\tag{4.4}\]</span></span> Dado que el integrando <span class="math inline">\(e^{-\kappa(t-s)}\)</span> es una función determinista, la integral de Itô en la <a href="#eq-ou-solucion" class="quarto-xref">Ecuación&nbsp;<span>4.4</span></a> es una variable aleatoria normal centrada. Asumiendo una condición inicial determinista <span class="math inline">\(x_0\)</span>, el valor esperado y la varianza del proceso (calculada mediante la Isometría de Itô, <a href="#thm-isometria-ito" class="quarto-xref">Teorema&nbsp;<span>4.1</span></a>) están dadas por: <span id="eq-ou-moments"><span class="math display">\[
 \mathbb{E}[X(t)] = \theta + (x_0 - \theta)e^{-\kappa t}, \qquad \text{Var}(X(t)) = \sigma^2 \int_0^t e^{-2\kappa(t-s)} ds = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right).
-\tag{4.5}\]</span></span></p>
-<p>Con lo cual, para todo instante <span class="math inline">\(t &gt; 0\)</span>, la variable aleatoria <span class="math inline">\(X(t)\)</span> sigue una distribución normal:</p>
-<p><span id="eq-ou-distribucion"><span class="math display">\[
+\tag{4.5}\]</span></span> Con lo cual, para todo instante <span class="math inline">\(t &gt; 0\)</span>, la variable aleatoria <span class="math inline">\(X(t)\)</span> sigue una distribución normal: <span id="eq-ou-distribucion"><span class="math display">\[
 X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right) \right),
-\tag{4.6}\]</span></span></p>
-<p>la cual converge cuando <span class="math inline">\(t \to \infty\)</span> a una distribución normal <span class="math inline">\(\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)\)</span> independientemente del estado inicial <span class="math inline">\(x_0\)</span> <span class="citation" data-cites="karlin1998introduction">(<a href="references.html#ref-karlin1998introduction" role="doc-biblioref">Karlin y Taylor 1998</a>)</span>.</p>
+\tag{4.6}\]</span></span> la cual converge cuando <span class="math inline">\(t \to \infty\)</span> a una distribución normal <span class="math inline">\(\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)\)</span> independientemente del estado inicial <span class="math inline">\(x_0\)</span> <span class="citation" data-cites="karlin1998introduction">(<a href="references.html#ref-karlin1998introduction" role="doc-biblioref">Karlin y Taylor 1998</a>)</span>.</p>
 </section>
 </section>
 <section id="ecuaciones-diferenciales-estocásticas-con-saltos" class="level2" data-number="4.6">
