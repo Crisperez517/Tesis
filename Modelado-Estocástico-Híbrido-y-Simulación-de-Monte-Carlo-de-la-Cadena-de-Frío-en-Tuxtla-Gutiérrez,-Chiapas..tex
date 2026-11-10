@@ -215,14 +215,14 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{plain}
 \newtheorem{algorithm}{Algoritmo}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -5732,7 +5732,7 @@ los tres escenarios en estudio.
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{inventario_vs_mermas_escenario_A.png}}
+\includegraphics[width=0.95\linewidth,height=\textheight,keepaspectratio]{inventario_vs_mermas_escenario_A.png}
 
 }
 
@@ -5751,7 +5751,7 @@ prolongada.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{inventario_vs_mermas_escenario_B.png}}
+\includegraphics[width=0.95\linewidth,height=\textheight,keepaspectratio]{inventario_vs_mermas_escenario_B.png}
 
 }
 
@@ -5767,7 +5767,7 @@ acumuladas crece de forma espaciada y moderada.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{inventario_vs_mermas_escenario_C.png}}
+\includegraphics[width=0.95\linewidth,height=\textheight,keepaspectratio]{inventario_vs_mermas_escenario_C.png}
 
 }
 
