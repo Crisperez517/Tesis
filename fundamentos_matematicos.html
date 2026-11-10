@@ -919,7 +919,7 @@ u(t) \le C \exp\left( \int_{t_0}^t v(s) ds \right).
 <p>Cuando los parámetros estructurales de un sistema físico cambian drásticamente debido a transiciones en el entorno (como cortes y restablecimientos en el suministro eléctrico) y simultáneamente el estado continuo sufre perturbaciones impulsivas (como aperturas de puerta), el comportamiento conjunto se describe mediante una ecuación diferencial estocástica híbrida con cambios de régimen de Markov y saltos <span class="citation" data-cites="mao2006stochastic yin2010hybrid">(<a href="references.html#ref-mao2006stochastic" role="doc-biblioref">Mao y Yuan 2006</a>; <a href="references.html#ref-yin2010hybrid" role="doc-biblioref">Yin y Zhu 2010</a>)</span>.</p>
 <p>Para formalizar el análisis sobre subintervalos cuyos extremos son tiempos de paro <a href="#def-tiempo-parada" class="quarto-xref">Definición&nbsp;<span>4.5</span></a> <span class="math inline">\(\tau\)</span> y <span class="math inline">\(\rho\)</span> tales que <span class="math inline">\(0 \le \tau(\omega) \le \rho(\omega)\)</span> para todo <span class="math inline">\(\omega \in \Omega\)</span>, usamos la notación estándar de <strong>intervalos estocásticos</strong> de <span class="citation" data-cites="mao2006stochastic">(<a href="references.html#ref-mao2006stochastic" role="doc-biblioref">Mao y Yuan 2006</a>)</span>: <span class="math display">\[
 \begin{aligned}
-[[\tau,\rho]] &amp;= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t\le\rho(\omega)\}, \\
+\left[[\tau,\rho]\right] &amp;= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t\le\rho(\omega)\}, \\
 [[\tau,\rho[[ &amp;= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t&lt;\rho(\omega)\}.
 \end{aligned}
 \]</span> Asimismo, denotamos por <span class="math inline">\(\mathcal{M}^2([[\tau, \rho]]; \mathbb{R})\)</span> al espacio de los procesos estocásticos real-valuados <span class="math inline">\(\{X(t)\}\)</span> adaptados a <span class="math inline">\(\{\mathcal{F}_t\}_{t \ge 0}\)</span> y definidos en <span class="math inline">\([[\tau, \rho]]\)</span> tales que: <span class="math display">\[
@@ -936,7 +936,7 @@ dX(t) = b(t, X(t^-), \alpha(t^-)) dt + \sigma(t, X(t^-), \alpha(t^-)) dW(t) + \i
 <li>Los coeficientes evaluados cumplen <span class="math inline">\(\{b(t, X(t^-), \alpha(t^-))\} \in \mathcal{L}^1([t_0, T]; \mathbb{R})\)</span>, <span class="math inline">\(\{\sigma(t, X(t^-), \alpha(t^-))\} \in \mathcal{L}^2([t_0, T]; \mathbb{R})\)</span> y <span class="math inline">\(\displaystyle \int_{t_0}^T \int_{\mathcal{Z}} \vert \gamma(t, X(t^-), \alpha(t^-), z) \vert^2 \nu_t(dz) dt &lt; \infty\)</span> casi seguramente.</li>
 <li>Para todo <span class="math inline">\(t \in [t_0, T]\)</span>, se satisface con probabilidad 1 la ecuación integral: <span id="eq-ede-hibrida-int"><span class="math display">\[
 \begin{aligned}
-X(t) &amp;= x_0 + \int_{t_0}^t b(s, X(s^-), \alpha(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-), \alpha(s^-)) dW(s) \\
+X(t) = x_0 &amp;+ \int_{t_0}^t b(s, X(s^-), \alpha(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-), \alpha(s^-)) dW(s) \\
 &amp;+ \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X(s^-), \alpha(s^-), z) \tilde{N}(ds, dz).
 \end{aligned}
 \tag{4.11}\]</span></span></li>
@@ -1047,7 +1047,7 @@ dT(t) =
 \begin{cases}
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) &amp; \text{si } \alpha(t) = 1 \text{ (Con energía)} \\
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) &amp; \text{si } \alpha(t) = 2 \text{ (Corte de luz)}
-\end{cases}, \ 0 \leq t \leq T,
+\end{cases} \ 0 \leq t \leq T,
 \tag{4.19}\]</span></span></p>
 <p>con condiciones iniciales <span class="math inline">\(T(0) = T_0 \in L^2_{\mathcal{F}_0}(\Omega; \mathbb{R})\)</span> y <span class="math inline">\(\alpha(0) = \alpha_0 \in \mathcal{M}\)</span>. En la <a href="#eq-ede-operativa-teorica" class="quarto-xref">Ecuación&nbsp;<span>4.19</span></a>, <span class="math inline">\(\kappa_{on} &gt; 0\)</span> y <span class="math inline">\(\kappa_{off} &gt; 0\)</span> representan las tasas de transferencia térmica en cada régimen, <span class="math inline">\(\theta_{set} \in \mathbb{R}\)</span> denota la temperatura de equilibrio del termostato, <span class="math inline">\(\sigma_{on} &gt; 0\)</span> y <span class="math inline">\(\sigma_{off} &gt; 0\)</span> son los coeficientes de difusión constantes asociados al movimiento Browniano estándar <span class="math inline">\(\{W(t)\}_{t \ge 0}\)</span>, y <span class="math inline">\(T_{amb}: [0, T] \to \mathbb{R}\)</span> es una función determinista continua y acotada que representa la temperatura ambiente exterior.</p>
 <p>Las perturbaciones discretas por apertura de puertas en el régimen <span class="math inline">\(\alpha(t) = 1\)</span> están dadas por un proceso de Poisson compuesto (<a href="#def-poisson-compuesto" class="quarto-xref">Definición&nbsp;<span>4.10</span></a>): <span class="math display">\[
