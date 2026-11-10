@@ -279,39 +279,48 @@ Por el contrario, el Escenario C demuestra que la contingencia operativa elimina
 
 ### Estacionalidad del Riesgo Operativo
 
-Al desglosar las pérdidas de dosis de forma mensual, los datos revelan el verdadero comportamiento del riesgo termodinámico a lo largo del año. Para evaluar esta métrica de forma rigurosa, se analizaron dos estimadores de centralidad: el promedio mensual (que es sensible a los años con apagones catastróficos) y la mediana mensual (estadísticamente más robusta porque representa el escenario más probable, aislando las fluctuaciones extremas).
+Al desglosar mensualmente la pérdida de dosis, los resultados revelan la evolución temporal del riesgo termodinámico a lo largo del año. Para evaluar esta métrica con rigor estadístico, se analizaron dos estimadores de tendencia central: el **promedio mensual** (sensible a años atípicos con apagones prolongados) y la **mediana mensual** (estimador robusto que representa el escenario más probable al aislar las fluctuaciones extremas).
 
-Inicialmente, desde un punto de vista puramente climático, se podría suponer que los meses de calor extremo en Tuxtla Gutiérrez (abril y mayo) presentarían la mayor cantidad de vacunas perdidas debido al estrés térmico ambiental sobre el equipo. No obstante, las 5000 simulaciones de Monte Carlo demuestran que la interacción humana modifica por completo este patrón natural.
+Desde una perspectiva puramente meteorológica, se podría esperar que los meses de calor extremo en Tuxtla Gutiérrez (abril y mayo) concentraran la mayor cantidad de vacunas destruidas debido al estrés térmico ambiental sobre el refrigerador. No obstante, las $5000$ Simulaciones de Monte Carlo demuestran que la interacción por parte del personal médico modifica por completo este patrón estacional.
 
 **Escenario A (Línea Base):**
 
-::: {#layout-barras-a layout-ncol=2}
-![Pérdida promedio mensual (Escenario A). Se observa una pérdida uniforme de alrededor de 5 dosis mensuales, con un ligero pico en mayo debido a las fallas eléctricas por estrés térmico.](barras_estacionales_promedio_escenario_A.png){#fig-promedio-a}
+::: {#fig-barras-a layout-ncol=2}
 
-![Pérdida mediana mensual (Escenario A). La mediana se mantiene estrictamente en cero durante los 12 meses del año, demostrando que en al menos el 50% de los escenarios climáticos normales no se pierde ni una sola vacuna al mes.](barras_estacionales_mediana_escenario_A.png){#fig-mediana-a}
+![Pérdida promedio mensual (Escenario A)](barras_estacionales_promedio_escenario_A.png){#fig-promedio-a}
+
+![Pérdida mediana mensual (Escenario A)](barras_estacionales_mediana_escenario_A.png){#fig-mediana-a}
+
+Estacionalidad mensual de la pérdida de vacunas en el Escenario A (Línea Base). **(Pérdida promedio mensual)** Se observa una pérdida uniforme cercana a las 5 dosis por mes, con un ligero incremento en mayo asociado a las fallas eléctricas por estrés térmico. **(Pérdida mediana mensual)** La mediana se mantiene estrictamente en cero durante los 12 meses del año, demostrando que en al menos el 50% de los años simulados no se pierde ni una sola vacuna al mes.
 :::
 
 **Escenario B (Apego Normativo):**
 
-::: {#layout-barras-b layout-ncol=2}
-![Pérdida promedio mensual (Escenario B). El estrés logístico aumenta significativamente las pérdidas. El mes de enero alcanza casi 40 dosis perdidas, seguido por un pico secundario en agosto durante la temporada de tormentas.](barras_estacionales_promedio_escenario_B.png){#fig-promedio-b}
+::: {#fig-barras-b layout-ncol=2}
 
-![Pérdida mediana mensual (Escenario B). A diferencia del Escenario A, la mediana ya no es cero. Enero y agosto se consolidan como los meses de mayor riesgo operativo esperado.](barras_estacionales_mediana_escenario_B.png){#fig-mediana-b}
+![Pérdida promedio mensual (Escenario B)](barras_estacionales_promedio_escenario_B.png){#fig-promedio-b}
+
+![Pérdida mediana mensual (Escenario B)](barras_estacionales_mediana_escenario_B.png){#fig-mediana-b}
+
+Estacionalidad mensual de la pérdida de vacunas en el Escenario B (Apego Normativo). **(Pérdida promedio mensual)** El estrés logístico incrementa notablemente las perdidas, alcanzando casi 40 dosis perdidas en enero y un pico secundario en agosto durante la temporada de tormentas. **(Pérdida mediana mensual)** A diferencia del Escenario A, la mediana deja de ser nula en todo el año, consolidando a enero y agosto como los meses de mayor riesgo operativo esperado.
 :::
 
 **Escenario C (Contingencia):**
 
-::: {#layout-barras-c layout-ncol=2}
-![Pérdida promedio mensual (Escenario C). La saturación logística domina el sistema, superando las 150 dosis mensuales de forma casi homogénea a lo largo del año.](barras_estacionales_promedio_escenario_C.png){#fig-promedio-c}
+::: {#fig-barras-c layout-ncol=2}
 
-![Pérdida mediana mensual (Escenario C). El colapso se confirma. Julio destaca ligeramente como el mes más crítico, superando las 160 dosis perdidas como escenario más probable.](barras_estacionales_mediana_escenario_C.png){#fig-mediana-c}
+![Pérdida promedio mensual (Escenario C)](barras_estacionales_promedio_escenario_C.png){#fig-promedio-c}
+
+![Pérdida mediana mensual (Escenario C)](barras_estacionales_mediana_escenario_C.png){#fig-mediana-c}
+
+Estacionalidad mensual de la pérdida de vacunas en el Escenario C (Contingencia). **(Pérdida promedio mensual)** La saturación logística domina el sistema, superando las 150 dosis mensuales destruidas de forma casi homogénea durante todo el año. **(Pérdida mediana mensual)** Se confirma el colapso térmico continuo; julio destaca ligeramente como el mes más crítico al superar las 160 dosis perdidas como escenario más probable.
 :::
 
 **Interpretación de la Estacionalidad:**
 
-El análisis estacional confirma que **el estrés operativo domina por completo al factor climático.** En el Escenario A, la @fig-mediana-a demuestra que la infraestructura termoaislante del equipo Haier HBC-150 es lo suficientemente robusta para sobrevivir a la intemperie chiapaneca sin sufrir daños (mediana igual a cero en todos los meses). Las pérdidas residuales observadas en el promedio del Escenario A son producto exclusivo de la cola de la distribución (años atípicamente catastróficos).
+El análisis comparativo confirma que **el estrés operativo domina por completo al factor climático**. En el Escenario A, la @fig-mediana-a demuestra que el aislamiento pasivo del refrigerador Haier HBC-150 es suficientemente robusto para soportar las condiciones climáticas de Tuxtla Gutiérrez sin sufrir mermas en un año típico (mediana igual a cero en todos los meses). Las pérdidas residuales observadas en el promedio mensual (@fig-promedio-a) provienen exclusivamente de la cola derecha de la distribución, es decir, de años aislados con apagones extremos.
 
-Sin embargo, al introducir la interacción humana, el patrón climático desaparece. En el Escenario B, la vulnerabilidad ya no recae en la primavera, sino que se desplaza hacia enero y agosto, coincidiendo con las épocas donde el volumen del inventario interactúa de manera letal con las perturbaciones eléctricas. Finalmente, en el Escenario C, la contingencia operativa nivela el riesgo: el equipo pierde su capacidad de recuperación térmica provocando que todos los meses del año (sin importar si es invierno o verano) resulten devastadores para la viabilidad de las vacunas, consolidando la destrucción sistemática del inventario activo.
+Sin embargo, al incorporar la manipulación clínica del equipo, el patrón puramente climático desaparece. En el Escenario B (@fig-promedio-b y @fig-mediana-b), la máxima vulnerabilidad no ocurre en la primavera, sino que se desplaza hacia enero y agosto, coincidiendo con los periodos donde un alto nivel de inventario almacenado interactúa con las interrupciones eléctricas. Finalmente, en el Escenario C (@fig-promedio-c y @fig-mediana-c), la contingencia epidemiológica homogeniza el riesgo: el exceso de aperturas agota la capacidad de recuperación térmica del equipo, provocando que todos los meses del año sin importar si es invierno o verano resulten críticos para la viabilidad del biológico y generando una pérdida continua en el inventario activo.
 
 ### Distribución del Riesgo Operativo
 
@@ -331,21 +340,24 @@ Sin embargo, en el Escenario C, la distribución tiene una forma casi simétrica
 
 ### Dispersión y Valores Atípicos (Diagramas de Caja)
 
-Para cuantificar visualmente la varianza, los rangos intercuartílicos y la magnitud exacta de los años extremos observados en las colas de los histogramas, se construyeron diagramas de caja (*boxplots*) para la pérdida absoluta de vacunas en los tres escenarios operativos.
+Para cuantificar visualmente la dispersión, los rangos intercuartílicos y la magnitud exacta de los años extremos observados en las colas de los histogramas, se construyeron diagramas de caja (*boxplots*) para el volumen anual de vacunas perdidas bajo los tres escenarios operativos.
 
-::: {#layout-boxplots layout-ncol=3}
-![Diagrama de caja de vacunas perdidas anualmente (Escenario A). La caja morada contiene el 50% central de las simulaciones, con la línea horizontal verde marcando la mediana. Se observa una caja muy estrecha, pero con una inmensa cantidad de puntos negros por encima del bigote superior; estos representan los años atípicamente catastróficos que arrastran el promedio poblacional hacia arriba.](boxplot_angosto_escenario_A.png){#fig-boxplot-a}
+::: {#fig-boxplots-empiricos layout-ncol=3}
 
-![Diagrama de caja de vacunas perdidas anualmente (Escenario B). La caja se eleva y se ensancha verticalmente, reflejando un aumento tanto en la mediana como en la varianza general del sistema. Los valores atípicos siguen concentrados exclusivamente en la cola superior, alcanzando escenarios de riesgo con casi 900 dosis perdidas.](boxplot_angosto_escenario_B.png){#fig-boxplot-b}
+![Escenario A](boxplot_angosto_escenario_A.png){#fig-boxplot-a}
 
-![Diagrama de caja de vacunas perdidas anualmente (Escenario C). La caja se posiciona en un nivel de destrucción extremo. A diferencia de los escenarios anteriores, el aumento masivo de la varianza provoca que aparezcan valores atípicos tanto en la cola superior (superando las 3000 dosis) como en la inferior (cayendo a 1000 dosis), confirmando la forma de campana observada en su histograma.](boxplot_angosto_escenario_C.png){#fig-boxplot-c}
+![Escenario B](boxplot_angosto_escenario_B.png){#fig-boxplot-b}
+
+![Escenario C](boxplot_angosto_escenario_C.png){#fig-boxplot-c}
+
+Diagramas de caja del volumen anual de vacunas perdidas. **(Escenario A)** La caja morada contiene el 50% central de las simulaciones y la línea horizontal verde indica la mediana. Se observa una caja estrecha acompañada de una gran cantidad de valores atípicos por encima del bigote superior, los cuales representan los años con apagones severos que elevan el promedio poblacional. **(Escenario B)** La caja se desplaza hacia arriba y se ensancha verticalmente, reflejando un incremento tanto en la mediana como en la varianza general del sistema; los valores atípicos permanecen concentrados en la cola superior, alcanzando casi 900 dosis perdidas. **(Escenario C)** La caja se ubica en un nivel de pérdida crítica; el aumento de la varianza genera valores atípicos tanto en la cola superior (superando las 3,000 dosis) como en la inferior (alrededor de 1,000 dosis), confirmando la simetría en forma de campana observada en su histograma (@fig-hist-c).
 :::
 
 **Interpretación de la Dispersión:**
 
-El análisis de los diagramas de caja confirma la asimetría del riesgo termodinámico. En el Escenario A, el rango intercuartílico (la altura de la caja morada) es sumamente pequeño, indicando que en la mayoría de los años las pérdidas son mínimas y muy similares entre sí. Sin embargo, hay una alta cantidad de valores atípicos extremos: años donde apagones severos rompen la inercia térmica y disparan las pérdidas muy por encima del comportamiento normal. 
+El análisis comparativo de los diagramas de caja confirma la asimetría del riesgo termodinámico. En el Escenario A (@fig-boxplot-a), el rango intercuartílico (la altura de la caja morada) es reducido, lo que indica que en la mayoría de los años simulados las mermas son bajas y muy similares entre sí. Sin embargo, destaca una alta concentración de valores atípicos extremos en la parte superior, correspondientes a años aislados en los que apagones prolongados superan la inercia térmica del refrigerador y disparan la destrucción de dosis muy por encima del comportamiento habitual.
 
-Conforme se introduce la interacción humana (Escenario B y C), el tamaño de la caja crece significativamente, demostrando que las aperturas de puerta inyectan una enorme varianza e incertidumbre al sistema. Esta evidencia visual (cajas asimétricas y colas pesadas de valores atípicos) indica fuertemente que los datos de las mermas no provienen de una distribución Normal. Para justificar el uso de estadística inferencial avanzada, es necesario comprobar esta falta de normalidad mediante una prueba de bondad de ajuste.
+Conforme se incorpora la interacción del personal médico en los escenarios B y C (@fig-boxplot-b y @fig-boxplot-c), la amplitud de la caja crece rapidamente, demostrando que la frecuencia de aperturas de puerta inyecta una elevada varianza e incertidumbre al sistema. Esta evidencia visual caracterizada por cajas asimétricas y colas pesadas de valores atípicos sugiere que los datos de las mermas no provienen de una distribución Normal. Para justificar el uso de estadística inferencial no paramétrica, a continuación se comprueba formalmente esta falta de normalidad mediante una prueba de bondad de ajuste.
 
 ### Análisis de Distribuciones y Prueba de Normalidad
 
@@ -452,7 +464,7 @@ Para ilustrar la reducción de la incertidumbre lograda por la inferencia no par
 
 ![Escenario C](boxplot_bootstrap_escenario_C.png){#fig-box-boot-c}
 
-Diagramas de caja de la media poblacional. **(A)** La caja naranja representa el 50% central del estimador, con la línea verde indicando la verdadera media poblacional. A diferencia del diagrama empírico @fig-boxplot-a (que mostraba datos atípicos de hasta mas de 300 dosis), la varianza se reduce significativamente fluctuando entre 58 y 63 dosis. **(B)** El estimador se estabiliza con precisión milimétrica, concentrándose alrededor de 343 dosis (fluctuación de 338 a 348). **(C)** A pesar del colapso logístico, el Teorema del Límite Central garantiza la precisión del estimador, fijando la media en 1905 dosis, con un margen de dispersión de 1890 a 1920 dosis.
+Diagramas de caja de la media poblacional. **(Escenario A)** La caja naranja representa el 50% central del estimador, con la línea verde indicando la verdadera media poblacional. A diferencia del diagrama empírico @fig-boxplot-a (que mostraba datos atípicos de hasta mas de 300 dosis), la varianza se reduce significativamente fluctuando entre 58 y 63 dosis. **(Escenario B)** El estimador se estabiliza con precisión milimétrica, concentrándose alrededor de 343 dosis (fluctuación de 338 a 348). **(Escenario C)** A pesar del colapso logístico, el Teorema del Límite Central garantiza la precisión del estimador, fijando la media en 1905 dosis, con un margen de dispersión de 1890 a 1920 dosis.
 :::
 
 **Interpretación de la Dispersión:**

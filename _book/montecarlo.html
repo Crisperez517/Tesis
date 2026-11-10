@@ -988,98 +988,119 @@ Figura&nbsp;8.14: 30 trayectorias anuales aleatorias (Escenario C). La saturaci�
 </section>
 <section id="estacionalidad-del-riesgo-operativo" class="level3" data-number="8.7.3">
 <h3 data-number="8.7.3" class="anchored" data-anchor-id="estacionalidad-del-riesgo-operativo"><span class="header-section-number">8.7.3</span> Estacionalidad del Riesgo Operativo</h3>
-<p>Al desglosar las pérdidas de dosis de forma mensual, los datos revelan el verdadero comportamiento del riesgo termodinámico a lo largo del año. Para evaluar esta métrica de forma rigurosa, se analizaron dos estimadores de centralidad: el promedio mensual (que es sensible a los años con apagones catastróficos) y la mediana mensual (estadísticamente más robusta porque representa el escenario más probable, aislando las fluctuaciones extremas).</p>
-<p>Inicialmente, desde un punto de vista puramente climático, se podría suponer que los meses de calor extremo en Tuxtla Gutiérrez (abril y mayo) presentarían la mayor cantidad de vacunas perdidas debido al estrés térmico ambiental sobre el equipo. No obstante, las 5000 simulaciones de Monte Carlo demuestran que la interacción humana modifica por completo este patrón natural.</p>
+<p>Al desglosar mensualmente la pérdida de dosis, los resultados revelan la evolución temporal del riesgo termodinámico a lo largo del año. Para evaluar esta métrica con rigor estadístico, se analizaron dos estimadores de tendencia central: el <strong>promedio mensual</strong> (sensible a años atípicos con apagones prolongados) y la <strong>mediana mensual</strong> (estimador robusto que representa el escenario más probable al aislar las fluctuaciones extremas).</p>
+<p>Desde una perspectiva puramente meteorológica, se podría esperar que los meses de calor extremo en Tuxtla Gutiérrez (abril y mayo) concentraran la mayor cantidad de vacunas destruidas debido al estrés térmico ambiental sobre el refrigerador. No obstante, las <span class="math inline">\(5000\)</span> Simulaciones de Monte Carlo demuestran que la interacción por parte del personal médico modifica por completo este patrón estacional.</p>
 <p><strong>Escenario A (Línea Base):</strong></p>
-<div id="layout-barras-a" class="quarto-layout-panel" data-layout-ncol="2">
+<div id="fig-barras-a" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barras-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-barras-a" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-promedio-a" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-promedio-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="barras_estacionales_promedio_escenario_A.png" class="img-fluid figure-img">
+<img src="barras_estacionales_promedio_escenario_A.png" class="img-fluid figure-img" data-ref-parent="fig-barras-a">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-promedio-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.15: Pérdida promedio mensual (Escenario A). Se observa una pérdida uniforme de alrededor de 5 dosis mensuales, con un ligero pico en mayo debido a las fallas eléctricas por estrés térmico.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-promedio-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Pérdida promedio mensual (Escenario A)
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-barras-a" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-mediana-a" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mediana-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="barras_estacionales_mediana_escenario_A.png" class="img-fluid figure-img">
+<img src="barras_estacionales_mediana_escenario_A.png" class="img-fluid figure-img" data-ref-parent="fig-barras-a">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mediana-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.16: Pérdida mediana mensual (Escenario A). La mediana se mantiene estrictamente en cero durante los 12 meses del año, demostrando que en al menos el 50% de los escenarios climáticos normales no se pierde ni una sola vacuna al mes.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mediana-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Pérdida mediana mensual (Escenario A)
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8.15: Estacionalidad mensual de la pérdida de vacunas en el Escenario A (Línea Base). <strong>(Pérdida promedio mensual)</strong> Se observa una pérdida uniforme cercana a las 5 dosis por mes, con un ligero incremento en mayo asociado a las fallas eléctricas por estrés térmico. <strong>(Pérdida mediana mensual)</strong> La mediana se mantiene estrictamente en cero durante los 12 meses del año, demostrando que en al menos el 50% de los años simulados no se pierde ni una sola vacuna al mes.
+</figcaption>
+</figure>
 </div>
 <p><strong>Escenario B (Apego Normativo):</strong></p>
-<div id="layout-barras-b" class="quarto-layout-panel" data-layout-ncol="2">
+<div id="fig-barras-b" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barras-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-barras-b" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-promedio-b" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-promedio-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="barras_estacionales_promedio_escenario_B.png" class="img-fluid figure-img">
+<img src="barras_estacionales_promedio_escenario_B.png" class="img-fluid figure-img" data-ref-parent="fig-barras-b">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-promedio-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.17: Pérdida promedio mensual (Escenario B). El estrés logístico aumenta significativamente las pérdidas. El mes de enero alcanza casi 40 dosis perdidas, seguido por un pico secundario en agosto durante la temporada de tormentas.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-promedio-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Pérdida promedio mensual (Escenario B)
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-barras-b" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-mediana-b" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mediana-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="barras_estacionales_mediana_escenario_B.png" class="img-fluid figure-img">
+<img src="barras_estacionales_mediana_escenario_B.png" class="img-fluid figure-img" data-ref-parent="fig-barras-b">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mediana-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.18: Pérdida mediana mensual (Escenario B). A diferencia del Escenario A, la mediana ya no es cero. Enero y agosto se consolidan como los meses de mayor riesgo operativo esperado.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mediana-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Pérdida mediana mensual (Escenario B)
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8.16: Estacionalidad mensual de la pérdida de vacunas en el Escenario B (Apego Normativo). <strong>(Pérdida promedio mensual)</strong> El estrés logístico incrementa notablemente las perdidas, alcanzando casi 40 dosis perdidas en enero y un pico secundario en agosto durante la temporada de tormentas. <strong>(Pérdida mediana mensual)</strong> A diferencia del Escenario A, la mediana deja de ser nula en todo el año, consolidando a enero y agosto como los meses de mayor riesgo operativo esperado.
+</figcaption>
+</figure>
 </div>
 <p><strong>Escenario C (Contingencia):</strong></p>
-<div id="layout-barras-c" class="quarto-layout-panel" data-layout-ncol="2">
+<div id="fig-barras-c" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barras-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-barras-c" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-promedio-c" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-promedio-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="barras_estacionales_promedio_escenario_C.png" class="img-fluid figure-img">
+<img src="barras_estacionales_promedio_escenario_C.png" class="img-fluid figure-img" data-ref-parent="fig-barras-c">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-promedio-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.19: Pérdida promedio mensual (Escenario C). La saturación logística domina el sistema, superando las 150 dosis mensuales de forma casi homogénea a lo largo del año.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-promedio-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Pérdida promedio mensual (Escenario C)
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-barras-c" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-mediana-c" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mediana-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="barras_estacionales_mediana_escenario_C.png" class="img-fluid figure-img">
+<img src="barras_estacionales_mediana_escenario_C.png" class="img-fluid figure-img" data-ref-parent="fig-barras-c">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mediana-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.20: Pérdida mediana mensual (Escenario C). El colapso se confirma. Julio destaca ligeramente como el mes más crítico, superando las 160 dosis perdidas como escenario más probable.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mediana-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Pérdida mediana mensual (Escenario C)
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barras-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8.17: Estacionalidad mensual de la pérdida de vacunas en el Escenario C (Contingencia). <strong>(Pérdida promedio mensual)</strong> La saturación logística domina el sistema, superando las 150 dosis mensuales destruidas de forma casi homogénea durante todo el año. <strong>(Pérdida mediana mensual)</strong> Se confirma el colapso térmico continuo; julio destaca ligeramente como el mes más crítico al superar las 160 dosis perdidas como escenario más probable.
+</figcaption>
+</figure>
 </div>
 <p><strong>Interpretación de la Estacionalidad:</strong></p>
-<p>El análisis estacional confirma que <strong>el estrés operativo domina por completo al factor climático.</strong> En el Escenario A, la <a href="#fig-mediana-a" class="quarto-xref">Figura&nbsp;<span>8.16</span></a> demuestra que la infraestructura termoaislante del equipo Haier HBC-150 es lo suficientemente robusta para sobrevivir a la intemperie chiapaneca sin sufrir daños (mediana igual a cero en todos los meses). Las pérdidas residuales observadas en el promedio del Escenario A son producto exclusivo de la cola de la distribución (años atípicamente catastróficos).</p>
-<p>Sin embargo, al introducir la interacción humana, el patrón climático desaparece. En el Escenario B, la vulnerabilidad ya no recae en la primavera, sino que se desplaza hacia enero y agosto, coincidiendo con las épocas donde el volumen del inventario interactúa de manera letal con las perturbaciones eléctricas. Finalmente, en el Escenario C, la contingencia operativa nivela el riesgo: el equipo pierde su capacidad de recuperación térmica provocando que todos los meses del año (sin importar si es invierno o verano) resulten devastadores para la viabilidad de las vacunas, consolidando la destrucción sistemática del inventario activo.</p>
+<p>El análisis comparativo confirma que <strong>el estrés operativo domina por completo al factor climático</strong>. En el Escenario A, la <a href="#fig-mediana-a" class="quarto-xref">Figura&nbsp;<span>8.15 (b)</span></a> demuestra que el aislamiento pasivo del refrigerador Haier HBC-150 es suficientemente robusto para soportar las condiciones climáticas de Tuxtla Gutiérrez sin sufrir mermas en un año típico (mediana igual a cero en todos los meses). Las pérdidas residuales observadas en el promedio mensual (<a href="#fig-promedio-a" class="quarto-xref">Figura&nbsp;<span>8.15 (a)</span></a>) provienen exclusivamente de la cola derecha de la distribución, es decir, de años aislados con apagones extremos.</p>
+<p>Sin embargo, al incorporar la manipulación clínica del equipo, el patrón puramente climático desaparece. En el Escenario B (<a href="#fig-promedio-b" class="quarto-xref">Figura&nbsp;<span>8.16 (a)</span></a> y <a href="#fig-mediana-b" class="quarto-xref">Figura&nbsp;<span>8.16 (b)</span></a>), la máxima vulnerabilidad no ocurre en la primavera, sino que se desplaza hacia enero y agosto, coincidiendo con los periodos donde un alto nivel de inventario almacenado interactúa con las interrupciones eléctricas. Finalmente, en el Escenario C (<a href="#fig-promedio-c" class="quarto-xref">Figura&nbsp;<span>8.17 (a)</span></a> y <a href="#fig-mediana-c" class="quarto-xref">Figura&nbsp;<span>8.17 (b)</span></a>), la contingencia epidemiológica homogeniza el riesgo: el exceso de aperturas agota la capacidad de recuperación térmica del equipo, provocando que todos los meses del año sin importar si es invierno o verano resulten críticos para la viabilidad del biológico y generando una pérdida continua en el inventario activo.</p>
 </section>
 <section id="distribución-del-riesgo-operativo" class="level3" data-number="8.7.4">
 <h3 data-number="8.7.4" class="anchored" data-anchor-id="distribución-del-riesgo-operativo"><span class="header-section-number">8.7.4</span> Distribución del Riesgo Operativo</h3>
@@ -1090,7 +1111,7 @@ Figura&nbsp;8.20: Pérdida mediana mensual (Escenario C). El colapso se confirma
 <img src="histograma_porcentajes_escenario_A.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.21: Histograma del porcentaje de vacunas perdidas anualmente (Escenario A). La distribución presenta una fuerte asimetría positiva (una cola larga estirada hacia la derecha). Esto indica que, aunque la concentración principal de los datos sugiere pérdidas bajas (mediana del 1.01% (línea verde)), existen años atípicamente catastróficos que arrastran el promedio general hacia arriba (media del 1.21% (línea azul)). Las líneas rojas punteadas delimitan el intervalo empírico del 95%, mostrando la alta dispersión hacia años extremos.
+Figura&nbsp;8.18: Histograma del porcentaje de vacunas perdidas anualmente (Escenario A). La distribución presenta una fuerte asimetría positiva (una cola larga estirada hacia la derecha). Esto indica que, aunque la concentración principal de los datos sugiere pérdidas bajas (mediana del 1.01% (línea verde)), existen años atípicamente catastróficos que arrastran el promedio general hacia arriba (media del 1.21% (línea azul)). Las líneas rojas punteadas delimitan el intervalo empírico del 95%, mostrando la alta dispersión hacia años extremos.
 </figcaption>
 </figure>
 </div>
@@ -1100,7 +1121,7 @@ Figura&nbsp;8.21: Histograma del porcentaje de vacunas perdidas anualmente (Esce
 <img src="histograma_porcentajes_escenario_B.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.22: Histograma del porcentaje de vacunas perdidas anualmente (Escenario B). Al introducir el estrés logístico normativo (aperturas de la puerta del equipo), la distribución completa se desplaza hacia la derecha, incrementando tanto la mediana (1.32%) como la media (1.36%). Aunque la asimetría disminuye ligeramente en comparación con el Escenario A, la cola derecha sigue advirtiendo de años de riesgo donde la pérdida relativa supera el 2.27%.
+Figura&nbsp;8.19: Histograma del porcentaje de vacunas perdidas anualmente (Escenario B). Al introducir el estrés logístico normativo (aperturas de la puerta del equipo), la distribución completa se desplaza hacia la derecha, incrementando tanto la mediana (1.32%) como la media (1.36%). Aunque la asimetría disminuye ligeramente en comparación con el Escenario A, la cola derecha sigue advirtiendo de años de riesgo donde la pérdida relativa supera el 2.27%.
 </figcaption>
 </figure>
 </div>
@@ -1110,7 +1131,7 @@ Figura&nbsp;8.22: Histograma del porcentaje de vacunas perdidas anualmente (Esce
 <img src="histograma_porcentajes_escenario_C.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.23: Histograma del porcentaje de vacunas perdidas anualmente (Escenario C). La contingencia extrema transforma drásticamente la forma de la distribución, volviéndola visualmente simétrica (similar a una campana de Gauss). La mediana (2.56%) y la media (2.57%) prácticamente se igualan, indicando un nivel de destrucción sumamente alto y un intervalo de confianza del 95% altamente concentrado.
+Figura&nbsp;8.20: Histograma del porcentaje de vacunas perdidas anualmente (Escenario C). La contingencia extrema transforma drásticamente la forma de la distribución, volviéndola visualmente simétrica (similar a una campana de Gauss). La mediana (2.56%) y la media (2.57%) prácticamente se igualan, indicando un nivel de destrucción sumamente alto y un intervalo de confianza del 95% altamente concentrado.
 </figcaption>
 </figure>
 </div>
@@ -1120,50 +1141,57 @@ Figura&nbsp;8.23: Histograma del porcentaje de vacunas perdidas anualmente (Esce
 </section>
 <section id="dispersión-y-valores-atípicos-diagramas-de-caja" class="level3" data-number="8.7.5">
 <h3 data-number="8.7.5" class="anchored" data-anchor-id="dispersión-y-valores-atípicos-diagramas-de-caja"><span class="header-section-number">8.7.5</span> Dispersión y Valores Atípicos (Diagramas de Caja)</h3>
-<p>Para cuantificar visualmente la varianza, los rangos intercuartílicos y la magnitud exacta de los años extremos observados en las colas de los histogramas, se construyeron diagramas de caja (<em>boxplots</em>) para la pérdida absoluta de vacunas en los tres escenarios operativos.</p>
-<div id="layout-boxplots" class="quarto-layout-panel" data-layout-ncol="3">
+<p>Para cuantificar visualmente la dispersión, los rangos intercuartílicos y la magnitud exacta de los años extremos observados en las colas de los histogramas, se construyeron diagramas de caja (<em>boxplots</em>) para el volumen anual de vacunas perdidas bajo los tres escenarios operativos.</p>
+<div id="fig-boxplots-empiricos" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplots-empiricos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-boxplots-empiricos" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div id="fig-boxplot-a" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-boxplot-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="boxplot_angosto_escenario_A.png" class="img-fluid figure-img">
+<img src="boxplot_angosto_escenario_A.png" class="img-fluid figure-img" data-ref-parent="fig-boxplots-empiricos">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.24: Diagrama de caja de vacunas perdidas anualmente (Escenario A). La caja morada contiene el 50% central de las simulaciones, con la línea horizontal verde marcando la mediana. Se observa una caja muy estrecha, pero con una inmensa cantidad de puntos negros por encima del bigote superior; estos representan los años atípicamente catastróficos que arrastran el promedio poblacional hacia arriba.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-boxplot-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Escenario A
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-boxplots-empiricos" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div id="fig-boxplot-b" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-boxplot-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="boxplot_angosto_escenario_B.png" class="img-fluid figure-img">
+<img src="boxplot_angosto_escenario_B.png" class="img-fluid figure-img" data-ref-parent="fig-boxplots-empiricos">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.25: Diagrama de caja de vacunas perdidas anualmente (Escenario B). La caja se eleva y se ensancha verticalmente, reflejando un aumento tanto en la mediana como en la varianza general del sistema. Los valores atípicos siguen concentrados exclusivamente en la cola superior, alcanzando escenarios de riesgo con casi 900 dosis perdidas.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-boxplot-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Escenario B
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-boxplots-empiricos" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div id="fig-boxplot-c" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-boxplot-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="boxplot_angosto_escenario_C.png" class="img-fluid figure-img">
+<img src="boxplot_angosto_escenario_C.png" class="img-fluid figure-img" data-ref-parent="fig-boxplots-empiricos">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.26: Diagrama de caja de vacunas perdidas anualmente (Escenario C). La caja se posiciona en un nivel de destrucción extremo. A diferencia de los escenarios anteriores, el aumento masivo de la varianza provoca que aparezcan valores atípicos tanto en la cola superior (superando las 3000 dosis) como en la inferior (cayendo a 1000 dosis), confirmando la forma de campana observada en su histograma.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-boxplot-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Escenario C
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplots-empiricos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8.21: Diagramas de caja del volumen anual de vacunas perdidas. <strong>(Escenario A)</strong> La caja morada contiene el 50% central de las simulaciones y la línea horizontal verde indica la mediana. Se observa una caja estrecha acompañada de una gran cantidad de valores atípicos por encima del bigote superior, los cuales representan los años con apagones severos que elevan el promedio poblacional. <strong>(Escenario B)</strong> La caja se desplaza hacia arriba y se ensancha verticalmente, reflejando un incremento tanto en la mediana como en la varianza general del sistema; los valores atípicos permanecen concentrados en la cola superior, alcanzando casi 900 dosis perdidas. <strong>(Escenario C)</strong> La caja se ubica en un nivel de pérdida crítica; el aumento de la varianza genera valores atípicos tanto en la cola superior (superando las 3,000 dosis) como en la inferior (alrededor de 1,000 dosis), confirmando la simetría en forma de campana observada en su histograma (<a href="#fig-hist-c" class="quarto-xref">Figura&nbsp;<span>8.20</span></a>).
+</figcaption>
+</figure>
 </div>
 <p><strong>Interpretación de la Dispersión:</strong></p>
-<p>El análisis de los diagramas de caja confirma la asimetría del riesgo termodinámico. En el Escenario A, el rango intercuartílico (la altura de la caja morada) es sumamente pequeño, indicando que en la mayoría de los años las pérdidas son mínimas y muy similares entre sí. Sin embargo, hay una alta cantidad de valores atípicos extremos: años donde apagones severos rompen la inercia térmica y disparan las pérdidas muy por encima del comportamiento normal.</p>
-<p>Conforme se introduce la interacción humana (Escenario B y C), el tamaño de la caja crece significativamente, demostrando que las aperturas de puerta inyectan una enorme varianza e incertidumbre al sistema. Esta evidencia visual (cajas asimétricas y colas pesadas de valores atípicos) indica fuertemente que los datos de las mermas no provienen de una distribución Normal. Para justificar el uso de estadística inferencial avanzada, es necesario comprobar esta falta de normalidad mediante una prueba de bondad de ajuste.</p>
+<p>El análisis comparativo de los diagramas de caja confirma la asimetría del riesgo termodinámico. En el Escenario A (<a href="#fig-boxplot-a" class="quarto-xref">Figura&nbsp;<span>8.21 (a)</span></a>), el rango intercuartílico (la altura de la caja morada) es reducido, lo que indica que en la mayoría de los años simulados las mermas son bajas y muy similares entre sí. Sin embargo, destaca una alta concentración de valores atípicos extremos en la parte superior, correspondientes a años aislados en los que apagones prolongados superan la inercia térmica del refrigerador y disparan la destrucción de dosis muy por encima del comportamiento habitual.</p>
+<p>Conforme se incorpora la interacción del personal médico en los escenarios B y C (<a href="#fig-boxplot-b" class="quarto-xref">Figura&nbsp;<span>8.21 (b)</span></a> y <a href="#fig-boxplot-c" class="quarto-xref">Figura&nbsp;<span>8.21 (c)</span></a>), la amplitud de la caja crece rapidamente, demostrando que la frecuencia de aperturas de puerta inyecta una elevada varianza e incertidumbre al sistema. Esta evidencia visual caracterizada por cajas asimétricas y colas pesadas de valores atípicos sugiere que los datos de las mermas no provienen de una distribución Normal. Para justificar el uso de estadística inferencial no paramétrica, a continuación se comprueba formalmente esta falta de normalidad mediante una prueba de bondad de ajuste.</p>
 </section>
 <section id="análisis-de-distribuciones-y-prueba-de-normalidad" class="level3" data-number="8.7.6">
 <h3 data-number="8.7.6" class="anchored" data-anchor-id="análisis-de-distribuciones-y-prueba-de-normalidad"><span class="header-section-number">8.7.6</span> Análisis de Distribuciones y Prueba de Normalidad</h3>
@@ -1378,7 +1406,7 @@ Tabla&nbsp;8.3: Estadísticas de riesgo: Promedio anual esperado aplicando el M�
 <img src="histograma_bootstrap_escenario_A.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boot-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.27: Distribución normalizada del porcentaje de pérdida (Escenario A). El eje horizontal representa el promedio esperado del porcentaje de vacunas perdidas, mientras que el eje vertical contabiliza la frecuencia de las 10000 medias de remuestreo. La línea azul indica la Media Bootstrap poblacional (1.21%), y las líneas rojas punteadas delimitan los límites exactos del Intervalo de Confianza Inferior (1.18%) y Superior (1.24%) al 95%. La distribución ha perdido por completo su asimetría original, adoptando la forma de una campana de Gauss.
+Figura&nbsp;8.22: Distribución normalizada del porcentaje de pérdida (Escenario A). El eje horizontal representa el promedio esperado del porcentaje de vacunas perdidas, mientras que el eje vertical contabiliza la frecuencia de las 10000 medias de remuestreo. La línea azul indica la Media Bootstrap poblacional (1.21%), y las líneas rojas punteadas delimitan los límites exactos del Intervalo de Confianza Inferior (1.18%) y Superior (1.24%) al 95%. La distribución ha perdido por completo su asimetría original, adoptando la forma de una campana de Gauss.
 </figcaption>
 </figure>
 </div>
@@ -1388,7 +1416,7 @@ Figura&nbsp;8.27: Distribución normalizada del porcentaje de pérdida (Escenari
 <img src="histograma_bootstrap_escenario_B.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boot-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.28: Distribución normalizada del porcentaje de pérdida (Escenario B). La distribución de medias converge a una campana simétrica centrada en una pérdida poblacional del 1.36%, con un intervalo de confianza del 95% reducido que va del 1.34% al 1.37%.
+Figura&nbsp;8.23: Distribución normalizada del porcentaje de pérdida (Escenario B). La distribución de medias converge a una campana simétrica centrada en una pérdida poblacional del 1.36%, con un intervalo de confianza del 95% reducido que va del 1.34% al 1.37%.
 </figcaption>
 </figure>
 </div>
@@ -1398,7 +1426,7 @@ Figura&nbsp;8.28: Distribución normalizada del porcentaje de pérdida (Escenari
 <img src="histograma_bootstrap_escenario_C.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boot-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.29: Distribución normalizada del porcentaje de pérdida (Escenario C). La campana se establece en el nivel más crítico del análisis, confirmando con absoluta precisión que la pérdida poblacional esperada es del 2.57%, acotada estrictamente entre el 2.56% y el 2.58% con una confianza del 95%.
+Figura&nbsp;8.24: Distribución normalizada del porcentaje de pérdida (Escenario C). La campana se establece en el nivel más crítico del análisis, confirmando con absoluta precisión que la pérdida poblacional esperada es del 2.57%, acotada estrictamente entre el 2.56% y el 2.58% con una confianza del 95%.
 </figcaption>
 </figure>
 </div>
@@ -1452,7 +1480,7 @@ Figura&nbsp;8.29: Distribución normalizada del porcentaje de pérdida (Escenari
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplots-boot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.30: Diagramas de caja de la media poblacional. <strong>(A)</strong> La caja naranja representa el 50% central del estimador, con la línea verde indicando la verdadera media poblacional. A diferencia del diagrama empírico <a href="#fig-boxplot-a" class="quarto-xref">Figura&nbsp;<span>8.24</span></a> (que mostraba datos atípicos de hasta mas de 300 dosis), la varianza se reduce significativamente fluctuando entre 58 y 63 dosis. <strong>(B)</strong> El estimador se estabiliza con precisión milimétrica, concentrándose alrededor de 343 dosis (fluctuación de 338 a 348). <strong>(C)</strong> A pesar del colapso logístico, el Teorema del Límite Central garantiza la precisión del estimador, fijando la media en 1905 dosis, con un margen de dispersión de 1890 a 1920 dosis.
+Figura&nbsp;8.25: Diagramas de caja de la media poblacional. <strong>(Escenario A)</strong> La caja naranja representa el 50% central del estimador, con la línea verde indicando la verdadera media poblacional. A diferencia del diagrama empírico <a href="#fig-boxplot-a" class="quarto-xref">Figura&nbsp;<span>8.21 (a)</span></a> (que mostraba datos atípicos de hasta mas de 300 dosis), la varianza se reduce significativamente fluctuando entre 58 y 63 dosis. <strong>(Escenario B)</strong> El estimador se estabiliza con precisión milimétrica, concentrándose alrededor de 343 dosis (fluctuación de 338 a 348). <strong>(Escenario C)</strong> A pesar del colapso logístico, el Teorema del Límite Central garantiza la precisión del estimador, fijando la media en 1905 dosis, con un margen de dispersión de 1890 a 1920 dosis.
 </figcaption>
 </figure>
 </div>
