@@ -1409,45 +1409,52 @@ Figura&nbsp;8.29: Distribución normalizada del porcentaje de pérdida (Escenari
 <section id="precisión-del-estimador-dispersión-de-medias-bootstrap" class="level3" data-number="8.8.3">
 <h3 data-number="8.8.3" class="anchored" data-anchor-id="precisión-del-estimador-dispersión-de-medias-bootstrap"><span class="header-section-number">8.8.3</span> Precisión del Estimador (Dispersión de Medias Bootstrap)</h3>
 <p>Para ilustrar la reducción de la incertidumbre lograda por la inferencia no paramétrica, se construyeron diagramas de caja (<em>boxplots</em>) aplicados exclusivamente a las 10000 medias muestrales obtenidas mediante el método Bootstrap para la métrica de dosis perdidas.</p>
-<div id="layout-boxplots-boot" class="quarto-layout-panel" data-layout-ncol="3">
+<div id="fig-boxplots-boot" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplots-boot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-boxplots-boot" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div id="fig-box-boot-a" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-box-boot-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="boxplot_bootstrap_escenario_A.png" class="img-fluid figure-img">
+<img src="boxplot_bootstrap_escenario_A.png" class="img-fluid figure-img" data-ref-parent="fig-boxplots-boot">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-box-boot-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.30: Diagrama de caja de la media poblacional (Escenario A). La caja naranja representa el 50% central del estimador, con la línea verde indicando la verdadera media poblacional. A diferencia del diagrama de caja empírico <a href="#fig-boxplot-a" class="quarto-xref">Figura&nbsp;<span>8.24</span></a> (que mostraba datos atípicos de hasta mas de 300 dosis), la varianza del estimador se ha reducido significativamente; el rango total de las medias fluctúa solamente entre 58 y 63 dosis.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-box-boot-a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Escenario A
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-boxplots-boot" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div id="fig-box-boot-b" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-box-boot-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="boxplot_bootstrap_escenario_B.png" class="img-fluid figure-img">
+<img src="boxplot_bootstrap_escenario_B.png" class="img-fluid figure-img" data-ref-parent="fig-boxplots-boot">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-box-boot-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.31: Diagrama de caja de la media poblacional (Escenario B). El estimador se estabiliza con una precisión milimétrica. La media poblacional esperada se concentra alrededor de las 343 dosis, con una fluctuación máxima contenida en un rango absoluto de apenas 10 dosis (de 338 a 348).
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-box-boot-b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Escenario B
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-boxplots-boot" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div id="fig-box-boot-c" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
+<figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-box-boot-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="boxplot_bootstrap_escenario_C.png" class="img-fluid figure-img">
+<img src="boxplot_bootstrap_escenario_C.png" class="img-fluid figure-img" data-ref-parent="fig-boxplots-boot">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-box-boot-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;8.32: Diagrama de caja de la media poblacional (Escenario C). A pesar del colapso logístico del sistema, el Teorema del Límite Central y la Ley de los Grandes Números garantizan la precisión del estimador. La media poblacional se aísla de las trayectorias catastróficas individuales y se fija en 1905 dosis, con un margen de dispersión de 1890 a 1920 dosis.
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-box-boot-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Escenario C
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplots-boot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8.30: Diagramas de caja de la media poblacional. <strong>(A)</strong> La caja naranja representa el 50% central del estimador, con la línea verde indicando la verdadera media poblacional. A diferencia del diagrama empírico <a href="#fig-boxplot-a" class="quarto-xref">Figura&nbsp;<span>8.24</span></a> (que mostraba datos atípicos de hasta mas de 300 dosis), la varianza se reduce significativamente fluctuando entre 58 y 63 dosis. <strong>(B)</strong> El estimador se estabiliza con precisión milimétrica, concentrándose alrededor de 343 dosis (fluctuación de 338 a 348). <strong>(C)</strong> A pesar del colapso logístico, el Teorema del Límite Central garantiza la precisión del estimador, fijando la media en 1905 dosis, con un margen de dispersión de 1890 a 1920 dosis.
+</figcaption>
+</figure>
 </div>
 <p><strong>Interpretación de la Dispersión:</strong></p>
 <p>La visualización de los diagramas de caja aplicados a las medias muestrales demuestra visualmente la robustez del método Bootstrap. Al comparar estas figuras con los diagramas empíricos originales, el contraste es absoluto: mientras que la estadística descriptiva inicial mostraba una varianza gigantesca y colas pesadas llenas de años atípicamente destructivos, el remuestreo logró disminuir esa varianza. Los <em>boxplots</em> naranjas demuestran que, al evaluar el riesgo a nivel poblacional y no a nivel de un año al azar, la incertidumbre desaparece, permitiendo estimar el daño con un margen de error de apenas unas cuantas dosis.</p>
