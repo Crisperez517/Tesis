@@ -632,7 +632,7 @@ donde $M_\alpha(t)$ es una martingala de salto asociada a las transiciones de $\
 $$
 \begin{aligned}
 \mathcal{L}f(t, x, i) &= \ \frac{\partial f}{\partial t}(t, x, i) + b(t, x, i)\frac{\partial f}{\partial x}(t, x, i) + \frac{1}{2}\sigma^2(t, x, i)\frac{\partial^2 f}{\partial x^2}(t, x, i) + \sum_{j = 1}^m q_{ij} f(t, x, j) \\
-+& \int_{\mathcal{Z}} \left[ f(t, x + \gamma(t, x, i, z), i) - f(t, x, i) - \gamma(t, x, i, z)\frac{\partial f}{\partial x}(t, x, i) \right] \nu_t(dz).
+&+ \int_{\mathcal{Z}} \left[ f(t, x + \gamma(t, x, i, z), i) - f(t, x, i) - \gamma(t, x, i, z)\frac{\partial f}{\partial x}(t, x, i) \right] \nu_t(dz).
 \end{aligned}
 $$
 :::

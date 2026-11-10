@@ -216,13 +216,13 @@
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
 \theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -2015,7 +2015,7 @@ transiciones de \(\alpha(t)\) y el operador generador acoplado
 se define como: \[
 \begin{aligned}
 \mathcal{L}f(t, x, i) &= \ \frac{\partial f}{\partial t}(t, x, i) + b(t, x, i)\frac{\partial f}{\partial x}(t, x, i) + \frac{1}{2}\sigma^2(t, x, i)\frac{\partial^2 f}{\partial x^2}(t, x, i) + \sum_{j = 1}^m q_{ij} f(t, x, j) \\
-+& \int_{\mathcal{Z}} \left[ f(t, x + \gamma(t, x, i, z), i) - f(t, x, i) - \gamma(t, x, i, z)\frac{\partial f}{\partial x}(t, x, i) \right] \nu_t(dz).
+&+ \int_{\mathcal{Z}} \left[ f(t, x + \gamma(t, x, i, z), i) - f(t, x, i) - \gamma(t, x, i, z)\frac{\partial f}{\partial x}(t, x, i) \right] \nu_t(dz).
 \end{aligned}
 \]
 
@@ -5367,12 +5367,12 @@ Como se demostró en la Sección~\ref{sec-numerico-saltos}, dado que los
 coeficientes de difusión \(\sigma_{on}\) y \(\sigma_{off}\) representan
 ruido aditivo constante respecto al estado \(T(t)\), sus derivadas
 parciales espaciales son nulas
-(\(\frac{\partial \sigma}{\partial T} = 0\)). En consecuencia, el
-término corrector de segundo orden del esquema de Milstein
-(Ecuación~\ref{eq-esquema-milstein}) se anula, por lo que el esquema
-híbrido de Euler-Maruyama empleado alcanza la misma precisión en la
-componente difusiva y tiene garantizada su convergencia fuerte de orden
-\(\gamma = 0.5\) por el Teorema~\ref{thm-em-switching}.
+\(\left( \displaystyle \dfrac{\partial \sigma}{\partial T} = 0 \right)\).
+En consecuencia, el término corrector de segundo orden del esquema de
+Milstein (Ecuación~\ref{eq-esquema-milstein}) se anula, por lo que el
+esquema híbrido de Euler-Maruyama empleado alcanza la misma precisión en
+la componente difusiva y tiene garantizada su convergencia fuerte de
+orden \(\gamma = 0.5\) por el Teorema~\ref{thm-em-switching}.
 
 El procedimiento detallado para simular una trayectoria anual de la
 temperatura interna del refrigerador se presenta en el
