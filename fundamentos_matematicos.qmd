@@ -410,6 +410,7 @@ $$
 $$
 \vert b(t, x) \vert^2 + \vert \sigma(t, x) \vert^2 \le K (1 + \vert x \vert^2)
 $$
+
 Bajo el cumplimiento de ambas condiciones, existe una única solución fuerte $\{X(t)\}_{t \in [0, T]}$ adaptada a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$, con trayectorias continuas con probabilidad 1 y tal que $\mathbb{E}\left[\sup_{0 \le t \le T} \vert X(t) \vert^2\right] < \infty$. Una demostración detallada de este teorema, basada en el método de iteraciones sucesivas de Picard, se encuentra en [@arnold1974stochastic].
 :::
 
@@ -437,26 +438,34 @@ Como paso previo al desarrollo del modelo termodinámico híbrido, se introduce 
 ::: {#def-ou-clasico}
 ### Proceso de Ornstein-Uhlenbeck
 Un proceso estocástico $\{X(t)\}_{t \ge 0}$ es un proceso de Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial estocástica lineal:
+
 $$
 dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t), \quad X(0) = x_0,
 $$ {#eq-ou-clasica}
+
 donde $\kappa > 0$ representa la tasa de reversión a la media, $\theta \in \mathbb{R}$ denota el nivel de equilibrio a largo plazo y $\sigma > 0$ es el coeficiente de difusión constante.
 :::
 
 La característica principal de la @eq-ou-clasica radica en su deriva lineal $b(x) = \kappa(\theta - x)$. Cuando el estado del proceso supera el valor de equilibrio ($X(t) > \theta$), la deriva es negativa y dirige la trayectoria hacia abajo; Si el proceso se encuentra por debajo del nivel de referencia ($X(t) < \theta$), la deriva es positiva e impulsa un crecimiento hacia $\theta$. Esta propiedad de reversión a la media convierte a este proceso en el modelo base para describir la evolución térmica de sistemas regidos por la ley de enfriamiento de Newton.
 
 Aplicando el Lema de Itô (@thm-ito-clasico) a la función $f(t, x) = x e^{\kappa t}$, se obtiene que $d(X(t)e^{\kappa t}) = \kappa \theta e^{\kappa t} dt + \sigma e^{\kappa t} dW(t)$. Integrando en el intervalo $[0, t]$ y despejando $X(t)$, se obtiene la solución analítica del proceso:
+
 $$
 X(t) = \theta + (x_0 - \theta)e^{-\kappa t} + \sigma \int_0^t e^{-\kappa(t-s)} dW(s).
 $$ {#eq-ou-solucion}
+
 Dado que el integrando $e^{-\kappa(t-s)}$ es una función determinista, la integral de Itô en la @eq-ou-solucion es una variable aleatoria normal centrada. Asumiendo una condición inicial determinista $x_0$, el valor esperado y la varianza del proceso (calculada mediante la Isometría de Itô, @thm-isometria-ito) están dadas por:
+
 $$
 \mathbb{E}[X(t)] = \theta + (x_0 - \theta)e^{-\kappa t}, \qquad \text{Var}(X(t)) = \sigma^2 \int_0^t e^{-2\kappa(t-s)} ds = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right).
 $$ {#eq-ou-moments}
+
 Con lo cual, para todo instante $t > 0$, la variable aleatoria $X(t)$ sigue una distribución normal:
+
 $$
 X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right) \right),
 $$ {#eq-ou-distribucion}
+
 la cual converge cuando $t \to \infty$ a una distribución normal $\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)$ independientemente del estado inicial $x_0$ [@karlin1998introduction].
 
 ## Ecuaciones Diferenciales Estocásticas con Saltos

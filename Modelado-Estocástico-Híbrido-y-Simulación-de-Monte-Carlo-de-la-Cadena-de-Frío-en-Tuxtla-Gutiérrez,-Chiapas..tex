@@ -215,12 +215,12 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{remark}
@@ -1527,15 +1527,17 @@ coeficientes satisfacen las siguientes dos condiciones:
   \textbf{Condición de Crecimiento Lineal:} Existe una constante
   \(K > 0\) tal que: \[
   \vert b(t, x) \vert^2 + \vert \sigma(t, x) \vert^2 \le K (1 + \vert x \vert^2)
-  \] Bajo el cumplimiento de ambas condiciones, existe una única
-  solución fuerte \(\{X(t)\}_{t \in [0, T]}\) adaptada a la filtración
-  \(\{\mathcal{F}_t\}_{t \ge 0}\), con trayectorias continuas con
-  probabilidad 1 y tal que
-  \(\mathbb{E}\left[\sup_{0 \le t \le T} \vert X(t) \vert^2\right] < \infty\).
-  Una demostración detallada de este teorema, basada en el método de
-  iteraciones sucesivas de Picard, se encuentra en
-  (\citeproc{ref-arnold1974stochastic}{Arnold 1974}).
+  \]
 \end{enumerate}
+
+Bajo el cumplimiento de ambas condiciones, existe una única solución
+fuerte \(\{X(t)\}_{t \in [0, T]}\) adaptada a la filtración
+\(\{\mathcal{F}_t\}_{t \ge 0}\), con trayectorias continuas con
+probabilidad 1 y tal que
+\(\mathbb{E}\left[\sup_{0 \le t \le T} \vert X(t) \vert^2\right] < \infty\).
+Una demostración detallada de este teorema, basada en el método de
+iteraciones sucesivas de Picard, se encuentra en
+(\citeproc{ref-arnold1974stochastic}{Arnold 1974}).
 
 \end{theorem}
 
@@ -1587,11 +1589,14 @@ Ornstein-Uhlenbeck]\protect\hypertarget{def-ou-clasico}{}\label{def-ou-clasico}
 Un proceso estocástico \(\{X(t)\}_{t \ge 0}\) es un proceso de
 Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial
 estocástica lineal:
+
 \begin{equation}\phantomsection\label{eq-ou-clasica}{
 dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t), \quad X(0) = x_0,
-}\end{equation} donde \(\kappa > 0\) representa la tasa de reversión a
-la media, \(\theta \in \mathbb{R}\) denota el nivel de equilibrio a
-largo plazo y \(\sigma > 0\) es el coeficiente de difusión constante.
+}\end{equation}
+
+donde \(\kappa > 0\) representa la tasa de reversión a la media,
+\(\theta \in \mathbb{R}\) denota el nivel de equilibrio a largo plazo y
+\(\sigma > 0\) es el coeficiente de difusión constante.
 
 \end{definition}
 
@@ -1610,22 +1615,29 @@ Aplicando el Lema de Itô (Teorema~\ref{thm-ito-clasico}) a la función
 \(d(X(t)e^{\kappa t}) = \kappa \theta e^{\kappa t} dt + \sigma e^{\kappa t} dW(t)\).
 Integrando en el intervalo \([0, t]\) y despejando \(X(t)\), se obtiene
 la solución analítica del proceso:
+
 \begin{equation}\phantomsection\label{eq-ou-solucion}{
 X(t) = \theta + (x_0 - \theta)e^{-\kappa t} + \sigma \int_0^t e^{-\kappa(t-s)} dW(s).
-}\end{equation} Dado que el integrando \(e^{-\kappa(t-s)}\) es una
-función determinista, la integral de Itô en la
-Ecuación~\ref{eq-ou-solucion} es una variable aleatoria normal centrada.
-Asumiendo una condición inicial determinista \(x_0\), el valor esperado
-y la varianza del proceso (calculada mediante la Isometría de Itô,
-Teorema~\ref{thm-isometria-ito}) están dadas por:
+}\end{equation}
+
+Dado que el integrando \(e^{-\kappa(t-s)}\) es una función determinista,
+la integral de Itô en la Ecuación~\ref{eq-ou-solucion} es una variable
+aleatoria normal centrada. Asumiendo una condición inicial determinista
+\(x_0\), el valor esperado y la varianza del proceso (calculada mediante
+la Isometría de Itô, Teorema~\ref{thm-isometria-ito}) están dadas por:
+
 \begin{equation}\phantomsection\label{eq-ou-moments}{
 \mathbb{E}[X(t)] = \theta + (x_0 - \theta)e^{-\kappa t}, \qquad \text{Var}(X(t)) = \sigma^2 \int_0^t e^{-2\kappa(t-s)} ds = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right).
-}\end{equation} Con lo cual, para todo instante \(t > 0\), la variable
-aleatoria \(X(t)\) sigue una distribución normal:
+}\end{equation}
+
+Con lo cual, para todo instante \(t > 0\), la variable aleatoria
+\(X(t)\) sigue una distribución normal:
+
 \begin{equation}\phantomsection\label{eq-ou-distribucion}{
 X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right) \right),
-}\end{equation} la cual converge cuando \(t \to \infty\) a una
-distribución normal
+}\end{equation}
+
+la cual converge cuando \(t \to \infty\) a una distribución normal
 \(\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)\)
 independientemente del estado inicial \(x_0\)
 (\citeproc{ref-karlin1998introduction}{Karlin y Taylor 1998}).
