@@ -215,12 +215,12 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
 \newtheorem{algorithm}{Algorithm}[chapter]
 \theoremstyle{remark}
@@ -1562,7 +1562,7 @@ y dos veces continuamente diferenciable respecto a \(x\)
 satisface la siguiente ecuación diferencial estocástica: \[
 \begin{aligned}
 df(t, X(t)) &= \left[ \frac{\partial f}{\partial t} (t, X(t)) + b(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2} (t, X(t)) \right] dt \\
-&\quad + \sigma(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) dW(t).
+&+ \sigma(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) dW(t).
 \end{aligned}
 \]
 
@@ -1589,7 +1589,6 @@ Ornstein-Uhlenbeck]\protect\hypertarget{def-ou-clasico}{}\label{def-ou-clasico}
 Un proceso estocástico \(\{X(t)\}_{t \ge 0}\) es un proceso de
 Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial
 estocástica lineal:
-
 \begin{equation}\phantomsection\label{eq-ou-clasica}{
 dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t), \quad X(0) = x_0,
 }\end{equation}
@@ -1625,7 +1624,6 @@ la integral de Itô en la Ecuación~\ref{eq-ou-solucion} es una variable
 aleatoria normal centrada. Asumiendo una condición inicial determinista
 \(x_0\), el valor esperado y la varianza del proceso (calculada mediante
 la Isometría de Itô, Teorema~\ref{thm-isometria-ito}) están dadas por:
-
 \begin{equation}\phantomsection\label{eq-ou-moments}{
 \mathbb{E}[X(t)] = \theta + (x_0 - \theta)e^{-\kappa t}, \qquad \text{Var}(X(t)) = \sigma^2 \int_0^t e^{-2\kappa(t-s)} ds = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right).
 }\end{equation}
@@ -1664,7 +1662,6 @@ medida aleatoria de Poisson compensada sobre
 \(\{\mathcal{F}_t\}_{t \ge 0}\) y mutuamente independientes. Una
 ecuación diferencial estocástica con saltos en el intervalo \([t_0, T]\)
 (con \(0 \leq t_0 < T < \infty\)) es una relación simbólica de la forma:
-
 \begin{equation}\phantomsection\label{eq-ede-saltos-diff}{
 dX(t) = b(t, X(t^-)) dt + \sigma(t, X(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(t, X(t^-), z) \tilde{N}(dt, dz), \quad X(t_0) = x_0,
 }\end{equation}
@@ -1682,7 +1679,6 @@ Un proceso estocástico \(\{X(t)\}_{t \in [t_0, T]}\) adaptado a
 coeficientes evaluados a lo largo de la trayectoria son integrables casi
 seguramente y si para todo \(t \in [t_0, T]\) se satisface con
 probabilidad 1 la ecuación integral equivalente:
-
 \begin{equation}\phantomsection\label{eq-ede-saltos-int}{
 X(t) = x_0 + \int_{t_0}^t b(s, X(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-)) dW(s) + \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X(s^-), z) \tilde{N}(ds, dz).
 }\end{equation}
@@ -1747,11 +1743,9 @@ posee medida de intensidad \(\nu_t(dz)dt = \lambda(t)dF(z)dt\). Sea
 \(t\) (\(\mathcal{C}^1\)) y dos veces continuamente diferenciable
 respecto a \(x\) (\(\mathcal{C}^2\)). Entonces el proceso compuesto
 \(f(t, X(t))\) satisface la siguiente ecuación diferencial estocástica
-con saltos:
-
-\begin{equation}\phantomsection\label{eq-ito-saltos-fijo}{
+con saltos: \begin{equation}\phantomsection\label{eq-ito-saltos-fijo}{
 \begin{aligned}
-df(t, X(t)) = & \left[ \frac{\partial f}{\partial t}(t, X(t)) + b(t, X(t))\frac{\partial f}{\partial x}(t, X(t)) + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2}(t, X(t)) \right] dt \\
+df(t, X(t)) &=  \left[ \frac{\partial f}{\partial t}(t, X(t)) + b(t, X(t))\frac{\partial f}{\partial x}(t, X(t)) + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2}(t, X(t)) \right] dt \\
 & + \int_{\mathcal{Z}} \left[ f(t, X(t^-) + \gamma(t, X(t^-), z)) - f(t, X(t^-)) - \gamma(t, X(t^-), z)\frac{\partial f}{\partial x}(t, X(t^-)) \right] \nu_t(dz) dt \\
 & + \sigma(t, X(t^-))\frac{\partial f}{\partial x}(t, X(t^-)) dW(t) \\
 & + \int_{\mathcal{Z}} \left[ f(t, X(t^-) + \gamma(t, X(t^-), z)) - f(t, X(t^-)) \right] \tilde{N}(dt, dz).
@@ -1911,13 +1905,16 @@ tiempos de paro Definición~\ref{def-tiempo-parada} \(\tau\) y \(\rho\)
 tales que \(0 \le \tau(\omega) \le \rho(\omega)\) para todo
 \(\omega \in \Omega\), usamos la notación estándar de \textbf{intervalos
 estocásticos} de (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}): \[
-[[\tau, \rho]] = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t \le \rho(\omega)\}, \qquad [[\tau, \rho[[ = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t < \rho(\omega)\}.
+\begin{aligned}
+[[\tau,\rho]] &= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t\le\rho(\omega)\}, \\
+[[\tau,\rho[[ &= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t<\rho(\omega)\}.
+\end{aligned}
 \] Asimismo, denotamos por \(\mathcal{M}^2([[\tau, \rho]]; \mathbb{R})\)
 al espacio de los procesos estocásticos real-valuados \(\{X(t)\}\)
 adaptados a \(\{\mathcal{F}_t\}_{t \ge 0}\) y definidos en
-\([[\tau, \rho]]\) tales que
-\(\mathbb{E}\left[ \displaystyle \int_\tau^\rho \vert X(t) \vert^2 dt\right] < \infty\),
-y por \(L^2_{\mathcal{F}_\tau}(\Omega; \mathbb{R})\) a la familia de
+\([[\tau, \rho]]\) tales que: \[
+\mathbb{E}\left[ \displaystyle \int_\tau^\rho \vert X(t) \vert^2 dt\right] < \infty,
+\] y por \(L^2_{\mathcal{F}_\tau}(\Omega; \mathbb{R})\) a la familia de
 variables aleatorias \(\xi\) que son \(\mathcal{F}_\tau\)-medibles y
 satisfacen que \(\mathbb{E}[\vert \xi \vert^2] < \infty\)
 (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006}).
@@ -1936,7 +1933,6 @@ medida aleatoria de Poisson compensada sobre
 \([0, \infty) \times \mathcal{Z}.\) Una \textbf{ecuación diferencial
 estocástica híbrida con saltos} en el intervalo \([t_0, T]\) se expresa
 en su forma diferencial como:
-
 \begin{equation}\phantomsection\label{eq-ede-hibrida-diff}{
 dX(t) = b(t, X(t^-), \alpha(t^-)) dt + \sigma(t, X(t^-), \alpha(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(t, X(t^-), \alpha(t^-), z) \tilde{N}(dt, dz),
 }\end{equation}
@@ -1974,11 +1970,13 @@ Un proceso estocástico \(\{X(t)\}_{t \in [t_0, T]}\) se denomina una
 \item
   Para todo \(t \in [t_0, T]\), se satisface con probabilidad 1 la
   ecuación integral:
+  \begin{equation}\phantomsection\label{eq-ede-hibrida-int}{
+  \begin{aligned}
+  X(t) &= x_0 + \int_{t_0}^t b(s, X(s^-), \alpha(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-), \alpha(s^-)) dW(s) \\
+  &+ \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X(s^-), \alpha(s^-), z) \tilde{N}(ds, dz).
+  \end{aligned}
+  }\end{equation}
 \end{enumerate}
-
-\begin{equation}\phantomsection\label{eq-ede-hibrida-int}{
-X(t) = x_0 + \int_{t_0}^t b(s, X(s^-), \alpha(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-), \alpha(s^-)) dW(s) + \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X(s^-), \alpha(s^-), z) \tilde{N}(ds, dz).
-}\end{equation}
 
 Se dice que la solución \(\{X(t)\}_{t \in [t_0, T]}\) es \textbf{única}
 (en el sentido de unicidad trayectoria por trayectoria) si para
@@ -2007,20 +2005,19 @@ tales que, para cada estado \(i \in \mathcal{M}\),
 \(x\) (\(\mathcal{C}^2\)). Si \((X(t), \alpha(t))\) es un proceso
 conjunto que satisface la Ecuación~\ref{eq-ede-hibrida-diff}, entonces
 el proceso compuesto \(f(t, X(t), \alpha(t))\) satisface la siguiente
-ecuación diferencial estocástica híbrida con saltos:
-
-\[
+ecuación diferencial estocástica híbrida con saltos: \[
 \begin{aligned}
-df(t, X(t), \alpha(t)) = & \ \mathcal{L}f(t, X(t), \alpha(t)) dt + \sigma(t, X(t^-), \alpha(t^-))\frac{\partial f}{\partial x}(t, X(t^-), \alpha(t^-)) dW(t) \\
-& + \int_{\mathcal{Z}} \left[ f(t, X(t^-) + \gamma(t, X(t^-), \alpha(t^-), z), \alpha(t^-)) - f(t, X(t^-), \alpha(t^-)) \right] \tilde{N}(dt, dz) + dM_\alpha(t),
+df(t, X(t), \alpha(t)) &= \ \mathcal{L}f(t, X(t), \alpha(t)) dt + \sigma(t, X(t^-), \alpha(t^-))\frac{\partial f}{\partial x}(t, X(t^-), \alpha(t^-)) dW(t) \\
+&+ \int_{\mathcal{Z}} \left[ f(t, X(t^-) + \gamma(t, X(t^-), \alpha(t^-), z), \alpha(t^-)) - f(t, X(t^-), \alpha(t^-)) \right] \tilde{N}(dt, dz) \\
+&+ dM_\alpha(t),
 \end{aligned}
 \] donde \(M_\alpha(t)\) es una martingala de salto asociada a las
 transiciones de \(\alpha(t)\) y el operador generador acoplado
 \(\mathcal{L}f: [t_0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}\)
 se define como: \[
 \begin{aligned}
-\mathcal{L}f(t, x, i) = & \ \frac{\partial f}{\partial t}(t, x, i) + b(t, x, i)\frac{\partial f}{\partial x}(t, x, i) + \frac{1}{2}\sigma^2(t, x, i)\frac{\partial^2 f}{\partial x^2}(t, x, i) + \sum_{j = 1}^m q_{ij} f(t, x, j) \\
-& + \int_{\mathcal{Z}} \left[ f(t, x + \gamma(t, x, i, z), i) - f(t, x, i) - \gamma(t, x, i, z)\frac{\partial f}{\partial x}(t, x, i) \right] \nu_t(dz).
+\mathcal{L}f(t, x, i) &= \ \frac{\partial f}{\partial t}(t, x, i) + b(t, x, i)\frac{\partial f}{\partial x}(t, x, i) + \frac{1}{2}\sigma^2(t, x, i)\frac{\partial^2 f}{\partial x^2}(t, x, i) + \sum_{j = 1}^m q_{ij} f(t, x, j) \\
++& \int_{\mathcal{Z}} \left[ f(t, x + \gamma(t, x, i, z), i) - f(t, x, i) - \gamma(t, x, i, z)\frac{\partial f}{\partial x}(t, x, i) \right] \nu_t(dz).
 \end{aligned}
 \]
 
@@ -2066,7 +2063,10 @@ condiciones:
   \(x, y \in \mathbb{R}\), \(t \in [t_0, T]\) y cada régimen
   \(i \in \mathcal{M}\),
   \begin{equation}\phantomsection\label{eq-hip-lipschitz-hibrida}{
-  \vert b(t, x, i) - b(t, y, i) \vert^2 + \vert \sigma(t, x, i) - \sigma(t, y, i) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(t, x, i, z) - \gamma(t, y, i, z) \vert^2 \nu_t(dz) \le L \vert x - y \vert^2.
+  \begin{aligned}
+  &\vert b(t, x, i) - b(t, y, i) \vert^2 + \vert \sigma(t, x, i) - \sigma(t, y, i) \vert^2 \\
+  &+ \int_{\mathcal{Z}} \vert \gamma(t, x, i, z) - \gamma(t, y, i, z) \vert^2 \nu_t(dz) \le L \vert x - y \vert^2.
+  \end{aligned}
   }\end{equation}
 \item
   \textbf{Condición de Crecimiento Lineal:} Para todo
@@ -2202,7 +2202,8 @@ casi seguramente cuando \(n \to \infty\). Definiendo el proceso detenido
 propiedades de las integrales estocásticas en tiempos de paro se cumple
 que: \[
 \begin{aligned}
-X_n(t) = x_0 & + \int_{t_0}^t b(s, X_n(s^-), \alpha(s^-))\mathbf{1}_{[[t_0, \sigma_n]]}(s) ds + \int_{t_0}^t \sigma(s, X_n(s^-), \alpha(s^-))\mathbf{1}_{[[t_0, \sigma_n]]}(s) dW(s) \\
+X_n(t) = x_0 & + \int_{t_0}^t b(s, X_n(s^-), \alpha(s^-))\mathbf{1}_{[[t_0, \sigma_n]]}(s) ds \\
+& + \int_{t_0}^t \sigma(s, X_n(s^-), \alpha(s^-))\mathbf{1}_{[[t_0, \sigma_n]]}(s) dW(s) \\
 & + \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X_n(s^-), \alpha(s^-), z)\mathbf{1}_{[[t_0, \sigma_n]]}(s) \tilde{N}(ds, dz).
 \end{aligned}
 \] Aplicando la desigualdad del (Lema~\ref{lem-desigualdad-algebraica})
@@ -2229,7 +2230,6 @@ el factor común \(4(T - t_0 + 5)\) (dado que
 \(4 \cdot 4 < 4(T - t_0 + 5)\)), y usando la condición de crecimiento
 lineal (Ecuación~\ref{eq-hip-crecimiento-hibrida}), agrupamos las tres
 integrales en una sola cota:
-
 \begin{equation}\phantomsection\label{eq-cota-previa-finitud}{
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4(T - t_0 + 5)\mathbb{E}\left[ \int_{t_0}^t K\left( 1 + \vert X_n(r^-) \vert^2 \right) \mathbf{1}_{[[t_0, \sigma_n]]}(r) dr \right],
 }\end{equation}
@@ -2237,7 +2237,6 @@ integrales en una sola cota:
 dado que
 \(\displaystyle \vert X_n(r^-) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) \le \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2\),
 y aplicando el Teorema de Tonelli se tiene que:
-
 \begin{equation}\phantomsection\label{eq-cota-previa-gronwall}{
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
 }\end{equation}
@@ -2255,9 +2254,7 @@ negativos es menor o igual que su suma, se obtiene que
 \(\vert X_n(r^-) \vert^2 \le \max\{n^2, \vert x_0 \vert^2\} \le n^2 + \vert x_0 \vert^2\).
 Sustituyendo esta cota en el integrando de la
 Ecuación~\ref{eq-cota-previa-finitud} e integrando respecto a \(r\), se
-tiene que para todo \(t \in [t_0, T]\):
-
-\[
+tiene que para todo \(t \in [t_0, T]\): \[
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5)(T - t_0)\left( 1 + n^2 + \mathbb{E}[\vert x_0 \vert^2] \right) < \infty.
 \]
 
@@ -2265,16 +2262,12 @@ Esto garantiza que la función
 \(\displaystyle u_n(t) = 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right]\)
 es finita, acotada y medible en \([t_0, T].\) Sumando \(1\) en ambos
 lados de la Ecuación~\ref{eq-cota-previa-gronwall}, obtenemos para todo
-\(t \in [t_0, T]\):
-
-\[
+\(t \in [t_0, T]\): \[
 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 1 + 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
 \]
 
 Aplicando la Desigualdad de Grönwall (Lema~\ref{lem-gronwall}) y
-evaluando en \(t = T\), se obtiene que:
-
-\[
+evaluando en \(t = T\), se obtiene que: \[
 \mathbb{E}\left[ \sup_{t_0 \le t \le \sigma_n} \vert X(t) \vert^2 \right] \le 1 + \mathbb{E}\left[ \sup_{t_0 \le t \le T} \vert X_n(t) \vert^2 \right] \le \left( 1 + 4\mathbb{E}[\vert x_0 \vert^2] \right) e^{4K(T - t_0)(T - t_0 + 5)}.
 \]
 
@@ -2311,14 +2304,12 @@ controlada por una cadena de Markov a tiempo continuo
 \(\{\alpha(t)\}_{t \ge 0}\) (Definición~\ref{def-cadena-markov}) con
 espacio de estados \(\mathcal{M} = \{1, 2\}\) y matriz generadora de
 tasas finitas \(Q = (q_{ij})_{2 \times 2}\), cuya expresión está dada
-por:
-
-\begin{equation}\phantomsection\label{eq-ede-operativa-teorica}{
+por: \begin{equation}\phantomsection\label{eq-ede-operativa-teorica}{
 dT(t) = 
 \begin{cases} 
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
-\end{cases}, \quad 0 \leq t \leq T,
+\end{cases}, \ 0 \leq t \leq T,
 }\end{equation}
 
 con condiciones iniciales
@@ -2335,9 +2326,7 @@ y acotada que representa la temperatura ambiente exterior.
 
 Las perturbaciones discretas por apertura de puertas en el régimen
 \(\alpha(t) = 1\) están dadas por un proceso de Poisson compuesto
-(Definición~\ref{def-poisson-compuesto}):
-
-\[
+(Definición~\ref{def-poisson-compuesto}): \[
 J(t) = \sum_{i=1}^{N_{puerta}(t)} \gamma_i,
 \]
 
@@ -2357,9 +2346,7 @@ la cadena de Markov \(\alpha(t)\) son mutuamente independientes.
 Definiendo los coeficientes de deriva
 \(b: [0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}\) y de
 difusión \(\sigma: \mathcal{M} \to \mathbb{R}\) para cada régimen
-mediante:
-
-\begin{equation}\phantomsection\label{eq-coeficientes-on}{
+mediante: \begin{equation}\phantomsection\label{eq-coeficientes-on}{
 b(t, T, 1) = \kappa_{on}(\theta_{set} - T), \qquad \sigma(1) = \sigma_{on},
 }\end{equation}
 \begin{equation}\phantomsection\label{eq-coeficientes-off}{
@@ -2368,14 +2355,12 @@ b(t, T, 2) = \kappa_{off}(T_{amb}(t) - T), \qquad \sigma(2) = \sigma_{off},
 
 y la función de amplitud de salto
 \(\gamma: \mathcal{M} \times \mathcal{Z} \to \mathbb{R}\) como:
-
 \begin{equation}\phantomsection\label{eq-funcion-salto}{
 \gamma(1, z) = z, \qquad \gamma(2, z) = 0,
 }\end{equation}
 
 la Ecuación~\ref{eq-ede-operativa-teorica} se puede escribir de forma
 unificada evaluada en los límites por la izquierda como:
-
 \begin{equation}\phantomsection\label{eq-modelo-termodinamico}{
 dT(t) = b(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \mathbf{1}_{\{\alpha(t^-) = 1\}} dJ(t).
 }\end{equation}
@@ -2397,9 +2382,7 @@ proceso compuesto \(J(t)\), cuya medida de intensidad
 Lema~\ref{lem-equivalencia-saltos} y utilizando la definición de
 \(\gamma(\alpha, z)\), el término de salto en la
 Ecuación~\ref{eq-modelo-termodinamico} admite la siguiente
-descomposición:
-
-\[
+descomposición: \[
 \begin{aligned}
 \mathbf{1}_{\{\alpha(t^-) = 1\}} dJ(t) &= \int_{\mathcal{Z}} \gamma(\alpha(t^-), z) N(dt, dz) \\
 &= \int_{\mathcal{Z}} \gamma(\alpha(t^-), z) \tilde{N}(dt, dz) + \left( \lambda(t) \int_{\mathcal{Z}} \gamma(\alpha(t^-), z) dF(z) \right) dt.
@@ -2414,9 +2397,7 @@ que \(\gamma(2, z) = 0\). Juntando este término determinista dentro del
 coeficiente de deriva original \(b(t, T, \alpha)\), definimos el
 coeficiente de \textbf{deriva compensada}
 \(\tilde{b}: [0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}\)
-como:
-
-\begin{equation}\phantomsection\label{eq-deriva-compensada-on}{
+como: \begin{equation}\phantomsection\label{eq-deriva-compensada-on}{
 \tilde{b}(t, T, 1) = \kappa_{on}(\theta_{set} - T) + \lambda(t)\mathbb{E}[\gamma_i],
 }\end{equation}
 \begin{equation}\phantomsection\label{eq-deriva-compensada-off}{
@@ -2463,9 +2444,7 @@ Ecuación~\ref{eq-coeficientes-off}) y la función de salto
 \(\gamma(i, z)\) (Ecuación~\ref{eq-funcion-salto}) dependen únicamente
 del régimen \(i\) y de la marca \(z\), y son independientes del estado
 \(T\), sus diferencias respecto a la variable de estado se anulan en
-ambos regímenes:
-
-\[
+ambos regímenes: \[
 \vert \sigma(i) - \sigma(i) \vert^2 = 0, \qquad \int_{\mathcal{Z}} \vert \gamma(i, z) - \gamma(i, z) \vert^2 \nu_t(dz) = 0.
 \]
 
@@ -2473,9 +2452,7 @@ Por otro lado, evaluando la diferencia cuadrática de la deriva
 compensada para el régimen \(i = 1\)
 (Ecuación~\ref{eq-deriva-compensada-on}), los términos
 \(\kappa_{on} \theta_{set}\) y \(\lambda(t)\mathbb{E}[\gamma_i]\) se
-cancelan, obteniéndose:
-
-\[
+cancelan, obteniéndose: \[
 \begin{aligned}
 \vert \tilde{b}(t, T_1, 1) - \tilde{b}(t, T_2, 1) \vert^2 &= \left\vert \left[ \kappa_{on}(\theta_{set} - T_1) + \lambda(t)\mathbb{E}[\gamma_i] \right] - \left[ \kappa_{on}(\theta_{set} - T_2) + \lambda(t)\mathbb{E}[\gamma_i] \right] \right\vert^2 \\
 &= \vert -\kappa_{on}(T_1 - T_2) \vert^2 = \kappa_{on}^2 \vert T_1 - T_2 \vert^2.
@@ -2485,18 +2462,14 @@ cancelan, obteniéndose:
 De manera análoga, para el régimen \(i = 2\)
 (Ecuación~\ref{eq-deriva-compensada-off}) el término
 \(\kappa_{off}T_{amb}(t)\) se cancela al restar ambas expresiones,
-obteniéndose:
-
-\[
+obteniéndose: \[
 \vert \tilde{b}(t, T_1, 2) - \tilde{b}(t, T_2, 2) \vert^2 = \left\vert \kappa_{off}(T_{amb}(t) - T_1) - \kappa_{off}(T_{amb}(t) - T_2) \right\vert^2 = \kappa_{off}^2 \vert T_1 - T_2 \vert^2.
 \]
 
 Definiendo la constante
 \(L = \max\{\kappa_{on}^2, \kappa_{off}^2\} > 0\), se cumple que para
 todo \(T_1, T_2 \in \mathbb{R},\) \(t \in [0, T]\), e \(i \in \{1, 2\}\)
-que:
-
-\[
+que: \[
 \vert \tilde{b}(t, T_1, i) - \tilde{b}(t, T_2, i) \vert^2 + \vert \sigma(i) - \sigma(i) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(i, z) - \gamma(i, z) \vert^2 \nu_t(dz) \le L \vert T_1 - T_2 \vert^2,
 \]
 
@@ -2514,9 +2487,7 @@ al máximo de la función continua \(T_{amb}(t)\) en el compacto
 Lema~\ref{lem-desigualdad-algebraica} al coeficiente de deriva
 compensada en el régimen \(i = 1\)
 (Ecuación~\ref{eq-deriva-compensada-on}), y acotando
-\(\lambda(t) \le \lambda_{max}\), se obtiene:
-
-\[
+\(\lambda(t) \le \lambda_{max}\), se obtiene: \[
 \vert \tilde{b}(t, T_1, 1) \vert^2 = \left\vert \left( \kappa_{on}\theta_{set} + \lambda(t)\mathbb{E}[\gamma_i] \right) - \kappa_{on}T_1 \right\vert^2 \le 2\left( \kappa_{on}\vert \theta_{set} \vert + \lambda_{max}\vert \mathbb{E}[\gamma_i] \vert \right)^2 + 2\kappa_{on}^2 \vert T_1 \vert^2.
 \]
 
@@ -2541,10 +2512,11 @@ integral es nula, mientras que para \(i = 1\) se cumple que:
 \]
 
 Sumando las cotas correspondientes a la deriva compensada, la difusión y
-la medida de saltos, y definiendo la constante positiva:
-
-\[
-K = \max\left\{ \max\left\{ 2\left( \kappa_{on}\vert \theta_{set} \vert + \lambda_{max}\vert \mathbb{E}[\gamma_i] \vert \right)^2, \, 2\kappa_{off}^2 T_{max}^2 \right\} + \Sigma_{max} + \lambda_{max} M_\gamma, \ \max\{2\kappa_{on}^2, 2\kappa_{off}^2\} \right\} > 0,
+la medida de saltos, y definiendo la constante positiva: \[
+\begin{aligned}
+K &= \max \Bigg\{ \max\left\{ 2\left( \kappa_{on}\vert \theta_{set} \vert + \lambda_{max}\vert \mathbb{E}[\gamma_i] \vert \right)^2, \, 2\kappa_{off}^2 T_{max}^2 \right\} \\
+&+ \Sigma_{max} + \lambda_{max} M_\gamma, \ \max\{2\kappa_{on}^2, 2\kappa_{off}^2\} \Bigg\} > 0,
+\end{aligned}
 \]
 
 se deduce que para todo
@@ -2566,7 +2538,6 @@ estocástica híbrida propuesta en la
 Ecuación~\ref{eq-ede-operativa-teorica} tiene una única solución fuerte
 \(\{T(t)\}_{t \in [0, T]}\) adaptada a \(\{\mathcal{F}_t\}_{t \ge 0}\),
 con trayectorias càdlàg casi seguramente y acotada en media cuadrática:
-
 \[
 \mathbb{E}\left[ \sup_{0 \le t \le T} \vert T(t) \vert^2 \right] < \infty,
 \]
@@ -2611,9 +2582,7 @@ Se dice que una aproximación numérica discreta
 \(\gamma > 0\) hacia la solución exacta \(\{X(t)\}_{t \in [0, T]}\) en
 el tiempo terminal \(T\) si existen constantes positivas \(C > 0\) y
 \(\delta_0 > 0\), independientes de \(\Delta t\), tales que para todo
-\(\Delta t \in (0, \delta_0)\) se satisface la siguiente desigualdad:
-
-\[
+\(\Delta t \in (0, \delta_0)\) se satisface la siguiente desigualdad: \[
 \mathbb{E}\left[ \vert X(T) - Y_N \vert \right] \le C (\Delta t)^\gamma.
 \]
 
@@ -2641,9 +2610,7 @@ tiempo terminal \(T\) si, para toda función de prueba
 \(2(\beta+1)\) veces continuamente diferenciables cuyas derivadas
 parciales tienen crecimiento a lo sumo polinomial), existen constantes
 positivas \(C > 0\) y \(\delta_0 > 0\), independientes de \(\Delta t\),
-tales que para todo \(\Delta t \in (0, \delta_0)\) se cumple que:
-
-\[
+tales que para todo \(\Delta t \in (0, \delta_0)\) se cumple que: \[
 \left\vert \mathbb{E}[g(X(T))] - \mathbb{E}[g(Y_N)] \right\vert \le C (\Delta t)^\beta.
 \]
 
@@ -2776,9 +2743,7 @@ I_{(1,1), n} = \int_{t_n}^{t_{n+1}} \int_{t_n}^s dW(u) dW(s) = \frac{1}{2}\left[
 
 Añadiendo esta corrección al esquema de Euler-Maruyama
 (Ecuación~\ref{eq-esquema-em}), se obtiene el esquema numérico de
-Milstein:
-
-\begin{equation}\phantomsection\label{eq-esquema-milstein}{
+Milstein: \begin{equation}\phantomsection\label{eq-esquema-milstein}{
 Y_{n+1} = Y_n + b(t_n, Y_n)\Delta t + \sigma(t_n, Y_n)\Delta W_n + \frac{1}{2}\sigma(t_n, Y_n)\frac{\partial \sigma}{\partial x}(t_n, Y_n)\left[ (\Delta W_n)^2 - \Delta t \right].
 }\end{equation}
 
@@ -2798,12 +2763,12 @@ coeficientes como las combinaciones
 satisfacen las condiciones de Lipschitz global y de crecimiento lineal
 uniformemente en todo \(t \in [0, T]\), entonces el esquema numérico de
 Milstein (Ecuación~\ref{eq-esquema-milstein}) converge en sentido
-\textbf{fuerte} con orden \(\gamma = 1.0\):
-
-\[
+\textbf{fuerte} con orden \(\gamma = 1.0\): \[
 \left( \mathbb{E}\left[ \sup_{0 \le n \le N} \vert X(t_n) - Y_n \vert^2 \right] \right)^{1/2} \le C \Delta t.
-\] La demostración detallada de este teorema mediante expansiones
-truncadas de Itô-Taylor se presenta en
+\]
+
+La demostración detallada de este teorema mediante expansiones truncadas
+de Itô-Taylor se presenta en
 (\citeproc{ref-kloeden1992numerical}{Kloeden y Platen 1992}).
 
 \end{theorem}
@@ -2872,7 +2837,6 @@ parámetro de volatilidad. Aplicando el Lema de Itô
 mediante la fórmula exponencial de la Sección 3.2 en
 (\citeproc{ref-situ2005theory}{Situ 2005})), se obtiene que la solución
 de la Ecuación~\ref{eq-ede-gbm} está dada por:
-
 \begin{equation}\phantomsection\label{eq-gbm-solucion}{
 X(t) = X_0 \exp\left[ \left( \mu - \frac{1}{2}\sigma^2 \right)t + \sigma W(t) \right].
 }\end{equation}
@@ -2963,7 +2927,6 @@ continua con la simulación discreta de las transiciones de régimen
 Consideremos el sistema de difusión con cambio de régimen markoviano
 estudiado en el Capítulo 2 (Sección 2.2) y Capítulo 5 (Sección 5.2) de
 (\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}):
-
 \begin{equation}\phantomsection\label{eq-ede-switching-num}{
 dX(t) = b(t, X(t), \alpha(t))dt + \sigma(t, X(t), \alpha(t))dW(t), \quad (X(0), \alpha(0)) = (x_0, i_0),
 }\end{equation}
@@ -2984,7 +2947,6 @@ desarrollo de Taylor de primer orden para tamaños de paso
 \(\Delta t > 0\) suficientemente pequeños (Sección 5.3 y 6.4 de
 (\citeproc{ref-yin2010hybrid}{Yin y Zhu 2010}) y Sección 4.2 de
 (\citeproc{ref-mao2006stochastic}{Mao y Yuan 2006})):
-
 \begin{equation}\phantomsection\label{eq-matriz-transicion-discreta}{
 P(\Delta t) = \exp(\Delta t \, Q) = I + \Delta t \, Q + \mathcal{O}\left((\Delta t)^2\right),
 }\end{equation}
@@ -3081,9 +3043,11 @@ aleatoria de Poisson \(p_\varphi(dv, dt)\) con intensidad finita
 \(\lambda(t)\) sobre el espacio de marcas
 \(\mathcal{E} = \mathbb{R}\setminus\{0\}\) (Sección 1.8 de
 (\citeproc{ref-platen2010numerical}{Platen y Bruti-Liberati 2010})):
-
 \begin{equation}\phantomsection\label{eq-ede-hibrida-saltos-num}{
-X(t) = X(0) + \int_0^t b(s, X(s), \alpha(s))ds + \int_0^t \sigma(s, X(s), \alpha(s))dW(s) + \int_0^t \int_{\mathcal{E}} c(s-, X(s-), \alpha(s-), v) p_\varphi(dv, ds).
+\begin{aligned}
+X(t) &= X(0) + \int_0^t b(s, X(s), \alpha(s))ds + \int_0^t \sigma(s, X(s), \alpha(s))dW(s) \\
+&+ \int_0^t \int_{\mathcal{E}} c(s-, X(s-), \alpha(s-), v) p_\varphi(dv, ds).
+\end{aligned}
 }\end{equation}
 
 Cuando las amplitudes de salto provienen de variables aleatorias
@@ -3093,14 +3057,12 @@ Poisson no homogéneo con función de intensidad \(\lambda(t) \geq 0\)
 localmente integrable, entonces la integral de salto sobre
 \([t_n, t_{n+1})\) se reduce al incremento de un \textbf{Proceso de
 Poisson Compuesto}:
-
 \begin{equation}\phantomsection\label{eq-incremento-poisson-compuesto}{
 \Delta J_n = \int_{t_n}^{t_{n+1}} \int_{\mathcal{E}} c(s-, X(s-), \alpha(s-), v) p_\varphi(dv, ds) \approx \mathbb{I}_{\{\alpha_n = 1\}} \sum_{j=1}^{\Delta N_n} \gamma_{n, j},
 }\end{equation}
 
 donde el número de saltos \(\Delta N_n\) ocurridos en \(\Delta t\) se
 aproxima mediante:
-
 \begin{equation}\phantomsection\label{eq-conteo-poisson-paso}{
 \Delta N_n \sim \text{Poisson}\left( \int_{t_n}^{t_{n+1}} \lambda(s)ds \right) \approx \text{Poisson}\left( \lambda(t_n)\Delta t \right),
 }\end{equation}
@@ -3266,7 +3228,6 @@ degradación de primer orden, la tasa instantánea de pérdida de
 viabilidad es proporcional a la potencia presente en ese instante
 (\citeproc{ref-atkins2018physical}{Atkins, Paula, y Keeler 2018};
 \citeproc{ref-yoshioka2000stability}{Yoshioka y Stella 2000}):
-
 \begin{equation}\phantomsection\label{eq-cinetica-primer-orden}{
 \frac{dP(t)}{dt} = -k(T(t)) P(t),
 }\end{equation}
@@ -3283,12 +3244,9 @@ Considere un sistema químico o biológico sujeto a una temperatura
 absoluta \(T_K > 0\) (expresada en grados Kelvin, \(T_K = T + 273.15\)
 con \(T\) en grados Celsius). La tasa de degradación térmica \(k(T_K)\)
 está determinada por la siguiente relación exponencial:
-
 \begin{equation}\phantomsection\label{eq-arrhenius-teorica}{
 k(T_K) = A \exp\left( -\frac{E_a}{R \cdot T_K} \right),
-}\end{equation}
-
-donde:
+}\end{equation} donde:
 
 \begin{itemize}
 \tightlist
@@ -3328,7 +3286,6 @@ cuando la temperatura supera el extremo superior del rango normativo
 (\(T(t) > 8^\circ\text{C}\)), tras superar el periodo de inercia térmica
 del vial, la fracción de biológico degradada en un subintervalo temporal
 \([t_n, t_{n+1}]\) de longitud \(\Delta t\) se determina mediante:
-
 \begin{equation}\phantomsection\label{eq-fraccion-dano-paso}{
 \Delta D_n = \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}},
 }\end{equation}
@@ -3562,7 +3519,6 @@ año presenta una media mensual de \textbf{43 interrupciones por mes} con
 una duración promedio por corte de \textbf{2.39 horas}. Al proyectar
 esta tasa mensual a una tasa anual, se tiene que el número total de
 interrupciones al año esperadas a nivel municipal (\(N_{total}\)) es:
-
 \begin{equation}\phantomsection\label{eq-cortes-totales}{
 N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/año}
 }\end{equation}
@@ -3641,7 +3597,6 @@ año o un mes), es decir si se tiene una red eléctrica con un total de
 \(M\) eventos de interrupción, donde cada evento
 \(i \in \{1, 2, \dots, M\}\) afecta a una cantidad de \(N_i\) usuarios,
 el índice SAIFI se expresa formalmente como:
-
 \begin{equation}\phantomsection\label{eq-saifi}{
 \displaystyle \text{SAIFI} = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{M} N_i}{N_T}
 }\end{equation}
@@ -3654,7 +3609,6 @@ mide la duración total acumulada de las interrupciones sostenidas que
 experimenta el usuario promedio dentro del periodo de evaluación. Si
 cada evento de falla \(i\) tiene una duración temporal de \(r_i\) horas,
 el índice SAIDI se define analíticamente mediante:
-
 \begin{equation}\phantomsection\label{eq-saidi}{
 \displaystyle \text{SAIDI} = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{M} N_i r_i}{N_T}
 }\end{equation}
@@ -3716,7 +3670,6 @@ cualquier mes \(i\), la asignación viene dada por:
 Sustituyendo los valores de nuestro escenario
 (\(\text{SAIFI}_{total} = 0.113\) y \(\mathbb{E}[N_{local}] = 64\)), la
 ecuación del modelo es:
-
 \begin{equation}\phantomsection\label{eq-modelo-cortes}{
 \text{Cortes}_i = \left( \frac{\Delta \text{SAIFI}_i}{0.113} \right) \times 64
 }\end{equation}
@@ -3943,9 +3896,8 @@ Enero}\label{validaciuxf3n-del-modelo-y-anuxe1lisis-de-la-anomaluxeda-de-enero}
 Por los fundamentos de los Procesos de Poisson No Homogéneos, el número
 esperado de cortes en cualquier intervalo \((t_1, t_2]\) está
 determinado por la integral definida de su función de intensidad:
-
 \begin{equation}\phantomsection\label{eq-integral-poisson}{
-\mathbb{E}[N(t_1, t_2)] = \int_{t_1}^{t_2} \lambda(t) dt
+\mathbb{E}[N(t_1, t_2)] = \displaystyle \int_{t_1}^{t_2} \lambda(t) dt
 }\end{equation}
 
 Para validar la consistencia analítica de nuestra función
@@ -4089,9 +4041,7 @@ acumulado total (\(10.812\) horas) representa el 100\% de la afectación
 anual (equivalente a nuestras \(152.96\) horas proyectadas), entonces el
 incremento de cualquier mes \(i\) representará una fracción directamente
 proporcional de horas de corte para el centro de almacenamiento.
-Analíticamente, la ecuación de asignación es:
-
-\[
+Analíticamente, la ecuación de asignación es: \[
 \text{Horas del Mes}_i = \left( \frac{\Delta \text{SAIDI}_i}{\text{SAIDI}_{total}} \right) \times \text{Horas Totales Anuales}
 \]
 
@@ -4206,9 +4156,7 @@ el peso de cada mes (\(\omega_i\)) está dado por su frecuencia de cortes
 (\(\omega_i = \text{Cortes}_i\)).
 
 Asi, las formulaciones para la esperanza y la varianza ponderada están
-dadas por:
-
-\begin{equation}\phantomsection\label{eq-media-ponderada}{
+dadas por: \begin{equation}\phantomsection\label{eq-media-ponderada}{
 \displaystyle \mathbb{E}[D] = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{n} \omega_i E_i}{\displaystyle \sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
 }\end{equation}
 
@@ -4255,12 +4203,8 @@ Log-normal.
 
 La teoría de la probabilidad nos dice que la esperanza y la varianza de
 una variable con distribución Log-normal dependen de sus parámetros a
-través del siguiente sistema de ecuaciones no lineales:
-
-\[
-\mathbb{E}[D] = \exp\left(\mu + \frac{\sigma^2}{2}\right)
-\] \[
-\mathbb{V}[D] = \left[\exp(\sigma^2) - 1\right] \exp(2\mu + \sigma^2)
+través del siguiente sistema de ecuaciones no lineales: \[
+\mathbb{E}[D] = \exp\left(\mu + \frac{\sigma^2}{2}\right), \quad \mathbb{V}[D] = \left[\exp(\sigma^2) - 1\right] \exp(2\mu + \sigma^2)
 \]
 
 Sustituyendo la primera ecuación en la segunda, la varianza puede
@@ -4268,7 +4212,6 @@ reescribirse como
 \(\mathbb{V}[D] = (\mathbb{E}[D])^2 \left[\exp(\sigma^2) - 1\right]\). A
 partir de esta simplificación, se despeja el sistema para obtener las
 fórmulas inversas de calibración:
-
 \begin{equation}\phantomsection\label{eq-sigma-lognormal}{
 \sigma = \sqrt{\ln\left(1 + \frac{\mathbb{V}[D]}{(\mathbb{E}[D])^2}\right)}
 }\end{equation}
@@ -4501,7 +4444,7 @@ dT(t) =
 \begin{cases} 
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
-\end{cases}, \quad 0 \leq t \leq T.
+\end{cases}, \ 0 \leq t \leq T.
 }\end{equation}
 
 Como se observa en el segundo régimen (\(\alpha(t) = 2\)) de la
@@ -4881,7 +4824,6 @@ Poliomielitis), retomamos el modelo cinético de primer orden
 Arrhenius} (Definición~\ref{def-ecuacion-arrhenius} y
 Ecuación~\ref{eq-arrhenius-teorica}) establecidos en la
 Sección~\ref{sec-fundamento-arrhenius}:
-
 \begin{equation}\phantomsection\label{eq-Arrhenius}{
 k(T_K(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right).
 }\end{equation}
@@ -4939,9 +4881,7 @@ Ecuación~\ref{eq-balance-inventario-general}, para actualizar el estado
 del sistema en pasos discretos \(\Delta t\) dentro de la Simulación, el
 número de dosis destruidas (merma instantánea) en cada subintervalo se
 calcula multiplicando el inventario activo \(I(t)\) por la fracción de
-biológico degradada \(\Delta D_n\):
-
-\[
+biológico degradada \(\Delta D_n\): \[
 \text{Merma}(t_n) = I(t_n) \Delta D_n = I(t_n) \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}}.
 \]
 
@@ -5035,11 +4975,11 @@ sistema de salud en México, tal como se detalla en la siguiente tabla:
 estacionalidad epidemiológica y a las campañas nacionales de salud
 pública en México.}\label{tbl-demanda-base}\tabularnewline
 \toprule\noalign{}
-Mes & Demanda Base Diaria (Dosis) & Justificación Epidemiológica \\
+Mes & Demanda Base Diaria & Justificación Epidemiológica \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
-Mes & Demanda Base Diaria (Dosis) & Justificación Epidemiológica \\
+Mes & Demanda Base Diaria & Justificación Epidemiológica \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
@@ -5071,6 +5011,7 @@ simulación:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
   \textbf{Escenario A (Control Absoluto):} Al simular días de
   inactividad clínica (fines de semana o días festivos), el personal no
@@ -5089,13 +5030,13 @@ simulación:
   aperturas del día, definimos a \(N_{resurtido}(t)\) como el
   subconjunto de eventos ocurridos exclusivamente durante la ventana de
   máxima afluencia matutina (09:00 a 14:00 hrs).
-
-  Matemáticamente, por cada evento de resurtido generado, se extrae un
-  bloque adicional de vacunas equivalente a la demanda base. Así, la
-  demanda diaria total se convierte en una variable aleatoria
-  dependiente del proceso de Poisson, definida por:
-  \[D_C(t) = D_{base} + \left( N_{resurtido}(t) \times D_{base} \right)\]
 \end{enumerate}
+
+Matemáticamente, por cada evento de resurtido generado, se extrae un
+bloque adicional de vacunas equivalente a la demanda base. Así, la
+demanda diaria total se convierte en una variable aleatoria dependiente
+del proceso de Poisson, definida por:
+\[D_C(t) = D_{base} + \left( N_{resurtido}(t) \times D_{base} \right)\]
 
 Este acoplamiento garantiza que las trayectorias en la Simulación de
 Monte Carlo con mayor cantidad de aperturas de puerta y por ende, mayor

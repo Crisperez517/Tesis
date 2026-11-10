@@ -16,7 +16,6 @@ Asimismo, desde una perspectiva termodinámica, existe un desfase temporal entre
 ## Cinética de Degradación Térmica y la Ecuación de Arrhenius {#sec-fundamento-arrhenius}
 
 En la estabilidad farmacéutica, la pérdida de potencia de un biológico producida por el calor se modela mediante leyes de cinética química. Sea $P(t) \in [0, 100]$ el porcentaje de potencia o viabilidad biológica remanente de un lote de vacunas en el tiempo $t$. Bajo una cinética de degradación de primer orden, la tasa instantánea de pérdida de viabilidad es proporcional a la potencia presente en ese instante [@atkins2018physical; @yoshioka2000stability]:
-
 $$
 \frac{dP(t)}{dt} = -k(T(t)) P(t),
 $$ {#eq-cinetica-primer-orden}
@@ -26,11 +25,9 @@ donde $k(T) > 0$ denota la constante de velocidad de reacción (o tasa de degrad
 ::: {#def-ecuacion-arrhenius}
 ### Ecuación de Arrhenius
 Considere un sistema químico o biológico sujeto a una temperatura absoluta $T_K > 0$ (expresada en grados Kelvin, $T_K = T + 273.15$ con $T$ en grados Celsius). La tasa de degradación térmica $k(T_K)$ está determinada por la siguiente relación exponencial:
-
 $$
 k(T_K) = A \exp\left( -\frac{E_a}{R \cdot T_K} \right),
 $$ {#eq-arrhenius-teorica}
-
 donde:
 
 - $A > 0$ es el **factor preexponencial** (o factor de frecuencia, en $\text{s}^{-1}$ o $\text{h}^{-1}$), que mide la frecuencia de colisiones moleculares con la orientación adecuada para la reacción.
@@ -41,7 +38,6 @@ donde:
 En los modelos deterministas clásicos de estabilidad acelerada, la temperatura se asume constante, lo que reduce a la @eq-cinetica-primer-orden a un decaimiento exponencial simple $P(t) = P(0)e^{-k(T_K)t}$ [@yoshioka2000stability]. Sin embargo, en una unidad de salud real, la temperatura interna $T(t)$ es un proceso estocástico determinado por la ecuación diferencial estocástica híbrida (@eq-ede-operativa-teorica). 
 
 Al introducir la trayectoria del proceso estocástico $T(t)$ dentro de la @eq-arrhenius-teorica, la tasa de degradación $k(T(t))$ se convierte en un proceso estocástico adaptado a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$ [@control2026vaccine]. Considerando que el daño farmacológico se activa únicamente cuando la temperatura supera el extremo superior del rango normativo ($T(t) > 8^\circ\text{C}$), tras superar el periodo de inercia térmica del vial, la fracción de biológico degradada en un subintervalo temporal $[t_n, t_{n+1}]$ de longitud $\Delta t$ se determina mediante:
-
 $$
 \Delta D_n = \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) > 8^\circ\text{C}\}},
 $$ {#eq-fraccion-dano-paso}

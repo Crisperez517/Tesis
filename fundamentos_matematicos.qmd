@@ -424,7 +424,7 @@ Sea $\{X(t)\}_{t \ge 0}$ un proceso estocástico que satisface la @eq-ede-genera
 $$
 \begin{aligned}
 df(t, X(t)) &= \left[ \frac{\partial f}{\partial t} (t, X(t)) + b(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2} (t, X(t)) \right] dt \\
-&\quad + \sigma(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) dW(t).
+&+ \sigma(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) dW(t).
 \end{aligned}
 $$
 :::
@@ -438,7 +438,6 @@ Como paso previo al desarrollo del modelo termodinámico híbrido, se introduce 
 ::: {#def-ou-clasico}
 ### Proceso de Ornstein-Uhlenbeck
 Un proceso estocástico $\{X(t)\}_{t \ge 0}$ es un proceso de Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial estocástica lineal:
-
 $$
 dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t), \quad X(0) = x_0,
 $$ {#eq-ou-clasica}
@@ -455,7 +454,6 @@ X(t) = \theta + (x_0 - \theta)e^{-\kappa t} + \sigma \int_0^t e^{-\kappa(t-s)} d
 $$ {#eq-ou-solucion}
 
 Dado que el integrando $e^{-\kappa(t-s)}$ es una función determinista, la integral de Itô en la @eq-ou-solucion es una variable aleatoria normal centrada. Asumiendo una condición inicial determinista $x_0$, el valor esperado y la varianza del proceso (calculada mediante la Isometría de Itô, @thm-isometria-ito) están dadas por:
-
 $$
 \mathbb{E}[X(t)] = \theta + (x_0 - \theta)e^{-\kappa t}, \qquad \text{Var}(X(t)) = \sigma^2 \int_0^t e^{-2\kappa(t-s)} ds = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right).
 $$ {#eq-ou-moments}
@@ -475,7 +473,6 @@ Los modelos de difusión continua basados únicamente en el movimiento Browniano
 ::: {#def-ede-saltos}
 ### Ecuación Diferencial Estocástica con Saltos de Poisson
 Sea $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})$ un espacio de probabilidad filtrado. Sean $W(t)$ un movimiento Browniano estándar y $\tilde{N}(dt, dz) = N(dt, dz) - \nu_t(dz)dt$ una medida aleatoria de Poisson compensada sobre $[0, \infty) \times \mathcal{Z}$, ambos adaptados a $\{\mathcal{F}_t\}_{t \ge 0}$ y mutuamente independientes. Una ecuación diferencial estocástica con saltos en el intervalo $[t_0, T]$ (con $0 \leq t_0 < T < \infty$) es una relación simbólica de la forma:
-
 $$
 dX(t) = b(t, X(t^-)) dt + \sigma(t, X(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(t, X(t^-), z) \tilde{N}(dt, dz), \quad X(t_0) = x_0,
 $$ {#eq-ede-saltos-diff}
@@ -483,7 +480,6 @@ $$ {#eq-ede-saltos-diff}
 donde $b: [t_0, T] \times \mathbb{R} \to \mathbb{R}$ es el coeficiente de deriva compensada, $\sigma: [t_0, T] \times \mathbb{R} \to \mathbb{R}$ es el coeficiente de difusión continua y $\gamma: [t_0, T] \times \mathbb{R} \times \mathcal{Z} \to \mathbb{R}$ cuantifica la amplitud de los saltos.
 
 Un proceso estocástico $\{X(t)\}_{t \in [t_0, T]}$ adaptado a $\{\mathcal{F}_t\}_{t \ge 0}$ y con trayectorias càdlàg es una **solución fuerte** de la @eq-ede-saltos-diff si sus coeficientes evaluados a lo largo de la trayectoria son integrables casi seguramente y si para todo $t \in [t_0, T]$ se satisface con probabilidad 1 la ecuación integral equivalente:
-
 $$
 X(t) = x_0 + \int_{t_0}^t b(s, X(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-)) dW(s) + \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X(s^-), z) \tilde{N}(ds, dz).
 $$ {#eq-ede-saltos-int}
@@ -500,10 +496,9 @@ Como se observa en la @fig-sde-comparacion, la presencia de discontinuidades mod
 ::: {#thm-ito-saltos-fijo}
 ### Fórmula de Itô para Difusiones con Saltos
 Sea $\{X(t)\}_{t \in [t_0, T]}$ una solución de la EDE con saltos (@eq-ede-saltos-diff) cuya medida de conteo $N(dt, dz)$ posee medida de intensidad $\nu_t(dz)dt = \lambda(t)dF(z)dt$. Sea $f(t, x)$ una función real continuamente diferenciable respecto a $t$ ($\mathcal{C}^1$) y dos veces continuamente diferenciable respecto a $x$ ($\mathcal{C}^2$). Entonces el proceso compuesto $f(t, X(t))$ satisface la siguiente ecuación diferencial estocástica con saltos:
-
 $$
 \begin{aligned}
-df(t, X(t)) = & \left[ \frac{\partial f}{\partial t}(t, X(t)) + b(t, X(t))\frac{\partial f}{\partial x}(t, X(t)) + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2}(t, X(t)) \right] dt \\
+df(t, X(t)) &=  \left[ \frac{\partial f}{\partial t}(t, X(t)) + b(t, X(t))\frac{\partial f}{\partial x}(t, X(t)) + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2}(t, X(t)) \right] dt \\
 & + \int_{\mathcal{Z}} \left[ f(t, X(t^-) + \gamma(t, X(t^-), z)) - f(t, X(t^-)) - \gamma(t, X(t^-), z)\frac{\partial f}{\partial x}(t, X(t^-)) \right] \nu_t(dz) dt \\
 & + \sigma(t, X(t^-))\frac{\partial f}{\partial x}(t, X(t^-)) dW(t) \\
 & + \int_{\mathcal{Z}} \left[ f(t, X(t^-) + \gamma(t, X(t^-), z)) - f(t, X(t^-)) \right] \tilde{N}(dt, dz).
@@ -588,14 +583,20 @@ Cuando los parámetros estructurales de un sistema físico cambian drásticament
 
 Para formalizar el análisis sobre subintervalos cuyos extremos son tiempos de paro @def-tiempo-parada $\tau$ y $\rho$ tales que $0 \le \tau(\omega) \le \rho(\omega)$ para todo $\omega \in \Omega$, usamos la notación estándar de **intervalos estocásticos** de [@mao2006stochastic]:
 $$
-[[\tau, \rho]] = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t \le \rho(\omega)\}, \qquad [[\tau, \rho[[ = \{(t, \omega) \in [0, \infty) \times \Omega : \tau(\omega) \le t < \rho(\omega)\}.
+\begin{aligned}
+[[\tau,\rho]] &= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t\le\rho(\omega)\}, \\
+[[\tau,\rho[[ &= \{(t,\omega)\in[0,\infty)\times\Omega:\tau(\omega)\le t<\rho(\omega)\}.
+\end{aligned}
 $$
-Asimismo, denotamos por $\mathcal{M}^2([[\tau, \rho]]; \mathbb{R})$ al espacio de los procesos estocásticos real-valuados $\{X(t)\}$ adaptados a $\{\mathcal{F}_t\}_{t \ge 0}$ y definidos en $[[\tau, \rho]]$ tales que $\mathbb{E}\left[ \displaystyle \int_\tau^\rho \vert X(t) \vert^2 dt\right] < \infty$, y por $L^2_{\mathcal{F}_\tau}(\Omega; \mathbb{R})$ a la familia de variables aleatorias $\xi$ que son $\mathcal{F}_\tau$-medibles y satisfacen que $\mathbb{E}[\vert \xi \vert^2] < \infty$ [@mao2006stochastic].
+Asimismo, denotamos por $\mathcal{M}^2([[\tau, \rho]]; \mathbb{R})$ al espacio de los procesos estocásticos real-valuados $\{X(t)\}$ adaptados a $\{\mathcal{F}_t\}_{t \ge 0}$ y definidos en $[[\tau, \rho]]$ tales que: 
+$$
+\mathbb{E}\left[ \displaystyle \int_\tau^\rho \vert X(t) \vert^2 dt\right] < \infty,
+$$
+y por $L^2_{\mathcal{F}_\tau}(\Omega; \mathbb{R})$ a la familia de variables aleatorias $\xi$ que son $\mathcal{F}_\tau$-medibles y satisfacen que $\mathbb{E}[\vert \xi \vert^2] < \infty$ [@mao2006stochastic].
 
 ::: {#def-ede-hibrida}
 ### Ecuación Diferencial Estocástica Híbrida con Saltos
 Sea $\{\alpha(t)\}_{t \ge 0}$ una cadena de Markov a tiempo continuo @def-cadena-markov con trayectorias càdlàg @def-adaptabilidad-cadlag, adaptada a $\{\mathcal{F}_t\}_{t \ge 0},$ que toma valores en un espacio de estados finito $\mathcal{M} = \{1, 2, \dots, m\}$ con matriz generadora $Q = (q_{ij})_{m \times m}.$ Sean $W(t)$ un movimiento Browniano estándar y $\tilde{N}(dt, dz) = N(dt, dz) - \nu_t(dz)dt$ una medida aleatoria de Poisson compensada sobre $[0, \infty) \times \mathcal{Z}.$ Una **ecuación diferencial estocástica híbrida con saltos** en el intervalo $[t_0, T]$ se expresa en su forma diferencial como:
-
 $$
 dX(t) = b(t, X(t^-), \alpha(t^-)) dt + \sigma(t, X(t^-), \alpha(t^-)) dW(t) + \int_{\mathcal{Z}} \gamma(t, X(t^-), \alpha(t^-), z) \tilde{N}(dt, dz),
 $$ {#eq-ede-hibrida-diff}
@@ -607,9 +608,11 @@ Un proceso estocástico $\{X(t)\}_{t \in [t_0, T]}$ se denomina una **solución 
 1. $\{X(t)\}_{t \in [t_0, T]}$ es adaptado a $\{\mathcal{F}_t\}_{t \ge 0}$ y posee trayectorias càdlàg casi seguramente.
 2. Los coeficientes evaluados cumplen $\{b(t, X(t^-), \alpha(t^-))\} \in \mathcal{L}^1([t_0, T]; \mathbb{R})$, $\{\sigma(t, X(t^-), \alpha(t^-))\} \in \mathcal{L}^2([t_0, T]; \mathbb{R})$ y $\displaystyle \int_{t_0}^T \int_{\mathcal{Z}} \vert \gamma(t, X(t^-), \alpha(t^-), z) \vert^2 \nu_t(dz) dt < \infty$ casi seguramente.
 3. Para todo $t \in [t_0, T]$, se satisface con probabilidad 1 la ecuación integral:
-
 $$
-X(t) = x_0 + \int_{t_0}^t b(s, X(s^-), \alpha(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-), \alpha(s^-)) dW(s) + \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X(s^-), \alpha(s^-), z) \tilde{N}(ds, dz).
+\begin{aligned}
+X(t) &= x_0 + \int_{t_0}^t b(s, X(s^-), \alpha(s^-)) ds + \int_{t_0}^t \sigma(s, X(s^-), \alpha(s^-)) dW(s) \\
+&+ \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X(s^-), \alpha(s^-), z) \tilde{N}(ds, dz).
+\end{aligned}
 $$ {#eq-ede-hibrida-int}
 
 Se dice que la solución $\{X(t)\}_{t \in [t_0, T]}$ es **única** (en el sentido de unicidad trayectoria por trayectoria) si para cualquier otra solución $\{\widehat{X}(t)\}_{t \in [t_0, T]}$ ambos procesos son indistinguibles, es decir, $\mathbb{P}\{X(t) = \widehat{X}(t) \text{ para todo } t \in [t_0, T]\} = 1$.
@@ -620,18 +623,18 @@ Para operar con funciones que dependen conjuntamente de la variable de estado $X
 ::: {#thm-lema-ito-saltos}
 ### Fórmula de Itô Generalizada para Sistemas Híbridos con Saltos
 Sea $\{f(t, x, i)\}_{i \in \mathcal{M}}$ una familia de funciones reales definidas en $[t_0, T] \times \mathbb{R} \times \mathcal{M}$ tales que, para cada estado $i \in \mathcal{M}$, $f(\cdot, \cdot, i)$ es continuamente diferenciable respecto a $t$ ($\mathcal{C}^1$) y dos veces continuamente diferenciable respecto a $x$ ($\mathcal{C}^2$). Si $(X(t), \alpha(t))$ es un proceso conjunto que satisface la @eq-ede-hibrida-diff, entonces el proceso compuesto $f(t, X(t), \alpha(t))$ satisface la siguiente ecuación diferencial estocástica híbrida con saltos:
-
 $$
 \begin{aligned}
-df(t, X(t), \alpha(t)) = & \ \mathcal{L}f(t, X(t), \alpha(t)) dt + \sigma(t, X(t^-), \alpha(t^-))\frac{\partial f}{\partial x}(t, X(t^-), \alpha(t^-)) dW(t) \\
-& + \int_{\mathcal{Z}} \left[ f(t, X(t^-) + \gamma(t, X(t^-), \alpha(t^-), z), \alpha(t^-)) - f(t, X(t^-), \alpha(t^-)) \right] \tilde{N}(dt, dz) + dM_\alpha(t),
+df(t, X(t), \alpha(t)) &= \ \mathcal{L}f(t, X(t), \alpha(t)) dt + \sigma(t, X(t^-), \alpha(t^-))\frac{\partial f}{\partial x}(t, X(t^-), \alpha(t^-)) dW(t) \\
+&+ \int_{\mathcal{Z}} \left[ f(t, X(t^-) + \gamma(t, X(t^-), \alpha(t^-), z), \alpha(t^-)) - f(t, X(t^-), \alpha(t^-)) \right] \tilde{N}(dt, dz) \\
+&+ dM_\alpha(t),
 \end{aligned}
 $$
 donde $M_\alpha(t)$ es una martingala de salto asociada a las transiciones de $\alpha(t)$ y el operador generador acoplado $\mathcal{L}f: [t_0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}$ se define como:
 $$
 \begin{aligned}
-\mathcal{L}f(t, x, i) = & \ \frac{\partial f}{\partial t}(t, x, i) + b(t, x, i)\frac{\partial f}{\partial x}(t, x, i) + \frac{1}{2}\sigma^2(t, x, i)\frac{\partial^2 f}{\partial x^2}(t, x, i) + \sum_{j = 1}^m q_{ij} f(t, x, j) \\
-& + \int_{\mathcal{Z}} \left[ f(t, x + \gamma(t, x, i, z), i) - f(t, x, i) - \gamma(t, x, i, z)\frac{\partial f}{\partial x}(t, x, i) \right] \nu_t(dz).
+\mathcal{L}f(t, x, i) &= \ \frac{\partial f}{\partial t}(t, x, i) + b(t, x, i)\frac{\partial f}{\partial x}(t, x, i) + \frac{1}{2}\sigma^2(t, x, i)\frac{\partial^2 f}{\partial x^2}(t, x, i) + \sum_{j = 1}^m q_{ij} f(t, x, j) \\
++& \int_{\mathcal{Z}} \left[ f(t, x + \gamma(t, x, i, z), i) - f(t, x, i) - \gamma(t, x, i, z)\frac{\partial f}{\partial x}(t, x, i) \right] \nu_t(dz).
 \end{aligned}
 $$
 :::
@@ -648,7 +651,10 @@ Si existen constantes positivas $L, K > 0$ tales que los coeficientes de la ecua
 
 1. **Condición de Lipschitz Global:** Para todo $x, y \in \mathbb{R}$, $t \in [t_0, T]$ y cada régimen $i \in \mathcal{M}$,
 $$
-\vert b(t, x, i) - b(t, y, i) \vert^2 + \vert \sigma(t, x, i) - \sigma(t, y, i) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(t, x, i, z) - \gamma(t, y, i, z) \vert^2 \nu_t(dz) \le L \vert x - y \vert^2.
+\begin{aligned}
+&\vert b(t, x, i) - b(t, y, i) \vert^2 + \vert \sigma(t, x, i) - \sigma(t, y, i) \vert^2 \\
+&+ \int_{\mathcal{Z}} \vert \gamma(t, x, i, z) - \gamma(t, y, i, z) \vert^2 \nu_t(dz) \le L \vert x - y \vert^2.
+\end{aligned}
 $$ {#eq-hip-lipschitz-hibrida}
 
 2. **Condición de Crecimiento Lineal:** Para todo $(t, x, i) \in [t_0, T] \times \mathbb{R} \times \mathcal{M}$,
@@ -704,7 +710,8 @@ $$
 Claramente, $\sigma_n$ es no decreciente y $\sigma_n \uparrow T$ casi seguramente cuando $n \to \infty$. Definiendo el proceso detenido $X_n(t) = X(\min\{t, \sigma_n\})$ para $t \in [t_0, T]$, por las propiedades de las integrales estocásticas en tiempos de paro se cumple que:
 $$
 \begin{aligned}
-X_n(t) = x_0 & + \int_{t_0}^t b(s, X_n(s^-), \alpha(s^-))\mathbf{1}_{[[t_0, \sigma_n]]}(s) ds + \int_{t_0}^t \sigma(s, X_n(s^-), \alpha(s^-))\mathbf{1}_{[[t_0, \sigma_n]]}(s) dW(s) \\
+X_n(t) = x_0 & + \int_{t_0}^t b(s, X_n(s^-), \alpha(s^-))\mathbf{1}_{[[t_0, \sigma_n]]}(s) ds \\
+& + \int_{t_0}^t \sigma(s, X_n(s^-), \alpha(s^-))\mathbf{1}_{[[t_0, \sigma_n]]}(s) dW(s) \\
 & + \int_{t_0}^t \int_{\mathcal{Z}} \gamma(s, X_n(s^-), \alpha(s^-), z)\mathbf{1}_{[[t_0, \sigma_n]]}(s) \tilde{N}(ds, dz).
 \end{aligned}
 $$
@@ -725,31 +732,26 @@ $$
 \end{aligned}
 $$
 Mayorando el factor $(T - t_0)$ y los coeficientes $16$ mediante el factor común $4(T - t_0 + 5)$ (dado que $4 \cdot 4 < 4(T - t_0 + 5)$), y usando la condición de crecimiento lineal (@eq-hip-crecimiento-hibrida), agrupamos las tres integrales en una sola cota:
-
 $$
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4(T - t_0 + 5)\mathbb{E}\left[ \int_{t_0}^t K\left( 1 + \vert X_n(r^-) \vert^2 \right) \mathbf{1}_{[[t_0, \sigma_n]]}(r) dr \right],
 $$ {#eq-cota-previa-finitud}
 
 dado que $\displaystyle \vert X_n(r^-) \vert^2 \mathbf{1}_{[[t_0, \sigma_n]]}(r) \le \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2$, y aplicando el Teorema de Tonelli se tiene que:
-
 $$
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
 $$ {#eq-cota-previa-gronwall}
 
 Note que, aunque el proceso detenido $X_n(s)$ puede superar el umbral $n$ en el instante exacto $s = \sigma_n$ debido a la ocurrencia de un salto, por definición de $\sigma_n$ se cumple que $\vert X(r) \vert < n$ para todo $r \in (t_0, \sigma_n)$, por lo que el límite por la izquierda satisface que $\vert X_n(r^-) \vert = \vert X(r^-) \vert \le \max\{n, \vert x_0 \vert\}$ para todo $r \in [[t_0, \sigma_n]]$ [@situ2005theory]. Elevando al cuadrado ambos miembros de la desigualdad y utilizando que el máximo de dos números no negativos es menor o igual que su suma, se obtiene que $\vert X_n(r^-) \vert^2 \le \max\{n^2, \vert x_0 \vert^2\} \le n^2 + \vert x_0 \vert^2$. Sustituyendo esta cota en el integrando de la @eq-cota-previa-finitud e integrando respecto a $r$, se tiene que para todo $t \in [t_0, T]$:
-
 $$
 \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5)(T - t_0)\left( 1 + n^2 + \mathbb{E}[\vert x_0 \vert^2] \right) < \infty.
 $$
 
 Esto garantiza que la función $\displaystyle u_n(t) = 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right]$ es finita, acotada y medible en $[t_0, T].$ Sumando $1$ en ambos lados de la @eq-cota-previa-gronwall, obtenemos para todo $t \in [t_0, T]$:
-
 $$
 1 + \mathbb{E}\left[ \sup_{t_0 \le s \le t} \vert X_n(s) \vert^2 \right] \le 1 + 4\mathbb{E}[\vert x_0 \vert^2] + 4K(T - t_0 + 5) \int_{t_0}^t \left( 1 + \mathbb{E}\left[ \sup_{t_0 \le u \le r} \vert X_n(u) \vert^2 \right] \right) dr.
 $$
 
 Aplicando la Desigualdad de Grönwall (@lem-gronwall) y evaluando en $t = T$, se obtiene que:
-
 $$
 \mathbb{E}\left[ \sup_{t_0 \le t \le \sigma_n} \vert X(t) \vert^2 \right] \le 1 + \mathbb{E}\left[ \sup_{t_0 \le t \le T} \vert X_n(t) \vert^2 \right] \le \left( 1 + 4\mathbb{E}[\vert x_0 \vert^2] \right) e^{4K(T - t_0)(T - t_0 + 5)}.
 $$
@@ -763,19 +765,17 @@ De todo lo anterior se concluye la demostracion del teorema de existencia y unic
 Una vez demostrado el teorema general de existencia y unicidad para ecuaciones diferenciales estocásticas híbridas con saltos y régimen de Markov (@thm-mao-switching), procedemos a formular la ecuación diferencial estocástica híbrida que describe la evolución de la temperatura interna $T(t)$ del refrigerador en un periodo temporal $[0, T]$, con $T > 0$ (la justificación detallada de la elección de esta ecuación diferencial estocástica se encuentra en el capitulo 7: Estudio de Caso).
 
 Sea $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t \ge 0}, \mathbb{P})$ un espacio de probabilidad filtrado. Basándonos en la ley de enfriamiento de Newton y en el proceso de Ornstein-Uhlenbeck (@def-ou-clasico), modelamos la temperatura interna $T(t)$ mediante una ecuación diferencial estocástica híbrida controlada por una cadena de Markov a tiempo continuo $\{\alpha(t)\}_{t \ge 0}$ (@def-cadena-markov) con espacio de estados $\mathcal{M} = \{1, 2\}$ y matriz generadora de tasas finitas $Q = (q_{ij})_{2 \times 2}$, cuya expresión está dada por:
-
 $$
 dT(t) = 
 \begin{cases} 
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) & \text{si } \alpha(t) = 1 \text{ (Con energía)} \\ 
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) & \text{si } \alpha(t) = 2 \text{ (Corte de luz)} 
-\end{cases}, \quad 0 \leq t \leq T,
+\end{cases}, \ 0 \leq t \leq T,
 $$ {#eq-ede-operativa-teorica}
 
 con condiciones iniciales $T(0) = T_0 \in L^2_{\mathcal{F}_0}(\Omega; \mathbb{R})$ y $\alpha(0) = \alpha_0 \in \mathcal{M}$. En la @eq-ede-operativa-teorica, $\kappa_{on} > 0$ y $\kappa_{off} > 0$ representan las tasas de transferencia térmica en cada régimen, $\theta_{set} \in \mathbb{R}$ denota la temperatura de equilibrio del termostato, $\sigma_{on} > 0$ y $\sigma_{off} > 0$ son los coeficientes de difusión constantes asociados al movimiento Browniano estándar $\{W(t)\}_{t \ge 0}$, y $T_{amb}: [0, T] \to \mathbb{R}$ es una función determinista continua y acotada que representa la temperatura ambiente exterior.
 
 Las perturbaciones discretas por apertura de puertas en el régimen $\alpha(t) = 1$ están dadas por un proceso de Poisson compuesto (@def-poisson-compuesto):
-
 $$
 J(t) = \sum_{i=1}^{N_{puerta}(t)} \gamma_i,
 $$
@@ -783,7 +783,6 @@ $$
 donde $\{N_{puerta}(t)\}_{t \ge 0}$ es un proceso de Poisson no homogéneo (@def-poisson-no-homogeneo) con función de intensidad localmente integrable y acotada $\lambda(t) \ge 0$, y $\{\gamma_i\}_{i \in \mathbb{N}}$ es una sucesión de variables aleatorias independientes e idénticamente distribuidas con función de distribución acumulada $F(z)$ con soporte $\mathcal{Z} \subseteq \mathbb{R}$, tales que poseen segundo momento finito $\mathbb{E}[\vert \gamma_i \vert^2] = M_\gamma < \infty$ (y por ende media finita $\mathbb{E}[\vert \gamma_i \vert] < \infty$). Se asume que el movimiento Browniano $W(t)$, el proceso de conteo $N_{puerta}(t)$, las magnitudes $\{\gamma_i\}_{i \in \mathbb{N}}$ y la cadena de Markov $\alpha(t)$ son mutuamente independientes.
 
 Definiendo los coeficientes de deriva $b: [0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}$ y de difusión $\sigma: \mathcal{M} \to \mathbb{R}$ para cada régimen mediante:
-
 $$
 b(t, T, 1) = \kappa_{on}(\theta_{set} - T), \qquad \sigma(1) = \sigma_{on},
 $${#eq-coeficientes-on}
@@ -792,13 +791,11 @@ b(t, T, 2) = \kappa_{off}(T_{amb}(t) - T), \qquad \sigma(2) = \sigma_{off},
 $${#eq-coeficientes-off}
 
 y la función de amplitud de salto $\gamma: \mathcal{M} \times \mathcal{Z} \to \mathbb{R}$ como:
-
 $$
 \gamma(1, z) = z, \qquad \gamma(2, z) = 0,
 $${#eq-funcion-salto}
 
 la @eq-ede-operativa-teorica se puede escribir de forma unificada evaluada en los límites por la izquierda como:
-
 $$
 dT(t) = b(t, T(t^-), \alpha(t^-)) dt + \sigma(\alpha(t^-)) dW(t) + \mathbf{1}_{\{\alpha(t^-) = 1\}} dJ(t).
 $$ {#eq-modelo-termodinamico}
@@ -808,7 +805,6 @@ $$ {#eq-modelo-termodinamico}
 Para analizar la existencia y unicidad de la solución de la @eq-modelo-termodinamico mediante el @thm-mao-switching, es necesario expresar el diferencial del proceso de Poisson compuesto $dJ(t)$ en términos de una integral estocástica respecto a la medida aleatoria de Poisson compensada $\tilde{N}(dt, dz)$ (@def-medida-compensada).
 
 Sea $N(dt, dz)$ la medida aleatoria de conteo de Poisson asociada al proceso compuesto $J(t)$, cuya medida de intensidad (@def-medida-levy) está dada por $\nu_t(dz)dt = \lambda(t)dF(z)dt$. Aplicando el @lem-equivalencia-saltos y utilizando la definición de $\gamma(\alpha, z)$, el término de salto en la @eq-modelo-termodinamico admite la siguiente descomposición:
-
 $$
 \begin{aligned}
 \mathbf{1}_{\{\alpha(t^-) = 1\}} dJ(t) &= \int_{\mathcal{Z}} \gamma(\alpha(t^-), z) N(dt, dz) \\
@@ -817,7 +813,6 @@ $$
 $$
 
 Cuando $\alpha(t^-) = 1$, la integral respecto a $dF(z)$ coincide con el valor esperado de las magnitudes de salto, i.e. $\displaystyle \int_{\mathcal{Z}} z dF(z) = \mathbb{E}[\gamma_i]$, mientras que cuando $\alpha(t^-) = 2$ dicha integral se anula debido a que $\gamma(2, z) = 0$. Juntando este término determinista dentro del coeficiente de deriva original $b(t, T, \alpha)$, definimos el coeficiente de **deriva compensada** $\tilde{b}: [0, T] \times \mathbb{R} \times \mathcal{M} \to \mathbb{R}$ como:
-
 $$
 \tilde{b}(t, T, 1) = \kappa_{on}(\theta_{set} - T) + \lambda(t)\mathbb{E}[\gamma_i],
 $${#eq-deriva-compensada-on}
@@ -838,13 +833,11 @@ Demostraremos a continuación que la ecuación diferencial estocástica híbrida
 En primer lugar, por construcción del modelo, el movimiento Browniano $W(t)$, la medida aleatoria de Poisson $N(dt, dz)$ y la cadena de Markov $\alpha(t)$ son mutuamente independientes. Asimismo, dado que el espacio de estados $\mathcal{M} = \{1, 2\}$ es finito y las tasas de transición de la matriz generadora $Q = (q_{ij})_{2 \times 2}$ son finitas, entonces la cadena de Markov no presenta explosión en $[0, T]$. Adicionalmente, dado que la función de intensidad es acotada en el intervalo cerrado $[0, T]$, existe una constante $\displaystyle \lambda_{max} = \sup_{t \in [0, T]} \lambda(t) < \infty$, con lo cual $\displaystyle \int_0^T \lambda(t)dt \le \lambda_{max}T < \infty$.
 
 Para comprobar el cumplimiento de la condición de Lipschitz global (@eq-hip-lipschitz-hibrida), sean $T_1, T_2 \in \mathbb{R}$ dos valores cualesquiera de la variable de estado, $t \in [0, T]$ e $i \in \{1, 2\}$. Dado que el coeficiente de difusión $\sigma(i)$ (@eq-coeficientes-on, @eq-coeficientes-off) y la función de salto $\gamma(i, z)$ (@eq-funcion-salto) dependen únicamente del régimen $i$ y de la marca $z$, y son independientes del estado $T$, sus diferencias respecto a la variable de estado se anulan en ambos regímenes:
-
 $$
 \vert \sigma(i) - \sigma(i) \vert^2 = 0, \qquad \int_{\mathcal{Z}} \vert \gamma(i, z) - \gamma(i, z) \vert^2 \nu_t(dz) = 0.
 $$
 
 Por otro lado, evaluando la diferencia cuadrática de la deriva compensada para el régimen $i = 1$ (@eq-deriva-compensada-on), los términos $\kappa_{on} \theta_{set}$ y $\lambda(t)\mathbb{E}[\gamma_i]$ se cancelan, obteniéndose:
-
 $$
 \begin{aligned}
 \vert \tilde{b}(t, T_1, 1) - \tilde{b}(t, T_2, 1) \vert^2 &= \left\vert \left[ \kappa_{on}(\theta_{set} - T_1) + \lambda(t)\mathbb{E}[\gamma_i] \right] - \left[ \kappa_{on}(\theta_{set} - T_2) + \lambda(t)\mathbb{E}[\gamma_i] \right] \right\vert^2 \\
@@ -853,13 +846,11 @@ $$
 $$
 
 De manera análoga, para el régimen $i = 2$ (@eq-deriva-compensada-off) el término $\kappa_{off}T_{amb}(t)$ se cancela al restar ambas expresiones, obteniéndose:
-
 $$
 \vert \tilde{b}(t, T_1, 2) - \tilde{b}(t, T_2, 2) \vert^2 = \left\vert \kappa_{off}(T_{amb}(t) - T_1) - \kappa_{off}(T_{amb}(t) - T_2) \right\vert^2 = \kappa_{off}^2 \vert T_1 - T_2 \vert^2.
 $$
 
 Definiendo la constante $L = \max\{\kappa_{on}^2, \kappa_{off}^2\} > 0$, se cumple que para todo $T_1, T_2 \in \mathbb{R},$ $t \in [0, T]$, e $i \in \{1, 2\}$ que:
-
 $$
 \vert \tilde{b}(t, T_1, i) - \tilde{b}(t, T_2, i) \vert^2 + \vert \sigma(i) - \sigma(i) \vert^2 + \int_{\mathcal{Z}} \vert \gamma(i, z) - \gamma(i, z) \vert^2 \nu_t(dz) \le L \vert T_1 - T_2 \vert^2,
 $$
@@ -867,7 +858,6 @@ $$
 lo cual verifica la condición de Lipschitz global (@eq-hip-lipschitz-hibrida).
 
 Resta verificar que los coeficientes satisfacen la condición de crecimiento lineal (@eq-hip-crecimiento-hibrida). Sea $(t, T_1, i) \in [0, T] \times \mathbb{R} \times \{1, 2\}$ y denotemos por $\displaystyle T_{max} = \max_{t \in [0, T]} \vert T_{amb}(t) \vert < \infty$ al máximo de la función continua $T_{amb}(t)$ en el compacto $[0, T]$. Aplicando la desigualdad elemental $\vert a - b \vert^2 \le 2\vert a \vert^2 + 2\vert b \vert^2$ del @lem-desigualdad-algebraica al coeficiente de deriva compensada en el régimen $i = 1$ (@eq-deriva-compensada-on), y acotando $\lambda(t) \le \lambda_{max}$, se obtiene:
-
 $$
 \vert \tilde{b}(t, T_1, 1) \vert^2 = \left\vert \left( \kappa_{on}\theta_{set} + \lambda(t)\mathbb{E}[\gamma_i] \right) - \kappa_{on}T_1 \right\vert^2 \le 2\left( \kappa_{on}\vert \theta_{set} \vert + \lambda_{max}\vert \mathbb{E}[\gamma_i] \vert \right)^2 + 2\kappa_{on}^2 \vert T_1 \vert^2.
 $$
@@ -885,9 +875,11 @@ $$
 $$
 
 Sumando las cotas correspondientes a la deriva compensada, la difusión y la medida de saltos, y definiendo la constante positiva:
-
 $$
-K = \max\left\{ \max\left\{ 2\left( \kappa_{on}\vert \theta_{set} \vert + \lambda_{max}\vert \mathbb{E}[\gamma_i] \vert \right)^2, \, 2\kappa_{off}^2 T_{max}^2 \right\} + \Sigma_{max} + \lambda_{max} M_\gamma, \ \max\{2\kappa_{on}^2, 2\kappa_{off}^2\} \right\} > 0,
+\begin{aligned}
+K &= \max \Bigg\{ \max\left\{ 2\left( \kappa_{on}\vert \theta_{set} \vert + \lambda_{max}\vert \mathbb{E}[\gamma_i] \vert \right)^2, \, 2\kappa_{off}^2 T_{max}^2 \right\} \\
+&+ \Sigma_{max} + \lambda_{max} M_\gamma, \ \max\{2\kappa_{on}^2, 2\kappa_{off}^2\} \Bigg\} > 0,
+\end{aligned}
 $$
 
 se deduce que para todo $(t, T_1, i) \in [0, T] \times \mathbb{R} \times \{1, 2\}$ se satisface la desigualdad:
@@ -899,7 +891,6 @@ $$
 verificando así la condición de crecimiento lineal (@eq-hip-crecimiento-hibrida).
 
 Por lo tanto, dado que se cumplen todas las hipótesis del @thm-mao-switching, para cualquier condición inicial $T(0) = T_0 \in L^2_{\mathcal{F}_0}(\Omega; \mathbb{R})$ y $\alpha(0) = \alpha_0 \in \{1, 2\}$, la ecuación diferencial estocástica híbrida propuesta en la @eq-ede-operativa-teorica tiene una única solución fuerte $\{T(t)\}_{t \in [0, T]}$ adaptada a $\{\mathcal{F}_t\}_{t \ge 0}$, con trayectorias càdlàg casi seguramente y acotada en media cuadrática:
-
 $$
 \mathbb{E}\left[ \sup_{0 \le t \le T} \vert T(t) \vert^2 \right] < \infty,
 $$
