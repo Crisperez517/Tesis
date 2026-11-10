@@ -215,14 +215,14 @@
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
 \usepackage{amsthm}
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
-\theoremstyle{plain}
-\newtheorem{algorithm}{Algoritmo}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter]
 \theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\theoremstyle{plain}
 \newtheorem{lemma}{Lema}[chapter]
+\theoremstyle{plain}
+\newtheorem{algorithm}{Algoritmo}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Demostración}}
 \newtheorem*{remark}{Observación}
@@ -2862,7 +2862,7 @@ y un paso de discretización \(\Delta t = 0.05\) (\(N = 40\)).
 
 \centering{
 
-\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{comparacion_metodos.png}
+\includegraphics[width=0.95\linewidth,height=\textheight,keepaspectratio]{comparacion_metodos.png}
 
 }
 
@@ -4534,14 +4534,14 @@ condiciones climáticas severas.
 
 \centering{
 
-\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{haier_hbc150.jpg}
+\includegraphics[width=0.6\linewidth,height=\textheight,keepaspectratio]{haier_hbc150.jpg}
 
 }
 
 \caption{\label{fig-haier-hbc150}Refrigerador institucional para vacunas
 Haier HBC-150. Este equipo tipo cofre cuenta con certificación PQS de la
-OMS y masa térmica incorporada para mantener la red de frío estable
-durante fallas prolongadas del suministro eléctrico.}
+OMS y masa térmica para mantener la red de frío estable durante fallas
+prolongadas del suministro eléctrico.}
 
 \end{figure}%
 

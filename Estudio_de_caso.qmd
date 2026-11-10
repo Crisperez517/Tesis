@@ -385,7 +385,7 @@ Vinculando los elementos de la @eq-ede-operativa con las definiciones matemátic
 
 Para garantizar el rigor físico de la simulación, los coeficientes termodinámicos se dedujeron a partir de las especificaciones técnicas del refrigerador institucional **Haier HBC-150**. De acuerdo con el catálogo oficial *Performance, Quality and Safety* (PQS) de la Organización Mundial de la Salud (OMS) [@oms_pqs_e003, pp. 89-90], este equipo cuenta con certificación de protección Grado A y está diseñado específicamente para preservar la red de frío en zonas con condiciones climáticas severas.
 
-![Refrigerador institucional para vacunas Haier HBC-150. Este equipo tipo cofre cuenta con certificación PQS de la OMS y masa térmica incorporada para mantener la red de frío estable durante fallas prolongadas del suministro eléctrico.](haier_hbc150.jpg){#fig-haier-hbc150 width="70%" fig-align="center"}
+![Refrigerador institucional para vacunas Haier HBC-150. Este equipo tipo cofre cuenta con certificación PQS de la OMS y masa térmica para mantener la red de frío estable durante fallas prolongadas del suministro eléctrico.](haier_hbc150.jpg){#fig-haier-hbc150 width="60%" fig-align="center"}
 
 Con el propósito de aproximar de manera precisa el comportamiento de este equipo bajo los rigurosos estándares operativos de la OMS, cada coeficiente de la @eq-ede-operativa se calculó a partir de las leyes físicas de transferencia de calor y la mecánica de fluidos. 
 
