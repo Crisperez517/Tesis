@@ -1,9 +1,3 @@
----
-language:
-  crossref-alg-title: "Algoritmo"
-  crossref-alg-prefix: "Algoritmo"
----
-
 # Soluciones Numéricas de Ecuaciones Diferenciales Estocásticas {#sec-numerico}
 
 En la práctica, la gran mayoría de las ecuaciones diferenciales estocásticas carecen de una solución analítica explícita debido a la estructura de sus coeficientes o al acoplamiento de múltiples perturbaciones. Por este motivo, resulta necesario recurrir a esquemas de aproximación numérica definidos sobre una discretización temporal. A diferencia del análisis numérico determinista, donde el error de aproximación se evalúa de manera puntual, en el cálculo estocástico la cercanía entre la solución exacta $X(t)$ y la aproximación numérica $Y$ debe medirse en media cuadrática o en distribución sobre el espacio de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$ [@kloeden1992numerical].
