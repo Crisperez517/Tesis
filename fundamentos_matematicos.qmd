@@ -154,13 +154,10 @@ $$
 Las leyes de transición y la evolución temporal de las probabilidades de estado de la cadena $\{\alpha(t)\}_{t \ge 0}$ se encuentran completamente caracterizadas por la matriz de intensidades de transición $Q = (q_{ij}) \in \mathbb{R}^{m \times m}$. Si definimos las funciones de probabilidad de transición condicional mediante $p_{ij}(h) = \mathbb{P}(\alpha(t+h) = j \mid \alpha(t) = i)$ para un incremento temporal positivo $h > 0$, las componentes de la matriz $Q$ se determinan evaluando el límite analítico en el origen:
 
 1. Para transiciones entre estados distintos ($i \neq j$), la componente $q_{ij}$ representa la tasa instantánea o intensidad de conmutación desde el régimen $i$ hacia el régimen $j$, definida como:
-
 $$
 q_{ij} = \lim_{h \to 0^+} \frac{p_{ij}(h)}{h} \ge 0
 $$
-
 2. Para los elementos que se encuentran en la diagonal principal ($i = j$), la componente $q_{ii}$ representa la tasa neta de salida del estado $i$, cumpliendo por conservación de la probabilidad que la suma por filas de la matriz $Q$ sea idénticamente nula se tiene que:
-
 $$
 q_{ii} = \lim_{h \to 0^+} \frac{p_{ii}(h) - 1}{h} = -\sum_{j \neq i} q_{ij}
 $$
@@ -413,7 +410,6 @@ $$
 $$
 \vert b(t, x) \vert^2 + \vert \sigma(t, x) \vert^2 \le K (1 + \vert x \vert^2)
 $$
-
 Bajo el cumplimiento de ambas condiciones, existe una única solución fuerte $\{X(t)\}_{t \in [0, T]}$ adaptada a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$, con trayectorias continuas con probabilidad 1 y tal que $\mathbb{E}\left[\sup_{0 \le t \le T} \vert X(t) \vert^2\right] < \infty$. Una demostración detallada de este teorema, basada en el método de iteraciones sucesivas de Picard, se encuentra en [@arnold1974stochastic].
 :::
 
@@ -432,7 +428,7 @@ df(t, X(t)) &= \left[ \frac{\partial f}{\partial t} (t, X(t)) + b(t, X(t))\frac{
 $$
 :::
 
-A diferencia del cálculo clásico, aparece el término adicional de segundo orden $\frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2} dt$. Este término proviene de que la variación cuadrática del movimiento Browniano no es nula, por lo que en una expansión de Taylor los incrementos cuadráticos aportan una contribución de primer orden temporal, cumpliendo la regla operacional $(dW(t))^2 = dt$.
+A diferencia del cálculo clásico, aparece el término adicional de segundo orden $\displaystyle \dfrac{1}{2}\sigma^2(t, X(t))\dfrac{\partial^2 f}{\partial x^2} dt$. Este término proviene de que la variación cuadrática del movimiento Browniano no es nula, por lo que en una expansión de Taylor los incrementos cuadráticos aportan una contribución de primer orden temporal, cumpliendo la regla operacional $(dW(t))^2 = dt$.
 
 ### El Proceso de Ornstein-Uhlenbeck Clásico
 
@@ -441,34 +437,26 @@ Como paso previo al desarrollo del modelo termodinámico híbrido, se introduce 
 ::: {#def-ou-clasico}
 ### Proceso de Ornstein-Uhlenbeck
 Un proceso estocástico $\{X(t)\}_{t \ge 0}$ es un proceso de Ornstein-Uhlenbeck si satisface la siguiente ecuación diferencial estocástica lineal:
-
 $$
 dX(t) = \kappa (\theta - X(t)) dt + \sigma dW(t), \quad X(0) = x_0,
 $$ {#eq-ou-clasica}
-
 donde $\kappa > 0$ representa la tasa de reversión a la media, $\theta \in \mathbb{R}$ denota el nivel de equilibrio a largo plazo y $\sigma > 0$ es el coeficiente de difusión constante.
 :::
 
 La característica principal de la @eq-ou-clasica radica en su deriva lineal $b(x) = \kappa(\theta - x)$. Cuando el estado del proceso supera el valor de equilibrio ($X(t) > \theta$), la deriva es negativa y dirige la trayectoria hacia abajo; Si el proceso se encuentra por debajo del nivel de referencia ($X(t) < \theta$), la deriva es positiva e impulsa un crecimiento hacia $\theta$. Esta propiedad de reversión a la media convierte a este proceso en el modelo base para describir la evolución térmica de sistemas regidos por la ley de enfriamiento de Newton.
 
-Aplicando el Lema de Itô (@thm-ito-clasico) a la función $f(t, x) = x e^{\kappa t}$, se obtiene que $d(X(t)e^{\kappa t}) = \kappa \theta e^{\kappa t} dt + \sigma e^{\kappa t} dW(t)$. Integrando en el intervalo $[0, t]$ y despejando $X(t)$, se obtiene la solución analítica explícita del proceso:
-
+Aplicando el Lema de Itô (@thm-ito-clasico) a la función $f(t, x) = x e^{\kappa t}$, se obtiene que $d(X(t)e^{\kappa t}) = \kappa \theta e^{\kappa t} dt + \sigma e^{\kappa t} dW(t)$. Integrando en el intervalo $[0, t]$ y despejando $X(t)$, se obtiene la solución analítica del proceso:
 $$
 X(t) = \theta + (x_0 - \theta)e^{-\kappa t} + \sigma \int_0^t e^{-\kappa(t-s)} dW(s).
 $$ {#eq-ou-solucion}
-
 Dado que el integrando $e^{-\kappa(t-s)}$ es una función determinista, la integral de Itô en la @eq-ou-solucion es una variable aleatoria normal centrada. Asumiendo una condición inicial determinista $x_0$, el valor esperado y la varianza del proceso (calculada mediante la Isometría de Itô, @thm-isometria-ito) están dadas por:
-
 $$
 \mathbb{E}[X(t)] = \theta + (x_0 - \theta)e^{-\kappa t}, \qquad \text{Var}(X(t)) = \sigma^2 \int_0^t e^{-2\kappa(t-s)} ds = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right).
 $$ {#eq-ou-moments}
-
 Con lo cual, para todo instante $t > 0$, la variable aleatoria $X(t)$ sigue una distribución normal:
-
 $$
 X(t) \sim \mathcal{N}\left( \theta + (x_0 - \theta)e^{-\kappa t}, \, \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right) \right),
 $$ {#eq-ou-distribucion}
-
 la cual converge cuando $t \to \infty$ a una distribución normal $\mathcal{N}\left(\theta, \frac{\sigma^2}{2\kappa}\right)$ independientemente del estado inicial $x_0$ [@karlin1998introduction].
 
 ## Ecuaciones Diferenciales Estocásticas con Saltos
