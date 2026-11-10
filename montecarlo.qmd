@@ -194,11 +194,11 @@ La contingencia obligó a realizar viajes masivos de reabastecimiento, elevando 
 
 Para visualizar cómo interactúa el consumo operativo con los momentos exactos de falla termodinámica, se generaron gráficas de doble eje para los tres escenarios en estudio.
 
-![Dinámica logística anual (Escenario A). La trayectoria continua de color azul (eje izquierdo) representa el nivel de inventario activo, el cual se mantiene como una línea recta casi todo el año debido a la ausencia de extracciones. La trayectoria escalonada de color rojo (eje derecho) representa el crecimiento acumulado de las dosis perdidas, observando que los saltos o daños coinciden exclusivamente a cuando se rompe la cadena de frío de manera prolongada.](inventario_vs_mermas_escenario_A.png){#fig-logistica-a width="95%" fig-align="center"}
+![Dinámica logística anual (Escenario A). La trayectoria continua de color azul (eje izquierdo) representa el nivel de inventario activo, el cual se mantiene como una línea recta casi todo el año debido a la ausencia de extracciones. La trayectoria escalonada de color rojo (eje derecho) representa el crecimiento acumulado de las dosis perdidas, observando que los saltos o daños coinciden exclusivamente a cuando se rompe la cadena de frío de manera prolongada.](inventario_vs_mermas_escenario_A.png){#fig-logistica-a}
 
-![Dinámica logística anual (Escenario B). La trayectoria azul muestra el patrón típico de "diente de sierra" generado por la extracción diaria a las 8:00 AM y los resurtidos verticales al tocar el punto de reorden. La trayectoria roja de mermas acumuladas crece de forma espaciada y moderada.](inventario_vs_mermas_escenario_B.png){#fig-logistica-b width="95%" fig-align="center"}
+![Dinámica logística anual (Escenario B). La trayectoria azul muestra el patrón típico de "diente de sierra" generado por la extracción diaria a las 8:00 AM y los resurtidos verticales al tocar el punto de reorden. La trayectoria roja de mermas acumuladas crece de forma espaciada y moderada.](inventario_vs_mermas_escenario_B.png){#fig-logistica-b}
 
-![Dinámica logística anual (Escenario C). La trayectoria azul evidencia un consumo caótico por la contingencia, obligando a múltiples resurtidos por semana. En consecuencia, la trayectoria roja se dispara agresivamente en forma exponencial.](inventario_vs_mermas_escenario_C.png){#fig-logistica-c width="95%" fig-align="center"}
+![Dinámica logística anual (Escenario C). La trayectoria azul evidencia un consumo caótico por la contingencia, obligando a múltiples resurtidos por semana. En consecuencia, la trayectoria roja se dispara agresivamente en forma exponencial.](inventario_vs_mermas_escenario_C.png){#fig-logistica-c}
 
 **Interpretación de la Dinámica Logística:**
 
