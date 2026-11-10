@@ -269,8 +269,7 @@ Si los instantes de ocurrencia de los eventos siguen un proceso de Poisson no ho
 $$
 \nu_t(dz) dt = \mathbb{E}\left[ N(dt, dz) \right] = \lambda(t) dF(z) dt,
 $$
-donde $dF(z)$ representa la medida de probabilidad inducida por la distribución de las magnitudes de salto (si las marcas poseen función de densidad $f(z)$, entonces 
-\\$dF(z) = f(z)dz$). De este modo, el número esperado de saltos en $(s, t]$ con magnitud en $A$ viene dado por:
+donde $dF(z)$ representa la medida de probabilidad inducida por la distribución de las magnitudes de salto (si las marcas poseen función de densidad $f(z)$, entonces $dF(z) = f(z)dz$). De este modo, el número esperado de saltos en $(s, t]$ con magnitud en $A$ viene dado por:
 $$
 \mathbb{E}\left[ N((s, t] \times A) \right] = \int_s^t \int_A \nu_u(dz) du = \left( \int_s^t \lambda(u) du \right) \left( \int_A dF(z) \right).
 $$
@@ -316,7 +315,9 @@ $$
 \int_0^T \int_{\mathcal{Z}} H(t, z) N(dt, dz) = \sum_{0 < T_k \le T} H(T_k, \gamma_k).
 $$
 Si además el integrando satisface la condición de integrabilidad:
-$$\mathbb{E}\left[ \displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] < \infty,$$ 
+$$
+\mathbb{E}\left[ \displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert \nu_t(dz) dt \right] < \infty,
+$$ 
 entonces el valor esperado de la integral de conteo coincide con la esperanza de la integral respecto a la medida de intensidad:
 $$
 \begin{aligned}
@@ -344,7 +345,7 @@ Entonces, el proceso de integral estocástica compensada:
 $$
 M_t = \int_0^t \int_{\mathcal{Z}} H(s, z) \tilde{N}(ds, dz), \quad t \in [0, T],
 $$
-está bien definido en $L^2(\Omega, \mathbb{P})$ y constituye una martingala de cuadrado integrable con trayectorias càdlàg respecto a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$, cuya esperanza es idénticamente nula:
+está bien definido en $L^2(\Omega, \mathbb{P})$ y constituye una martingala de cuadrado integrable con trayectorias càdlàg respecto a la filtración $\{\mathcal{F}_t\}_{t \ge 0}$, cuya esperanza es nula:
 $$
 \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} H(t, z) \tilde{N}(dt, dz) \right] = 0.
 $$
@@ -356,7 +357,10 @@ De forma analoga al Movimiento Browniano, la integral respecto a la medida aleat
 ### Isometría de Itô para la Medida Compensada
 Para todo integrando predecible $H(t, z, \omega)$ tal que $\mathbb{E} \left[ \displaystyle \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert^2 \nu_t(dz) dt \right] < \infty$, el segundo momento de la integral estocástica respecto a la medida compensada $\tilde{N}(dt, dz)$ satisface la identidad:
 $$
-\mathbb{E}\left[ \left\vert \int_0^T \int_{\mathcal{Z}} H(t, z) \tilde{N}(dt, dz) \right\vert^2 \right] = \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert^2 \nu_t(dz) dt \right] = \mathbb{E}\left[ \int_0^T \lambda(t) \left( \int_{\mathcal{Z}} \vert H(t, z) \vert^2 dF(z) \right) dt \right].
+\begin{aligned}
+\mathbb{E}\left[ \left\vert \int_0^T \int_{\mathcal{Z}} H(t, z) \tilde{N}(dt, dz) \right\vert^2 \right] &= \mathbb{E}\left[ \int_0^T \int_{\mathcal{Z}} \vert H(t, z) \vert^2 \nu_t(dz) dt \right] \\
+&= \mathbb{E}\left[ \int_0^T \lambda(t) \left( \int_{\mathcal{Z}} \vert H(t, z) \vert^2 dF(z) \right) dt \right].
+\end{aligned}
 $$
 :::
 
@@ -366,7 +370,7 @@ Con este marco de integración establecido, podemos enunciar el lema que vincula
 ### Lema de Equivalencia del Proceso de Poisson Compuesto
 Sea $\displaystyle J(t) = \sum_{i=1}^{N(t)} \gamma_i$ un proceso de Poisson compuesto donde $\displaystyle \{N(t)\}_{t \ge 0}$ es un proceso de Poisson no homogéneo con función de intensidad $\lambda(t) \ge 0$, y $\{\gamma_i\}_{i \in \mathbb{N}}$ es una sucesión de variables aleatorias independientes e idénticamente distribuidas con función de distribución $F(z)$ y media finita $\mathbb{E}[\vert \gamma_i \vert] < \infty$, independientes de $N(t)$. Entonces, el proceso $J(t)$ admite la siguiente representación integral respecto a la medida aleatoria de conteo $N(dt, dz)$:
 $$
-J(t) = \int_0^t \int_{\mathbb{R}} z N(ds, dz), \quad \text{o en forma diferencial,} \quad dJ(t) = \int_{\mathbb{R}} z N(dt, dz).
+J(t) = \int_0^t \int_{\mathbb{R}} z N(ds, dz), \quad \text{o en su forma diferencial,} \quad dJ(t) = \int_{\mathbb{R}} z N(dt, dz).
 $$
 En consecuencia, sustituyendo la relación de la medida compensada $N(dt, dz) = \tilde{N}(dt, dz) + \lambda(t)dF(z)dt$, el diferencial del proceso de Poisson compuesto se descompone en el diferencial de una martingala de salto compensado (de media cero) más un término de deriva determinista proporcional al tamaño esperado del salto:
 $$
@@ -383,20 +387,16 @@ Una vez definida la integral de Itô, es posible formular ecuaciones que combina
 ::: {#def-ede-general}
 ### Ecuación Diferencial Estocástica Clásica
 Una ecuación diferencial estocástica (EDE) continua para un proceso $\{X(t)\}_{t \ge 0}$ es una relación expresada en su forma diferencial mediante:
-
 $$
 dX(t) = b(t, X(t)) dt + \sigma(t, X(t)) dW(t)
 $$ {#eq-ede-general-diff}
-
 donde $b(t, X(t))$ denota el coeficiente de deriva y $\sigma(t, X(t))$ representa el coeficiente de difusión.
 :::
 
 Dado que el movimiento Browniano no es diferenciable, el término $dX(t)$ en la @eq-ede-general-diff no representa una derivada ordinaria, sino una notación abreviada de su ecuación integral equivalente:
-
 $$
 X(t) = X(0) + \int_0^t b(s, X(s)) ds + \int_0^t \sigma(s, X(s)) dW(s).
 $$ {#eq-ede-general-int}
-
 En la @eq-ede-general-int, la primera integral es una integral ordinaria de Riemann respecto al tiempo que captura la tendencia determinista del sistema, mientras que la segunda es una integral de Itô que modela la acumulación del ruido continuo. Para una revisión detallada del cálculo estocástico elemental, se sugiere consultar a [@karatzas1998brownian].
 
 Para asegurar que una EDE tenga solución y sea única y bien definida en todo su dominio temporal, los coeficientes de deriva y difusión deben satisfacer las restricciones del siguiente teorema.
@@ -424,9 +424,11 @@ Para evaluar funciones diferenciables que dependen de la solución de una EDE co
 ::: {#thm-ito-clasico}
 ### Lema de Itô para Difusiones Continuas
 Sea $\{X(t)\}_{t \ge 0}$ un proceso estocástico que satisface la @eq-ede-general-diff, y sea $f(t, x)$ una función escalar continuamente diferenciable respecto a $t$ ($\mathcal{C}^1$) y dos veces continuamente diferenciable respecto a $x$ ($\mathcal{C}^2$). Entonces el proceso compuesto $f(t, X(t))$ satisface la siguiente ecuación diferencial estocástica:
-
 $$
-df(t, X(t)) = \left[ \frac{\partial f}{\partial t} (t, X(t)) + b(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2} (t, X(t)) \right] dt + \sigma(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) dW(t)
+\begin{aligned}
+df(t, X(t)) &= \left[ \frac{\partial f}{\partial t} (t, X(t)) + b(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) + \frac{1}{2}\sigma^2(t, X(t))\frac{\partial^2 f}{\partial x^2} (t, X(t)) \right] dt \\
+&\quad + \sigma(t, X(t))\frac{\partial f}{\partial x} (t, X(t)) dW(t).
+\end{aligned}
 $$
 :::
 
