@@ -595,8 +595,7 @@ Tabla&nbsp;7.1: Interrupciones eléctricas en Tuxtla Gutiérrez, Chiapas (Fuente
 </figure>
 </div>
 <p>El análisis de la <a href="#tbl-interrupciones-cfe" class="quarto-xref">Tabla&nbsp;<span>7.1</span></a> muestra un incremento significativo en la frecuencia de fallas a partir del año 2020, estabilizándose en una franja superior a los 40 cortes mensuales. Este cambio se debe al crecimiento de la carga térmica residencial e industrial y a la saturación de los transformadores de distribución en la mancha urbana.</p>
-<p>Para la calibración de la EDE en este trabajo de investigación, se seleccionó el año <strong>2024</strong> como el escenario de línea base. Dicho año presenta una media mensual de <strong>43 interrupciones por mes</strong> con una duración promedio por corte de <strong>2.39 horas</strong>. Al proyectar esta tasa mensual a una tasa anual, se tiene que el número total de interrupciones al año esperadas a nivel municipal (<span class="math inline">\(N_{total}\)</span>) es:</p>
-<p><span id="eq-cortes-totales"><span class="math display">\[
+<p>Para la calibración de la EDE en este trabajo de investigación, se seleccionó el año <strong>2024</strong> como el escenario de línea base. Dicho año presenta una media mensual de <strong>43 interrupciones por mes</strong> con una duración promedio por corte de <strong>2.39 horas</strong>. Al proyectar esta tasa mensual a una tasa anual, se tiene que el número total de interrupciones al año esperadas a nivel municipal (<span class="math inline">\(N_{total}\)</span>) es: <span id="eq-cortes-totales"><span class="math display">\[
 N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/año}
 \tag{7.1}\]</span></span></p>
 </section>
@@ -623,15 +622,13 @@ N_{total} = 43 \text{ cortes/mes} \times 12 \text{ meses} = 516 \text{ cortes/a�
 <p>Para comprender la estructura de estos datos oficiales, la CFE evalúa la continuidad del suministro a través de dos indicadores internacionales de confiabilidad:</p>
 <section id="índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi" class="level3" data-number="7.4.1">
 <h3 data-number="7.4.1" class="anchored" data-anchor-id="índice-de-la-frecuencia-de-interrupción-promedio-en-número-saifi"><span class="header-section-number">7.4.1</span> 1. Índice de la Frecuencia de Interrupción Promedio, en número (SAIFI)</h3>
-<p>El indicador SAIFI (<em>System Average Interruption Frequency Index</em>) contabiliza el número promedio de interrupciones sostenidas que experimenta un usuario durante un periodo determinado (generalmente un año o un mes), es decir si se tiene una red eléctrica con un total de <span class="math inline">\(N_T\)</span> usuarios atendidos. Si en un intervalo de observación ocurren <span class="math inline">\(M\)</span> eventos de interrupción, donde cada evento <span class="math inline">\(i \in \{1, 2, \dots, M\}\)</span> afecta a una cantidad de <span class="math inline">\(N_i\)</span> usuarios, el índice SAIFI se expresa formalmente como:</p>
-<p><span id="eq-saifi"><span class="math display">\[
+<p>El indicador SAIFI (<em>System Average Interruption Frequency Index</em>) contabiliza el número promedio de interrupciones sostenidas que experimenta un usuario durante un periodo determinado (generalmente un año o un mes), es decir si se tiene una red eléctrica con un total de <span class="math inline">\(N_T\)</span> usuarios atendidos. Si en un intervalo de observación ocurren <span class="math inline">\(M\)</span> eventos de interrupción, donde cada evento <span class="math inline">\(i \in \{1, 2, \dots, M\}\)</span> afecta a una cantidad de <span class="math inline">\(N_i\)</span> usuarios, el índice SAIFI se expresa formalmente como: <span id="eq-saifi"><span class="math display">\[
 \displaystyle \text{SAIFI} = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{M} N_i}{N_T}
 \tag{7.3}\]</span></span></p>
 </section>
 <section id="índice-de-duración-promedio-de-interrupción-en-minutos-saidi" class="level3" data-number="7.4.2">
 <h3 data-number="7.4.2" class="anchored" data-anchor-id="índice-de-duración-promedio-de-interrupción-en-minutos-saidi"><span class="header-section-number">7.4.2</span> 2. Índice de Duración Promedio de Interrupción, en minutos (SAIDI)</h3>
-<p>El indicador SAIDI (<em>System Average Interruption Duration Index</em>) mide la duración total acumulada de las interrupciones sostenidas que experimenta el usuario promedio dentro del periodo de evaluación. Si cada evento de falla <span class="math inline">\(i\)</span> tiene una duración temporal de <span class="math inline">\(r_i\)</span> horas, el índice SAIDI se define analíticamente mediante:</p>
-<p><span id="eq-saidi"><span class="math display">\[
+<p>El indicador SAIDI (<em>System Average Interruption Duration Index</em>) mide la duración total acumulada de las interrupciones sostenidas que experimenta el usuario promedio dentro del periodo de evaluación. Si cada evento de falla <span class="math inline">\(i\)</span> tiene una duración temporal de <span class="math inline">\(r_i\)</span> horas, el índice SAIDI se define analíticamente mediante: <span id="eq-saidi"><span class="math display">\[
 \displaystyle \text{SAIDI} = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{M} N_i r_i}{N_T}
 \tag{7.4}\]</span></span></p>
 <p>A partir de estas definiciones, la <a href="#tbl-saidi-saifi" class="quarto-xref">Tabla&nbsp;<span>7.2</span></a> presenta la evolución mensual acumulada de los indicadores SAIDI y SAIFI reportada en la página 82 del informe anual de la CFE.</p>
@@ -723,8 +720,7 @@ Tabla&nbsp;7.2: Evolución mensual acumulada de los indicadores SAIDI y SAIFI (F
 <p><span id="eq-reparto-cortes"><span class="math display">\[
 \text{Cortes}_i = \left( \frac{\Delta \text{SAIFI}_i}{\text{SAIFI}_{total}} \right) \times \mathbb{E}[N_{local}]
 \tag{7.6}\]</span></span></p>
-<p>Sustituyendo los valores de nuestro escenario (<span class="math inline">\(\text{SAIFI}_{total} = 0.113\)</span> y <span class="math inline">\(\mathbb{E}[N_{local}] = 64\)</span>), la ecuación del modelo es:</p>
-<p><span id="eq-modelo-cortes"><span class="math display">\[
+<p>Sustituyendo los valores de nuestro escenario (<span class="math inline">\(\text{SAIFI}_{total} = 0.113\)</span> y <span class="math inline">\(\mathbb{E}[N_{local}] = 64\)</span>), la ecuación del modelo es: <span id="eq-modelo-cortes"><span class="math display">\[
 \text{Cortes}_i = \left( \frac{\Delta \text{SAIFI}_i}{0.113} \right) \times 64
 \tag{7.7}\]</span></span></p>
 <p>Al hacer este cálculo y redondeando al entero más cercano (realizando un ajuste para conservar la suma total en 64 cortes anuales), obtenemos la distribución estacional de las fallas eléctricas presentada en la <a href="#tbl-cortes-mensuales" class="quarto-xref">Tabla&nbsp;<span>7.3</span></a>.</p>
@@ -888,9 +884,8 @@ Figura&nbsp;7.1: Función de intensidad diaria de fallas eléctricas <span class
 </section>
 <section id="validación-del-modelo-y-análisis-de-la-anomalía-de-enero" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="validación-del-modelo-y-análisis-de-la-anomalía-de-enero"><span class="header-section-number">7.6</span> Validación del Modelo y Análisis de la Anomalía de Enero</h2>
-<p>Por los fundamentos de los Procesos de Poisson No Homogéneos, el número esperado de cortes en cualquier intervalo <span class="math inline">\((t_1, t_2]\)</span> está determinado por la integral definida de su función de intensidad:</p>
-<p><span id="eq-integral-poisson"><span class="math display">\[
-\mathbb{E}[N(t_1, t_2)] = \int_{t_1}^{t_2} \lambda(t) dt
+<p>Por los fundamentos de los Procesos de Poisson No Homogéneos, el número esperado de cortes en cualquier intervalo <span class="math inline">\((t_1, t_2]\)</span> está determinado por la integral definida de su función de intensidad: <span id="eq-integral-poisson"><span class="math display">\[
+\mathbb{E}[N(t_1, t_2)] = \displaystyle \int_{t_1}^{t_2} \lambda(t) dt
 \tag{7.10}\]</span></span></p>
 <p>Para validar la consistencia analítica de nuestra función <span class="math inline">\(\lambda(t)\)</span>, particionamos el año de 366 días (considerando que el <strong>año 2024 fue bisiesto</strong>, por lo que febrero aporta 29 días al dominio) en 12 subintervalos correspondientes a los días acumulados de cada mes. Al resolver numéricamente sus respectivas integrales mediante cuadratura gaussiana, contrastamos el área teórica bajo la curva contra los objetivos empíricos de la CFE:</p>
 <div id="tbl-validacion-integral" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1015,8 +1010,7 @@ D \sim \text{LogNormal}(\mu, \sigma^2)
 \text{Horas Totales Anuales} = 64 \text{ cortes/año} \times 2.39 \text{ horas/corte} = 152.96 \text{ horas}
 \]</span></p>
 <p>Para distribuir estas <span class="math inline">\(152.96\)</span> horas a lo largo de los 12 meses del año, respetando la intensidad de daño a la infraestructura propia de cada época del año, utilizamos el indicador de duración acumulada SAIDI del <em>Informe Anual de la CFE 2024</em> <a href="#tbl-saidi-saifi" class="quarto-xref">Tabla&nbsp;<span>7.2</span></a>.</p>
-<p>El primer paso consiste en calcular la diferencia marginal (<span class="math inline">\(\Delta \text{SAIDI}_i = \text{SAIDI}_i - \text{SAIDI}_{i-1}\)</span>) para obtener el peso de cada mes individual. Posteriormente, aplicamos una <strong>regla de 3 simple</strong>: asumiendo que el valor total del SAIDI acumulado total (<span class="math inline">\(10.812\)</span> horas) representa el 100% de la afectación anual (equivalente a nuestras <span class="math inline">\(152.96\)</span> horas proyectadas), entonces el incremento de cualquier mes <span class="math inline">\(i\)</span> representará una fracción directamente proporcional de horas de corte para el centro de almacenamiento. Analíticamente, la ecuación de asignación es:</p>
-<p><span class="math display">\[
+<p>El primer paso consiste en calcular la diferencia marginal (<span class="math inline">\(\Delta \text{SAIDI}_i = \text{SAIDI}_i - \text{SAIDI}_{i-1}\)</span>) para obtener el peso de cada mes individual. Posteriormente, aplicamos una <strong>regla de 3 simple</strong>: asumiendo que el valor total del SAIDI acumulado total (<span class="math inline">\(10.812\)</span> horas) representa el 100% de la afectación anual (equivalente a nuestras <span class="math inline">\(152.96\)</span> horas proyectadas), entonces el incremento de cualquier mes <span class="math inline">\(i\)</span> representará una fracción directamente proporcional de horas de corte para el centro de almacenamiento. Analíticamente, la ecuación de asignación es: <span class="math display">\[
 \text{Horas del Mes}_i = \left( \frac{\Delta \text{SAIDI}_i}{\text{SAIDI}_{total}} \right) \times \text{Horas Totales Anuales}
 \]</span></p>
 <p>Sustituyendo los valores de nuestro escenario (<span class="math inline">\(\text{SAIDI}_{total} = 10.812\)</span> y <span class="math inline">\(\text{Horas Totales} = 152.96\)</span>), el modelo de asignación mensual queda como:</p>
@@ -1161,8 +1155,7 @@ Tabla&nbsp;7.5: Estimación de la duración promedio mensual por corte a partir 
 <li><strong>Estabilidad Invernal (Enero a Marzo, Noviembre y Diciembre):</strong> Meses de baja exigencia térmica ambiental, donde los apagones ocurren mayoritariamente a factores de mantenimiento.</li>
 </ol>
 <p>Realizar un promedio aritmético simple de las duraciones <span class="math inline">\(E_i\)</span> entre los meses de cada temporada introduciría un sesgo grave, ya que asignaría el mismo peso a un mes con 9 cortes que a uno con solo 2 cortes. Para garantizar la rigurosidad estadística, se calcula la media empírica (<span class="math inline">\(\mathbb{E}[D]\)</span>) y la varianza empírica (<span class="math inline">\(\mathbb{V}[D]\)</span>) mediante un modelo de <strong>estadística descriptiva ponderada</strong>, donde el peso de cada mes (<span class="math inline">\(\omega_i\)</span>) está dado por su frecuencia de cortes (<span class="math inline">\(\omega_i = \text{Cortes}_i\)</span>).</p>
-<p>Asi, las formulaciones para la esperanza y la varianza ponderada están dadas por:</p>
-<p><span id="eq-media-ponderada"><span class="math display">\[
+<p>Asi, las formulaciones para la esperanza y la varianza ponderada están dadas por: <span id="eq-media-ponderada"><span class="math display">\[
 \displaystyle \mathbb{E}[D] = \displaystyle \dfrac{\displaystyle \sum_{i=1}^{n} \omega_i E_i}{\displaystyle \sum_{i=1}^{n} \omega_i} = \frac{\text{Horas Acumuladas de la Temporada}}{\text{Cortes Totales de la Temporada}}
 \tag{7.12}\]</span></span></p>
 <p><span id="eq-varianza-ponderada"><span class="math display">\[
@@ -1178,14 +1171,10 @@ Tabla&nbsp;7.5: Estimación de la duración promedio mensual por corte a partir 
 <section id="transformación-algebraica-a-parámetros-log-normales" class="level3" data-number="7.7.3">
 <h3 data-number="7.7.3" class="anchored" data-anchor-id="transformación-algebraica-a-parámetros-log-normales"><span class="header-section-number">7.7.3</span> Transformación Algebraica a Parámetros Log-Normales</h3>
 <p>Una vez conocidas las medias (<span class="math inline">\(\mathbb{E}[D]\)</span>) y varianzas (<span class="math inline">\(\mathbb{V}[D]\)</span>), estas deben transformarse hacia los parámetros <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\sigma\)</span> que conforman la función de distribución Log-normal.</p>
-<p>La teoría de la probabilidad nos dice que la esperanza y la varianza de una variable con distribución Log-normal dependen de sus parámetros a través del siguiente sistema de ecuaciones no lineales:</p>
-<p><span class="math display">\[
-\mathbb{E}[D] = \exp\left(\mu + \frac{\sigma^2}{2}\right)
-\]</span> <span class="math display">\[
-\mathbb{V}[D] = \left[\exp(\sigma^2) - 1\right] \exp(2\mu + \sigma^2)
+<p>La teoría de la probabilidad nos dice que la esperanza y la varianza de una variable con distribución Log-normal dependen de sus parámetros a través del siguiente sistema de ecuaciones no lineales: <span class="math display">\[
+\mathbb{E}[D] = \exp\left(\mu + \frac{\sigma^2}{2}\right), \quad \mathbb{V}[D] = \left[\exp(\sigma^2) - 1\right] \exp(2\mu + \sigma^2)
 \]</span></p>
-<p>Sustituyendo la primera ecuación en la segunda, la varianza puede reescribirse como <span class="math inline">\(\mathbb{V}[D] = (\mathbb{E}[D])^2 \left[\exp(\sigma^2) - 1\right]\)</span>. A partir de esta simplificación, se despeja el sistema para obtener las fórmulas inversas de calibración:</p>
-<p><span id="eq-sigma-lognormal"><span class="math display">\[
+<p>Sustituyendo la primera ecuación en la segunda, la varianza puede reescribirse como <span class="math inline">\(\mathbb{V}[D] = (\mathbb{E}[D])^2 \left[\exp(\sigma^2) - 1\right]\)</span>. A partir de esta simplificación, se despeja el sistema para obtener las fórmulas inversas de calibración: <span id="eq-sigma-lognormal"><span class="math display">\[
 \sigma = \sqrt{\ln\left(1 + \frac{\mathbb{V}[D]}{(\mathbb{E}[D])^2}\right)}
 \tag{7.14}\]</span></span></p>
 <p><span id="eq-mu-lognormal"><span class="math display">\[
@@ -1306,7 +1295,7 @@ dT(t) =
 \begin{cases}
 \kappa_{on}(\theta_{set} - T(t))dt + \sigma_{on}dW(t) + dJ(t) &amp; \text{si } \alpha(t) = 1 \text{ (Con energía)} \\
 \kappa_{off}(T_{amb}(t) - T(t))dt + \sigma_{off}dW(t) &amp; \text{si } \alpha(t) = 2 \text{ (Corte de luz)}
-\end{cases}, \quad 0 \leq t \leq T.
+\end{cases}, \ 0 \leq t \leq T.
 \tag{7.17}\]</span></span></p>
 <p>Como se observa en el segundo régimen (<span class="math inline">\(\alpha(t) = 2\)</span>) de la <a href="#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>7.17</span></a>, el término de saltos discretos <span class="math inline">\(dJ(t)\)</span> se anula durante un corte de suministro eléctrico. Esto responde a los protocolos normativos de operación en las clínicas de salud <span class="citation" data-cites="oms2015cadenafrio">(<a href="references.html#ref-oms2015cadenafrio" role="doc-biblioref">Organización Mundial de la Salud 2015</a>)</span>: ante un apagón, el personal médico tiene prohibido abrir el refrigerador con el fin de preservar la inercia térmica de los paquetes fríos y botellas de agua, haciendo que la evolución térmica dependa exclusivamente de la transferencia pasiva de calor hacia el ambiente exterior.</p>
 <p>Vinculando los elementos de la <a href="#eq-ede-operativa" class="quarto-xref">Ecuación&nbsp;<span>7.17</span></a> con las definiciones matemáticas del marco teórico, cada componente del sistema representa física y matemáticamente lo siguiente:</p>
@@ -1389,8 +1378,7 @@ Fuera de estos horarios, la intensidad del proceso es estrictamente cero.</li>
 </section>
 <section id="sec-Arrhenius" class="level2" data-number="7.10">
 <h2 data-number="7.10" class="anchored" data-anchor-id="sec-Arrhenius"><span class="header-section-number">7.10</span> Cinética de Degradación Térmica (Ecuación de Arrhenius)</h2>
-<p>La Ecuación Diferencial Estocástica calibrada anteriormente permite simular la trayectoria térmica interna del refrigerador, <span class="math inline">\(T(t)\)</span>. Para traducir estas variaciones térmicas en pérdida de viabilidad del biológico (particularmente en vacunas vivas atenuadas como Sarampión o Poliomielitis), retomamos el modelo cinético de primer orden (<a href="fundamentos_epidemiologicos.html#eq-cinetica-primer-orden" class="quarto-xref">Ecuación&nbsp;<span>6.1</span></a>) y la <strong>Ecuación de Arrhenius</strong> (<a href="fundamentos_epidemiologicos.html#def-ecuacion-arrhenius" class="quarto-xref">Definición&nbsp;<span>6.1</span></a> y <a href="fundamentos_epidemiologicos.html#eq-arrhenius-teorica" class="quarto-xref">Ecuación&nbsp;<span>6.2</span></a>) establecidos en la <a href="fundamentos_epidemiologicos.html#sec-fundamento-arrhenius" class="quarto-xref"><span>Sección 6.2</span></a>:</p>
-<p><span id="eq-Arrhenius"><span class="math display">\[
+<p>La Ecuación Diferencial Estocástica calibrada anteriormente permite simular la trayectoria térmica interna del refrigerador, <span class="math inline">\(T(t)\)</span>. Para traducir estas variaciones térmicas en pérdida de viabilidad del biológico (particularmente en vacunas vivas atenuadas como Sarampión o Poliomielitis), retomamos el modelo cinético de primer orden (<a href="fundamentos_epidemiologicos.html#eq-cinetica-primer-orden" class="quarto-xref">Ecuación&nbsp;<span>6.1</span></a>) y la <strong>Ecuación de Arrhenius</strong> (<a href="fundamentos_epidemiologicos.html#def-ecuacion-arrhenius" class="quarto-xref">Definición&nbsp;<span>6.1</span></a> y <a href="fundamentos_epidemiologicos.html#eq-arrhenius-teorica" class="quarto-xref">Ecuación&nbsp;<span>6.2</span></a>) establecidos en la <a href="fundamentos_epidemiologicos.html#sec-fundamento-arrhenius" class="quarto-xref"><span>Sección 6.2</span></a>: <span id="eq-Arrhenius"><span class="math display">\[
 k(T_K(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right).
 \tag{7.19}\]</span></span></p>
 <p>Para nuestro estudio de caso, los parámetros fisicoquímicos de la <a href="#eq-Arrhenius" class="quarto-xref">Ecuación&nbsp;<span>7.19</span></a> se calibran de la siguiente manera:</p>
@@ -1407,8 +1395,7 @@ k(T_K(t)) = A \exp\left(-\frac{E_a}{R \cdot T_K(t)}\right).
 <p><span class="math display">\[
 DA(t) = \int_{0}^{t} k(T_K(s)) \cdot \mathbf{1}_{\{T(s) &gt; 8^\circ\text{C}\}} \, ds.
 \]</span></p>
-<p>De acuerdo con la discretización temporal deducida en la <a href="fundamentos_epidemiologicos.html#eq-fraccion-dano-paso" class="quarto-xref">Ecuación&nbsp;<span>6.3</span></a> junto con la <a href="fundamentos_epidemiologicos.html#eq-balance-inventario-general" class="quarto-xref">Ecuación&nbsp;<span>6.4</span></a>, para actualizar el estado del sistema en pasos discretos <span class="math inline">\(\Delta t\)</span> dentro de la Simulación, el número de dosis destruidas (merma instantánea) en cada subintervalo se calcula multiplicando el inventario activo <span class="math inline">\(I(t)\)</span> por la fracción de biológico degradada <span class="math inline">\(\Delta D_n\)</span>:</p>
-<p><span class="math display">\[
+<p>De acuerdo con la discretización temporal deducida en la <a href="fundamentos_epidemiologicos.html#eq-fraccion-dano-paso" class="quarto-xref">Ecuación&nbsp;<span>6.3</span></a> junto con la <a href="fundamentos_epidemiologicos.html#eq-balance-inventario-general" class="quarto-xref">Ecuación&nbsp;<span>6.4</span></a>, para actualizar el estado del sistema en pasos discretos <span class="math inline">\(\Delta t\)</span> dentro de la Simulación, el número de dosis destruidas (merma instantánea) en cada subintervalo se calcula multiplicando el inventario activo <span class="math inline">\(I(t)\)</span> por la fracción de biológico degradada <span class="math inline">\(\Delta D_n\)</span>: <span class="math display">\[
 \text{Merma}(t_n) = I(t_n) \Delta D_n = I(t_n) \left( 1 - \exp\left[ -k(T_K(t_n)) \Delta t \right] \right) \mathbf{1}_{\{T(t_n) &gt; 8^\circ\text{C}\}}.
 \]</span></p>
 <p>De esta forma, en cada iteración donde la temperatura rebasa los <span class="math inline">\(8^\circ\text{C}\)</span> (tras superar el periodo de inercia térmica del vial), el algoritmo descuenta las dosis inutilizables por exposición al calor, activando los protocolos de reabastecimiento cuando el inventario cae por debajo del umbral crítico de operación.</p>
@@ -1445,7 +1432,7 @@ Tabla&nbsp;7.7: Demanda base diaria de vacunas por mes, ajustada a la estacional
 <thead>
 <tr class="header">
 <th style="text-align: left;">Mes</th>
-<th style="text-align: left;">Demanda Base Diaria (Dosis)</th>
+<th style="text-align: left;">Demanda Base Diaria</th>
 <th style="text-align: left;">Justificación Epidemiológica</th>
 </tr>
 </thead>
@@ -1511,11 +1498,11 @@ Tabla&nbsp;7.7: Demanda base diaria de vacunas por mes, ajustada a la estacional
 <p>La innovación principal de este bloque logístico radica en la dependencia entre el estrés térmico y el estrés de inventario. La demanda diaria real en el modelo, <span class="math inline">\(D(t)\)</span>, no es un escalar estático, sino una variable aleatoria que se acopla dinámicamente a las perturbaciones del proceso de Poisson <span class="math inline">\(N_{puerta}(t)\)</span> calibrado en la sección anterior.</p>
 <p>La regla de consumo se define a partir de los tres escenarios de simulación:</p>
 <ol type="1">
-<li><p><strong>Escenario A (Control Absoluto):</strong> Al simular días de inactividad clínica (fines de semana o días festivos), el personal no abre el equipo (<span class="math inline">\(\lambda = 0\)</span>). Consecuentemente, no hay extracción de biológicos: <span class="math display">\[D_A(t) = 0\]</span></p></li>
-<li><p><strong>Escenario B (Apego Normativo):</strong> Simula una jornada clínica estándar con una única apertura matutina de extracción. El consumo diario es exactamente igual a la demanda base dictada por el mes correspondiente: <span class="math display">\[D_B(t) = D_{base}\]</span></p></li>
-<li><p><strong>Escenario C (Estrés Operativo):</strong> Durante contingencias o cercos epidemiológicos, la demanda sobrepasa la capacidad de los termos auxiliares, forzando viajes de resurtido al equipo principal. Dado que el proceso general <span class="math inline">\(N_{puerta}(t)\)</span> engloba todas las aperturas del día, definimos a <span class="math inline">\(N_{resurtido}(t)\)</span> como el subconjunto de eventos ocurridos exclusivamente durante la ventana de máxima afluencia matutina (09:00 a 14:00 hrs).</p>
-<p>Matemáticamente, por cada evento de resurtido generado, se extrae un bloque adicional de vacunas equivalente a la demanda base. Así, la demanda diaria total se convierte en una variable aleatoria dependiente del proceso de Poisson, definida por: <span class="math display">\[D_C(t) = D_{base} + \left( N_{resurtido}(t) \times D_{base} \right)\]</span></p></li>
+<li><strong>Escenario A (Control Absoluto):</strong> Al simular días de inactividad clínica (fines de semana o días festivos), el personal no abre el equipo (<span class="math inline">\(\lambda = 0\)</span>). Consecuentemente, no hay extracción de biológicos: <span class="math display">\[D_A(t) = 0\]</span></li>
+<li><strong>Escenario B (Apego Normativo):</strong> Simula una jornada clínica estándar con una única apertura matutina de extracción. El consumo diario es exactamente igual a la demanda base dictada por el mes correspondiente: <span class="math display">\[D_B(t) = D_{base}\]</span></li>
+<li><strong>Escenario C (Estrés Operativo):</strong> Durante contingencias o cercos epidemiológicos, la demanda sobrepasa la capacidad de los termos auxiliares, forzando viajes de resurtido al equipo principal. Dado que el proceso general <span class="math inline">\(N_{puerta}(t)\)</span> engloba todas las aperturas del día, definimos a <span class="math inline">\(N_{resurtido}(t)\)</span> como el subconjunto de eventos ocurridos exclusivamente durante la ventana de máxima afluencia matutina (09:00 a 14:00 hrs).</li>
 </ol>
+<p>Matemáticamente, por cada evento de resurtido generado, se extrae un bloque adicional de vacunas equivalente a la demanda base. Así, la demanda diaria total se convierte en una variable aleatoria dependiente del proceso de Poisson, definida por: <span class="math display">\[D_C(t) = D_{base} + \left( N_{resurtido}(t) \times D_{base} \right)\]</span></p>
 <p>Este acoplamiento garantiza que las trayectorias en la Simulación de Monte Carlo con mayor cantidad de aperturas de puerta y por ende, mayor ingreso de calor y daño térmico correspondan exactamente a los días con mayor rotación de inventario, reflejando con precisión la saturación logística de una crisis sanitaria.</p>
 
 
